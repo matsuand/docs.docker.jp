@@ -1,0 +1,69 @@
+<div class="header">
+    <div class="fan"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="nav-primary">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <img class="logo" src="../images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs">
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="primary nav navbar-nav">
+                            <li><a href="https://docker.com/what-docker">Dockerとは?</a></li>
+                            <li><a href="https://docker.com/get-docker">製品</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Docker の入手 <span class="caret"></span></a>
+                                <ul class="dropdown-menu nav-main">
+                                    <h6 class="dropdown-header">デスクトップ向け</h6>
+                                    <li><a href="https://docker.com/docker-mac">Mac</a></li>
+                                    <li><a href="https://docker.com/docker-windows">Windows</a></li>
+                                    <h6 class="dropdown-header">クラウドプロバイダー向け</h6>
+                                    <li><a href="https://docker.com/docker-aws">AWS</a></li>
+                                    <li><a href="https://docker.com/docker-microsoft-azure">Azure</a></li>
+                                    <h6 class="dropdown-header">サーバー向け</h6>
+                                    <li><a href="https://docker.com/docker-windows-server">Windows Server</a></li>
+                                    <li><a href="https://docker.com/docker-centos">CentOS</a></li>
+                                    <li><a href="https://docker.com/docker-debian">Debian</a></li>
+                                    <li><a href="https://docker.com/docker-fedora">Fedora</a></li>
+                                    <li><a href="https://docker.com/docker-oracle-linux">Oracle Enterprise Linux</a></li>
+                                    <li><a href="https://docker.com/docker-rhel">RHEL</a></li>
+                                    <li><a href="https://docker.com/docker-sles">SLES</a></li>
+                                    <li><a href="https://docker.com/docker-ubuntu">Ubuntu</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="https://docs.docker.com">ドキュメント</a></li>
+                            <li><a href="https://docker.com/docker-community">コミュニティ</a></li>
+                            <li><a href="https://hub.docker.com/signup">Docker ID 生成</a></li>
+                            <li><a href="https://hub.docker.com/sso/start">サインイン</a></li>
+                        </ul>
+                        </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- hero banner text -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="hero-text">
+                <div class="hero-text-centered">
+                    <h1>{{ site.name }}</h1>
+                    <p>Docker は分離されたコンテナー内にて安全にアプリを実行する方法を提供します。依存パッケージやライブラリはすべてパッケージングされます。</p>
+                    <ul class="buttons">
+                        <li><a class="button transparent-btn" href="/install/" target="_blank">Docker の入手</a></li>
+                        <li> <a class="button secondary-btn" href="/get-started/" target="_blank">はじめよう</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- nav-secondary -->
+    <!-- data-offset-top should calculated as follows: (height of <header> - header of <nav>) -->
+    <nav class="nav-secondary-tabs" data-spy="affix" data-offset-top="385">
+        <div class="container-fluid">
+            <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
+                {% include navigation.html %}
+            </div>
+        </div>
+    </nav>
+</div>

@@ -1,3 +1,7 @@
 .git
 build
 .python-version
+.jekyll-metadata
+.ruby-version
+.sass-cache
+_site
