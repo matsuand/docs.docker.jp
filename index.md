@@ -28,10 +28,14 @@ production servers in the cloud. Total reading time is less than an hour.
 
 ## Docker エンタープライズエディションのすすめ
 
+<!--
 Run your solution in production with Docker Enterprise Edition to get a
 management dashboard, security scanning, LDAP integration, content signing,
 multi-cloud support, and more. Click below to test-drive a running instance of
 Docker EE without installing anything.
+-->
+Docker エンタープライズエディションをソリューションにおいて利用すれば、管理ダッシュボード、セキュリティスキャニング、LDAP 統合、コンテンツ認証、マルチクラウド対応などをさまざまに行うことができます。
+以下をクリックして、Docker EE インスタンスを試してみてください。インストールは一切不要です。
 
 [Docker エンタープライズエディションのすすめ](https://trial.docker.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
 
