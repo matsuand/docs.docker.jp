@@ -60,7 +60,8 @@ redirect_from:
 Welcome! We are excited that you want to learn Docker. The _Docker Get Started Tutorial_
 teaches you how to:
 -->
-ようこそ！  皆さんが Docker の使い方を学ぼうとしており、私たちは嬉しく思います。**Docker をはじめよう** では以下のことを学んでいきます。
+ようこそ！  皆さんが Docker の使い方を学ぼうとしており、私たちは嬉しく思います。
+**Docker をはじめよう** では以下のことを学んでいきます。
 
 <!--
 1. Set up your Docker environment (on this page)
@@ -93,47 +94,92 @@ deploying applications is.
 <!--
 Containerization is increasingly popular because containers are:
 -->
-Containerization is increasingly popular because containers are:
+コンテナー化（containerization）はよりポピュラーなものになっています。その理由は以下です。
 
+<!--
 - Flexible: Even the most complex applications can be containerized.
 - Lightweight: Containers leverage and share the host kernel.
 - Interchangeable: You can deploy updates and upgrades on-the-fly.
 - Portable: You can build locally, deploy to the cloud, and run anywhere.
 - Scalable: You can increase and automatically distribute container replicas.
 - Stackable: You can stack services vertically and on-the-fly.
+-->
+- 柔軟性: より複雑なアプリケーションであるほど、コンテナー化ができます。
+- 軽量: Containers leverage and share the host kernel.
+- 交換可能: You can deploy updates and upgrades on-the-fly.
+- 可搬性: You can build locally, deploy to the cloud, and run anywhere.
+- スケーラブル: You can increase and automatically distribute container replicas.
+- スタッカブル: You can stack services vertically and on-the-fly.
 
+<!--
 ![Containers are portable](images/laurel-docker-containers.png){:width="100%"}
+-->
+![コンテナーは可搬性に優れる](images/laurel-docker-containers.png){:width="100%"}
 
 ### イメージとコンテナー
 
+<!--
 A container is launched by running an image. An **image** is an executable
 package that includes everything needed to run an application--the code, a
 runtime, libraries, environment variables, and configuration files.
+-->
+コンテナーというものはイメージを実行することによって動き始めます。
+**イメージ** とは、アプリケーションの実行に必要なものをすべて含んだ、実行可能なパッケージのことです。
+つまりそこには、コード、ランタイム、ライブラリ、環境変数、設定ファイルをすべて含みます。
 
+<!--
 A **container** is a runtime instance of an image--what the image becomes in
 memory when executed (that is, an image with state, or a user process). You can
 see a list of your running containers with the command, `docker ps`, just as you
 would in Linux.
+-->
+**コンテナー** とは、イメージが実行されたインスタンスのことです。
+つまりイメージの実行とともに（状態あるいはユーザープロセスをともなって）メモリにロードされたものです。
+実行中のコンテナーの一覧は `docker ps` というコマンドを実行すれば見ることができます。
+ちょうど Linux 上で行うコマンド実行と同様です。
 
 ### コンテナーと仮想マシン
 
+<!--
 A **container** runs _natively_ on Linux and shares the kernel of the host
 machine with other containers. It runs a discrete process, taking no more memory
 than any other executable, making it lightweight.
+-->
+**コンテナー**は Linux 上においてネイティブに実行され、他のコンテナーも含めてホストマシン上のカーネルを共有します。
+そのプロセスは分離されていて、通常の実行モジュールよりも少ないメモリで動作します。
+つまり軽量化されています。
 
+<!--
 By contrast, a **virtual machine** (VM) runs a full-blown "guest" operating
 system with _virtual_ access to host resources through a hypervisor. In general,
 VMs provide an environment with more resources than most applications need.
+-->
+これとは対照的に**仮想マシン（virtual machine; VM）**は、本格的な"ゲスト"オペレーティングシステムを稼動させ、仮想的なアクセスはハイパーバイザーを通じてホストリソースを操作します。
+一般に仮想マシンが提供する環境は、通常のアプリケーションに比べて多くのリソースを必要とします。
 
-![Container stack example](/images/Container%402x.png){:width="300px"} | ![Virtual machine stack example](/images/VM%402x.png){:width="300px"}
+![コンテナースタックの例](/images/Container%402x.png){:width="300px"} | ![仮想マシンスタックの例](/images/VM%402x.png){:width="300px"}
 
 ## Docker 環境の用意
 
+<!--
 Install a [maintained version](/engine/installation/#updates-and-patches){: target="_blank" class="_"}
 of Docker Community Edition (CE) or Enterprise Edition (EE) on a
 [supported platform](/ee/supported-platforms/){: target="_blank" class="_"}.
+-->
+Docker コミュニティエディション（Community Edition; CE）または Docker エンタープライズエディション（Enterprise Edition; EE）をインストールします。
+[対応するプラットフォーム](/ee/supported-platforms/){: target="_blank" class="_"} および [メンテナンスされているバージョン](/engine/installation/#updates-and-patches){: target="_blank" class="_"} をそれぞれ確認してください。
 
+<!--
 > For full Kubernetes Integration
+>
+> - [Kubernetes on Docker Desktop for Mac](/docker-for-mac/kubernetes/){: target="_blank" class="_"}
+is available in [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05){: target="_blank" class="_"} or
+[17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} and higher.
+> - [Kubernetes on Docker Desktop for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
+is available in
+[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher edge channels only.
+-->
+> Kubernetes 統合について
 >
 > - [Kubernetes on Docker Desktop for Mac](/docker-for-mac/kubernetes/){: target="_blank" class="_"}
 is available in [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05){: target="_blank" class="_"} or
@@ -213,7 +259,7 @@ is available in
 3.  List the `hello-world` container (spawned by the image) which exits after
     displaying its message. If it were still running, you would not need the `--all` option:
 -->
-3.  `hello-world` コンテナー (イメージから実行されたもの) を表示します。
+3.  `hello-world` コンテナー（イメージから実行されたもの）を表示します。
     これはメッセージが出力された後には終了します。
     実行されている場合は `--all` オプションをつける必要はありません。
 
@@ -242,7 +288,7 @@ docker run hello-world
 ## Docker イメージの一覧
 docker image ls
 
-## Docker コンテナーの一覧 (実行中, すべて (-all), quiet モードにあるすべて (-aq))
+## Docker コンテナーの一覧（実行中, すべて (-all), quiet モードにあるすべて (-aq)）
 docker container ls
 docker container ls --all
 docker container ls -aq
@@ -253,7 +299,7 @@ docker container ls -aq
 <!--
 Containerization makes [CI/CD](https://www.docker.com/solutions/cicd){: target="_blank" class="_"} seamless. For example:
 -->
-コンテナー化 (containerization) は [CI/CD](https://www.docker.com/solutions/cicd){: target="_blank" class="_"} をシームレスにします。
+コンテナー化（containerization）は [CI/CD](https://www.docker.com/solutions/cicd){: target="_blank" class="_"} をシームレスにします。
 たとえば以下のとおりです。
 
 <!--
