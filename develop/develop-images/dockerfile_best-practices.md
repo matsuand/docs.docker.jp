@@ -32,9 +32,10 @@ A Docker image consists of read-only layers each of which represents a
 Dockerfile  instruction. The layers are stacked and each one is a delta of the
 changes from the previous layer. Consider this `Dockerfile`:
 -->
-A Docker image consists of read-only layers each of which represents a
-Dockerfile  instruction. The layers are stacked and each one is a delta of the
-changes from the previous layer. Consider this `Dockerfile`:
+Docker イメージは読み取り専用のレイヤにより構成されます。
+個々のレイヤは Dockerfile の各コマンドを表現しています。
+レイヤは順に積み上げられ、直前のレイヤからの差分を表わします。
+以下のような `Dockerfile` を見てみます。
 
 ```Dockerfile
 FROM ubuntu:18.04
@@ -46,20 +47,33 @@ CMD python /app/app.py
 <!--
 Each instruction creates one layer:
 -->
-各命令から 1つずつレイヤーが生成されます。
+各コマンドからは 1つずつレイヤーが生成されます。
 
+<!--
 - `FROM` creates a layer from the `ubuntu:18.04` Docker image.
 - `COPY` adds files from your Docker client's current directory.
 - `RUN` builds your application with `make`.
 - `CMD` specifies what command to run within the container.
+-->
+- `FROM` Docker イメージ `ubuntu:18.04` からレイヤを 1 つ生成します。
+- `COPY` Docker クライアントのカレントディレクトリからファイルをコピーします。
+- `RUN` `make` を使ってアプリケーションをビルドします。
+- `CMD` コンテナー内にて実行するコマンドを指定します。
 
+<!--
 When you run an image and generate a container, you add a new _writable layer_
 (the "container layer") on top of the underlying layers. All changes made to
 the running container, such as writing new files, modifying existing files, and
 deleting files, are written to this thin writable container layer.
+-->
+イメージを実行してコンテナーが生成されると、それまであったレイヤの上に_書き込み可能やレイヤ_（"コンテナーレイヤ"）が加えられます。
+実行されているコンテナーへの変更、つまり新規ファイル生成や既存ファイル編集、ファイル削除などはすべて、その薄くできあがった書き込みレイヤに書き込まれます。
 
+<!--
 For more on image layers (and how Docker builds and stores images), see
 [About storage drivers](/storage/storagedriver/).
+-->
+イメージレイヤ（また Docker がイメージをどう作り保存するか）については [ストレージドライバーについて](/storage/storagedriver/) を参照してください。
 
 <!--
 ## General guidelines and recommendations
@@ -71,24 +85,42 @@ For more on image layers (and how Docker builds and stores images), see
 -->
 ### "はかない" (ephemeral) コンテナーの生成
 
+<!--
 The image defined by your `Dockerfile` should generate containers that are as
 ephemeral as possible. By "ephemeral", we mean that the container can be stopped
 and destroyed, then rebuilt and replaced with an absolute minimum set up and
 configuration.
+-->
+`Dockerfile` によって定義されるイメージからコンテナーが作り出されますが、このコンテナーはできる限り "はかないもの"（ephemeral）と考えておくべきです。
+"はかない" という語を使うのは、コンテナーが停止、破棄されて、すぐに新たなものが作り出されるからです。
+最小限の構成や設定があれば、新たなものに置き換えられます。
 
+<!--
 Refer to [Processes](https://12factor.net/processes) under _The Twelve-factor App_
 methodology to get a feel for the motivations of running containers in such a
 stateless fashion.
+-->
+_The Twelve-factor App_ 手法にある[プロセス](https://12factor.net/processes)を見てみると、コンテナーの実行の仕方をステートレス（stateless）にしている理由がつかめると思います。
 
+<!--
 ### Understand build context
+-->
+### ビルドコンテキストを理解する
 
+<!--
 When you issue a `docker build` command, the current working directory is called
 the _build context_. By default, the Dockerfile is assumed to be located here,
 but you can specify a different location with the file flag (`-f`). Regardless
 of where the `Dockerfile` actually lives, all recursive contents of files and
 directories in the current directory are sent to the Docker daemon as the build
 context.
+-->
+``docker build`` コマンドを実行したときの、カレントなワーキングディレクトリのことを _ビルドコンテキスト_（build context）と呼びます。
+デフォルトで Dockerfile は、カレントなワーキングディレクトリを指すものとしていますが、ファイルフラグ（`-f`）を使って別のディレクトリを指定することもできます。
+Regardless of where the `Dockerfile` actually lives, all recursive contents of files and
+directories in the current directory are sent to the Docker daemon as the build context.
 
+<!--
 > Build context example
 >
 > Create a directory for the build context and `cd` into it. Write "hello" into
@@ -111,6 +143,28 @@ context.
 > mv Dockerfile dockerfiles && mv hello context
 > docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
 > ```
+-->
+> ビルドコンテキストの例
+>
+> ビルドコンテキストとするディレクトリを生成してそこに `cd` で移動します。
+> テキストファイル `hello` に "hello" と書き込み、Dockerfile 上でそのファイルに対して `cat` コマンドを与えるようにします。
+> ビルドコンテキスト（`.`）の中からイメージをビルドします。
+>
+> ```shell
+> mkdir myproject && cd myproject
+> echo "hello" > hello
+> echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
+> docker build -t helloapp:v1 .
+> ```
+>
+> `Dockerfile` と `hello` をそれぞれ別のディレクトリに移動させて、（上でビルドした際のキャッシュには頼らずに）2 つめのイメージをビルドします。
+> Dockerfile に対して `-f` を使い、ビルドコンテキストとなるディレクトリを指定します。
+>
+> ```shell
+> mkdir -p dockerfiles context
+> mv Dockerfile dockerfiles && mv hello context
+> docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
+> ```
 
 Inadvertently including files that are not necessary for building an image
 results in a larger build context and larger image size. This can increase the
@@ -122,7 +176,10 @@ building your `Dockerfile`:
 Sending build context to Docker daemon  187.8MB
 ```
 
+<!--
 ### Pipe Dockerfile through `stdin`
+-->
+### `stdin` を通じた Dockerfile のパイプ
 
 Docker has the ability to build images by piping `Dockerfile` through `stdin`
 with a _local or remote build context_. Piping a `Dockerfile` through `stdin`
@@ -1255,51 +1312,99 @@ frequently.
 
 ### WORKDIR
 
+<!--
 [Dockerfile reference for the WORKDIR instruction](/engine/reference/builder.md#workdir)
+-->
+[Dockerfile リファレンスの WORKDIR コマンド](/engine/reference/builder.md#workdir)
 
+<!--
 For clarity and reliability, you should always use absolute paths for your
 `WORKDIR`. Also, you should use `WORKDIR` instead of  proliferating instructions
 like `RUN cd … && do-something`, which are hard to read, troubleshoot, and
 maintain.
+-->
+`WORKDIR` に設定するパスは、分かり易く確実なものとするために、絶対パス指定としてください。
+また `RUN cd … && do-something` といった長くなる一方のコマンドを書くくらいなら、`WORKDIR` を利用してください。
+そのような書き方は読みにくく、トラブル発生時には解決しにくく保守が困難になるためです。
 
 ### ONBUILD
 
+<!--
 [Dockerfile reference for the ONBUILD instruction](/engine/reference/builder.md#onbuild)
+-->
+[Dockerfile リファレンスの ONBUILD コマンド](/engine/reference/builder.md#onbuild)
 
+<!--
 An `ONBUILD` command executes after the current `Dockerfile` build completes.
 `ONBUILD` executes in any child image derived `FROM` the current image.  Think
 of the `ONBUILD` command as an instruction the parent `Dockerfile` gives
 to the child `Dockerfile`.
+-->
+`ONBUILD` コマンドは、`Dockerfile` によるビルドが完了した後に実行されます。
+`ONBUILD` は、現在のイメージから `FROM` によって派生した子イメージにおいて実行されます。
+つまり `ONBUILD` とは、親の `Dockerfile` から子どもの `Dockerfile` へ与える命令であると言えます。
 
+<!--
 A Docker build executes `ONBUILD` commands before any command in a child
 `Dockerfile`.
+-->
+Docker によるビルドにおいては `ONBUILD` の実行が済んでから、子イメージのコマンド実行が行われます。
 
+<!--
 `ONBUILD` is useful for images that are going to be built `FROM` a given
 image. For example, you would use `ONBUILD` for a language stack image that
 builds arbitrary user software written in that language within the
 `Dockerfile`, as you can see in [Ruby’s `ONBUILD` variants](https://github.com/docker-library/ruby/blob/master/2.4/jessie/onbuild/Dockerfile).
+-->
+`ONBUILD` は、所定のイメージから `FROM` を使ってイメージをビルドしようとするときに利用できます。
+たとえば特定言語のスタックイメージは `ONBUILD` を利用します。
+`Dockerfile` 内にて、その言語で書かれたどのようなユーザーソフトウェアであってもビルドすることができます。
+その例として [Ruby's ONBUILD variants](https://github.com/docker-library/ruby/blob/master/2.1/onbuild/Dockerfile) があります。
 
+<!--
 Images built from `ONBUILD` should get a separate tag, for example:
 `ruby:1.9-onbuild` or `ruby:2.0-onbuild`.
+-->
+`ONBUILD` によって構築するイメージは、異なったタグを指定してください。
+たとえば `ruby:1.9-onbuild` と `ruby:2.0-onbuild` などです。
 
+<!--
 Be careful when putting `ADD` or `COPY` in `ONBUILD`. The "onbuild" image
 fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the `Dockerfile` author to make a choice.
+-->
+`ONBUILD` において `ADD` や `COPY` を用いるときは注意してください。
+"onbuild" イメージが新たにビルドされる際に、追加しようとしているリソースが見つからなかったとしたら、このイメージは復旧できない状態になります。上に示したように個別にタグをつけておけば、`Dockerfile` の開発者にとっても判断ができるようになるので、不測の事態は軽減されます。
 
+<!--
 ## Examples for Official Images
+-->
+## 公式イメージの例
 
+<!--
 These Official Images have exemplary `Dockerfile`s:
+-->
+以下に示すのは代表的な `Dockerfile` の例です。
 
 * [Go](https://hub.docker.com/_/golang/)
 * [Perl](https://hub.docker.com/_/perl/)
 * [Hy](https://hub.docker.com/_/hylang/)
 * [Ruby](https://hub.docker.com/_/ruby/)
 
+<!--
 ## Additional resources:
+-->
+## その他の情報
 
+<!--
 * [Dockerfile Reference](/engine/reference/builder.md)
 * [More about Base Images](baseimages.md)
 * [More about Automated Builds](/docker-hub/builds/)
 * [Guidelines for Creating Official Images](/docker-hub/official_images/)
+-->
+* [Dockerfile リファレンス](/engine/reference/builder.md)
+* [ベースイメージの詳細](baseimages.md)
+* [自動ビルドの詳細](/docker-hub/builds/)
+* [公式イメージ作成のガイドライン](/docker-hub/official_images/)
 

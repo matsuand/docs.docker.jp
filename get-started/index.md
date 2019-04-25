@@ -86,15 +86,15 @@ applications with containers. The use of Linux containers to deploy applications
 is called _containerization_. Containers are not new, but their use for easily
 deploying applications is.
 -->
-Docker is a platform for developers and sysadmins to **develop, deploy, and run**
-applications with containers. The use of Linux containers to deploy applications
-is called _containerization_. Containers are not new, but their use for easily
-deploying applications is.
+Docker は開発者やシステム管理者が、コンテナーを使ってアプリケーションを**開発、デプロイ、実行**するためのプラットフォームです。
+Linux のコンテナーを利用してアプリケーションをデプロイすることを「コンテナー化」（_containerization_）と呼びます。
+コンテナーは新たな技術というものではありませんが、これを使えばアプリケーションを簡単にデプロイできます。
 
 <!--
 Containerization is increasingly popular because containers are:
 -->
-コンテナー化（containerization）はよりポピュラーなものになっています。その理由は以下です。
+コンテナー化は、よりポピュラーなものになっています。
+その理由は以下です。
 
 <!--
 - Flexible: Even the most complex applications can be containerized.
@@ -105,11 +105,11 @@ Containerization is increasingly popular because containers are:
 - Stackable: You can stack services vertically and on-the-fly.
 -->
 - 柔軟性: より複雑なアプリケーションであるほど、コンテナー化ができます。
-- 軽量: Containers leverage and share the host kernel.
-- 交換可能: You can deploy updates and upgrades on-the-fly.
-- 可搬性: You can build locally, deploy to the cloud, and run anywhere.
-- スケーラブル: You can increase and automatically distribute container replicas.
-- スタッカブル: You can stack services vertically and on-the-fly.
+- 軽量: コンテナーはホストシステムのカーネルを活用し共有します。
+- 交換可能: アップデートやアップグレードがすばやくできます。
+- 可搬性: ローカルでビルド、クラウドにデプロイ、どこでも動きます。
+- スケーラブル: コンテナーのレプリカを増やしたり自動的に提供することができます。
+- スタッカブル: サービスをスケールアップし、すばやく対応できます。
 
 <!--
 ![Containers are portable](images/laurel-docker-containers.png){:width="100%"}
@@ -167,7 +167,7 @@ of Docker Community Edition (CE) or Enterprise Edition (EE) on a
 [supported platform](/ee/supported-platforms/){: target="_blank" class="_"}.
 -->
 Docker コミュニティエディション（Community Edition; CE）または Docker エンタープライズエディション（Enterprise Edition; EE）をインストールします。
-[対応するプラットフォーム](/ee/supported-platforms/){: target="_blank" class="_"} および [メンテナンスされているバージョン](/engine/installation/#updates-and-patches){: target="_blank" class="_"} をそれぞれ確認してください。
+[対応するプラットフォーム](/ee/supported-platforms/){: target="_blank" class="_"}および [メンテナンスされているバージョン](/engine/installation/#updates-and-patches){: target="_blank" class="_"}をそれぞれ確認してください。
 
 <!--
 > For full Kubernetes Integration
@@ -181,12 +181,10 @@ is available in
 -->
 > Kubernetes 統合について
 >
-> - [Kubernetes on Docker Desktop for Mac](/docker-for-mac/kubernetes/){: target="_blank" class="_"}
-is available in [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05){: target="_blank" class="_"} or
-[17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} and higher.
-> - [Kubernetes on Docker Desktop for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
-is available in
-[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher edge channels only.
+> - [Docker Desktop for Mac における Kubernetes](/docker-for-mac/kubernetes/){: target="_blank" class="_"}
+は [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05){: target="_blank" class="_"} において、または [17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} 以上において利用可能です。
+> - [Docker Desktop for Windows における Kubernetes](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
+は [18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} またはそれ以上のエッジチャネルのみで利用可能です。
 
 [Docker のインストール](/engine/installation/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
@@ -222,7 +220,11 @@ is available in
     ...
     ```
 
+<!--
 > To avoid permission errors (and the use of `sudo`), add your user to the `docker` group. [Read more](/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}.
+-->
+> パーミッションエラーにならないようにする（`sudo` は使わない場合）には、`docker` グループにユーザーを追加します。
+[詳しくはこちら](/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}。
 
 ### Docker インストールの確認
 
@@ -246,19 +248,19 @@ is available in
     ...
     ```
 
-<!--
-2.  List the `hello-world` image that was downloaded to your machine:
--->
+    <!--
+    2.  List the `hello-world` image that was downloaded to your machine:
+    -->
 2.  マシンにダウンロードされた `hello-world` イメージを表示します。
 
     ```shell
     docker image ls
     ```
 
-<!--
-3.  List the `hello-world` container (spawned by the image) which exits after
-    displaying its message. If it were still running, you would not need the `--all` option:
--->
+    <!--
+    3.  List the `hello-world` container (spawned by the image) which exits after
+        displaying its message. If it were still running, you would not need the `--all` option:
+    -->
 3.  `hello-world` コンテナー（イメージから実行されたもの）を表示します。
     これはメッセージが出力された後には終了します。
     実行されている場合は `--all` オプションをつける必要はありません。
@@ -273,7 +275,7 @@ is available in
 ## まとめと早見表
 
 ```shell
-## List Docker CLI commands
+## Docker CLI のコマンド一覧
 docker
 docker container --help
 

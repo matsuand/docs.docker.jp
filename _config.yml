@@ -1,4 +1,4 @@
-name: Docker Documentation
+name: Docker ドキュメント
 markdown: kramdown
 kramdown:
   input: GFM
@@ -11,7 +11,8 @@ incremental: true
 permalink: pretty
 safe: false
 lsi: false
-url: https://docs.docker.com
+lang: ja_JP
+url: http://lfs64translation
 # This needs to have all the directories you expect to be in the archives (delivered by docs-base in the Dockerfile)
 keep_files: ["v17.03", "v17.06", "v17.09", "v17.12", "v18.03"]
 exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.html"]

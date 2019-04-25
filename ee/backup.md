@@ -1,5 +1,5 @@
 ---
-title: Backup Docker EE
+title: Docker EE のバックアップ
 description: Learn how to create a backup of your Docker Enterprise Edition, and how to restore from a backup.
 keywords: enterprise, backup, restore
 redirect_from:

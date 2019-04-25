@@ -31,9 +31,9 @@ stack, defining the interactions of all the services, covered in
 -->
 Docker におけるアプリケーション構築を始めましょう。
 アプリケーション階層の最下部となるところから始めることにします。
-これがコンテナであり、このページにて取り扱います。
+これがコンテナーであり、このページにて取り扱います。
 このレベルの上位にあるのがサービスです。
-サービスは、アプリケーション実行中のコンテナの動きを定義します。
+サービスは、アプリケーション実行中のコンテナーの動きを定義します。
 このことは [3 部](part3.md) で扱います。
 最後に、最上位にあるのがスタックです。
 サービス間の対話方法を定義します。
@@ -90,8 +90,8 @@ be specific about what files you want to "copy in" to that environment. However,
 after doing that, you can expect that the build of your app defined in this
 `Dockerfile` behaves exactly the same wherever it runs.
 -->
-`Dockerfile` では、コンテナ内の環境で何をするかを定義します。
-ネットワークインターフェースとディスクドライバーののようなリソースは、システム上の他の環境からは隔離された環境内に仮想化されています。
+`Dockerfile` では、コンテナー内の環境で何をするかを定義します。
+ネットワークインターフェースとディスクドライバーのようなリソースは、システム上の他の環境からは隔離された環境内に仮想化されています。
 このようなリソースに接続するには、ポートを外の世界にマッピング（割り当て）する必要がありますし、どのファイルを環境に「複製」（copy in）するか指定する必要もあります。
 しかしながら、これらの作業を `Dockerfile` における構築時の定義で済ませておけば、どこで実行しても同じ挙動となります。
 
@@ -104,7 +104,8 @@ that file, and save it. Take note of the comments that explain each statement in
 your new Dockerfile.
 -->
 空ディレクトリを作成します。
-新しいディレクトリ内にディレクトリを変更（`cd`）し、`Dockerfile` という名前のファイルを作成し、以降の内容をファイルにコピー＆ペーストし、保存します。なお、Dockerfile のコメントは、各命令文に対する説明です。
+新しいディレクトリ内にディレクトリを変更（`cd`）し、`Dockerfile` という名前のファイルを作成し、以降の内容をファイルにコピー＆ペーストし、保存します。
+なお、Dockerfile のコメントは、各命令文に対する説明です。
 
 ```dockerfile
 # 公式 Python ランタイムを親イメージとして使用
@@ -113,19 +114,19 @@ FROM python:2.7-slim
 # 作業ディレクトリを /app に設定
 WORKDIR /app
 
-# 現在のディレクトリの内容を、コンテナ内の /app にコピー
+# 現在のディレクトリの内容を、コンテナー内の /app にコピー
 COPY . /app
 
 # requirements.txt で指定された必要なパッケージをすべてインストール
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-# ポート 80 番をコンテナの外の世界でも利用可能に
+# ポート 80 番をコンテナーの外の世界でも利用可能に
 EXPOSE 80
 
 # 環境変数の定義
 ENV NAME World
 
-# コンテナ起動時に app.py を実行
+# コンテナー起動時に app.py を実行
 CMD ["python", "app.py"]
 ```
 

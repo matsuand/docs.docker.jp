@@ -47,7 +47,7 @@ Docker はアプリケーションをパッケージ化して実行するため�
 <!--
 Docker provides tooling and a platform to manage the lifecycle of your containers:
 -->
-Docker が提供するのは、コンテナのライフサイクルを管理するツールとプラットフォームです。
+Docker が提供するのは、コンテナーのライフサイクルを管理するツールとプラットフォームです。
 
 <!--
 * Develop your application and its supporting components using containers.
@@ -132,7 +132,7 @@ delivery (CI/CD) workflows.
 -->
 Docker は開発のライフサイクルを効率化します。
 開発するアプリケーションやサービスがローカルなコンテナー内に実現でき、開発者は標準化された環境により作業が進められるからです。
-コンテナを使った開発は、継続的インテグレーション (continuous integration; CI) や継続的開発 (continuous development; CD) のワークフローに適しています。
+コンテナーを使った開発は、継続的インテグレーション (continuous integration; CI) や継続的開発 (continuous development; CD) のワークフローに適しています。
 
 <!--
 Consider the following example scenario:
@@ -149,7 +149,7 @@ Consider the following example scenario:
 - When testing is complete, getting the fix to the customer is as simple as
   pushing the updated image to the production environment.
 -->
-- 開発者がローカルでコードを書き、仲間とその作業を共有するために Docker コンテナを使います。
+- 開発者がローカルでコードを書き、仲間とその作業を共有するために Docker コンテナーを使います。
 - Docker によりアプリケーションをテスト環境に投入し、自動および手動のテストを実行します。
 - 開発者がバグを発見したら、開発環境においてこれを修正して、アプリケーションをテスト環境に再デプロイし、テスト確認を行ないます。
 - テストが完了します。この後にユーザーが修正版を利用できるようにすることは、更新済イメージを本番環境へ投入することと同じく容易なことです。
@@ -464,7 +464,7 @@ These namespaces provide a layer of isolation. Each aspect of a container runs
 in a separate namespace and its access is limited to that namespace.
 -->
 名前空間はいくつもの分離状態を作り出します。
-コンテナ内のさまざまな処理は、分離された名前空間内にて実行され、それぞれへのアクセスはその名前空間内に限定されます。
+コンテナー内のさまざまな処理は、分離された名前空間内にて実行され、それぞれへのアクセスはその名前空間内に限定されます。
 
 <!--
 Docker Engine uses namespaces such as the following on Linux:

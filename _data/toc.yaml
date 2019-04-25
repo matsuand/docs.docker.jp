@@ -258,7 +258,7 @@ guides:
     - sectiontitle: Store data within containers
       section:
       - path: /storage/storagedriver/
-        title: About storage drivers
+        title: ストレージドライバーについて
       - path: /storage/storagedriver/select-storage-driver/
         title: Select a storage driver
       - path: /storage/storagedriver/aufs-driver/
@@ -518,20 +518,20 @@ guides:
     title: Docs hackathon results
 
 reference:
-- sectiontitle: File formats
+- sectiontitle: ファイルフォーマット
   section:
-  - title: Dockerfile reference
+  - title: Dockerfile リファレンス
     path: /engine/reference/builder/
-  - title: Compose file reference
+  - title: Compose ファイルリファレンス
     path: /compose/compose-file/
     nosync: true
 
-- sectiontitle: Command-Line Interfaces (CLIs)
+- sectiontitle: コマンドラインインターフェイス (CLI)
   section:
   - sectiontitle: Docker CLI (docker)
     section:
     - path: /engine/reference/run/
-      title: Docker run reference
+      title: Docker run リファレンス
     - path: /engine/reference/commandline/cli/
       title: Use the Docker command line
     - path: /engine/reference/commandline/docker/
@@ -1318,7 +1318,7 @@ manuals:
           - title: Offline installation
             path: /ee/ucp/interlock/deploy/offline-install/
           - title: Layer 7 routing upgrade
-            path: /ee/ucp/interlock/upgrade/
+            path: /ee/ucp/interlock/deploy/upgrade/
         - sectiontitle: Configuration
           section:
           - title: Configure your deployment
@@ -1345,8 +1345,6 @@ manuals:
             path: /ee/ucp/interlock/usage/canary/
           - title: Using context or path-based routing
             path: /ee/ucp/interlock/usage/context/
-          - title: Publishing a default host service
-            path: /ee/ucp/interlock/usage/default-backend/
           - title: Specifying a routing mode
             path: /ee/ucp/interlock/usage/interlock-vip-mode/
           - title: Using routing labels
