@@ -2,7 +2,7 @@
 {% capture dockerBaseDesc %}The base command for the Docker CLI.{% endcapture %}
 {% if include.datafolder and include.datafile %}
 
-## Description
+## 説明
 
 {% if include.datafile=="docker" %}<!-- docker.yaml is textless, so override -->
 {{ dockerBaseDesc }}
@@ -69,7 +69,10 @@ your client and daemon API versions.
 
 {% if site.data[include.datafolder][include.datafile].usage %}
 
+<!--
 ## Usage
+-->
+## 利用方法
 
 ```none
 {{ site.data[include.datafolder][include.datafile].usage | replace: tabChar,"" | strip }}{% if site.data[include.datafolder][include.datafile].cname %} COMMAND{% endif %}
@@ -82,14 +85,22 @@ your client and daemon API versions.
   {% else %}
     {% assign alloptions = site.data[include.datafolder][include.datafile].options %}
   {% endif %}
+<!--
 ## Options
+-->
+## オプション
 
 <table>
 <thead>
   <tr>
+    <!--
     <td>Name, shorthand</td>
     <td>Default</td>
     <td>Description</td>
+    -->
+    <td>名前／省略形</td>
+    <td>デフォルト</td>
+    <td>説明</td>
   </tr>
 </thead>
 <tbody>
@@ -119,13 +130,20 @@ your client and daemon API versions.
 
 {% if site.data[include.datafolder][include.datafile].cname %}
 
+<!--
 ## Child commands
+-->
+## 下位コマンド
 
 <table>
 <thead>
   <tr>
+    <!--
     <td>Command</td>
     <td>Description</td>
+    -->
+    <td>コマンド</td>
+    <td>説明</td>
   </tr>
 </thead>
 <tbody>
@@ -143,7 +161,10 @@ your client and daemon API versions.
 {% if site.data[include.datafolder][include.datafile].pname %}
 {% unless site.data[include.datafolder][include.datafile].pname == include.datafile %}
 
+<!--
 ## Parent command
+-->
+## 上位コマンド
 
 {% capture parentfile %}{{ site.data[include.datafolder][include.datafile].plink | replace: ".yaml", "" | replace: "docker_","" }}{% endcapture %}
 {% capture parentdatafile %}{{ site.data[include.datafolder][include.datafile].plink | replace: ".yaml", "" }}{% endcapture %}
@@ -154,8 +175,8 @@ your client and daemon API versions.
   {% capture parentDesc %}{{ site.data[include.datafolder][parentdatafile].short }}{% endcapture %}
 {% endif %}
 
-| Command | Description |
-| ------- | ----------- |
+| コマンド | 説明        |
+| -------- | ----------- |
 | [{{ site.data[include.datafolder][include.datafile].pname }}]({{ parentfile }}) | {{ parentDesc }}|
 
 {% endunless %}
@@ -163,13 +184,20 @@ your client and daemon API versions.
 
 {% unless site.data[include.datafolder][include.datafile].pname == "docker" or site.data[include.datafolder][include.datafile].pname == "dockerd" or include.datafile=="docker" %}
 
+<!--
 ## Related commands
+-->
+## 関連コマンド
 
 <table>
 <thead>
   <tr>
+    <!--
     <td>Command</td>
     <td>Description</td>
+    -->
+    <td>コマンド</td>
+    <td>説明</td>
   </tr>
 </thead>
 <tbody>
@@ -187,7 +215,10 @@ your client and daemon API versions.
 
 {% unless site.data[include.datafolder][include.datafile].long == site.data[include.datafolder][include.datafile].short %}
 
+<!--
 ## Extended description
+-->
+## 追加説明
 
 {{ site.data[include.datafolder][include.datafile].long }}
 
@@ -195,7 +226,10 @@ your client and daemon API versions.
 
 {% if site.data[include.datafolder][include.datafile].examples %}
 
+<!--
 ## Examples
+-->
+## 利用例
 
 {{ site.data[include.datafolder][include.datafile].examples }}
 

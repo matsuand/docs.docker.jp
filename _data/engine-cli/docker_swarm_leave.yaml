@@ -1,14 +1,14 @@
 command: docker swarm leave
-short: Leave the swarm
+short: スウォームからノードを削除します。
 long: |-
-  When you run this command on a worker, that worker leaves the swarm.
+  このコマンドをワーカー上で実行した場合、そのワーカーがスウォームから去ります（leave）。
 
-  You can use the `--force` option on a manager to remove it from the swarm.
-  However, this does not reconfigure the swarm to ensure that there are enough
-  managers to maintain a quorum in the swarm. The safe way to remove a manager
-  from a swarm is to demote it to a worker and then direct it to leave the quorum
-  without using `--force`. Only use `--force` in situations where the swarm will
-  no longer be used after the manager leaves, such as in a single-node swarm.
+  マネージャー上において `--force` オプションをつけて実行すると、スウォームからマネージャーを削除します。
+  しかしスォーム内においてマネージャーの最低必要数（quorum）を維持しているかどうか、これを確認して再設定を行うことはしません。
+  スウォームからマネージャーを削除する安全な方法は、マネージャーをワーカーに格下げし、最低必要数から除かれるように指示することです。
+  そのときには `--force` オプションをつけずにコマンド実行します。
+  `--force` オプションを利用するのは、マネージャーが去ってしまった後には、もうそのスウォームを利用しない場合にのみ利用するようにしてください。
+  それはつまりシングルモードスウォームにおける場合などです。
 usage: docker swarm leave [OPTIONS]
 pname: docker swarm
 plink: docker_swarm.yaml
@@ -17,14 +17,14 @@ options:
   shorthand: f
   value_type: bool
   default_value: "false"
-  description: Force this node to leave the swarm, ignoring warnings
+  description: ノードを強制的にスウォームから除きます。警告は無視します。
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
-  Consider the following swarm, as seen from the manager:
+  以下のようなスウォームがあるとします。これはマネージャーから見たものです。
 
   ```bash
   $ docker node ls
@@ -34,17 +34,17 @@ examples: |-
   dvfxp4zseq4s0rih1selh0d20 *  manager1  Ready   Active        Leader
   ```
 
-  To remove `worker2`, issue the following command from `worker2` itself:
+  `worker2` を削除するには `worker2` そのものから以下のコマンドを実行します。
 
   ```bash
   $ docker swarm leave
   Node left the default swarm.
   ```
 
-  The node will still appear in the node list, and marked as `down`. It no longer
-  affects swarm operation, but a long list of `down` nodes can clutter the node
-  list. To remove an inactive node from the list, use the [`node rm`](node_rm.md)
-  command.
+  このノードはノード一覧内にまだ含まれますが `down` として印づけされます。
+  これ以降、スウォーム動作には関わりません。
+  ただし `down` ノードがたくさん表示されると、ノード一覧がわかりにくくなります。
+  アクティブでないノードを一覧から除くには [`node rm`](node_rm.md) コマンドを使います。
 deprecated: false
 min_api_version: "1.24"
 experimental: false
