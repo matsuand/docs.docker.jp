@@ -4,12 +4,15 @@ keywords: fig, composition, compose, docker
 redirect_from:
 - /compose/yml
 - /compose/compose-file-v3.md
-title: Compose file version 3 reference
+title: Compose ファイル バージョン 3 リファレンス
 toc_max: 4
 toc_min: 1
 ---
 
+<!--
 ## Reference and guidelines
+-->
+## リファレンスとガイドライン
 
 These topics describe version 3 of the Compose file format. This is the newest
 version.
@@ -2601,7 +2604,10 @@ secrets:
 You still need to [grant access to the secrets](#secrets) to each service in the
 stack.
 
+<!--
 ## Variable substitution
+-->
+## 変数の置換
 
 {% include content/compose-var-sub.md %}
 

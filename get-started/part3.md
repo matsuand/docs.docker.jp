@@ -10,7 +10,7 @@ description: Learn how to define load-balanced and scalable service that runs co
 <!--
 - [Install Docker version 1.13 or higher](/engine/installation/index.md).
 -->
-- [Docker バージョン 1.13 またはそれ以上をインストールすること](/engine/installation/index.md)。
+- [Docker バージョン 1.13 またはそれ以上をインストールしていること](/engine/installation/index.md)。
 
 <!--
 - Get [Docker Compose](/compose/overview.md). On [Docker Desktop for

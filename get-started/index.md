@@ -272,6 +272,9 @@ is available in
     54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
     ```
 
+<!--
+## Recap and cheat sheet
+-->
 ## まとめと早見表
 
 ```shell
@@ -296,7 +299,7 @@ docker container ls --all
 docker container ls -aq
 ```
 
-## 1 部を終えて
+## 1 部のまとめ
 
 <!--
 Containerization makes [CI/CD](https://www.docker.com/solutions/cicd){: target="_blank" class="_"} seamless. For example:

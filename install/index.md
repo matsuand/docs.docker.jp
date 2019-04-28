@@ -1,6 +1,6 @@
 ---
 title: Docker CE について
-description: Lists the installation methods
+description: インストール方法を一覧列記。
 keywords: docker, installation, install, docker ce, docker ee, docker editions, stable, edge
 redirect_from:
 - /installation/
@@ -22,17 +22,17 @@ Docker Community Edition (CE) is ideal for developers and small
 teams looking to get started with Docker and experimenting with container-based
 apps. Docker CE has three types of update channels, **stable**, **test**, and **nightly**:
 -->
-Docker コミュニティエディション (Community Edition; CE) は個人の開発者や小さな開発チームに向けたものであり、Docker をはじめようとしたり、コンテナーベースのアプリケーションを試そうとしたりする方に適しています。
-Docker CE には更新チャネルとして **安定版 (stable)**、**テスト版 (test)**、**最新版 (nightly)** の 3 つがあります。
+Docker コミュニティエディション（Community Edition; CE）は個人の開発者や小さな開発チームに向けたものであり、Docker をはじめようとしたり、コンテナーベースのアプリケーションを試そうとしたりする方に適しています。
+Docker CE には更新チャネルとして **安定版**（stable）、**テスト版**（test）、**最新版**（nightly）の 3 つがあります。
 
 <!--
 * **Stable** gives you latest releases for general availability.
 * **Test** gives pre-releases that are ready for testing before general availability.
 * **Nightly** gives you latest builds of work in progress for the next major release.
 -->
-* **安定版 (stable)** は、正規安定版 (general availability; GA) の最新リリースです。
-* **テスト版 (test)** は、正規安定版に向けてテスト向けとなっているプレリリース版です。
-* **最新版 (nightly)** は、次のメジャーリリースに向けての開発途上の最新ビルド版です。
+* **安定版**（stable）は、正規安定版（general availability; GA）の最新リリースです。
+* **テスト版**（test）は、正規安定版に向けてテスト向けとなっているプレリリース版です。
+* **最新版**（nightly）は、次のメジャーリリースに向けての開発途上の最新ビルド版です。
 
 <!--
 For more information about Docker CE, see
@@ -47,9 +47,10 @@ For the Docker CE engine, the open
 repositories [Docker Engine](https://github.com/docker/engine) and
 [Docker Client](https://github.com/docker/cli) apply.
 -->
-Docker CE エンジンは、オープンなレポジトリである [Docker エンジン](https://github.com/docker/engine) と
-[Docker クライアント](https://github.com/docker/cli) が提供されています。
+Docker CE エンジンには、[Docker Engine](https://github.com/docker/engine) と
+[Docker Client](https://github.com/docker/cli) を提供するオープンリポジトリがあります。
 
+<!--
 Releases of Docker Engine and Docker Client for general availability
 are versioned using dotted triples. The components of this triple
 are `YY.mm.<patch>` where the `YY.mm` component is referred to as the
@@ -58,17 +59,34 @@ cadence and does not guarantee SemVer, but the desired date for general
 availability. The version number may have additional information, such as
 beta and release candidate qualifications. Such releases are considered
 "pre-releases".
+-->
+Docker Engine と Docker Client の正規安定版リリースは、3 つの数字をドットで区切ったバージョン番号により管理されています。
+この 3 つの数字は `YY.mm.<patch>` といった形式で、このうち `YY.mm` の部分はリリースされた年月を表わします。
+バージョン番号のフォーマットは順にあがっていくように番号づけされますが、セマンティックバージョンを意味するわけではなく、安定版リリース予定の年月を示すにすぎません。
+バージョン番号には付加情報がつくことがあります。
+それはベータ版であるとか、リリース候補であるといった識別情報です。
+そのようなリリースは "プレリリース" として扱われます。
 
+<!--
 The cadence of the year-month releases is every 6 months starting with
 the `18.09` release. The patch releases for a year-month release take
 place as needed to address bug fixes during its support cycle.
+-->
+年月によるリリースは `18.09` のリリース以降 6 ヶ月ごとに行われます。
+その年月リリースに対するパッチのリリースは必要に応じて行われ、年月リリースのサイクルの合間のバグフィックスとして提供されます。
 
+<!--
 Docker CE binaries for a release are available on [download.docker.com](https://download.docker.com/)
 as packages for the supported operating systems. Docker EE binaries are
 available on the [Docker Hub](https://hub.docker.com/) for the supported operating systems. The
 release channels are available for each of the year-month releases and
 allow users to "pin" on a year-month release of choice. The release
 channel also receives patch releases when they become available.
+-->
+Docker CE のバイナリリリースは [download.docker.com](https://download.docker.com/) から、サポートするオペレーティングシステム向けのパッケージとして提供されます。
+Docker EE のバイナリリリースは [Docker Hub](https://hub.docker.com/) から、サポートするオペレーティングシステム向けに提供されます。
+リリースチャネルは、個々の年月リリースを提供するものなので、年月リリースを選びやすくしています。
+リリースチャネルはまた、パッチリリースが提供された際に、そのパッチリリースを得ることもできます。
 
 ### 最新版
 
@@ -76,7 +94,7 @@ channel also receives patch releases when they become available.
 Nightly builds are created once per day from the master branch. The version
 number for nightly builds take the format:
 -->
-最新版 (nightly builds) はマスターブランチから毎日生成されます。
+最新版（nightly）はマスターブランチから 1 日 1 回生成されます。
 最新版のバージョン番号は以下のような書式です。
 
     0.0.0-YYYYmmddHHMMSS-abcdefabcdef
@@ -89,28 +107,51 @@ of the commit hash, for example `0.0.0-20180720214833-f61e0f7`.
 また最後の文字はコミットハッシュの先頭文字です。
 具体的には `0.0.0-20180720214833-f61e0f7` のようになります。
 
+<!--
 These builds allow for testing from the latest code on the master branch. No
 qualifications or guarantees are made for the nightly builds.
+-->
+このビルドは、マスターブランチにある最新コードを使ったテストのためのものです。
+最新版ビルドの品質、動作は保証されません。
 
+<!--
 The release channel for these builds is called `nightly`.
+-->
+このビルドに対するリリースチャネルは `nightly` と呼ばれます。
 
 ### プレリリース
 
+<!--
 In preparation for a new year-month release, a branch is created from
 the master branch with format `YY.mm` when the milestones desired by
 Docker for the release have achieved feature-complete. Pre-releases
 such as betas and release candidates are conducted from their respective release
 branches. Patch releases and the corresponding pre-releases are performed
 from within the corresponding release branch.
+-->
+次の年月リリースに向けては、マスターブランチから新たなブランチが `YY.mm` の形式で生成されます。
+これは Docker のリリースに向けて設定されたマイルストーンにおいて、機能実現を達成したときに生成されます。
+ベータ版やリリース候補版などのプレリリース版は、対応するリリースブランチに基づいて作業が行われます。
+パッチリリースとそれに対応するプレリリース版は、対応するリリースブランチに基づいて作業が行われます。
 
+<!--
 While pre-releases are done to assist in the stabilization process, no
 guarantees are provided.
+-->
+プレリリース版の作業は安定性を保って行われますが、保証されるものではありません。
 
+<!--
 Binaries built for pre-releases are available in the test channel for
 the targeted year-month release using the naming format `test-YY.mm`,
 for example `test-18.09`.
+-->
+プレリリース版に対応するバイナリリリースを入手することができます。
+これはテストチャネル内の対象となる年月リリースに対応して `test-YY.mm` といった形式、例えば `test-18.09` といった名前で提供されます。
 
+<!--
 ### General availability
+-->
+### 正規安定版（general availability; GA）
 
 Year-month releases are made from a release branch diverged from the master
 branch. The branch is created with format `<year>.<month>`, for example
@@ -123,7 +164,10 @@ Binaries built from this releases are available in the stable channel
 `stable-YY.mm`, for example `stable-18.09`, as well as the corresponding
 test channel.
 
+<!--
 ### Relationship between CE and EE code
+-->
+### Docker CE と EE のコード関係
 
 For a given year-month release, Docker releases both CE and EE
 variants concurrently. EE is a superset of the code delivered in
@@ -154,7 +198,10 @@ until the end-of-life date.
 After the year-month branch has reached end-of-life, the branch may be
 deleted from the repository.
 
+<!--
 ### Reporting security issues
+-->
+### セキュリティに関する問題の報告
 
 The Docker maintainers take security seriously. If you discover a security
 issue, please bring it to their attention right away!
@@ -207,7 +254,10 @@ or by adding a comment to the PR.
 
 Patch releases are always backward compatible with its year-month version.
 
+<!--
 ## Not covered
+-->
+## 非対応
 
 As a general rule, anything not mentioned in this document may change in any release.
 
@@ -218,7 +268,13 @@ in release procedure or product functionality is required, it will
 be communicated clearly, and the solution will be considered against
 total impact.
 
+<!--
 ## Get started
+-->
+## はじめよう
 
+<!--
 After setting up Docker, you can learn the basics with
 [Getting started with Docker](/get-started/).
+-->
+Docker をセットアップしたら [Docker をはじめよう](/get-started/) を読んで基礎を学んでください。

@@ -5,33 +5,63 @@ redirect_from:
 - /engine/installation/fedora/
 - /engine/installation/linux/fedora/
 - /engine/installation/linux/docker-ce/fedora/
-title: Get Docker CE for Fedora
+title: Docker CE の入手（Fedora 向け）
 toc_max: 4
 ---
 
+<!--
 To get started with Docker CE on Fedora, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ce).
+-->
+Fedora 向けに Docker CE を始めるには、[前提条件を満たしているか](./#prerequisites)を確認してから、[Docker をインストール](./#install-docker-ce)してください。
 
+<!--
 ## Prerequisites
+-->
+## 前提条件
+{: #prerequisites }
 
+<!--
 ### Docker EE customers
+-->
+### Docker EE を利用する方は
+{: #docker-ee-customers }
 
+<!--
 Docker EE is not supported on Fedora. For a list of supported operating systems
 and distributions for different Docker editions, see
 [Docker variants](/install/index.md#docker-variants).
+-->
+Docker EE は Fedora ではサポートされていません。
+[その他の Docker](/install/index.md#docker-variants) から、他の Docker エディションを確認し、サポートされているオペレーティングシステムやディストリビューションを探してください。
 
+<!--
 ### OS requirements
+-->
+### OS 要件
+{: #os-requirements }
 
+<!--
 To install Docker, you need the 64-bit version of one of these Fedora versions:
+-->
+Docker CE をインストールするには、以下に示す Fedora の 64 ビットバージョンのいずれかが必要です。
 
 - 28
 - 29
 
+<!--
 ### Uninstall old versions
+-->
+### 古いバージョンのアンインストール
+{: #uninstall-old-versions }
 
+<!--
 Older versions of Docker were called `docker` or `docker-engine`. If these are
 installed, uninstall them, along with associated dependencies.
+-->
+Docker のかつてのバージョンは、`docker` あるいは `docker-engine` と呼ばれていました。
+これがインストールされている場合は、関連する依存パッケージも含めアンインストールしてください。
 
 ```bash
 $ sudo dnf remove docker \
@@ -46,46 +76,94 @@ $ sudo dnf remove docker \
                   docker-engine
 ```
 
+<!--
 It's OK if `dnf` reports that none of these packages are installed.
+-->
+`dnf` を実行したときに、上のパッケージがインストールされていないと表示されれば OK です。
 
+<!--
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
 networks, are preserved. The Docker CE package is now called `docker-ce`.
+-->
+`/var/lib/docker/` にはイメージ、コンテナー、ボリューム、ネットワークが含まれていて、それは保持されたまま残ります。
+なお Docker CE パッケージは、今は `docker-ce` と呼ばれます。
 
+<!--
 ## Install Docker CE
+-->
+## Docker CE のインストール
+{: #install-docker-ce }
 
+<!--
 You can install Docker CE in different ways, depending on your needs:
+-->
+Docker CE のインストール方法はいくつかあります。
+必要に応じて選んでください。
 
+<!--
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
   from them, for ease of installation and upgrade tasks. This is the
   recommended approach.
+-->
+- たいていのユーザーは [Docker のリポジトリをセットアップ](./#install-using-the-repository)して、そこからインストールしています。
+  インストールやアップグレードの作業が簡単だからです。
+  この方法をお勧めします。
 
+<!--
 - Some users download the RPM package and
   [install it manually](#install-from-a-package) and manage
   upgrades completely manually. This is useful in situations such as installing
   Docker on air-gapped systems with no access to the internet.
+-->
+- ユーザーの中には RPM パッケージをダウンロードし、[手動でインストール](./#install-from-a-package)している方もいます。
+  アップグレードも完全に手動となります。
+  この方法は、インターネットにアクセスできない環境で Docker をインストールするような場合には有用です。
 
+<!--
 - In testing and development environments, some users choose to use automated
   [convenience scripts](#install-using-the-convenience-script) to install Docker.
+-->
+- テスト環境や開発環境向けに、自動化された[便利なスクリプト](./#install-using-the-convenience-script)を使って
+  Docker のインストールを行うユーザーもいます。
 
+<!--
 ### Install using the repository
+-->
+### リポジトリを利用したインストール
+{: #install-using-the-repository }
 
+<!--
 Before you install Docker CE for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker
 from the repository.
+-->
+新しいホストマシンに Docker CE を初めてインストールするときは、その前に Docker リポジトリをセットアップしておくことが必要です。
+これを行った後に、リポジトリからの Docker のインストールやアップグレードができるようになります。
 
+<!--
 #### Set up the repository
+-->
+#### リポジトリのセットアップ
+{: #set-up-the-repository }
 
 {% assign download-url-base = "https://download.docker.com/linux/fedora" %}
 
+<!--
 1.  Install the `dnf-plugins-core` package which provides the commands to manage
     your DNF repositories from the command line.
+-->
+1.  `dnf-plugins-core` パッケージをインストールします。
+    これはコマンドラインから DNF リポジトリを管理するコマンドを提供するものです。
 
     ```bash
     $ sudo dnf -y install dnf-plugins-core
     ```
 
-2.  Use the following command to set up the **stable** repository.
+    <!--
+    2.  Use the following command to set up the **stable** repository.
+    -->
+2.  以下のコマンドを使って **安定版**（stable）リポジトリをセットアップします。
 
     ```bash
     $ sudo dnf config-manager \
@@ -93,6 +171,7 @@ from the repository.
         {{ download-url-base }}/docker-ce.repo
     ```
 
+<!--
 > **Optional**: Enable the **nightly** or **test** repositories.
 >
 > These repositories are included in the `docker.repo` file above but are disabled
@@ -119,32 +198,88 @@ from the repository.
 > ```
 >
 > [Learn about **nightly** and **test** channels](/install/index.md).
+-->
+> **任意の作業**： **最新版**（nightly）または **テスト版**（test）リポジトリの有効化
+>
+> このリポジトリは上記の ``docker.repo`` ファイルに含まれていますが、デフォルトで無効になっています。
+> このリポジトリを **安定版**（stable）リポジトリとともに有効にします。
+> 以下のコマンドは **最新版** リポジトリを有効にします。
+>
+> ```bash
+> $ sudo dnf config-manager --set-enabled docker-ce-nightly
+> ```
+>
+> **テスト版** チャネルを有効にする場合は、以下のコマンドを実行します。
+>
+> ```bash
+> $ sudo dnf config-manager --set-enabled docker-ce-test
+> ```
+>
+> **最新版** リポジトリ、 **テスト版** リポジトリを無効にするには `dnf config-manager` コマンドに `--set-disabled` フラグをつけて実行します。
+> 再度有効にするには `--set-enabled` フラグを利用します。
+> 以下のコマンドは **最新版** リポジトリを無効にします。
+>
+> ```bash
+> $ sudo dnf config-manager --set-disabled docker-ce-nightly
+> ```
+>
+> [**最新版** と **テスト版** チャネルについて学ぶのはこちら](/install/index.md)。
 
+<!--
 #### Install Docker CE
+-->
+#### Docker CE のインストール
+{: #install-docker-ce }
 
+<!--
 1.  Install the _latest version_ of Docker CE and containerd, or go to the next step to install a specific version:
+-->
+1.  Docker CE と containerd の最新版をインストールします。
+    あるいは次の手順に行って、特定のバージョンをインストールします。
 
     ```bash
     $ sudo dnf install docker-ce docker-ce-cli containerd.io
     ```
 
+    <!--
     If prompted to accept the GPG key, verify that the fingerprint matches
     `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`, and if so, accept it.
+    -->
+    GPG 鍵を受け入れるかどうか問われたら、鍵の指紋が `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35` に間違いないことを確認し、鍵を受け入れてください。
 
+    <!--
     > Got multiple Docker repositories?
     >
     > If you have multiple Docker repositories enabled, installing
     > or updating without specifying a version in the `dnf install` or
     > `dnf update` command always installs the highest possible version,
     > which may not be appropriate for your stability needs.
+    -->
+    > 複数リポジトリからの取得？
+    >
+    > Docker リポジトリを複数有効にしていて、バージョン指定をせずに `dnf install`
+    > によるインストール、または `dnf update` によるアップデートを行うと、入手可能な最新版がインストールされます。
+    > 安定した版が必要である場合には、適切でない場合があります。
 
+    <!--
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
+    -->
+    Docker はインストールされましたが、まだ起動はしていません。
+    グループ `docker` が生成されていますが、このグループにはまだユーザーが存在していない状態です。
 
-2.  To install a _specific version_ of Docker CE, list the available versions
-    in the repo, then select and install:
+    <!--
+    2.  To install a _specific version_ of Docker CE, list the available versions
+        in the repo, then select and install:
+    -->
+2.  特定バージョンの Docker CE をインストールする場合は、リポジトリにある利用可能なバージョンの一覧を確認し、いずれかを選んでインストールします。
 
+    <!--
     a. List and sort the versions available in your repo. This example sorts
        results by version number, highest to lowest, and is truncated:
+    -->
+    a. リポジトリ内にある利用可能なバージョンを並びかえて一覧表示します。
+       以下の例では出力結果をバージョン番号によりソートします。
+       一覧は最新のものが上に並びます。バージョンは簡略に表示されます。
 
     ```bash
     $ dnf list docker-ce  --showduplicates | sort -r
@@ -155,116 +290,219 @@ from the repository.
     docker-ce.x86_64  18.06.0.ce-3.fc28                docker-ce-stable
     ```
 
+    <!--
     The list returned depends on which repositories are enabled, and is specific
     to your version of Fedora (indicated by the `.fc28` suffix in this example).
+    -->
+    この一覧内容は、どのリポジトリを有効にしているかによって変わります。
+    また利用している Fedora のバージョンに応じたものになります（この例では ``.fc28`` というサフィックスにより示されるバージョンです）。
 
+    <!--
     b. Install a specific version by its fully qualified package name, which is
        the package name (`docker-ce`) plus the version string (2nd column) up to
        the first hyphen, separated by a hyphen (`-`), for example,
        `docker-ce-3:18.09.1`.
+    -->
+    b. 特定のバージョンをインストールする場合は、有効なパッケージ名を用います。
+       これはパッケージ名（`docker-ce`）に加えて、バージョン文字列（２項目め）の初めのコロン（`:`）から初めのハイフン（`-`）までを、ハイフンでつなげます。
+       たとえば `docker-ce-3:18.09.1` となります。
 
     ```bash
     $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io
     ```
 
+    <!--
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
+    -->
+    Docker はインストールされましたが、まだ起動はしていません。
+    グループ ``docker`` が追加されていますが、このグループにはまだユーザーが存在していない状態です。
 
-3.  Start Docker.
+    <!--
+    3.  Start Docker.
+    -->
+3. Docker を起動します。
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-4.  Verify that Docker CE is installed correctly by running the `hello-world`
-    image.
+    <!--
+    //4.  Verify that Docker CE is installed correctly by running the `hello-world`
+        image.
+    -->
+4.  Docker CE が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
 
     ```bash
     $ sudo docker run hello-world
     ```
 
+    <!--
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
+    -->
+    このコマンドはテスト用イメージをダウンロードし、コンテナー内で実行します。
+    コンテナーが起動すると、メッセージを表示して終了します。
 
+<!--
 Docker CE is installed and running. You need to use `sudo` to run Docker
 commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
+-->
+Docker CE がインストールされ、実行できました。
+Docker コマンドの実行には ``sudo`` が必要になります。
+続いて [Linux のインストール後](/engine/installation/linux/linux-postinstall.md)に進み、非特権ユーザーでも Docker コマンドが実行できるように、またその他の追加の設定について見ていきます。
 
+<!--
 #### Upgrade Docker CE
+-->
+#### Docker CE のアップグレード
+{: #upgrade-docker-ce }
 
+<!--
 To upgrade Docker CE, follow the [installation instructions](#install-docker-ce),
 choosing the new version you want to install.
+-->
+Docker CE をアップグレードするには、[インストール手順](./#install-docker-ce)に従って、インストールしたい新たなバージョンを選んでください。
 
+<!--
 ### Install from a package
+-->
+### パッケージからのインストール
+{: #install-from-a-package }
 
+<!--
 If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker CE.
+-->
+Docker リポジトリを利用した Docker インストールができない場合は、目的とするリリースの `.rpm` ファイルをダウンロードして、手動でインストールする方法があります。この場合 Docker をアップグレードするには、毎回新たな `.rpm` ファイルをダウンロードして利用することになります
 
+<!--
 1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/) and choose your
     version of Fedora. Go to `x86_64/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
+-->
+1.  [{{ download-url-base }}/]({{ download-url-base }}/) にアクセスします。
+    `x86_64/stable/Packages/` へ移動して、インストールしたい `.rpm` ファイルをダウンロードします。
 
+    <!--
     > **Note**: To install a **nightly**  or **test** (pre-release) package,
     > change the word `stable` in the above URL to `nightly` or `test`.
     > [Learn about **nightly** and **test** channels](/install/index.md).
+    -->
+    > **メモ**:  **最新版**または**テスト版**（プレリリース版）パッケージをインストールする場合は
+    > URL 内の `stable` を `nightly` または `test` に変更してください。
+    > [**最新版**と**テスト版**チャンネルを学ぶにはこちら](/install/index.md)。
 
-2.  Install Docker CE, changing the path below to the path where you downloaded
-    the Docker package.
+    <!--
+    2.  Install Docker CE, changing the path below to the path where you downloaded
+        the Docker package.
+    -->
+2.  Docker CE をインストールします。
+    以下に示すパス部分は、Docker パッケージをダウンロードしたパスに書き換えます。
 
     ```bash
     $ sudo dnf -y install /path/to/package.rpm
     ```
 
-3.  Start Docker.
+    <!--
+    3.  Start Docker.
+    -->
+3.  Docker を起動します。
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-4.  Verify that Docker CE is installed correctly by running the `hello-world`
-    image.
+    <!--
+    //4.  Verify that Docker CE is installed correctly by running the `hello-world`
+        image.
+    -->
+4.  Docker CE が正しくインストールされているのを確認するため `hello-world` イメージを実行します。
 
     ```bash
     $ sudo docker run hello-world
     ```
 
+    <!--
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
+    -->
+    このコマンドはテスト用イメージをダウンロードし、コンテナー内で実行します。
+    コンテナーが起動すると、メッセージを表示して終了します。
 
+<!--
 Docker CE is installed and running. You need to use `sudo` to run Docker commands.
 Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
+-->
+Docker CE がインストールされ、実行できました。
+Docker コマンドの実行には ``sudo`` が必要になります。
+続いて [Linux のインストール後](/engine/installation/linux/linux-postinstall.md)に進み、非特権ユーザーでも Docker コマンドが実行できるように、またその他の追加の設定について見ていきます。
 
+<!--
 #### Upgrade Docker CE
+-->
+#### Docker CE のアップグレード
+{: #upgrade-docker-ce }
 
+<!--
 To upgrade Docker CE, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `dnf -y upgrade`
 instead of `dnf -y install`, and pointing to the new file.
+-->
+Docker CE をアップグレードする場合は、新たなパッケージファイルをダウンロードして、[インストール手順](./#install-from-a-package)をもう一度行います。
+その際には `dnf -y install` でなく `dnf -y upgrade` を実行します。
+またパッケージには新しいものを指定します。
 
 {% include install-script.md %}
 
+<!--
 ## Uninstall Docker CE
+-->
+## Docker CE のアンインストール
+{: #uninstall-docker-ce }
 
+<!--
 1.  Uninstall the Docker package:
+-->
+1.  Docker パッケージをアンインストールします。
 
     ```bash
     $ sudo dnf remove docker-ce
     ```
 
-2.  Images, containers, volumes, or customized configuration files on your host
-    are not automatically removed. To delete all images, containers, and
-    volumes:
+    <!--
+    2.  Images, containers, volumes, or customized configuration files on your host
+        are not automatically removed. To delete all images, containers, and
+        volumes:
+    -->
+2.  ホスト上のイメージ、コンテナー、ボリューム、カスタマイズした設定ファイルは自動的に削除されません。
+    イメージ、コンテナー、ボリュームをすべて削除するには、以下を実行します。
 
     ```bash
     $ sudo rm -rf /var/lib/docker
     ```
 
+<!--
 You must delete any edited configuration files manually.
+-->
+編集した設定ファイルはすべて手動で削除する必要があります。
 
+<!--
 ## Next steps
+-->
+## 次のステップ
+{: #next-steps }
 
+<!--
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
+-->
+- [Linux のインストール後](/install/linux/linux-postinstall.md) へ進む
 
+<!--
 - Continue with the [User Guide](/get-started/index.md).
+-->
+- [ユーザーガイド](/get-started/index.md) へ進む

@@ -4,6 +4,7 @@
 ### Install using the convenience script
 -->
 ### 便利スクリプトを使ったインストール
+{: #install-using-the-convenience-script }
 
 <!--
 Docker provides convenience scripts at [get.docker.com](https://get.docker.com/)
@@ -62,6 +63,7 @@ each of the commands below, replace each occurrence of `get` with `test`.
 その場合はコマンド中の `get` を `test` に置き換えて実行します。
 
 > **警告**:
+>
 > インターネットからスクリプトをダウンロードしたら、まず内容を十分確認してから実行してください。
 {:.warning}
 

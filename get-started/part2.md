@@ -270,6 +270,7 @@ Note how the tag defaulted to `latest`. The full syntax for the tag option would
 be something like `--tag=friendlyhello:v0.0.1`.
 
 
+<!--
 >  Troubleshooting for Linux users
 >
 > _Proxy server settings_
@@ -307,6 +308,42 @@ be something like `--tag=friendlyhello:v0.0.1`.
 > `sudo service docker restart`
 >
 > Once fixed, retry to run the `build` command.
+-->
+>  Linux ユーザー向けのトラブルシューティング
+>
+> _Proxy サーバー設定_
+>
+> プロキシーサーバーが起動していると、ウェブアプリへの接続がブロックされることがあります。
+> プロキシーサーバーを動かしているなら、Dockerfile に以下の記述を追加してください。
+> これは `ENV` コマンドを使って、プロキシーサーバーのホストとポートを指定するものです。
+>
+> ```conf
+> # プロキシーサーバー設定、host:port 部分は各自のサーバー向けに置き換える
+> ENV http_proxy host:port
+> ENV https_proxy host:port
+> ```
+>
+> _DNS セッティング_
+>
+> DNS 設定に誤りがあると `pip` において問題が発生することがあります。
+> `pip` を正しく動作させるためには、DNS サーバーアドレスを正しく設定する必要があります。
+> Docker デーモンの DNS 設定を変更することになります。
+> 設定ファイル `/etc/docker/daemon.json` を編集（または新規生成）し、以下のように `dns` キーを加えます。
+>
+> ```json
+>{
+>   "dns": ["your_dns_address", "8.8.8.8"]
+>}
+> ```
+>
+> 上の例においてリストの 1 つめは DNS サーバーのアドレスです。
+> また 2 つめは Google の DNS サーバーのアドレスであり、1 つめが利用できないときに利用されます。
+>
+> 設定を有効にするには `daemon.json` を保存し、docker サービスを再起動します。
+>
+> `sudo service docker restart`
+>
+> 設定ができたら、再度 `build` コマンドを実行します。
 
 <!--
 ## Run the app
@@ -341,9 +378,14 @@ web page.
 
 ![Hello World in browser](images/app-in-browser.png)
 
+<!--
 > **Note**: If you are using Docker Toolbox on Windows 7, use the Docker Machine IP
 > instead of `localhost`. For example, http://192.168.99.100:4000/. To find the IP
 > address, use the command `docker-machine ip`.
+-->
+> **メモ**: Windows 7 上でDocker Toolbox を利用している場合は、`localhost` ではなく Docker Machine の IP アドレスを利用してください。
+> たとえば http://192.168.99.100:4000/ といった具合です。
+> IP アドレスを調べるには `docker-machine ip` コマンドを実行します。
 
 <!--
 You can also use the `curl` command in a shell to view the same content.
@@ -383,7 +425,7 @@ Hit `CTRL+C` in your terminal to quit.
 <!--
 Now let's run the app in the background, in detached mode:
 -->
-次はアプリをバックグラウンドで動作するため、デタッチド・モード（detached mode）で実行しましょう。
+次はアプリをバックグラウンドで起動するため、デタッチモード（detached mode）で実行します。
 
 ```shell
 docker run -d -p 4000:80 friendlyhello
@@ -486,29 +528,50 @@ python                   2.7-slim            1c7128a655f6        5 days ago     
 ...
 ```
 
+<!--
 ### Publish the image
+-->
+### イメージの公開
 
+<!--
 Upload your tagged image to the repository:
+-->
+タグづけされたイメージをリポジトリにアップロードします。
 
 ```shell
 docker push username/repository:tag
 ```
 
+<!--
 Once complete, the results of this upload are publicly available. If you log in
 to [Docker Hub](https://hub.docker.com/), you see the new image there, with
 its pull command.
+-->
+上のコマンドが成功すれば、アップロードした結果が公開され利用可能となります。
+[Docker Hub](https://hub.docker.com/) にログインすれば、新しいイメージがアップロードされているの確認できます。
+これは pull コマンドで取得可能です。
 
+<!--
 ### Pull and run the image from the remote repository
+-->
+### リモートリポジトリからのイメージの取得と実行
 
+<!--
 From now on, you can use `docker run` and run your app on any machine with this
 command:
+-->
+ここからは `docker run` を利用していきます。
+どのマシン上であっても、アプリの実行にはこのコマンドを使います。
 
 ```shell
 docker run -p 4000:80 username/repository:tag
 ```
 
+<!--
 If the image isn't available locally on the machine, Docker pulls it from
 the repository.
+-->
+ローカルマシン上にそのイメージがない場合、Docker はリポジトリからイメージを取得します。
 
 ```shell
 $ docker run -p 4000:80 gordon/get-started:part2
@@ -531,16 +594,25 @@ and all the dependencies from `requirements.txt`, and runs your code. It all
 travels together in a neat little package, and you don't need to install
 anything on the host machine for Docker to run it.
 
+<!--
 ## Conclusion of part two
+-->
+## 2 部のまとめ
 
 That's all for this page. In the next section, we learn how to scale our
 application by running this container in a **service**.
 
+<!--
 [Continue to Part 3 >>](part3.md){: class="button outline-btn"}
+-->
+[3 部へ >>](part3.md){: class="button outline-btn"}
 
 Or, learn how to [launch your container on your own machine using Digital Ocean](https://docs.docker.com/machine/examples/ocean/){: target="_blank" class="_" }.
 
+<!--
 ## Recap and cheat sheet (optional)
+-->
+## まとめと早見表（おまけ）
 
 Here's [a terminal recording of what was covered on this
 page](https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g):

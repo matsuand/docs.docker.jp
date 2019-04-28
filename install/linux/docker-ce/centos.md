@@ -15,17 +15,19 @@ To get started with Docker CE on CentOS, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ce).
 -->
-CentOS 用 Docker CE を始めるには、[前提条件を満たしているか](#prerequisites)を確認してから、[Docker をインストール](#install-docker-ce)してください。
+CentOS 向けに Docker CE を始めるには、[前提条件を満たしているか](./#prerequisites)を確認してから、[Docker をインストール](./#install-docker-ce)してください。
 
 <!--
 ## Prerequisites
 -->
 ## 前提条件
+{: #prerequisites }
 
 <!--
 ### Docker EE customers
 -->
 ### Docker EE を利用する方は
+{: #docker-ee-customers }
 
 <!--
 To install Docker Enterprise Edition (Docker EE), go to
@@ -45,6 +47,7 @@ Docker EE の詳細を学ぶには、[Docker エンタープライズエディ�
 ### OS requirements
 -->
 ### OS 要件
+{: #os-requirements }
 
 <!--
 To install Docker CE, you need a maintained version of CentOS 7. Archived
@@ -70,6 +73,7 @@ The `overlay2` storage driver is recommended.
 ### Uninstall old versions
 -->
 ### 古いバージョンのアンインストール
+{: #uninstall-old-versions }
 
 <!--
 Older versions of Docker were called `docker` or `docker-engine`. If these are
@@ -105,6 +109,7 @@ networks, are preserved. The Docker CE package is now called `docker-ce`.
 ## Install Docker CE
 -->
 ## Docker CE のインストール
+{: #install-docker-ce }
 
 <!--
 You can install Docker CE in different ways, depending on your needs:
@@ -118,7 +123,7 @@ Docker CE のインストール方法はいくつかあります。
   from them, for ease of installation and upgrade tasks. This is the
   recommended approach.
 -->
-- たいていのユーザーは [Docker のリポジトリをセットアップ](#install-using-the-repository)して、そこからインストールしています。
+- たいていのユーザーは [Docker のリポジトリをセットアップ](./#install-using-the-repository)して、そこからインストールしています。
   インストールやアップグレードの作業が簡単だからです。
   この方法をお勧めします。
 
@@ -128,7 +133,7 @@ Docker CE のインストール方法はいくつかあります。
   upgrades completely manually. This is useful in situations such as installing
   Docker on air-gapped systems with no access to the internet.
 -->
-- ユーザーの中には RPM パッケージをダウンロードし、手動でインストールしている方もいます。
+- ユーザーの中には RPM パッケージをダウンロードし、[手動でインストール](./#install-from-a-package)している方もいます。
   アップグレードも完全に手動となります。
   この方法は、インターネットにアクセスできない環境で Docker をインストールするような場合には有用です。
 
@@ -136,13 +141,14 @@ Docker CE のインストール方法はいくつかあります。
 - In testing and development environments, some users choose to use automated
   [convenience scripts](#install-using-the-convenience-script) to install Docker.
 -->
-- テスト環境や開発環境向けに、自動化された[便利なスクリプト](#install-using-the-convenience-script)を使って
+- テスト環境や開発環境向けに、自動化された[便利なスクリプト](./#install-using-the-convenience-script)を使って
   Docker のインストールを行うユーザーもいます。
 
 <!--
 ### Install using the repository
 -->
 ### リポジトリを利用したインストール
+{: #install-using-the-repository }
 
 <!--
 Before you install Docker CE for the first time on a new host machine, you need
@@ -156,6 +162,7 @@ from the repository.
 #### Set up the repository
 -->
 #### リポジトリのセットアップ
+{: #set-up-the-repository }
 
 {% assign download-url-base = "https://download.docker.com/linux/centos" %}
 
@@ -185,7 +192,7 @@ from the repository.
         {{ download-url-base }}/docker-ce.repo
     ```
 
-> **任意の作業**: **最新版**（nightly）または **テスト版**（test）リポジトリの有効化
+> **任意の作業**： **最新版**（nightly）または **テスト版**（test）リポジトリの有効化
 >
 > このリポジトリは上記の ``docker.repo`` ファイルに含まれていますが、デフォルトで無効になっています。
 > このリポジトリを **安定版**（stable）リポジトリとともに有効にします。
@@ -214,6 +221,7 @@ from the repository.
 #### Install Docker CE
 -->
 #### Docker CE のインストール
+{: #install-docker-ce }
 
 <!--
 1.  Install the _latest version_ of Docker CE and containerd, or go to the next step to install a specific version:
@@ -248,7 +256,7 @@ from the repository.
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
     -->
     Docker はインストールされましたが、まだ起動はしていません。
-    グループ `docker` が追加されていますが、このグループにはまだユーザーが存在していない状態です。
+    グループ `docker` が生成されていますが、このグループにはまだユーザーが存在していない状態です。
 
     <!--
     2.  To install a _specific version_ of Docker CE, list the available versions
@@ -298,7 +306,7 @@ from the repository.
     Docker is installed but not started. The `docker` group is created, but no users are added to the group.
     -->
     Docker はインストールされましたが、まだ起動はしていません。
-    グループ ``docker`` が追加されていますが、このグループにはまだユーザが存在していない状態です。
+    グループ ``docker`` が追加されていますが、このグループにはまだユーザーが存在していない状態です。
 
     <!--
     3.  Start Docker.
@@ -313,7 +321,6 @@ from the repository.
     //4.  Verify that Docker CE is installed correctly by running the `hello-world`
         image.
     -->
-
 4. Docker CE が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
 
     ```bash
@@ -324,8 +331,8 @@ from the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
     -->
-   このコマンドはテスト用イメージをダウンロードし、コンテナー内で実行します。
-   コンテナーが起動すると、メッセージを表示して終了します。
+    このコマンドはテスト用イメージをダウンロードし、コンテナー内で実行します。
+    コンテナーが起動すると、メッセージを表示して終了します。
 
 <!--
 Docker CE is installed and running. You need to use `sudo` to run Docker
@@ -341,17 +348,19 @@ Docker コマンドの実行には ``sudo`` が必要になります。
 #### Upgrade Docker CE
 -->
 #### Docker CE のアップグレード
+{: #upgrade-docker-ce }
 
 <!--
 To upgrade Docker CE, follow the [installation instructions](#install-docker-ce),
 choosing the new version you want to install.
 -->
-Docker CE をアップグレードするには、[インストール手順](#install-docker-ce)に従って、インストールしたい新たなバージョンを選んでください。
+Docker CE をアップグレードするには、[インストール手順](./#install-docker-ce)に従って、インストールしたい新たなバージョンを選んでください。
 
 <!--
 ### Install from a package
 -->
 ### パッケージからのインストール
+{: #install-from-a-package }
 
 <!--
 If you cannot use Docker's repository to install Docker, you can download the
@@ -374,8 +383,8 @@ Docker リポジトリを利用した Docker インストールができない�
     > [Learn about **nightly** and **test** channels](/install/index.md).
     -->
     > **メモ**:  **最新版**または**テスト版**（プレリリース版）パッケージをインストールする場合は
-    > URL 内の `stable` を `edge` に変更してください。
-    > [最新版とテスト版チャンネルを学ぶにはこちら](/install/index.md)。
+    > URL 内の `stable` を `nightly` または `test` に変更してください。
+    > [**最新版**と**テスト版**チャンネルを学ぶにはこちら](/install/index.md)。
 
 
     <!--
@@ -409,7 +418,7 @@ Docker リポジトリを利用した Docker インストールができない�
     //4.  Verify that Docker CE is installed correctly by running the `hello-world`
         image.
     -->
-4.  Docker CE が正しくインストールされているのを確認するため、 ``hello-world`` イメージを実行します。
+4.  Docker CE が正しくインストールされているのを確認するため `hello-world` イメージを実行します。
 
     ```bash
     $ sudo docker run hello-world
@@ -419,8 +428,8 @@ Docker リポジトリを利用した Docker インストールができない�
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
     -->
-   このコマンドはテスト用イメージをダウンロードし、コンテナー内で実行します。
-   コンテナーが起動すると、メッセージを表示して終了します。
+    このコマンドはテスト用イメージをダウンロードし、コンテナー内で実行します。
+    コンテナーが起動すると、メッセージを表示して終了します。
 
 <!--
 Docker CE is installed and running. You need to use `sudo` to run Docker commands.
@@ -436,13 +445,14 @@ Docker コマンドの実行には ``sudo`` が必要になります。
 #### Upgrade Docker CE
 -->
 #### Docker CE のアップグレード
+{: #upgrade-docker-ce }
 
 <!--
 To upgrade Docker CE, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `yum -y upgrade`
 instead of `yum -y install`, and pointing to the new file.
 -->
-Docker CE をアップグレードする場合は、新たなパッケージファイルをダウンロードして、[インストール手順](#install-from-a-package)をもう一度行います。
+Docker CE をアップグレードする場合は、新たなパッケージファイルをダウンロードして、[インストール手順](./#install-from-a-package)をもう一度行います。
 その際には `yum -y install` でなく `yum -y upgrade` を実行します。
 またパッケージには新しいものを指定します。
 
@@ -452,6 +462,7 @@ Docker CE をアップグレードする場合は、新たなパッケージフ�
 ## Uninstall Docker CE
 -->
 ## Docker CE のアンインストール
+{: #uninstall-docker-ce }
 
 <!--
 1.  Uninstall the Docker package:
@@ -483,6 +494,7 @@ You must delete any edited configuration files manually.
 ## Next steps
 -->
 ## 次のステップ
+{: #next-steps }
 
 <!--
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)

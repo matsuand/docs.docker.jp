@@ -1,32 +1,54 @@
 ---
 description: How to use Docker Compose's extends keyword to share configuration between files and projects
 keywords: fig, composition, compose, docker, orchestration, documentation, docs
-title: Share Compose configurations between files and projects
+title: ファイル間、プロジェクト間での Compose 設定の共有
 ---
 
+<!--
 Compose supports two methods of sharing common configuration:
+-->
+Compose がサポートする設定共有には 2 とおりあります。
 
+<!--
 1. Extending an entire Compose file by
    [using multiple Compose files](extends.md#multiple-compose-files)
 2. Extending individual services with [the `extends` field](extends.md#extending-services) (for Compose file versions up to 2.1)
+-->
+1. Compose ファイル全体を [複数の Compose ファイルの利用](extends.md#multiple-compose-files) により拡張します。
+2. 個々のサービスを [`extends` フィールド](extends.md#extending-services) を使って拡張します（Compose ファイルバージョン 2.1 まで）。
 
 
+<!--
 ## Multiple Compose files
+-->
+## 複数の Compose ファイル
 
 Using multiple Compose files enables you to customize a Compose application
 for different environments or different workflows.
 
+<!--
 ### Understanding multiple Compose files
+-->
+### Compose ファイルが複数ある意味
 
+<!--
 By default, Compose reads two files, a `docker-compose.yml` and an optional
 `docker-compose.override.yml` file. By convention, the `docker-compose.yml`
 contains your base configuration. The override file, as its name implies, can
 contain configuration overrides for existing services or entirely new
 services.
+-->
+デフォルトにおいて Compose は 2 つのファイルを読み込みます。
+`docker-compose.yml` と、必要に応じて作られるオプションの `docker-compose.override.yml` です。
+慣習として `docker-compose.yml` には基本的な設定を含めます。
+`docker-compose.override.yml` ファイルは、オーバーライドという表現が含まれていることから分かるように、既存のサービスあるいは新たに起動する全サービスに対しての追加設定を行うものです。
 
+<!--
 If a service is defined in both files, Compose merges the configurations using
 the rules described in [Adding and overriding
 configuration](extends.md#adding-and-overriding-configuration).
+-->
+サービスの定義が両方のファイルに存在した場合、Compose は [設定の追加とオーバーライド](extends.md#設定の追加とオーバーライド) に示すルールに従って定義設定をマージします。
 
 To use multiple override files, or an override file with a different name, you
 can use the `-f` option to specify the list of files. Compose merges files in
@@ -276,24 +298,36 @@ common configuration:
       links:
         - queue
 
+<!--
 ## Adding and overriding configuration
+-->
+## 設定の追加とオーバーライド
 
+<!--
+Compose copies configurations from the original service over to the local one.
+If a configuration option is defined in both the original service and the local
+service, the local value *replaces* or *extends* the original value.
+-->
 Compose copies configurations from the original service over to the local one.
 If a configuration option is defined in both the original service and the local
 service, the local value *replaces* or *extends* the original value.
 
+<!--
 For single-value options like `image`, `command` or `mem_limit`, the new value
 replaces the old value.
+-->
+1 つの値しか持たないオプション、たとえば `image`、`command`、`mem_limit` のようなものは、古い値が新しい値に置き換えられます。
 
-    # original service
+    # 元々のサービス
     command: python app.py
 
-    # local service
+    # ローカル定義のサービス
     command: python otherapp.py
 
-    # result
+    # 結果
     command: python otherapp.py
 
+<!--
 >  `build` and `image` in Compose file version 1
 >
 > In the case of `build` and `image`, when using
@@ -307,60 +341,83 @@ replaces the old value.
 >
 > This is because `build` and `image` cannot be used together in a version 1
 > file.
+-->
+>  Compose ファイルバージョン 1 における `build` と `image`
+>
+> In the case of `build` and `image`, when using
+> [version 1 of the Compose file format](/compose/compose-file/compose-file-v1.md), using one
+> option in the local service causes Compose to discard the other option if it
+> was defined in the original service.
+>
+> For example, if the original service defines `image: webapp` and the
+> local service defines `build: .` then the resulting service has a
+> `build: .` and no `image` option.
+>
+> This is because `build` and `image` cannot be used together in a version 1
+> file.
 
+<!--
 For the **multi-value options** `ports`, `expose`, `external_links`, `dns`,
 `dns_search`, and `tmpfs`, Compose concatenates both sets of values:
+-->
+**複数の値を持つオプション**、`ports`、`expose`、`external_links`、`dns`、`dns_search`、`tmpfs` では、両者の設定をつなぎ合わせます。
 
-    # original service
+    # 元々のサービス
     expose:
       - "3000"
 
-    # local service
+    # ローカル定義のサービス
     expose:
       - "4000"
       - "5000"
 
-    # result
+    # 結果
     expose:
       - "3000"
       - "4000"
       - "5000"
 
+<!--
 In the case of `environment`, `labels`, `volumes`, and `devices`, Compose
 "merges" entries together with locally-defined values taking precedence. For
 `environment` and `labels`, the environment variable or label name determines
 which value is used:
+-->
+`environment`、`labels`、`volumes`、`devices` の場合、Compose は設定内容を"マージ"して、ローカル定義の値が優先するようにします。
 
-    # original service
+    # 元々のサービス
     environment:
       - FOO=original
       - BAR=original
 
-    # local service
+    # ローカル定義のサービス
     environment:
       - BAR=local
       - BAZ=local
 
-    # result
+    # 結果
     environment:
       - FOO=original
       - BAR=local
       - BAZ=local
 
+<!--
 Entries for `volumes` and `devices` are merged using the mount path in the
 container:
+-->
+`volumes` や `devices` の設定内容は、コンテナーのマウントパスを使ってマージされます。
 
-    # original service
+    # 元々のサービス
     volumes:
       - ./original:/foo
       - ./original:/bar
 
-    # local service
+    # ローカル定義のサービス
     volumes:
       - ./local:/bar
       - ./local:/baz
 
-    # result
+    # 結果
     volumes:
       - ./original:/foo
       - ./local:/bar
@@ -368,8 +425,12 @@ container:
 
 
 
+<!--
 ## Compose documentation
+-->
+## Compose ドキュメント
 
+<!--
 - [User guide](index.md)
 - [Installing Compose](install.md)
 - [Getting Started](gettingstarted.md)
@@ -378,3 +439,12 @@ container:
 - [Get started with WordPress](wordpress.md)
 - [Command line reference](./reference/index.md)
 - [Compose file reference](compose-file.md)
+-->
+- [ユーザーガイド](index.md)
+- [Compose のインストール](install.md)
+- [はじめよう](gettingstarted.md)
+- [Django とともにはじめよう](django.md)
+- [Rails とともにはじめよう](rails.md)
+- [WordPress とともにはじめよう](wordpress.md)
+- [コマンドラインリファレンス](./reference/index.md)
+- [Compose ファイルリファレンス](compose-file.md)

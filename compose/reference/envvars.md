@@ -1,7 +1,7 @@
 ---
 description: Compose CLI environment variables
 keywords: fig, composition, compose, docker, orchestration, cli, reference
-title: Compose CLI environment variables
+title: Compose CLI 環境変数
 ---
 
 Several environment variables are available for you to configure the Docker Compose command-line behaviour.
@@ -9,32 +9,62 @@ Several environment variables are available for you to configure the Docker Comp
 Variables starting with `DOCKER_` are the same as those used to configure the
 Docker command-line client. If you're using `docker-machine`, then the `eval "$(docker-machine env my-docker-vm)"` command should set them to their correct values. (In this example, `my-docker-vm` is the name of a machine you created.)
 
+<!--
 > **Note**: Some of these variables can also be provided using an
 > [environment file](/compose/env-file.md).
+-->
+> **メモ**
+>
+ここに示す環境変数の中には、[環境ファイル](/compose/env-file.md)を用いて設定できるものもあります。
 
 ## COMPOSE\_PROJECT\_NAME
 
+<!--
 Sets the project name. This value is prepended along with the service name to
 the container on start up. For example, if your project name is `myapp` and it
 includes two services `db` and `web`, then Compose starts containers named
 `myapp_db_1` and `myapp_web_1` respectively.
+-->
+プロジェクト名を設定します。
+この値は、コンテナーの起動時にサービス名の先頭につけられます。
+たとえばプロジェクト名が `myapp` であり、2 つのサービス `db` と `web` があるとします。
+このとき Compose がコンテナーにつける名前は、それぞれ `myapp_db_1`、`myapp_web_1` となります。
 
+<!--
 Setting this is optional. If you do not set this, the `COMPOSE_PROJECT_NAME`
 defaults to the `basename` of the project directory. See also the `-p`
 [command-line option](overview.md).
+-->
+この変数を設定するのはオプションです。
+これを設定しなかった場合、`COMPOSE_PROJECT_NAME` のデフォルトは、プロジェクトディレクトリの `basename` となります。
+[コマンドラインオプション](overview.md) `-p` も参照してください。
 
 ## COMPOSE\_FILE
 
+<!--
 Specify the path to a Compose file. If not provided, Compose looks for a file named
 `docker-compose.yml` in the current directory and then each parent directory in
 succession until a file by that name is found.
+-->
+Compose ファイルへのパスを指定します。
+指定されなかった場合、Compose はカレントディレクトリ内の `docker-compose.yml` というファイルを探します。
+そしてファイルが見つからなければ、この名前のファイルを見つけるまで親ディレクトリを順にたどって探します。
 
+<!--
 This variable supports multiple Compose files separated by a path separator (on
 Linux and macOS the path separator is `:`, on Windows it is `;`). For example:
 `COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml`. The path separator
 can also be customized using `COMPOSE_PATH_SEPARATOR`.
+-->
+この変数は複数の Compose ファイルの指定をサポートしています。
+複数のパスはセパレーターで区切ります（パスセパレーターは Linux や macOS では `:`、Windows では `;`）。
+たとえば `COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml` とします。
+パスセパレーターは `COMPOSE_PATH_SEPARATOR` を使って変更することもできます。
 
+<!--
 See also the `-f` [command-line option](overview.md).
+-->
+[コマンドラインオプション](overview.md) `-f` も参照してください。
 
 ## COMPOSE\_API\_VERSION
 

@@ -92,31 +92,31 @@ guides:
     - title: Microsoft Windows
       path: /docker-for-windows/install/
       nosync: true
-    - sectiontitle: Docker Toolbox (legacy)
+    - sectiontitle: Docker Toolbox (旧版)
       section:
       - path: /toolbox/overview/
-        title: Toolbox overview
+        title: Toolbox 概要
       - path: /toolbox/toolbox_install_mac/
-        title: Install Toolbox on Mac
+        title: Toolbox on Mac のインストール
       - path: /toolbox/toolbox_install_windows/
-        title: Install Toolbox on Windows
+        title: Toolbox on Windows のインストール
       - sectiontitle: Kitematic
         section:
         - path: /kitematic/userguide/
-          title: "Kitematic user guide: intro &amp; overview"
+          title: "Kitematic ユーザーガイド: intro &amp; overview"
         - path: /kitematic/nginx-web-server/
-          title: Set up an Nginx web server
+          title: Nginx ウェブサーバーの設定
         - path: /kitematic/minecraft-server/
-          title: Set up a Minecraft Server
+          title: Minecraft サーバーの設定
         - path: /kitematic/rethinkdb-dev-database/
           title: Creating a local RethinkDB database for development
         - path: /kitematic/faq/
-          title: Frequently asked questions
+          title: よくたずねられる質問
         - path: /kitematic/known-issues/
-          title: Known issues
+          title: 既知の問題
       - path: /toolbox/faqs/troubleshoot/
-        title: Troubleshooting
-    - title: Release notes
+        title: トラブルシューティング
+    - title: リリースノート
       path: /engine/release-notes/
       nosync: true
   - sectiontitle: Docker EE
@@ -137,7 +137,7 @@ guides:
         title: Ubuntu
     - path: /install/windows/docker-ee/
       title: Microsoft Windows Server
-    - title: Release notes
+    - title: リリースノート
       path: /engine/release-notes/
       nosync: true
   - sectiontitle: Compatibility between Docker versions
@@ -199,33 +199,33 @@ guides:
     - sectiontitle: Develop using the Docker Engine SDKs and API
       section:
         - path: /develop/sdk/
-          title: Overview
+          title: 概要
         - path: /develop/sdk/examples/
           title: SDK and API examples
-- sectiontitle: Configure networking
+- sectiontitle: ネットワーク設定
   section:
     - path: /network/
-      title: Networking overview
+      title: ネットワーク概要
     - path: /network/bridge/
-      title: Use bridge networks
+      title: ブリッジネットワークの利用
     - path: /network/overlay/
-      title: Use overlay networks
+      title: オーバーレイネットワークの利用
     - path: /network/host/
-      title: Use host networking
+      title: ホストネットワークの利用
     - path: /network/macvlan/
-      title: Use Macvlan networks
+      title: Macvlan ネットワークの利用
     - path: /network/none/
       title: Disable networking for a container
-    - sectiontitle: Networking tutorials
+    - sectiontitle: ネットワークチュートリアル
       section:
       - path: /network/network-tutorial-standalone/
-        title: Bridge network tutorial
+        title: ブリッジネットワークのチュートリアル
       - path: /network/network-tutorial-host/
-        title: Host networking tutorial
+        title: ホストネットワークのチュートリアル
       - path: /network/network-tutorial-overlay/
-        title: Overlay networking tutorial
+        title: オーバーレイネットワークのチュートリアル
       - path: /network/network-tutorial-macvlan/
-        title: Macvlan network tutorial
+        title: Macvlan ネットワークのチュートリアル
     - sectiontitle: Configure the daemon and containers
       section:
       - path: /config/daemon/ipv6/
@@ -243,36 +243,36 @@ guides:
       - path: /network/overlay-standalone.swarm/
         title: Overlay networks for Swarm Classic
 
-- sectiontitle: Manage application data
+- sectiontitle: アプリデータの管理
   section:
     - path: /storage/
-      title: Storage overview
+      title: ストレージ概要
     - path: /storage/volumes/
-      title: Volumes
+      title: ボリューム
     - path: /storage/bind-mounts/
-      title: Bind mounts
+      title: バインドマウント
     - path: /storage/tmpfs/
-      title: tmpfs mounts
+      title: tmpfs マウント
     - path: /storage/troubleshooting_volume_errors/
-      title: Troubleshoot volume problems
-    - sectiontitle: Store data within containers
+      title: ボリュームに関するトラブルシューティング
+    - sectiontitle: コンテナー内へのデータ保存
       section:
       - path: /storage/storagedriver/
         title: ストレージドライバーについて
       - path: /storage/storagedriver/select-storage-driver/
-        title: Select a storage driver
+        title: ストレージドライバーの選択
       - path: /storage/storagedriver/aufs-driver/
-        title: Use the AUFS storage driver
+        title: AUFS ストレージドライバーの利用
       - path: /storage/storagedriver/btrfs-driver/
-        title: Use the Btrfs storage driver
+        title: Btrfs ストレージドライバーの利用
       - path: /storage/storagedriver/device-mapper-driver/
-        title: Use the Device mapper storage driver
+        title: Device mapper ストレージドライバーの利用
       - path: /storage/storagedriver/overlayfs-driver/
-        title: Use the OverlayFS storage driver
+        title: OverlayFS ストレージドライバーの利用
       - path: /storage/storagedriver/zfs-driver/
-        title: Use the ZFS storage driver
+        title: ZFS ストレージドライバーの利用
       - path: /storage/storagedriver/vfs-driver/
-        title: Use the VFS storage driver
+        title: VFS ストレージドライバーの利用
 - sectiontitle: Run your app in production
   section:
   - sectiontitle: Configure all objects
@@ -990,7 +990,7 @@ reference:
     - path: /engine/api/sdks/
       title: SDKs
     - path: /engine/api/latest/
-      title: v{{ site.latest_engine_api_version }} reference (latest)
+      title: v1.39 reference (latest)
     - sectiontitle: API reference by version
       section:
       - path: /engine/api/version-history/
@@ -1106,24 +1106,24 @@ samples:
 - sectiontitle: Library references
   section:
   - generateTOC: library
-- sectiontitle: Sample applications
+- sectiontitle: サンプルアプリケーション
   section:
   - path: /samples/
-    title: Samples home
+    title: サンプルのホームページ
   - path: /engine/examples/apt-cacher-ng/
     title: apt-cacher-ng
   - path: /engine/examples/dotnetcore/
-    title: .NET Core application
+    title: .NET Core アプリケーション
   - path: /compose/aspnet-mssql-compose/
-    title: ASP.NET Core + SQL Server on Linux
+    title: Linux 上での ASP.NET Core + SQL Server
   - path: /engine/examples/couchdb_data_volumes/
     title: CouchDB
   - path: /compose/django/
-    title: Django and PostgreSQL
+    title: Django と PostgreSQL
   - path: /engine/examples/postgresql_service/
     title: PostgreSQL
   - path: /compose/rails/
-    title: Rails and PostgreSQL
+    title: Rails と PostgreSQL
   - path: /engine/examples/running_riak_service/
     title: Riak
   - path: /engine/examples/running_ssh_service/
@@ -3073,19 +3073,19 @@ manuals:
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
-    title: Overview of Docker Compose
+    title: Docker Compose 概要
   - path: /compose/install/
-    title: Install Compose
+    title: Compose のインストール
   - path: /compose/gettingstarted/
-    title: Getting started
-  - sectiontitle: Compose (docker-compose) CLI reference
+    title: はじめよう
+  - sectiontitle: Compose (docker-compose) CLI リファレンス
     section:
     - path: /compose/reference/overview/
-      title: Overview of docker-compose CLI
+      title: docker-compose コマンド概要
     - path: /compose/reference/envvars/
-      title: CLI environment variables
+      title: CLI 環境変数
     - path: /compose/completion/
-      title: Command-line completion
+      title: コマンドライン補完
     - path: /compose/reference/build/
       title: build
     - path: /compose/reference/bundle/
@@ -3134,14 +3134,14 @@ manuals:
       title: unpause
     - path: /compose/reference/up/
       title: up
-  - sectiontitle: Compose file reference
+  - sectiontitle: Compose ファイルリファレンス
     section:
     - path: /compose/compose-file/
-      title: Version 3
+      title: バージョン 3
     - path: /compose/compose-file/compose-file-v2/
-      title: Version 2
+      title: バージョン 2
     - path: /compose/compose-file/compose-file-v1/
-      title: Version 1
+      title: バージョン 1
     - path: /compose/compose-file/compose-versioning/
       title: About versions and upgrading
     - path: /compose/faq/
@@ -3151,15 +3151,15 @@ manuals:
   - path: /compose/swarm/
     title: Using Compose with Swarm
   - path: /compose/env-file/
-    title: Environment file
+    title: 環境ファイル
   - path: /compose/environment-variables/
-    title: Environment variables in Compose
+    title: Compose の環境変数
   - path: /compose/extends/
-    title: Extend services in Compose
+    title: Compose のサービス拡張
   - path: /compose/networking/
     title: Networking in Compose
   - path: /compose/production/
-    title: Using Compose in production
+    title: 本番環境での Compose の利用
   - path: /compose/link-env-deprecated/
     title: Link environment variables (deprecated)
   - path: /compose/startup-order/
@@ -3167,13 +3167,13 @@ manuals:
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
   - path: /release-notes/docker-compose/
-    title: Docker Compose release notes
+    title: Docker Compose リリースノート
 - sectiontitle: Docker Desktop for Mac
   section:
   - path: /docker-for-mac/
-    title: Getting started
+    title: はじめよう
   - path: /docker-for-mac/install/
-    title: Install Docker Desktop for Mac
+    title: Docker Desktop for Mac のインストール
   - path: /docker-for-mac/kubernetes/
     title: Deploy on Kubernetes
   - path: /docker-for-mac/docker-toolbox/
@@ -3191,19 +3191,19 @@ manuals:
   - path: /docker-for-mac/troubleshoot/
     title: Logs and troubleshooting
   - path: /docker-for-mac/faqs/
-    title: FAQs
+    title: FAQ
   - path: /docker-for-mac/opensource/
     title: Open source licensing
   - path: /docker-for-mac/release-notes/
-    title: Stable release notes
+    title: 安定版リリースノート
   - path: /docker-for-mac/edge-release-notes/
-    title: Edge release notes
+    title: 最新版(edge)リリースノート
 - sectiontitle: Docker Desktop for Windows
   section:
   - path: /docker-for-windows/
-    title: Getting started
+    title: はじめよう
   - path: /docker-for-windows/install/
-    title: Install Docker Desktop for Windows
+    title: Docker Desktop for Windows のインストール
   - path: /docker-for-windows/kubernetes/
     title: Deploy on Kubernetes
   - path: /docker-for-windows/networking/
@@ -3213,26 +3213,26 @@ manuals:
   - path: /docker-for-windows/troubleshoot/
     title: Logs and troubleshooting
   - path: /docker-for-windows/faqs/
-    title: FAQs
+    title: FAQ
   - path: /docker-for-windows/opensource/
     title: Open source licensing
   - path: /docker-for-windows/release-notes/
-    title: Stable release notes
+    title: 安定版リリースノート
   - path: /docker-for-windows/edge-release-notes/
-    title: Edge release notes
-- title: Docker ID accounts
+    title: 最新版(edge)リリースノート
+- title: Docker ID アカウント
   path: /docker-id/
 - sectiontitle: Docker Machine
   section:
   - path: /machine/overview/
-    title: Machine overview
+    title: Machine 概要
   - path: /machine/install-machine/
-    title: Install Machine
+    title: Machine のインストール
   - path: /machine/get-started/
     title: Get started with a local VM
   - path: /machine/get-started-cloud/
     title: Provision hosts in the cloud
-  - sectiontitle: Learn by example
+  - sectiontitle: 例から学ぶ
     section:
     - path: /machine/examples/ocean/
       title: Provision Digital Ocean Droplets
@@ -3243,9 +3243,9 @@ manuals:
   - sectiontitle: Machine (docker-machine) CLI
     section:
     - path: /machine/reference/
-      title: Machine CLI overview
+      title: Machine CLI 概要
     - path: /machine/completion/
-      title: Machine command-line completion
+      title: Machine コマンドライン補完
     - path: /machine/reference/active/
       title: active
     - path: /machine/reference/config/
@@ -3288,10 +3288,10 @@ manuals:
       title: upgrade
     - path: /machine/reference/url/
       title: url
-  - sectiontitle: Machine drivers
+  - sectiontitle: Machine ドライバー
     section:
     - path: /machine/drivers/
-      title: Drivers overview
+      title: ドライバー概要
     - path: /machine/drivers/os-base/
       title: Driver options and operating system defaults
     - path: /machine/drivers/aws/
@@ -3325,13 +3325,13 @@ manuals:
   - path: /machine/migrate-to-machine/
     title: Migrate from Boot2Docker to Machine
   - path: /release-notes/docker-machine/
-    title: Docker Machine release notes
+    title: Docker Machine リリースノート
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
-    title: Quickstart
+    title: クィックスタート
   - path: /docker-hub/repos/
-    title: Repositories
+    title: リポジトリ
   - path: /docker-hub/official_images/
     title: Official Images
   - path: /docker-hub/orgs/
@@ -3342,12 +3342,12 @@ manuals:
     title: Slack Integration
   - path: /docker-hub/upgrade/
     title: Upgrading your plan
-  - sectiontitle: Automated Builds
+  - sectiontitle: 自動ビルド
     section:
       - path: /docker-hub/builds/
-        title: Set up Automated builds
+        title: 自動ビルドの設定
       - path: /docker-hub/builds/automated-testing/
-        title: Testing in Automated Builds
+        title: 自動ビルドのテスト
       - path: /docker-hub/builds/advanced/
         title: Advanced Automated Builds
       - path: /docker-hub/builds/link-source/
