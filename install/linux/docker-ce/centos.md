@@ -1,5 +1,5 @@
 ---
-description: Instructions for installing Docker CE on CentOS
+description: CentOS 上に Docker CE をインストールする手順を説明。
 keywords: requirements, apt, installation, centos, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/centos/
@@ -35,7 +35,7 @@ To install Docker Enterprise Edition (Docker EE), go to
 **instead of this topic**.
 -->
 Docker エンタープライズエディション（Docker Enterprise Edition; EE）をインストールする場合は、
-**このページではなく** [Docer EE の入手（CentOS 向け）](/install/linux/docker-ee/centos)に進んでください。
+**このページではなく** [Docer EE の入手（CentOS 向け）](/install/linux/docker-ee/centos/)に進んでください。
 
 <!--
 To learn more about Docker EE, see

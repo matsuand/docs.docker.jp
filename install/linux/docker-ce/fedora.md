@@ -1,5 +1,5 @@
 ---
-description: Instructions for installing Docker CE on Fedora
+description: Fedora 上に Docker CE をインストールする手順を説明。
 keywords: requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/fedora/
