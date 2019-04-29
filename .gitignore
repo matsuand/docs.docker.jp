@@ -2,6 +2,8 @@
 build
 .python-version
 .jekyll-metadata
+.jekyll-metadata.publish
+.jekyll-metadata.upload
 .ruby-version
 .sass-cache
 _site
