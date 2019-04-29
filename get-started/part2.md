@@ -1,12 +1,13 @@
 ---
 title: "はじめよう 2 部: コンテナー"
 keywords: containers, python, code, coding, build, push, run
-description: Learn how to write, build, and run a simple app -- the Docker way.
+description: Docker 風に簡単なアプリを書き、ビルドし実行する方法を学びます。
 ---
 
 {% include_relative nav.html selected="2" %}
 
 ## 前提条件
+{: #prerequisites }
 
 <!--
 - [Install Docker version 1.13 or higher](/engine/installation/).
@@ -22,6 +23,7 @@ description: Learn how to write, build, and run a simple app -- the Docker way.
   ```
 
 ## はじめに
+{: #introduction }
 
 <!--
 It's time to begin building an app the Docker way. We start at the bottom of the hierarchy of such app, a container, which this page covers. Above this level is a service, which defines how containers behave in
@@ -52,6 +54,7 @@ Docker におけるアプリケーション構築を始めましょう。
 ## Your new development environment
 -->
 ## 新しい開発環境
+{: #your-new-development-environment }
 
 <!--
 In the past, if you were to start writing a Python app, your first
@@ -80,6 +83,7 @@ These portable images are defined by something called a `Dockerfile`.
 ## Define a container with `Dockerfile`
 -->
 ## `Dockerfile` によるコンテナー定義
+{: #define-a-container-with-Dockerfile }
 
 <!--
 `Dockerfile` defines what goes on in the environment inside your
@@ -96,6 +100,7 @@ after doing that, you can expect that the build of your app defined in this
 しかしながら、これらの作業を `Dockerfile` における構築時の定義で済ませておけば、どこで実行しても同じ挙動となります。
 
 ### `Dockerfile`
+{: #dockerfile }
 
 <!--
 Create an empty directory on your local machine. Change directories (`cd`) into the new directory,
@@ -141,6 +146,7 @@ This `Dockerfile` refers to a couple of files we haven't created yet, namely
 ## The app itself
 -->
 ## アプリそのもの
+{: #the-app-itself }
 
 <!--
 Create two more files, `requirements.txt` and `app.py`, and put them in the same
@@ -157,6 +163,7 @@ command.
 先ほどの `Dockerfile` でイメージの構築時、 `Dockerfile` の `COPY` 命令で `app.py` と `requirements.txt` をイメージの中に組み込みます。
 
 ### `requirements.txt`
+{: #requirementstxt }
 
 ```
 Flask
@@ -164,6 +171,7 @@ Redis
 ```
 
 ### `app.py`
+{: #apppy }
 
 ```python
 from flask import Flask
@@ -225,6 +233,7 @@ you have.
 ## Build the app
 -->
 ## アプリの構築
+{: #build-the-app }
 
 <!--
 We are ready to build the app. Make sure you are still at the top level of your
@@ -266,8 +275,12 @@ friendlyhello         latest              326387cea398
 
 ```
 
+<!--
 Note how the tag defaulted to `latest`. The full syntax for the tag option would
 be something like `--tag=friendlyhello:v0.0.1`.
+-->
+タグ名がデフォルトの `latest` となったことに注意してください。
+タグオプションの適切な文法は `--tag=friendlyhello:v0.0.1` というものです。
 
 
 <!--
@@ -313,7 +326,7 @@ be something like `--tag=friendlyhello:v0.0.1`.
 >
 > _Proxy サーバー設定_
 >
-> プロキシーサーバーが起動していると、ウェブアプリへの接続がブロックされることがあります。
+> プロキシーサーバーが稼動していると、ウェブアプリへの接続がブロックされることがあります。
 > プロキシーサーバーを動かしているなら、Dockerfile に以下の記述を追加してください。
 > これは `ENV` コマンドを使って、プロキシーサーバーのホストとポートを指定するものです。
 >
@@ -349,6 +362,7 @@ be something like `--tag=friendlyhello:v0.0.1`.
 ## Run the app
 -->
 ## アプリの実行
+{: #run-the-app }
 
 <!--
 Run the app, mapping your machine's port 4000 to the container's published port
@@ -366,15 +380,15 @@ But that message is coming from inside the container, which doesn't know you
 mapped port 80 of that container to 4000, making the correct URL
 `http://localhost:4000`.
 -->
-Python がアプリに提供するのは `http://0.0.0.0:80` であるのに注意して下さい。
-しかし、これはコンテナー内で表示されるメッセージであり、コンテナー内からはコンテナーのポート 80 番からポート 4000 への割り当ては分かりません。
+Python がアプリに提供するのは `http://0.0.0.0:80` であることに注意して下さい。
+しかしこれはコンテナー内で表示されるメッセージであり、コンテナー内からはコンテナーのポート 80 番からポート 4000 への割り当ては分かりません。
 適切な URL は `http://localhost:4000` です。
 
 <!--
 Go to that URL in a web browser to see the display content served up on a
 web page.
 -->
-ウェブブラウザで URL を開いて、出力内容がウェブページに表示されていることを確認してください。
+ウェブブラウザーで URL を開いて、出力内容がウェブページに表示されていることを確認してください。
 
 ![Hello World in browser](images/app-in-browser.png)
 
@@ -413,6 +427,7 @@ Hit `CTRL+C` in your terminal to quit.
 -->
 ターミナル上で `CTRL+C` を実行し、終了します。
 
+<!--
  > On Windows, explicitly stop the container
  >
  > On Windows systems, `CTRL+C` does not stop the container. So, first
@@ -421,6 +436,14 @@ Hit `CTRL+C` in your terminal to quit.
  `docker container stop <Container NAME or ID>` to stop the
  container. Otherwise, you get an error response from the daemon
  when you try to re-run the container in the next step.
+-->
+ > Windows においてはコンテナーを明示的に停止
+ >
+ > Windows システムでは `CTRL+C` を入力してもコンテナーを止めることはできません。
+ > このため、まず `CTRL+C` を入力してプロンプトに戻り（あるいは別のシェルを起動して）、
+ > `docker container ls` を入力して実行中のコンテナーを確認します。
+ > そして `docker container stop <コンテナー名 または コンテナー ID>` を入力してコンテナーを停止させます。
+ > こうしておかないと、次にコンテナーを再起動しようとしたときに、デーモンがエラーを出力することになります。
 
 <!--
 Now let's run the app in the background, in detached mode:
@@ -465,58 +488,111 @@ docker container stop 1fa4ab2cf395
 ## Share your image
 -->
 ## イメージの共有
+{: #share-your-image}
 
+<!--
 To demonstrate the portability of what we just created, let's upload our built
 image and run it somewhere else. After all, you need to know how to push to
 registries when you want to deploy containers to production.
+-->
+生成したばかりのイメージの可搬性を示すため、このイメージを別のところにアップロードしてみます。
+なお、コンテナーを本番環境へデプロイするには、レジストリへ送信する方法を知っておく必要があります。
 
+<!--
 A registry is a collection of repositories, and a repository is a collection of
 images&#8212;sort of like a GitHub repository, except the code is already built.
 An account on a registry can create many repositories. The `docker` CLI uses
 Docker's public registry by default.
+-->
+レジストリというものはレポジトリの集まりのことです。
+そのレポジトリとはイメージの集まりです。
+GitHub リポジトリのようなものです。
+ただしコードのビルドがすでに済んでいるというところが GitHub とは違います。
+レジストリのアカウントからはレポジトリをたくさん作ることができます。
+`docker` CLI はデフォルトとして Docker 公開リポジトリを利用します。
 
+<!--
 > **Note**: We use Docker's public registry here just because it's free
 and pre-configured, but there are many public ones to choose from, and you can
 even set up your own private registry using [Docker Trusted
 Registry](/datacenter/dtr/2.2/guides/).
+-->
+> **メモ**: Docker 公開リポジトリをここで利用するのは、これが無償であり事前に設定されているものだからです。
+> ただし公開リポジトリは他にもあるので自由に選んでください。
+> あるいは [Docker Trusted Registry](/datacenter/dtr/2.2/guides/) を利用すれば、独自のプライベートレジストリを設定することもできます。
 
+<!--
 ### Log in with your Docker ID
+-->
+### Docker ID でログイン
+{: #log-in-with-your-docker-id }
 
+<!--
 If you don't have a Docker account, sign up for one at
 [hub.docker.com](https://hub.docker.com){: target="_blank" class="_" }.
 Make note of your username.
+-->
+Docker アカウントを持っていない方は、[hub.docker.com](https://hub.docker.com){: target="_blank" class="_" }
+にサインアップして取得してください。
+ユーザー名は控えておいてください。
 
+<!--
 Log in to the Docker public registry on your local machine.
+-->
+ローカルマシンから Docker の公開レジストリへログインします。
 
 ```shell
 $ docker login
 ```
 
+<!--
 ### Tag the image
+-->
+### イメージへのタグづけ
+{: #tag-the-image }
 
+<!--
 The notation for associating a local image with a repository on a registry is
 `username/repository:tag`. The tag is optional, but recommended, since it is
 the mechanism that registries use to give Docker images a version. Give the
 repository and tag meaningful names for the context, such as
 `get-started:part2`. This puts the image in the `get-started` repository and
 tag it as `part2`.
+-->
+レジストリ内のレポジトリをローカルイメージに関連づけるには `username/repository:tag` という書き方をします。
+タグ（tag）はオプションですが、指定することが推奨されます。
+というのも、これによってレジストリが Docker イメージに対してバージョンを与える方法となるからです。
+状況に合わせてレポジトリとタグには、たとえば `get-started:part2` といったように意味を持つ名前をつけてください。
+これによりそのイメージが `get-started` レポジトリ内に `part2` というタグがつけられた上で保存されます。
 
+<!--
 Now, put it all together to tag the image. Run `docker tag image` with your
 username, repository, and tag names so that the image uploads to your
 desired destination. The syntax of the command is:
+-->
+そこでイメージにタグをつけます。
+`docker tag image` の実行時にユーザー名、リポジトリ名、タグ名を指定します。
+イメージは指定した名前でアップロードされます。
+このコマンドの文法は以下のとおりです。
 
 ```shell
 docker tag image username/repository:tag
 ```
 
+<!--
 For example:
+-->
+例：
 
 ```shell
 docker tag friendlyhello gordon/get-started:part2
 ```
 
+<!--
 Run [docker image ls](/engine/reference/commandline/image_ls/) to see your newly
 tagged image.
+-->
+[docker image ls](/engine/reference/commandline/image_ls/) を実行して、タグづけした新しいイメージを確認してみます。
 
 ```shell
 $ docker image ls
@@ -532,6 +608,7 @@ python                   2.7-slim            1c7128a655f6        5 days ago     
 ### Publish the image
 -->
 ### イメージの公開
+{: #publish-the-image }
 
 <!--
 Upload your tagged image to the repository:
@@ -548,13 +625,14 @@ to [Docker Hub](https://hub.docker.com/), you see the new image there, with
 its pull command.
 -->
 上のコマンドが成功すれば、アップロードした結果が公開され利用可能となります。
-[Docker Hub](https://hub.docker.com/) にログインすれば、新しいイメージがアップロードされているの確認できます。
+[Docker Hub](https://hub.docker.com/) にログインすれば、新しいイメージがアップロードされているのを確認できます。
 これは pull コマンドで取得可能です。
 
 <!--
 ### Pull and run the image from the remote repository
 -->
 ### リモートリポジトリからのイメージの取得と実行
+{: #pull-and-run-the-image-from-the-remote-repository }
 
 <!--
 From now on, you can use `docker run` and run your app on any machine with this
@@ -589,56 +667,78 @@ Status: Downloaded newer image for gordon/get-started:part2
  * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
 ```
 
+<!--
 No matter where `docker run` executes, it pulls your image, along with Python
 and all the dependencies from `requirements.txt`, and runs your code. It all
 travels together in a neat little package, and you don't need to install
 anything on the host machine for Docker to run it.
+-->
+`docker run` をどこで実行してもイメージが取得できます。
+しかも `requirements.txt` に書かれた Python や依存パッケージもすべて含まれていて、アプリコードも実行できます。
+すっきりとまとまったこのパッケージはどこにでも持ち運びできて、
+Docker を実行するからといって、ホストマシンには何もインストールする必要がないのです。
 
 <!--
 ## Conclusion of part two
 -->
 ## 2 部のまとめ
+{: #conclusion-of-part-two }
 
+<!--
 That's all for this page. In the next section, we learn how to scale our
 application by running this container in a **service**.
+-->
+このページの内容はここまでです。
+次はアプリケーションをスケールアップして、コンテナーを**サービス**として起動することを学びます。
 
 <!--
 [Continue to Part 3 >>](part3.md){: class="button outline-btn"}
 -->
 [3 部へ >>](part3.md){: class="button outline-btn"}
 
+<!--
 Or, learn how to [launch your container on your own machine using Digital Ocean](https://docs.docker.com/machine/examples/ocean/){: target="_blank" class="_" }.
+-->
+あるいは [Digital Ocean を使って自マシン内でコンテナーを起動する](https://docs.docker.com/machine/examples/ocean/){: target="_blank" class="_" } 方法もあります。
 
 <!--
 ## Recap and cheat sheet (optional)
 -->
 ## まとめと早見表（おまけ）
+{: #recap-and-cheat-sheet-optional }
 
+<!--
 Here's [a terminal recording of what was covered on this
 page](https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g):
+-->
+[このページで扱った端末操作の録画](https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g) がこちらです。
 
 <script type="text/javascript"
 src="https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g.js"
 id="asciicast-blkah0l4ds33tbe06y4vkme6g" speed="2" async></script>
 
+<!--
 Here is a list of the basic Docker commands from this page, and some related
 ones if you'd like to explore a bit before moving on.
+-->
+このページで扱った基本的な Docker コマンドの一覧を示します。
+またこの先に進むにあたって必要となりそうな関連コマンドも示します。
 
 ```shell
-docker build -t friendlyhello .  # Create image using this directory's Dockerfile
-docker run -p 4000:80 friendlyhello  # Run "friendlyhello" mapping port 4000 to 80
-docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode
-docker container ls                                # List all running containers
-docker container ls -a             # List all containers, even those not running
-docker container stop <hash>           # Gracefully stop the specified container
-docker container kill <hash>         # Force shutdown of the specified container
-docker container rm <hash>        # Remove specified container from this machine
-docker container rm $(docker container ls -a -q)         # Remove all containers
-docker image ls -a                             # List all images on this machine
-docker image rm <image id>            # Remove specified image from this machine
-docker image rm $(docker image ls -a -q)   # Remove all images from this machine
-docker login             # Log in this CLI session using your Docker credentials
-docker tag <image> username/repository:tag  # Tag <image> for upload to registry
-docker push username/repository:tag            # Upload tagged image to registry
-docker run username/repository:tag                   # Run image from a registry
+docker build -t friendlyhello .                 # Dockerfileのディレクトリにてイメージ生成
+docker run -p 4000:80 friendlyhello  # "friendlyname" の実行; ポート 4000 を 80 に割り当て
+docker run -d -p 4000:80 friendlyhello                        # 同上、ただしデタッチモード
+docker container ls                                         # 実行中のコンテナー一覧の表示
+docker container ls -a                      # 実行していないものを含めコンテナー一覧の表示
+docker container stop <hash>                                  # 指定コンテナーを適切に停止
+docker container kill <hash>                          # 指定コンテナーを強制シャットダウン
+docker container rm <hash>                                # マシンから指定コンテナーを削除
+docker container rm $(docker container ls -a -q)                  # コンテナーをすべて削除
+docker image ls -a                                    # マシン上のイメージすべての一覧表示
+docker image rm <image id>                                  # マシン上の指定イメージを削除
+docker image rm $(docker image ls -a -q)                # マシン上からイメージすべてを削除
+docker login                                         # CLIセッションによりDockerへログイン
+docker tag <image> username/repository:tag   # レジストリアップロードにて<image>にタグづけ
+docker push username/repository:tag             # タグつきイメージをレジストリアップロード
+docker run username/repository:tag                            # レジストリからイメージ実行
 ```
