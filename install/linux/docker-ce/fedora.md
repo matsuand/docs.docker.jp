@@ -14,7 +14,7 @@ To get started with Docker CE on Fedora, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ce).
 -->
-Fedora 向けに Docker CE を始めるには、[前提条件を満たしているか](./#prerequisites)を確認してから、[Docker をインストール](./#install-docker-ce)してください。
+Fedora 向けに Docker CE を始めるには、[前提条件を満たしているか](#prerequisites)を確認してから、[Docker をインストール](#install-docker-ce)してください。
 
 <!--
 ## Prerequisites
@@ -106,7 +106,7 @@ Docker CE のインストール方法はいくつかあります。
   from them, for ease of installation and upgrade tasks. This is the
   recommended approach.
 -->
-- たいていのユーザーは [Docker のリポジトリをセットアップ](./#install-using-the-repository)して、そこからインストールしています。
+- たいていのユーザーは [Docker のリポジトリをセットアップ](#install-using-the-repository)して、そこからインストールしています。
   インストールやアップグレードの作業が簡単だからです。
   この方法をお勧めします。
 
@@ -116,7 +116,7 @@ Docker CE のインストール方法はいくつかあります。
   upgrades completely manually. This is useful in situations such as installing
   Docker on air-gapped systems with no access to the internet.
 -->
-- ユーザーの中には RPM パッケージをダウンロードし、[手動でインストール](./#install-from-a-package)している方もいます。
+- ユーザーの中には RPM パッケージをダウンロードし、[手動でインストール](#install-from-a-package)している方もいます。
   アップグレードも完全に手動となります。
   この方法は、インターネットにアクセスできない環境で Docker をインストールするような場合には有用です。
 
@@ -124,7 +124,7 @@ Docker CE のインストール方法はいくつかあります。
 - In testing and development environments, some users choose to use automated
   [convenience scripts](#install-using-the-convenience-script) to install Docker.
 -->
-- テスト環境や開発環境向けに、自動化された[便利なスクリプト](./#install-using-the-convenience-script)を使って
+- テスト環境や開発環境向けに、自動化された[便利なスクリプト](#install-using-the-convenience-script)を使って
   Docker のインストールを行うユーザーもいます。
 
 <!--
@@ -363,7 +363,7 @@ Docker コマンドの実行には ``sudo`` が必要になります。
 To upgrade Docker CE, follow the [installation instructions](#install-docker-ce),
 choosing the new version you want to install.
 -->
-Docker CE をアップグレードするには、[インストール手順](./#install-docker-ce)に従って、インストールしたい新たなバージョンを選んでください。
+Docker CE をアップグレードするには、[インストール手順](#install-docker-ce)に従って、インストールしたい新たなバージョンを選んでください。
 
 <!--
 ### Install from a package
@@ -453,7 +453,7 @@ To upgrade Docker CE, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `dnf -y upgrade`
 instead of `dnf -y install`, and pointing to the new file.
 -->
-Docker CE をアップグレードする場合は、新たなパッケージファイルをダウンロードして、[インストール手順](./#install-from-a-package)をもう一度行います。
+Docker CE をアップグレードする場合は、新たなパッケージファイルをダウンロードして、[インストール手順](#install-from-a-package)をもう一度行います。
 その際には `dnf -y install` でなく `dnf -y upgrade` を実行します。
 またパッケージには新しいものを指定します。
 

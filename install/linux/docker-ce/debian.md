@@ -15,7 +15,7 @@ To get started with Docker CE on Debian, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ce).
 -->
-Debian 向けに Docker CE を始めるには、[前提条件を満たしているか](./#prerequisites)を確認してから、[Docker をインストール](./#install-docker-ce)してください。
+Debian 向けに Docker CE を始めるには、[前提条件を満たしているか](#prerequisites)を確認してから、[Docker をインストール](#install-docker-ce)してください。
 
 <!--
 ## Prerequisites
@@ -104,7 +104,7 @@ Docker CE のインストール方法はいくつかあります。
   from them, for ease of installation and upgrade tasks. This is the
   recommended approach, except for Raspbian.
 -->
-- たいていのユーザーは [Docker のリポジトリをセットアップ](./#install-using-the-repository)して、そこからインストールしています。
+- たいていのユーザーは [Docker のリポジトリをセットアップ](#install-using-the-repository)して、そこからインストールしています。
   インストールやアップグレードの作業が簡単だからです。
   この方法をお勧めします。
 
@@ -114,7 +114,7 @@ Docker CE のインストール方法はいくつかあります。
   upgrades completely manually. This is useful in situations such as installing
   Docker on air-gapped systems with no access to the internet.
 -->
-- ユーザーの中には DEB パッケージをダウンロードし、[手動でインストール](./#install-from-a-package)している方もいます。
+- ユーザーの中には DEB パッケージをダウンロードし、[手動でインストール](#install-from-a-package)している方もいます。
   アップグレードも完全に手動となります。
   この方法は、インターネットにアクセスできない環境で Docker をインストールするような場合には有用です。
 
@@ -123,7 +123,7 @@ Docker CE のインストール方法はいくつかあります。
   [convenience scripts](#install-using-the-convenience-script) to install Docker.
   This is currently the only approach for Raspbian.
 -->
-- テスト環境や開発環境向けに、自動化された[便利なスクリプト](./#install-using-the-convenience-script)を使って
+- テスト環境や開発環境向けに、自動化された[便利なスクリプト](#install-using-the-convenience-script)を使って
   Docker のインストールを行うユーザーもいます。
   これを対象としているのは、現在 Raspbian のみです。
 
@@ -388,7 +388,7 @@ To upgrade Docker CE, first run `sudo apt-get update`, then follow the
 to install.
 -->
 Docker CE をアップグレードするには、まず `sudo apt-get update` を実行します。
-そして[インストール手順](./#install-docker-ce)に従って、インストールしたい新たなバージョンを選んでください。
+そして[インストール手順](#install-docker-ce)に従って、インストールしたい新たなバージョンを選んでください。
 
 <!--
 ### Install from a package
@@ -479,7 +479,7 @@ Docker コマンドの実行には ``sudo`` が必要になります。
 To upgrade Docker CE, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), pointing to the new file.
 -->
-Docker CE をアップグレードするには、[インストール手順](./#install-from-a-package)に従って、インストールしたい新たなバージョンを選んでください。
+Docker CE をアップグレードするには、[インストール手順](#install-from-a-package)に従って、インストールしたい新たなバージョンを選んでください。
 
 {% include install-script.md %}
 
