@@ -6,6 +6,7 @@ description: Learn how to create clusters of Dockerized machines.
 {% include_relative nav.html selected="4" %}
 
 ## 前提条件
+{: #prerequisites }
 
 <!--
 - [Install Docker version 1.13 or higher](/engine/installation/index.md).
@@ -66,6 +67,7 @@ username/repo:tag`, then visit `http://localhost/`.
 ## Introduction
 -->
 ## はじめに
+{: #introduction }
 
 <!--
 In [part 3](part3.md), you took an app you wrote in [part 2](part2.md), and
@@ -86,6 +88,7 @@ by joining multiple machines into a "Dockerized" cluster called a **swarm**.
 ## Understanding Swarm clusters
 -->
 ## スウォームクラスターの理解
+{: #understanding-swarm-clusters }
 
 <!--
 A swarm is a group of machines that are running Docker and joined into
@@ -141,6 +144,7 @@ Docker は**スウォームモード**に切り替えることが可能であり
 ## Set up your swarm
 -->
 ## スウォームのセットアップ
+{: #set-up-your-swarm }
 
 <!--
 A swarm is made up of multiple nodes, which can be either physical or virtual
@@ -162,6 +166,7 @@ to quickly create a two-machine cluster and turn it into a swarm.
 ### Create a cluster
 -->
 ### クラスターの生成
+{: #create-a-cluster }
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#local">ローカル VM (Mac, Linux, Windows 7 または 8)</a></li>
@@ -175,6 +180,7 @@ to quickly create a two-machine cluster and turn it into a swarm.
 #### VMs on your local machine (Mac, Linux, Windows 7 and 8)
 -->
 #### ローカルマシン上の VM（Mac, Linux, Windows 7 または 8）
+{: #vms-on-your-local-machine-mac-linux-windows-7-and-8 }
 
 <!--
 You need a hypervisor that can create virtual machines (VMs), so
@@ -213,6 +219,7 @@ docker-machine create --driver virtualbox myvm2
 #### VMs on your local machine (Windows 10)
 -->
 #### ローカルマシン上の VM（Windows 10）
+{: #vms-on-your-local-machine-windows-10 }
 
 <!--
 First, quickly create a virtual switch for your virtual machines (VMs) to share,
@@ -261,6 +268,7 @@ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
 #### List the VMs and get their IP addresses
 -->
 #### VM の一覧および各 IP アドレスの取得
+{: #list-the-vms-and-get-their-ip-addresses }
 
 <!--
 You now have two VMs created, named `myvm1` and `myvm2`.
@@ -300,6 +308,7 @@ myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.
 #### Initialize the swarm and add nodes
 -->
 #### スウォームの初期化とノードの追加
+{: #initialize-the-swarm-and-add-nodes }
 
 <!--
 The first machine acts as the manager, which executes management commands
@@ -420,12 +429,23 @@ rihwohkh3ph38fhillhhb84sk *   myvm1               Ready               Active    
 ## Deploy your app on the swarm cluster
 -->
 ## スウォームクラスター上にアプリをデプロイ
+{: #deploy-your-app-on-the-swarm-cluster }
 
+<!--
 The hard part is over. Now you just repeat the process you used in [part
 3](part3.md) to deploy on your new swarm. Just remember that only swarm managers
 like `myvm1` execute Docker commands; workers are just for capacity.
+-->
+面倒な部分はここまでです。
+ここからは [3 部](part3.md)で行ったことを繰り返して、今度はスウォームをデプロイします。
+Docker コマンドを実行できるのは `myvm1` のようなスウォームマネージャーだけです。
+ワーカーは単に処理性能をあげるためにあるだけです。
 
+<!--
 ### Configure a `docker-machine` shell to the swarm manager
+-->
+### Configure a `docker-machine` shell to the swarm manager
+{: #configure-a-docker-machine-shell-to-the-swarm-manager }
 
 So far, you've been wrapping Docker commands in `docker-machine ssh` to talk to
 the VMs. Another option is to run `docker-machine env <machine>` to get
@@ -449,7 +469,11 @@ Linux, or Windows, so examples of each are shown on the tabs below.
   <div id="mac-linux-machine" class="tab-pane fade in active">
   {% capture mac-linux-machine-content %}
 
+<!--
 #### Docker machine shell environment on Mac or Linux
+-->
+#### Docker machine shell environment on Mac or Linux
+{: #docker-machine-shell-environment-on-mac-or-linux }
 
 Run `docker-machine env myvm1` to get the command to configure your shell to
 talk to `myvm1`.
@@ -487,7 +511,11 @@ myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.
 <div id="win-machine" class="tab-pane fade">
 {% capture win-machine-content %}
 
+<!--
 #### Docker machine shell environment on Windows
+-->
+#### Docker machine shell environment on Windows
+{: #docker-machine-shell-environment-on-windows }
 
 Run `docker-machine env myvm1` to get the command to configure your shell to
 talk to `myvm1`.
@@ -524,7 +552,11 @@ myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.
   <hr>
 </div>
 
+<!--
 ### Deploy the app on the swarm manager
+-->
+### Deploy the app on the swarm manager
+{: #deploy-the-app-on-the-swarm-manager }
 
 Now that you have `myvm1`, you can use its powers as a swarm manager to
 deploy your app by using the same `docker stack deploy` command you used in part
@@ -599,7 +631,11 @@ like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"}
 > This tutorial demos both `docker-machine ssh` and
 `docker-machine env`, since these are available on all platforms via the `docker-machine` CLI.
 
+<!--
 ### Accessing your cluster
+-->
+### Accessing your cluster
+{: #accessing-your-cluster }
 
 You can access your app from the IP address of **either** `myvm1` or `myvm2`.
 
@@ -634,7 +670,11 @@ look:
 > service and make sure the ip addresses you enter in your browser
 > or curl reflects that
 
+<!--
 ## Iterating and scaling your app
+-->
+## Iterating and scaling your app
+{: #iterating-and-scaling-your-app }
 
 From here you can do everything you learned about in parts 2 and 3.
 
@@ -652,9 +692,17 @@ same `docker swarm join` command you used on `myvm2`, and capacity is added
 to your cluster. Just run `docker stack deploy` afterwards, and your app can
 take advantage of the new resources.
 
+<!--
 ## Cleanup and reboot
+-->
+## Cleanup and reboot
+{: #cleanup-and-reboot }
 
+<!--
 ### Stacks and swarms
+-->
+### Stacks and swarms
+{: #stacks-and-swarms }
 
 You can tear down the stack with `docker stack rm`. For example:
 
