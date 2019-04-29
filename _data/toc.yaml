@@ -83,9 +83,9 @@ guides:
       - path: /install/linux/docker-ce/ubuntu/
         title: Ubuntu
       - path: /install/linux/docker-ce/binaries/
-        title: Binaries
+        title: バイナリ
       - path: /install/linux/linux-postinstall/
-        title: Optional Linux post-installation steps
+        title: Linux インストール後の作業
     - title: MacOS
       path: /docker-for-mac/install/
       nosync: true
