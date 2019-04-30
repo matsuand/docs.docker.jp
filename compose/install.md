@@ -1,22 +1,34 @@
 ---
-description: How to install Docker Compose
+description: Docker Compose のインストール方法。
 keywords: compose, orchestration, install, installation, docker, documentation
 title: Docker Compose のインストール
 toc_max: 2
 ---
 
+<!--
 You can run Compose on macOS, Windows, and 64-bit Linux.
+-->
+Docker Compose は macOS、Windows、64 ビット Linux で動作します。
 
 <!--
 ## Prerequisites
 -->
 ## 前提条件
+{: #prerequisites }
 
+<!--
 Docker Compose relies on Docker Engine for any meaningful work, so make sure you
 have Docker Engine installed either locally or remote, depending on your setup.
+-->
+Docker Compose は重要な処理を Docker Engine に委ねています。
+したがって Docker Engine がインストールされていることを確認します。
+それはローカル、リモートいずれでも、設定次第で可能です。
 
+<!--
 - On desktop systems like Docker Desktop for Mac and Windows, Docker Compose is
 included as part of those desktop installs.
+-->
+- Docker Desktop for Mac、Docker Desktop for Windows のようなデスクトップシステムにおいては、インストールの一部として Docker Compose が含まれています。
 
 - On Linux systems, first install the
 [Docker](/install/index.md#server){: target="_blank" class="_"}

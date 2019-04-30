@@ -1,13 +1,17 @@
 ---
 description: Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments.
 keywords: binaries, installation, docker, documentation, linux
-title: Install Docker CE from binaries
+title: Docker CE の入手（バイナリパッケージ）
 redirect_from:
 - /engine/installation/binaries/
 - /engine/installation/linux/docker-ce/binaries/
 ---
 
+<!--
 > **Note**: You may have been redirected to this page because there is no longer
+> a dynamically-linked Docker package for your Linux distribution.
+-->
+> **メモ**: You may have been redirected to this page because there is no longer
 > a dynamically-linked Docker package for your Linux distribution.
 
 If you want to try Docker or use it in a testing environment, but you're not on

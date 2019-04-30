@@ -90,33 +90,87 @@ redirect_from:
 
 
 
+<!--
+### Step 1: Sign up for Docker Hub
+-->
 ### 手順 1: Docker Hub へのサインアップ
+{: #step-1-sign-up-for-docker-hub }
 
-[creating an account](https://hub.docker.com/signup)（アカウントの生成）から始めます。.
+[アカウントの生成](https://hub.docker.com/signup)から始めます。
 
+<!--
+### Step 2: Create your first repository
+-->
 ### 手順 2: リポジトリを新規生成
+{: #step-2-create-your-first-repository }
 
+<!--
+To create a repo:
+1. Sign in to [Docker Hub](https://hub.docker.com)
+2. Click on Create Repository on the Docker Hub welcome page: ![Welcome](images/index-welcome.png)
+3. Name it **<your_username>/my-first-repo** as shown below. Select **Private**:
+-->
 リポジトリ生成の手順は以下です。
 1. [Docker Hub](https://hub.docker.com) にサインインします。
-2. Docker Hub の welcome ページにて Create Repository をクリックします。 ![Welcome](images/index-welcome.png)
-3. 以下に示すように **<your_username>/my-first-repo** に名称を入力します。そして **Private** を選択します。
+2. Docker Hub の welcome ページにて Create Repository をクリックします。 ![ようこそ](images/index-welcome.png)
+3. 以下に示すように **<your_username>/my-first-repo** に名称を入力します。
+   そして **Private** を選択します。
 
+<!--
 ![Create Repository](images/index-create-repo.png)
+-->
+![リポジトリの生成](images/index-create-repo.png)
 
+<!--
+You've created your first repo. You should see:
+-->
 新規にリポジトリが生成され、以下のように表示されます。
 
+<!--
 ![Repository Created](images/index-repo-created.png)
+-->
+![リポジトリが生成される](images/index-repo-created.png)
 
+<!--
+### Step 3: Download and install Docker Desktop
+-->
 ### 手順 3: Docker Desktop のダウンロードとインストール
+{: #step-3-download-and-install-docker-desktop }
 
+<!--
+We'll need to download Docker Desktop to build and push a container image to Docker Hub.
+-->
 コンテナーイメージを構築して Docker Hub にプッシュするために、Docker Desktop をダウンロードする必要があります。
 
-1. [Docker Desktop](https://docker.com/get-started) をダウンロードしてインストールします。Linux の場合は [Docker Engine - Community](https://hub.docker.com/search?type=edition&offering=community) をダウンロードします。
-2. 端末画面を開いて、Docker Hub にサインインします。実行コマンドは `docker login` です。
+<!--
+1. Download and install [Docker Desktop](https://docker.com/get-started). If on Linux, download [Docker Engine - Community](https://hub.docker.com/search?type=edition&offering=community)
+2. Open the terminal and sign in to Docker Hub on your computer by running `docker login`
+-->
+1. [Docker Desktop](https://docker.com/get-started) をダウンロードしてインストールします。
+   Linux の場合は [Docker Engine - Community](https://hub.docker.com/search?type=edition&offering=community) をダウンロードします。
+2. 端末画面を開いて、Docker Hub にサインインします。
+   実行コマンドは `docker login` です。
 
+<!--
+### Step 4: Build and push a container image to Docker Hub from your computer
+-->
 ### 手順 4: ローカルマシンからコンテナーイメージを構築し Docker Hub へプッシュ
+{: #step-4-build-and-push-a-container-image-to-docker-hub-from-your-computer }
 
-以下に示すように Dockerfile を生成しアプリケーションを指定します。（Dockerfile についての詳細は [こちら](https://docs.docker.com/engine/reference/builder/) を参照してください。）
+<!--
+Start by creating a Dockerfile to specify your application as shown below. (More on Dockerfiles [here](https://docs.docker.com/engine/reference/builder/))
+```shell
+cat > Dockerfile <<EOF
+FROM busybox
+CMD echo "Hello world! This is my first Docker image."
+EOF
+```
+2. Run `docker build -t <your_username>/my-first-repo .` to build your Docker image
+3. Test your docker image locally by running `docker run <your_username>/my-first-repo`
+4. Run `docker push <your_username>/my-first-repo` to push your Docker image to Docker Hub
+-->
+以下に示すように Dockerfile を生成しアプリケーションを指定します。
+（Dockerfile の詳細は [こちら](https://docs.docker.com/engine/reference/builder/) を参照してください。）
 ```shell
 cat > Dockerfile <<EOF
 FROM busybox
@@ -141,7 +195,11 @@ Congratulations! You've successfully:
 - Built a Docker container image on your computer
 - Pushed it to Docker Hub
 
+<!--
 ### Next Steps
+-->
+### Next Steps
+{: #next-steps }
 
 - Create an [Organization](orgs.md) to use Docker Hub with your team.
 - Automatically build container images from code through [Builds](builds/index.md).

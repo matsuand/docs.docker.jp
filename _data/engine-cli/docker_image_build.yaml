@@ -1,7 +1,7 @@
 command: docker image build
-short: Build an image from a Dockerfile
-long: Build an image from a Dockerfile
-usage: docker image build [OPTIONS] PATH | URL | -
+short: Dockerfile からイメージをビルドします。
+long: Dockerfile からイメージをビルドします。
+usage: docker image build [オプション] パス | URL | -
 pname: docker image
 plink: docker_image.yaml
 options:

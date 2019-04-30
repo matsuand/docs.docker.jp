@@ -1,6 +1,6 @@
 command: docker image
-short: Manage images
-long: Manage images.
+short: イメージを管理します。
+long: イメージを管理します。
 usage: docker image
 pname: docker
 plink: docker.yaml

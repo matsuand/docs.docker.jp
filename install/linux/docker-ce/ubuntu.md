@@ -539,7 +539,7 @@ Docker CE をアップグレードするには、[インストール手順](#ins
     ```
 
     <!--
-    2.  Images, containers, volumes, or customized configuration files on your host
+    //2.  Images, containers, volumes, or customized configuration files on your host
         are not automatically removed. To delete all images, containers, and
         volumes:
     -->

@@ -444,22 +444,39 @@ Docker コマンドを実行できるのは `myvm1` のようなスウォーム�
 <!--
 ### Configure a `docker-machine` shell to the swarm manager
 -->
-### Configure a `docker-machine` shell to the swarm manager
+### スウォームマネージャーに対する `docker-machine` シェル設定
 {: #configure-a-docker-machine-shell-to-the-swarm-manager }
 
+<!--
 So far, you've been wrapping Docker commands in `docker-machine ssh` to talk to
 the VMs. Another option is to run `docker-machine env <machine>` to get
 and run a command that configures your current shell to talk to the Docker
 daemon on the VM. This method works better for the next step because it allows
 you to use your local `docker-compose.yml` file to deploy the app
 "remotely" without having to copy it anywhere.
+-->
+ここまでの Docker コマンドは `docker-machine ssh` というコマンドでラッピングしながら VM との対話を行ってきました。
+これに対する別のやり方として `docker-machine env <machine>` を実行する方法があります。
+これを使うと VM 上の Docker デーモンとの対話を行うように、カレントシェルを設定するコマンドが使えるようになり実行ができます。
+この方法は次のステップにおいて、より効果的に動作します。
+それはローカルにある `docker-compose.yml` ファイルを使って、"リモートの"アプリをデプロイできるようになるからです。
+このファイルをどこかにコピーする必要はありません。
 
+<!--
 Type `docker-machine env myvm1`, then copy-paste and run the command provided as
 the last line of the output to configure your shell to talk to `myvm1`, the
 swarm manager.
+-->
+`docker-machine env myvm1` と入力します。
+そして出力結果の最終行のコマンドをコピーペーストして実行します。
+これはスウォームマネージャーである `myvm1` との対話を行うために、シェルに対して設定を行うものです。
 
+<!--
 The commands to configure your shell differ depending on whether you are Mac,
 Linux, or Windows, so examples of each are shown on the tabs below.
+-->
+シェルの設定を行う上記のコマンドは、Mac、Linux、Windows のいずれを用いているかによって異なります。
+したがってその例は、以下のタブごとに示します。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#mac-linux-machine">Mac, Linux</a></li>
@@ -472,11 +489,15 @@ Linux, or Windows, so examples of each are shown on the tabs below.
 <!--
 #### Docker machine shell environment on Mac or Linux
 -->
-#### Docker machine shell environment on Mac or Linux
+#### Mac または Linux における Docker Machine シェル環境設定
 {: #docker-machine-shell-environment-on-mac-or-linux }
 
+<!--
 Run `docker-machine env myvm1` to get the command to configure your shell to
 talk to `myvm1`.
+-->
+`docker-machine env myvm1` を実行して、シェル設定を行うコマンドを得ます。
+これは `myvm1` との対話を行うためのものです。
 
 ```shell
 $ docker-machine env myvm1
@@ -488,14 +509,21 @@ export DOCKER_MACHINE_NAME="myvm1"
 # eval $(docker-machine env myvm1)
 ```
 
+<!--
 Run the given command to configure your shell to talk to `myvm1`.
+-->
+表示されたコマンドを実行して、`myvm1` と対話するためのシェル設定を行います。
 
 ```shell
 eval $(docker-machine env myvm1)
 ```
 
+<!--
 Run `docker-machine ls` to verify that `myvm1` is now the active machine, as
 indicated by the asterisk next to it.
+-->
+`docker-machine ls` すると `myvm1` がアクティブマシンとなっていることが分かります。
+マシン名のとなりにあるアスタリスクが、アクティブであることを示しています。
 
 ```shell
 $ docker-machine ls
@@ -514,11 +542,15 @@ myvm2   -        virtualbox   Running   tcp://192.168.99.101:2376           v17.
 <!--
 #### Docker machine shell environment on Windows
 -->
-#### Docker machine shell environment on Windows
+#### Windows における Docker Machine シェル環境設定
 {: #docker-machine-shell-environment-on-windows }
 
+<!--
 Run `docker-machine env myvm1` to get the command to configure your shell to
 talk to `myvm1`.
+-->
+`docker-machine env myvm1` を実行して、シェル設定を行うコマンドを得ます。
+これは `myvm1` との対話を行うためのものです。
 
 ```shell
 PS C:\Users\sam\sandbox\get-started> docker-machine env myvm1
@@ -531,13 +563,20 @@ $Env:COMPOSE_CONVERT_WINDOWS_PATHS = "true"
 # & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
 ```
 
+<!--
 Run the given command to configure your shell to talk to `myvm1`.
+-->
+表示されたコマンドを実行して、`myvm1` と対話するためのシェル設定を行います。
 
 ```shell
 & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
 ```
 
+<!--
 Run `docker-machine ls` to verify that `myvm1` is the active machine as indicated by the asterisk next to it.
+-->
+`docker-machine ls` すると `myvm1` がアクティブマシンとなっていることが分かります。
+マシン名のとなりにあるアスタリスクが、アクティブであることを示しています。
 
 ```shell
 PS C:PATH> docker-machine ls
@@ -555,15 +594,23 @@ myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.
 <!--
 ### Deploy the app on the swarm manager
 -->
-### Deploy the app on the swarm manager
+### スウォームマネージャーからのアプリのデプロイ
 {: #deploy-the-app-on-the-swarm-manager }
 
+<!--
 Now that you have `myvm1`, you can use its powers as a swarm manager to
 deploy your app by using the same `docker stack deploy` command you used in part
 3 to `myvm1`, and your local copy of `docker-compose.yml.`. This command may take a few seconds
 to complete and the deployment takes some time to be available. Use the
 `docker service ps <service_name>` command on a swarm manager to verify that
 all services have been redeployed.
+-->
+ここで設定をし終えた `myvm1` は、スウォームマネージャーとしての機能を持ったことになります。
+ちょうど 3 部における `myvm1` で用いた `docker stack deploy` というコマンドを、同じく用いてアプリをデプロイできます。
+ローカルにある `docker-compose.yml` についても同じです。
+コマンド実行は処理を終えるのに多少時間がかかります。
+またデプロイ結果も利用できるまでに時間を要します。
+スウォームマネージャー上で `docker service ps <service_name>` コマンドを実行すると、デプロイされているサービスすべてを確認することができます。
 
 You are connected to `myvm1` by means of the `docker-machine` shell
 configuration, and you still have access to the files on your local host. Make
@@ -634,7 +681,7 @@ like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"}
 <!--
 ### Accessing your cluster
 -->
-### Accessing your cluster
+### クラスターへのアクセス
 {: #accessing-your-cluster }
 
 You can access your app from the IP address of **either** `myvm1` or `myvm2`.

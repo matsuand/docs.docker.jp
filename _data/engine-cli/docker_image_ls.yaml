@@ -1,8 +1,8 @@
 command: docker image ls
 aliases: images, list
-short: List images
-long: List images
-usage: docker image ls [OPTIONS] [REPOSITORY[:TAG]]
+short: イメージの一覧を出力します。
+long: イメージの一覧を出力します。
+usage: docker image ls [オプション] [リポジトリ[:タグ]]
 pname: docker image
 plink: docker_image.yaml
 options:
