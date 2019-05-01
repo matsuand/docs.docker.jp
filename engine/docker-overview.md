@@ -26,6 +26,7 @@ Docker が採用する方法を最大限利用して、アプリケーション�
 ## The Docker platform
 -->
 ## Docker プラットフォーム
+{: #the-docker-platform }
 
 <!--
 Docker provides the ability to package and run an application in a loosely isolated
@@ -118,6 +119,7 @@ For more details, see [Docker Architecture](#docker-architecture) below.
 ## What can I use Docker for?
 -->
 ## 何のために Docker を使うのか？
+{: #what-can-i-use-docker-for }
 
 <!--
 **Fast, consistent delivery of your applications**
@@ -196,6 +198,7 @@ Docker は高度に処理集中する環境に適しており、さらには中�
 ## Docker architecture
 -->
 ## Docker アーキテクチャー
+{: #docker-architecture }
 
 <!--
 Docker uses a client-server architecture. The Docker *client* talks to the
@@ -220,6 +223,7 @@ Docker クライアントとデーモンの間の通信には REST API が利用
 ### The Docker daemon
 -->
 ### The Docker デーモン
+{: #the-docker-daemon }
 
 <!--
 The Docker daemon (`dockerd`) listens for Docker API requests and manages Docker
@@ -233,6 +237,7 @@ Docker デーモン（`dockerd`）は Docker API リクエストを受け付け�
 ### The Docker client
 -->
 ### Docker クライアント
+{: #the-docker-client }
 
 <!--
 The Docker client (`docker`) is the primary way that many Docker users interact
@@ -250,6 +255,7 @@ Docker クライアントは複数のデーモンと通信することができ�
 ### Docker registries
 -->
 ### Docker レジストリ
+{: #docker-registries }
 
 <!--
 A Docker _registry_ stores Docker images. Docker Hub is a public
@@ -275,6 +281,7 @@ your image is pushed to your configured registry.
 ### Docker objects
 -->
 ### Docker オブジェクト
+{: #docker-objects }
 
 <!--
 When you use Docker, you are creating and using images, containers, networks,
@@ -288,6 +295,7 @@ Docker の利用時は、イメージ、コンテナー、ネットワーク、�
 #### Images
 -->
 #### イメージ
+{: #images }
 
 <!--
 An _image_ is a read-only template with instructions for creating a Docker
@@ -322,6 +330,7 @@ Dockerfile の内容を書き換えたことでイメージが再構築される
 #### Containers
 -->
 #### コンテナー
+{: #containers }
 
 <!--
 A container is a runnable instance of an image. You can create, start, stop,
@@ -355,6 +364,7 @@ its state that are not stored in persistent storage disappear.
 ##### Example `docker run` command
 -->
 ##### `docker run` コマンドの例
+{: #example-docker-run-command }
 
 <!--
 The following command runs an `ubuntu` container, attaches interactively to your
@@ -422,6 +432,7 @@ the default registry configuration):
 #### Services
 -->
 #### サービス
+{: #services }
 
 <!--
 Services allow you to scale containers across multiple Docker daemons, which
@@ -447,6 +458,7 @@ Docker is written in [Go](https://golang.org/) and takes advantage of several
 features of the Linux kernel to deliver its functionality.
 -->
 ## 基盤とする技術
+{: #the-underlying-technology }
 Docker は [Go 言語](https://golang.org/) で書かれており、Linux カーネルの機能をうまく活用して、さまざまな機能性を実現しています。
 
 <!--
@@ -456,6 +468,7 @@ called the *container*. When you run a container, Docker creates a set of
 *namespaces* for that container.
 -->
 ### 名前空間
+{: #namespaces }
 Docker は名前空間という技術を利用して `コンテナー`と呼ぶ作業空間を分離して提供します。
 コンテナーが実行されたとき、Docker はそのコンテナーに対して複数の *名前空間* を生成します。
 
@@ -496,6 +509,7 @@ containers and optionally enforce limits and constraints. For example,
 you can limit the memory available to a specific container.
 -->
 ### コントロールグループ
+{: #control-groups }
 Linux 上で動作する Docker Engine には、さらに _コントールグループ_ （`cgroups`; control groups）と呼ばれる技術も併用されます。
 cgroup は、アプリケーションが利用するリソースを特定のものに限定します。
 つまりコントロールグループは、Docker Engine が利用可能なハードウェアリソースをコンテナー間で共有するようにし、必要に応じて利用上限や制約をつけることも行います。たとえば特定のコンテナーが利用するメモリの上限を設定することもできます。
@@ -508,6 +522,7 @@ the building blocks for containers. Docker Engine can use multiple UnionFS varia
 including AUFS, btrfs, vfs, and DeviceMapper.
 -->
 ### ユニオンファイルシステム
+{: #union-file-systems }
 ユニオンファイルシステムは UnionFS というものであり、レイヤが作り出され、軽量かつ高速に処理が行われるファイルシステムのことです。
 Docker Engine は UnionFS を利用して、コンテナーにおけるブロックを構築します。
 Docker Engine では AUFS、btrfs、vfs、DeviceMapper などの UnionFS 系のファイルシステムも利用できます。
@@ -520,6 +535,7 @@ the future, Docker may support other container formats by integrating with
 technologies such as BSD Jails or Solaris Zones.
 -->
 ### コンテナーフォーマット
+{: #container-format }
 名前空間、コントロールグループ、UnionFS は Docker Engine により、コンテナーフォーマットと呼ばれるラッパーとして構成されます。
 このコンテナーフォーマットのデフォルトが ``libcontainer`` です。
 いずれ BSD Jail や Solaris Zone などを技術統合した新たなコンテナーフォーマットがサポートされることになるかもしれません。
@@ -533,6 +549,7 @@ technologies such as BSD Jails or Solaris Zones.
     [Docker Engine user guide](userguide/index.md).
 -->
 ## 次のステップ
+{: #next-steps }
 - [Docker のインストール](installation/index.md#installation) に進む。
 - [Docker をはじめよう](getstarted/index.md) を試す。
 - 利用例を確認したり詳細なトピックを突き詰めたりするために [Docker Engine ユーザーガイド](userguide/index.md) を読む。

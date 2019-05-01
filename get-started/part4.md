@@ -612,20 +612,35 @@ all services have been redeployed.
 またデプロイ結果も利用できるまでに時間を要します。
 スウォームマネージャー上で `docker service ps <service_name>` コマンドを実行すると、デプロイされているサービスすべてを確認することができます。
 
+<!--
 You are connected to `myvm1` by means of the `docker-machine` shell
 configuration, and you still have access to the files on your local host. Make
 sure you are in the same directory as before, which includes the
 [`docker-compose.yml` file you created in part
 3](/get-started/part3/#docker-composeyml).
+-->
+`docker-machine` のシェル設定を使って `myvm1` への接続ができました。
+しかもローカルホストのファイルを扱うことができる状態です。
+前と変わらず同じディレクトリにいます。
+そのディレクトリには [3 部で生成した `docker-compose.yml`
+ファイル](/get-started/part3/#docker-composeyml)があるのです。
 
+<!--
 Just like before, run the following command to deploy the app on `myvm1`.
+-->
+前と同じように以下のコマンドを実行して `myvm1` 上のアプリをデプロイします。
 
 ```bash
 docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
+<!--
 And that's it, the app is deployed on a swarm cluster!
+-->
+まさにこれです。
+スウォームクラスター上にアプリがデプロイできました！
 
+<!--
 > **Note**: If your image is stored on a private registry instead of Docker Hub,
 > you need to be logged in using `docker login <your-registry>` and then you
 > need to add the `--with-registry-auth` flag to the above command. For example:
@@ -640,11 +655,31 @@ And that's it, the app is deployed on a swarm cluster!
 > service is deployed, using the encrypted WAL logs. With this information, the
 > nodes are able to log into the registry and pull the image.
 >
+-->
+> **メモ**
+>
+> 利用するイメージが Docker Hub 上でなくプライベートリポジトリ上に保存されている場合は、`docker login <レジストリ名>` を使ってログインしておく必要があります。そして上のコマンドへは `--with-registry-auth` をつけます。
+> たとえば以下のとおりです。
+>
+> ```bash
+> docker login registry.example.com
+>
+> docker stack deploy --with-registry-auth -c docker-compose.yml getstartedlab
+> ```
+>
+> こうするとローカルクライアントから、サービスをデプロイするスウォームノードに向けてログイントークンが送られます。
+> その際には暗号化された WAL ログが用いられます。
+> この情報を使ってノードからレジストリへのログインが可能になり、イメージを取得できるようになります。
+>
 
+<!--
 Now you can use the same [docker commands you used in part
 3](/get-started/part3.md#run-your-new-load-balanced-app). Only this time notice
 that the services (and associated containers) have been distributed between
 both `myvm1` and `myvm2`.
+-->
+ここから [3 部でも用いてきた同じ docker コマンド](/get-started/part3.md#run-your-new-load-balanced-app) を利用します。
+今回の場合は、サービス（と関連コンテナー）が `myvm1` と `myvm2` の両者によって提供されているということです。
 
 ```bash
 $ docker stack ps getstartedlab
@@ -657,6 +692,7 @@ ghii74p9budx  getstartedlab_web.4   gordon/get-started:part2  myvm1  Running
 0prmarhavs87  getstartedlab_web.5   gordon/get-started:part2  myvm2  Running
 ```
 
+<!--
 > Connecting to VMs with `docker-machine env` and `docker-machine ssh`
 >
 > * To set your shell to talk to a different machine like `myvm2`, simply re-run
@@ -677,6 +713,25 @@ like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"}
 >
 > This tutorial demos both `docker-machine ssh` and
 `docker-machine env`, since these are available on all platforms via the `docker-machine` CLI.
+-->
+> `docker-machine env` と `docker-machine ssh` を使った VM への接続
+>
+> * シェル設定を使って `myvm2` のような別のマシンと接続したい場合は、同一シェル上、あるいは別のシェル上にて `docker-machine env`
+> を実行するだけです。こうすることで実行コマンドは `myvm2` に向けて行われます。
+> シェル設定を行っていないシェルや、新たに開いたシェルを用いる場合には、再度設定する必要があります。
+> `docker-machine ls` によりマシン一覧が表示され、状態（state）や IP アドレスを見たり、何があるのか、どれに接続すべきなのかが分かります。
+> 詳しくは [Docker Machine をはじめるためのトピック](/machine/get-started.md#create-a-machine)を参照してください。
+>
+> * Alternatively, you can wrap Docker commands in the form of
+`docker-machine ssh <machine> "<command>"`, which logs directly into
+the VM but doesn't give you immediate access to files on your local host.
+>
+> * On Mac and Linux, you can use `docker-machine scp <file> <machine>:~`
+to copy files across machines, but Windows users need a Linux terminal emulator
+like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} for this to work.
+>
+> This tutorial demos both `docker-machine ssh` and
+`docker-machine env`, since these are available on all platforms via the `docker-machine` CLI.
 
 <!--
 ### Accessing your cluster
@@ -684,13 +739,19 @@ like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"}
 ### クラスターへのアクセス
 {: #accessing-your-cluster }
 
+<!--
 You can access your app from the IP address of **either** `myvm1` or `myvm2`.
+-->
+`myvm1` や `myvm2` の IP アドレスを使ってアプリにアクセスすることができます。
 
 The network you created is shared between them and load-balancing. Run
 `docker-machine ls` to get your VMs' IP addresses and visit either of them on a
 browser, hitting refresh (or just `curl` them).
 
+<!--
 ![Hello World in browser](images/app-in-browser-swarm.png)
+-->
+![ブラウザー上の Hello World](images/app-in-browser-swarm.png)
 
 There are five possible container IDs all cycling by randomly, demonstrating
 the load-balancing.
@@ -720,24 +781,45 @@ look:
 <!--
 ## Iterating and scaling your app
 -->
-## Iterating and scaling your app
+## アプリ操作の繰り返しとスケーリング
 {: #iterating-and-scaling-your-app }
 
+<!--
 From here you can do everything you learned about in parts 2 and 3.
+-->
+ここからは 2 部と 3 部で学んだ操作をすべて行っていくことができます。
 
+<!--
 Scale the app by changing the `docker-compose.yml` file.
+-->
+アプリをスケーリングするには `docker-compose.yml` ファイルを変更します。
 
+<!--
+Change the app behavior by editing code, then rebuild, and push the new image.
+(To do this, follow the same steps you took earlier to [build the
+app](part2.md#build-the-app) and [publish the
+image](part2.md#publish-the-image)).
+-->
 Change the app behavior by editing code, then rebuild, and push the new image.
 (To do this, follow the same steps you took earlier to [build the
 app](part2.md#build-the-app) and [publish the
 image](part2.md#publish-the-image)).
 
+<!--
 In either case, simply run `docker stack deploy` again to deploy these changes.
+-->
+どちらにせよ、再度 `docker stack deploy` を実行するだけで、変更内容をすぐにデプロイすることができます。
 
+<!--
 You can join any machine, physical or virtual, to this swarm, using the
 same `docker swarm join` command you used on `myvm2`, and capacity is added
 to your cluster. Just run `docker stack deploy` afterwards, and your app can
 take advantage of the new resources.
+-->
+物理マシン仮想マシンを問わず、どのマシンからでもスウォームに加わることができます。
+`myvm2` に対して行った `docker swarm join` コマンドを同じように実行するだけです。
+クラスターには性能を向上させるマシンが加えられることになります。
+この後に `docker stack deploy` を実行すれば、新たなリソースを活用してアプリが稼動します。
 
 <!--
 ## Cleanup and reboot
@@ -748,7 +830,7 @@ take advantage of the new resources.
 <!--
 ### Stacks and swarms
 -->
-### Stacks and swarms
+### スタックとスウォーム
 {: #stacks-and-swarms }
 
 You can tear down the stack with `docker stack rm`. For example:
@@ -765,18 +847,31 @@ docker stack rm getstartedlab
 > manager, but _you need this swarm for part 5, so keep it
 > around for now_.
 
+<!--
 ### Unsetting docker-machine shell variable settings
+-->
+### docker-machine シェル環境設定の無効化
+{: #unsetting-docker-machine-shell-variable-settings }
 
+<!--
 You can unset the `docker-machine` environment variables in your current shell
 with the given command.
+-->
+現在いるシェル上において `docker-machine` の環境変数を無効化するには、以下のコマンドを実行します。
 
+  <!--
   On **Mac or Linux** the command is:
+  -->
+  **Mac または Linux** の場合は以下とします。
 
   ```shell
   eval $(docker-machine env -u)
   ```
 
+  <!--
   On **Windows** the command is:
+  -->
+  **Windows** の場合は以下とします。
 
   ```shell
   & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env -u | Invoke-Expression
@@ -787,9 +882,17 @@ and allows you to continue working in the same shell, now using native `docker`
 commands (for example, on Docker Desktop for Mac or Docker Desktop for Windows). To learn more,
 see the [Machine topic on unsetting environment variables](/machine/get-started/#unset-environment-variables-in-the-current-shell).
 
+<!--
 ### Restarting Docker machines
+-->
+### Docker マシンの再起動
+{: #restarting-docker-machines }
 
+<!--
 If you shut down your local host, Docker machines stops running. You can check the status of machines by running `docker-machine ls`.
+-->
+ローカルホストをシャットダウンすると Docker マシンも停止します。
+Docker マシンの状態は `docker-machine ls` を実行して確認することができます。
 
 ```
 $ docker-machine ls
@@ -798,13 +901,19 @@ myvm1   -        virtualbox   Stopped                 Unknown
 myvm2   -        virtualbox   Stopped                 Unknown
 ```
 
+<!--
 To restart a machine that's stopped, run:
+-->
+停止しているマシンを再起動するには以下を実行します。
 
 ```
-docker-machine start <machine-name>
+docker-machine start <マシン名>
 ```
 
+<!--
 For example:
+-->
+たとえば以下のとおりです。
 
 ```
 $ docker-machine start myvm1

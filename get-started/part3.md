@@ -5,7 +5,11 @@ description: Learn how to define load-balanced and scalable service that runs co
 ---
 {% include_relative nav.html selected="3" %}
 
+<!--
+## Prerequisites
+-->
 ## 前提条件
+{: #prerequisites }
 
 <!--
 - [Install Docker version 1.13 or higher](/engine/installation/index.md).
@@ -55,7 +59,11 @@ username/repo:tag`, then visit `http://localhost:4000/`.
   ここで username、repo、tag の部分は各環境に合わせて書き換えてください。
   そして `http://localhost/` にアクセスします。
 
+<!--
+## Introduction
+-->
 ## はじめに
+{: #introduction }
 
 <!--
 In part 3, we scale our application and enable load-balancing. To do this, we
@@ -75,7 +83,11 @@ must go one level up in the hierarchy of a distributed application: the
 - **サービス** (ここにいます)
 - コンテナー ([2 部](part2.md)で説明済)
 
+<!--
+## About services
+-->
 ## サービスについて
+{: #about-services }
 
 <!--
 In a distributed application, different pieces of the app are called "services".
@@ -113,6 +125,7 @@ platform -- just write a `docker-compose.yml` file.
 ## Your first `docker-compose.yml` file
 -->
 ## 初めての `docker-compose.yml` ファイル
+{: #your-first-docker-composeyml-file }
 
 <!--
 A `docker-compose.yml` file is a YAML file that defines how Docker containers
@@ -200,6 +213,7 @@ This `docker-compose.yml` file tells Docker to do the following:
 ## Run your new load-balanced app
 -->
 ## 新しい負荷分散アプリケーションの実行
+{: #run-your-new-load-balanced-app }
 
 <!--
 Before we can use the `docker stack deploy` command we first run:
@@ -375,6 +389,7 @@ aocrb88ap8b0        getstartedlab_web.5   username/repo:tag   docker-desktop    
 ## Scale the app
 -->
 ## アプリのスケーリング
+{: #scale-the-app }
 
 <!--
 You can scale the app by changing the `replicas` value in `docker-compose.yml`,
@@ -405,6 +420,7 @@ started.
 ### Take down the app and the swarm
 -->
 ### アプリとスウォームの停止
+{: #take-down-the-app-and-the-swarm }
 
 <!--
 * Take the app down with `docker stack rm`:
@@ -454,6 +470,7 @@ Cloud](/docker-cloud/), or on any hardware or cloud provider you choose with
 ## Recap and cheat sheet (optional)
 -->
 ## まとめと早見表（おまけ）
+{: #recap-and-cheat-sheet-optional }
 
 <!--
 Here's [a terminal recording of what was covered on this page](https://asciinema.org/a/b5gai4rnflh7r0kie01fx6lip):

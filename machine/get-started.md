@@ -7,7 +7,11 @@ title: Docker Machine をローカル VM で始めるには
 Let's take a look at using `docker-machine` to create, use and manage a
 Docker host inside of a local virtual machine.
 
+<!--
+## Prerequisite Information
+-->
 ## 前提条件
+{: #prerequisite-information }
 
 With the advent of [Docker Desktop for Mac](/docker-for-mac/index.md) and [Docker Desktop for
 Windows](/docker-for-windows/index.md) as replacements for [Docker
@@ -31,7 +35,11 @@ Machine to create local VMs.
 
 * **Docker Desktop for Windows** - You can use `docker-machine create` with the `hyperv` driver to create additional local machines.
 
+<!--
+#### If you are using Docker Desktop for Windows
+-->
 #### Docker Desktop for Windows を使っている場合
+{: #if-you-are-using-docker-desktop-for-windows }
 
 Docker Desktop for Windows uses [Microsoft
 Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/windows_welcome)
@@ -48,7 +56,11 @@ The prerequisites are:
 the [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md) topic,
 which includes an [example](/machine/drivers/hyper-v.md#example) of how to do this.
 
+<!--
+#### If you are using Docker Desktop for Mac
+-->
 #### Docker Desktop for Mac を使っている場合
+{: #if-you-are-using-docker-desktop-for-mac }
 
 Docker Desktop for Mac uses [HyperKit](https://github.com/docker/HyperKit/), a
 lightweight macOS virtualization solution built on top of the
@@ -62,7 +74,11 @@ both HyperKit and Oracle VirtualBox on the same system. To learn more, see
 
 * [最新版の VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"} を正しくインストールできていることを確認します。（すでに示した ToolBox の一部としてインストールしているか、直接インストールしているかのどちらでも構いません。）
 
+<!--
+#### If you are using Docker Toolbox
+-->
 #### Docker Toolbox を使っている場合
+{: #if-you-are-using-docker-toolbox }
 
 Docker Desktop for Mac and Docker Desktop for Windows both require newer versions of their
 respective operating systems, so users with older OS versions must use Docker
@@ -89,7 +105,11 @@ Microsoft Hyper-V](drivers/hyper-v.md).)
   created. If so, you can still follow along with these steps, but
   create another machine and name it something other than `default`.
 
+<!--
 ##  Use Machine to run Docker containers
+-->
+##  Use Machine to run Docker containers
+{: #use-machine-to-run-docker-containers }
 
 Docker コンテナを実行するには、
 
@@ -104,7 +124,11 @@ The examples here show how to create and start a machine, run Docker commands, a
 -->
 以下の例で、マシンの作成・起動方法、 Docker コマンドの実行方法、コンテナの使い方を見ていきます。
 
+<!--
+## Create a machine
+-->
 ## マシンの作成
+{: #create-a-machine }
 
 1. コマンドシェルやターミナル画面を開きます。
 
@@ -119,10 +143,10 @@ The examples here show how to create and start a machine, run Docker commands, a
 
 3. マシンを作成します。
 
-<!-- v17.09 ja: 原文相違
-    Run the `docker-machine create` command, passing the string virtualbox to the
---driver flag. The final argument is the name of the machine. If this is your first machine, name
-it `default`. If you already have a “default” machine,
+<!--
+    Run the `docker-machine create` command, pass the appropriate driver to the
+`--driver` flag and provide a machine name. If this is your first machine, name
+it `default` as shown in the example. If you already have a "default" machine,
 choose another name for this new machine.
 -->
     コマンド ``docker-machine create`` の実行時、 ``--driver`` フラグに ``virtualbox`` の文字列を指定します。そして、最後の引数がマシン名になります。これが初めてのマシンであれば、名前を ``default`` にしましょう。既に「default｣という名前のマシンが存在している場合は、別の新しいマシン名を指定します。
@@ -186,7 +210,11 @@ choose another name for this new machine.
 
     あとはホスト上で Docker コマンドを実行できます。
 
+<!--
+## Run containers and experiment with Machine commands
+-->
 ## Machine コマンドを使ってコンテナを実行
+{: #run-containers-and-experiment-with-machine-commands }
 
 セットアップが完了したことを確認するため、`docker run` コマンドを使ってコンテナを起動しましょう。
 
@@ -243,14 +271,22 @@ choose another name for this new machine.
 
   あとは、好きなだけ実行したいローカル仮想マシンを作成・管理できます。そのためには ``docker-machine create`` を実行するだけです。作成されたマシン全ての情報を確認するには ``docker-machine ls`` を使います。
 
+<!--
+## Start and stop machines
+-->
 ## マシンの起動と停止
+{: #start-and-stop-machines }
 
 ホストを使い終わり、しばらく使わないのであれば、 `docker-machine stop` を実行して停止できます。あとで起動したい場合は `docker-machine start`  を実行します。
 
         $ docker-machine stop default
         $ docker-machine start default
 
+<!--
+## Operate on machines without specifying the name
+-->
 ## マシンの名前を指定せずに操作するには
+{: #operate-on-machines-without-specifying-the-name }
 
 いくつかの `docker-machine` コマンドは、マシン名を明示しれなければ `default` という名称のマシン（が存在している場合）に対して処理を行います。そのため、 `default` ローカル仮想マシンは一般的なパターンとして、頻繁に利用できるでしょう。
 
@@ -360,11 +396,12 @@ configuration file for your shell. However, this fails if a machine called
 machine automatically. The following example shows how to do this in macOS.
 
 
-<!-- v17.09 ja: 原文相違
+<!--
 Create a file called `com.docker.machine.default.plist` under
 `~/Library/LaunchAgents` with the following content:
 -->
-`~/Library/LaunchAgents` 以下に `com.docker.machine.default.plist` ファイルを作成します。内容は次の通りです。
+`~/Library/LaunchAgents` 以下に `com.docker.machine.default.plist` ファイルを作成します。
+内容は次の通りです。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -392,7 +429,11 @@ Create a file called `com.docker.machine.default.plist` under
 
 この中にある ``LaunchAgent`` の ``default``  を書き換えれば、任意のマシン（群）を起動できます。
 
+<!--
+## Where to go next
+-->
 ## 次はどこへ行きますか
+{: #where-to-go-next }
 
 -   Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
 -   [Understand Machine concepts](concepts.md)

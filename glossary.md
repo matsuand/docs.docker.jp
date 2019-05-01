@@ -1,6 +1,6 @@
 ---
 title: "Docker 用語"
-description: "Glossary of terms used around Docker"
+description: "Docker に関して使われている用語集"
 keywords: "glossary, docker, terms, definitions"
 notoc: true
 noratings: true
@@ -19,14 +19,13 @@ like so:
 <span id="glossaryMatch" />
 <span id="topicMatch" />
 
-## 用語
+## 用語一覧
 
-To see a definition for a term, and all topics in the documentation that have
-been tagged with that term, click any entry below:
+用語の定義を参照する場合、またその用語がタグづけされたドキュメントを参照する場合は、以下の項目をクリックしてください。
 
 {% for entry in site.data.glossary %}- [{{ entry[0] }}]
 {% endfor %}
 
 {% for entry in site.data.glossary %}[{{ entry[0] }}]: /glossary/?term={{ entry[0] }}
-{: class="glossLink" data-content="{{ entry[1] | markdownify | strip_html | strip | truncatewords: 50, "..."}}" data-trigger="hover" id="popoverData{{ forloop.index }}" rel="popover" data-placement="bottom" data-original-title="Definition of: {{ entry[0]}}"}
+{: class="glossLink" data-content="{{ entry[1] | markdownify | strip_html | strip | truncatewords: 50, "..."}}" data-trigger="hover" id="popoverData{{ forloop.index }}" rel="popover" data-placement="bottom" data-original-title="用語定義: {{ entry[0]}}"}
 {% endfor %}

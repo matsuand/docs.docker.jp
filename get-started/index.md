@@ -78,7 +78,11 @@ teaches you how to:
 5. [バックエンドにデータベースを加えてスタックサービス](part5.md)
 6. [アプリを本番環境へデプロイ](part6.md)
 
+<!--
+## Docker concepts
+-->
 ## Docker の考え方
+{: #docker-concepts }
 
 <!--
 Docker is a platform for developers and sysadmins to **develop, deploy, and run**
@@ -116,7 +120,11 @@ Containerization is increasingly popular because containers are:
 -->
 ![コンテナーは可搬性に優れる](images/laurel-docker-containers.png){:width="100%"}
 
+<!--
+### Images and containers
+-->
 ### イメージとコンテナー
+{: #images-and-containers }
 
 <!--
 A container is launched by running an image. An **image** is an executable
@@ -138,7 +146,11 @@ would in Linux.
 実行中のコンテナーの一覧は `docker ps` というコマンドを実行すれば見ることができます。
 ちょうど Linux 上で行うコマンド実行と同様です。
 
+<!--
+### Containers and virtual machines
+-->
 ### コンテナーと仮想マシン
+{: #containers-and-virtual-machines }
 
 <!--
 A **container** runs _natively_ on Linux and shares the kernel of the host
@@ -159,7 +171,11 @@ VMs provide an environment with more resources than most applications need.
 
 ![コンテナースタックの例](/images/Container%402x.png){:width="300px"} | ![仮想マシンスタックの例](/images/VM%402x.png){:width="300px"}
 
+<!--
+## Prepare your Docker environment
+-->
 ## Docker 環境の用意
+{: #prepare-your-docker-environment }
 
 <!--
 Install a [maintained version](/engine/installation/#updates-and-patches){: target="_blank" class="_"}
@@ -189,7 +205,11 @@ is available in
 [Docker のインストール](/engine/installation/index.md){: class="button outline-btn"}
 <div style="clear:left"></div>
 
+<!--
+### Test Docker version
+-->
 ### Docker バージョンの確認
+{: #test-docker-version }
 
 <!--
 1.  Run `docker --version` and ensure that you have a supported version of Docker:
@@ -226,7 +246,11 @@ is available in
 > パーミッションエラーにならないようにする（`sudo` は使わない場合）には、`docker` グループにユーザーを追加します。
 [詳しくはこちら](/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}。
 
+<!--
+### Test Docker installation
+-->
 ### Docker インストールの確認
+{: #test-docker-installation }
 
 <!--
 1.  Test that your installation works by running the simple Docker image,
@@ -276,6 +300,7 @@ is available in
 ## Recap and cheat sheet
 -->
 ## まとめと早見表
+{: #recap-and-cheat-sheet }
 
 ```shell
 ## Docker CLI のコマンド一覧
@@ -299,7 +324,11 @@ docker container ls --all
 docker container ls -aq
 ```
 
+<!--
+## Conclusion of part one
+-->
 ## 1 部のまとめ
+{: #conclusion-of-part-one }
 
 <!--
 Containerization makes [CI/CD](https://www.docker.com/solutions/cicd){: target="_blank" class="_"} seamless. For example:
