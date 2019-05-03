@@ -17,9 +17,9 @@ btrfs: |
   supports as a storage backend. It is a [copy-on-write](http://en.wikipedia.org/wiki/Copy-on-write)
   filesystem.
 build: |
-  build is the process of building Docker images using a [Dockerfile](#dockerfile).
-  The build uses a Dockerfile and a "context". The context is the set of files in the
-  directory in which the image is built.
+  build（ビルド）は [Dockerfile](#dockerfile) を使って Docker イメージを構築するプロセスのこと。
+  ビルドでは Dockerfile と "コンテキスト"（context）を利用する。
+  コンテキストとは、イメージが構築されたディレクトリ内にある一連のファイルのこと。
 cgroups: |
   cgroups is a Linux kernel feature that limits, accounts for, and isolates
   the resource usage (CPU, memory, disk I/O, network, etc.) of a collection
@@ -59,18 +59,19 @@ copy-on-write: |
   containers, and storage
   drivers](/engine/userguide/storagedriver/imagesandcontainers/).
 container: |
-  A container is a runtime instance of a [docker image](#image).
+  container（コンテナー）とは [docker イメージ](#image) の実行時インスタンスのこと。
 
-  A Docker container consists of
+  Docker コンテナーは以下により構成される。
 
-  - A Docker image
-  - An execution environment
-  - A standard set of instructions
+  - Docker イメージ
+  - 実行環境
+  - 命令の標準セット
 
-  The concept is borrowed from Shipping Containers, which define a standard to ship
-  goods globally. Docker defines a standard to ship software.
+  この考え方は輸送コンテナーからきています。
+  輸送コンテナーには標準が定義されていて、どこへでも物を輸送していきます。
+  Docker も標準を定義してソフトウェアを導入します。
 Docker: |
-  Docker という語は以下を意味します。
+  Docker とは以下を意味する。
 
   - Docker プロジェクト全体のこと。
   開発者やシステム管理者がアプリケーションの開発、移行、実行を行うプラットフォームのこと。
@@ -363,3 +364,16 @@ x86_64: |
   x86_64 (or x86-64) refers to a 64-bit instruction set invented by AMD as an
   extension of Intel's x86 architecture. AMD calls its x86_64 architecture,
   AMD64, and Intel calls its implementation, Intel 64.
+
+コンテナー: |
+  コンテナー（container）とは [docker イメージ](#image) の実行時インスタンスのこと。
+
+  Docker コンテナーは以下により構成される。
+
+  - Docker イメージ
+  - 実行環境
+  - 命令の標準セット
+
+  この考え方は輸送コンテナーからきています。
+  輸送コンテナーには標準が定義されていて、どこへでも物を輸送していきます。
+  Docker も標準を定義してソフトウェアを導入します。
