@@ -1,23 +1,40 @@
 ---
-description: Controlling and configuring Docker using systemd
+description: systemd を用いた Docker のコントロールと設定
 keywords: docker, daemon, systemd, configuration
 redirect_from:
 - /engine/articles/systemd/
 - /articles/systemd/
 - /engine/admin/systemd/
-title: Control Docker with systemd
+title: systemd における Docker のコントロール
 ---
 
+<!--
 Many Linux distributions use systemd to start the Docker daemon. This document
 shows a few examples of how to customize Docker's settings.
+-->
+Linux ディストリビューションにおいては systemd を用いて Docker デーモンを起動するものが多くなっています。
+このドキュメントでは Docker の設定を行う例をいくつか示します。
 
+<!--
 ## Start the Docker daemon
+-->
+## Docker デーモンの起動
+{: #start-the-docker-daemon }
 
+<!--
 ### Start manually
+-->
+### 手動による起動
+{: #start-manually }
 
+<!--
 Once Docker is installed, you need to start the Docker daemon.
 Most Linux distributions use `systemctl` to start services. If you
 do not have `systemctl`, use the `service` command.
+-->
+Docker をインストールしたら Docker デーモンを起動することが必要です。
+Linux ディストリビューションでは、たいてい `systemctl` を使ってサービスを起動します。
+`systemctl` がない場合には `service` コマンドを使います。
 
 - **`systemctl`**:
 
@@ -31,12 +48,24 @@ do not have `systemctl`, use the `service` command.
   $ sudo service docker start
   ```
 
+<!--
 ### Start automatically at system boot
+-->
+### システムブート時の自動起動
+{: #start-automatically-at-system-boot }
 
+<!--
 If you want Docker to start at boot, see
 [Configure Docker to start on boot](/install/linux/linux-postinstall.md/#configure-docker-to-start-on-boot).
+-->
+システムブート時に Docker を起動したい場合は
+[システムブート時の Docker の設定](/install/linux/linux-postinstall.md/#configure-docker-to-start-on-boot) を参照してください。
 
+<!--
 ## Custom Docker daemon options
+-->
+## Docker デーモンのオプション設定
+{: #custom-docker-daemon-options }
 
 There are a number of ways to configure the daemon flags and environment variables
 for your Docker daemon. The recommended way is to use the platform-independent
@@ -47,7 +76,11 @@ You can configure nearly all daemon configuration options using `daemon.json`. T
 example configures two options. One thing you cannot configure using `daemon.json` mechanism is
 a [HTTP proxy](#http-proxy).
 
+<!--
 ### Runtime directory and storage driver
+-->
+### Runtime directory and storage driver
+{: #runtime-directory-and-storage-driver }
 
 You may want to control the disk space used for Docker images, containers,
 and volumes by moving it to a separate partition.
@@ -61,7 +94,11 @@ To accomplish this, set the following flags in the `daemon.json` file:
 }
 ```
 
+<!--
 ### HTTP/HTTPS proxy
+-->
+### HTTP/HTTPS プロキシー
+{: #httphttps-proxy }
 
 The Docker daemon uses the `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY` environmental variables in
 its start-up environment to configure HTTP or HTTPS proxy behavior. You cannot configure
@@ -152,12 +189,20 @@ you need to add this configuration in the Docker systemd service file.
     Environment=HTTPS_PROXY=https://proxy.example.com:443/
     ```
 
+<!--
 ## Configure where the Docker daemon listens for connections
+-->
+## Configure where the Docker daemon listens for connections
+{: #configure-where-the-docker-daemon-listens-for-connections }
 
 See
 [Configure where the Docker daemon listens for connections](/install/linux/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections).
 
+<!--
 ## Manually create the systemd unit files
+-->
+## Manually create the systemd unit files
+{: #manually-create-the-systemd-unit-files }
 
 When installing the binary without a package, you may want
 to integrate Docker with systemd. For this, install the two unit files

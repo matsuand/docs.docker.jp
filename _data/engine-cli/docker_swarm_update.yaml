@@ -1,8 +1,7 @@
 command: docker swarm update
-short: Update the swarm
-long: Updates a swarm with new parameter values. This command must target a manager
-  node.
-usage: docker swarm update [OPTIONS]
+short: スウォームを更新する。
+long: 新しいパラメーター値によりスウォームを更新します。このコマンドはマネージャーノードを対象とする必要があります。
+usage: docker swarm update [オプション]
 pname: docker swarm
 plink: docker_swarm.yaml
 options:

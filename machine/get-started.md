@@ -326,7 +326,11 @@ choose another name for this new machine.
 
 `default` 以外のマシンでは、常に特定のマシン名をコマンドの引数として明示する必要があります。
 
+<!--
 ## Unset environment variables in the current shell
+-->
+## カレントシェルの環境変数クリア
+{: #unset-environment-variables-in-the-current-shell }
 
 You might want to use the current shell to connect to a different Docker Engine.
 This would be the case if, for example, you are [running Docker Desktop for Mac
@@ -386,7 +390,11 @@ shell to talk to different Docker engines.
     this scenario isn't applicable because Docker Desktop for Windows uses the Docker
     Engine and Docker Machine that come with it.
 
+<!--
+## Start local machines on startup
+-->
 ## 起動時にローカル・マシンの自動起動
+{: #start-local-machines-on-startup }
 
 To ensure that the Docker client is automatically configured at the start of
 each shell session, you can embed `eval $(docker-machine env default)` in your

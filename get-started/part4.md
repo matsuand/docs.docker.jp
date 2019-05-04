@@ -1,7 +1,7 @@
 ---
 title: "はじめよう 4部: スウォーム"
 keywords: swarm, scale, cluster, machine, vm, manager, worker, deploy, ssh, orchestration
-description: Learn how to create clusters of Dockerized machines.
+description: Docker 化したマシンをクラスターとして生成する方法を学ぶ。
 ---
 {% include_relative nav.html selected="4" %}
 
@@ -722,16 +722,14 @@ like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"}
 > `docker-machine ls` によりマシン一覧が表示され、状態（state）や IP アドレスを見たり、何があるのか、どれに接続すべきなのかが分かります。
 > 詳しくは [Docker Machine をはじめるためのトピック](/machine/get-started.md#create-a-machine)を参照してください。
 >
-> * Alternatively, you can wrap Docker commands in the form of
-`docker-machine ssh <machine> "<command>"`, which logs directly into
-the VM but doesn't give you immediate access to files on your local host.
+> * 上とは別に `docker-machine ssh <マシン> "<コマンド>"` という形で Docker コマンドをラップして実行することもできます。
+> これは VM に直接ログインするものですが、ローカルホストにあるファイルを操作することはできなくなります。
 >
-> * On Mac and Linux, you can use `docker-machine scp <file> <machine>:~`
-to copy files across machines, but Windows users need a Linux terminal emulator
-like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} for this to work.
+> * Mac や Linux の場合 `docker-machine scp <ファイル> <マシン>:~` というコマンドを使って、マシン間でのファイルコピーができます。
+> しかし Windows ユーザーがこれを行うためには [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"} のような Linux ターミナルエミュレーターを利用する必要があります。
 >
-> This tutorial demos both `docker-machine ssh` and
-`docker-machine env`, since these are available on all platforms via the `docker-machine` CLI.
+> このチュートリアルでは `docker-machine ssh` と `docker-machine env` の両方を示します。
+> いずれの方法でも、あらゆるプラットフォームにおいて `docker-machine` CLI が実行できることになります。
 
 <!--
 ### Accessing your cluster
@@ -742,29 +740,50 @@ like [Git Bash](https://git-for-windows.github.io/){: target="_blank" class="_"}
 <!--
 You can access your app from the IP address of **either** `myvm1` or `myvm2`.
 -->
-`myvm1` や `myvm2` の IP アドレスを使ってアプリにアクセスすることができます。
+アプリに対しては `myvm1` や `myvm2` の IP アドレスのどちらを使ってもアクセスできます。
 
+<!--
 The network you created is shared between them and load-balancing. Run
 `docker-machine ls` to get your VMs' IP addresses and visit either of them on a
 browser, hitting refresh (or just `curl` them).
+-->
+作り出されたネットワークは、各マシン間で共有され負荷分散が行われます。
+`docker-machine ls` を実行して VM の IP アドレスを確認してください。
+そしてどちらでもよいので、ブラウザーを使ってアクセスし更新ボタンを押してください（あるいは `curl` コマンドを使うのでも構いません）。
 
 <!--
 ![Hello World in browser](images/app-in-browser-swarm.png)
 -->
 ![ブラウザー上の Hello World](images/app-in-browser-swarm.png)
 
+<!--
 There are five possible container IDs all cycling by randomly, demonstrating
 the load-balancing.
+-->
+コンテナー ID は 5 つの値がランダムな順に割り当てられます。
+これによって負荷分散が行われていることがわかります。
 
+
+<!--
 The reason both IP addresses work is that nodes in a swarm participate in an
 ingress **routing mesh**. This ensures that a service deployed at a certain port
 within your swarm always has that port reserved to itself, no matter what node
 is actually running the container. Here's a diagram of how a routing mesh for a
 service called `my-web` published at port `8080` on a three-node swarm would
 look:
+-->
+2 つの IP アドレスが有効になる理由は、スウォーム内の各ノードが ingress の**ルーティングメッシュ**（routing mesh）に属しているからです。
+スウォーム内の特定ポートにおいてデプロイされたサービスは、常にそのポートが割り当てられるようになります。
+どのノードがコンテナー内にて実際に動いているかは関係がありません。
+以下はルーティングメッシュとはどういうものかを示す図です。
+`my-web` というサービスが、ノードを 3 つ持つスウォーム上にてポート `8080` により公開されている様子です。
 
+<!--
 ![routing mesh diagram](/engine/swarm/images/ingress-routing-mesh.png)
+-->
+![ルーティングメッシュ図](/engine/swarm/images/ingress-routing-mesh.png)
 
+<!--
 > Having connectivity trouble?
 >
 > Keep in mind that to use the ingress network in the swarm,
@@ -777,6 +796,16 @@ look:
 > Double check what you have in the ports section under your web
 > service and make sure the ip addresses you enter in your browser
 > or curl reflects that
+-->
+> 接続に問題があり？
+>
+> スウォーム内で ingress ネットワークを使う際には、スウォームモードを有効にする前に、スウォームノード間において以下のポートを開いておく必要があります。
+>
+> - ポート 7946 TCP/UDP ネットワーク検出用コンテナー
+> - ポート 4789 UDP ingress ネットワーク用コンテナー
+>
+> ウェブサービスのポート設定をよく確認してください。
+> またブラウザーあるいは curl コマンドに用いる IP アドレスが適切なものであることも確認してください。
 
 <!--
 ## Iterating and scaling your app
@@ -800,10 +829,8 @@ Change the app behavior by editing code, then rebuild, and push the new image.
 app](part2.md#build-the-app) and [publish the
 image](part2.md#publish-the-image)).
 -->
-Change the app behavior by editing code, then rebuild, and push the new image.
-(To do this, follow the same steps you took earlier to [build the
-app](part2.md#build-the-app) and [publish the
-image](part2.md#publish-the-image)).
+アプリの処理内容を変更するには、コードを編集して、新たなイメージの再構築とプッシュを行います。
+（これを行うには、前と同様に[アプリの構築](part2.md#build-the-app)と[イメージの公開](part2.md#publish-the-image)の手順に従います。）
 
 <!--
 In either case, simply run `docker stack deploy` again to deploy these changes.
@@ -824,7 +851,7 @@ take advantage of the new resources.
 <!--
 ## Cleanup and reboot
 -->
-## Cleanup and reboot
+## クリアと再起動
 {: #cleanup-and-reboot }
 
 <!--
@@ -833,12 +860,17 @@ take advantage of the new resources.
 ### スタックとスウォーム
 {: #stacks-and-swarms }
 
+<!--
 You can tear down the stack with `docker stack rm`. For example:
+-->
+スタックの削除は `docker stack rm` により行います。
+たとえば以下のとおりです。
 
 ```
 docker stack rm getstartedlab
 ```
 
+<!--
 > Keep the swarm or remove it?
 >
 > At some point later, you can remove this swarm if you want to with
@@ -846,6 +878,11 @@ docker stack rm getstartedlab
 > and `docker-machine ssh myvm1 "docker swarm leave --force"` on the
 > manager, but _you need this swarm for part 5, so keep it
 > around for now_.
+-->
+> スウォームはとっておくか消すか？
+>
+> この後にスウォームを削除したい場合は、ワーカー上であれば `docker-machine ssh myvm2 "docker swarm leave"`、マネージャー上であれば `docker-machine ssh myvm1 "docker swarm leave --force"` を実行します。
+> ただし 5 部においてこのスウォームを利用するので、このままとっておいてください。
 
 <!--
 ### Unsetting docker-machine shell variable settings
@@ -877,10 +914,17 @@ with the given command.
   & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env -u | Invoke-Expression
   ```
 
+<!--
 This disconnects the shell from `docker-machine` created virtual machines,
 and allows you to continue working in the same shell, now using native `docker`
 commands (for example, on Docker Desktop for Mac or Docker Desktop for Windows). To learn more,
 see the [Machine topic on unsetting environment variables](/machine/get-started/#unset-environment-variables-in-the-current-shell).
+-->
+上のコマンドは、仮想マシンを作り出した `docker-machine` のシェルを抜け出ます。
+同じシェル上において作業を進めていきますが、今度は（Docker Desktop for Mac あるいは
+Docker Desktop for Windows の）ネイティブな `docker` コマンドを利用することになります。
+より詳しくは [Machine のトピック: カレントシェルの環境変数クリア](/machine/get-started/#unset-environment-variables-in-the-current-shell)
+を参照してください。
 
 <!--
 ### Restarting Docker machines
@@ -937,13 +981,21 @@ Started machines may have new IP addresses. You may need to re-run the `docker-m
 
 [5 部へ >>](part5.md){: class="button outline-btn"}
 
+<!--
 ## Recap and cheat sheet (optional)
+-->
+## まとめと早見表（おまけ）
+{: #recap-and-cheat-sheet-optional }
 
+<!--
 Here's [a terminal recording of what was covered on this
 page](https://asciinema.org/a/113837):
+-->
+[このページで扱った端末操作の録画](https://asciinema.org/a/113837)がこちらです。
 
 <script type="text/javascript" src="https://asciinema.org/a/113837.js" id="asciicast-113837" speed="2" async></script>
 
+<!--
 In part 4 you learned what a swarm is, how nodes in swarms can be managers or
 workers, created a swarm, and deployed an application on it. You saw that the
 core Docker commands didn't change from part 3, they just had to be targeted to
@@ -951,29 +1003,39 @@ run on a swarm master. You also saw the power of Docker's networking in action,
 which kept load-balancing requests across containers, even though they were
 running on different machines. Finally, you learned how to iterate and scale
 your app on a cluster.
+-->
+4 部ではスウォームとはなにかを学びました。
+そしてスォーム内のノードがマネージャーやワーカーとなる様子、スウォームの生成、アプリケーションのデプロイ方法についても学びました。
+ここでわかったことは、基本的な Docker コマンドが 3 部と変わっていないことであり、それがスウォームマネージャー上で実行するように仕向けていました。
+また Docker のネットワークが稼動する様子も見てきました。
+コンテナーが異なるマシン上で稼動していても、その間での負荷分散の要求に応えていくものです。
+最後には、クラスター上におけるアプリ操作の繰り返しとスケーリングに学びました。
 
+<!--
 Here are some commands you might like to run to interact with your swarm and your VMs a bit:
+-->
+スウォームや VM とのやり取りを行うコマンドをここにまとめます。
 
 ```shell
-docker-machine create --driver virtualbox myvm1 # Create a VM (Mac, Win7, Linux)
+docker-machine create --driver virtualbox myvm1   # VM (Mac, Win7, Linux) の生成
 docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1 # Win10
-docker-machine env myvm1                # View basic information about your node
-docker-machine ssh myvm1 "docker node ls"         # List the nodes in your swarm
-docker-machine ssh myvm1 "docker node inspect <node ID>"        # Inspect a node
-docker-machine ssh myvm1 "docker swarm join-token -q worker"   # View join token
-docker-machine ssh myvm1   # Open an SSH session with the VM; type "exit" to end
-docker node ls                # View nodes in swarm (while logged on to manager)
-docker-machine ssh myvm2 "docker swarm leave"  # Make the worker leave the swarm
-docker-machine ssh myvm1 "docker swarm leave -f" # Make master leave, kill swarm
-docker-machine ls # list VMs, asterisk shows which VM this shell is talking to
-docker-machine start myvm1            # Start a VM that is currently not running
-docker-machine env myvm1      # show environment variables and command for myvm1
-eval $(docker-machine env myvm1)         # Mac command to connect shell to myvm1
-& "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression   # Windows command to connect shell to myvm1
-docker stack deploy -c <file> <app>  # Deploy an app; command shell must be set to talk to manager (myvm1), uses local Compose file
-docker-machine scp docker-compose.yml myvm1:~ # Copy file to node's home dir (only required if you use ssh to connect to manager and deploy the app)
-docker-machine ssh myvm1 "docker stack deploy -c <file> <app>"   # Deploy an app using ssh (you must have first copied the Compose file to myvm1)
-eval $(docker-machine env -u)     # Disconnect shell from VMs, use native docker
-docker-machine stop $(docker-machine ls -q)               # Stop all running VMs
-docker-machine rm $(docker-machine ls -q) # Delete all VMs and their disk images
+docker-machine env myvm1                                  # ノードの基本情報表示
+docker-machine ssh myvm1 "docker node ls"           # スウォームのノード一覧表示
+docker-machine ssh myvm1 "docker node inspect <node ID>"      # ノードの詳細表示
+docker-machine ssh myvm1 "docker swarm join-token -q worker"  # 参加トークン表示
+docker-machine ssh myvm1              # VM への SSHセッション開始, "exit" で終了
+docker node ls                 # スウォーム内ノード表示 (マネージャーログオン時)
+docker-machine ssh myvm2 "docker swarm leave"       # スウォームからワーカー削除
+docker-machine ssh myvm1 "docker swarm leave -f"  # マスター削除、スウォーム削除
+docker-machine ls                # VM 一覧, 当シェルの対話 VM にアスタリスク表示
+docker-machine start myvm1                                    # 非稼動の VM 開始
+docker-machine env myvm1                        # myvm1 の環境変数とコマンド表示
+eval $(docker-machine env myvm1)            # Mac コマンド, myvm1 へのシェル接続
+& "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression   # Windows コマンド, myvm1 へのシェル接続
+docker stack deploy -c <file> <app>  # アプリデプロイ,コマンドシェルはマネージャー(myvm1)との対話要, ローカル Compose ファイル利用。
+docker-machine scp docker-compose.yml myvm1:~ # ノードのホームにファイルコピー (マネージャーへssh接続,アプリデプロイ時のみ)
+docker-machine ssh myvm1 "docker stack deploy -c <file> <app>"   # ssh利用したアプリデプロイ (まずmyvm1へComposeファイルコピーが必要)
+eval $(docker-machine env -u)       # dockerネイティブコマンド, VMからシェル切断
+docker-machine stop $(docker-machine ls -q)                 # 稼働中 VM の全停止
+docker-machine rm $(docker-machine ls -q)   # 全 VM とそのディスクイメージの削除
 ```

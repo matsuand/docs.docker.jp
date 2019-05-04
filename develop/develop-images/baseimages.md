@@ -1,39 +1,71 @@
 ---
-description: How to create base images
+description: ベースイメージを生成する方法。
 keywords: images, base image, examples
 redirect_from:
 - /engine/articles/baseimages/
 - /engine/userguide/eng-image/baseimages/
-title: Create a base image
+title: ベースイメージの生成
 ---
 
+<!--
 Most Dockerfiles start from a parent image. If you need to completely control
 the contents of your image, you might need to create a base image instead.
 Here's the difference:
+-->
+Dockerfile は普通は親イメージから作り始めます。
+イメージ内容を完全にコントロールする場合は、ベースイメージを作り出すこともあります。
+その違いは以下のとおりです。
 
+<!--
 - A [parent image](/glossary.md?term=parent%20image) is the image that your
   image is based on. It refers to the contents of the `FROM` directive in the
   Dockerfile. Each subsequent declaration in the Dockerfile modifies this parent
   image. Most Dockerfiles start from a parent image, rather than a base image.
   However, the terms are sometimes used interchangeably.
+-->
+- [親イメージ](/glossary.md?term=parent%20image)は基準とするイメージのことです。
+  Dockerfile 内の `FROM` ディレクティブによって指定されます。
+  Dockerfile 内のこれに続く定義は、その親イメージを修正指示するものとなります。
+  Dockerfile は普通は親イメージから作り始め、ベースイメージから作るのはまれです。
+  ただしこの用語は混同されて用いられることもあります。
 
-- A [base image](/glossary.md?term=base%20image) either has no `FROM` line
-  in its Dockerfile, or has `FROM scratch`.
+  <!--
+  - A [base image](/glossary.md?term=base%20image) either has no `FROM` line
+    in its Dockerfile, or has `FROM scratch`.
+  -->
+- [ベースイメージ](/glossary.md?term=base%20image)は Dockerfile において `FROM` 行がないか、あるいは `FROM scratch` が記述されます。
 
+<!--
 This topic shows you several ways to create a base image. The specific process
 will depend heavily on the Linux distribution you want to package. We have some
 examples below, and you are encouraged to submit pull requests to contribute new
 ones.
+-->
+ここではベースイメージの生成方法をいくつか示します。
+パッケージ化しようとしている Linux ディストリビューションに大きく依存する処理操作もあります。
+以下に例をあげていきます。
+新たなイメージの提供に支障があれば、プルリクエストをあげてください。
 
+<!--
 ## Create a full image using tar
+-->
+## tar を使ったフルイメージの生成
+{: #create-a-full-image-using-tar }
 
+<!--
 In general, start with a working machine that is running
 the distribution you'd like to package as a parent image, though that is
 not required for some tools like Debian's
 [Debootstrap](https://wiki.debian.org/Debootstrap), which you can also
 use to build Ubuntu images.
+-->
+通常であれば、作業マシン上に稼動するディストリビューションを使い、これを親イメージとしてパッケージにしていくことになります。
+しかし Debian の [Debootstrap](https://wiki.debian.org/Debootstrap) のようなツールを使えば作業マシンは不要であり、ここから Ubuntu イメージを作ることもできます。
 
+<!--
 It can be as simple as this to create an Ubuntu parent image:
+-->
+Ubuntu の親イメージを作るのは、同じように簡単にできます。
 
     $ sudo debootstrap xenial xenial > /dev/null
     $ sudo tar -C xenial -c . | docker import - xenial
@@ -47,8 +79,11 @@ It can be as simple as this to create an Ubuntu parent image:
     DISTRIB_CODENAME=xenial
     DISTRIB_DESCRIPTION="Ubuntu 16.04 LTS"
 
+<!--
 There are more example scripts for creating parent images in the Docker
 GitHub Repo:
+-->
+Docker GitHub レポジトリには、親イメージを生成するスクリプトの例がいろいろとあります。
 
  - [BusyBox](https://github.com/moby/moby/blob/master/contrib/mkimage/busybox-static)
  - CentOS / Scientific Linux CERN (SLC) [on Debian/Ubuntu](
@@ -58,7 +93,11 @@ GitHub Repo:
  - [Debian / Ubuntu](
    https://github.com/moby/moby/blob/master/contrib/mkimage/debootstrap)
 
+<!--
 ## Create a simple parent image using scratch
+-->
+## 単純な親イメージを一から生成
+{: #create-a-simple-parent-image-using-scratch }
 
 You can use Docker's reserved, minimal image, `scratch`, as a starting point for
 building containers. Using the `scratch` "image" signals to the build process
@@ -112,7 +151,11 @@ If you want to test it out, you can clone
 [the image repo](https://github.com/docker-library/hello-world).
 
 
+<!--
 ## More resources
+-->
+## More resources
+{: #more-resources }
 
 There are lots more resources available to help you write your `Dockerfile`.
 

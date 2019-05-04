@@ -1,5 +1,5 @@
 ---
-description: Compose file reference
+description: Compose ファイルリファレンス
 keywords: fig, composition, compose, docker
 redirect_from:
 - /compose/yml
@@ -13,11 +13,16 @@ toc_min: 1
 ## Reference and guidelines
 -->
 ## リファレンスとガイドライン
+{: #reference-and-guidelines }
 
 These topics describe version 3 of the Compose file format. This is the newest
 version.
 
+<!--
 ## Compose and Docker compatibility matrix
+-->
+## Compose and Docker compatibility matrix
+{: #compose-and-docker-compatibility-matrix }
 
 There are several versions of the Compose file format – 1, 2, 2.x, and 3.x. The
 table below is a quick look. For full details on what each version includes and
@@ -25,7 +30,11 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
 {% include content/compose-matrix.md %}
 
+<!--
 ## Compose file structure and examples
+-->
+## Compose file structure and examples
+{: #compose-file-structure-and-examples }
 
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
@@ -150,7 +159,11 @@ Another good reference is the Compose file for the voting app sample used in the
 topic on [Deploying an app to a
 Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md). This is also shown on the accordion at the top of this section.
 
+<!--
 ## Service configuration reference
+-->
+## Service configuration reference
+{: #service-configuration-reference }
 
 The Compose file is a [YAML](http://yaml.org/) file defining
 [services](#service-configuration-reference),
@@ -572,6 +585,9 @@ behaviors:
 - `docker-compose up SERVICE` automatically includes `SERVICE`'s
   dependencies. In the following example, `docker-compose up web` also
   creates and starts `db` and `redis`.
+
+- `docker-compose stop` stops services in dependency order. In the following
+  example, `web` is stopped before `db` and `redis`.
 
 Simple example:
 

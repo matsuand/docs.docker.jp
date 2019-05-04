@@ -1,7 +1,7 @@
 command: docker start
-short: Start one or more stopped containers
-long: Start one or more stopped containers
-usage: docker start [OPTIONS] CONTAINER [CONTAINER...]
+short: 停止しているコンテナーを起動する。
+long: 停止しているコンテナーを起動します。
+usage: docker start [オプション] CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml
 options:

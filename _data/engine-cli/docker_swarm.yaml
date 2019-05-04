@@ -1,5 +1,5 @@
 command: docker swarm
-short: スウォームを管理します。
+short: スウォームを管理する。
 long: スウォームを管理します。
 usage: docker swarm
 pname: docker
