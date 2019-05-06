@@ -1,7 +1,6 @@
 ---
 title: Docker エディションの概要
-description: Learn about the two Docker editions available, Docker Enterprise
-  Edition, and Docker Community Edition.
+description: Docker には 2 つのエディション、つまり Docker Enterprise エディションと Docker Community エディションがあることを学びます。
 keywords: editions, ee, ce,
 green-check: '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}'
 ---
