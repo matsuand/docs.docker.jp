@@ -36,14 +36,14 @@ To install Docker Enterprise Edition (Docker EE), go to
 [Get Docker EE for Ubuntu](/install/linux/docker-ee/ubuntu.md)
 **instead of this topic**.
 -->
-Docker エンタープライズエディション（Docker Enterprise Edition; EE）をインストールする場合は、
+Docker Enterprise エディション（Docker Enterprise Edition; EE）をインストールする場合は、
 **このページではなく** [Docer EE の入手（Ubuntu 向け）](/install/linux/docker-ee/ubuntu.md)に進んでください。
 
 <!--
 To learn more about Docker EE, see
 [Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
 -->
-Docker EE の詳細を学ぶには、[Docker エンタープライズエディション](https://www.docker.com/enterprise-edition/)をご覧ください。
+Docker EE の詳細を学ぶには、[Docker Enterprise エディション](https://www.docker.com/enterprise-edition/)をご覧ください。
 
 <!--
 ### OS requirements
@@ -108,7 +108,7 @@ Docker CE on Ubuntu supports `overlay2`, `aufs` and `btrfs` storage drivers.
 > [btrfs](/engine/userguide/storagedriver/btrfs-driver.md) for more details.
 -->
 Ubuntu 向けの Docker CE では `overlay2`、`aufs`、`btrfs` の各ストレージドライバーをサポートします。
-> **メモ**: Docker Engine - エンタープライズは SLES 上において `btrfs` のみをサポートします。
+> **メモ**: Docker Engine - Enterprise は SLES 上において `btrfs` のみをサポートします。
 > 詳しい説明は [btrfs](/engine/userguide/storagedriver/btrfs-driver.md) を参照してください。
 
 <!--

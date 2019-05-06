@@ -22,7 +22,7 @@ Docker Community Edition (CE) is ideal for developers and small
 teams looking to get started with Docker and experimenting with container-based
 apps. Docker CE has three types of update channels, **stable**, **test**, and **nightly**:
 -->
-Docker コミュニティエディション（Community Edition; CE）は個人の開発者や小さな開発チームに向けたものであり、Docker をはじめようとしたり、コンテナーベースのアプリケーションを試そうとしたりする方に適しています。
+Docker Comunity エディション（Community Edition; CE）は個人の開発者や小さな開発チームに向けたものであり、Docker をはじめようとしたり、コンテナーベースのアプリケーションを試そうとしたりする方に適しています。
 Docker CE には更新チャネルとして **安定版**（stable）、**テスト版**（test）、**最新版**（nightly）の 3 つがあります。
 
 <!--

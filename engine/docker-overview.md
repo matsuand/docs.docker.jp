@@ -222,7 +222,7 @@ Docker クライアントとデーモンの間の通信には REST API が利用
 <!--
 ### The Docker daemon
 -->
-### The Docker デーモン
+### Docker デーモン
 {: #the-docker-daemon }
 
 <!--
