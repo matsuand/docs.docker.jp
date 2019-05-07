@@ -5,7 +5,7 @@ title: docker-compose up
 notoc: true
 ---
 
-```
+<!--
 Usage: up [options] [--scale SERVICE=NUM...] [SERVICE...]
 
 Options:
@@ -37,25 +37,81 @@ Options:
                                container. Implies --abort-on-container-exit.
     --scale SERVICE=NUM        Scale SERVICE to NUM instances. Overrides the
                                `scale` setting in the Compose file if present.
+-->
+```
+利用方法: up [オプション] [--scale SERVICE=NUM...] [SERVICE...]
+
+オプション:
+    -d, --detach               デタッチモード。コンテナーをバックグラウンド起動し、
+                               新たなコンテナー名を表示します。
+                               --abort-on-container-exit と同時に使えません。
+    --no-color                 白黒の画面出力を行ないます。
+    --quiet-pull               プルする際に処理実行中の情報を表示しません。
+    --no-deps                  リンクされているサービスを起動しません。
+    --force-recreate           コンテナーの設定やイメージに変更がなくても
+                               コンテナーを再生成します。
+    --always-recreate-deps     依存コンテナーを再生成します。
+                               --no-recreate と同時に使えません。
+    --no-recreate              コンテナーが存在していれば再生成しません。
+                               --force-recreate および -V と同時に使えません。
+    --no-build                 イメージがなかったとしてもビルドの生成を行いません。
+    --no-start                 サービスの生成後にその起動は行いません。
+    --build                    コンテナー起動前にイメージをビルドします。
+    --abort-on-container-exit  コンテナーのいずれかが停止したときにコンテナーすべて
+                               を停止します。-d と同時に使えません。
+    -t, --timeout TIMEOUT      アタッチあるいは起動されているコンテナーのシャット
+                               ダウンに要するタイムアウト時間を秒数で指定します。
+                               （デフォルト: 10）
+    -V, --renew-anon-volumes   前回のコンテナーからデータ抽出を行わずに、匿名の
+                               ボリュームを生成します。
+    --remove-orphans           Compose ファイルに定義されていないサービスコンテナー
+                               を削除します。
+    --exit-code-from SERVICE   指定されたサービスコンテナーの終了コードを返します。
+                               --abort-on-container-exit の指定を暗に含みます。
+    --scale SERVICE=NUM        SERVICE のインスタンス数を NUM とします。Compose
+                               ファイルに `scale` の設定があっても上書きされます。
 ```
 
+<!--
 Builds, (re)creates, starts, and attaches to containers for a service.
+-->
+サービスコンテナーのビルド、（再）生成、起動、アタッチを行います。
 
+<!--
 Unless they are already running, this command also starts any linked services.
+-->
+リンクされているサービスがまだ起動していない場合は、それらも起動します。
 
+<!--
 The `docker-compose up` command aggregates the output of each container (essentially running `docker-compose logs -f`). When
 the command exits, all containers are stopped. Running `docker-compose up -d`
 starts the containers in the background and leaves them running.
+-->
+`docker-compose up` コマンドは、各コンテナーからの出力をすべてまとめます（`docker-compose logs -f` の実行と同じです）。
+コマンドが終了すると、コンテナーはすべて停止します。
+`docker-compose up -d` を実行すると、コンテナーはバックグラウンドで起動し、そのまま実行し続けます。
 
+<!--
 If there are existing containers for a service, and the service's configuration
 or image was changed after the container's creation, `docker-compose up` picks
 up the changes by stopping and recreating the containers (preserving mounted
 volumes). To prevent Compose from picking up changes, use the `--no-recreate`
 flag.
+-->
+サービスコンテナーが存在していて、そのコンテナーの生成以降に、サービスの設定やイメージが変更された場合、`docker-compose up` コマンドはその変更を検知しコンテナーの停止および再生成を行います（マウントボリュームはそのまま維持されます）。
+変更の検知を行わないようにするには `--no-recreate` フラグを指定します。
 
+<!--
 If you want to force Compose to stop and recreate all containers, use the
 `--force-recreate` flag.
+-->
+コンテナーすべてを強制的に停止および再生成するには `--force-recreate` フラグを指定します。
 
+<!--
 If the process encounters an error, the exit code for this command is `1`.
 If the process is interrupted using `SIGINT` (`ctrl` + `C`) or `SIGTERM`, the containers are stopped, and the exit code is `0`.
 If `SIGINT` or `SIGTERM` is sent again during this shutdown phase, the running containers are killed, and the exit code is `2`.
+-->
+処理過程においてエラーが発生した場合、このコマンドは終了コード `1` を返します。
+`SIGINT` (`ctrl` + `C`) や `SIGTERM` によって処理が中断した場合、コンテナーはすべて停止し、終了コード `0` を返します。
+シャットダウン過程において `SIGINT` や `SIGTERM` が再度送信された場合、起動しているコンテナーのプロセスは強制終了され、終了コード `2` を返します。
