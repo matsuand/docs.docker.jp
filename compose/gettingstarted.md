@@ -1,30 +1,57 @@
 ---
-description: Get started with Docker Compose
+description: Docker Compose をはじめよう。
 keywords: documentation, docs, docker, compose, orchestration, containers
-title: Get started with Docker Compose
+title: Docker Compose をはじめよう
 ---
 
+{% comment %}
 On this page you build a simple Python web application running on Docker
 Compose. The application uses the Flask framework and maintains a hit counter in
 Redis. While the sample uses Python, the concepts demonstrated here should be
 understandable even if you're not familiar with it.
+{% endcomment %}
+このページでは、簡単な Python ウェブアプリケーションを Docker Compose 上に作り上げます。
+このアプリケーションは Flask フレームワークを利用し、Redis によりアクセスカウンターを管理します。
+サンプルでは Python を用いていますが、ここで示す考え方は Python に不慣れな方でも理解できるようにしています。
 
+{% comment %}
 ## Prerequisites
+{% endcomment %}
+## 前提条件
+{: #prerequisites }
 
+{% comment %}
 Make sure you have already installed both [Docker Engine](/install/index.md) and [Docker
 Compose](install.md). You don't need to install Python or Redis, as both are
 provided by Docker images.
+{% endcomment %}
+[Docker Engine](/install/index.md) と [Docker Compose](install.md) をインストールしておいてください。
+Python や Redis はインストールする必要はありません。
+これはいずれも Docker イメージとして提供されます。
 
+{% comment %}
 ## Step 1: Setup
+{% endcomment %}
+## ステップ 1: セットアップ
+{: #step-1-setup }
 
+{% comment %}
 Define the application dependencies.
+{% endcomment %}
+アプリケーションの依存パッケージを定義します。
 
+{% comment %}
 1.  Create a directory for the project:
+{% endcomment %}
+1.  プロジェクト用のディレクトリを生成します。
 
         $ mkdir composetest
         $ cd composetest
 
+{% comment %}
 2.  Create a file called `app.py` in your project directory and paste this in:
+{% endcomment %}
+2.  プロジェクトディレクトリ内に `app.py` というファイルを生成して、以下の記述を書き写してください。
 
         import time
 
@@ -57,9 +84,14 @@ Define the application dependencies.
             app.run(host="0.0.0.0", debug=True)
 
 
+      {% comment %}
       In this example, `redis` is the hostname of the redis container on the
       application's network. We use the default port for Redis, `6379`.
+      {% endcomment %}
+      この例において `redis` とは、このアプリケーションネットワーク上の redis コンテナーのホスト名です。
+      Redis のデフォルトポートとして `6379` を利用します。
 
+      {% comment %}
       > Handling transient errors
       >
       > Note the way the `get_hit_count` function is written. This basic retry
@@ -69,22 +101,43 @@ Define the application dependencies.
       > service needs to be restarted anytime during the app's lifetime. In a
       > cluster, this also helps handling momentary connection drops between
       > nodes.
+      {% endcomment %}
+      > 一時的なエラーの取り扱い
+      >
+      > `get_hit_count` という関数がどのように書かれているかを見てください。
+      > この単純なリトライのループにより、redis サービスが起動していなかったとしても、リクエストを何度でも送信できます。
+      > アプリケーションが起動する最中に対して、この方法が適していますが、さらにはこのアプリの動作中に redis サービスを再起動する必要が発生した場合も、アプリが柔軟に対応できる方法です。
+      > クラスターを構成している場合、ノード間でのネットワークの瞬断を制御することもできます。
 
 
+{% comment %}
 3.  Create another file called `requirements.txt` in your project directory and
-    paste this in:
+paste this in:
+{% endcomment %}
+3.  プロジェクト用のディレクトリにもう一つ ``requirements.txt`` という名称のファイルを作成し、次のようにします。
 
         flask
         redis
 
+{% comment %}
 ## Step 2: Create a Dockerfile
+{% endcomment %}
+## ステップ 2: Dockerfile の生成
+{: #step-2-create-a-dockerfile }
 
+{% comment %}
 In this step, you write a Dockerfile that builds a Docker image. The image
 contains all the dependencies the Python application requires, including Python
 itself.
+{% endcomment %}
+このステップでは、Docker イメージを構築する Dockerfile を作ります。
+そのイメージには依存するすべてのもの、つまり Python と Python アプリケーションが含まれます。
 
+{% comment %}
 In your project directory, create a file named `Dockerfile` and paste the
 following:
+{% endcomment %}
+プロジェクト用のディレクトリ内で `Dockerfile` という名称のファイルを作成し、次の内容にします。
 
     FROM python:3.4-alpine
     ADD . /code
@@ -92,23 +145,43 @@ following:
     RUN pip install -r requirements.txt
     CMD ["python", "app.py"]
 
+{% comment %}
 This tells Docker to:
+{% endcomment %}
+これは Docker に対して以下の指示を行います。
 
+{% comment %}
 * Build an image starting with the Python 3.4 image.
 * Add the current directory `.` into the path `/code` in the image.
 * Set the working directory to `/code`.
 * Install the Python dependencies.
 * Set the default command for the container to `python app.py`.
+{% endcomment %}
+* Python 3.4 イメージを使って当イメージを構築する
+* カレントディレクトリ `.` をイメージ内のパス `/code` に加える
+* 作業用ディレクトリを `/code` に指定する
+* Python の依存パッケージをインストールする
+* コンテナーに対するデフォルトのコマンドを `python app.py` にする
 
+{% comment %}
 For more information on how to write Dockerfiles, see the [Docker user
 guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
 and the [Dockerfile reference](/engine/reference/builder.md).
+{% endcomment %}
+Dockerfile の書き方の詳細については、 [Docker ユーザーガイド](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile>)や [Dockerfile リファレンス](/engine/reference/builder.md)をご覧ください。
 
 
+{% comment %}
 ## Step 3: Define services in a Compose file
+{% endcomment %}
+## ステップ 3: Compose ファイル内でのサービス定義
+{: #step-3-define-services-in-a-compose-file }
 
+{% comment %}
 Create a file called `docker-compose.yml` in your project directory and paste
 the following:
+{% endcomment %}
+プロジェクト用のディレクトリ内で `Dockerfile` という名称のファイルを作成し、次の内容にします。
 
     version: '3'
     services:
@@ -119,22 +192,48 @@ the following:
       redis:
         image: "redis:alpine"
 
+{% comment %}
 This Compose file defines two services: `web` and `redis`.
+{% endcomment %}
+この Compose ファイルは `web` と `redis` という 2 つのサービスを定義します。
 
+{% comment %}
 ### Web service
+{% endcomment %}
+### ウェブサービス
+{: #web-service }
 
+{% comment %}
 The `web` service uses an image that's built from the `Dockerfile` in the current directory.
 It then binds the container and the host machine to the exposed port, `5000`. This example service uses the default port for
 the Flask web server, `5000`.
+{% endcomment %}
+`web` サービスは、カレントディレクトリ内の `Dockerfile` からビルドされたイメージを利用します。
+そしてコンテナーとホストマシンを、公開用ポート `5000` でつなぎます。
+このサービス例では、Flask ウェブサーバーのデフォルトポートである `5000` を利用するものです。
 
+{% comment %}
 ### Redis service
+{% endcomment %}
+### Redis サービス
+{: #redis-service }
 
+{% comment %}
 The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/)
 image pulled from the Docker Hub registry.
+{% endcomment %}
+`redis` サービスには Docker Hub レジストリから取得した、公開の [Redis](https://registry.hub.docker.com/_/redis/) イメージを利用します。
 
+{% comment %}
 ## Step 4: Build and run your app with Compose
+{% endcomment %}
+## ステップ 4: Compose によるアプリケーションの構築と実行
+{: #step-4-build-and-run-your-app-with-compose }
 
+{% comment %}
 1.  From your project directory, start up your application by running `docker-compose up`.
+{% endcomment %}
+1.  プロジェクト用のディレクトリで `docker-compose up` によりアプリケーションを起動します。
 
     ```
     $ docker-compose up
@@ -158,43 +257,81 @@ image pulled from the Docker Hub registry.
     redis_1  | 1:M 17 Aug 22:11:10.483 * Ready to accept connections
     ```
 
+    {% comment %}
     Compose pulls a Redis image, builds an image for your code, and starts the
     services you defined. In this case, the code is statically copied into the image at build time.
+    {% endcomment %}
+    Compose は Redis イメージを取得し、コードが動作するイメージを構築した上で、定義されているサービスを開始します。
+    この例ではビルド時において、コードがイメージ内に静的にコピーされます。
 
+{% comment %}
 2.  Enter `http://0.0.0.0:5000/` in a browser to see the application running.
+{% endcomment %}
+2.  ブラウザーで `http://0.0.0.0:5000/` を開き、アプリケーションの動作を確認します。
 
+    {% comment %}
     If you're using Docker natively on Linux, Docker Desktop for Mac, or Docker Desktop for
     Windows, then the web app should now be listening on port 5000 on your
     Docker daemon host. Point your web browser to `http://localhost:5000` to
     find the `Hello World` message. If this doesn't resolve, you can also try
     `http://0.0.0.0:5000`.
+    {% endcomment %}
+    Docker を Linux、Docker Desktop for Mac、Docker Desktop for Windows で直接使っている場合、ウェブアプリは Docker デーモンのホスト上でポート 5000 を開いています。
+    ブラウザーから `http://localhost:5000` にアクセスして、`Hello World` メッセージが表示されることを確認してください。
+    接続できなければ `http://0.0.0.0:5000` も試してください。
 
+
+    {% comment %}
     If you're using Docker Machine on a Mac or Windows, use `docker-machine ip
     MACHINE_VM` to get the IP address of your Docker host. Then, open
     `http://MACHINE_VM_IP:5000` in a browser.
+    {% endcomment %}
+    Docker Machine on Mac や Docker Machine on Windows を利用している場合は、`docker-machine ip 仮想マシン名` を実行して Docker ホスト上の IP アドレスを取得します。
+    そしてブラウザーから `http://仮想マシンのIP:5000` を開きます。
 
+    {% comment %}
     You should see a message in your browser saying:
+    {% endcomment %}
+    ブラウザーには以下のメッセージが表示されます。
 
     ```
     Hello World! I have been seen 1 times.
     ```
 
+    {% comment %}
     ![hello world in browser](images/quick-hello-world-1.png)
+    {% endcomment %}
+    ![ブラウザー上の hello world](images/quick-hello-world-1.png)
 
-3.  Refresh the page.
+    {% comment %}
+    3.  Refresh the page.
+    {% endcomment %}
+3.  ページを更新します。
 
+    {% comment %}
     The number should increment.
+    {% endcomment %}
+    数値が更新されたはずです。
 
     ```
     Hello World! I have been seen 2 times.
     ```
 
+    {% comment %}
     ![hello world in browser](images/quick-hello-world-2.png)
+    {% endcomment %}
+    ![ブラウザー上の hello world](images/quick-hello-world-2.png)
 
+{% comment %}
 4.  Switch to another terminal window, and type `docker image ls` to
     list local images.
+{% endcomment %}
+4.  別の端末画面を開いて `docker image ls` を実行し、ローカルのイメージ一覧を表示します。
 
+    {% comment %}
     Listing images at this point should return `redis` and `web`.
+    {% endcomment %}
+    この時点で一覧表示されるイメージに `redis` と `web` が含まれます。
 
     ```
     $ docker image ls
@@ -204,15 +341,30 @@ image pulled from the Docker Hub registry.
     redis                   alpine              9d8fa9aa0e5b        3 weeks ago         27.5MB
     ```
 
+    {% comment %}
     You can inspect images with `docker inspect <tag or id>`.
+    {% endcomment %}
+    `docker inspect <tag または id>` によってイメージを確認することもできます。
 
+{% comment %}
 5.  Stop the application, either by running `docker-compose down`
 from within your project directory in the second terminal, or by
 hitting CTRL+C in the original terminal where you started the app.
+{% endcomment %}
+5.  アプリケーションを停止させます。
+    2 つめに開いた端末画面上のプロジェクトディレクトリにおいて ``docker-compose down`` を実行します。
+    またはアプリを開始したはじめの端末画面上において CTRL+C を入力します。
 
+{% comment %}
 ## Step 5: Edit the Compose file to add a bind mount
+{% endcomment %}
+## ステップ 5: Compose ファイルにバインドマウントを追加
+{: #step-5-edit-the-compose-file-to-add-a-bind-mount }
 
+{% comment %}
 Edit `docker-compose.yml` in your project directory to add a [bind mount](/engine/admin/volumes/bind-mounts.md) for the `web` service:
+{% endcomment %}
+プロジェクトディレクトリ内にある `docker-compose.yml` を編集して、`web` サービスへの[バインドマウント](/engine/admin/volumes/bind-mounts.md)を追加します。
 
     version: '3'
     services:
@@ -225,13 +377,24 @@ Edit `docker-compose.yml` in your project directory to add a [bind mount](/engin
       redis:
         image: "redis:alpine"
 
+{% comment %}
 The new `volumes` key mounts the project directory (current directory) on the
 host to `/code` inside the container, allowing you to modify the code on the
 fly, without having to rebuild the image.
+{% endcomment %}
+新しい `volumes` というキーは、ホスト上のプロジェクトディレクトリ（カレントディレクトリ）を、コンテナー内にある `/code` ディレクトリにマウントします。
+こうすることで、イメージを再構築することなく、実行中のコードを修正できるようになります。
 
+{% comment %}
 ## Step 6: Re-build and run the app with Compose
+{% endcomment %}
+## ステップ 6: Compose によるアプリの再構築と実行
+{: #step-6-re-build-and-run-the-app-with-compose }
 
+{% comment %}
 From your project directory, type `docker-compose up` to build the app with the updated Compose file, and run it.
+{% endcomment %}
+プロジェクトディレクトリにて `docker-compose up` を入力する際に、Compose ファイルが更新されていると、アプリは再構築され実行されます。
 
 ```
 $ docker-compose up
@@ -245,9 +408,14 @@ web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 ...
 ```
 
+{% comment %}
 Check the `Hello World` message in a web browser again, and refresh to see the
 count increment.
+{% endcomment %}
+`Hello World` メッセージをもう一度確認してみます。
+再読み込みをすると、さらにカウンターが増えるはずです。
 
+{% comment %}
 > Shared folders, volumes, and bind mounts
 >
 > * If your project is outside of the `Users` directory (`cd ~`), then you
@@ -267,29 +435,69 @@ ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
 requirements for [Docker Desktop for Windows](/docker-for-windows/install.md) and do not
 need VirtualBox.
 {: .important}
+{% endcomment %}
+> フォルダ、ボリューム、バインドマウントの共有
+>
+> * プロジェクトを `Users` ディレクトリ（`cd ~`）以外に置いている場合、利用している Dockerfile やボリュームのドライブ、ディレクトリは、共有できるようにしておく必要があります。
+>   実行時に、アプリケーションファイルが見つからない、ボリュームマウントが拒否される、サービスが起動できない、といったランタイムエラーが発生した場合は、ファイルやドライブを共有にすることを試してください。
+>   `C:\Users`（Windows の場合）または `/Users`（Mac の場合）ではないディレクトリにあるプロジェクトがある場合は、ボリュームマウントを共有ドライブにする必要があります。
+>   これはまた、[Linux コンテナー](/docker-for-windows/#switch-between-windows-and-linux-containers-beta-feature)を利用する Docker Desktop  for Windows のプロジェクトでも同様です。
+>   詳しくは Docker Desktop for Windows における[共有ドライブ](../docker-for-windows/#shared-drives)や Docker for Mac における[ファイル共有](../docker-for-mac/#file-sharing)を参照してください。
+>   また一般的な利用例に関しては[コンテナーでデータ管理](../engine/tutorials/dockervolumes)を参照してください。
+>
+> * 比較的古い Windows OS 上において Oracle VirtualBox を利用している場合は、[VB trouble ticket](https://www.virtualbox.org/ticket/14920) に示されている共有フォルダに関する問題が起こるかもしれません。
+>   より新しい Windows システムであれば、[Docker Desktop for Windows](/docker-for-windows/install.md) の要件を満たすため、VirtualBox は必要としません。
+{: .important}
 
+{% comment %}
 ## Step 7: Update the application
+{% endcomment %}
+## ステップ 7: アプリケーションの更新
+{: #step-7-update-the-application }
 
+{% comment %}
 Because the application code is now mounted into the container using a volume,
 you can make changes to its code and see the changes instantly, without having
 to rebuild the image.
+{% endcomment %}
+アプリケーションのコードは、ボリュームを利用してコンテナー内にマウントされたため、コードへの変更とその確認はすぐにできます。
+イメージを再構築することは必要なくなりました。
 
+{% comment %}
 1.  Change the greeting in `app.py` and save it. For example, change the `Hello World!` message to `Hello from Docker!`:
+{% endcomment %}
+1.  `app.py` 内のメッセージを変更して保存します。
+    たとえば `Hello World!` メッセージを `Hello from Docker!` に変更することにします。
 
     ```
     return 'Hello from Docker! I have been seen {} times.\n'.format(count)
     ```
 
+{% comment %}
 2.  Refresh the app in your browser. The greeting should be updated, and the
     counter should still be incrementing.
+{% endcomment %}
+2.  ブラウザーにてアプリを再読み込みします。
+    メッセージは更新され、カウンターも加算されているはずです。
 
+    {% comment %}
     ![hello world in browser](images/quick-hello-world-3.png)
+    {% endcomment %}
+    ![ブラウザー上の hello world](images/quick-hello-world-3.png)
 
+{% comment %}
 ## Step 8: Experiment with some other commands
+{% endcomment %}
+## ステップ 8: その他のコマンドを試す
+{: #step-8-experiment-with-some-other-commands }
 
+{% comment %}
 If you want to run your services in the background, you can pass the `-d` flag
 (for "detached" mode) to `docker-compose up` and use `docker-compose ps` to
 see what is currently running:
+{% endcomment %}
+サービスをバックグラウンドで実行したい場合は `docker-compose up` に `-d` フラグ（"デタッチ"モード用のフラグ）をつけます。
+`docker-compose ps` を実行して、現在動いているものを確認します。
 
     $ docker-compose up -d
     Starting composetest_redis_1...
@@ -301,32 +509,60 @@ see what is currently running:
     composetest_redis_1   /usr/local/bin/run         Up
     composetest_web_1     /bin/sh -c python app.py   Up      5000->5000/tcp
 
+{% comment %}
 The `docker-compose run` command allows you to run one-off commands for your
 services. For example, to see what environment variables are available to the
 `web` service:
+{% endcomment %}
+`docker-compose run` コマンドを使えば、サービスに対してのコマンド実行を行うことができます。
+たとえば `web` サービス上でどのような環境変数が利用可能であるかは、以下のコマンドを実行します。
 
     $ docker-compose run web env
 
+{% comment %}
 See `docker-compose --help` to see other available commands. You can also install [command completion](completion.md) for the bash and zsh shell, which also shows you available commands.
+{% endcomment %}
+`docker-compose --help` を実行すれば、その他のコマンドを確認できます。
+bash や zsh シェルにおいて [コマンド補完](completion.md)をインストールしている場合は、利用可能なコマンドを確認することもできます。
 
+{% comment %}
 If you started Compose with `docker-compose up -d`, stop
 your services once you've finished with them:
+{% endcomment %}
+`docker-compose up -d` により Compose を起動していた場合は、サービスを停止させるために以下のコマンドを実行します。
 
     $ docker-compose stop
 
+{% comment %}
 You can bring everything down, removing the containers entirely, with the `down`
 command. Pass `--volumes` to also remove the data volume used by the Redis
 container:
+{% endcomment %}
+コンテナーも完全に削除し、すべてを終わらせる場合には `down` コマンドを使います。
+`--volumes` を指定すれば Redis コンテナーにおいて利用されているデータボリュームも削除することができます。
 
     $ docker-compose down --volumes
 
+{% comment %}
 At this point, you have seen the basics of how Compose works.
+{% endcomment %}
+ここまで Compose の基本動作について見てきました。
 
 
+{% comment %}
 ## Where to go next
+{% endcomment %}
+## 次は何を読みますか
+{: #where-to-go-next }
 
+{% comment %}
 - Next, try the quick start guide for [Django](django.md),
   [Rails](rails.md), or [WordPress](/samples/library/wordpress/)
 - [Explore the full list of Compose commands](./reference/)
 - [Compose configuration file reference](compose-file/)
 - To learn more about volumes and bind mounts, see [Manage data in Docker](/engine/admin/volumes/index.md)
+{% endcomment %}
+- 次は [Django](django.md)、[Rails](rails.md)、[WordPress](/samples/library/wordpress/) のクイックスタートを試してみましょう。
+- [Compose コマンドの全一覧](./reference/)
+- [Compose ファイルリファレンス](compose-file/)
+- ボリュームやバインドマウントについての詳細は、[Docker でのデータ管理](/engine/admin/volumes/index.md)を参照してください。
