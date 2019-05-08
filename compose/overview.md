@@ -1,5 +1,5 @@
 ---
-description: Introduction and Overview of Compose
+description: Compose の導入と概要
 keywords: documentation, docs, docker, compose, orchestration, containers
 title: Docker Compose 概要
 ---
@@ -102,6 +102,7 @@ Compose には、アプリケーションのライフサイクルを管理する
 ## Compose documentation
 -->
 ## Compose のドキュメント
+{: #compose-documentation }
 
 <!--
 - [Installing Compose](install.md)
@@ -126,6 +127,7 @@ Compose には、アプリケーションのライフサイクルを管理する
 ## Features
 -->
 ## 機能
+{: #features }
 
 <!--
 The features of Compose that make it effective are:
@@ -135,13 +137,13 @@ Compose には特徴的な以下の機能があります。
 * [1 つのホスト上で分離された環境を複数実現](overview.md#Multiple-isolated-environments-on-a-single-host)
 * [コンテナー生成時はボリュームデータを維持](overview.md#preserve-volume-data-when-containers-are-created)
 * [変更のあったコンテナーのみ再作成](overview.md#only-recreate-containers-that-have-changed)
-* [Variables and moving a composition between environments](overview.md#variables-and-moving-a-composition-between-environments)
+* [変数と環境間の移行](overview.md#variables-and-moving-a-composition-between-environments)
 
 <!--
 ### Multiple isolated environments on a single host
 -->
-<a name="Multiple-isolated-environments-on-a-single-host"></a>
 ### 1 つのホスト上で分離された環境を複数実現
+{: #multiple-isolated-environments-on-a-single-host }
 
 <!--
 Compose uses a project name to isolate environments from each other. You can make use of this project name in several different contexts:
@@ -172,8 +174,8 @@ a custom project name by using the
 <!--
 ### Preserve volume data when containers are created
 -->
-<a name="preserve-volume-data-when-containers-are-created"></a>
 ### コンテナー生成時はボリュームデータを維持
+{: #preserve-volume-data-when-containers-are-created }
 
 <!--
 Compose preserves all volumes used by your services. When `docker-compose up`
@@ -196,8 +198,8 @@ Windows 上において `docker-compose` を利用している場合には、[�
 <!--
 ### Only recreate containers that have changed
 -->
-<a name="only-recreate-containers-that-have-changed"></a>
 ### 変更のあったコンテナーのみ再作成
+{: #only-recreate-containers-that-have-changed }
 
 <!--
 Compose caches the configuration used to create a container. When you
@@ -213,8 +215,8 @@ Compose はコンテナーが生成されたときの設定情報をキャッシ
 <!--
 ### Variables and moving a composition between environments
 -->
-<a name="variables-and-moving-a-composition-between-environments"></a>
 ### 変数と環境間の移行
+{: #variables-and-moving-a-composition-between-environments }
 
 <!--
 Compose supports variables in the Compose file. You can use these variables
@@ -237,8 +239,8 @@ Compose ファイルは `extends` フィールドを使うことで、複数の 
 <!--
 ## Common use cases
 -->
-<a name="common-use-cases"></a>
 ## 一般的な利用例
+{: #common-use-cases }
 
 <!--
 Compose can be used in many different ways. Some common use cases are outlined
@@ -251,6 +253,7 @@ Compose はさまざまな使い方があります。
 ### Development environments
 -->
 ### 開発環境
+{: #development-environments }
 
 <!--
 When you're developing software, the ability to run an application in an
@@ -282,6 +285,7 @@ Compose は、分厚く仕上がっている「開発者向け導入手順書」
 ### Automated testing environments
 -->
 ### 自動テスト環境
+{: #automated-testing-environments }
 
 <!--
 An important part of any Continuous Deployment or Continuous Integration process
@@ -302,6 +306,7 @@ Compose ではテストスイートに対応して、分離されたテスト環
 ### Single host deployments
 -->
 ### ただ 1 つのホストからのデプロイ
+{: #single-host-deployments }
 
 <!--
 Compose has traditionally been focused on development and testing workflows,
@@ -325,6 +330,7 @@ For details on using production-oriented features, see
 ## Release notes
 -->
 ## リリースノート
+{: #release-notes }
 
 <!--
 To see a detailed list of changes for past and current releases of Docker
@@ -337,6 +343,7 @@ Docker Compose の過去から現在に至るまでの詳細な変更一覧は�
 ## Getting help
 -->
 ## ヘルプを得るには
+{: #getting-help }
 
 <!--
 Docker Compose is under active development. If you need help, would like to

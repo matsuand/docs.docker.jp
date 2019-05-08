@@ -2,10 +2,14 @@
 advisory: kitematic
 description: Documentation that provides an overview of Kitematic and installation instructions
 keywords: docker, documentation, about, technology, kitematic, gui
-title: Kitematic user guide
+title: Kitematic ユーザーガイド
 ---
 
+<!--
 ## Overview
+-->
+## Overview
+{: #overview }
 
 Kitematic is an open source project built to simplify and streamline using
 Docker on a Mac or Windows PC. Kitematic automates the Docker

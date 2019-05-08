@@ -40,7 +40,11 @@ For more information about Docker CE, see
 -->
 Docker CE についての詳細は [Docker コミュニティエディション](https://www.docker.com/community-edition/){: target="_blank" class="_" } を参照してください。
 
+<!--
+## Releases
+-->
 ## リリース
+{: #releases }
 
 <!--
 For the Docker CE engine, the open
@@ -88,7 +92,11 @@ Docker EE のバイナリリリースは [Docker Hub](https://hub.docker.com/) �
 リリースチャネルは、個々の年月リリースを提供するものなので、年月リリースを選びやすくしています。
 リリースチャネルはまた、パッチリリースが提供された際に、そのパッチリリースを得ることもできます。
 
+<!--
+### Nightly builds
+-->
 ### 最新版
+{: #nightly-builds }
 
 <!--
 Nightly builds are created once per day from the master branch. The version
@@ -119,7 +127,11 @@ The release channel for these builds is called `nightly`.
 -->
 このビルドに対するリリースチャネルは `nightly` と呼ばれます。
 
+<!--
+### Pre-releases
+-->
 ### プレリリース
+{: #pre-releases }
 
 <!--
 In preparation for a new year-month release, a branch is created from
@@ -152,9 +164,19 @@ for example `test-18.09`.
 ### General availability
 -->
 ### 正規安定版（general availability; GA）
+{: #general-availability }
 
+<!--
 Year-month releases are made from a release branch diverged from the master
 branch. The branch is created with format `<year>.<month>`, for example
+`18.09`. The year-month name indicates the earliest possible calendar
+month to expect the release to be generally available. All further patch
+releases are performed from that branch. For example, once `v18.09.0` is
+released, all subsequent patch releases are built from the `18.09` branch.
+-->
+年月によるリリースは、マスターブランチから分岐したリリースブランチとして生成されます。
+
+The branch is created with format `<year>.<month>`, for example
 `18.09`. The year-month name indicates the earliest possible calendar
 month to expect the release to be generally available. All further patch
 releases are performed from that branch. For example, once `v18.09.0` is
