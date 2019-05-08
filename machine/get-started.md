@@ -8,7 +8,7 @@ Let's take a look at using `docker-machine` to create, use and manage a
 Docker host inside of a local virtual machine.
 
 <!--
-## Prerequisite Information
+## Prerequisite information
 -->
 ## 前提条件
 {: #prerequisite-information }

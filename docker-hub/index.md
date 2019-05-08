@@ -196,9 +196,9 @@ Congratulations! You've successfully:
 - Pushed it to Docker Hub
 
 <!--
-### Next Steps
+### Next steps
 -->
-### Next Steps
+### Next steps
 {: #next-steps }
 
 - Create an [Organization](orgs.md) to use Docker Hub with your team.
