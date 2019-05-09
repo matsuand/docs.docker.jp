@@ -3149,7 +3149,7 @@ manuals:
   - path: /compose/bundles/
     title: Docker stacks and distributed application bundles
   - path: /compose/swarm/
-    title: Using Compose with Swarm
+    title: Compose において Swarm を使う
   - path: /compose/env-file/
     title: 環境ファイル
   - path: /compose/environment-variables/

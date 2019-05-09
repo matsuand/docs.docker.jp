@@ -1,13 +1,16 @@
 ---
 advisory: swarm-standalone
 hide_from_sitemap: true
-description: Swarm filters
+description: Swarm フィルター。
 keywords: docker, swarm, clustering, filters
-title: Swarm filters
+title: Swarm フィルター
 ---
 
+{% comment %}
 Filters tell Docker Swarm scheduler which nodes to use when creating and running
 a container.
+{% endcomment %}
+フィルターは、コンテナーが生成、実行された際に、Docker Swarm のスケジューラーがどのノードを用いるかを指示します。
 
 ## Configure the available filters
 
@@ -180,29 +183,63 @@ an error is thrown indicating no suitable node can be found.
 If the value cannot be cast to an integer number or is not present,
 there is no limit on container number.
 
+{% comment %}
 ## Container filters
+{% endcomment %}
+## コンテナーフィルター
+{: #container-filters }
 
+{% comment %}
 When creating a container, you can use three types of container filters:
+{% endcomment %}
+コンテナーを生成する際には、以下の三種類のコンテナーフィルターを用いることができます。
 
 * [`affinity`](filter.md#use-an-affinity-filter)
 * [`dependency`](filter.md#use-a-dependency-filter)
 * [`port`](filter.md#use-a-port-filter)
 
+{% comment %}
 ### Use an affinity filter
+{% endcomment %}
+### affinity フィルターの利用
+{: #use-an-affinity-filter }
 
+{% comment %}
+Use an `affinity` filter to create "attractions" between containers. For
+example, you can run a container and instruct Swarm to schedule it next to
+another container based on these affinities:
+{% endcomment %}
 Use an `affinity` filter to create "attractions" between containers. For
 example, you can run a container and instruct Swarm to schedule it next to
 another container based on these affinities:
 
+{% comment %}
 * container name or ID
 * an image on the host
 * a custom label applied to the container
+{% endcomment %}
+* コンテナー名または ID
+* ホスト上のイメージ
+* コンテナーに適用されているカスタムラベル
 
+{% comment %}
+These affinities ensure that containers run on the same network node
+&mdash; without you having to know what each node is running.
+{% endcomment %}
 These affinities ensure that containers run on the same network node
 &mdash; without you having to know what each node is running.
 
+{% comment %}
 #### Example name affinity
+{% endcomment %}
+#### Example name affinity
+{: #example-name-affinity }
 
+{% comment %}
+You can schedule a new container to run next to another based on a container
+name or ID. For example, you can start a container called `frontend` running
+`nginx`:
+{% endcomment %}
 You can schedule a new container to run next to another based on a container
 name or ID. For example, you can start a container called `frontend` running
 `nginx`:
@@ -217,6 +254,10 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 87c4376856a8        nginx:latest        "nginx"             Less than a second ago   running             192.168.0.42:80->80/tcp         node-1/frontend
 ```
 
+{% comment %}
+Then, using `-e affinity:container==frontend` value to schedule a second
+container to locate and run next to the container named `frontend`.
+{% endcomment %}
 Then, using `-e affinity:container==frontend` value to schedule a second
 container to locate and run next to the container named `frontend`.
 
@@ -250,7 +291,13 @@ $ docker -H node-2:2375 pull mysql
 $ docker -H node-3:2375 pull redis
 ```
 
+{% comment %}
 Only `node-1` and `node-3` have the `redis` image. Specify a `-e
+affinity:image==redis` filter to schedule several additional containers to run
+on these nodes.
+{% endcomment %}
+`node-1` と `node-3` だけが `redis` イメージを持ちます。
+Specify a `-e
 affinity:image==redis` filter to schedule several additional containers to run
 on these nodes.
 
@@ -276,8 +323,12 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 963841b138d8        redis:latest        "redis"             Less than a second ago   running                                             node-1/redis8
 ```
 
+{% comment %}
 As you can see here, the containers were only scheduled on nodes that had the
 `redis` image. Instead of the image name, you could have specified the image ID.
+{% endcomment %}
+ここで分かるように、コンテナーのスケジュールは `redis` イメージを持つノードにおいてのみ行われました。
+イメージ名でなくイメージ ID を使ってイメージを指定することもできます。
 
 ```bash
 $ docker image ls
