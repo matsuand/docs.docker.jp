@@ -9,18 +9,18 @@ toc_max: 4
 toc_min: 1
 ---
 
-<!--
+{% comment %}
 ## Reference and guidelines
--->
+{% endcomment %}
 ## リファレンスとガイドライン
 {: #reference-and-guidelines }
 
 These topics describe version 3 of the Compose file format. This is the newest
 version.
 
-<!--
+{% comment %}
 ## Compose and Docker compatibility matrix
--->
+{% endcomment %}
 ## Compose and Docker compatibility matrix
 {: #compose-and-docker-compatibility-matrix }
 
@@ -30,9 +30,9 @@ how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
 {% include content/compose-matrix.md %}
 
-<!--
+{% comment %}
 ## Compose file structure and examples
--->
+{% endcomment %}
 ## Compose file structure and examples
 {: #compose-file-structure-and-examples }
 
@@ -159,9 +159,9 @@ Another good reference is the Compose file for the voting app sample used in the
 topic on [Deploying an app to a
 Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md). This is also shown on the accordion at the top of this section.
 
-<!--
+{% comment %}
 ## Service configuration reference
--->
+{% endcomment %}
 ## Service configuration reference
 {: #service-configuration-reference }
 
@@ -2620,10 +2620,11 @@ secrets:
 You still need to [grant access to the secrets](#secrets) to each service in the
 stack.
 
-<!--
+{% comment %}
 ## Variable substitution
--->
+{% endcomment %}
 ## 変数の置換
+{: #variable-substitution }
 
 {% include content/compose-var-sub.md %}
 

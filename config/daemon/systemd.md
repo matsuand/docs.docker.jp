@@ -8,30 +8,30 @@ redirect_from:
 title: systemd における Docker のコントロール
 ---
 
-<!--
+{% comment %}
 Many Linux distributions use systemd to start the Docker daemon. This document
 shows a few examples of how to customize Docker's settings.
--->
+{% endcomment %}
 Linux ディストリビューションにおいては systemd を用いて Docker デーモンを起動するものが多くなっています。
 このドキュメントでは Docker の設定を行う例をいくつか示します。
 
-<!--
+{% comment %}
 ## Start the Docker daemon
--->
+{% endcomment %}
 ## Docker デーモンの起動
 {: #start-the-docker-daemon }
 
-<!--
+{% comment %}
 ### Start manually
--->
+{% endcomment %}
 ### 手動による起動
 {: #start-manually }
 
-<!--
+{% comment %}
 Once Docker is installed, you need to start the Docker daemon.
 Most Linux distributions use `systemctl` to start services. If you
 do not have `systemctl`, use the `service` command.
--->
+{% endcomment %}
 Docker をインストールしたら Docker デーモンを起動することが必要です。
 Linux ディストリビューションでは、たいてい `systemctl` を使ってサービスを起動します。
 `systemctl` がない場合には `service` コマンドを使います。
@@ -48,22 +48,22 @@ Linux ディストリビューションでは、たいてい `systemctl` を使�
   $ sudo service docker start
   ```
 
-<!--
+{% comment %}
 ### Start automatically at system boot
--->
+{% endcomment %}
 ### システムブート時の自動起動
 {: #start-automatically-at-system-boot }
 
-<!--
+{% comment %}
 If you want Docker to start at boot, see
 [Configure Docker to start on boot](/install/linux/linux-postinstall.md/#configure-docker-to-start-on-boot).
--->
+{% endcomment %}
 システムブート時に Docker を起動したい場合は
 [システムブート時の Docker の設定](/install/linux/linux-postinstall.md/#configure-docker-to-start-on-boot) を参照してください。
 
-<!--
+{% comment %}
 ## Custom Docker daemon options
--->
+{% endcomment %}
 ## Docker デーモンのオプション設定
 {: #custom-docker-daemon-options }
 
@@ -76,9 +76,9 @@ You can configure nearly all daemon configuration options using `daemon.json`. T
 example configures two options. One thing you cannot configure using `daemon.json` mechanism is
 a [HTTP proxy](#http-proxy).
 
-<!--
+{% comment %}
 ### Runtime directory and storage driver
--->
+{% endcomment %}
 ### Runtime directory and storage driver
 {: #runtime-directory-and-storage-driver }
 
@@ -94,9 +94,9 @@ To accomplish this, set the following flags in the `daemon.json` file:
 }
 ```
 
-<!--
+{% comment %}
 ### HTTP/HTTPS proxy
--->
+{% endcomment %}
 ### HTTP/HTTPS プロキシー
 {: #httphttps-proxy }
 
@@ -189,18 +189,18 @@ you need to add this configuration in the Docker systemd service file.
     Environment=HTTPS_PROXY=https://proxy.example.com:443/
     ```
 
-<!--
+{% comment %}
 ## Configure where the Docker daemon listens for connections
--->
+{% endcomment %}
 ## Configure where the Docker daemon listens for connections
 {: #configure-where-the-docker-daemon-listens-for-connections }
 
 See
 [Configure where the Docker daemon listens for connections](/install/linux/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections).
 
-<!--
+{% comment %}
 ## Manually create the systemd unit files
--->
+{% endcomment %}
 ## Manually create the systemd unit files
 {: #manually-create-the-systemd-unit-files }
 

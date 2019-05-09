@@ -4,50 +4,52 @@ keywords: fig, composition, compose, docker, orchestration, documentation, docs
 title: ファイル間、プロジェクト間での Compose 設定の共有
 ---
 
-<!--
+{% comment %}
 Compose supports two methods of sharing common configuration:
--->
+{% endcomment %}
 Compose がサポートする設定共有には 2 とおりあります。
 
-<!--
+{% comment %}
 1. Extending an entire Compose file by
    [using multiple Compose files](extends.md#multiple-compose-files)
 2. Extending individual services with [the `extends` field](extends.md#extending-services) (for Compose file versions up to 2.1)
--->
+{% endcomment %}
 1. Compose ファイル全体を [複数の Compose ファイルの利用](extends.md#multiple-compose-files) により拡張します。
 2. 個々のサービスを [`extends` フィールド](extends.md#extending-services) を使って拡張します（Compose ファイルバージョン 2.1 まで）。
 
 
-<!--
+{% comment %}
 ## Multiple Compose files
--->
+{% endcomment %}
 ## 複数の Compose ファイル
+{: #multiple-compose-files }
 
 Using multiple Compose files enables you to customize a Compose application
 for different environments or different workflows.
 
-<!--
+{% comment %}
 ### Understanding multiple Compose files
--->
+{% endcomment %}
 ### Compose ファイルが複数ある意味
+{: #understanding-multiple-compose-files }
 
-<!--
+{% comment %}
 By default, Compose reads two files, a `docker-compose.yml` and an optional
 `docker-compose.override.yml` file. By convention, the `docker-compose.yml`
 contains your base configuration. The override file, as its name implies, can
 contain configuration overrides for existing services or entirely new
 services.
--->
+{% endcomment %}
 デフォルトにおいて Compose は 2 つのファイルを読み込みます。
 `docker-compose.yml` と、必要に応じて作られるオプションの `docker-compose.override.yml` です。
 慣習として `docker-compose.yml` には基本的な設定を含めます。
 `docker-compose.override.yml` ファイルは、オーバーライドという表現が含まれていることから分かるように、既存のサービスあるいは新たに起動する全サービスに対しての追加設定を行うものです。
 
-<!--
+{% comment %}
 If a service is defined in both files, Compose merges the configurations using
 the rules described in [Adding and overriding
 configuration](extends.md#adding-and-overriding-configuration).
--->
+{% endcomment %}
 サービスの定義が両方のファイルに存在した場合、Compose は [設定の追加とオーバーライド](extends.md#設定の追加とオーバーライド) に示すルールに従って定義設定をマージします。
 
 To use multiple override files, or an override file with a different name, you
@@ -298,24 +300,25 @@ common configuration:
       links:
         - queue
 
-<!--
+{% comment %}
 ## Adding and overriding configuration
--->
+{% endcomment %}
 ## 設定の追加とオーバーライド
+{: #adding-and-overriding-configuration }
 
-<!--
+{% comment %}
 Compose copies configurations from the original service over to the local one.
 If a configuration option is defined in both the original service and the local
 service, the local value *replaces* or *extends* the original value.
--->
+{% endcomment %}
 Compose copies configurations from the original service over to the local one.
 If a configuration option is defined in both the original service and the local
 service, the local value *replaces* or *extends* the original value.
 
-<!--
+{% comment %}
 For single-value options like `image`, `command` or `mem_limit`, the new value
 replaces the old value.
--->
+{% endcomment %}
 1 つの値しか持たないオプション、たとえば `image`、`command`、`mem_limit` のようなものは、古い値が新しい値に置き換えられます。
 
     # 元々のサービス
@@ -327,7 +330,7 @@ replaces the old value.
     # 結果
     command: python otherapp.py
 
-<!--
+{% comment %}
 >  `build` and `image` in Compose file version 1
 >
 > In the case of `build` and `image`, when using
@@ -341,7 +344,7 @@ replaces the old value.
 >
 > This is because `build` and `image` cannot be used together in a version 1
 > file.
--->
+{% endcomment %}
 >  Compose ファイルバージョン 1 における `build` と `image`
 >
 > In the case of `build` and `image`, when using
@@ -356,10 +359,10 @@ replaces the old value.
 > This is because `build` and `image` cannot be used together in a version 1
 > file.
 
-<!--
+{% comment %}
 For the **multi-value options** `ports`, `expose`, `external_links`, `dns`,
 `dns_search`, and `tmpfs`, Compose concatenates both sets of values:
--->
+{% endcomment %}
 **複数の値を持つオプション**、`ports`、`expose`、`external_links`、`dns`、`dns_search`、`tmpfs` では、両者の設定をつなぎ合わせます。
 
     # 元々のサービス
@@ -377,12 +380,12 @@ For the **multi-value options** `ports`, `expose`, `external_links`, `dns`,
       - "4000"
       - "5000"
 
-<!--
+{% comment %}
 In the case of `environment`, `labels`, `volumes`, and `devices`, Compose
 "merges" entries together with locally-defined values taking precedence. For
 `environment` and `labels`, the environment variable or label name determines
 which value is used:
--->
+{% endcomment %}
 `environment`、`labels`、`volumes`、`devices` の場合、Compose は設定内容を"マージ"して、ローカル定義の値が優先するようにします。
 
     # 元々のサービス
@@ -401,10 +404,10 @@ which value is used:
       - BAR=local
       - BAZ=local
 
-<!--
+{% comment %}
 Entries for `volumes` and `devices` are merged using the mount path in the
 container:
--->
+{% endcomment %}
 `volumes` や `devices` の設定内容は、コンテナーのマウントパスを使ってマージされます。
 
     # 元々のサービス
@@ -425,12 +428,13 @@ container:
 
 
 
-<!--
+{% comment %}
 ## Compose documentation
--->
+{% endcomment %}
 ## Compose ドキュメント
+{: #compose-documentation }
 
-<!--
+{% comment %}
 - [User guide](index.md)
 - [Installing Compose](install.md)
 - [Getting Started](gettingstarted.md)
@@ -439,7 +443,7 @@ container:
 - [Get started with WordPress](wordpress.md)
 - [Command line reference](./reference/index.md)
 - [Compose file reference](compose-file.md)
--->
+{% endcomment %}
 - [ユーザーガイド](index.md)
 - [Compose のインストール](install.md)
 - [はじめよう](gettingstarted.md)

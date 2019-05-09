@@ -14,11 +14,11 @@ notags: true
 
 ## Docker をはじめよう
 
-<!--
+{% comment %}
 Try our new multi-part walkthrough that covers writing your first app,
 data storage, networking, and swarms, and ends with your app running on
 production servers in the cloud. Total reading time is less than an hour.
--->
+{% endcomment %}
 さまざまなウォークスルーを進めていくために、まずはアプリを作るところから始めて、データストレージ、ネットワーク、スウォームと進みます。最終的にはクラウド上にサーバーアプリケーションを稼動させるところまで行きましょう。すべてを読むのに１時間もかかりません。
 
 [Docker をはじめよう](/get-started/){: class="button outline-btn"}
@@ -28,12 +28,12 @@ production servers in the cloud. Total reading time is less than an hour.
 
 ## Docker エンタープライズエディションのすすめ
 
-<!--
+{% comment %}
 Run your solution in production with Docker Enterprise Edition to get a
 management dashboard, security scanning, LDAP integration, content signing,
 multi-cloud support, and more. Click below to test-drive a running instance of
 Docker EE without installing anything.
--->
+{% endcomment %}
 Docker エンタープライズエディションをソリューションにおいて利用すれば、管理ダッシュボード、セキュリティスキャニング、LDAP 統合、コンテンツ認証、マルチクラウド対応などをさまざまに行うことができます。
 以下をクリックして、Docker EE インスタンスを試してみてください。インストールは一切不要です。
 
@@ -49,22 +49,22 @@ Docker エンタープライズエディションをソリューションにお�
 
 ### Docker コミュニティエディション
 
-<!--
+{% comment %}
 Get started with Docker and experimenting with container-based apps. Docker CE
 is available on many platforms, from desktop to cloud to server. Build and share
 containers and automate the development pipeline from a single environment.
 Choose the Edge channel to get access to the latest features, or the Stable
 channel for more predictability.
--->
+{% endcomment %}
 Docker を使い、コンテナーをベースとしたアプリケーションを体験しましょう。
 Docker CE はデスクトップからクラウドのサーバーに至るまで、多くのプラットフォームで利用可能です。
 単一の環境から自動デプロイパイプラインを通し、コンテナーを構築、共有します。
 最新機能をいち早く試したい場合はエッジ（edge）チャンネルを選んでください。
 また理解できているものを利用したい場合は安定（stable）チャンネルを選んでください。
 
-<!--
+{% comment %}
 [Learn more about Docker CE](/install/){: class="button outline-btn"}
--->
+{% endcomment %}
 [Docker CE について学ぶ](/install/){: class="button outline-btn"}
 
 </div>
@@ -72,18 +72,18 @@ Docker CE はデスクトップからクラウドのサーバーに至るまで�
 
 ### Docker エンタープライズエディション
 
-<!--
+{% comment %}
 Designed for enterprise development and IT teams who build, ship, and run
 business critical applications in production at scale. Integrated, certified,
 and supported to provide enterprises with the most secure container platform in
 the industry to modernize all applications. Docker EE Advanced comes with enterprise
 [add-ons](#docker-ee-add-ons) like UCP and DTR.
--->
+{% endcomment %}
 エンタープライズ開発や IT チーム向けに設計されたものであり、最重要のビジネスアプリケーションが、稼働中にその規模を拡大していっても、アプリケーションの構築、導入、実行を容易に実現できます。エンタープライズ開発の統合、認証、サポートを行い、先進的なアプリケーションを提供する業界において、もっとも安全なコンテナ・プラットフォームを提供します。
 
-<!--
+{% comment %}
 [Learn more about Docker EE](/ee/supported-platforms/){: class="button outline-btn"}
--->
+{% endcomment %}
 [Docker EE について学ぶ](/ee/supported-platforms/){: class="button outline-btn"}
 
 </div>

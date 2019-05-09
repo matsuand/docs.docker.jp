@@ -9,7 +9,7 @@ notoc: true
 このコマンドは廃止予定（deprecated）です。
 このかわりに `up` コマンドに `--no-start` オプションをつけて実行してください。
 
-<!--
+{% comment %}
 Usage: create [options] [SERVICE...]
 
 Options:
@@ -19,7 +19,7 @@ Options:
                            Incompatible with --force-recreate.
     --no-build             Don't build an image, even if it's missing.
     --build                Build images before creating containers.
--->
+{% endcomment %}
 ```
 利用方法: create [オプション] [サービス名...]
 

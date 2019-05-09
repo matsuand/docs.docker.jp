@@ -8,9 +8,7 @@ title: FAQ とトラブルシューティング
 
 This is a frequently asked questions (FAQs) and troubleshooting guide for non-technical users who are learning about Docker, starting with [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
 
-<!--
 By following the getting started, you'll learn fundamental Docker features by performing some simple tasks.
--->
 
 In the process of installing and setting up Docker, you might run into problems or have questions about configuration and setup.
 

@@ -5,14 +5,14 @@ title: docker-compose start
 notoc: true
 ---
 
-<!--
+{% comment %}
 Usage: start [SERVICE...]
--->
+{% endcomment %}
 ```
 利用方法: start [SERVICE...]
 ```
 
-<!--
+{% comment %}
 Starts existing containers for a service.
--->
+{% endcomment %}
 既存のサービスコンテナーを起動します。

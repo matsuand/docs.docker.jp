@@ -4,49 +4,51 @@ keywords: fig, composition, compose, docker, orchestration, environment, env fil
 title: 環境変数のデフォルトをファイル内に定義する
 ---
 
-<!--
+{% comment %}
 Compose supports declaring default environment variables in an environment file
 named `.env` placed in the folder where the `docker-compose` command is executed
 *(current working directory)*.
--->
+{% endcomment %}
 Compose では環境変数のデフォルトを定義しておくことができます。
 これは `.env` という名前の環境ファイルに環境変数を定義するもので、このファイルを
 `docker-compose` コマンドが実行されるディレクトリ（*カレントワーキングディレクトリ*）に置きます。
 
-<!--
+{% comment %}
 ## Syntax rules
--->
+{% endcomment %}
 ## 文法
+{: #syntax-rules }
 
-<!--
+{% comment %}
 These syntax rules apply to the `.env` file:
--->
+{% endcomment %}
 `.env` ファイルに適用される文法は以下のとおりです。
 
-<!--
+{% comment %}
 * Compose expects each line in an `env` file to be in `VAR=VAL` format.
 * Lines beginning with `#` are processed as comments and ignored.
 * Blank lines are ignored.
 * There is no special handling of quotation marks. This means that
   **they are part of the VAL**.
--->
+{% endcomment %}
 * Compose は `env` ファイル内の各行が `変数=値` という形式で書かれているものとして扱います。
 * 先頭が `#` で始まる行は、コメント行となり無視されます。
 * 空行は無視されます。
 * 引用符は特別に扱われません。
   つまりそれは**値の一部として扱われます**。
 
-<!--
+{% comment %}
 ## Compose file and CLI variables
--->
+{% endcomment %}
 ## Compose ファイルと CLI 変数
+{: #compose-file-and-cli-variables }
 
-<!--
+{% comment %}
 The environment variables you define here are used for [variable
 substitution](compose-file/index.md#variable-substitution) in your Compose file,
 and can also be used to define the following [CLI
 variables](reference/envvars.md):
--->
+{% endcomment %}
 環境変数を定義すると Compose ファイル内では[変数置換](compose-file/index.md#variable-substitution)が行われます。
 また以下の [CLI 変数](reference/envvars.md) の定義に利用することもできます。
 
@@ -69,16 +71,17 @@ variables](reference/envvars.md):
 >   コンテナーが認識できる環境変数として設定するには、[Compose における環境変数](/compose/environment-variables.md)に示されているガイドラインに従ってください。
 >   そこでは、シェル環境変数をコンテナーに受け渡す方法や、Compose ファイル内での環境変数の定義方法などを説明しています。
 
-<!--
+{% comment %}
 ## More Compose documentation
--->
+{% endcomment %}
 ## その他の Compose ドキュメント
+{: #more-compose-documentation }
 
-<!--
+{% comment %}
 - [User guide](index.md)
 - [Command line reference](./reference/index.md)
 - [Compose file reference](compose-file.md)
--->
+{% endcomment %}
 - [ユーザーガイド](index.md)
 - [コマンドラインリファレンス](./reference/index.md)
 - [Compose ファイルリファレンス](compose-file.md)

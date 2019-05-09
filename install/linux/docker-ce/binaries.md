@@ -7,10 +7,10 @@ redirect_from:
 - /engine/installation/linux/docker-ce/binaries/
 ---
 
-<!--
+{% comment %}
 > **Note**: You may have been redirected to this page because there is no longer
 > a dynamically-linked Docker package for your Linux distribution.
--->
+{% endcomment %}
 > **メモ**: You may have been redirected to this page because there is no longer
 > a dynamically-linked Docker package for your Linux distribution.
 

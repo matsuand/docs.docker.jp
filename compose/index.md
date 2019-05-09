@@ -5,13 +5,13 @@ title: Docker Compose
 notoc: true
 ---
 
-<!--
+{% comment %}
 Compose is a tool for defining and running multi-container Docker applications. To learn more about Compose refer to the following documentation:
--->
+{% endcomment %}
 Compose は、複数コンテナーによる Docker アプリケーションを定義し実行するためのツールです。
 Compose についての詳細は、以下のドキュメントを参照してください。
 
-<!--
+{% comment %}
 - [Compose Overview](overview.md)
 - [Install Compose](install.md)
 - [Getting Started](gettingstarted.md)
@@ -23,7 +23,7 @@ Compose についての詳細は、以下のドキュメントを参照してく
 - [Command-line reference](./reference/index.md)
 - [Compose file reference](/compose/compose-file/index.md)
 - [Environment file](env-file.md)
--->
+{% endcomment %}
 - [Compose 概要](overview.md)
 - [Compose のインストール](install.md)
 - [Compose をはじめよう](gettingstarted.md)
@@ -36,9 +36,9 @@ Compose についての詳細は、以下のドキュメントを参照してく
 - [Compose ファイルリファレンス](/compose/compose-file/index.md)
 - [環境ファイル](env-file.md)
 
-<!--
+{% comment %}
 To see a detailed list of changes for past and current releases of Docker
 Compose, refer to the
 [CHANGELOG](https://github.com/docker/compose/blob/master/CHANGELOG.md).
--->
+{% endcomment %}
 Docker Compose のこれまでのリリースにおける変更点の一覧は [CHANGELOG](https://github.com/docker/compose/blob/master/CHANGELOG.md) から確認することができます。

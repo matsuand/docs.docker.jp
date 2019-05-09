@@ -9,10 +9,10 @@ redirect_from:
  - /release-notes/docker-ce/
 ---
 
-<!--
+{% comment %}
 This document describes the latest changes, additions, known issues, and fixes
 for Docker Engine Enterprise Edition (Docker EE) and Community Edition (CE).
--->
+{% endcomment %}
 このドキュメントは Docker Engine Enterprise エディション（Docker EE）および Community エディション（CE）についての最近の変更、機能追加、既知の問題、修正内容について説明するものです。
 
 Docker EE is a superset of all the features in Docker CE. It incorporates defect fixes

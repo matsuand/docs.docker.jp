@@ -4,9 +4,7 @@ keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, ra
 title: Docker Machine 概要
 ---
 
-<!--
 You can use Docker Machine to:
--->
 
 * Install and run Docker on Mac or Windows
 * Provision and manage multiple remote Docker hosts
