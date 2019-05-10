@@ -1,7 +1,7 @@
 ---
 description: Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments.
 keywords: binaries, installation, docker, documentation, linux
-title: Docker CE の入手（バイナリパッケージ）
+title: Docker CE の入手（バイナリモジュール）
 redirect_from:
 - /engine/installation/binaries/
 - /engine/installation/linux/docker-ce/binaries/
@@ -11,31 +11,60 @@ redirect_from:
 > **Note**: You may have been redirected to this page because there is no longer
 > a dynamically-linked Docker package for your Linux distribution.
 {% endcomment %}
-> **メモ**: You may have been redirected to this page because there is no longer
-> a dynamically-linked Docker package for your Linux distribution.
+> **メモ**: このページへはリダイレクトによりやってきたかもしれません。
+> お使いの Linux ディストリビューションでは、ダイナミックリンクによる Docker パッケージが提供されていないためです。
 
+{% comment %}
 If you want to try Docker or use it in a testing environment, but you're not on
 a supported platform, you can try installing from static binaries. If possible,
 you should use packages built for your operating system, and use your operating
 system's package management system to manage Docker installation and upgrades.
 Be aware that 32-bit static binary archives do not include the Docker daemon.
+{% endcomment %}
+Docker を利用したい、あるいはテスト環境で使いたいと思っていも、お使いのプラットフォームでは Docker がサポートされていません。
+そんなときはスタティックリンクされたバイナリをインストールしてみてください。
+可能であれば、お使いのオペレーティングシステム用にビルドされたパッケージを使い、オペレーティングシステムのパッケージ管理方法に基づいて Docker のインストールやアップグレードを行ってください。
+なお 32 ビットのスタティックバイナリには、Docker デーモンが含まれていない点に注意してください。
 
+{% comment %}
 Static binaries for the Docker daemon binary are only available for Linux (as
 `dockerd`).
 Static binaries for the Docker client are available for Linux and macOS (as `docker`).
+{% endcomment %}
+Docker デーモンに対するスタティックバイナリは、Linux でのみ利用可能です（`dockerd` として）。
+Docker クライアントに対するスタティックバイナリは、Linux と macOS で利用可能です（`docker` として）。
 
+{% comment %}
 This topic discusses binary installation for both Linux and macOS:
+{% endcomment %}
+ここでは Linux と macOS におけるバイナリモジュールのインストール方法を説明します。
 
+{% comment %}
 - [Install daemon and client binaries on Linux](#install-daemon-and-client-binaries-on-linux )
 - [Install client binaries on macOS](#install-client-binaries-on-macos )
+{% endcomment %}
+- [Linux においてデーモンとクライアントのバイナリをインストール](#install-daemon-and-client-binaries-on-linux )
+- [macOS においてクライアントのバイナリをインストール](#install-client-binaries-on-macos )
 
+{% comment %}
 ## Install daemon and client binaries on Linux
+{% endcomment %}
+## Linux においてデーモンとクライアントのバイナリをインストール
+{: #install-daemon-and-client-binaries-on-linux }
 
+{% comment %}
 ### Prerequisites
+{% endcomment %}
+### 前提条件
+{: #prerequisites }
 
+{% comment %}
 Before attempting to install Docker from binaries, be sure your host machine
 meets the prerequisites:
+{% endcomment %}
+Docker のバイナリをインストールする場合には、ホストマシンが以下の前提条件を満たしていることを確認してください。
 
+{% comment %}
 - A 64-bit installation
 - Version 3.10 or higher of the Linux kernel. The latest version of the kernel
   available for your platform is recommended.
@@ -50,124 +79,255 @@ meets the prerequisites:
   [#2683](https://github.com/moby/moby/issues/2683),
   [#3485](https://github.com/moby/moby/issues/3485),
   [#4568](https://github.com/moby/moby/issues/4568)).
+{% endcomment %}
+- 64 ビットシステム。
+- Linux カーネルのバージョンは 3.10 またはそれ以上。
+  利用するプラットフォームが提供する最新カーネルを用いることを推奨。
+- `iptables` のバージョンは 1.4 またはそれ以上。
+- `git` のバージョンは 1.7 またはそれ以上。
+- `ps` 実行モジュールがあること。通常 `procps` あるいは類似パッケージが提供している。
+- [XZ Utils](http://tukaani.org/xz/) のバージョンは 4.9 またはそれ以上。
+- [`cgroupfs` 階層が適切にマウントされていること](
+  https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount)。
+  単純にすべてを取りまとめた `cgroup` マウントポイントでは不十分です。
+  Github の 以下の issue を参考にしてください。
+  [#2683](https://github.com/moby/moby/issues/2683)、
+  [#3485](https://github.com/moby/moby/issues/3485)、
+  [#4568](https://github.com/moby/moby/issues/4568)
 
+{% comment %}
 #### Secure your environment as much as possible
+{% endcomment %}
+#### できるだけセキュアな環境を
+{: #secure-your-environment-as-much-as-possible }
 
+{% comment %}
 ##### OS considerations
+{% endcomment %}
+##### OS に関すること
+{: #os-considerations }
 
+{% comment %}
 Enable SELinux or AppArmor if possible.
+{% endcomment %}
+利用可能であれば SELinux や AppArmor を有効にしてください。
 
+{% comment %}
 It is recommended to use AppArmor or SELinux if your Linux distribution supports
 either of the two. This helps improve security and blocks certain
 types of exploits. Review the documentation for your Linux distribution for
 instructions for enabling and configuring AppArmor or SELinux.
+{% endcomment %}
+利用する Linux ディストリビューションが SELinux または AppArmor をサポートしている場合は、それらを利用することを推奨します。
+これを有効にしていればセキュリティは向上し、ある種のセキュリティ攻撃を防ぐことにもつながります。
+SELinux や AppArmor を設定し有効にする手順については、各 Linux ディストリビューションのドキュメントを参照してください。
 
+{% comment %}
 > Security Warning
 >
 > If either of the security mechanisms is enabled, do not disable it as a
 > work-around to make Docker or its containers run. Instead, configure it
 > correctly to fix any problems.
 {:.warning}
+{% endcomment %}
+> セキュリティ警告
+>
+> このセキュリティ機能を有効にしていた場合には、Docker やコンテナーを動作させたいからというので、機能を無効にするのはお止めください。
+> そのかわりに、正しく機能するように設定を適切に行ってください。
+{:.warning}
 
+{% comment %}
 ##### Docker daemon considerations
+{% endcomment %}
+##### Docker デーモンに関すること
+{: #docker-daemon-considerations }
 
+{% comment %}
 - Enable `seccomp` security profiles if possible. See
   [Enabling `seccomp` for Docker](/engine/security/seccomp.md).
+{% endcomment %}
+- 利用可能であれば、セキュリティプロファイル `seccomp` を有効にしてください。
+  [Docker における `seccomp` の利用](/engine/security/seccomp.md)を参照。
 
+{% comment %}
 - Enable user namespaces if possible. See the
   [Daemon user namespace options](/engine/reference/commandline/dockerd.md#daemon-user-namespace-options).
+{% endcomment %}
+- 利用可能であればユーザー名前空間を有効にしてください。
+  [デーモンのユーザー名前空間に関するオプション](/engine/reference/commandline/dockerd.md#daemon-user-namespace-options)を参照。
 
+{% comment %}
 ### Install static binaries
+{% endcomment %}
+### スタティックバイナリのインストール
+{: #install-static-binaries }
 
+{% comment %}
 1.  Download the static binary archive. Go to
     [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/)
     (or change `stable` to `nightly` or `test`),
     choose your hardware platform, and download the `.tgz` file relating to the
     version of Docker CE you want to install.
+{% endcomment %}
+1.  スタティックバイナリのアーカイブをダウンロードします。
+    [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/) へ行き、対応するハードウェアプラットフォーム向けのものを選びます。
+    （`stable` の部分は必要に応じて `nightly` や `test` とします。）
+    必要としている Docker CE のバージョンに対応づいた `.tgz` ファイルをダウンロードします。
 
+{% comment %}
 2.  Extract the archive using the `tar` utility. The `dockerd` and `docker`
     binaries are extracted.
+{% endcomment %}
+2.  `tar` ユーティリティーを使ってアーカイブを展開します。
+    バイナリ `dockerd` と `docker` が抽出されます。
 
     ```bash
     $ tar xzvf /path/to/<FILE>.tar.gz
     ```
 
+{% comment %}
 3.  **Optional**: Move the binaries to a directory on your executable path, such
     as `/usr/bin/`. If you skip this step, you must provide the path to the
     executable when you invoke `docker` or `dockerd` commands.
+{% endcomment %}
+3.  **任意の作業**: 上のバイナリを実行パスの通ったディレクトリ、たとえば `/usr/bin/` などに移動させます。
+    この作業を行わない場合、`docker` や `dockerd` コマンドを起動する際には、常に実行ファイルへのパスも指定する必要があります。
 
     ```bash
     $ sudo cp docker/* /usr/bin/
     ```
 
+{% comment %}
 4.  Start the Docker daemon:
+{% endcomment %}
+4.  Docker デーモンを起動します。
 
     ```bash
     $ sudo dockerd &
     ```
 
+    {% comment %}
     If you need to start the daemon with additional options, modify the above
     command accordingly or create and edit the file `/etc/docker/daemon.json`
     to add the custom configuration options.
+    {% endcomment %}
+    デーモンに追加のオプションをつけて実行する必要がある場合は、上記のコマンドそれぞれを修正するか、あるいは設定ファイル `/etc/docker/daemon.json` を生成編集します。そこに必要な設定オプションを追加します。
 
+{% comment %}
 5.  Verify that Docker is installed correctly by running the `hello-world`
     image.
+{% endcomment %}
+5.  Docker が正しくインストールされたことを確認するために `hello-world` イメージを実行します。
 
     ```bash
     $ sudo docker run hello-world
     ```
 
+    {% comment %}
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
+    {% endcomment %}
+    このコマンドはテストイメージをダウンロードして、コンテナー内で実行します。
+    コンテナーが起動すると、メッセージを表示して終了します。
 
+{% comment %}
 ## Install client binaries on macOS
+{% endcomment %}
+## macOS においてクライアントのバイナリをインストール
+{: #install-client-binaries-on-macos }
 
+{% comment %}
 The macOS binary includes the Docker client only. It does not include the
 `dockerd` daemon.
+{% endcomment %}
+macOS のバイナリには Docker クライアントのみが提供されます。
+つまり `dockerd` デーモンは含まれていません。
 
+{% comment %}
 1.  Download the static binary archive. Go to
     [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/),
     (or change `stable` to `nightly` or `test`),
     and download the `.tgz` file relating to the version of Docker CE you want
     to install.
+{% endcomment %}
+1.  スタティックバイナリのアーカイブをダウンロードします。
+    [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/) へ行きます。
+    （`stable` の部分は必要に応じて `nightly` や `test` とします。）
+    必要としている Docker CE のバージョンに対応づいた `.tgz` ファイルをダウンロードします。
 
+{% comment %}
 2.  Extract the archive using the `tar` utility. The `docker` binary is
     extracted.
+{% endcomment %}
+2.  `tar` ユーティリティーを使ってアーカイブを展開します。
+    バイナリ `docker` が抽出されます。
 
     ```bash
     $ tar xzvf /path/to/<FILE>.tar.gz
     ```
 
+{% comment %}
 3.  **Optional**: Move the binary to a directory on your executable path, such
     as `/usr/local/bin/`. If you skip this step, you must provide the path to the
     executable when you invoke `docker` or `dockerd` commands.
+{% endcomment %}
+3.  **任意の作業**: 上のバイナリを実行パスの通ったディレクトリ、たとえば `/usr/local/bin/` などに移動させます。
+    この作業を行わない場合、`docker` や `dockerd` コマンドを起動する際には、常に実行ファイルへのパスも指定する必要があります。
 
     ```bash
     $ sudo cp docker/docker /usr/local/bin/
     ```
 
+{% comment %}
 4.  Verify that Docker is installed correctly by running the `hello-world`
     image. The value of `<hostname>` is a hostname or IP address running the
     Docker daemon and accessible to the client.
+{% endcomment %}
+4.  Docker が正しくインストールされたことを確認するために `hello-world` イメージを実行します。
+    `<hostname>` にはホスト名かその IP アドレスを指定します。
+    このホストは Docker デーモンが起動しているマシンのことであり、クライアントからアクセス可能であるものです。
 
     ```bash
     $ sudo docker -H <hostname> run hello-world
     ```
 
+    {% comment %}
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
+    {% endcomment %}
+    このコマンドはテストイメージをダウンロードして、コンテナー内で実行します。
+    コンテナーが起動すると、メッセージを表示して終了します。
 
+{% comment %}
 ## Upgrade static binaries
+{% endcomment %}
+## スタティックバイナリのアップグレード
+{: #upgrade-static-binaries }
 
+{% comment %}
 To upgrade your manual installation of Docker CE, first stop any
 `dockerd` or `dockerd.exe`  processes running locally, then follow the
 regular installation steps to install the new version on top of the existing
 version.
+{% endcomment %}
+Docker CE を手動によりインストールしていて、これをアップデートする場合は、まずローカルで起動させている `dockerd` あるいは `dockerd.exe` のプロセスをすべて終了させます。
+そして通常の手順により新しいバージョンをインストールします。
 
+{% comment %}
 ## Next steps
+{% endcomment %}
+## 次のステップ
+{: #next-steps }
 
+{% comment %}
 - On Linux:
     - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
     - Continue with the [User Guide](/engine/userguide/index.md).
 - On macOS:
     - Continue with the [User Guide](/get-started/index.md).
+{% endcomment %}
+- Linux の場合
+    - [Linux インストール後の作業](/install/linux/linux-postinstall.md)へ進む
+    - [ユーザーガイド](/engine/userguide/index.md)へ進む
+- macOS の場合
+    - [ユーザーガイド](/get-started/index.md)へ進む
