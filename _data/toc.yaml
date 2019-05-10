@@ -990,7 +990,7 @@ reference:
     - path: /engine/api/sdks/
       title: SDKs
     - path: /engine/api/latest/
-      title: v{{ site.latest_engine_api_version }} reference (latest)
+      title: v1.39 reference (latest)
     - sectiontitle: API reference by version
       section:
       - path: /engine/api/version-history/
