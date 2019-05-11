@@ -121,7 +121,7 @@ guides:
       nosync: true
   - sectiontitle: Docker EE
     section:
-    - title: About Docker EE
+    - title: Docker EE について
       path: /ee/supported-platforms/
     - sectiontitle: Linux
       section:
@@ -1130,44 +1130,44 @@ samples:
     title: SSHd
 
 manuals:
-- sectiontitle: Docker Enterprise Edition
+- sectiontitle: Docker Enterprise エディション
   section:
   - path: /ee/
-    title: About Docker EE
-  - title: Try Docker EE on the cloud
+    title: Docker EE について
+  - title: クラウド上の Docker EE を試す
     path: https://trial.docker.com
   - path: /ee/supported-platforms/
-    title: Supported platforms
+    title: サポートするプラットフォーム
     nosync: true
   - path: /ee/end-to-end-install/
     title: Deploy Docker EE standard
   - path: /ee/backup/
-    title: Backup Docker EE
+    title: Docker EE のバックアップ
   - path: /ee/upgrade/
-    title: Upgrade Docker EE
+    title: Docker EE のアップグレード
   - path: /ee/docker-ee-architecture/
-    title: Docker EE Architecture
+    title: Docker EE アーキテクチャー
   - path: /ee/telemetry/
     title: Manage usage data collection
   - sectiontitle: Docker EE Engine
     section:
     - path: /ee/supported-platforms/
-      title: Install Docker EE Engine
+      title: Docker EE Engine のインストール
       nosync: true
-    - title: Release notes
+    - title: リリースノート
       path: /engine/release-notes/
   - sectiontitle: Universal Control Plane
     section:
     - path: /ee/ucp/
       title: Universal Control Plane overview
     - path: /ee/ucp/ucp-architecture/
-      title: UCP Architecture
+      title: UCP アーキテクチャー
     - sectiontitle: Administration
       section:
       - sectiontitle: Install
         section:
         - path: /ee/ucp/admin/install/system-requirements/
-          title: System requirements
+          title: システム要件
         - path: /ee/ucp/admin/install/plan-installation/
           title: Plan your installation
         - path: /ee/ucp/admin/install/
@@ -3163,7 +3163,7 @@ manuals:
   - path: /compose/link-env-deprecated/
     title: Link environment variables (deprecated)
   - path: /compose/startup-order/
-    title: Control startup order
+    title: 起動順の制御
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
   - path: /release-notes/docker-compose/
