@@ -21,7 +21,7 @@ you should use packages built for your operating system, and use your operating
 system's package management system to manage Docker installation and upgrades.
 Be aware that 32-bit static binary archives do not include the Docker daemon.
 {% endcomment %}
-Docker を利用したい、あるいはテスト環境で使いたいと思っていも、お使いのプラットフォームでは Docker がサポートされていません。
+Docker を利用したい、あるいはテスト環境で使いたいと思っても、お使いのプラットフォームでは Docker がサポートされていません。
 そんなときはスタティックリンクされたバイナリをインストールしてみてください。
 可能であれば、お使いのオペレーティングシステム用にビルドされたパッケージを使い、オペレーティングシステムのパッケージ管理方法に基づいて Docker のインストールやアップグレードを行ってください。
 なお 32 ビットのスタティックバイナリには、Docker デーモンが含まれていない点に注意してください。
