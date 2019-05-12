@@ -368,7 +368,7 @@ non-privileged users to run Docker commands and for other optional configuration
 steps.
 {% endcomment %}
 Docker CE がインストールされ、実行できました。
-Docker コマンドの実行には ``sudo`` が必要になります。
+Docker コマンドの実行には `sudo` が必要になります。
 続いて [Linux のインストール後](/engine/installation/linux/linux-postinstall.md)に進み、非特権ユーザーでも Docker コマンドが実行できるように、またその他の追加の設定について見ていきます。
 
 {% comment %}
