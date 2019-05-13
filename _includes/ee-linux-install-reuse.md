@@ -197,7 +197,8 @@ You only need to set up the repository once, after which you can install Docker 
 {% comment %}
 5.  Enable the `ol7_addons` Oracle repository. This ensures access to the `container-selinux` package required by `docker-ee`.
 {% endcomment %}
-5.  Enable the `ol7_addons` Oracle repository. This ensures access to the `container-selinux` package required by `docker-ee`.
+5.  Oracle のリポジトリ `ol7_addons` を有効にします。
+    これによって `docker-ee` が必要としている `container-selinux` パッケージへアクセスできるようになります。
 
     ```bash
     $ sudo yum-config-manager --enable ol7_addons
@@ -270,7 +271,7 @@ You only need to set up the repository once, after which you can install Docker 
     The list returned depends on which repositories you enabled, and is specific to your version of {{ linux-dist-long }} (indicated by `.el7` in this example).
     {% endcomment %}
     この一覧内容は、どのリポジトリを有効にしているかによって変わります。
-    また利用している { linux-dist-long }} のバージョンに応じたものになります（この例では ``.e17`` というサフィックスにより示されるバージョンです）。
+    また利用している {{ linux-dist-long }} のバージョンに応じたものになります（この例では ``.e17`` というサフィックスにより示されるバージョンです）。
 
     {% comment %}
     b.  Install a specific version by its fully qualified package name, which is the package name (`docker-ee`) plus the version string (2nd column) starting at the first colon (`:`), up to the first hyphen, separated by a hyphen (`-`). For example, `docker-ee-18.09.1`.
@@ -392,11 +393,9 @@ Docker EE をアップグレードする際には、常に新しいファイル�
     architecture, and Docker version. Download the
     `.{{ package-format | downcase }}` file from the `Packages` directory.
 {% endcomment %}
-1.  Go to the Docker EE repository URL associated with your
-    trial or subscription in your browser. Go to
-    `{{ linux-dist-url-slug }}/`. Choose your {{ linux-dist-long }} version,
-    architecture, and Docker version. Download the
-    `.{{ package-format | downcase }}` file from the `Packages` directory.
+1.  ブラウザーから Docker EE リポジトリ上のお試し用（trial） URL、あるいは購入者用（subscription）URL にアクセスします。
+    そして `{{ linux-dist-url-slug }}/` を開いて、目的とするアーキテクチャーとバージョンの {{ linux-dist-long }} を選びます。
+    `Package` ディレクトリから `.{{ package-format | downcase }}` ファイルをダウンロードします。
 
   {% if linux-dist == "rhel" %}
     > If you have trouble with `selinux` using the packages under the `7` directory,

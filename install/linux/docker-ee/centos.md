@@ -39,7 +39,7 @@ that require action are explained below.
 {% endcomment %}
 - {{ linux-dist-cap }} 64 ビット 7.1 またはそれ以上 `x86_64` を利用。
 - ストレージドライバーとして `overlay2` または `devicemapper`（本番環境では `direct-lvm` モード）を利用。
-- [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" } から Docker EE レポジトリを検索。
+- [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" } から Docker EE リポジトリを検索。
 - Docker の旧バージョンはアンインストール。
 - `/etc/yum.repos.d/` から古い Docker リポジトリは削除。
 
