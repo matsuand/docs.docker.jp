@@ -85,11 +85,17 @@ GitHub Repo:
 {% endcomment %}
 Docker GitHub レポジトリには、親イメージを生成するスクリプトの例がいろいろとあります。
 
+{% comment %}
  - [BusyBox](https://github.com/moby/moby/blob/master/contrib/mkimage/busybox-static)
  - CentOS / Scientific Linux CERN (SLC) [on Debian/Ubuntu](
    https://github.com/moby/moby/blob/master/contrib/mkimage/rinse) or
    [on CentOS/RHEL/SLC/etc.](
    https://github.com/moby/moby/blob/master/contrib/mkimage-yum.sh)
+ - [Debian / Ubuntu](
+   https://github.com/moby/moby/blob/master/contrib/mkimage/debootstrap)
+{% endcomment %}
+ - [BusyBox](https://github.com/moby/moby/blob/master/contrib/mkimage/busybox-static)
+ - CentOS / Scientific Linux CERN (SLC)（[Debian/Ubuntu 向け](https://github.com/moby/moby/blob/master/contrib/mkimage/rinse)、または[CentOS/RHEL/SLC/など向け](https://github.com/moby/moby/blob/master/contrib/mkimage-yum.sh)）
  - [Debian / Ubuntu](
    https://github.com/moby/moby/blob/master/contrib/mkimage/debootstrap)
 
@@ -99,15 +105,24 @@ Docker GitHub レポジトリには、親イメージを生成するスクリプ
 ## 単純な親イメージを一から生成
 {: #create-a-simple-parent-image-using-scratch }
 
+{% comment %}
 You can use Docker's reserved, minimal image, `scratch`, as a starting point for
 building containers. Using the `scratch` "image" signals to the build process
 that you want the next command in the `Dockerfile` to be the first filesystem
 layer in your image.
+{% endcomment %}
+Docker が規定する最小イメージ `scratch` は、コンテナーを構築するベースイメージとして利用できます。
+`scratch` を利用すると「イメージ」は、`Dockerfile`内の次に実行したいコマンドの構築プロセスに対して、最初のファイルシステムレイヤーとなるように指示を出します。
 
+{% comment %}
 While `scratch` appears in Docker's repository on the hub, you can't pull it,
 run it, or tag any image with the name `scratch`. Instead, you can refer to it
 in your `Dockerfile`. For example, to create a minimal container using
 `scratch`:
+{% endcomment %}
+Docker Hub 上の Docker リポジトリとして `scratch` が登場したことにより、`scratch` という名前を使ったイメージのアップロード、実行、タグづけはできなくなりました。
+そのかわり`Dockerfile` 内での参照のみが可能です。
+たとえば `scratch` を利用した最小コンテナーの生成は以下のようになります。
 
 ```Dockerfile
 FROM scratch
@@ -115,19 +130,29 @@ ADD hello /
 CMD ["/hello"]
 ```
 
+{% comment %}
 Assuming you built the "hello" executable example by following the instructions
 at
 [https://github.com/docker-library/hello-world/](https://github.com/docker-library/hello-world/),
 and you compiled it with the `-static` flag, you can build this Docker
 image using this `docker build` command:
+{% endcomment %}
+[https://github.com/docker-library/hello-world/](https://github.com/docker-library/hello-world/)に示されている手順に従って、"hello" 実行モジュールの例を構築するとします。
+実行モジュールは `-static` フラグをつけてコンパイルします。
+Docker イメージは `docker build` コマンドによってビルドすることができます。
 
 ```bash
 docker build --tag hello .
 ```
 
+{% comment %}
 Don't forget the `.` character at the end, which sets the build context to the
 current directory.
+{% endcomment %}
+`.` の文字を最後につけるのを忘れないでください。
+これはビルドコンテキストをカレントディレクトリに設定するものです。
 
+{% comment %}
 > **Note**: Because Docker Desktop for Mac and Docker Desktop for Windows use a Linux VM,
 > you need a Linux binary, rather than a Mac or Windows binary.
 > You can use a Docker container to build it:
@@ -139,27 +164,53 @@ current directory.
 > container# cd /build
 > container# gcc -o hello -static -nostartfiles hello.c
 > ```
+{% endcomment %}
+> **メモ**: Docker Desktop for Mac と Docker Desktop for Windows では Linux VM を利用するため、Mac や Windows の実行バイナリではなく Linux の実行バイナリが必要になります。
+> Docker コンテナーを使って以下のようにビルドします。
+>
+> ```bash
+> $ docker run --rm -it -v $PWD:/build ubuntu:16.04
+>
+> container# apt-get update && apt-get install build-essential
+> container# cd /build
+> container# gcc -o hello -static -nostartfiles hello.c
+> ```
 
+{% comment %}
 To run your new image, use the `docker run` command:
+{% endcomment %}
+新イメージは `docker run` コマンドを使って実行します。
 
 ```bash
 docker run --rm hello
 ```
 
+{% comment %}
 This example creates the hello-world image used in the tutorials.
 If you want to test it out, you can clone
 [the image repo](https://github.com/docker-library/hello-world).
+{% endcomment %}
+この例は、チュートリアルにおいて用いられている hello-world イメージを生成します。
+これを試してみたい場合は、[イメージリポジトリ](https://github.com/docker-library/hello-world)をクローンすることもできます。
 
 
 {% comment %}
 ## More resources
 {% endcomment %}
-## More resources
+## その他の情報
 {: #more-resources }
 
+{% comment %}
 There are lots more resources available to help you write your `Dockerfile`.
+{% endcomment %}
+`Dockerfile`の書き方については、他にも多く触れています。
 
+{% comment %}
 * There's a [complete guide to all the instructions](/engine/reference/builder.md) available for use in a `Dockerfile` in the reference section.
 * To help you write a clear, readable, maintainable `Dockerfile`, we've also
 written a [`Dockerfile` best practices guide](dockerfile_best-practices.md).
 * If your goal is to create a new Official Image, be sure to read up on Docker's [Official Images](/docker-hub/official_images/).
+{% endcomment %}
+* リファレンスには`Dockerfile`にて利用可能な[全コマンドのガイド](/engine/reference/builder.md) があります。
+* `Dockerfile`をわかりやすく読みやすく、保守がしやすくするように、[`Dockerfile`ベストプラクティス](dockerfile_best-practices.md)も記述しています。
+* 公式イメージを作ることが目的であれば Docker の[公式イメージ](/docker-hub/official_images/)を確認してください。
