@@ -44,7 +44,7 @@ ones.
 ここではベースイメージの生成方法をいくつか示します。
 パッケージ化しようとしている Linux ディストリビューションに大きく依存する処理操作もあります。
 以下に例をあげていきます。
-新たなイメージの提供に支障があれば、プルリクエストをあげてください。
+新たなイメージを提供して頂ける場合は、プルリクエストをあげることをお願いします。
 
 {% comment %}
 ## Create a full image using tar
@@ -65,7 +65,7 @@ use to build Ubuntu images.
 {% comment %}
 It can be as simple as this to create an Ubuntu parent image:
 {% endcomment %}
-Ubuntu の親イメージを作るのは、同じように簡単にできます。
+Ubuntu の親イメージを作るのは、以下のように簡単にできます。
 
     $ sudo debootstrap xenial xenial > /dev/null
     $ sudo tar -C xenial -c . | docker import - xenial
@@ -191,7 +191,7 @@ If you want to test it out, you can clone
 [the image repo](https://github.com/docker-library/hello-world).
 {% endcomment %}
 この例は、チュートリアルにおいて用いられている hello-world イメージを生成します。
-これを試してみたい場合は、[イメージリポジトリ](https://github.com/docker-library/hello-world)をクローンすることもできます。
+これを試してみたい場合は、[イメージリポジトリ](https://github.com/docker-library/hello-world)をクローンすることができます。
 
 
 {% comment %}
