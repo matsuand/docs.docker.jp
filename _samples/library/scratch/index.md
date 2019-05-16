@@ -7,31 +7,45 @@ permalink: /samples/library/scratch/
 redirect_from:
 - /samples/scratch/
 description: |
-  an explicitly empty image, especially for building images "FROM scratch"
+  意図的な空のイメージ。「一から」のイメージ構築用。
 ---
 
+{% comment %}
 an explicitly empty image, especially for building images "FROM scratch"
+{% endcomment %}
+意図的な空のイメージ。
+「一から」のイメージ構築用。
 
+{% comment %}
 > **Library reference**
 >
 > This content is imported from
 > [the official Docker Library docs](https://github.com/docker-library/docs/tree/master/{{ page.repo}}/),
 > and is provided by the original uploader. You can view the Docker Hub page for this image at
 > [https://hub.docker.com/images/{{ page.repo }}](https://hub.docker.com/images/{{ page.repo }})
+{% endcomment %}
+> **ライブラリリファレンス**
+>
+> このイメージは [公式の Docker ライブラリドキュメント](https://github.com/docker-library/docs/tree/master/{{ page.repo}}/) からインポートできるものであり、オリジナルのアップロード者が提供します。
+> Docker Hub の [https://hub.docker.com/images/{{ page.repo }}](https://hub.docker.com/images/{{ page.repo }}) においてこのイメージを確認することができます。
 
 <!-- content begin -->
 {% raw %}
 # `FROM scratch`
 
-This image is most useful in the context of building base images (such as [`debian`](https://registry.hub.docker.com/_/debian/) and [`busybox`](https://registry.hub.docker.com/_/busybox/)) or super minimal images (that contain only a single binary and whatever it requires, such as [`hello-world`](https://registry.hub.docker.com/_/hello-world/)).
+このイメージは（[`debian`](https://registry.hub.docker.com/_/debian/)や[`busybox`](https://registry.hub.docker.com/_/busybox/)のような）ベースイメージの構築、あるいは（[`hello-world`](https://registry.hub.docker.com/_/hello-world/))のように単一の実行バイナリだけが含まれているような）最大限に小さくしたイメージの構築に対して有用なものです。
 
-As of Docker 1.5.0 (specifically, [`docker/docker#8827`](https://github.com/docker/docker/pull/8827)), `FROM scratch` is a no-op in the `Dockerfile`, and will not create an extra layer in your image (so a previously 2-layer image will be a 1-layer image instead).
+Docker 1.5.0 から（特に[`docker/docker#8827`](https://github.com/docker/docker/pull/8827)から）、`Dockerfile` 内の `FROM scratch` の行は何も処理をしないものとなりました。したがってイメージ内に追加のレイヤーを生成しません。
+（つまりこれまで 2 レイヤーからなるイメージであったものが、今は 1 レイヤーのイメージとなります。）
 
-From [https://docs.docker.com/engine/userguide/eng-image/baseimages/](https://docs.docker.com/engine/userguide/eng-image/baseimages/#creating-a-simple-parent-image-using-scratch):
+[https://docs.docker.com/engine/userguide/eng-image/baseimages/](https://docs.docker.com/engine/userguide/eng-image/baseimages/#creating-a-simple-parent-image-using-scratch)からの引用。
 
-> You can use Docker’s reserved, minimal image, `scratch`, as a starting point for building containers. Using the `scratch` “image” signals to the build process that you want the next command in the `Dockerfile` to be the first filesystem layer in your image.
+> Docker が規定する最小イメージ `scratch` は、コンテナーを構築するベースイメージとして利用できます。
+> `scratch` を利用すると、「イメージ」は、`Dockerfile`内の次に実行したいコマンドの構築プロセスに対して、最初のファイルシステムレイヤーとなるように指示を出します。
 >
-> While `scratch` appears in Docker’s repository on the hub, you can’t pull it, run it, or tag any image with the name `scratch`. Instead, you can refer to it in your `Dockerfile`. For example, to create a minimal container using `scratch`:
+> Docker Hub 上の Docker リポジトリとして `scratch` が登場したことにより、`scratch` という名前を使ったイメージのアップロード、実行、タグづけはできなくなりました。
+> そのかわり`Dockerfile` 内での参照のみが可能です。
+> たとえば `scratch` を利用した最小コンテナーの生成は以下のようになります。
 
 ```dockerfile
 FROM scratch
