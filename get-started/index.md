@@ -196,14 +196,14 @@ is available in [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-
 [17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} and higher.
 > - [Kubernetes on Docker Desktop for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
 is available in
-[18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} and higher edge channels only.
+[18.06.0 CE (win70)](/docker-for-windows/release-notes/){: target="_blank" class="_"} and higher as well as edge channels.
 {% endcomment %}
 > Kubernetes 統合について
 >
 > - [Docker Desktop for Mac における Kubernetes](/docker-for-mac/kubernetes/){: target="_blank" class="_"}
 は [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05){: target="_blank" class="_"} において、または [17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} 以上において利用可能です。
 > - [Docker Desktop for Windows における Kubernetes](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
-は [18.02 Edge (win50)](/docker-for-windows/edge-release-notes/#docker-community-edition-18020-ce-rc1-win50-2018-01-26){: target="_blank" class="_"} またはそれ以上のエッジチャネルのみで利用可能です。
+は [18.06.0 Edge (win70)](/docker-for-windows/release-notes/){: target="_blank" class="_"} またはそれ以上のエッジチャネルのみで利用可能です。
 
 {% comment %}
 [Install Docker](/engine/installation/index.md){: class="button outline-btn"}
