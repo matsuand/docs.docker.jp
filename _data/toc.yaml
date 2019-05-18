@@ -67,7 +67,7 @@ guides:
         - path: /docker-for-azure/faqs/
           title: FAQs
         - path: /docker-for-azure/opensource/
-          title: Open source licensing
+          title: オープンソースライセンス
         - path: /docker-for-azure/release-notes/
           title: Release notes
         - path: /docker-for-azure/archive/
@@ -3201,7 +3201,7 @@ manuals:
   - path: /docker-for-mac/faqs/
     title: FAQ
   - path: /docker-for-mac/opensource/
-    title: Open source licensing
+    title: オープンソースライセンス
   - path: /docker-for-mac/release-notes/
     title: 安定版リリースノート
   - path: /docker-for-mac/edge-release-notes/
@@ -3223,7 +3223,7 @@ manuals:
   - path: /docker-for-windows/faqs/
     title: FAQ
   - path: /docker-for-windows/opensource/
-    title: Open source licensing
+    title: オープンソースライセンス
   - path: /docker-for-windows/release-notes/
     title: 安定版リリースノート
   - path: /docker-for-windows/edge-release-notes/
