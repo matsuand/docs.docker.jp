@@ -77,6 +77,7 @@ redirect_from:
 - /apidocs/overview/
 ---
 
+{% comment %}
 [Docker Hub](https://hub.docker.com) is a service provided by Docker for finding and sharing container images with your team. It provides the following major features:
 * [Repositories](/docker-hub/repos.md): Push and pull container images.
 * [Teams & Organizations](/docker-hub/orgs.md): Manage access to private repositories of container images.
@@ -87,6 +88,16 @@ redirect_from:
 * [Builds](/docker-hub/builds.md): Automatically build container images from GitHub and Bitbucket and push them to Docker Hub
 * [Webhooks](/docker-hub/webhooks.md): Trigger actions after a successful push
   to a repository to integrate Docker Hub with other services.
+{% endcomment %}
+[Docker Hub](https://hub.docker.com) は、開発チームに向けて Docker のコンテナーイメージを検索したり共有したりするために Docker が提供しているサービスの 1 つです。
+主な機能として以下があります。
+* [リポジトリ](/docker-hub/repos.md): コンテナーイメージのプッシュ、プルを行います。
+* [開発チームや組織](/docker-hub/orgs.md): コンテナーイメージを配するプライベートリポジトリへのアクセスを管理します。
+* [公式イメージ](/docker-hub/official_images.md): Docker が提供している高品質のコンテナーイメージをプルして利用します。
+* [開発提供イメージ](/docker-hub/publish/customer_faq.md): 外部ベンダーによって提供されている高品質のコンテナーイメージをプルして利用します。
+  認定されているイメージであれば、Docker Enterprise との互換性が保証されサポートされます。
+* [ビルド](/docker-hub/builds.md): GitHub や Bitbucket のコンテナーイメージを自動ビルドして Docker Hub へプッシュします。
+* [ウェブフック](/docker-hub/webhooks.md)（webhook）: リポジトリへ正常にプッシュができた際に処理起動されるトリガーであり、Docker Hub と他サービスとの連携を図ります。
 
 
 
@@ -96,6 +107,9 @@ redirect_from:
 ### 手順 1: Docker Hub へのサインアップ
 {: #step-1-sign-up-for-docker-hub }
 
+{% comment %}
+Start by [creating an account](https://hub.docker.com/signup).
+{% endcomment %}
 [アカウントの生成](https://hub.docker.com/signup)から始めます。
 
 {% comment %}
@@ -112,14 +126,15 @@ To create a repo:
 {% endcomment %}
 リポジトリ生成の手順は以下です。
 1. [Docker Hub](https://hub.docker.com) にサインインします。
-2. Docker Hub の welcome ページにて Create Repository をクリックします。 ![ようこそ](images/index-welcome.png)
-3. 以下に示すように **<your_username>/my-first-repo** に名称を入力します。
+2. Docker Hub の Welcome ページにて Create Repository をクリックします。
+   ![ようこそ](images/index-welcome.png)
+3. 以下に示すように **\<your_username\>/my-first-repo** に名称を入力します。
    そして **Private** を選択します。
 
-{% comment %}
-![Create Repository](images/index-create-repo.png)
-{% endcomment %}
-![リポジトリの生成](images/index-create-repo.png)
+   {% comment %}
+   ![Create Repository](images/index-create-repo.png)
+   {% endcomment %}
+   ![リポジトリの生成](images/index-create-repo.png)
 
 {% comment %}
 You've created your first repo. You should see:
@@ -178,30 +193,56 @@ CMD echo "Hello world! This is my first Docker image."
 EOF
 ```
 2. Docker イメージを構築するために、コマンド `docker build -t <your_username>/my-first-repo` を実行します。
-3. Test your docker image locally by running `docker run <your_username>/my-first-repo`
-4. Run `docker push <your_username>/my-first-repo` to push your Docker image to Docker Hub
+3. ローカル環境にて Docker イメージを確認するために、コマンド`docker run <your_username>/my-first-repo`を実行します。
+4. `docker push <your_username>/my-first-repo`を実行して Docker イメージを Docker Hub にプッシュします。
 
+{% comment %}
 You should see output similar to:
+{% endcomment %}
+出力結果は以下のようになります。
 
+{% comment %}
 ![Terminal](images/index-terminal.png)
+{% endcomment %}
+![端末画面](images/index-terminal.png)
 
+{% comment %}
 And in Docker Hub, your repository should have a new `latest` tag available under **Tags**:
+{% endcomment %}
+Docker Hub 内ではリポジトリの**Tags**画面に、新たに`latest`というタグが追加されます。
 
+{% comment %}
 ![Tag Created](images/index-tag.png)
+{% endcomment %}
+![生成されたタグ](images/index-tag.png)
 
+{% comment %}
 Congratulations! You've successfully:
 - Signed up for Docker Hub
 - Created your first repository
 - Built a Docker container image on your computer
 - Pushed it to Docker Hub
+{% endcomment %}
+おめでとうございます。
+以下の作業が完了しました。
+- Docker Hub へのサインアップ
+- 初めてのリポジトリ生成
+- コンピューター上での Docker コンテナーイメージのビルド
+- Docker Hub へのプッシュ
 
 {% comment %}
 ### Next steps
 {% endcomment %}
-### Next steps
+### 次のステップ
 {: #next-steps }
 
+{% comment %}
 - Create an [Organization](orgs.md) to use Docker Hub with your team.
 - Automatically build container images from code through [Builds](builds/index.md).
 - [Explore](https://hub.docker.com/explore) Official & Publisher Images
 - [Upgrade your plan](upgrade.md) to push additional private Docker images to Docker Hub
+{% endcomment %}
+- [組織](orgs.md)（organization）を生成して開発チームにより Docker Hub を利用します。
+- [ビルド](builds/index.md)からのコードを用いてコンテナーイメージを自動ビルドします。
+- 公式イメージや開発提供イメージを[検索](https://hub.docker.com/explore)します。
+- [開発作業を更新](upgrade.md)してプライベートな Docker イメージを Docker Hub に追加します。
