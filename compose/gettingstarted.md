@@ -58,7 +58,6 @@ Define the application dependencies.
         import redis
         from flask import Flask
 
-
         app = Flask(__name__)
         cache = redis.Redis(host='redis', port=6379)
 
@@ -79,9 +78,6 @@ Define the application dependencies.
         def hello():
             count = get_hit_count()
             return 'Hello World! I have been seen {} times.\n'.format(count)
-
-        if __name__ == "__main__":
-            app.run(host="0.0.0.0", debug=True)
 
 
       {% comment %}
@@ -139,11 +135,15 @@ following:
 {% endcomment %}
 プロジェクト用のディレクトリ内で `Dockerfile` という名称のファイルを作成し、次の内容にします。
 
-    FROM python:3.4-alpine
-    ADD . /code
+    FROM python:3.7-alpine
     WORKDIR /code
+    ENV FLASK_APP app.py
+    ENV FLASK_RUN_HOST 0.0.0.0
+    RUN apk add --no-cache gcc musl-dev linux-headers
+    COPY requirements.txt requirements.txt
     RUN pip install -r requirements.txt
-    CMD ["python", "app.py"]
+    COPY . .
+    CMD ["flask", "run"]
 
 {% comment %}
 This tells Docker to:
@@ -151,17 +151,21 @@ This tells Docker to:
 これは Docker に対して以下の指示を行います。
 
 {% comment %}
-* Build an image starting with the Python 3.4 image.
-* Add the current directory `.` into the path `/code` in the image.
+* Build an image starting with the Python 3.7 image.
 * Set the working directory to `/code`.
-* Install the Python dependencies.
-* Set the default command for the container to `python app.py`.
+* Set environment variables used by the `flask` command.
+* Install gcc so Python packages such as MarkupSafe and SQLAlchemy can compile speedups.
+* Copy `requirements.txt` and install the Python dependencies.
+* Copy the current directory `.` in the project to the workdir `.` in the image.
+* Set the default command for the container to `flask run`.
 {% endcomment %}
-* Python 3.4 イメージを使って当イメージを構築する
-* カレントディレクトリ `.` をイメージ内のパス `/code` に加える
+* Python 3.7 イメージを使って当イメージを構築する
 * 作業用ディレクトリを `/code` に指定する
-* Python の依存パッケージをインストールする
-* コンテナーに対するデフォルトのコマンドを `python app.py` にする
+* `flask`コマンドにより用いられる環境変数を設定する
+* gcc をインストールし、MarkupSafe や SQLAlchemy Python のような Python 依存パッケージこのコンパイルをスピードアップする
+* `requirements.txt`をコピーして Python 依存パッケージをインストールする
+* このプロジェクトのカレントディレクトリ`.`を、イメージ内のワークディレクトリ`.`にコピーする
+* コンテナーに対するデフォルトのコマンドを `flask run` にする
 
 {% comment %}
 For more information on how to write Dockerfiles, see the [Docker user
@@ -188,7 +192,7 @@ the following:
       web:
         build: .
         ports:
-         - "5000:5000"
+          - "5000:5000"
       redis:
         image: "redis:alpine"
 
@@ -265,9 +269,9 @@ image pulled from the Docker Hub registry.
     この例ではビルド時において、コードがイメージ内に静的にコピーされます。
 
 {% comment %}
-2.  Enter `http://0.0.0.0:5000/` in a browser to see the application running.
+2.  Enter http://localhost:5000/ in a browser to see the application running.
 {% endcomment %}
-2.  ブラウザーで `http://0.0.0.0:5000/` を開き、アプリケーションの動作を確認します。
+2.  ブラウザーで `http://localhost:5000/` を開き、アプリケーションの動作を確認します。
 
     {% comment %}
     If you're using Docker natively on Linux, Docker Desktop for Mac, or Docker Desktop for
@@ -277,9 +281,8 @@ image pulled from the Docker Hub registry.
     `http://0.0.0.0:5000`.
     {% endcomment %}
     Docker を Linux、Docker Desktop for Mac、Docker Desktop for Windows で直接使っている場合、ウェブアプリは Docker デーモンのホスト上でポート 5000 を開いています。
-    ブラウザーから `http://localhost:5000` にアクセスして、`Hello World` メッセージが表示されることを確認してください。
-    接続できなければ `http://0.0.0.0:5000` も試してください。
-
+    ブラウザーから http://localhost:5000 にアクセスして、`Hello World` メッセージが表示されることを確認してください。
+    接続できなければ `http://127.0.0.1:5000` も試してください。
 
     {% comment %}
     If you're using Docker Machine on a Mac or Windows, use `docker-machine ip
@@ -371,19 +374,26 @@ Edit `docker-compose.yml` in your project directory to add a [bind mount](/engin
       web:
         build: .
         ports:
-         - "5000:5000"
+          - "5000:5000"
         volumes:
-         - .:/code
+          - .:/code
+        environment:
+          FLASK_ENV: development
       redis:
         image: "redis:alpine"
 
 {% comment %}
 The new `volumes` key mounts the project directory (current directory) on the
 host to `/code` inside the container, allowing you to modify the code on the
-fly, without having to rebuild the image.
+fly, without having to rebuild the image. The `environment` key sets the
+`FLASK_ENV` environment variable, which tells `flask run` to run in development
+mode and reload the code on change. This mode should only be used in development.
 {% endcomment %}
 新しい `volumes` というキーは、ホスト上のプロジェクトディレクトリ（カレントディレクトリ）を、コンテナー内にある `/code` ディレクトリにマウントします。
 こうすることで、イメージを再構築することなく、実行中のコードを修正できるようになります。
+`environment`キーには環境変数`FLASK_ENV`を設定しています。
+これは開発モードで`flask run`を実行し、コード変更時にリロードするよう指示します。
+このモードは開発時にのみ用いるようにします。
 
 {% comment %}
 ## Step 6: Re-build and run the app with Compose
