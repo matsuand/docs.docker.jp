@@ -1,30 +1,60 @@
 ---
 description: Getting started with Docker Compose and Django
 keywords: documentation, docs,  docker, compose, orchestration, containers
-title: "Quickstart: Compose and Django"
+title: "クィックスタート: Compose と Django"
 ---
 
+{% comment %}
 This quick-start guide demonstrates how to use Docker Compose to set up and run a simple Django/PostgreSQL app. Before starting,
 [install Compose](install.md).
+{% endcomment %}
+このクィックスタートガイドでは Docker Compose を使って、簡単な Django/PostgreSQL アプリを設定し実行する手順を示します。
+はじめる前に [Compose をインストール](install.md)してください。
 
+{% comment %}
 ### Define the project components
+{% endcomment %}
+### プロジェクトのコンポーネントを定義
+{: #define-the-project-components }
 
+{% comment %}
 For this project, you need to create a Dockerfile, a Python dependencies file,
 and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extension for this file.)
+{% endcomment %}
+このプロジェクトでは Dockerfile、Python の依存関係を示すファイル、`docker-compose.yml`ファイルをそれぞれ生成します。（`docker-compose.yml`の拡張子は`.yml`と`.yaml`のどちらでも構いません。）
 
+{% comment %}
 1. Create an empty project directory.
+{% endcomment %}
+1. 空のプロジェクトディレクトリを生成します。
 
+    {% comment %}
     You can name the directory something easy for you to remember. This directory is the context for your application image. The directory should only contain resources to build that image.
+    {% endcomment %}
+    ディレクトリ名は覚えやすいものにします。
+    このディレクトリはアプリケーションイメージのコンテキストディレクトリとなります。
+    このディレクトリには、イメージをビルドするために必要となるものだけを含めるようにします。
 
+{% comment %}
 2. Create a new file called `Dockerfile` in your project directory.
+{% endcomment %}
+2. プロジェクトディレクトリ内に `Dockerfile` というファイルを新規生成します。
 
+    {% comment %}
     The Dockerfile defines an application's image content via one or more build
     commands that configure that image. Once built, you can run the image in a
     container.  For more information on `Dockerfile`, see the [Docker user
     guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
     and the [Dockerfile reference](/engine/reference/builder.md).
+    {% endcomment %}
+    Dockerfile はアプリケーションイメージの内容を定義するものであり、イメージを設定しビルドするコマンドがいくつか記述されます。
+    ビルドが成功すると、コンテナー内にてイメージが起動します。
+    `Dockerfile`の詳細は [Docker ユーザーガイド](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)や [Dockerfile リファレンス](/engine/reference/builder.md)を参照してください。
 
+{% comment %}
 3. Add the following content to the `Dockerfile`.
+{% endcomment %}
+3. `Dockerfile` に以下の内容を記述します。
 
        FROM python:3
        ENV PYTHONUNBUFFERED 1
@@ -34,25 +64,49 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
        RUN pip install -r requirements.txt
        COPY . /code/
 
+    {% comment %}
     This `Dockerfile` starts with a [Python 3 parent image](https://hub.docker.com/r/library/python/tags/3/).
     The parent image is modified by adding a new `code` directory. The parent image is further modified
     by installing the Python requirements defined in the `requirements.txt` file.
+    {% endcomment %}
+    この`Dockerfile`はまず [Python 3 の親イメージ](https://hub.docker.com/r/library/python/tags/3/)から始まっています。
+    この親イメージには新規のディレクトリ`code`が加えられます。
+    さらに`requirements.txt`ファイルに定義された Python 依存パッケージをインストールする変更が加えられています。
 
+{% comment %}
 4. Save and close the `Dockerfile`.
+{% endcomment %}
+4. `Dockerfile` を保存して閉じます。
 
+{% comment %}
 5. Create a `requirements.txt` in your project directory.
+{% endcomment %}
+5. プロジェクトディレクトリに`requirements.txt`というファイルを生成します。
 
+    {% comment %}
     This file is used by the `RUN pip install -r requirements.txt` command in your `Dockerfile`.
+    {% endcomment %}
+    このファイルは`Dockerfile`内の`RUN pip install -r requirements.txt`というコマンドにおいて利用されます。
 
+{% comment %}
 6. Add the required software in the file.
+{% endcomment %}
+6. 上のファイルに必要となるソフトウェアを記述します。
 
        Django>=2.0,<3.0
        psycopg2>=2.7,<3.0
 
+{% comment %}
 7. Save and close the `requirements.txt` file.
+{% endcomment %}
+7. `requirements.txt`ファイルを保存して閉じます。
 
+{% comment %}
 8. Create a file called `docker-compose.yml` in your project directory.
+{% endcomment %}
+8. プロジェクトディレクトリ内に`docker-compose.yml`というファイルを生成します。
 
+    {% comment %}
     The `docker-compose.yml` file describes the services that make your app. In
     this example those services are a web server and database.  The compose file
     also describes which Docker images these services use, how they link
@@ -60,8 +114,18 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     Finally, the `docker-compose.yml` file describes which ports these services
     expose. See the [`docker-compose.yml` reference](compose-file.md) for more
     information on how this file works.
+    {% endcomment %}
+    `docker-compose.yml`ファイルは、アプリケーションを作り出すサービスを記述するものです。
+    この例においてそのサービスとは、ウェブサーバーとデータベースです。
+    Compose ファイルはまた、各サービスが利用する Docker イメージを記述します。
+    そしてどのように互いにリンクし合い、コンテナー内部にマウントすべきボリュームはどのようなものかを定義します。
+    そして`docker-compose.yml`ファイルには、各サービスが公開するポート番号が何かも記述します。
+    このファイルがどのようにして動作するかの詳細は [`docker-compose.yml` リファレンス](compose-file.md)を参照してください。
 
+{% comment %}
 9.  Add the following configuration to the file.
+{% endcomment %}
+9.  以下の設定内容をファイルに記述します。
 
     ```none
     version: '3'
@@ -80,32 +144,63 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
           - db
     ```
 
+    {% comment %}
     This file defines two services: The `db` service and the `web` service.
+    {% endcomment %}
+    このファイルには`db`サービスと`web`サービスという 2 つのサービスが定義されています。
 
+{% comment %}
 10. Save and close the `docker-compose.yml` file.
+{% endcomment %}
+10. `docker-compose.yml`ファイルを保存して閉じます。
 
+{% comment %}
 ### Create a Django project
+{% endcomment %}
+### Django プロジェクトの生成
+{: #create-a-django-project }
 
+{% comment %}
 In this step, you create a Django starter project by building the image from the build context defined in the previous procedure.
+{% endcomment %}
+ここでの手順では、前の手順で定義したビルドコンテキストからイメージをビルドし、Django プロジェクトのひながたを生成します。
 
+{% comment %}
 1. Change to the root of your project directory.
+{% endcomment %}
+1. プロジェクトディレクトリに移動します。
 
+{% comment %}
 2. Create the Django project by running
 the [docker-compose run](/compose/reference/run/) command as follows.
+{% endcomment %}
+2. Django プロジェクトを生成するために [docker-compose run](/compose/reference/run/) コマンドを以下のように実行します。
 
        sudo docker-compose run web django-admin startproject composeexample .
 
+    {% comment %}
     This instructs Compose to run `django-admin startproject composeexample`
     in a container, using the `web` service's image and configuration. Because
     the `web` image doesn't exist yet, Compose builds it from the current
     directory, as specified by the `build: .` line in `docker-compose.yml`.
+    {% endcomment %}
+    このコマンドは Compose に対し、コンテナー内において `django-admin startproject composeexample` を実行するものです。
+    その際には`web`サービスイメージとその設定を利用します。
+    ただし`web`イメージはこの時点ではまだ存在していないため、Compose はカレントディレクトリからそのイメージをビルドします。このことは`docker-compose.yml`の`build: .`という記述行において指示されています。
 
+    {% comment %}
     Once the `web` service image is built, Compose runs it and executes the
     `django-admin startproject` command in the container. This command
     instructs Django to create a set of files and directories representing a
     Django project.
+    {% endcomment %}
+    `web`サービスイメージがビルドされると Compose はこのイメージを起動し、コンテナー内でコマンド`django-admin startproject`を実行します。
+    このコマンドは Django に対して、Django プロジェクトを組み立てるファイルやディレクトリを生成することを指示するものです。
 
+{% comment %}
 3. After the `docker-compose` command completes, list the contents of your project.
+{% endcomment %}
+3. `docker-compose`コマンドの処理が完了したら、プロジェクト内の一覧を表示してみます。
 
        $ ls -l
        drwxr-xr-x 2 root   root   composeexample
@@ -114,15 +209,24 @@ the [docker-compose run](/compose/reference/run/) command as follows.
        -rwxr-xr-x 1 root   root   manage.py
        -rw-rw-r-- 1 user   user   requirements.txt
 
+    {% comment %}
     If you are running Docker on Linux, the files `django-admin` created are
     owned by root. This happens because the container runs as the root user.
     Change the ownership of the new files.
+    {% endcomment %}
+    Linux 上で Docker を利用している場合、`django-admin`が生成したファイルの所有者が root になっています。
+    これはコンテナーが root ユーザーで実行されるからです。
+    生成されたファイルの所有者を以下のようにして変更します。
 
        sudo chown -R $USER:$USER .
 
+    {% comment %}
     If you are running Docker on Mac or Windows, you should already
     have ownership of all files, including those generated by
     `django-admin`. List the files just to verify this.
+    {% endcomment %}
+    Docker on Mac あるいは Docker on Windows を利用している場合は、生成されたファイルの所有権は、`django-admin`が作り出したファイルも含めて、すべて持っています。
+    確認のため一覧を表示してみます。
 
         $ ls -l
         total 32
@@ -133,13 +237,26 @@ the [docker-compose run](/compose/reference/run/) command as follows.
         -rw-r--r--  1 user  staff   16 Feb 13 23:01 requirements.txt
 
 
+{% comment %}
 ### Connect the database
+{% endcomment %}
+### データベースへの接続設定
+{: #connect-the-database }
 
+{% comment %}
 In this section, you set up the database connection for Django.
+{% endcomment %}
+ここでは Django におけるデータベース接続の設定を行います。
 
+{% comment %}
 1.  In your project directory, edit the `composeexample/settings.py` file.
+{% endcomment %}
+1.  プロジェクトディレクトリにおいて`composeexample/settings.py`ファイルを編集します。
 
+{% comment %}
 2.  Replace the `DATABASES = ...` with the following:
+{% endcomment %}
+2.  `DATABASES = ...`の部分を以下のように書き換えます。
 
         DATABASES = {
             'default': {
@@ -151,13 +268,22 @@ In this section, you set up the database connection for Django.
             }
         }
 
+    {% comment %}
     These settings are determined by the
     [postgres](https://hub.docker.com/images/postgres) Docker image
     specified in `docker-compose.yml`.
+    {% endcomment %}
+    上の設定は`docker-compose.yml`に指定した Docker イメージ [postgres](https://hub.docker.com/images/postgres) が定めている内容です。
 
+{% comment %}
 3.  Save and close the file.
+{% endcomment %}
+3.  ファイルを保存して閉じます。
 
+{% comment %}
 4.  Run the [docker-compose up](/compose/reference/up/) command from the top level directory for your project.
+{% endcomment %}
+4.  プロジェクトのトップディレクトリにおいてコマンド [docker-compose up](/compose/reference/up/) を実行します。
 
     ```none
     $ docker-compose up
@@ -180,15 +306,24 @@ In this section, you set up the database connection for Django.
     web_1  | Quit the server with CONTROL-C.
     ```
 
+    {% comment %}
     At this point, your Django app should be running at port `8000` on
     your Docker host. On Docker Desktop for Mac and Docker Desktop for Windows, go
     to `http://localhost:8000` on a web browser to see the Django
     welcome page. If you are using [Docker Machine](/machine/overview.md),
     then `docker-machine ip MACHINE_VM` returns the Docker host IP
     address, to which you can append the port (`<Docker-Host-IP>:8000`).
+    {% endcomment %}
+    この段階で Django アプリは Docker ホスト上のポート`8000`で稼動しています。
+    Docker Desktop for Mac または Docker Desktop for Windows の場合は、ブラウザーから `http://localhost:8000` にアクセスすることで、Django の Welcome ページを確認できます。
+    [Docker Machine](/machine/overview.md) を利用している場合は、`docker-machine ip MACHINE_VM` を実行すると Docker ホストの IP アドレスが得られるので、ポート番号をつけてアクセスします（`<DockerホストID>:8000`）。
 
+    {% comment %}
     ![Django example](images/django-it-worked.png)
+    {% endcomment %}
+    ![Django の例](images/django-it-worked.png)
 
+    {% comment %}
     > Note:
     >
     > On certain platforms (Windows 10), you might need to
@@ -199,10 +334,24 @@ In this section, you set up the database connection for Django.
     >
     > This value is **not** safe for production usage.  Refer to the
      [Django documentation](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts)  for more information.
+    {% endcomment %}
+    > メモ:
+    >
+    > 特定プラットフォーム（Windows 10）では、`settings.py`ファイル内の`ALLOWED_HOSTS`に、ホスト名あるいはホストの IP アドレスを追加することが必要かもしれません。ここはデモが目的なので、以下のように設定することにします。
+    >
+    >       ALLOWED_HOSTS = ['*']
+    >
+    > この設定は本番環境では**安全ではありません**。詳しくは [Django ドキュメント](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts)を参照してください。
 
+{% comment %}
 5.  List running containers.
+{% endcomment %}
+5.  起動しているコンテナーの一覧を確認します。
 
+    {% comment %}
     In another terminal window, list the running Docker processes with the `docker container ls` command.
+    {% endcomment %}
+    別の端末画面を開いて `docker container ls`コマンドを実行し、起動している Docker プロセスの一覧を表示します。
 
     ```none
     $ docker ps
@@ -212,10 +361,16 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
 
     ```
 
+{% comment %}
 6.  Shut down services and clean up by using either of these methods:
+{% endcomment %}
+6.  サービスを停止しクリアするために、以下のいずれかの方法をとります。
 
+    {% comment %}
     * Stop the application by typing `Ctrl-C`
     in the same shell in where you started it:
+    {% endcomment %}
+    * アプリケーションを実行したシェル上で `Ctrl-C` を入力してアプリケーションを止めます。
 
       ```none
       Gracefully stopping... (press Ctrl+C again to force)
@@ -223,7 +378,10 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
       Killing test_db_1 ... done
       ```
 
+    {% comment %}
     * Or, for a more elegant shutdown, switch to a different shell, and run [docker-compose down](/compose/reference/down/) from the top level of your Django sample project directory.
+    {% endcomment %}
+    * もう少しきれいなやり方として別のシェル画面に切り替えて、Django サンプルプロジェクトのトップディレクトリにおいて [docker-compose down](/compose/reference/down/) を実行します。
 
       ```none
       vmb at mymachine in ~/sandbox/django
@@ -236,10 +394,19 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
       Removing network django_default
       ```
 
+  {% comment %}
   Once you've shut down the app, you can safely remove the Django project directory (for example, `rm -rf django`).
+  {% endcomment %}
+  アプリを停止したら Django プロジェクトディレクトリは何も問題なく削除することができます。
+  （たとえば `rm -rf django`）
 
+{% comment %}
 ## More Compose documentation
+{% endcomment %}
+## その他の Compose ドキュメント
+{: #more-compose-documentation }
 
+{% comment %}
 - [User guide](index.md)
 - [Installing Compose](install.md)
 - [Getting Started](gettingstarted.md)
@@ -247,3 +414,11 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
 - [Get started with WordPress](wordpress.md)
 - [Command line reference](./reference/index.md)
 - [Compose file reference](compose-file.md)
+{% endcomment %}
+- [ユーザーガイド](index.md)
+- [Compose のインストール](install.md)
+- [はじめよう](gettingstarted.md)
+- [Rails とともにはじめる](rails.md)
+- [WordPress とともにはじめる](wordpress.md)
+- [コマンドラインリファレンス](./reference/index.md)
+- [Compose ファイルリファレンス](compose-file.md)
