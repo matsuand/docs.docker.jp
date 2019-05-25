@@ -1,19 +1,37 @@
 ---
-title: Docker Trusted Registry overview
-description: Learn how to install, configure, and use Docker Trusted Registry.
+title: Docker Trusted Registry 概要
+description: Docker Trusted Registry のインストール、設定、利用について学びます。
 keywords: registry, repository, images
 ---
 
+{% comment %}
 Docker Trusted Registry (DTR) is the enterprise-grade image storage solution
 from Docker. You install it behind your firewall so that you can securely store
 and manage the Docker images you use in your applications.
+{% endcomment %}
+Docker Trusted Registry (DTR) は Docker が提供する、エンタープライズレベルのイメージストレージソリューションです。
+You install it behind your firewall so that you can securely store
+and manage the Docker images you use in your applications.
 
+{% comment %}
 ## Image and job management
+{% endcomment %}
+## イメージ管理とジョブ管理
+{: #image-and-job-management }
 
+{% comment %}
+DTR can be installed on-premises, or on a virtual private
+cloud. And with it, you can store your Docker images securely, behind your
+firewall.
+{% endcomment %}
 DTR can be installed on-premises, or on a virtual private
 cloud. And with it, you can store your Docker images securely, behind your
 firewall.
 
+{% comment %}
+You can use DTR as part of your continuous integration, and continuous
+delivery processes to build, ship, and run your applications.
+{% endcomment %}
 You can use DTR as part of your continuous integration, and continuous
 delivery processes to build, ship, and run your applications.
 
