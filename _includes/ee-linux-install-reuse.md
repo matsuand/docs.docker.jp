@@ -114,7 +114,8 @@ You only need to set up the repository once, after which you can install Docker 
     {% comment %}
     Also, store your OS version string in `/etc/yum/vars/dockerosversion`. Most users should use `7`, but you can also use the more specific minor version, starting from `7.2`.
     {% endcomment %}
-    Also, store your OS version string in `/etc/yum/vars/dockerosversion`. Most users should use `7`, but you can also use the more specific minor version, starting from `7.2`.
+    同様に OS バージョン文字列を `/etc/yum/vars/dockerosversion` に保存します。
+    たいていのユーザーにとっては `7` で十分ですが、`7.2` で始まるマイナーバージョンまで指定することもできます。
 
     ```bash
     $ sudo sh -c 'echo "7" > /etc/yum/vars/dockerosversion'
@@ -139,17 +140,19 @@ You only need to set up the repository once, after which you can install Docker 
 {% comment %}
 5.  Enable the `extras` RHEL repository. This ensures access to the `container-selinux` package required by `docker-ee`.
 {% endcomment %}
-5.  Enable the `extras` RHEL repository. This ensures access to the `container-selinux` package required by `docker-ee`.
+5.  RHEL の `extras` リポジトリを有効にします。
+    これにより `docker-ee` が必要としている `container-selinux` パッケージを入手できるようにします。
 
     {% comment %}
     The repository can differ per your architecture and cloud provider, so review the options in this step before running:
     {% endcomment %}
-    The repository can differ per your architecture and cloud provider, so review the options in this step before running:
+    リポジトリは利用するアーキテクチャーやクラウドプロバイダーにより異なります。
+    したがってここに示す内容を確認してから設定を実行してください。
 
     {% comment %}
     **For all architectures _except_ IBM Power:**
     {% endcomment %}
-    **For all architectures _except_ IBM Power:**
+    **IBM Power を除くアーキテクチャーすべての場合:**
 
     ```bash
     $ sudo yum-config-manager --enable rhel-7-server-extras-rpms
@@ -158,7 +161,7 @@ You only need to set up the repository once, after which you can install Docker 
     {% comment %}
     **For IBM Power only (little endian):**
     {% endcomment %}
-    **For IBM Power only (little endian):**
+    **IBM Power の場合（リトルエンディアン）:**
 
     ```bash
     $ sudo yum-config-manager --enable extras
@@ -170,12 +173,12 @@ You only need to set up the repository once, after which you can install Docker 
     {% comment %}
     Depending on cloud provider, you may also need to enable another repository:
     {% endcomment %}
-    Depending on cloud provider, you may also need to enable another repository:
+    クラウドプロバイダーによっては、別のリポジトリを有効にする必要があるかもしれません。
 
     {% comment %}
     **For AWS** (where `REGION` is a literal, and does _not_ represent the region your machine is running in):
     {% endcomment %}
-    **For AWS** (where `REGION` is a literal, and does _not_ represent the region your machine is running in):
+    **AWS の場合** （以下において `REGION` は固定の文字列です。マシンを利用する地域を示すわけではありません。）
 
     ```bash
     $ sudo yum-config-manager --enable rhui-REGION-rhel-server-extras
@@ -184,7 +187,7 @@ You only need to set up the repository once, after which you can install Docker 
     {% comment %}
     **For Azure:**
     {% endcomment %}
-    **For Azure:**
+    **Azure の場合**
 
     ```bash
     $ sudo yum-config-manager --enable rhui-rhel-7-server-rhui-extras-rpms
@@ -363,7 +366,8 @@ Docker EE をアップグレードする際には、常に新しいファイル�
 {% comment %}
 1.  Enable the `extras` RHEL repository. This ensures access to the `container-selinux` package which is required by `docker-ee`:
 {% endcomment %}
-1.  Enable the `extras` RHEL repository. This ensures access to the `container-selinux` package which is required by `docker-ee`:
+1.  RHEL の `extras` リポジトリを有効にします。
+    これにより `docker-ee` が必要としている `container-selinux` パッケージを入手できるようにします。
 
     ```bash
     $ sudo yum-config-manager --enable rhel-7-server-extras-rpms
@@ -372,7 +376,8 @@ Docker EE をアップグレードする際には、常に新しいファイル�
     {% comment %}
     Alternately, obtain that package manually from Red Hat. There is no way to publicly browse this repository.
     {% endcomment %}
-    Alternately, obtain that package manually from Red Hat. There is no way to publicly browse this repository.
+    別の方法として Red Hat から直接パッケージを入手することもできます。
+    そのリポジトリは公開されていないので、ブラウザーではアクセスできません。
 {% endif %}
 
 {% if linux-dist == "centos" %}
@@ -397,9 +402,14 @@ Docker EE をアップグレードする際には、常に新しいファイル�
     そして `{{ linux-dist-url-slug }}/` を開いて、目的とするアーキテクチャーとバージョンの {{ linux-dist-long }} を選びます。
     `Package` ディレクトリから `.{{ package-format | downcase }}` ファイルをダウンロードします。
 
+  {% comment %}
   {% if linux-dist == "rhel" %}
     > If you have trouble with `selinux` using the packages under the `7` directory,
     > try choosing the version-specific directory instead, such as `7.3`.
+  {% endif %}
+  {% endcomment %}
+  {% if linux-dist == "rhel" %}
+    > `7` ディレクトリ内にあるパッケージを利用する際に `selinux` に関連した問題が発生した場合は、別バージョンのディレクトリ、たとえば `7.3` などを選んで試してみてください。
   {% endif %}
 {% endif %}
 
