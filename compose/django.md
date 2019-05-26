@@ -1,5 +1,5 @@
 ---
-description: Getting started with Docker Compose and Django
+description: Docker Compose と Django をはじめる。
 keywords: documentation, docs,  docker, compose, orchestration, containers
 title: "クィックスタート: Compose と Django"
 ---
