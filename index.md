@@ -26,18 +26,18 @@ production servers in the cloud. Total reading time is less than an hour.
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-## Docker エンタープライズエディションのすすめ
+## Docker Enterprise のすすめ
 
 {% comment %}
-Run your solution in production with Docker Enterprise Edition to get a
+Run your solution in production with Docker Enterprise to get a
 management dashboard, security scanning, LDAP integration, content signing,
 multi-cloud support, and more. Click below to test-drive a running instance of
-Docker EE without installing anything.
+Docker Enterprise without installing anything.
 {% endcomment %}
-Docker エンタープライズエディションをソリューションにおいて利用すれば、管理ダッシュボード、セキュリティスキャニング、LDAP 統合、コンテンツ認証、マルチクラウド対応などをさまざまに行うことができます。
-以下をクリックして、Docker EE インスタンスを試してみてください。インストールは一切不要です。
+Docker Enterprise をソリューションにおいて利用すれば、管理ダッシュボード、セキュリティスキャニング、LDAP 統合、コンテンツ認証、マルチクラウド対応などをさまざまに行うことができます。
+以下をクリックして、Docker エンタープライズインスタンスを試してみてください。インストールは一切不要です。
 
-[Docker エンタープライズエディションのすすめ](https://trial.docker.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
+[Docker Enterprise のすすめ](https://trial.docker.com){: class="button outline-btn" onclick="ga('send', 'event', 'EE Trial Referral', 'Front Page', 'Click');"}
 
 </div>
 </div>
@@ -70,21 +70,27 @@ Docker CE はデスクトップからクラウドのサーバーに至るまで�
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-### Docker エンタープライズエディション
+### Docker Enterprise プラットフォーム
 
 {% comment %}
 Designed for enterprise development and IT teams who build, ship, and run
 business critical applications in production at scale. Integrated, certified,
 and supported to provide enterprises with the most secure container platform in
-the industry to modernize all applications. Docker EE Advanced comes with enterprise
-[add-ons](#docker-ee-add-ons) like UCP and DTR.
+the industry to modernize all applications. Docker Enterprise Advanced comes with enterprise
+[add-ons](#docker-ee-add-ons) like Universal Control Plane (UCP) for managing and
+orchestrating the container runtime, and Docker Trusted Registry (DTR) for storing and
+securing images in an enterprise grade registry.
 {% endcomment %}
-エンタープライズ開発や IT チーム向けに設計されたものであり、最重要のビジネスアプリケーションが、稼働中にその規模を拡大していっても、アプリケーションの構築、導入、実行を容易に実現できます。エンタープライズ開発の統合、認証、サポートを行い、先進的なアプリケーションを提供する業界において、もっとも安全なコンテナ・プラットフォームを提供します。
+エンタープライズ開発や IT チーム向けに設計されたものであり、最重要のビジネスアプリケーションが、稼働中にその規模を拡大していっても、アプリケーションの構築、導入、実行を容易に実現できます。
+エンタープライズ開発の統合、認証、サポートを行い、先進的なアプリケーションを提供する業界において、もっとも安全なコンテナープラットフォームを提供します。
+Docker Enterprise Advanced には Universal Control Plane (UCP) や Docker Trusted Registry (DTR) といった[アドオン](#docker-ee-add-ons) が含まれます。
+UCP はコンテナー実行時の管理とオーケストレーションを行います。
+DTR はエンタープライズレベルのレジストリにおいてイメージの保存と保護を行います。
 
 {% comment %}
-[Learn more about Docker EE](/ee/supported-platforms/){: class="button outline-btn"}
+[Learn more about Docker Enterprise](/ee/supported-platforms/){: class="button outline-btn"}
 {% endcomment %}
-[Docker EE について学ぶ](/ee/supported-platforms/){: class="button outline-btn"}
+[Docker Enterprise について学ぶ](/ee/supported-platforms/){: class="button outline-btn"}
 
 </div>
 </div><!-- end row -->
