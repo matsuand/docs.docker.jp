@@ -1,5 +1,5 @@
 ---
-description: "Dockerfiles use a simple DSL which allows you to automate the steps you would normally manually take to create an image."
+description: "Dockerfile では単純な DSL を使って、通常なら手動で行うイメージ生成手順を自動化します。"
 keywords: "builder, docker, Dockerfile, automation, image creation"
 redirect_from:
 - /reference/builder/
@@ -2171,7 +2171,7 @@ This means that the executable will not be the container's `PID 1` - and
 will _not_ receive Unix signals - so your executable will not receive a
 `SIGTERM` from `docker stop <container>`.
 {% endcomment %}
-シェル形式では `CMD` や `run` によるコマンドライン引数は利用されません。
+シェル形式では `CMD` や `run` によるコマンドライン引数は受け付けずに処理を行います。
 ただし `ENTRYPOINT` が `/bin/sh -c` のサブコマンドとして起動されるので、シグナルを送信しません。
 これはつまり、実行モジュールがコンテナーの `PID 1` にはならず、Unix のシグナルを受信しないということです。
 したがって `docker stop <container>` が実行されても、その実行モジュールは `SIGTERM` を受信しないことになります。
@@ -2248,7 +2248,7 @@ If you need to write a starter script for a single executable, you can ensure th
 the final executable receives the Unix signals by using `exec` and `gosu`
 commands:
 {% endcomment %}
-1 つの実行モジュールを起動するスクリプトを書く場合、最終実行される実行モジュールが Unix シグナルを受信できるように `exec` あるいは `gosu` を用いることが必要です。
+1 つの実行モジュールを起動するスクリプトを書く場合、最終実行される実行モジュールが Unix シグナルを受信できるようにするには `exec` あるいは `gosu` を用います。
 
 ```bash
 #!/usr/bin/env bash
@@ -2353,8 +2353,8 @@ sys	0m 0.03s
 > but this can only set the binary to *exec* (no `sh -c` will be used).
 {% endcomment %}
 > **メモ:** `--entrypoint` を使うと `ENTRYPOINT` の設定を上書きすることができます。
-> ただしこの場合は実行モジュールを exec 形式にできるだけです。
-> （`sh -c` は利用することはできません。）
+> ただしこの場合は、実行モジュールを exec 形式にできるだけです。
+> （`sh -c` は利用されません。）
 
 {% comment %}
 > **Note**:
@@ -2511,7 +2511,7 @@ or for executing an ad-hoc command in a container.
 {% comment %}
 The table below shows what command is executed for different `ENTRYPOINT` / `CMD` combinations:
 {% endcomment %}
-以下に示す表は、`ENTRYPOINT` と `CMD` の組み合わせに従って実行されるコマンドを示しています。
+以下の表は、`ENTRYPOINT` と `CMD` の組み合わせに従って実行されるコマンドを示しています。
 
 {% comment %}
 |                                | No ENTRYPOINT              | ENTRYPOINT exec_entry p1_entry | ENTRYPOINT ["exec_entry", "p1_entry"]          |
@@ -2561,9 +2561,9 @@ The `docker run` command initializes the newly created volume with any data
 that exists at the specified location within the base image. For example,
 consider the following Dockerfile snippet:
 {% endcomment %}
-The `docker run` command initializes the newly created volume with any data
-that exists at the specified location within the base image. For example,
-consider the following Dockerfile snippet:
+`docker run` コマンドは、新たに生成するボリュームを初期化します。
+ベースイメージ内の指定したディレクトリに、データが存在していても構いません。
+たとえば以下のような Dockerfile の記述部分があったとします。
 
     FROM ubuntu
     RUN mkdir /myvol
@@ -2575,9 +2575,7 @@ This Dockerfile results in an image that causes `docker run` to
 create a new mount point at `/myvol` and copy the  `greeting` file
 into the newly created volume.
 {% endcomment %}
-This Dockerfile results in an image that causes `docker run` to
-create a new mount point at `/myvol` and copy the  `greeting` file
-into the newly created volume.
+この Dockerfile はイメージに対する処理として、`docker run` により `/myvol` というマウントポイントを新たに生成し、そのボリュームの中に `greeting` ファイルをコピーします。
 
 {% comment %}
 ### Notes about specifying volumes
@@ -2607,15 +2605,14 @@ Keep the following things in mind about volumes in the `Dockerfile`.
 - **Changing the volume from within the Dockerfile**: If any build steps change the
   data within the volume after it has been declared, those changes will be discarded.
 {% endcomment %}
-- **Changing the volume from within the Dockerfile**: If any build steps change the
-  data within the volume after it has been declared, those changes will be discarded.
+- **Dockerfile 内からのボリューム変更**: ボリュームを宣言した後に、そのボリューム内のデータを変更する処理があったとしても、そのような変更は無視され処理されません。
 
 {% comment %}
 - **JSON formatting**: The list is parsed as a JSON array.
   You must enclose words with double quotes (`"`) rather than single quotes (`'`).
 {% endcomment %}
-- **JSON formatting**: The list is parsed as a JSON array.
-  You must enclose words with double quotes (`"`) rather than single quotes (`'`).
+- **JSON 形式**: 引数リストは JSON 配列として扱われます。
+  したがって文字列をくくるのはダブルクォート（`"`）であり、シングルクォート（`'`）は用いてはなりません。
 
 {% comment %}
 - **The host directory is declared at container run-time**: The host directory
@@ -2625,12 +2622,11 @@ Keep the following things in mind about volumes in the `Dockerfile`.
   within the Dockerfile. The `VOLUME` instruction does not support specifying a `host-dir`
   parameter.  You must specify the mountpoint when you create or run the container.
 {% endcomment %}
-- **The host directory is declared at container run-time**: The host directory
-  (the mountpoint) is, by its nature, host-dependent. This is to preserve image
-  portability, since a given host directory can't be guaranteed to be available
-  on all hosts. For this reason, you can't mount a host directory from
-  within the Dockerfile. The `VOLUME` instruction does not support specifying a `host-dir`
-  parameter.  You must specify the mountpoint when you create or run the container.
+- **コンテナー実行時に宣言されるホストディレクトリ**: ホストディレクトリ（マウントポイント）は、その性質からして、ホストに依存するものです。
+  これはイメージの可搬性を確保するためなので、設定されたホストディレクトリが、あらゆるホスト上にて利用可能になるかどうかの保証はありません。
+  このため、Dockerfile の内部からホストディレクトリをマウントすることはできません。
+  つまり `VOLUME` 命令は `host-dir`（ホストのディレクトリを指定する）パラメーターをサポートしていません。
+  マウントポイントの指定は、コンテナーを生成、実行するときに行う必要があります。
 
 ## USER
 
@@ -2708,7 +2704,7 @@ relative path is provided, it will be relative to the path of the previous
 The output of the final `pwd` command in this `Dockerfile` would be
 `/a/b/c`.
 {% endcomment %}
-上の `Dockerfile` の最後の `pwd` コマンドは、最終的に `/a/b/c` という出力結果を返します。
+上の `Dockerfile` の最後の `pwd` コマンドは `/a/b/c` という出力結果を返します。
 
 {% comment %}
 The `WORKDIR` instruction can resolve environment variables previously set using
@@ -2727,7 +2723,7 @@ For example:
 The output of the final `pwd` command in this `Dockerfile` would be
 `/path/$DIRNAME`
 {% endcomment %}
-上の `Dockerfile` の最後の `pwd` コマンドは、最終的に `/path/$DIRNAME` という出力結果を返します。
+上の `Dockerfile` の最後の `pwd` コマンドは `/path/$DIRNAME` という出力結果を返します。
 
 ## ARG
 
@@ -2767,7 +2763,7 @@ ARG buildno
 >  values are visible to any user of the image with the `docker history` command.
 {% endcomment %}
 > **警告:** ビルド時の変数として、github キーや認証情報などの秘密の情報を設定することは、お勧めできません。
->  ビルド変数の値は、イメージを利用するものが `docker history` コマンドを実行すれば容易に見ることができます。
+>  ビルド変数の値は、イメージを利用する他人が `docker history` コマンドを実行すれば容易に見ることができてしまうからです。
 
 {% comment %}
 ### Default values
@@ -2837,20 +2833,19 @@ subsequent line 3. The `USER` at line 4 evaluates to `what_user` as `user` is
 defined and the `what_user` value was passed on the command line. Prior to its definition by an
 `ARG` instruction, any use of a variable results in an empty string.
 {% endcomment %}
-2 行めの `USER` が `some-user` として評価され、`user` 変数は続く 3 行めにおいて定義されています。
-
-The `USER` at line 4 evaluates to `what_user` as `user` is
-defined and the `what_user` value was passed on the command line. Prior to its definition by an
-`ARG` instruction, any use of a variable results in an empty string.
+2 行めの `USER` が `some-user` として評価されます。
+これは `user` 変数が、直後の 3 行めにおいて定義されているからです。
+そして 4 行めの `USER` は `what_user` として評価されます。
+`user` が定義済であって、コマンドラインから `what_user` という値が受け渡されたからです。
+`ARG` 命令による定義を行うまで、その変数を利用しても空の文字列として扱われます。
 
 {% comment %}
 An `ARG` instruction goes out of scope at the end of the build
 stage where it was defined. To use an arg in multiple stages, each stage must
 include the `ARG` instruction.
 {% endcomment %}
-An `ARG` instruction goes out of scope at the end of the build
-stage where it was defined. To use an arg in multiple stages, each stage must
-include the `ARG` instruction.
+`ARG` 命令の変数スコープは、それが定義されたビルドステージが終了するときまでです。
+複数のビルドステージにおいて `ARG` を利用する場合は、個々に `ARG` 命令を指定する必要があります。
 
 ```
 FROM busybox
@@ -2865,7 +2860,7 @@ RUN ./run/other $SETTINGS
 {% comment %}
 ### Using ARG variables
 {% endcomment %}
-### Using ARG variables
+### ARG 変数の利用
 {: #using-arg-variables }
 
 {% comment %}
@@ -2874,10 +2869,9 @@ available to the `RUN` instruction. Environment variables defined using the
 `ENV` instruction always override an `ARG` instruction of the same name. Consider
 this Dockerfile with an `ENV` and `ARG` instruction.
 {% endcomment %}
-You can use an `ARG` or an `ENV` instruction to specify variables that are
-available to the `RUN` instruction. Environment variables defined using the
-`ENV` instruction always override an `ARG` instruction of the same name. Consider
-this Dockerfile with an `ENV` and `ARG` instruction.
+`ARG` 命令や `ENV` 命令において変数を指定し、それを `RUN` 命令にて用いることができます。
+`ENV` 命令を使って定義された環境変数は、`ARG` 命令において同名の変数が指定されていたとしても優先されます。
+以下のように `ENV` 命令と `ARG` 命令を含む Dockerfile があるとします。
 
 {% comment %}
 ```
@@ -2894,7 +2888,7 @@ Then, assume this image is built with this command:
 3 ENV CONT_IMG_VER v1.0.0
 4 RUN echo $CONT_IMG_VER
 ```
-Then, assume this image is built with this command:
+そしてこのイメージを以下のコマンドによりビルドしたとします。
 
 ```
 $ docker build --build-arg CONT_IMG_VER=v2.0.1 .
@@ -2906,17 +2900,16 @@ passed by the user:`v2.0.1` This behavior is similar to a shell
 script where a locally scoped variable overrides the variables passed as
 arguments or inherited from environment, from its point of definition.
 {% endcomment %}
-In this case, the `RUN` instruction uses `v1.0.0` instead of the `ARG` setting
-passed by the user:`v2.0.1` This behavior is similar to a shell
-script where a locally scoped variable overrides the variables passed as
-arguments or inherited from environment, from its point of definition.
+この例において `RUN` 命令は `v1.0.0` という値を採用します。
+コマンドラインから `v2.0.1` が受け渡され `ARG` の値に設定されますが、それが用いられるわけではありません。
+これはちょうどシェルスクリプトにおいて行われる動きに似ています。
+ローカルなスコープを持つ変数は、指定された引数や環境から受け継いだ変数よりも優先されます。
 
 {% comment %}
 Using the example above but a different `ENV` specification you can create more
 useful interactions between `ARG` and `ENV` instructions:
 {% endcomment %}
-Using the example above but a different `ENV` specification you can create more
-useful interactions between `ARG` and `ENV` instructions:
+上の例を利用しつつ `ENV` のもう 1 つ別の仕様を用いると、さらに `ARG` と `ENV` の組み合わせによる以下のような利用もできます。
 
 ```
 1 FROM ubuntu
@@ -2929,8 +2922,8 @@ useful interactions between `ARG` and `ENV` instructions:
 Unlike an `ARG` instruction, `ENV` values are always persisted in the built
 image. Consider a docker build without the `--build-arg` flag:
 {% endcomment %}
-Unlike an `ARG` instruction, `ENV` values are always persisted in the built
-image. Consider a docker build without the `--build-arg` flag:
+`ARG` 命令とは違って `ENV` による値はビルドイメージ内に常に保持されます。
+以下のような `--build-arg` フラグのない `docker build` を見てみます。
 
 ```
 $ docker build .
@@ -2940,8 +2933,8 @@ $ docker build .
 Using this Dockerfile example, `CONT_IMG_VER` is still persisted in the image but
 its value would be `v1.0.0` as it is the default set in line 3 by the `ENV` instruction.
 {% endcomment %}
-Using this Dockerfile example, `CONT_IMG_VER` is still persisted in the image but
-its value would be `v1.0.0` as it is the default set in line 3 by the `ENV` instruction.
+上の Dockerfile の例を用いると、`CONT_IMG_VER` の値はイメージ内に保持されますが、その値は `v1.0.0` になります。
+これは 3 行めの `ENV` 命令で設定されているデフォルト値です。
 
 {% comment %}
 The variable expansion technique in this example allows you to pass arguments
@@ -2949,23 +2942,21 @@ from the command line and persist them in the final image by leveraging the
 `ENV` instruction. Variable expansion is only supported for [a limited set of
 Dockerfile instructions.](#environment-replacement)
 {% endcomment %}
-The variable expansion technique in this example allows you to pass arguments
-from the command line and persist them in the final image by leveraging the
-`ENV` instruction. Variable expansion is only supported for [a limited set of
-Dockerfile instructions.](#environment-replacement)
+この例で見たように変数展開の手法では、コマンドラインから引数を受け渡すことが可能であり、`ENV` 命令を用いればその値を最終イメージに残すことができます。
+変数展開は、[特定の Dockerfile 命令](#environment-replacement)においてのみサポートされます。
 
 {% comment %}
 ### Predefined ARGs
 {% endcomment %}
-### Predefined ARGs
+### 定義済 ARG 変数
 {: #predefined-args }
 
 {% comment %}
 Docker has a set of predefined `ARG` variables that you can use without a
 corresponding `ARG` instruction in the Dockerfile.
 {% endcomment %}
-Docker has a set of predefined `ARG` variables that you can use without a
-corresponding `ARG` instruction in the Dockerfile.
+Docker にはあらかじめ定義された `ARG` 変数があります。
+これは Dockerfile において `ARG` 命令を指定しなくても利用することができます。
 
 * `HTTP_PROXY`
 * `http_proxy`
@@ -2979,31 +2970,45 @@ corresponding `ARG` instruction in the Dockerfile.
 {% comment %}
 To use these, simply pass them on the command line using the flag:
 {% endcomment %}
-To use these, simply pass them on the command line using the flag:
+これを利用する場合は、コマンドラインから以下のフラグを与えるだけです。
 
 ```
 --build-arg <varname>=<value>
 ```
 
+{% comment %}
 By default, these pre-defined variables are excluded from the output of
 `docker history`. Excluding them reduces the risk of accidentally leaking
 sensitive authentication information in an `HTTP_PROXY` variable.
+{% endcomment %}
+デフォルトにおいて、これらの定義済変数は `docker history` による出力からは除外されます。
+除外する理由は、`HTTP_PROXY` などの各変数内にある重要な認証情報が漏洩するリスクを軽減するためです。
 
+{% comment %}
 For example, consider building the following Dockerfile using
 `--build-arg HTTP_PROXY=http://user:pass@proxy.lon.example.com`
+{% endcomment %}
+たとえば `--build-arg HTTP_PROXY=http://user:pass@proxy.lon.example.com` という引数を用いて、以下の Dockerfile をビルドするとします。
 
 ``` Dockerfile
 FROM ubuntu
 RUN echo "Hello World"
 ```
 
+{% comment %}
 In this case, the value of the `HTTP_PROXY` variable is not available in the
 `docker history` and is not cached. If you were to change location, and your
 proxy server changed to `http://user:pass@proxy.sfo.example.com`, a subsequent
 build does not result in a cache miss.
+{% endcomment %}
+この場合、`HTTP_PROXY` 変数の値は `docker history` から取得することはできず、キャッシュにも含まれていません。
+したがって URL が変更され、プロキシーサーバーも `http://user:pass@proxy.sfo.example.com` に変更したとしても、この後に続くビルド処理において、キャッシュミスは発生しません。
 
+{% comment %}
 If you need to override this behaviour then you may do so by adding an `ARG`
 statement in the Dockerfile as follows:
+{% endcomment %}
+この動作を取り消す必要がある場合は、以下のように Dockerfile 内に `ARG` 命令を加えれば実現できます。
 
 ``` Dockerfile
 FROM ubuntu
@@ -3011,20 +3016,39 @@ ARG HTTP_PROXY
 RUN echo "Hello World"
 ```
 
+{% comment %}
 When building this Dockerfile, the `HTTP_PROXY` is preserved in the
 `docker history`, and changing its value invalidates the build cache.
+{% endcomment %}
+この Dockerfile がビルドされるとき、`HTTP_PROXY` は `docker history` に保存されます。
+そしてその値を変更すると、ビルドキャッシュは無効化されます。
 
+{% comment %}
 ### Automatic platform ARGs in the global scope
+{% endcomment %}
+### プラットフォームに応じて自動設定されるグローバル ARG 変数
+{: #automatic-platform-args-in-the-global-scope }
 
+{% comment %}
 This feature is only available when using the [BuildKit](#buildkit) backend.
+{% endcomment %}
+この機能は [BuildKit](#buildkit) バックエンドを用いている場合にのみ利用可能です。
 
+{% comment %}
 Docker predefines a set of `ARG` variables with information on the platform of
 the node performing the build (build platform) and on the platform of the
 resulting image (target platform). The target platform can be specified with
 the `--platform` flag on `docker build`.
+{% endcomment %}
+Docker にはあらかじめ定義された `ARG` 変数として、ビルド処理を行ったプラットフォーム（ビルドプラットフォーム）の、あるいはイメージを作り出したプラットフォーム（ターゲットプラットフォーム）の、各ノード情報を提供するものがあります。
+ターゲットプラットフォームは `docker build` の `--platform` フラグを使って指定することもできます。
 
+{% comment %}
 The following `ARG` variables are set automatically:
+{% endcomment %}
+以下の `ARG` 変数が自動的に定義されています。
 
+{% comment %}
 * `TARGETPLATFORM` - platform of the build result. Eg `linux/amd64`, `linux/arm/v7`, `windows/amd64`.
 * `TARGETOS` - OS component of TARGETPLATFORM
 * `TARGETARCH` - architecture component of TARGETPLATFORM
@@ -3033,12 +3057,29 @@ The following `ARG` variables are set automatically:
 * `BUILDOS` - OS component of BUILDPLATFORM
 * `BUILDARCH` - OS component of BUILDPLATFORM
 * `BUILDVARIANT` - OS component of BUILDPLATFORM
+{% endcomment %}
+* `TARGETPLATFORM` - ビルド結果のプラットフォーム。 `linux/amd64`、 `linux/arm/v7`、 `windows/amd64` など。
+* `TARGETOS` - TARGETPLATFORM の OS 部分。
+* `TARGETARCH` - TARGETPLATFORM のアーキテクチャー部分。
+* `TARGETVARIANT` - TARGETPLATFORM のバリアント（variant）部分。
+* `BUILDPLATFORM` - ビルド処理を行ったプラットフォーム。
+* `BUILDOS` - BUILDPLATFORM の OS 部分。
+* `BUILDARCH` - BUILDPLATFORM のアーキテクチャー部分。
+* `BUILDVARIANT` - BUILDPLATFORM のバリアント（variant）部分。
 
+{% comment %}
 These arguments are defined in the global scope so are not automatically
 available inside build stages or for your `RUN` commands. To expose one of
 these arguments inside the build stage redefine it without value.
+{% endcomment %}
+この変数はグローバルスコープにより定義されます。
+したがってビルドステージの内部にて、あるいは `RUN` コマンドにおいて、自動的に利用できるものではありません。
+ビルドステージにおいてこの変数を明示的に利用するためには、値をつけずにその変数を再定義します。
 
+{% comment %}
 For example:
+{% endcomment %}
+たとえば以下のとおりです。
 
 ```Dockerfile
 FROM alpine
@@ -3046,8 +3087,13 @@ ARG TARGETPLATFORM
 RUN echo "I'm building for $TARGETPLATFORM"
 ```
 
+{% comment %}
 ### Impact on build caching
+{% endcomment %}
+### ビルドキャッシュへの影響
+{: #impact-on-build-caching }
 
+{% comment %}
 `ARG` variables are not persisted into the built image as `ENV` variables are.
 However, `ARG` variables do impact the build cache in similar ways. If a
 Dockerfile defines an `ARG` variable whose value is different from a previous
@@ -3056,8 +3102,18 @@ particular, all `RUN` instructions following an `ARG` instruction use the `ARG`
 variable implicitly (as an environment variable), thus can cause a cache miss.
 All predefined `ARG` variables are exempt from caching unless there is a
 matching `ARG` statement in the `Dockerfile`.
+{% endcomment %}
+`ARG` 変数は `ENV` 変数とは違って、ビルドイメージの中に保持されません。
+しかし `ARG` 変数はビルドキャッシュへ同じような影響を及ぼします。
+Dockerfile に `ARG` 変数が定義されていて、その値が前回のビルドとは異なった値が設定されたとします。
+このとき「キャッシュミス」（cache miss）が発生しますが、それは初めて利用されたときであり、定義された段階ではありません。
+特に `ARG` 命令に続く `RUN` 命令は、`ARG` 変数の値を（環境変数として）暗に利用しますが、そこでキャッシュミスが起こります。
+定義済の `ARG` 変数は、`Dockerfile` 内に `ARG` 行がない限りは、キャッシュは行われません。
 
+{% comment %}
 For example, consider these two Dockerfile:
+{% endcomment %}
+たとえば以下の 2 つの Dockerfile を考えます。
 
 ```
 1 FROM ubuntu
@@ -3071,13 +3127,20 @@ For example, consider these two Dockerfile:
 3 RUN echo hello
 ```
 
+{% comment %}
 If you specify `--build-arg CONT_IMG_VER=<value>` on the command line, in both
 cases, the specification on line 2 does not cause a cache miss; line 3 does
 cause a cache miss.`ARG CONT_IMG_VER` causes the RUN line to be identified
 as the same as running `CONT_IMG_VER=<value>` echo hello, so if the `<value>`
 changes, we get a cache miss.
+{% endcomment %}
+コマンドラインから `--build-arg CONT_IMG_VER=<value>` を指定すると 2 つの例ともに、2 行めの記述ではキャッシュミスが起きず、3 行めで発生します。
+`ARG CONT_IMG_VER` は、`RUN` 行において `CONT_IMG_VER=<value>` echo hello と同等のことが実行されるので、`<value>` が変更されると、キャッシュミスが起こるということです。
 
+{% comment %}
 Consider another example under the same command line:
+{% endcomment %}
+もう 1 つの例を、同じコマンドライン実行を行って利用するとします。
 
 ```
 1 FROM ubuntu
@@ -3085,13 +3148,21 @@ Consider another example under the same command line:
 3 ENV CONT_IMG_VER $CONT_IMG_VER
 4 RUN echo $CONT_IMG_VER
 ```
+{% comment %}
 In this example, the cache miss occurs on line 3. The miss happens because
 the variable's value in the `ENV` references the `ARG` variable and that
 variable is changed through the command line. In this example, the `ENV`
 command causes the image to include the value.
+{% endcomment %}
+この例においてキャッシュミスは 3 行めで発生します。
+これは `ENV` における変数値が `ARG` 変数を参照しており、その変数値がコマンドラインから変更されるために起きます。
+この例では `ENV` コマンドがイメージに対して変数値を書き込むものとなります。
 
+{% comment %}
 If an `ENV` instruction overrides an `ARG` instruction of the same name, like
 this Dockerfile:
+{% endcomment %}
+`ENV` 命令が `ARG` 命令の同一変数名を上書きする例を見てみます。
 
 ```
 1 FROM ubuntu
@@ -3100,26 +3171,45 @@ this Dockerfile:
 4 RUN echo $CONT_IMG_VER
 ```
 
+{% comment %}
 Line 3 does not cause a cache miss because the value of `CONT_IMG_VER` is a
 constant (`hello`). As a result, the environment variables and values used on
 the `RUN` (line 4) doesn't change between builds.
+{% endcomment %}
+3 行めにおいてキャッシュミスは発生しません。
+これは `CONT_IMG_VER` が定数（`hello`）であるからです。
+その結果、4 行めの `RUN` 命令において用いられる環境変数およびその値は、ビルドの際に変更されません。
 
 ## ONBUILD
 
     ONBUILD [INSTRUCTION]
 
+{% comment %}
 The `ONBUILD` instruction adds to the image a *trigger* instruction to
 be executed at a later time, when the image is used as the base for
 another build. The trigger will be executed in the context of the
 downstream build, as if it had been inserted immediately after the
 `FROM` instruction in the downstream `Dockerfile`.
+{% endcomment %}
+`ONBUILD` 命令は、イメージに対して**トリガー**命令（trigger instruction）を追加します。
+トリガー命令は後々実行されるものであり、そのイメージが他のビルドにおけるベースイメージとして用いられたときに実行されます。
+このトリガー命令は、後続のビルドコンテキスト内で実行されます。
+後続の `Dockerfile` 内での `FROM` 命令の直後に、その命令が挿入されたかのようにして動作します。
 
+{% comment %}
 Any build instruction can be registered as a trigger.
+{% endcomment %}
+どのようなビルド命令でも、トリガー命令として登録することができます。
 
+{% comment %}
 This is useful if you are building an image which will be used as a base
 to build other images, for example an application build environment or a
 daemon which may be customized with user-specific configuration.
+{% endcomment %}
+この命令は、他のイメージのビルドに用いることを意図したイメージをビルドする際に利用できます。
+たとえばアプリケーションやデーモンの開発環境であって、ユーザー特有の設定を行うような場合です。
 
+{% comment %}
 For example, if your image is a reusable Python application builder, it
 will require application source code to be added in a particular
 directory, and it might require a build script to be called *after*
@@ -3129,12 +3219,28 @@ each application build. You could simply provide application developers
 with a boilerplate `Dockerfile` to copy-paste into their application, but
 that is inefficient, error-prone and difficult to update because it
 mixes with application-specific code.
+{% endcomment %}
+たとえば、繰り返し利用できる Python アプリケーション環境イメージがあるとします。
+そしてこのイメージにおいては、アプリケーションソースコードを所定のディレクトリに配置することが必要であって、さらにソースを配置した後にソースビルドを行うスクリプトを加えたいとします。
+このままでは `ADD` と `RUN` を単に呼び出すだけでは実現できません。
+それはアプリケーションソースコードがまだわかっていないからであり、ソースコードはアプリケーション環境ごとに異なるからです。
+アプリケーション開発者に向けて、ひながたとなる `Dockerfile` を提供して、コピーペーストした上でアプリケーションに組み入れるようにすることも考えられます。
+しかしこれでは不十分であり、エラーも起こしやすくなります。
+そしてアプリケーションに特有のコードが含まれることになるので、更新作業も大変になります。
 
+{% comment %}
 The solution is to use `ONBUILD` to register advance instructions to
 run later, during the next build stage.
+{% endcomment %}
+これを解決するには `ONBUILD` を利用します。
+後々実行する追加の命令を登録しておき、次のビルドステージにおいて実行させるものです。
 
+{% comment %}
 Here's how it works:
+{% endcomment %}
+これは以下のようにして動作します。
 
+{% comment %}
 1. When it encounters an `ONBUILD` instruction, the builder adds a
    trigger to the metadata of the image being built. The instruction
    does not otherwise affect the current build.
@@ -3150,25 +3256,53 @@ Here's how it works:
    completes and the build continues as usual.
 4. Triggers are cleared from the final image after being executed. In
    other words they are not inherited by "grand-children" builds.
+{% endcomment %}
+1. `ONBUILD` 命令があると、現在ビルドしているイメージのメタデータに対してトリガーが追加されます。
+   この命令は現在のビルドには影響を与えません。
+2. ビルドの最後に、トリガーの一覧がイメージマニフェスト内の `OnBuild` というキーのもとに保存されます。
+   この情報は `docker inspect` コマンドを使って確認することができます。
+3. 次のビルドにおけるベースイメージとして、このイメージを利用します。
+   その指定には `FROM` 命令を用います。
+   `FROM` 命令の処理の中で、後続ビルド処理が `ONBUILD` トリガーを見つけると、それが登録された順に実行していきます。
+   トリガーが 1 つでも失敗したら、`FROM` 命令は中断され、ビルドが失敗することになります。
+   すべてのトリガーが成功したら `FROM` 命令の処理が終わり、ビルド処理がその後に続きます。
+4. トリガーは、イメージが実行された後は、イメージ内から削除されます。
+   別の言い方をすれば、「孫」のビルドにまでは受け継がれないということです。
 
+{% comment %}
 For example you might add something like this:
+{% endcomment %}
+例として以下のようなことを追加する場合が考えられます。
 
     [...]
     ONBUILD ADD . /app/src
     ONBUILD RUN /usr/local/bin/python-build --dir /app/src
     [...]
 
+{% comment %}
 > **Warning**: Chaining `ONBUILD` instructions using `ONBUILD ONBUILD` isn't allowed.
+{% endcomment %}
+> **警告**: `ONBUILD` 命令をつなぎ合わせた命令、`ONBUILD ONBUILD` は実現することはできません。
 
+{% comment %}
 > **Warning**: The `ONBUILD` instruction may not trigger `FROM` or `MAINTAINER` instructions.
+{% endcomment %}
+> **警告**: `ONBUILD` 命令は `FROM` 命令や `MAINTAINER` 命令をトリガーとすることはできません。
 
 ## STOPSIGNAL
 
     STOPSIGNAL signal
 
+{% comment %}
 The `STOPSIGNAL` instruction sets the system call signal that will be sent to the container to exit.
 This signal can be a valid unsigned number that matches a position in the kernel's syscall table, for instance 9,
 or a signal name in the format SIGNAME, for instance SIGKILL.
+{% endcomment %}
+`STOPSIGNAL` 命令はシステムコールシグナルを設定するものであり、コンテナーが終了するときに送信されます。
+シグナルは負ではない整数値であり、カーネルのシステムコールテーブル内に合致するものを指定します。
+たとえば 9 などです。
+あるいは SIGNAME という形式のシグナル名を指定します。
+たとえば SIGKILL などです。
 
 ## HEALTHCHECK
 
@@ -3181,8 +3315,8 @@ The `HEALTHCHECK` instruction has two forms:
 * `HEALTHCHECK [OPTIONS] CMD command` (check container health by running a command inside the container)
 * `HEALTHCHECK NONE` (disable any healthcheck inherited from the base image)
 {% endcomment %}
-* `HEALTHCHECK [OPTIONS] CMD command` (check container health by running a command inside the container)
-* `HEALTHCHECK NONE` (disable any healthcheck inherited from the base image)
+* `HEALTHCHECK [OPTIONS] CMD command` （コンテナー内部でコマンドを実行し、コンテナーをヘルスチェック）
+* `HEALTHCHECK NONE` （ベースイメージが行うヘルスチェックを無効化）
 
 {% comment %}
 The `HEALTHCHECK` instruction tells Docker how to test a container to check that
@@ -3190,10 +3324,8 @@ it is still working. This can detect cases such as a web server that is stuck in
 an infinite loop and unable to handle new connections, even though the server
 process is still running.
 {% endcomment %}
-The `HEALTHCHECK` instruction tells Docker how to test a container to check that
-it is still working. This can detect cases such as a web server that is stuck in
-an infinite loop and unable to handle new connections, even though the server
-process is still running.
+`HEALTHCHECK` 命令は、コンテナーが動作していることをチェックする方法を指定するものです。
+この機能はたとえば、ウェブサーバーのプロセスが稼動はしているものの、無限ループに陥っていて新たな接続を受け入れられない状態を検知する場合などに利用できます。
 
 {% comment %}
 When a container has a healthcheck specified, it has a _health status_ in
@@ -3201,15 +3333,15 @@ addition to its normal status. This status is initially `starting`. Whenever a
 health check passes, it becomes `healthy` (whatever state it was previously in).
 After a certain number of consecutive failures, it becomes `unhealthy`.
 {% endcomment %}
-When a container has a healthcheck specified, it has a _health status_ in
-addition to its normal status. This status is initially `starting`. Whenever a
-health check passes, it becomes `healthy` (whatever state it was previously in).
-After a certain number of consecutive failures, it becomes `unhealthy`.
+コンテナーにヘルスチェックが設定されていると、通常のステータスに加えて**ヘルスステータス**を持つことになります。
+このステータスの初期値は `starting` です。
+ヘルスチェックが行われると、このステータスは（それまでにどんなステータスであっても）`healthy` となります。
+ある一定数、連続してチェックに失敗すると、そのステータスは `unhealty` となります。
 
 {% comment %}
 The options that can appear before `CMD` are:
 {% endcomment %}
-The options that can appear before `CMD` are:
+`CMD` より前に記述できるオプションは以下のものです。
 
 {% comment %}
 * `--interval=DURATION` (default: `30s`)
@@ -3217,31 +3349,29 @@ The options that can appear before `CMD` are:
 * `--start-period=DURATION` (default: `0s`)
 * `--retries=N` (default: `3`)
 {% endcomment %}
-* `--interval=DURATION` (default: `30s`)
-* `--timeout=DURATION` (default: `30s`)
-* `--start-period=DURATION` (default: `0s`)
-* `--retries=N` (default: `3`)
+* `--interval=DURATION` (デフォルト: `30s`)
+* `--timeout=DURATION` (デフォルト: `30s`)
+* `--start-period=DURATION` (デフォルト: `0s`)
+* `--retries=N` (デフォルト: `3`)
 
 {% comment %}
 The health check will first run **interval** seconds after the container is
 started, and then again **interval** seconds after each previous check completes.
 {% endcomment %}
-The health check will first run **interval** seconds after the container is
-started, and then again **interval** seconds after each previous check completes.
+ヘルスチェックは、コンテナーが起動した **interval** 秒後に最初に起動されます。
+そして直前のヘルスチェックが完了した **interval** 秒後に、再び実行されます。
 
 {% comment %}
 If a single run of the check takes longer than **timeout** seconds then the check
 is considered to have failed.
 {% endcomment %}
-If a single run of the check takes longer than **timeout** seconds then the check
-is considered to have failed.
+1 回のヘルスチェックが **timeout** 秒以上かかったとき、そのチェックは失敗したものとして扱われます。
 
 {% comment %}
 It takes **retries** consecutive failures of the health check for the container
 to be considered `unhealthy`.
 {% endcomment %}
-It takes **retries** consecutive failures of the health check for the container
-to be considered `unhealthy`.
+コンテナーに対するヘルスチェックが **retries** 回分、連続して失敗した場合は `unhealthy` とみなされます。
 
 {% comment %}
 **start period** provides initialization time for containers that need time to bootstrap.
@@ -3249,51 +3379,65 @@ Probe failure during that period will not be counted towards the maximum number 
 However, if a health check succeeds during the start period, the container is considered
 started and all consecutive failures will be counted towards the maximum number of retries.
 {% endcomment %}
-**start period** provides initialization time for containers that need time to bootstrap.
-Probe failure during that period will not be counted towards the maximum number of retries.
-However, if a health check succeeds during the start period, the container is considered
-started and all consecutive failures will be counted towards the maximum number of retries.
+**開始時間** （start period）は、コンテナーが起動するまでに必要となる初期化時間を設定します。
+この時間内にヘルスチェックの失敗が発生したとしても、 **retries** 数の最大を越えたかどうかの判断は行われません。
+ただしこの開始時間内にヘルスチェックが 1 つでも成功したら、コンテナーは起動済であるとみなされます。
+そこで、それ以降にヘルスチェックが失敗したら、**retries** 数の最大を越えたかどうかがカウントされます。
 
 {% comment %}
 There can only be one `HEALTHCHECK` instruction in a Dockerfile. If you list
 more than one then only the last `HEALTHCHECK` will take effect.
 {% endcomment %}
-There can only be one `HEALTHCHECK` instruction in a Dockerfile. If you list
-more than one then only the last `HEALTHCHECK` will take effect.
+1 つの Dockerfile に記述できる `HEALTHCHECK` 命令はただ 1 つです。
+複数の `HEALTHCHECK` を記述しても、最後の命令しか効果はありません。
 
 {% comment %}
 The command after the `CMD` keyword can be either a shell command (e.g. `HEALTHCHECK
 CMD /bin/check-running`) or an _exec_ array (as with other Dockerfile commands;
 see e.g. `ENTRYPOINT` for details).
 {% endcomment %}
-The command after the `CMD` keyword can be either a shell command (e.g. `HEALTHCHECK
-CMD /bin/check-running`) or an _exec_ array (as with other Dockerfile commands;
-see e.g. `ENTRYPOINT` for details).
+`CMD` キーワードの後ろにあるコマンドは、シェルコマンド（たとえば `HEALTHCHECK CMD /bin/check-running`）か、あるいは exec 形式の配列（他の Dockerfile コマンド、たとえば `ENTRYPOINT` にあるもの）のいずれかを指定します。
 
+{% comment %}
 The command's exit status indicates the health status of the container.
 The possible values are:
+{% endcomment %}
+そのコマンドの終了ステータスが、コンテナーのヘルスステータスを表わします。
+返される値は以下となります。
 
+{% comment %}
 - 0: success - the container is healthy and ready for use
 - 1: unhealthy - the container is not working correctly
 - 2: reserved - do not use this exit code
+{% endcomment %}
+- 0: 成功（success） - コンテナーは健康であり、利用が可能です。
+- 1: 不健康（unhealthy） - コンテナーは正常に動作していません。
+- 2: 予約（reserved） - このコードを戻り値として利用してはなりません。
 
+{% comment %}
 For example, to check every five minutes or so that a web-server is able to
 serve the site's main page within three seconds:
+{% endcomment %}
+たとえば 5 分間に 1 回のチェックとして、ウェブサーバーが 3 秒以内にサイトのメインページを提供できているかを確認するには、以下のようにします。
 
     HEALTHCHECK --interval=5m --timeout=3s \
       CMD curl -f http://localhost/ || exit 1
 
+{% comment %}
 To help debug failing probes, any output text (UTF-8 encoded) that the command writes
 on stdout or stderr will be stored in the health status and can be queried with
 `docker inspect`. Such output should be kept short (only the first 4096 bytes
 are stored currently).
+{% endcomment %}
+ヘルスチェックにが失敗しても、それをデバッグしやすくするために、そのコマンドが標準出力あるいは標準エラー出力へ書き込んだ文字列（UTF-8 エンコーディング）は、すべてヘルスステータス内に保存されます。
+`docker inspect` を使えば、すべて確認することができます。
+ただしその出力は切り詰められます（現時点においては最初の 4096 バイト分のみを出力します）。
 
 {% comment %}
 When the health status of a container changes, a `health_status` event is
 generated with the new status.
 {% endcomment %}
-When the health status of a container changes, a `health_status` event is
-generated with the new status.
+コンテナーのヘルスステータスが変更されると、`health_status` イベントが生成されて、新たなヘルスステータスになります。
 
 {% comment %}
 The `HEALTHCHECK` feature was added in Docker 1.12.
@@ -3311,23 +3455,28 @@ commands to be overridden. The default shell on Linux is `["/bin/sh", "-c"]`, an
 Windows is `["cmd", "/S", "/C"]`. The `SHELL` instruction *must* be written in JSON
 form in a Dockerfile.
 {% endcomment %}
-The `SHELL` instruction allows the default shell used for the *shell* form of
-commands to be overridden. The default shell on Linux is `["/bin/sh", "-c"]`, and on
-Windows is `["cmd", "/S", "/C"]`. The `SHELL` instruction *must* be written in JSON
-form in a Dockerfile.
+`SHELL` 命令は、各種コマンドのシェル形式において用いられるデフォルトのシェルを、上書き設定するために利用します。
+デフォルトのシェルは Linux 上では `["/bin/sh", "-c"]`、Windows 上では `["cmd", "/S", "/C"]` です。
+`SHELL` 命令は Dockerfile 内において JSON 形式で記述しなければなりません。
 
 {% comment %}
 The `SHELL` instruction is particularly useful on Windows where there are
 two commonly used and quite different native shells: `cmd` and `powershell`, as
 well as alternate shells available including `sh`.
 {% endcomment %}
-The `SHELL` instruction is particularly useful on Windows where there are
-two commonly used and quite different native shells: `cmd` and `powershell`, as
-well as alternate shells available including `sh`.
+`SHELL` 命令は特に Windows 上において利用されます。
+Windows には主に 2 つのネイティブなシェル、つまり `cmd` と `powershell` があり、両者はかなり異なります。
+しかも `sh` のような、さらに別のシェルも利用することができます。
 
+{% comment %}
 The `SHELL` instruction can appear multiple times. Each `SHELL` instruction overrides
 all previous `SHELL` instructions, and affects all subsequent instructions. For example:
+{% endcomment %}
+`SHELL` 命令は、何度でも記述できます。
+個々の `SHELL` 命令は、それより前の `SHELL` 命令の値を上書きし、それ以降の命令に効果を及ぼします。
+たとえば以下のとおりです。
 
+   {% comment %}
     FROM microsoft/windowsservercore
 
     # Executed as cmd /S /C echo default
@@ -3343,37 +3492,77 @@ all previous `SHELL` instructions, and affects all subsequent instructions. For 
     # Executed as cmd /S /C echo hello
     SHELL ["cmd", "/S", "/C"]
     RUN echo hello
+   {% endcomment %}
+    FROM microsoft/windowsservercore
 
+    # 以下のように実行： cmd /S /C echo default
+    RUN echo default
+
+    # 以下のように実行： cmd /S /C powershell -command Write-Host default
+    RUN powershell -command Write-Host default
+
+    # 以下のように実行： powershell -command Write-Host hello
+    SHELL ["powershell", "-command"]
+    RUN Write-Host hello
+
+    # 以下のように実行： cmd /S /C echo hello
+    SHELL ["cmd", "/S", "/C"]
+    RUN echo hello
+
+{% comment %}
 The following instructions can be affected by the `SHELL` instruction when the
 *shell* form of them is used in a Dockerfile: `RUN`, `CMD` and `ENTRYPOINT`.
+{% endcomment %}
+Dockerfile において `RUN`、`CMD`、`ENTRYPOINT` の各コマンドをシェル形式で記述した際には、`SHELL` 命令の設定による影響が及びます。
 
+{% comment %}
 The following example is a common pattern found on Windows which can be
 streamlined by using the `SHELL` instruction:
+{% endcomment %}
+以下に示す例は、Windows 上において見られる普通の実行パターンですが、`SHELL` 命令を使って簡単に実現することができます。
 
     ...
     RUN powershell -command Execute-MyCmdlet -param1 "c:\foo.txt"
     ...
 
+{% comment %}
 The command invoked by docker will be:
+{% endcomment %}
+Docker によって実行されるコマンドは以下となります。
 
     cmd /S /C powershell -command Execute-MyCmdlet -param1 "c:\foo.txt"
 
+{% comment %}
 This is inefficient for two reasons. First, there is an un-necessary cmd.exe command
 processor (aka shell) being invoked. Second, each `RUN` instruction in the *shell*
 form requires an extra `powershell -command` prefixing the command.
+{% endcomment %}
+これは効率的ではなく、そこには 2 つの理由があります。
+1 つめは、コマンドプロセッサー cmd.exe（つまりはシェル）が不要に呼び出されているからです。
+2 つめは、シェル形式の `RUN` 命令において、常に `powershell -command` を各コマンドの頭につけて実行しなければならないからです。
 
+{% comment %}
 To make this more efficient, one of two mechanisms can be employed. One is to
 use the JSON form of the RUN command such as:
+{% endcomment %}
+これを効率化するには、2 つあるメカニズムの 1 つを取り入れることです。
+1 つは、RUN コマンドの JSON 形式を使って、以下のようにします。
 
     ...
     RUN ["powershell", "-command", "Execute-MyCmdlet", "-param1 \"c:\\foo.txt\""]
     ...
 
+{% comment %}
 While the JSON form is unambiguous and does not use the un-necessary cmd.exe,
 it does require more verbosity through double-quoting and escaping. The alternate
 mechanism is to use the `SHELL` instruction and the *shell* form,
 making a more natural syntax for Windows users, especially when combined with
 the `escape` parser directive:
+{% endcomment %}
+JSON 形式を使えば、あいまいさはなくなり、不要な cmd.exe を使うこともなくなります。
+しかしダブルクォートやエスケープを行うことも必要となり、より多くを記述することにもなります。
+もう 1 つの方法は `SHELL` 命令とシェル形式を使って、Windows ユーザーにとって、より自然な文法で実現するやり方です。
+特にパーサーディレクティブ `escape` を組み合わせて実現します。
 
     # escape=`
 
@@ -3383,7 +3572,10 @@ the `escape` parser directive:
     ADD Execute-MyCmdlet.ps1 c:\example\
     RUN c:\example\Execute-MyCmdlet -sample 'hello world'
 
+{% comment %}
 Resulting in:
+{% endcomment %}
+これは以下のようになります。
 
     PS E:\docker\build\shell> docker build -t shell .
     Sending build context to Docker daemon 4.096 kB
@@ -3418,27 +3610,56 @@ Resulting in:
     Successfully built 8e559e9bf424
     PS E:\docker\build\shell>
 
+{% comment %}
 The `SHELL` instruction could also be used to modify the way in which
 a shell operates. For example, using `SHELL cmd /S /C /V:ON|OFF` on Windows, delayed
 environment variable expansion semantics could be modified.
+{% endcomment %}
+`SHELL` 命令はまた、シェルの動作を変更する際にも利用することができます。
+たとえば Windows 上において `SHELL cmd /S /C /V:ON|OFF` を実行すると、遅延環境変数の展開方法を変更することができます。
 
+{% comment %}
 The `SHELL` instruction can also be used on Linux should an alternate shell be
 required such as `zsh`, `csh`, `tcsh` and others.
+{% endcomment %}
+`SHELL` 命令は Linux において、`zsh`、`csh`、`tcsh` などのシェルが必要となる場合にも利用することができます。
 
+{% comment %}
 The `SHELL` feature was added in Docker 1.12.
+{% endcomment %}
+`SHELL` による機能は Docker 1.12 において追加されました。
 
+{% comment %}
 ## External implementation features
+{% endcomment %}
+## 外部実装機能
+{: #external-implementation-features }
 
+{% comment %}
 This feature is only available when using the  [BuildKit](#buildkit) backend.
+{% endcomment %}
+この機能は [BuildKit](#buildkit) バックエンドを用いている場合にのみ利用可能です。
 
+{% comment %}
 Docker build supports experimental features like cache mounts, build secrets and
 ssh forwarding that are enabled by using an external implementation of the
 builder with a syntax directive. To learn about these features, [refer to the documentation in BuildKit repository](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/experimental.md).
+{% endcomment %}
+Docker によるビルド処理においては、実験的な機能として、キャッシュマウント、ビルドシークレット、ssh フォワーディングなどをサポートしており、これらは文法ディレクティブを利用した外部実装機能を通じて実現しています。
+この機能に関する詳細は、[BuildKit リポジトリ内のドキュメント](https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/experimental.md)を参照してください。
 
+{% comment %}
 ## Dockerfile examples
+{% endcomment %}
+## Dockerfile 記述例
+{: #dockerfile-examples }
 
+{% comment %}
 Below you can see some examples of Dockerfile syntax. If you're interested in
 something more realistic, take a look at the list of [Dockerization examples](https://docs.docker.com/engine/examples/).
+{% endcomment %}
+以下では Dockerfile の文法例をいくつか示します。
+より実践的なところに興味がある場合は [Docker 化のサンプル](https://docs.docker.com/engine/examples/)を参照してください。
 
 ```
 # Nginx
