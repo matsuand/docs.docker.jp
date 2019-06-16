@@ -15,30 +15,39 @@ toc_min: 1
 ## リファレンスとガイドライン
 {: #reference-and-guidelines }
 
+{% comment %}
 These topics describe version 3 of the Compose file format. This is the newest
 version.
+{% endcomment %}
+ここに示す内容は Compose ファイルフォーマット、バージョン 3 です。
+これが最新バージョンです。
 
 {% comment %}
 ## Compose and Docker compatibility matrix
 {% endcomment %}
-## Compose and Docker compatibility matrix
+## Compose と Docker の互換マトリックス
 {: #compose-and-docker-compatibility-matrix }
 
+{% comment %}
 There are several versions of the Compose file format – 1, 2, 2.x, and 3.x. The
 table below is a quick look. For full details on what each version includes and
 how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
+{% endcomment %}
+Compose ファイルフォーマットには 1、2、2.x、3.x という複数のバージョンがあります。
+その様子は以下の一覧表に見ることができます。
+各バージョンにて何が増えたのか、どのようにアップグレードしたのか、といった詳細については **[バージョンとアップグレードについて](compose-versioning.md)**を参照してください。
 
 {% include content/compose-matrix.md %}
 
 {% comment %}
 ## Compose file structure and examples
 {% endcomment %}
-## Compose file structure and examples
+## Compose ファイルの構造と記述例
 {: #compose-file-structure-and-examples }
 
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
-    Example Compose file version 3
+    Compose ファイル バージョン 3 の記述例
     <i class="chevron fa fa-fw"></i></div>
     <div class="collapse block" id="collapseSample1">
 <pre><code>
@@ -138,64 +147,116 @@ volumes:
     </div>
 </div>
 
+{% comment %}
 The topics on this reference page are organized alphabetically by top-level key
 to reflect the structure of the Compose file itself. Top-level keys that define
 a section in the configuration file such as `build`, `deploy`, `depends_on`,
 `networks`, and so on, are listed with the options that support them as
 sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the
 Compose file.
+{% endcomment %}
+このリファレンスページで取り上げているトピックは、Compose ファイルの構造に合わせて、最上位のキー項目をアルファベット順に示しています。
+最上位のキー項目とは、設定ファイルにおいてのセクションを定義するものであり、`build`、`deploy`、`depends_on`、`networks`などのことです。
+そのキー項目ごとに、それをサポートするオプションをサブトピックとして説明しています。
+これは Compose ファイルにおいて `<key>: <option>: <value>` という形式のインデント構造に対応します。
 
+{% comment %}
 A good place to start is the [Getting Started](/get-started/index.md) tutorial
 which uses version 3 Compose stack files to implement multi-container apps,
 service definitions, and swarm mode. Here are some Compose files used in the
 tutorial.
+{% endcomment %}
+理解しやすいのは、[はじめよう](/get-started/index.md)にて示しているチュートリアルです。
+そこでは Compose ファイルのバージョン 3 を使って、マルチコンテナーアプリケーション、サービス定義、スウォームモードを実現しています。
+チュートリアルで利用している Compose ファイルは以下のものです。
 
+{% comment %}
 - [Your first docker-compose.yml File](/get-started/part3.md#your-first-docker-composeyml-file)
+{% endcomment %}
+- [はじめての docker-compose.yml ファイル](/get-started/part3.md#your-first-docker-composeyml-file)
 
+{% comment %}
 - [Add a new service and redeploy](/get-started/part5.md#add-a-new-service-and-redeploy)
+{% endcomment %}
+- [サービスの新規追加と再デプロイ](/get-started/part5.md#add-a-new-service-and-redeploy)
 
+{% comment %}
 Another good reference is the Compose file for the voting app sample used in the
 [Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
 topic on [Deploying an app to a
 Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md). This is also shown on the accordion at the top of this section.
+{% endcomment %}
+別のリファレンスとして [Deploying an app to a
+Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md) の中のトピック [Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/) において利用されている投票アプリのサンプルの Compose ファイルが参考になります。
+これも本節の上部にあるプルダウンのコードの中に示しています。
 
 {% comment %}
 ## Service configuration reference
 {% endcomment %}
-## Service configuration reference
+## サービス設定リファレンス
 {: #service-configuration-reference }
 
+{% comment %}
 The Compose file is a [YAML](http://yaml.org/) file defining
 [services](#service-configuration-reference),
 [networks](#network-configuration-reference) and
 [volumes](#volume-configuration-reference).
 The default path for a Compose file is `./docker-compose.yml`.
+{% endcomment %}
+Compose ファイルは [YAML](http://yaml.org/) 形式のファイルであり、[サービス（services）](#service-configuration-reference)、[ネットワーク（networks）](#network-configuration-reference)、[ボリューム（volumes）](#volume-configuration-reference)を定義します。
+Compose ファイルのデフォルトパスは `./docker-compose.yml` です。
 
+{% comment %}
 >**Tip**: You can use either a `.yml` or `.yaml` extension for this file.
 They both work.
+{% endcomment %}
+>**ヒント**: このファイルの拡張子は `.yml` と `.yaml` のどちらでも構いません。
+いずれでも動作します。
 
+{% comment %}
 A service definition contains configuration that is applied to each
 container started for that service, much like passing command-line parameters to
 `docker container create`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
+{% endcomment %}
+サービスの定義とは、そのサービスを起動する各コンテナーに適用される設定を行うことです。
+コマンドラインから `docker container create` のパラメーターを受け渡すことと、非常によく似ています。
+同様に、ネットワークの定義、ボリュームの定義は、それぞれ `docker network create` と `docker volume create` のコマンドに対応づくものです。
 
+{% comment %}
 As with `docker container create`, options specified in the Dockerfile, such as `CMD`,
 `EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
+{% endcomment %}
+`docker container create` に関しても同じことが言えますが、Dockerfile にて指定された `CMD`、`EXPOSE`、`VOLUME`、`ENV` のようなオプションはデフォルトでは維持されます。したがって `docker-compose.yml` の中で再度設定する必要はありません。
 
+{% comment %}
 You can use environment variables in configuration values with a Bash-like
 `${VARIABLE}` syntax - see
 [variable substitution](#variable-substitution) for full details.
+{% endcomment %}
+設定を記述する際には環境変数を用いることができます。
+環境変数は Bash 風に `${VARIABLE}` のように記述します。
+詳しくは[変数の置換](#variable-substitution)を参照してください。
 
+{% comment %}
 This section contains a list of all configuration options supported by a service
 definition in version 3.
+{% endcomment %}
+このセクションでは、バージョン 3 のサービス定義においてサポートされている設定オプションをすべて説明しています。
 
 ### build
 
+{% comment %}
 Configuration options that are applied at build time.
+{% endcomment %}
+この設定オプションはビルド時に適用されます。
 
+{% comment %}
 `build` can be specified either as a string containing a path to the build
 context:
+{% endcomment %}
+`build` の指定方法の 1 つは、ビルドコンテキストへのパスを表わす文字列を指定します。
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -204,8 +265,11 @@ services:
     build: ./dir
 ```
 
+{% comment %}
 Or, as an object with the path specified under [context](#context) and
 optionally [Dockerfile](#dockerfile) and [args](#args):
+{% endcomment %}
+あるいは [context](#context) の指定のもとにパスを指定し、オプションとして [Dockerfile](#dockerfile) や [args](#args) を記述する方法をとります。
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -218,30 +282,52 @@ services:
         buildno: 1
 ```
 
+{% comment %}
 If you specify `image` as well as `build`, then Compose names the built image
 with the `webapp` and optional `tag` specified in `image`:
+{% endcomment %}
+`build` に加えて `image` も指定した場合、Compose はビルドイメージに名前をつけます。
+たとえば以下のように `image` を指定すると、イメージ名を `webapp`、オプションのタグを `tag` という名前にします。
 
 ```yaml
 build: ./dir
 image: webapp:tag
 ```
 
+{% comment %}
 This results in an image named `webapp` and tagged `tag`, built from `./dir`.
+{% endcomment %}
+結果としてイメージ名は `webapp` であり `tag` というタグづけが行われます。
+そしてこのイメージは `./dir` から作り出されます。
 
+{% comment %}
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file. The `docker stack` command accepts only pre-built images.
+{% endcomment %}
+> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> `docker stack` コマンドは、ビルド済のイメージのみを受け付けるためです。
 
 #### context
 
+{% comment %}
 Either a path to a directory containing a Dockerfile, or a url to a git repository.
+{% endcomment %}
+Dockerfile を含むディレクトリへのパスか、あるいは git リポジトリの URL を設定します。
 
+{% comment %}
 When the value supplied is a relative path, it is interpreted as relative to the
 location of the Compose file. This directory is also the build context that is
 sent to the Docker daemon.
+{% endcomment %}
+設定された記述が相対パスを表わしている場合、Compose ファイルのあるディレクトリからの相対パスとして解釈されます。
+このディレクトリはビルドコンテキストでもあり、Docker デーモンへ送信されるディレクトリです。
 
+{% comment %}
 Compose builds and tags it with a generated name, and uses that image
 thereafter.
+{% endcomment %}
+Compose は指定された名前により、イメージのビルドとタグづけを行い、後々これを利用します。
 
 ```yaml
 build:
@@ -250,10 +336,17 @@ build:
 
 #### dockerfile
 
+{% comment %}
 Alternate Dockerfile.
+{% endcomment %}
+別の Dockerfile を指定します。
 
+{% comment %}
 Compose uses an alternate file to build with. A build path must also be
 specified.
+{% endcomment %}
+Compose は指定された別の Dockerfile を使ってビルドを行います。
+このときは、ビルドパスを同時に指定しなければなりません。
 
 ```yaml
 build:
@@ -263,10 +356,17 @@ build:
 
 #### args
 
+{% comment %}
 Add build arguments, which are environment variables accessible only during the
 build process.
+{% endcomment %}
+ビルド引数を追加します。
+これは環境変数であり、ビルド処理の間だけ利用可能なものです。
 
+{% comment %}
 First, specify the arguments in your Dockerfile:
+{% endcomment %}
+Dockerfile 内にてはじめにビルド引数を指定します。
 
 ```Dockerfile
 ARG buildno
@@ -276,8 +376,12 @@ RUN echo "Build number: $buildno"
 RUN echo "Based on commit: $gitcommithash"
 ```
 
+{% comment %}
 Then specify the arguments under the `build` key. You can pass a mapping
 or a list:
+{% endcomment %}
+そして `build` キーのもとにその引数を指定します。
+指定は個々をマッピングする形式か、リストとする形式が可能です。
 
 ```yaml
 build:
@@ -295,13 +399,21 @@ build:
     - gitcommithash=cdc3b19
 ```
 
+{% comment %}
 > **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
 > If you need an argument to be available in both places, also specify it under the `FROM` instruction.
 > See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
+{% endcomment %}
+> **メモ**: Dockerfile にて `FROM` 命令の前に `ARG` 命令を指定した場合、`FROM` 以降のビルド命令において `ARG` の値は利用することができません。
+> `FROM` の前後どこでも、そして特に `FROM` 命令の後でもその値を利用したい場合は、[ARG と FROM の関連について](/engine/reference/builder/#understand-how-arg-and-from-interact)を参照してください。
 
+{% comment %}
 You can omit the value when specifying a build argument, in which case its value
 at build time is the value in the environment where Compose is running.
+{% endcomment %}
+ビルド引数の指定にあたって、その値設定を省略することができます。
+この場合、ビルド時におけるその値は、Compose を起動している環境での値になります。
 
 ```yaml
 args:
@@ -309,14 +421,24 @@ args:
   - gitcommithash
 ```
 
+{% comment %}
 > **Note**: YAML boolean values (`true`, `false`, `yes`, `no`, `on`, `off`) must
 > be enclosed in quotes, so that the parser interprets them as strings.
+{% endcomment %}
+> **メモ**: YAML のブール値 (`true`, `false`, `yes`, `no`, `on`, `off`) を用いる場合は、クォートで囲む必要があります。
+> そうすることで、これらの値は文字列として解釈されます。
 
 #### cache_from
 
+{% comment %}
 > **Note**: This option is new in v3.2
+{% endcomment %}
+> **メモ**: このオプションはバージョン 3.2 において新たに追加されました。
 
+{% comment %}
 A list of images that the engine uses for cache resolution.
+{% endcomment %}
+エンジンがキャッシュ解決のために利用するイメージを設定します。
 
 ```yaml
 build:
@@ -328,13 +450,24 @@ build:
 
 #### labels
 
+{% comment %}
 > **Note**: This option is new in v3.3
+{% endcomment %}
+> **メモ**: このオプションはバージョン 3.3 において新たに追加されました。
 
+{% comment %}
 Add metadata to the resulting image using [Docker labels](/engine/userguide/labels-custom-metadata.md).
 You can use either an array or a dictionary.
+{% endcomment %}
+[Docker labels](/engine/userguide/labels-custom-metadata.md) を使ってイメージにメタデータを追加します。
+配列形式と辞書形式のいずれかにより指定します。
 
+{% comment %}
 We recommend that you use reverse-DNS notation to prevent your labels from conflicting with
 those used by other software.
+{% endcomment %}
+ここでは逆 DNS 記法とすることをお勧めします。
+この記法にしておけば、他のソフトウェアが用いるラベルとの競合が避けられるからです。
 
 ```yaml
 build:
@@ -356,11 +489,18 @@ build:
 
 #### shm_size
 
+{% comment %}
 > Added in [version 3.5](compose-versioning.md#version-35) file format
+{% endcomment %}
+> ファイルフォーマット[バージョン 3.5](compose-versioning.md#version-35) において追加されました。
 
+{% comment %}
 Set the size of the `/dev/shm` partition for this build's containers. Specify
 as an integer value representing the number of bytes or as a string expressing
 a [byte value](#specifying-byte-values).
+{% endcomment %}
+このビルドコンテナーにおける `/dev/shm` パーティションのサイズを設定します。
+指定する値は、バイト数を表わす整数値か、あるいは[バイト表現](#specifying-byte-values)によって表わされる文字列とします。
 
 ```yaml
 build:
@@ -376,11 +516,17 @@ build:
 
 #### target
 
+{% comment %}
 > Added in [version 3.4](compose-versioning.md#version-34) file format
+{% endcomment %}
+> ファイルフォーマット[バージョン 3.4](compose-versioning.md#version-34) において追加されました。
 
+{% comment %}
 Build the specified stage as defined inside the `Dockerfile`. See the
 [multi-stage build docs](/engine/userguide/eng-image/multistage-build.md) for
 details.
+{% endcomment %}
+`Dockerfile` 内部に定義されている特定のステージをビルドする方法は、[マルチステージビルド](/engine/userguide/eng-image/multistage-build.md)を参照してください。
 
 ```yaml
 build:
@@ -390,8 +536,12 @@ build:
 
 ### cap_add, cap_drop
 
+{% comment %}
 Add or drop container capabilities.
 See `man 7 capabilities` for a full list.
+{% endcomment %}
+コンテナーケーパビリティーの機能を追加または削除します。
+詳細な一覧は `man 7 capabilities` を参照してください。
 
 ```yaml
 cap_add:
@@ -402,32 +552,47 @@ cap_drop:
   - SYS_ADMIN
 ```
 
+{% comment %}
 > **Note**: These options are ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
+{% endcomment %}
+> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
 
 ### cgroup_parent
 
+{% comment %}
 Specify an optional parent cgroup for the container.
+{% endcomment %}
+コンテナーに対して、オプションで指定する親の cgroup を指定します。
 
 ```yaml
 cgroup_parent: m-executor-abcd
 ```
 
+{% comment %}
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
+{% endcomment %}
+> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
 
 ### command
 
+{% comment %}
 Override the default command.
+{% endcomment %}
+デフォルトコマンドを上書きします。
 
 ```yaml
 command: bundle exec thin -p 3000
 ```
 
+{% comment %}
 The command can also be a list, in a manner similar to
 [dockerfile](/engine/reference/builder.md#cmd):
+{% endcomment %}
+コマンドは [dockerfile](/engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
 
 ```yaml
 command: ["bundle", "exec", "thin", "-p", "3000"]
@@ -435,22 +600,43 @@ command: ["bundle", "exec", "thin", "-p", "3000"]
 
 ### configs
 
+{% comment %}
 Grant access to configs on a per-service basis using the per-service `configs`
 configuration. Two different syntax variants are supported.
+{% endcomment %}
+サービスごとの `configs` を利用して、サービス単位での configs 設定を許可します。
+2 つの異なる文法がサポートされています。
 
+{% comment %}
 > **Note**: The config must already exist or be
 > [defined in the top-level `configs` configuration](#configs-configuration-reference)
 > of this stack file, or stack deployment fails.
+{% endcomment %}
+> **メモ**: config は既に定義済であるか、あるいは [最上位の `configs` が定義済](#configs-configuration-reference) である必要があります。
+> そうでない場合、このファイルによるデプロイが失敗します。
 
+{% comment %}
 For more information on configs, see [configs](/engine/swarm/configs.md).
+{% endcomment %}
+configs に関する詳細は [configs](/engine/swarm/configs.md) を参照してください。
 
+{% comment %}
 #### Short syntax
+{% endcomment %}
+#### 短い文法
+{: #short-syntax }
 
+{% comment %}
 The short syntax variant only specifies the config name. This grants the
 container access to the config and mounts it at `/<config_name>`
 within the container. The source name and destination mountpoint are both set
 to the config name.
+{% endcomment %}
+短い文法の場合には config 名を指定するのみです。
+これを行うと、コンテナー内において `/<config_name>` というディレクトリをマウントしてアクセス可能とします。
+マウント元の名前とマウント名はともに config 名となります。
 
+{% comment %}
 The following example uses the short syntax to grant the `redis` service
 access to the `my_config` and `my_other_config` configs. The value of
 `my_config` is set to the contents of the file `./my_config.txt`, and
@@ -458,9 +644,19 @@ access to the `my_config` and `my_other_config` configs. The value of
 already been defined in Docker, either by running the `docker config create`
 command or by another stack deployment. If the external config does not exist,
 the stack deployment fails with a `config not found` error.
+{% endcomment %}
+以下の例では短い文法を用います。
+`redis` サービスが 2 つの configs ファイル `my_config` と `my_other_config` にアクセスできるようにするものです。
+`my_config` へは、ファイル `./my_config.txt` の内容を設定しています。
+そして `my_other_config` は外部リソースとして定義します。
+これはつまり Docker によりすでに定義されていることを意味し、`docker config create` の実行により、あるいは別のスタックデプロイメントにより指定されます。
+外部 config が存在していない場合は、スタックデプロイメントは失敗し `config not found` というエラーになります。
 
+{% comment %}
 > **Note**: `config` definitions are only supported in version 3.3 and higher
 >  of the compose file format.
+{% endcomment %}
+> **メモ**: `config` 定義は、Compose ファイルフォーマットのバージョン 3.3 またはそれ以上においてサポートされています。
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -479,11 +675,19 @@ configs:
     external: true
 ```
 
+{% comment %}
 #### Long syntax
+{% endcomment %}
+#### 長い文法
+{: #long-syntax }
 
+{% comment %}
 The long syntax provides more granularity in how the config is created within
 the service's task containers.
+{% endcomment %}
+長い文法は、サービスのタスクコンテナー内にて生成する config をより細かく設定します。
 
+{% comment %}
 - `source`: The name of the config as it exists in Docker.
 - `target`: The path and name of the file to be mounted in the service's
   task containers. Defaults to `/<source>` if not specified.
@@ -498,11 +702,31 @@ the service's task containers.
   UNIX file permission modes, you may find this
   [permissions calculator](http://permissions-calculator.org/){: target="_blank" class="_" }
   useful.
+{% endcomment %}
+- `source`: Docker 内に設定する config 名。
+- `target`: サービスのタスクコンテナー内にマウントされるファイルパス名。
+  指定されない場合のデフォルトは `/<source>`。
+- `uid` と `gid`: サービスのタスクコンテナー内にマウントされる config ファイルの所有者を表わす UID 値および GID 値。
+  指定されない場合のデフォルトは、Linux においては `0`。
+  Windows においてはサポートされません。
+- `mode`: サービスのタスクコンテナー内にマウントされる config ファイルのパーミッション。
+  8 進数表記。
+  たとえば `0444` であればすべて読み込み可。
+  デフォルトは `0444`。
+  Configs は、テンポラリなファイルシステム上にマウントされるため、書き込み可能にはできません。
+  したがって書き込みビットを設定しても無視されます。
+  実行ビットは設定できます。
+  UNIX のファイルパーミッションモードに詳しくない方は、[パーミッション計算機](http://permissions-calculator.org/){: target="_blank" class="_" }を参照してください。
 
+{% comment %}
 The following example sets the name of `my_config` to `redis_config` within the
 container, sets the mode to `0440` (group-readable) and sets the user and group
 to `103`. The `redis` service does not have access to the `my_other_config`
 config.
+{% endcomment %}
+以下の例では `my_config` という名前の config を、コンテナー内では `redis_config` として設定します。
+そしてモードを `0440`（グループが読み込み可能）とし、ユーザーとグループは `103` とします。
+`redis` サービスは `my_other_config` へはアクセスしません。
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -524,33 +748,63 @@ configs:
     external: true
 ```
 
+{% comment %}
 You can grant a service access to multiple configs and you can mix long and
 short syntax. Defining a config does not imply granting a service access to it.
+{% endcomment %}
+1 つのサービスを複数の configs にアクセスする設定とすることもできます。
+また短い文法、長い文法を混在することも可能です。
+config を定義しただけでは、サービスに対して config へのアクセスを許可するものにはなりません。
 
 ### container_name
 
+{% comment %}
 Specify a custom container name, rather than a generated default name.
+{% endcomment %}
+デフォルトのコンテナー名ではない、独自のコンテナー名を設定します。
 
 ```yaml
 container_name: my-web-container
 ```
 
+{% comment %}
 Because Docker container names must be unique, you cannot scale a service beyond
 1 container if you have specified a custom name. Attempting to do so results in
 an error.
+{% endcomment %}
+Docker コンテナー名はユニークである必要があります。
+そこで独自のコンテナー名を設定したときは、サービスをスケールアップして複数コンテナーとすることはできません。
+これを行うとエラーが発生します。
 
+{% comment %}
 > **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
+{% endcomment %}
+> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
 
 ### credential_spec
 
+{% comment %}
 > **Note**: this option was added in v3.3.
+{% endcomment %}
+> **メモ**: このオプションは v3.3 で追加されました。
 
+{% comment %}
 Configure the credential spec for managed service account. This option is only
 used for services using Windows containers. The `credential_spec` must be in the
 format `file://<filename>` or `registry://<value-name>`.
+{% endcomment %}
+管理サービスアカウントに対する資格情報スペック（`credential_spec`）を設定します。
+このオプションは Windows コンテナーを利用するサービスにおいてのみ用いられます。
+`credential_spec` の書式は `file://<filename>` または `registry://<value-name>` でなければなりません。
 
+{% comment %}
+When using `file:`, the referenced file must be present in the `CredentialSpecs`
+subdirectory in the Docker data directory, which defaults to `C:\ProgramData\Docker\`
+on Windows. The following example loads the credential spec from a file named
+`C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json`:
+{% endcomment %}
 When using `file:`, the referenced file must be present in the `CredentialSpecs`
 subdirectory in the Docker data directory, which defaults to `C:\ProgramData\Docker\`
 on Windows. The following example loads the credential spec from a file named
@@ -2076,8 +2330,17 @@ format that looks like this:
 The supported units are `us`, `ms`, `s`, `m` and `h`.
 
 
+{% comment %}
 ## Specifying byte values
+{% endcomment %}
+## バイト値の表現
+{: #specifying-byte-values }
 
+{% comment %}
+Some configuration options, such as the `shm_size` sub-option for
+[`build`](#build), accept a byte value as a string in a format
+that looks like this:
+{% endcomment %}
 Some configuration options, such as the `shm_size` sub-option for
 [`build`](#build), accept a byte value as a string in a format
 that looks like this:
@@ -2088,12 +2351,28 @@ that looks like this:
     300m
     1gb
 
+{% comment %}
+The supported units are `b`, `k`, `m` and `g`, and their alternative notation `kb`,
+`mb` and `gb`. Decimal values are not supported at this time.
+{% endcomment %}
 The supported units are `b`, `k`, `m` and `g`, and their alternative notation `kb`,
 `mb` and `gb`. Decimal values are not supported at this time.
 
 
+{% comment %}
 ## Volume configuration reference
+{% endcomment %}
+## ボリューム設定リファレンス
+{: #volume-configuration-reference }
 
+{% comment %}
+While it is possible to declare [volumes](#volumes) on the file as part of the
+service declaration, this section allows you to create named volumes (without
+relying on `volumes_from`) that can be reused across multiple services, and are
+easily retrieved and inspected using the docker command line or API. See the
+[docker volume](/engine/reference/commandline/volume_create.md) subcommand
+documentation for more information.
+{% endcomment %}
 While it is possible to declare [volumes](#volumes) on the file as part of the
 service declaration, this section allows you to create named volumes (without
 relying on `volumes_from`) that can be reused across multiple services, and are

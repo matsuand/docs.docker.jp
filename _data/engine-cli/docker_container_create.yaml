@@ -1,6 +1,6 @@
 command: docker container create
-short: Create a new container
-long: Create a new container
+short: 新たなコンテナーを生成します。
+long: 新たなコンテナーを生成します。
 usage: docker container create [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker container
 plink: docker_container.yaml

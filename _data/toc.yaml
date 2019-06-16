@@ -185,9 +185,9 @@ guides:
           - path: /develop/develop-images/baseimages/
             title: ベースイメージの生成
           - path: /develop/develop-images/build_enhancements/
-            title: Docker build enhancements for 18.09
+            title: 18.09 での Docker build の拡張
           - path: /develop/develop-images/multistage-build/
-            title: Use multi-stage builds
+            title: マルチステージビルドの利用
           - path: /engine/reference/builder/
             title: Dockerfile リファレンス
             nosync: true

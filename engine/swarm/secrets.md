@@ -1,11 +1,27 @@
 ---
-title: Manage sensitive data with Docker secrets
+title: Docker secrets を使った機密情報の管理
 description: How to securely store, retrieve, and use sensitive data with Docker services
 keywords: swarm, secrets, credentials, sensitive strings, sensitive data, security, encryption, encryption at rest
 ---
 
+{% comment %}
 ## About secrets
+{% endcomment %}
+## secrets について
+{: #about-secrets }
 
+{% comment %}
+In terms of Docker Swarm services, a _secret_ is a blob of data, such as a
+password, SSH private key, SSL certificate, or another piece of data that should
+not be transmitted over a network or stored unencrypted in a Dockerfile or in
+your application's source code. In Docker 1.13 and higher, you can use Docker
+_secrets_ to centrally manage this data and securely transmit it to only those
+containers that need access to it. Secrets are encrypted during transit and at
+rest in a Docker swarm. A given secret is only accessible to those services
+which have been granted explicit access to it, and only while those service
+tasks are running.
+{% endcomment %}
+Docker Swarm サービスにおいて secret とは、パスワード、SSH 秘密鍵、SSL 証明書などのようなデータ
 In terms of Docker Swarm services, a _secret_ is a blob of data, such as a
 password, SSH private key, SSL certificate, or another piece of data that should
 not be transmitted over a network or stored unencrypted in a Dockerfile or in

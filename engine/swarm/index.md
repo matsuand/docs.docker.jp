@@ -1,12 +1,21 @@
 ---
-description: Docker Engine swarm mode overview
+description: Docker Engine スウォームモードの概要
 keywords: docker, container, cluster, swarm
-title: Swarm mode overview
+title: スウォームモード概要
 ---
 
+{% comment %}
+To use Docker in swarm mode, install Docker. See
+[installation instructions](/install/) for all operating systems and platforms.
+{% endcomment %}
 To use Docker in swarm mode, install Docker. See
 [installation instructions](/install/) for all operating systems and platforms.
 
+{% comment %}
+Current versions of Docker include *swarm mode* for natively managing a cluster
+of Docker Engines called a *swarm*. Use the Docker CLI to create a swarm, deploy
+application services to a swarm, and manage swarm behavior.
+{% endcomment %}
 Current versions of Docker include *swarm mode* for natively managing a cluster
 of Docker Engines called a *swarm*. Use the Docker CLI to create a swarm, deploy
 application services to a swarm, and manage swarm behavior.

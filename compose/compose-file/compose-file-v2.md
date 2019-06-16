@@ -1,53 +1,104 @@
 ---
-description: Compose file reference
+description: Compose ファイルリファレンス
 keywords: fig, composition, compose version 3, docker
 redirect_from:
 - /compose/yml
-title: Compose file version 2 reference
+title: Compose ファイル バージョン 2 リファレンス
 toc_max: 4
 toc_min: 1
 ---
 
+{% comment %}
 ## Reference and guidelines
+{% endcomment %}
+## リファレンスとガイドライン
+{: #reference-and-guidelines }
 
+{% comment %}
 These topics describe version 2 of the Compose file format.
+{% endcomment %}
+ここに示す内容は Compose ファイルフォーマット、バージョン 2 です。
 
+{% comment %}
 ## Compose and Docker compatibility matrix
+{% endcomment %}
+## Compose と Docker の互換マトリックス
+{: #compose-and-docker-compatibility-matrix }
 
+{% comment %}
 There are several versions of the Compose file format – 1, 2, 2.x, and 3.x The
 table below is a quick look. For full details on what each version includes and
 how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
+{% endcomment %}
+Compose ファイルフォーマットには 1、2、2.x、3.x という複数のバージョンがあります。
+その様子は以下の一覧表に見ることができます。
+各バージョンにて何が増えたのか、どのようにアップグレードしたのか、といった詳細については **[バージョンとアップグレードについて](compose-versioning.md)**を参照してください。
 
 {% include content/compose-matrix.md %}
 
+{% comment %}
 ## Service configuration reference
+{% endcomment %}
+## サービス設定リファレンス
+{: #service-configuration-reference }
 
+{% comment %}
 The Compose file is a [YAML](http://yaml.org/) file defining
 [services](#service-configuration-reference),
 [networks](#network-configuration-reference) and
 [volumes](#volume-configuration-reference).
 The default path for a Compose file is `./docker-compose.yml`.
+{% endcomment %}
+Compose ファイルは [YAML](http://yaml.org/) 形式のファイルであり、[サービス（services）](#service-configuration-reference)、[ネットワーク（networks）](#network-configuration-reference)、[ボリューム（volumes）](#volume-configuration-reference)を定義します。
+Compose ファイルのデフォルトパスは `./docker-compose.yml` です。
 
+{% comment %}
 >**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
+{% endcomment %}
+>**ヒント**: このファイルの拡張子は `.yml` と `.yaml` のどちらでも構いません。
+いずれでも動作します。
 
+{% comment %}
+A [container](/engine/reference/glossary.md#container) definition contains configuration which are applied to each
+container started for that service, much like passing command-line parameters to
+`docker run`. Likewise, network and volume definitions are analogous to
+`docker network create` and `docker volume create`.
+{% endcomment %}
 A [container](/engine/reference/glossary.md#container) definition contains configuration which are applied to each
 container started for that service, much like passing command-line parameters to
 `docker run`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
 
+{% comment %}
+As with `docker run`, options specified in the Dockerfile, such as `CMD`,
+`EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
+specify them again in `docker-compose.yml`.
+{% endcomment %}
 As with `docker run`, options specified in the Dockerfile, such as `CMD`,
 `EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
 
+{% comment %}
+You can use environment variables in configuration values with a Bash-like
+`${VARIABLE}` syntax - see [variable substitution](#variable-substitution) for
+full details.
+{% endcomment %}
 You can use environment variables in configuration values with a Bash-like
 `${VARIABLE}` syntax - see [variable substitution](#variable-substitution) for
 full details.
 
+{% comment %}
+This section contains a list of all configuration options supported by a service
+definition in version 2.
+{% endcomment %}
 This section contains a list of all configuration options supported by a service
 definition in version 2.
 
 ### blkio_config
 
+{% comment %}
+A set of configuration options to set block IO limits for this service.
+{% endcomment %}
 A set of configuration options to set block IO limits for this service.
 
     version: "{{ site.compose_file_v2 }}"
@@ -74,43 +125,81 @@ A set of configuration options to set block IO limits for this service.
 
 #### device_read_bps, device_write_bps
 
+{% comment %}
+Set a limit in bytes per second for read / write operations on a given device.
+Each item in the list must have two keys:
+{% endcomment %}
 Set a limit in bytes per second for read / write operations on a given device.
 Each item in the list must have two keys:
 
+{% comment %}
+* `path`, defining the symbolic path to the affected device
+* `rate`, either as an integer value representing the number of bytes or as
+  a string expressing a [byte value](#specifying-byte-values).
+{% endcomment %}
 * `path`, defining the symbolic path to the affected device
 * `rate`, either as an integer value representing the number of bytes or as
   a string expressing a [byte value](#specifying-byte-values).
 
 #### device_read_iops, device_write_iops
 
+{% comment %}
+Set a limit in operations per second for read / write operations on a given
+device. Each item in the list must have two keys:
+{% endcomment %}
 Set a limit in operations per second for read / write operations on a given
 device. Each item in the list must have two keys:
 
+{% comment %}
+* `path`, defining the symbolic path to the affected device
+* `rate`, as an integer value representing the permitted number of operations
+  per second.
+{% endcomment %}
 * `path`, defining the symbolic path to the affected device
 * `rate`, as an integer value representing the permitted number of operations
   per second.
 
 #### weight
 
+{% comment %}
+Modify the proportion of bandwidth allocated to this service relative to other
+services. Takes an integer value between 10 and 1000, with 500 being the
+default.
+{% endcomment %}
 Modify the proportion of bandwidth allocated to this service relative to other
 services. Takes an integer value between 10 and 1000, with 500 being the
 default.
 
 #### weight_device
 
+{% comment %}
+Fine-tune bandwidth allocation by device. Each item in the list must have
+two keys:
+{% endcomment %}
 Fine-tune bandwidth allocation by device. Each item in the list must have
 two keys:
 
+{% comment %}
+* `path`, defining the symbolic path to the affected device
+* `weight`, an integer value between 10 and 1000
+{% endcomment %}
 * `path`, defining the symbolic path to the affected device
 * `weight`, an integer value between 10 and 1000
 
 ### build
 
+{% comment %}
 Configuration options that are applied at build time.
+{% endcomment %}
+この設定オプションはビルド時に適用されます。
 
+{% comment %}
 `build` can be specified either as a string containing a path to the build
 context, or an object with the path specified under [context](#context) and
 optionally [dockerfile](#dockerfile) and [args](#args).
+{% endcomment %}
+`build` の指定は 1 つには、ビルドコンテキストへのパスを表わす文字列を指定します。
+あるいは [context](#context) の指定のもとにパスを指定し、オプションとして [Dockerfile](#dockerfile) や [args](#args) を記述する方法をとります。
 
     build: ./dir
 
@@ -120,18 +209,32 @@ optionally [dockerfile](#dockerfile) and [args](#args).
       args:
         buildno: 1
 
+{% comment %}
 If you specify `image` as well as `build`, then Compose names the built image
 with the `webapp` and optional `tag` specified in `image`:
+{% endcomment %}
+`build` に加えて `image` も指定した場合、Compose はビルドイメージに名前をつけます。
+たとえば以下のように `image` を指定すると、イメージ名を `webapp`、オプションのタグを `tag` という名前にします。
 
     build: ./dir
     image: webapp:tag
 
+{% comment %}
 This results in an image named `webapp` and tagged `tag`, built from `./dir`.
+{% endcomment %}
+結果としてイメージ名は `webapp` であり `tag` というタグづけが行われます。
+そしてこのイメージは `./dir` から作り出されます。
 
 #### cache_from
 
+{% comment %}
 > Added in [version 2.2](compose-versioning.md#version-22) file format
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.2](compose-versioning.md#version-22) において追加されました。
 
+{% comment %}
+A list of images that the engine uses for cache resolution.
+{% endcomment %}
 A list of images that the engine uses for cache resolution.
 
     build:
@@ -142,26 +245,47 @@ A list of images that the engine uses for cache resolution.
 
 #### context
 
+{% comment %}
+> [Version 2 file format](compose-versioning.md#version-2) and up. In version 1, just use
+> [build](#build).
+{% endcomment %}
 > [Version 2 file format](compose-versioning.md#version-2) and up. In version 1, just use
 > [build](#build).
 
+{% comment %}
 Either a path to a directory containing a Dockerfile, or a url to a git repository.
+{% endcomment %}
+Dockerfile を含むディレクトリへのパスか、あるいは git リポジトリの URL を設定します。
 
+{% comment %}
 When the value supplied is a relative path, it is interpreted as relative to the
 location of the Compose file. This directory is also the build context that is
 sent to the Docker daemon.
+{% endcomment %}
+設定された記述が相対パスを表わしている場合、Compose ファイルのあるディレクトリからの相対パスとして解釈されます。
+このディレクトリはビルドコンテキストでもあり、Docker デーモンへ送信されるディレクトリです。
 
+{% comment %}
 Compose builds and tags it with a generated name, and use that image thereafter.
+{% endcomment %}
+Compose は指定された名前により、イメージのビルドとタグづけを行い、後々これを利用します。
 
     build:
       context: ./dir
 
 #### dockerfile
 
+{% comment %}
 Alternate Dockerfile.
+{% endcomment %}
+別の Dockerfile を指定します。
 
+{% comment %}
 Compose uses an alternate file to build with. A build path must also be
 specified.
+{% endcomment %}
+Compose は指定された別の Dockerfile を使ってビルドを行います。
+このときは、ビルドパスを同時に指定しなければなりません。
 
     build:
       context: .
@@ -169,12 +293,22 @@ specified.
 
 #### args
 
+{% comment %}
+> [Version 2 file format](compose-versioning.md#version-2) and up.
+{% endcomment %}
 > [Version 2 file format](compose-versioning.md#version-2) and up.
 
+{% comment %}
 Add build arguments, which are environment variables accessible only during the
 build process.
+{% endcomment %}
+ビルド引数を追加します。
+これは環境変数であり、ビルド処理の間だけ利用可能なものです。
 
+{% comment %}
 First, specify the arguments in your Dockerfile:
+{% endcomment %}
+Dockerfile 内にてはじめにビルド引数を指定します。
 
     ARG buildno
     ARG gitcommithash
@@ -182,8 +316,12 @@ First, specify the arguments in your Dockerfile:
     RUN echo "Build number: $buildno"
     RUN echo "Based on commit: $gitcommithash"
 
+{% comment %}
 Then specify the arguments under the `build` key. You can pass a mapping
 or a list:
+{% endcomment %}
+そして `build` キーのもとにその引数を指定します。
+指定は個々をマッピングする形式か、リストとする形式が可能です。
 
     build:
       context: .
@@ -197,7 +335,12 @@ or a list:
         - buildno=1
         - gitcommithash=cdc3b19
 
+{% comment %}
 > **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
+> If you need an argument to be available in both places, also specify it under the `FROM` instruction.
+> See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
+{% endcomment %}
+> **メモ**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > If you need an argument to be available in both places, also specify it under the `FROM` instruction.
 > See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
 
