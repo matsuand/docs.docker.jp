@@ -207,6 +207,21 @@ your host's Linux distribution and available kernel drivers.
 デフォルトのストレージエンジン、あるいはサポートされるストレージエンジンは何かということは、利用する Linux ディストリビューションおよび利用可能なカーネルドライバーによります。
 
 {% comment %}
+## Configure default logging driver
+{% endcomment %}
+## デフォルトのロギングドライバーの設定
+{: #configure-default-logging-driver }
+
+{% comment %}
+Docker provides the [capability](/config/containers/logging/) to collect and view log data from all containers running on a host via a series of logging drivers. The default logging driver, `json-file`, writes log data to JSON-formatted files on the host filesystem. Over time, these log files expand in size, leading to potential exhaustion of disk resources. To alleviate such issues, either configure an alternative logging driver such as Splunk or Syslog, or [set up log rotation](/config/containers/logging/configure/#configure-the-default-logging-driver) for the default driver. If you configure an alternative logging driver, see [Use `docker logs` to read container logs for remote logging drivers](/config/containers/logging/dual-logging/).
+{% endcomment %}
+Docker では [ロギングドライバーの機能](/config/containers/logging/)を通じて、ホスト上に稼動するすべてのコンテナーからログを収集して参照する機能が提供されています。
+デフォルトのロギングドライバーは `json-file` であり、ホスト上のファイルシステム内に JSON 形式のファイルとしてログデータを保存します。
+時間の経過とともにログファイルはサイズが増大するため、気づかないうちにディスクリソースを浪費することにつながります。
+この問題を解消するため、Splunk や Syslog といった別のロギングドライバーを設定するか、あるいはデフォルトドライバーに対して [ログローテーション](/config/containers/logging/configure/#configure-the-default-logging-driver) を設定するようにしてください。
+別のロギングドライバーを設定する場合は [リモートロギングドライバーにより `docker logs` を使ってコンテナーログを読む](/config/containers/logging/dual-logging/) を参照してください。
+
+{% comment %}
 ## Configure where the Docker daemon listens for connections
 {% endcomment %}
 ## Docker デーモンが接続待ちする方法を設定
