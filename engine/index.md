@@ -198,12 +198,12 @@ on the separate [Release Notes page](/release-notes)
 As changes are made to Docker there may be times when existing features
 need to be removed or replaced with newer features. Before an existing
 feature is removed it is labeled as "deprecated" within the documentation
-and remains in Docker for at least 3 stable releases. After that time it may be
-removed.
+and remains in Docker for at least 3 stable releases unless specified
+explicitly otherwise. After that time it may be removed.
 {% endcomment %}
 Docker の機能変更に際しては、既存機能を削除したり新たな機能に置き換えたりする必要があった場合には、時間をおくことが必要になります。
 既存機能を削除するにあたっては、ドキュメント内に "deprecated"（廃止予定）とラベル付けするようにします。
-そして Docker モジュール内には、最低でも３つの安定版がリリースされる間（およそ９ヶ月）は残すようにします。
+そして Docker モジュール内には、特に指定がない限りは、最低でも３つの安定版がリリースされる間（およそ９ヶ月）は残すようにします。
 この期間を過ぎたものは削除されることがあります。
 
 {% comment %}
