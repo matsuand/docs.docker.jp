@@ -74,25 +74,22 @@ As with `docker run`, options specified in the Dockerfile, such as `CMD`,
 `EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
 {% endcomment %}
-As with `docker run`, options specified in the Dockerfile, such as `CMD`,
-`EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
-specify them again in `docker-compose.yml`.
+`docker run` に関しても同じことが言えますが、Dockerfile にて指定された `CMD`、`EXPOSE`、`VOLUME`、`ENV` のようなオプションはデフォルトでは維持されます。したがって `docker-compose.yml` の中で再度設定する必要はありません。
 
 {% comment %}
 You can use environment variables in configuration values with a Bash-like
 `${VARIABLE}` syntax - see [variable substitution](#variable-substitution) for
 full details.
 {% endcomment %}
-You can use environment variables in configuration values with a Bash-like
-`${VARIABLE}` syntax - see [variable substitution](#variable-substitution) for
-full details.
+設定を記述する際には環境変数を用いることができます。
+環境変数は Bash 風に `${VARIABLE}` のように記述します。
+詳しくは[変数の置換](#variable-substitution)を参照してください。
 
 {% comment %}
 This section contains a list of all configuration options supported by a service
 definition in version 2.
 {% endcomment %}
-This section contains a list of all configuration options supported by a service
-definition in version 2.
+このセクションでは、バージョン 2 のサービス定義においてサポートされている設定オプションをすべて説明しています。
 
 ### blkio_config
 
@@ -235,7 +232,7 @@ This results in an image named `webapp` and tagged `tag`, built from `./dir`.
 {% comment %}
 A list of images that the engine uses for cache resolution.
 {% endcomment %}
-A list of images that the engine uses for cache resolution.
+エンジンがキャッシュ解決のために利用するイメージを設定します。
 
     build:
       context: .

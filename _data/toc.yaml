@@ -469,7 +469,7 @@ guides:
       - path: /engine/extend/legacy_plugins/
         title: Extending Docker with plugins
       - path: /engine/extend/plugins_network/
-        title: Docker network driver plugins
+        title: Docker ネットワークドライバープラグイン
       - path: /engine/extend/plugins_volume/
         title: Volume plugins
       - title: Plugin configuration

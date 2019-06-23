@@ -48,6 +48,11 @@ Compose はこのファイルを自動的に探しにいきます。
 > `docker stack deploy` コマンドでは動作しません。
 {: .important }
 
+{% comment %}
+Both `$VARIABLE` and `${VARIABLE}` syntax are supported. Additionally when using
+the [2.1 file format](compose-versioning.md#version-21), it is possible to
+provide inline default values using typical shell syntax:
+{% endcomment %}
 `$VARIABLE` と `${VARIABLE}` という 2 つの文法がともにサポートされます。
 さらに [2.1 ファイルフォーマット](compose-versioning.md#version-21)を利用している場合は、シェル上でも利用されているインラインのデフォルト指定方法を行うことができます。
 
@@ -105,4 +110,5 @@ as an environment variable and warns you:
 {% comment %}
 The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.
 {% endcomment %}
-VAR_NOT_INTERPOLATED_BY_COMPOSE は設定されていません。空文字として置換します。
+The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.
+（VAR_NOT_INTERPOLATED_BY_COMPOSE は設定されていません。空文字として置換します。）
