@@ -460,7 +460,7 @@ guides:
         title: Swarm administration guide
       - path: /engine/swarm/raft/
         title: Raft consensus in swarm mode
-    - sectiontitle: Extend Docker
+    - sectiontitle: Docker の拡張
       section:
       - path: /engine/extend/
         title: Managed plugin system
@@ -471,11 +471,11 @@ guides:
       - path: /engine/extend/plugins_network/
         title: Docker ネットワークドライバープラグイン
       - path: /engine/extend/plugins_volume/
-        title: Volume plugins
-      - title: Plugin configuration
+        title: ボリュームプラグイン
+      - title: プラグイン設定
         path: /engine/extend/config/
       - path: /engine/extend/plugin_api/
-        title: Plugins API
+        title: プラグイン API
 - sectiontitle: Standards and compliance
   section:
   - path: /compliance/
@@ -3155,9 +3155,9 @@ manuals:
     - path: /compose/compose-file/compose-file-v1/
       title: バージョン 1
     - path: /compose/compose-file/compose-versioning/
-      title: About versions and upgrading
+      title: バージョンとアップグレード
     - path: /compose/faq/
-      title: Frequently asked questions
+      title: よくたずねられる質問
   - path: /compose/bundles/
     title: Docker stacks and distributed application bundles
   - path: /compose/swarm/
