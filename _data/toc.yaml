@@ -2141,37 +2141,37 @@ manuals:
   - sectiontitle: Docker Trusted Registry
     section:
     - path: /ee/dtr/
-      title: Docker Trusted Registry overview
+      title: Docker Trusted Registry 概要
     - path: /ee/dtr/architecture/
-      title: Architecture
-    - sectiontitle: Administration
+      title: アーキテクチャー
+    - sectiontitle: 管理
       section:
-      - sectiontitle: Install
+      - sectiontitle: インストール
         section:
         - path: /ee/dtr/admin/install/system-requirements/
-          title: System requirements
+          title: システム要件
         - path: /ee/dtr/admin/install/
-          title: Install
+          title: インストール
         - path: /ee/dtr/admin/install/install-offline/
-          title: Install offline
+          title: オフラインでのインストール
         - path: /ee/dtr/admin/upgrade/
-          title: Upgrade
+          title: アップグレード
         - path: /ee/dtr/admin/install/uninstall/
-          title: Uninstall
-      - sectiontitle: Configure
+          title: アンインストール
+      - sectiontitle: 設定
         section:
         - path: /ee/dtr/admin/configure/license-your-installation/
-          title: License your installation
+          title: インストールへのライセンス
         - path: /ee/dtr/admin/configure/use-your-own-tls-certificates/
-          title: Use your own TLS certificates
+          title: TLS 証明書の利用
         - path: /ee/dtr/admin/configure/enable-single-sign-on/
-          title: Enable single sign-on
-        - sectiontitle: External storage
+          title: シングルサインオンの有効化
+        - sectiontitle: 外部ストレージ
           section:
           - path: /ee/dtr/admin/configure/external-storage/
-            title: Overview
+            title: 概要
           - path: /ee/dtr/admin/configure/external-storage/storage-backend-migration/
-            title: Switch storage backends
+            title: ストレージバックエンドの切り替え
           - path: /ee/dtr/admin/configure/external-storage/s3/
             title: S3
           - path: /ee/dtr/admin/configure/external-storage/nfs/
@@ -2179,12 +2179,12 @@ manuals:
         - path: /ee/dtr/admin/configure/set-up-high-availability/
           title: Set up high availability
         - path: /ee/dtr/admin/configure/use-a-load-balancer/
-          title: Use a load balancer
+          title: ロードバランサーの利用
         - path: /ee/dtr/admin/configure/set-up-vulnerability-scans/
           title: Set up vulnerability scans
-        - sectiontitle: Deploy caches
+        - sectiontitle: デプロイキャッシュ
           section:
-          - title: Cache overview
+          - title: キャッシュ概要
             path: /ee/dtr/admin/configure/deploy-caches/
           - title: Cache deployment strategy
             path: /ee/dtr/admin/configure/deploy-caches/strategy/
@@ -3169,7 +3169,7 @@ manuals:
   - path: /compose/extends/
     title: Compose のサービス拡張
   - path: /compose/networking/
-    title: Networking in Compose
+    title: Compose のネットワーク
   - path: /compose/production/
     title: 本番環境での Compose の利用
   - path: /compose/link-env-deprecated/
