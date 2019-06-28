@@ -70,41 +70,19 @@ You can find various versions of the tools on [Toolbox Releases](https://github.
 {: #ready-to-get-started }
 
 {% comment %}
-1. Get the latest Toolbox installer for your platform:
+Choose the install instructions for your platform, and follow the steps:
 {% endcomment %}
-1. 各プラットフォーム向けの最新の Toolbox インストーラーを入手します。
+それぞれのプラットフォームに応じたインストール手順を選んで、その手順を進めます。
 
-    <table style="width:100%">
-      <tr>
-        <th style="font-size: medium; font-family: arial;  text-align: center">
-        Toolbox for Mac</th>
-        <th style="font-size: medium; font-family: arial; text-align: center">
-        Toolbox for Windows</th>
-      </tr>
-      <tr valign="top">
-        <td width="50%" style="font-size: medium; font-family: arial;  text-align: center">
-        <a class="button outline-btn" href="https://download.docker.com/mac/stable/DockerToolbox.pkg">Docker Toolbox for Mac の入手</a>
-        </td>
-        <td width="50%" style="font-size: medium; font-family: arial;  text-align: center">
-        <a class="button outline-btn" href="https://download.docker.com/win/stable/DockerToolbox.exe">Docker Toolbox for Windows の入手</a>
-        </td>
-      </tr>
-    </table>
+ {% comment %}
+ - [Install Docker Toolbox for macOS](toolbox_install_mac.md)
+ {% endcomment %}
+ - [Docker Toolbox on macOS のインストール](toolbox_install_mac.md)
 
-{% comment %}
-2. Choose the install instructions for your platform, and follow the steps:
-{% endcomment %}
-2. それぞれのプラットフォームに応じたインストール手順を選んで、その手順を進めます。
-
-    {% comment %}
-    * [Install Docker Toolbox on macOS](toolbox_install_mac.md)
-    {% endcomment %}
-    * [Docker Toolbox on macOS のインストール](toolbox_install_mac.md)
-
-    {% comment %}
-    * [Install Docker Toolbox for Windows](toolbox_install_windows.md)
-    {% endcomment %}
-    * [Docker Toolbox for Windows のインストール](toolbox_install_windows.md)
+ {% comment %}
+ - [Install Docker Toolbox for Windows](toolbox_install_windows.md)
+ {% endcomment %}
+ - [Docker Toolbox for Windows のインストール](toolbox_install_windows.md)
 
 {% comment %}
 ## Next steps

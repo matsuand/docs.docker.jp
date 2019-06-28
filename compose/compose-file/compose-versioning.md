@@ -1,29 +1,64 @@
 ---
-description: Compose file reference
+description: Compose ファイルリファレンス
 keywords: fig, composition, compose, versions, upgrading, docker
-title: Compose file versions and upgrading
+title: Compose ファイルのバージョンとアップグレード
 ---
 
+{% comment %}
 The Compose file is a [YAML](http://yaml.org/) file defining services,
 networks, and volumes for a Docker application.
+{% endcomment %}
+Compose ファイルは [YAML](http://yaml.org/) 形式のファイルであり、Docker アプリケーションに対してサービス、ネットワーク、ボリュームを定義します。
 
+{% comment %}
 The Compose file formats are now described in these references, specific to each version.
+{% endcomment %}
+Compose ファイルのフォーマットは、各バージョンごとに以下のリファレンスに記述しています。
 
+{% comment %}
 | **Reference file**                                    | **What changed in this version** |
 |:------------------------------------------------------|:---------------------------------|
 | [Version 3](index.md) (most current, and recommended) | [Version 3 updates](#version-3)  |
 | [Version 2](compose-file-v2.md)                       | [Version 2 updates](#version-2)  |
 | [Version 1](compose-file-v1.md)                       | [Version 1 updates](#version-1)  |
+{% endcomment %}
+| **リファレンスファイル**                        | **各バージョンでの変更点**           |
+|:------------------------------------------------|:-------------------------------------|
+| [バージョン 3](index.md) （最新版、利用を推奨） | [バージョン 3 での変更](#version-3)  |
+| [バージョン 2](compose-file-v2.md)              | [バージョン 2 での変更](#version-2)  |
+| [バージョン 1](compose-file-v1.md)              | [バージョン 1 での変更](#version-1)  |
 
+{% comment %}
+The topics below explain the differences among the versions, Docker Engine
+compatibility, and [how to upgrade](#upgrading).
+{% endcomment %}
 The topics below explain the differences among the versions, Docker Engine
 compatibility, and [how to upgrade](#upgrading).
 
+{% comment %}
 ## Compatibility matrix
+{% endcomment %}
+## 互換マトリックス
+{: #compatibility-matrix }
 
+{% comment %}
+There are several versions of the Compose file format – 1, 2, 2.x, and 3.x
+{% endcomment %}
 There are several versions of the Compose file format – 1, 2, 2.x, and 3.x
 
 {% include content/compose-matrix.md %}
 
+{% comment %}
+> Looking for more detail on Docker and Compose compatibility?
+>
+> We recommend keeping up-to-date with newer releases as much as possible.
+However, if you are using an older version of Docker and want to determine which
+Compose release is compatible, refer to the [Compose release
+notes](https://github.com/docker/compose/releases/). Each set of release notes
+gives details on which versions of Docker Engine are supported, along
+with compatible Compose file format versions. (See also, the discussion in
+[issue #3404](https://github.com/docker/docker.github.io/issues/3404).)
+{% endcomment %}
 > Looking for more detail on Docker and Compose compatibility?
 >
 > We recommend keeping up-to-date with newer releases as much as possible.
@@ -35,23 +70,56 @@ with compatible Compose file format versions. (See also, the discussion in
 [issue #3404](https://github.com/docker/docker.github.io/issues/3404).)
 
 
+{% comment %}
+For details on versions and how to upgrade, see
+[Versioning](compose-versioning.md#versioning) and
+[Upgrading](compose-versioning.md#upgrading).
+{% endcomment %}
 For details on versions and how to upgrade, see
 [Versioning](compose-versioning.md#versioning) and
 [Upgrading](compose-versioning.md#upgrading).
 
+{% comment %}
 ## Versioning
+{% endcomment %}
+## バージョンづけ
+{: #versioning }
 
+{% comment %}
 There are currently three versions of the Compose file format:
+{% endcomment %}
+Compose ファイルフォーマットには、現在のところ 3 つのバージョンがあります。
 
+{% comment %}
 - Version 1, the legacy format. This is specified by
 omitting a `version` key at the root of the YAML.
+{% endcomment %}
+- バージョン 1。
+  古いフォーマットです。
+  YAML ファイルのルートにおいて `version` キーを省略することで指定されます。
 
+{% comment %}
 - Version 2.x. This is specified with a `version: '2'` or `version: '2.1'`, etc., entry at the root of the YAML.
+{% endcomment %}
+- バージョン 2.x。
+  YAML ファイルのルートにおいて、`version: '2'` または `version: '2.1'` などのように記述することで指定されます。
 
+{% comment %}
+- Version 3.x, the latest and recommended version, designed to
+be cross-compatible between Compose and the Docker Engine's
+[swarm mode](/engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
+{% endcomment %}
 - Version 3.x, the latest and recommended version, designed to
 be cross-compatible between Compose and the Docker Engine's
 [swarm mode](/engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
 
+{% comment %}
+> ### v2 and v3 Declaration
+>
+> **Note**: When specifying the Compose file version to use, make sure to
+> specify both the _major_ and _minor_ numbers. If no minor version is given,
+> `0` is used by default and not the latest minor version.
+{% endcomment %}
 > ### v2 and v3 Declaration
 >
 > **Note**: When specifying the Compose file version to use, make sure to
@@ -59,26 +127,55 @@ be cross-compatible between Compose and the Docker Engine's
 > `0` is used by default and not the latest minor version.
 
 
+{% comment %}
+The [Compatibility Matrix](#compatibility-matrix) shows Compose file versions mapped to Docker Engine releases.
+{% endcomment %}
 The [Compatibility Matrix](#compatibility-matrix) shows Compose file versions mapped to Docker Engine releases.
 
+{% comment %}
+To move your project to a later version, see the [Upgrading](#upgrading)
+section.
+{% endcomment %}
 To move your project to a later version, see the [Upgrading](#upgrading)
 section.
 
+{% comment %}
+> **Note**: If you're using
+> [multiple Compose files](/compose/extends.md#multiple-compose-files) or
+> [extending services](/compose/extends.md#extending-services), each file must be of the
+> same version - you cannot, for example, mix version 1 and 2 in a single
+> project.
+{% endcomment %}
 > **Note**: If you're using
 > [multiple Compose files](/compose/extends.md#multiple-compose-files) or
 > [extending services](/compose/extends.md#extending-services), each file must be of the
 > same version - you cannot, for example, mix version 1 and 2 in a single
 > project.
 
+{% comment %}
+Several things differ depending on which version you use:
+{% endcomment %}
 Several things differ depending on which version you use:
 
+{% comment %}
+- The structure and permitted configuration keys
+- The minimum Docker Engine version you must be running
+- Compose's behaviour with regards to networking
+{% endcomment %}
 - The structure and permitted configuration keys
 - The minimum Docker Engine version you must be running
 - Compose's behaviour with regards to networking
 
+{% comment %}
+These differences are explained below.
+{% endcomment %}
 These differences are explained below.
 
+{% comment %}
 ### Version 1
+{% endcomment %}
+### バージョン 1
+{: #version-1 }
 
 Compose files that do not declare a version are considered "version 1". In those
 files, all the [services](/compose/compose-file/index.md#service-configuration-reference) are

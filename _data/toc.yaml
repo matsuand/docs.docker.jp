@@ -3173,7 +3173,7 @@ manuals:
   - path: /compose/production/
     title: 本番環境での Compose の利用
   - path: /compose/link-env-deprecated/
-    title: Link environment variables (deprecated)
+    title: リンク時の環境変数（機能修正）
   - path: /compose/startup-order/
     title: 起動順の制御
   - path: /compose/samples-for-compose/

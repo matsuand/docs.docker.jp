@@ -1,43 +1,78 @@
 ---
 advisory: swarm-standalone
 hide_from_sitemap: true
-description: Swarm and container networks
+description: Swarm とコンテナーのネットワーク
 keywords: docker, swarm, clustering,  networking
-title: Swarm and container networks
+title: Swarm とコンテナーのネットワーク
 ---
 
+{% comment %}
 Docker Swarm is fully compatible with Docker's networking features. This
 includes the multi-host networking feature which allows creation of custom
 container networks that span multiple Docker hosts.
+{% endcomment %}
+Docker Swarm は Docker のネットワーク機能と完全に互換性があります。
+マルチホストによるネットワーク機能も含みます。
+これは複数の Docker ホストにわたっての独自のコンテナーネットワークを生成できるものです。
 
+{% comment %}
 Before using Swarm with a custom network, read through the conceptual
 information in [Docker container
 networking](/engine/userguide/networking/).
 You should also have walked through the [Get started with multi-host
 networking](/engine/userguide/networking/get-started-overlay/)
 example.
+{% endcomment %}
+独自のネットワークに対して Swarm を使うには、[Docker コンテナーのネットワーク](/engine/userguide/networking/) についての概念を一通り読んでおいてください。
+また [マルチホストネットワークをはじめよう](/engine/userguide/networking/get-started-overlay/) の例を試しておくことも必要でしょう。
 
+{% comment %}
 ## Create a custom network in a Swarm cluster
+{% endcomment %}
+## Swarm クラスターにおける独自ネットワークの生成
+{: #create-a-custom-network-in-a-swarm-cluster }
 
+{% comment %}
 Multi-host networks require a key-value store. The key-value store holds
 information about the network state which includes discovery, networks,
 endpoints, IP addresses, and more. Through the Docker's libkv project, Docker
 supports Consul, Etcd, and ZooKeeper key-value store backends. For details about
 the supported backends, refer to the [libkv
 project](https://github.com/docker/libkv).
+{% endcomment %}
+マルチホストネットワークでは、キーバリューを保存するストア（store）が必要になります。
+このキーバリューストアは、ネットワークの状態を表わす情報を保持するものであり、ネットワーク検出、ネットワーク自体の情報、エンドポイント、IP アドレスなどの情報があります。
+Docker の libkv プロジェクトを通じて、Docker では Consul、Etcd、ZooKeeper といったキーバリューストアバックエンドがサポートされます。
+サポートしているこのバックエンドの詳細は [libkv プロジェクト](https://github.com/docker/libkv) を参照してください。
 
+{% comment %}
 To create a custom network, you must choose a key-value store backend and
 implement it on your network. Then, you configure the Docker Engine daemon to
 use this store. Two required parameters,  `--cluster-store` and
 `--cluster-advertise`, refer to your key-value store server.
+{% endcomment %}
+独自のネットワークを生成するには、キーバリューストアバックエンドを 1 つ選んで、ネットワーク上に実装する必要があります。
+そして Docker Engine デーモンにおいて、このストアを利用する設定を行います。
+設定の際には 2 つのパラメーター、`--cluster-store`, `--cluster-advertise` を使って、キーバリューストアの存在するサーバーを指定します。
 
+{% comment %}
 Once you've configured and restarted the daemon on each Swarm node, you are
 ready to create a network.
+{% endcomment %}
+Swarm の各ノード上にてデーモンの設定と再起動を行えば、ネットワークを生成できるようになります。
 
+{% comment %}
 ## List networks
+{% endcomment %}
+## ネットワークの一覧確認
+{: #list-networks }
 
+{% comment %}
 This example assumes there are two nodes `node-0` and `node-1` in the cluster.
 From a Swarm node, list the networks:
+{% endcomment %}
+以下の例では、クラスター内に 2 つのノード `node-0`、`node-1` があるとします。
+Swarm ノードからネットワーク一覧を確認します。
 
 ```bash
 $ docker network ls
@@ -50,13 +85,25 @@ NETWORK ID          NAME                   DRIVER
 6382abccd23d        node-1/none            null
 ```
 
+{% comment %}
 As you can see, each network name is prefixed by the node name.
+{% endcomment %}
+上に示すように、各ネットワーク名の先頭にはノード名がつきます。
 
+{% comment %}
 ## Create a network
+{% endcomment %}
+## ネットワークの生成
+{: #create-a-network }
 
+{% comment %}
 By default, Swarm is using the `overlay` network driver, a global-scope network
 driver. A global-scope network driver creates a network across an entire Swarm cluster.
 When you create an `overlay` network under Swarm, you can omit the `-d` option:
+{% endcomment %}
+デフォルトで Swarm は、グローバルなスコープを持つネットワークドライバー `overlay` を用います。
+グローバルスコープのネットワークドライバーは、Swarm クラスター全体にわたるネットワークを生成します。
+Swarm のもとで `overlay` ネットワークを生成する場合、`-d` オプションは省略できます。
 
 ```bash
 $ docker network create swarm_network
@@ -73,12 +120,20 @@ NETWORK ID          NAME                   DRIVER
 42131321acab        node-1/swarm_network   overlay
 ```
 
+{% comment %}
 As you can see here, both the `node-0/swarm_network` and the
 `node-1/swarm_network` have the same ID.  This is because when you create a
 network on the cluster, it is accessible from all the nodes.
+{% endcomment %}
+上に示されるように `node-0/swarm_network` と `node-1/swarm_network` は同じ ID を持ちます。
+クラスター上にネットワークを生成すると、ノードすべてがアクセス可能になるわけです。
 
+{% comment %}
 To create a local scope network (for example with the `bridge` network driver) you
 should use `<node>/<name>` otherwise your network is created on a random node.
+{% endcomment %}
+ローカルなスコープのネットワークを（たとえば `bridge` ネットワークドライバーを利用して）生成する場合は、`<node>/<name>` という記述を行う必要があります。
+こうしないと、ネットワークがランダムに選び出されたノード上に生成されてしまいます。
 
 ```bash
 $ docker network create node-0/bridge2 -b bridge
@@ -99,13 +154,26 @@ NETWORK ID          NAME                   DRIVER
 5262bbfe5616        node-1/bridge2         bridge
 ```
 
+{% comment %}
 `--opt encrypted` is a feature only available in Docker Swarm mode. It's not supported in Swarm standalone.
 Network encryption requires key management, which is outside the scope of Swarm.
+{% endcomment %}
+`--opt encrypted` は Docker Swarm モードにおいてのみ利用可能な機能です。
+これはスタンドアロンの Swarm ではサポートされていません。
+ネットワークの暗号化には鍵の管理機能が必要で、これは Swarm の機能範囲には含まれません。
 
+{% comment %}
 ## Remove a network
+{% endcomment %}
+## ネットワークの削除
+{: #remove-a-network }
 
+{% comment %}
 To remove a network you can use its ID or its name. If two different networks
 have the same name, include the `<node>` value:
+{% endcomment %}
+ネットワークを削除するときは、ネットワーク ID かネットワーク名を用いた指定を行います。
+2 つの異なるネットワークが同一名である場合は、`<node>` の記述を含めてください。
 
 ```bash
 $ docker network rm swarm_network
@@ -123,12 +191,26 @@ NETWORK ID          NAME                   DRIVER
 5262bbfe5616        node-1/bridge2         bridge
 ```
 
+{% comment %}
 The `swarm_network` was removed from every node. The `bridge2` was removed only
 from `node-0`.
+{% endcomment %}
+`swarm_network` が全ノードから削除されました。
+また `bridge2` は `node-0` からのみ削除されました。
 
+{% comment %}
 ## Docker Swarm documentation index
+{% endcomment %}
+## Docker Swarm ドキュメントの例
+{: #docker-swarm-documentation-index }
 
+{% comment %}
 - [Docker Swarm overview](index.md)
 - [Scheduler strategies](scheduler/strategy.md)
 - [Scheduler filters](scheduler/filter.md)
+- [Swarm API](swarm-api.md)
+{% endcomment %}
+- [Docker Swarm 概要](index.md)
+- [スケジューラーストラテジー](scheduler/strategy.md)
+- [スケジューラーフィルター](scheduler/filter.md)
 - [Swarm API](swarm-api.md)

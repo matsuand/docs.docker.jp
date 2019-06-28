@@ -1,64 +1,134 @@
 ---
 description: Docker Compose FAQ
 keywords: documentation, docs,  docker, compose, faq
-title: Frequently asked questions
+title: よくたずねられる質問
 ---
 
+{% comment %}
+If you don’t see your question here, feel free to drop by `#docker-compose` on
+freenode IRC and ask the community.
+{% endcomment %}
 If you don’t see your question here, feel free to drop by `#docker-compose` on
 freenode IRC and ask the community.
 
 
+{% comment %}
 ## Can I control service startup order?
+{% endcomment %}
+## サービスの起動順は制御できますか？
+{: #can-i-control-service-startup-order }
 
+{% comment %}
 Yes - see [Controlling startup order](startup-order.md).
+{% endcomment %}
+はい。
+[起動順の制御](startup-order.md) を参照してください。
 
 
+{% comment %}
 ## Why do my services take 10 seconds to recreate or stop?
+{% endcomment %}
+## サービスの再生成や停止に 10 秒もかかるのはなぜ？
+{: #why-do-my-services-take-10-seconds-to-recreate-or-stop }
 
+{% comment %}
+Compose stop attempts to stop a container by sending a `SIGTERM`. It then waits
+for a [default timeout of 10 seconds](./reference/stop.md).  After the timeout,
+a `SIGKILL` is sent to the container to forcefully kill it.  If you
+are waiting for this timeout, it means that your containers aren't shutting down
+when they receive the `SIGTERM` signal.
+{% endcomment %}
 Compose stop attempts to stop a container by sending a `SIGTERM`. It then waits
 for a [default timeout of 10 seconds](./reference/stop.md).  After the timeout,
 a `SIGKILL` is sent to the container to forcefully kill it.  If you
 are waiting for this timeout, it means that your containers aren't shutting down
 when they receive the `SIGTERM` signal.
 
+{% comment %}
+There has already been a lot written about this problem of
+[processes handling signals](https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86)
+in containers.
+{% endcomment %}
 There has already been a lot written about this problem of
 [processes handling signals](https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86)
 in containers.
 
+{% comment %}
+To fix this problem, try the following:
+{% endcomment %}
 To fix this problem, try the following:
 
+{% comment %}
+* Make sure you're using the JSON form of `CMD` and `ENTRYPOINT`
+in your Dockerfile.
+{% endcomment %}
 * Make sure you're using the JSON form of `CMD` and `ENTRYPOINT`
 in your Dockerfile.
 
+  {% comment %}
+  For example use `["program", "arg1", "arg2"]` not `"program arg1 arg2"`.
+  Using the string form causes Docker to run your process using `bash` which
+  doesn't handle signals properly. Compose always uses the JSON form, so don't
+  worry if you override the command or entrypoint in your Compose file.
+  {% endcomment %}
   For example use `["program", "arg1", "arg2"]` not `"program arg1 arg2"`.
   Using the string form causes Docker to run your process using `bash` which
   doesn't handle signals properly. Compose always uses the JSON form, so don't
   worry if you override the command or entrypoint in your Compose file.
 
+{% comment %}
+* If you are able, modify the application that you're running to
+add an explicit signal handler for `SIGTERM`.
+{% endcomment %}
 * If you are able, modify the application that you're running to
 add an explicit signal handler for `SIGTERM`.
 
+{% comment %}
+* Set the `stop_signal` to a signal which the application knows how to handle:
+{% endcomment %}
 * Set the `stop_signal` to a signal which the application knows how to handle:
 
       web:
         build: .
         stop_signal: SIGINT
 
+{% comment %}
+* If you can't modify the application, wrap the application in a lightweight init
+system (like [s6](http://skarnet.org/software/s6/)) or a signal proxy (like
+[dumb-init](https://github.com/Yelp/dumb-init) or
+[tini](https://github.com/krallin/tini)).  Either of these wrappers take care of
+handling `SIGTERM` properly.
+{% endcomment %}
 * If you can't modify the application, wrap the application in a lightweight init
 system (like [s6](http://skarnet.org/software/s6/)) or a signal proxy (like
 [dumb-init](https://github.com/Yelp/dumb-init) or
 [tini](https://github.com/krallin/tini)).  Either of these wrappers take care of
 handling `SIGTERM` properly.
 
+{% comment %}
 ## How do I run multiple copies of a Compose file on the same host?
+{% endcomment %}
+## 1 つのホスト上で Compose ファイルを複数稼動させるには？
+{: #how-do-i-run-multiple-copies-of-a-compose-file-on-the-same-host }
 
+{% comment %}
+Compose uses the project name to create unique identifiers for all of a
+project's  containers and other resources. To run multiple copies of a project,
+set a custom project name using the [`-p` command line
+option](./reference/overview.md) or the [`COMPOSE_PROJECT_NAME`
+environment variable](./reference/envvars.md#compose-project-name).
+{% endcomment %}
 Compose uses the project name to create unique identifiers for all of a
 project's  containers and other resources. To run multiple copies of a project,
 set a custom project name using the [`-p` command line
 option](./reference/overview.md) or the [`COMPOSE_PROJECT_NAME`
 environment variable](./reference/envvars.md#compose-project-name).
 
+{% comment %}
 ## What's the difference between `up`, `run`, and `start`?
+{% endcomment %}
+## What's the difference between `up`, `run`, and `start`?
+{: #whats-the-difference-between-up-run-and-start }
 
 Typically, you want `docker-compose up`. Use `up` to start or restart all the
 services defined in a `docker-compose.yml`. In the default "attached"
