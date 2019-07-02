@@ -1,7 +1,7 @@
 ---
-description: Why Docker for AWS?
+description: なぜ Docker for AWS か？
 keywords: aws, amazon, iaas, why
-title: Why Docker for AWS?
+title: なぜ Docker for AWS か？
 ---
 
 {% assign cloudprovider_log_dest = 'CloudWatch' %}

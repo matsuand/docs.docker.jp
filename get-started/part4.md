@@ -281,7 +281,7 @@ Use this command to list the machines and get their IP addresses.
 以下のコマンドを使って、マシンおよび IP アドレスの一覧を得ます。
 
 {% comment %}
-> **Note**: you need to run the following as administrator or else you don't get any resonable output (only "UNKNOWN").
+> **Note**: you need to run the following as administrator or else you don't get any reasonable output (only "UNKNOWN").
 {% endcomment %}
 > **メモ**
 >
