@@ -5,6 +5,7 @@ title: docker-compose kill
 notoc: true
 ---
 
+{% comment %}
 ```
 Usage: kill [options] [SERVICE...]
 
@@ -12,7 +13,19 @@ Options:
     -s SIGNAL         SIGNAL to send to the container.
                       Default signal is SIGKILL.
 ```
+{% endcomment %}
+```
+利用方法: kill [オプション] [SERVICE...]
 
+オプション:
+    -s SIGNAL         SIGNAL to send to the container.
+                      Default signal is SIGKILL.
+```
+
+{% comment %}
+Forces running containers to stop by sending a `SIGKILL` signal. Optionally the
+signal can be passed, for example:
+{% endcomment %}
 Forces running containers to stop by sending a `SIGKILL` signal. Optionally the
 signal can be passed, for example:
 

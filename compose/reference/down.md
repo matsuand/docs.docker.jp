@@ -5,6 +5,7 @@ title: docker-compose down
 notoc: true
 ---
 
+{% comment %}
 ```
 Usage: down [options]
 
@@ -21,14 +22,46 @@ Options:
     -t, --timeout TIMEOUT   Specify a shutdown timeout in seconds.
                             (default: 10)
 ```
+{% endcomment %}
+```
+利用方法: down [オプション]
 
+オプション:
+    --rmi type              イメージを削除します。type は以下のいずれか。
+                              'all': 全サービスに用いられているイメージすべてを削除。
+                              'local': `image` フィールドにカスタムタグが設定されて
+                              いないイメージのみ削除。
+    -v, --volumes           Remove named volumes declared in the `volumes`
+                            section of the Compose file and anonymous volumes
+                            attached to containers.
+    --remove-orphans        Compose ファイルにて定義されていないサービスのコンテナー
+                            を削除します。
+    -t, --timeout TIMEOUT   シャットダウンするまでの時間を秒単位で設定します。
+                            （デフォルト: 10）
+```
+
+{% comment %}
 Stops containers and removes containers, networks, volumes, and images
 created by `up`.
+{% endcomment %}
+コンテナーを停止します。
+そして `up` コマンドによって生成されたコンテナー、ネットワーク、ボリューム、イメージを削除します。
 
+{% comment %}
 By default, the only things removed are:
+{% endcomment %}
+デフォルトで、削除されるものは以下に限ります。
 
+{% comment %}
 - Containers for services defined in the Compose file
 - Networks defined in the `networks` section of the Compose file
 - The default network, if one is used
+{% endcomment %}
+- Compose ファイルにおいて定義されているサービスのコンテナー。
+- Compose ファイルの `networks` セクションに定義されているネットワーク。
+- デフォルトネットワーク。ただし利用されている場合に限る。
 
+{% comment %}
 Networks and volumes defined as `external` are never removed.
+{% endcomment %}
+`external` として定義されているネットワークやボリュームは削除されません。

@@ -3159,7 +3159,7 @@ manuals:
     - path: /compose/faq/
       title: よくたずねられる質問
   - path: /compose/bundles/
-    title: Docker stacks and distributed application bundles
+    title: Docker スタックと配布アプリケーションバンドル
   - path: /compose/swarm/
     title: Compose において Swarm を使う
   - path: /compose/env-file/
@@ -3177,7 +3177,7 @@ manuals:
   - path: /compose/startup-order/
     title: 起動順の制御
   - path: /compose/samples-for-compose/
-    title: Sample apps with Compose
+    title: Compose を用いたサンプルアプリ
   - path: /release-notes/docker-compose/
     title: Docker Compose リリースノート
 - sectiontitle: Docker Desktop for Mac

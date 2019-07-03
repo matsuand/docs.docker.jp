@@ -8,7 +8,7 @@
 #       advisory: experimental
 
 texts:
-  experimental: "The functionality described on this page is marked as Experimental, and as such, may change before it becomes generally available."
+  experimental: "このページに示す機能は「試験的」（experimental）として位置づけられています。このため正規安定版となる頃には変更されているかもしれません。"
   rc: "The Swarm mode feature included in Docker Engine 1.12 is a release candidate feature and might be subject to non backward-compatible changes. Some functionality may change before the feature becomes generally available."
   docker4mac-beta: "Docker Desktop for Mac is currently in public beta. Some functionality may change before the product becomes generally available."
   docker4win-beta: "Docker Desktop for Windows is currently in public beta. Some functionality may change before the product becomes generally available."
