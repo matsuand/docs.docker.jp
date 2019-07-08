@@ -592,7 +592,7 @@ command: bundle exec thin -p 3000
 The command can also be a list, in a manner similar to
 [dockerfile](/engine/reference/builder.md#cmd):
 {% endcomment %}
-コマンドは [dockerfile](/engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
+このコマンドは [dockerfile](/engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
 
 ```yaml
 command: ["bundle", "exec", "thin", "-p", "3000"]
@@ -1394,7 +1394,7 @@ List of device mappings.  Uses the same format as the `--device` docker
 client create option.
 {% endcomment %}
 デバイスのマッピングをリスト形式で設定します。
-Docker クライアントの create オプションと同じ書式とします。
+Docker クライアントの create オプションと同じ書式にします。
 
 ```yaml
 devices:
@@ -1655,7 +1655,6 @@ VAR=1
 {% comment %}
 and
 {% endcomment %}
-and
 
 ```bash
 # b.env
@@ -1769,7 +1768,7 @@ with a (version 3) Compose file.
 Add hostname mappings. Use the same values as the docker client `--add-host` parameter.
 {% endcomment %}
 ホスト名のマッピングを追加します。
-Docker Client の `--add-host` パラメーターと同じ値を設定します。
+Docker Client の `--add-host` パラメーターと同じ値を設定してください。
 
 ```yaml
 extra_hosts:

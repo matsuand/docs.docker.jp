@@ -138,8 +138,8 @@ script:
 - [Compose file reference](compose-file.md)
 {% endcomment %}
 - [Compose のインストール](install.md)
-- [Django とともにはじめる](django.md)
-- [Rails とともにはじめる](rails.md)
-- [WordPress とともにはじめる](wordpress.md)
+- [Django を使ってはじめよう](django.md)
+- [Rails を使ってはじめよう](rails.md)
+- [WordPress を使ってはじめよう](wordpress.md)
 - [コマンドラインリファレンス](./reference/index.md)
 - [Compose ファイルリファレンス](compose-file.md)

@@ -12,19 +12,17 @@ Docker Enterprise 2.1 is a Containers-as-a-Service (CaaS) platform that enables 
 chain and deploys diverse applications for high availability across disparate
 infrastructure, both on-premises and in the cloud.
 {% endcomment %}
-Docker Enterprise 2.1 は CaaS（Containers as a Service; サービスとしてのコンテナー）プラットフォームです。
-that enables a secure software supply
-chain and deploys diverse applications for high availability across disparate
-infrastructure, both on-premises and in the cloud.
+Docker Enterprise 2.1 は CaaS（Containers as a Service； サービスとしてのコンテナー）プラットフォームです。
+これは安全なソフトウェアサプライチェーンの実現を可能とし、さまざまなインフラストラクチャーにわたって、可用性の高い多様なアプリケーションをデプロイできるものです。
+対象は自社サーバーでもクラウド上でもかわりません。
 
 {% comment %}
 Docker Enterprise is a secure, scalable, and supported container
 platform for building and orchestrating applications across multi-tenant Linux,
 Windows Server 2016, and IBM Z environments.
 {% endcomment %}
-Docker Enterprise is a secure, scalable, and supported container
-platform for building and orchestrating applications across multi-tenant Linux,
-Windows Server 2016, and IBM Z environments.
+Docker Enterprise は、セキュアでスケーラブルなコンテナープラットフォームです。
+Linux、Windows Server 2016、IBM Z 環境など複数テナントにわたって、アプリケーションのビルドとオーケストレーションを行います。
 
 {% comment %}
 Docker Enterprise enables deploying your workloads for high availability (HA) onto the

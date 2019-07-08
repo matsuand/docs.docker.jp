@@ -1,54 +1,102 @@
 ---
-description: Compose file reference
+description: Compose ファイルリファレンス
 keywords: fig, composition, compose version 1, docker
 redirect_from:
 - /compose/yml
-title: Compose file version 1 reference
+title: Compose ファイル バージョン 1 リファレンス
 toc_max: 4
 toc_min: 1
 ---
 
+{% comment %}
 ## Reference and guidelines
+{% endcomment %}
+## リファレンスとガイドライン
+{: #reference-and-guidelines }
 
+{% comment %}
 These topics describe version 1 of the Compose file format. This is the oldest
 version.
+{% endcomment %}
+ここに示す内容は Compose ファイルフォーマット、バージョン 1 です。
+これは最も古いバージョンです。
 
+{% comment %}
 ## Compose and Docker compatibility matrix
+{% endcomment %}
+## Compose と Docker の互換マトリックス
+{: #compose-and-docker-compatibility-matrix }
 
+{% comment %}
 There are several versions of the Compose file format – 1, 2, 2.x, and 3.x The
 table below is a quick look. For full details on what each version includes and
 how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
+{% endcomment %}
+Compose ファイルフォーマットには 1、2、2.x、3.x という複数のバージョンがあります。
+その様子は以下の一覧表に見ることができます。
+各バージョンにて何が増えたのか、どのようにアップグレードしたのか、といった詳細については **[バージョンとアップグレードについて](compose-versioning.md)**を参照してください。
 
 {% include content/compose-matrix.md %}
 
+{% comment %}
 ## Service configuration reference
+{% endcomment %}
+## サービス設定リファレンス
+{: #service-configuration-reference }
 
+{% comment %}
 The Version 1 Compose file is a [YAML](http://yaml.org/) file that defines [services](#service-configuration-reference).
+{% endcomment %}
+Compose ファイルバージョン 1 は [YAML](http://yaml.org/) 形式のファイルであり、[サービス（services）](#service-configuration-reference) を定義します。
 
+{% comment %}
 The default path for a Compose file is `./docker-compose.yml`.
+{% endcomment %}
+Compose ファイルのデフォルトパスは `./docker-compose.yml` です。
 
+{% comment %}
 >**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
+{% endcomment %}
+>**ヒント**: このファイルの拡張子は `.yml` と `.yaml` のどちらでも構いません。
+いずれでも動作します。
 
+{% comment %}
 A service definition contains configuration which is applied to each
 container started for that service, much like passing command-line parameters to
 `docker run`.
+{% endcomment %}
+サービスの定義とは、そのサービスを起動する各コンテナーに適用される設定を行うことです。
+コマンドラインから `docker run` のパラメーターを受け渡すことと、非常によく似ています。
 
+{% comment %}
 As with `docker run`, options specified in the Dockerfile, such as `CMD`,
 `EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
+{% endcomment %}
+`docker run` に関しても同じことが言えますが、Dockerfile にて指定された `CMD`、`EXPOSE`、`VOLUME`、`ENV` のようなオプションはデフォルトでは維持されます。したがって `docker-compose.yml` の中で再度設定する必要はありません。
 
+{% comment %}
 This section contains a list of all configuration options supported by a service
 definition in version 1.
+{% endcomment %}
+このセクションでは、バージョン 1 のサービス定義においてサポートされている設定オプションをすべて説明しています。
 
 ### build
 
+{% comment %}
 Configuration options that are applied at build time.
+{% endcomment %}
+この設定オプションはビルド時に適用されます。
 
+{% comment %}
 `build` can specified as a string containing a path to the build
 context.
+{% endcomment %}
+`build` の指定は、ビルドコンテキストへのパスを表わす文字列を指定します。
 
     build: ./dir
 
+{% comment %}
 > **Note**
 >
 > In [version 1 file format](compose-versioning.md#version-1),
@@ -58,17 +106,34 @@ context.
 >   form that is allowed in Version 2 and up.
 > * Using `build` together with [`image`](#image) is not allowed.
 Attempting to do so results in an error.
+{% endcomment %}
+> **メモ**
+>
+> [ファイルフォーマットバージョン 1](compose-versioning.md#version-1) における `build` は、より新しいバージョンに比べると以下の二点の違いがあります。
+>
+>*  文字列指定 (`build: .`) のみがサポートされます。
+>   オブジェクト指定はバージョン 2 およびそれ以降でサポートされます。
+>*  `build` と [`image`](#image) を同時に利用することはできません。
+>   これを行うとエラーが発生します。
 
 #### dockerfile
 
+{% comment %}
 Alternate Dockerfile.
+{% endcomment %}
+別の Dockerfile を指定します。
 
+{% comment %}
 Compose uses an alternate file to build with. A build path must also be
 specified.
+{% endcomment %}
+Compose は指定された別の Dockerfile を使ってビルドを行います。
+このときは、ビルドパスを同時に指定しなければなりません。
 
       build: .
       dockerfile: Dockerfile-alternate
 
+{% comment %}
 > **Note**
 >
 > In the [version 1 file format](compose-versioning.md#version-1), `dockerfile` is different from newer versions in two ways:
@@ -76,11 +141,24 @@ specified.
 >* It appears alongside `build`, not as a sub-option:
 >
 >*  Using `dockerfile` together with [`image`](#image) is not allowed. Attempting to do so results in an error.
+{% endcomment %}
+> **メモ**
+>
+> [ファイルフォーマットバージョン 1](compose-versioning.md#version-1) における `dockerfile` は、より新しいバージョンに比べると以下の二点の違いがあります。
+>
+>* これは `build` と同レベルに指定するものであり、サブオプションではありません。
+>
+>*  `dockerfile` と [`image`](#image) を同時に利用することはできません。
+>   これを行うとエラーが発生します。
 
 ### cap_add, cap_drop
 
+{% comment %}
 Add or drop container capabilities.
 See `man 7 capabilities` for a full list.
+{% endcomment %}
+コンテナーケーパビリティーの機能を追加または削除します。
+詳細な一覧は `man 7 capabilities` を参照してください。
 
     cap_add:
       - ALL
@@ -89,48 +167,76 @@ See `man 7 capabilities` for a full list.
       - NET_ADMIN
       - SYS_ADMIN
 
+{% comment %}
 > **Note**: These options are ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
+{% endcomment %}
+> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
 
 ### command
 
+{% comment %}
 Override the default command.
+{% endcomment %}
+デフォルトコマンドを上書きします。
 
     command: bundle exec thin -p 3000
 
+{% comment %}
 The command can also be a list, in a manner similar to
 [dockerfile](/engine/reference/builder.md#cmd):
+{% endcomment %}
+このコマンドは [dockerfile](/engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
 
     command: ["bundle", "exec", "thin", "-p", "3000"]
 
 ### cgroup_parent
 
+{% comment %}
 Specify an optional parent cgroup for the container.
+{% endcomment %}
+コンテナーに対して、オプションで指定する親の cgroup を指定します。
 
     cgroup_parent: m-executor-abcd
 
 ### container_name
 
+{% comment %}
 Specify a custom container name, rather than a generated default name.
+{% endcomment %}
+デフォルトのコンテナー名ではない、独自のコンテナー名を設定します。
 
     container_name: my-web-container
 
+{% comment %}
 Because Docker container names must be unique, you cannot scale a service
 beyond 1 container if you have specified a custom name. Attempting to do so
 results in an error.
+{% endcomment %}
+Docker コンテナー名はユニークである必要があります。
+そこで独自のコンテナー名を設定したときは、サービスをスケールアップして複数コンテナーとすることはできません。
+これを行うとエラーが発生します。
 
 ### devices
 
+{% comment %}
 List of device mappings.  Uses the same format as the `--device` docker
 client create option.
+{% endcomment %}
+デバイスのマッピングをリスト形式で設定します。
+Docker クライアントの create オプションの `--device` と同じ書式にします。
 
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
 
 ### dns
 
+{% comment %}
 Custom DNS servers. Can be a single value or a list.
+{% endcomment %}
+DNS サーバーを設定します。
+設定は 1 つだけとするか、リストにすることができます。
 
     dns: 8.8.8.8
     dns:
@@ -139,7 +245,11 @@ Custom DNS servers. Can be a single value or a list.
 
 ### dns_search
 
+{% comment %}
 Custom DNS search domains. Can be a single value or a list.
+{% endcomment %}
+DNS 検索ドメインを設定します。
+設定は 1 つだけとするか、リストにすることができます。
 
     dns_search: example.com
     dns_search:
@@ -148,12 +258,19 @@ Custom DNS search domains. Can be a single value or a list.
 
 ### entrypoint
 
+{% comment %}
 Override the default entrypoint.
+{% endcomment %}
+デフォルトのエントリーポイントを上書きします。
 
     entrypoint: /code/entrypoint.sh
 
+{% comment %}
 The entrypoint can also be a list, in a manner similar to
 [dockerfile](/engine/reference/builder.md#entrypoint):
+{% endcomment %}
+エントリーポイントはリスト形式で設定することができます。
+その指定方法は [Dockerfile](/engine/reference/builder.md#entrypoint) と同様です。
 
     entrypoint:
         - php
@@ -163,20 +280,34 @@ The entrypoint can also be a list, in a manner similar to
         - memory_limit=-1
         - vendor/bin/phpunit
 
+{% comment %}
 > **Note**: Setting `entrypoint` both overrides any default entrypoint set
 > on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
 > clears out any default command on the image - meaning that if there's a `CMD`
 > instruction in the Dockerfile, it is ignored.
+{% endcomment %}
+> **メモ**: `entrypoint` を設定すると、サービスイメージ内に Dockerfile 命令の `ENTRYPOINT` によって設定されているデフォルトのエントリーポイントは上書きされ、**さらに**イメージ内のあらゆるデフォルトコマンドもクリアされます。
+> これはつまり、Dockerfile に `CMD` 命令があったとしたら無視されるということです。
 
 ### env_file
 
+{% comment %}
 Add environment variables from a file. Can be a single value or a list.
+{% endcomment %}
+ファイルを用いて環境変数を追加します。
+設定は 1 つだけとするか、リストにすることができます。
 
+{% comment %}
 If you have specified a Compose file with `docker-compose -f FILE`, paths in
 `env_file` are relative to the directory that file is in.
+{% endcomment %}
+Compose ファイルを `docker-compose -f FILE` という起動により指定している場合、`env_file` におけるパスは、Compose ファイルがあるディレクトリからの相対パスとします。
 
+{% comment %}
 Environment variables specified in [environment](#environment) _override_
 these values.
+{% endcomment %}
+環境変数が [environment](#environment) の項に宣言されていれば、ここでの設定を**オーバーライド**します。
 
     env_file: .env
 
@@ -185,27 +316,48 @@ these values.
       - ./apps/web.env
       - /opt/secrets.env
 
+{% comment %}
 Compose expects each line in an env file to be in `VAR=VAL` format. Lines
 beginning with `#` are processed as comments and are ignored. Blank lines are
 also ignored.
+{% endcomment %}
+env ファイルの各行は `VAR=VAL` の書式とします。
+行先頭に `#` があると、コメント行となり無視されます。
+空行も無視されます。
 
     # Set Rails/Rack environment
     RACK_ENV=development
 
+{% comment %}
 > **Note**: If your service specifies a [build](#build) option, variables
 > defined in environment files are _not_ automatically visible during the
 > build.
+{% endcomment %}
+> **メモ**: サービスに [build](#build) オプションを指定している場合、env ファイル内に定義された変数は、ビルド時に自動的に参照されません。
 
+{% comment %}
 The value of `VAL` is used as is and not modified at all. For example if the
 value is surrounded by quotes (as is often the case of shell variables), the
 quotes are included in the value passed to Compose.
+{% endcomment %}
+`VAL` の値は記述されたとおりに用いられ、一切修正はされません。
+たとえば値がクォートにより囲まれている（よくシェル変数に対して行う）場合、クォートもそのまま値として Compose に受け渡されます。
 
+{% comment %}
 Keep in mind that _the order of files in the list is significant in determining
 the value assigned to a variable that shows up more than once_. The files in the
 list are processed from the top down. For the same variable specified in file
 `a.env` and assigned a different value in file `b.env`, if `b.env` is
 listed below (after), then the value from `b.env` stands. For example, given the
 following declaration in `docker-compose.yml`:
+{% endcomment %}
+ファイルを複数用いる場合の順番には気をつけてください。
+特に何度も出現する変数に対して、値がどのように決定されるかです。
+ファイルが複数指定された場合、その処理は上から順に行われます。
+たとえば `a.env` ファイルに変数が指定されていて、`b.env` ファイルには同じ変数が異なる値で定義されていたとします。
+ここで `b.env` ファイルが下に（後に）指定されているとします。
+このとき変数の値は `b.env` のものが採用されます。
+さらに例として `docker-compose.yml` に以下のような宣言があったとします。
 
 ```yaml
 services:
@@ -215,30 +367,47 @@ services:
       - b.env
 ```
 
+{% comment %}
 And the following files:
+{% endcomment %}
+ファイルの内容は以下であるとします。
 
 ```none
 # a.env
 VAR=1
 ```
 
+{% comment %}
 and
+{% endcomment %}
 
 ```none
 # b.env
 VAR=hello
 ```
 
+{% comment %}
 $VAR is `hello`.
+{% endcomment %}
+この結果 `$VAR` は `hello` になります。
 
 ### environment
 
+{% comment %}
 Add environment variables. You can use either an array or a dictionary. Any
 boolean values; true, false, yes no, need to be enclosed in quotes to ensure
 they are not converted to True or False by the YML parser.
+{% endcomment %}
+環境変数を追加します。
+配列形式または辞書形式での指定が可能です。
+ブール値 `true`, `false`, `yes`, `no` を用いる場合は、クォートで囲むことで YML パーサーによって True や False に変換されてしまうのを防ぐ必要があります。
 
+{% comment %}
 Environment variables with only a key are resolved to their values on the
 machine Compose is running on, which can be helpful for secret or host-specific values.
+{% endcomment %}
+環境変数だけが記述されている場合は、Compose が起動しているマシン上にて定義されている値が設定されます。
+これは機密情報やホスト固有の値を設定する場合に利用できます。
 
     environment:
       RACK_ENV: development
@@ -250,14 +419,22 @@ machine Compose is running on, which can be helpful for secret or host-specific 
       - SHOW=true
       - SESSION_SECRET
 
+{% comment %}
 > **Note**: If your service specifies a [build](#build) option, variables
 > defined in `environment` are _not_ automatically visible during the
 > build.
+{% endcomment %}
+> **メモ**: サービスに [build](#build) オプションを指定している場合、env ファイル内に定義された変数は、ビルド時に自動的に参照されません。
 
 ### expose
 
+{% comment %}
 Expose ports without publishing them to the host machine - they'll only be
 accessible to linked services. Only the internal port can be specified.
+{% endcomment %}
+ホストマシンにはポートを公開せずに、ポートを expose します。
+これはリンクされたサービスのみアクセスが可能になります。
+内部ポートのみが指定できます。
 
     expose:
      - "3000"
@@ -265,35 +442,68 @@ accessible to linked services. Only the internal port can be specified.
 
 ### extends
 
+{% comment %}
 Extend another service, in the current file or another, optionally overriding
 configuration.
+{% endcomment %}
+現ファイルや別のファイルにある他のサービスを拡張します。
+必要に応じて設定を上書きすることもできます。
 
+{% comment %}
 You can use `extends` on any service together with other configuration keys.
 The `extends` value must be a dictionary defined with a required `service`
 and an optional `file` key.
+{% endcomment %}
+別のサービスを `extends` により拡張する際には、合わせて他の設定キーを指定することができます。
+`extends` に設定する値は辞書形式であり、`service` キーが必須です。
+また必要に応じて指定する `file` キーがあります。
 
     extends:
       file: common.yml
       service: webapp
 
+{% comment %}
 The `service` the name of the service being extended, for example
 `web` or `database`. The `file` is the location of a Compose configuration
 file defining that service.
+{% endcomment %}
+`service` は拡張するサービスの名前を指定します。
+たとえば `web` や `database` です。
+`file` は、サービスを定義する Compose 設定ファイルのパスを指定します。
 
+{% comment %}
 If you omit the `file` Compose looks for the service configuration in the
 current file. The `file` value can be an absolute or relative path. If you
 specify a relative path, Compose treats it as relative to the location of the
 current file.
+{% endcomment %}
+`file` の指定を省略した場合、Compose はそのサービス設定を現ファイルの中から探します。
+`file` に指定する値は絶対パス、相対パスのいずれでも構いません。
+相対パスを指定した場合、Compose は現ファイルのあるディレクトリからの相対パスとして扱います。
 
+{% comment %}
 You can extend a service that itself extends another. You can extend
 indefinitely. Compose does not support circular references and `docker-compose`
 returns an error if it encounters one.
+{% endcomment %}
+拡張するサービスそのものが、他のサービスを拡張したものも指定可能です。
+拡張の繰り返しはいくらでもできます。
+ただし Compose は循環参照をサポートしていないため、そのような状況が発生した場合は `docker-compose` がエラーを返します。
 
+{% comment %}
 For more on `extends`, see the
 [the extends documentation](/compose/extends.md#extending-services).
+{% endcomment %}
+`extends` に関する詳細は [extends ドキュメント](/compose/extends.md#extending-services) を参照してください。
 
 ### external_links
 
+{% comment %}
+Link to containers started outside this `docker-compose.yml` or even outside
+of Compose, especially for containers that provide shared or common services.
+`external_links` follow semantics similar to `links` when specifying both the
+container name and the link alias (`CONTAINER:ALIAS`).
+{% endcomment %}
 Link to containers started outside this `docker-compose.yml` or even outside
 of Compose, especially for containers that provide shared or common services.
 `external_links` follow semantics similar to `links` when specifying both the
@@ -332,11 +542,18 @@ If the image does not exist, Compose attempts to pull it, unless you have also
 specified [build](#build), in which case it builds it using the specified
 options and tags it with the specified tag.
 
+{% comment %}
+> **Note**: In the [version 1 file format](compose-versioning.md#version-1), using [`build`](#build) together
+> with `image` is not allowed. Attempting to do so results in an error.
+{% endcomment %}
 > **Note**: In the [version 1 file format](compose-versioning.md#version-1), using [`build`](#build) together
 > with `image` is not allowed. Attempting to do so results in an error.
 
 ### labels
 
+{% comment %}
+Add metadata to containers using [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either an array or a dictionary.
+{% endcomment %}
 Add metadata to containers using [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.

@@ -185,7 +185,7 @@ guides:
           - path: /develop/develop-images/baseimages/
             title: ベースイメージの生成
           - path: /develop/develop-images/build_enhancements/
-            title: 18.09 での Docker build の拡張
+            title: 18.09 での Docker ビルドの拡張
           - path: /develop/develop-images/multistage-build/
             title: マルチステージビルドの利用
           - path: /engine/reference/builder/
@@ -3084,7 +3084,7 @@ manuals:
     path: /ee/get-support/
 - sectiontitle: Docker Compose
   section:
-  - path: /compose/overview/
+  - path: /compose/
     title: Docker Compose 概要
   - path: /compose/install/
     title: Compose のインストール

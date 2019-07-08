@@ -11,7 +11,7 @@ title: Docker スタックと配布アプリケーションバンドル（試験
 > document in the [docker/docker-ce repo](https://github.com/docker/docker-ce). It's been updated to accurately reflect newer releases.
 {% endcomment %}
 > **メモ**: ここに示すドキュメントは [docker/docker-ce repo](https://github.com/docker/docker-ce) にある [Docker スタックと配布アプリケーションバンドル](https://github.com/moby/moby/blob/v1.12.0-rc4/experimental/docker-stacks-and-bundles.md)（Docker Stacks and Distributed Application Bundles）を修正したものです。
-> これは最新の記述に合わせて的確に更新を行っています。
+> そして最新の記述に合わせて的確に更新を行っています。
 
 {% comment %}
 ## Overview
@@ -39,7 +39,7 @@ nor the Docker Registry support distribution of bundles, and the concept of a
 Docker スタックと配布アプリケーションバンドルは、試験的な機能として Docker 1.12 および Docker Compose 1.8 より導入が始まりました。
 これはスウォームモードや、Engine API におけるノードとサービスの考え方が進められた時期です。
 Docker Engine や Docker Registry はバンドル配布をサポートしていません。
-また **バンドル**(`bundle`) というものの考え方は、新たなリリースを迎えたとしても、さして重要視するものではありません。
+また **バンドル**（`bundle`）というものの考え方は、新たなリリースを迎えたとしても、さして重要視するものではありません。
 
 {% comment %}
 However, [swarm mode](/engine/swarm/index.md), multi-service applications, and
@@ -56,11 +56,8 @@ walkthrough](/get-started/). This shows you how to define
 a service configuration in a Compose file, deploy the app, and use
 the relevant tools and commands.
 {% endcomment %}
-If you are just getting started with Docker and want to learn the best way to
-deploy multi-service applications, a good place to start is the [Get Started
-walkthrough](/get-started/). This shows you how to define
-a service configuration in a Compose file, deploy the app, and use
-the relevant tools and commands.
+Docker に取り掛かかり始めたばかりの方が、次に複数サービスによるアプリケーションのデプロイ方法を学ぶとすれば、[はじめよう](/get-started/) を読んでみるのがよいと思います。
+そこでは Compose ファイルに 1 つのサービス設定を定義して、アプリをデプロイし、関連ツールやコマンドを使っていく方法が示されています。
 
 {% comment %}
 ## Produce a bundle
@@ -74,7 +71,7 @@ from an existing `docker-compose.yml`. Of course, that's just *one* possible way
 to proceed, in the same way that `docker build` isn't the only way to produce a
 Docker image.
 {% endcomment %}
-バンドルを生成する簡単な方法は、すでにある `docker-compose.yml` から `docker-compose` を実行して生成します。
+バンドルを生成するには、すでにある `docker-compose.yml` から `docker-compose` を実行するのが最も単純です。
 もちろんこれは**一つ**のやり方にすぎません。
 Docker イメージを作り出すのが `docker build` だけではないことと同じ話です。
 
@@ -108,20 +105,17 @@ Wrote bundle to vossibility-stack.dab
 > it. If you're on Linux, follow the instructions in the
 > [experimental build README](https://github.com/docker/cli/blob/master/experimental/README.md).
 {% endcomment %}
-> **メモ**: Because support for stacks and bundles is in the experimental stage,
-> you need to install an experimental build of Docker Engine to use it.
+> **メモ**: スタックとバンドルに関するサポートが試験的な段階にあるため、これを利用するためには Docker Engine の試験的ビルド（experimental build）をインストールする必要があります。
 >
-> If you're on Mac or Windows, download the “Beta channel” version of
-> [Docker Desktop for Mac](/docker-for-mac/) or
-> [Docker Desktop for Windows](/docker-for-windows/) to install
-> it. If you're on Linux, follow the instructions in the
-> [experimental build README](https://github.com/docker/cli/blob/master/experimental/README.md).
+> Mac や Windows を利用している場合は [Docker Desktop for Mac](/docker-for-mac/) または [Docker Desktop for Windows](/docker-for-windows/) の「ベータチャネル」（Beta channel）からダウンロードしてインストールしてください。
+> Linux を利用している場合は [試験ビルドの README](https://github.com/docker/cli/blob/master/experimental/README.md) に示す手順に従ってください。
 
 {% comment %}
 A stack is created using the `docker deploy` command:
 {% endcomment %}
 スタックは `docker deploy` コマンドを使って生成されます。
 
+{% comment %}
 ```bash
 # docker deploy --help
 
@@ -133,6 +127,20 @@ Options:
       --file   string        Path to a Distributed Application Bundle file (Default: STACK.dab)
       --help                 Print usage
       --with-registry-auth   Send registry authentication details to Swarm agents
+```
+{% endcomment %}
+```bash
+# docker deploy --help
+
+利用方法:  docker deploy [オプション] STACK
+
+スタックを生成、更新します。
+
+オプション:
+      --file   string        配布アプリケーションバンドルへのパスを指定します。
+                             （デフォルト: STACK.dab）
+      --help                 利用方法を表示します。
+      --with-registry-auth   Swarm エージェントにレジストリ認証情報を送信します。
 ```
 
 {% comment %}
@@ -179,6 +187,7 @@ Stacks are managed using the `docker stack` command:
 {% endcomment %}
 スタックの管理には `docker stack` コマンドを利用します。
 
+{% comment %}
 ```bash
 # docker stack --help
 
@@ -198,6 +207,26 @@ Commands:
 
 Run 'docker stack COMMAND --help' for more information on a command.
 ```
+{% endcomment %}
+```bash
+# docker stack --help
+
+利用方法:  docker stack コマンド
+
+Docker スタックを管理します。
+
+オプション:
+      --help   利用方法を表示します。
+
+コマンド:
+  config      スタック設定を出力します。
+  deploy      スタックを生成、更新します。
+  rm          スタックを削除します。
+  services    スタック内のサービスを一覧表示します。
+  tasks       スタック内のタスクを一覧表示します。
+
+各コマンドの詳細は 'docker stack COMMAND --help' を実行してください。
+```
 
 {% comment %}
 ## Bundle file format
@@ -209,28 +238,30 @@ Run 'docker stack COMMAND --help' for more information on a command.
 Distributed application bundles are described in a JSON format. When bundles
 are persisted as files, the file extension is `.dab`.
 {% endcomment %}
-Distributed application bundles are described in a JSON format. When bundles
-are persisted as files, the file extension is `.dab`.
+配布アプリケーションバンドルは JSON 形式により表現されます。
+バンドルがファイルとして保存されている場合、そのファイル拡張子は `.dab` です。
 
 {% comment %}
 A bundle has two top-level fields: `version` and `services`. The version used
 by Docker 1.12 tools is `0.1`.
 {% endcomment %}
-A bundle has two top-level fields: `version` and `services`. The version used
-by Docker 1.12 tools is `0.1`.
+バンドルには最上位のフィールドが 2 つあります。
+`version` と `services` です。
+Docker 1.12 の各ツールにて利用されるバージョンは `0.1` です。
 
 {% comment %}
 `services` in the bundle are the services that comprise the app. They
 correspond to the new `Service` object introduced in the 1.12 Docker Engine API.
 {% endcomment %}
-`services` in the bundle are the services that comprise the app. They
-correspond to the new `Service` object introduced in the 1.12 Docker Engine API.
+バンドル内の `services` とは、アプリケーションを含めたサービスのことです。
+これは Docker Engine API 1.12 において導入された、新しい `Service` オブジェクトに対応するものです。
 
 {% comment %}
 A service has the following fields:
 {% endcomment %}
-A service has the following fields:
+サービスには以下のフィールドがあります。
 
+{% comment %}
 <dl>
     <dt>
         Image (required) <code>string</code>
@@ -241,30 +272,74 @@ A service has the following fields:
         service. Example:
         <code>postgres@sha256:e0a230a9f5b4e1b8b03bb3e8cf7322b0e42b7838c5c87f4545edb48f5eb8f077</code>
     </dd>
+{% endcomment %}
+<dl>
+    <dt>
+        Image (必須) <code>string</code>
+    </dt>
+    <dd>
+        サービスが実行するイメージ。
+        Docker イメージは全内容に基づくハッシュを使って指定します。
+        この値によってサービスのデプロイ内容が完全に特定されます。
+        たとえば <code>postgres@sha256:e0a230a9f5b4e1b8b03bb3e8cf7322b0e42b7838c5c87f4545edb48f5eb8f077</code> のようなものです。
+    </dd>
+{% comment %}
     <dt>
         Command <code>[]string</code>
     </dt>
     <dd>
         Command to run in service containers.
     </dd>
+{% endcomment %}
+    <dt>
+        Command <code>[]string</code>
+    </dt>
+    <dd>
+        サービスコンテナー内で実行するコマンド。
+    </dd>
+{% comment %}
     <dt>
         Args <code>[]string</code>
     </dt>
     <dd>
         Arguments passed to the service containers.
     </dd>
+{% endcomment %}
+    <dt>
+        Args <code>[]string</code>
+    </dt>
+    <dd>
+        サービスコンテナーに受け渡すコマンド引数。
+    </dd>
+{% comment %}
     <dt>
         Env <code>[]string</code>
     </dt>
     <dd>
         Environment variables.
     </dd>
+{% endcomment %}
+    <dt>
+        Env <code>[]string</code>
+    </dt>
+    <dd>
+        環境変数。
+    </dd>
+{% comment %}
     <dt>
         Labels <code>map[string]string</code>
     </dt>
     <dd>
         Labels used for setting meta data on services.
     </dd>
+{% endcomment %}
+    <dt>
+        Labels <code>map[string]string</code>
+    </dt>
+    <dd>
+        サービス上のメタデータを設定するために利用するラベル。
+    </dd>
+{% comment %}
     <dt>
         Ports <code>[]Port</code>
     </dt>
@@ -274,21 +349,47 @@ A service has the following fields:
         only specify the container port to be exposed. These ports can be
         mapped on runtime hosts at the operator's discretion.
     </dd>
+{% endcomment %}
+    <dt>
+        Ports <code>[]Port</code>
+    </dt>
+    <dd>
+        サービスのポート。（<code>Port</code> (<code>int</code>) と <code>Protocol</code> (<code>string</code> から構成される。）
+        サービス記述は、公開するコンテナーポートの指定のみでも可能です。
+        このポートは操作時に、実行ホストへのポートマッピングを行うことができます。
+    </dd>
 
+{% comment %}
     <dt>
         WorkingDir <code>string</code>
     </dt>
     <dd>
         Working directory inside the service containers.
     </dd>
+{% endcomment %}
+    <dt>
+        WorkingDir <code>string</code>
+    </dt>
+    <dd>
+        サービスコンテナー内部のワークディレクトリ。
+    </dd>
 
+{% comment %}
     <dt>
         User <code>string</code>
     </dt>
     <dd>
         Username or UID (format: <code>&lt;name|uid&gt;[:&lt;group|gid&gt;]</code>).
     </dd>
+{% endcomment %}
+    <dt>
+        User <code>string</code>
+    </dt>
+    <dd>
+        ユーザー名または UID （書式: <code>&lt;name|uid&gt;[:&lt;group|gid&gt;]</code>）
+    </dd>
 
+{% comment %}
     <dt>
         Networks <code>[]string</code>
     </dt>
@@ -297,13 +398,21 @@ A service has the following fields:
         deploying a bundle should create networks as needed.
     </dd>
 </dl>
+{% endcomment %}
+    <dt>
+        Networks <code>[]string</code>
+    </dt>
+    <dd>
+        サービスコンテナーが接続するべきネットワーク。
+        バンドルをデプロイしているエンティティは、必要なネットワークを生成します。
+    </dd>
+</dl>
 
 {% comment %}
 > **Note**: Some configuration options are not yet supported in the DAB format,
 > including volume mounts.
 {% endcomment %}
-> **Note**: Some configuration options are not yet supported in the DAB format,
-> including volume mounts.
+> **メモ**: DAB 形式においては、ボリュームマウントなどのように、まだサポートされていない設定があります。
 
 {% comment %}
 ## Related topics
@@ -314,14 +423,14 @@ A service has the following fields:
 {% comment %}
 * [Get started walkthrough](/get-started/)
 {% endcomment %}
-* [Get started walkthrough](/get-started/)
+* [はじめよう](/get-started/)
 
 {% comment %}
 * [docker stack deploy](/engine/reference/commandline/stack_deploy/) command
 {% endcomment %}
-* [docker stack deploy](/engine/reference/commandline/stack_deploy/) command
+* [docker stack deploy](/engine/reference/commandline/stack_deploy/) コマンド
 
 {% comment %}
 * [deploy](/compose/compose-file/index.md#deploy) option in [Compose files](/compose/compose-file/index.md)
 {% endcomment %}
-* [deploy](/compose/compose-file/index.md#deploy) option in [Compose files](/compose/compose-file/index.md)
+* [Compose ファイル](/compose/compose-file/index.md) における [deploy](/compose/compose-file/index.md#deploy) オプション

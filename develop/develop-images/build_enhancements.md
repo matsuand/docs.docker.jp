@@ -1,47 +1,95 @@
 ---
-title: Build Enhancements for Docker
-description: Learn the new features of Docker Build
+title: Docker ビルドの拡張
+description: Docker ビルドの新しい機能について学びます。
 keywords: build, security, engine, secret, buildkit
 ---
 
+{% comment %}
 Docker Build is one of the most used features of the Docker Engine - users ranging from developers, build teams, and release teams all use Docker Build.
+{% endcomment %}
+Docker によるビルドは、Docker Engine においてもっとも利用されている機能と言えます。
+開発者、ビルドチーム、リリースチームなど幅広いユーザーが、この Docker ビルドを行います。
 
+{% comment %}
+Docker Build enhancements for 18.09 release introduces a much-needed overhaul of the build architecture. By integrating BuildKit, users should see an improvement on performance, storage management, feature functionality, and security.
+{% endcomment %}
 Docker Build enhancements for 18.09 release introduces a much-needed overhaul of the build architecture. By integrating BuildKit, users should see an improvement on performance, storage management, feature functionality, and security.
 
+{% comment %}
 * Docker images created with buildkit can be pushed to Docker Hub and DTR just like Docker images created with legacy build
 * the Dockerfile format that works on legacy build will also work with buildkit builds
 * The new `--secret` command line option allows the user to pass secret information for building new images with a specified Dockerfile
+{% endcomment %}
+* ビルドキットを用いて生成された Docker イメージは、従来の Docker イメージと同じように、Docker Hub や DTR にプッシュすることができます。
+* 従来のビルドに対して動作している Dockerfile の記述は、ビルドキットを用いてビルドを行っても同様に動作します。
+* 新しくコマンドラインオプション `--secret` が導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。
 
+{% comment %}
+For more information on build options, see the reference guide on the [command line build options](../../engine/reference/commandline/build/).
+{% endcomment %}
 For more information on build options, see the reference guide on the [command line build options](../../engine/reference/commandline/build/).
 
 
+{% comment %}
 ## Requirements
+{% endcomment %}
+## システム要件
+{: #requirements }
 
+{% comment %}
+* System requirements are docker-ce x86_64, ppc64le, s390x, aarch64, armhf; or docker-ee x86_64 only
+* Network connection required for downloading images of custom frontends
+{% endcomment %}
 * System requirements are docker-ce x86_64, ppc64le, s390x, aarch64, armhf; or docker-ee x86_64 only
 * Network connection required for downloading images of custom frontends
 
+{% comment %}
 ## Limitations
+{% endcomment %}
+## 制約条件
+{: #limitations }
 
+{% comment %}
 * BuildKit mode is incompatible with UCP and Swarm Classic
 * Only supported for building Linux containers
+{% endcomment %}
+* ビルドキットモードは、UCP や Swarm Classic とは互換性がありません。
+* Linux コンテナーのビルドのみがサポートされます。
 
+{% comment %}
 ## To enable buildkit builds
+{% endcomment %}
+## ビルドキットによるビルドの有効化
+{: #to-enable-buildkit-builds }
 
+{% comment %}
+Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1` environment variable when invoking the `docker build` command, such as:
+{% endcomment %}
 Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1` environment variable when invoking the `docker build` command, such as:
 
 ```
 $ DOCKER_BUILDKIT=1 docker build .
 ```
 
+{% comment %}
+To enable docker buildkit by default, set daemon configuration in `/etc/docker/daemon.json` feature to true and restart the daemon:
+{% endcomment %}
 To enable docker buildkit by default, set daemon configuration in `/etc/docker/daemon.json` feature to true and restart the daemon:
 
 ```
 { "features": { "buildkit": true } }
 ```
 
+{% comment %}
 ## New Docker Build command line build output
+{% endcomment %}
+## 新たな Docker コマンドラインによるビルド時の出力
+{: #new-docker-build-command-line-build-output }
 
+{% comment %}
 New docker build BuildKit TTY output (default):
+{% endcomment %}
+新たな Docker ビルドキットによる TTY 出力は（デフォルトで）以下のとおりです。
 ```
 $ docker build .
 [+] Building 70.9s (34/59)
@@ -69,7 +117,10 @@ $ docker build .
  => [dev 5/23] RUN ln -s /usr/local/completion/bash/docker /etc/bash_comp  2.1s
 ```
 
+{% comment %}
 New docker build BuildKit plain output:
+{% endcomment %}
+ビルドキットの簡易な出力は以下のとおりです。
 ```
 $ docker build --progress=plain .
 
@@ -97,28 +148,59 @@ $ docker build --progress=plain .
 #2 transferring dockerfile: 9.26kB done
 ```
 
+{% comment %}
 ## Overriding default frontends
+{% endcomment %}
+## デフォルトフロントエンドの上書き設定
+{: #overriding-default-frontends }
 
+{% comment %}
 The new syntax features in `Dockerfile` are available if you override the default frontend. To override
 the default frontend, set the first line of the `Dockerfile` as a comment with a specific frontend image:
 ```
 # syntax = <frontend image>, e.g. # syntax = docker/dockerfile:1.0-experimental
 ```
+{% endcomment %}
+`Dockerfile` における新たな文法機能として、デフォルトのフロントエンドを上書き設定することが可能になりました。
+これを行うには `Dockerfile` の先頭行に、コメントとして特定のフロントエンドイメージを指定します。
+```
+# syntax = <frontend image> # たとえば syntax = docker/dockerfile:1.0-experimental
+```
 
+{% comment %}
 ## New Docker Build secret information
+{% endcomment %}
+## 新たな Docker ビルドにおける機密情報の扱い
+{: #new-docker-build-secret-information }
 
+{% comment %}
 The new `--secret` flag for docker build allows the user to pass secret information to be used in the Dockerfile for building docker images in a safe way that will not end up stored in the final image.
+{% endcomment %}
+Docker ビルドにおいては新たに `--secret` フラグが導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。
+機密情報は、最終的にイメージ内に保存されることはないので、安全に取り扱うことができます。
 
+{% comment %}
+`id` is the identifier to pass into the `docker build --secret`. This identifier is  associated with the `RUN --mount` identifier to use in the Dockerfile. Docker does not use the filename of where the secret is kept outside of the Dockerfile, since this may be sensitive information.
+{% endcomment %}
 `id` is the identifier to pass into the `docker build --secret`. This identifier is  associated with the `RUN --mount` identifier to use in the Dockerfile. Docker does not use the filename of where the secret is kept outside of the Dockerfile, since this may be sensitive information.
 
+{% comment %}
+`dst` renames the secret file to a specific file in the Dockerfile `RUN` command to use.
+{% endcomment %}
 `dst` renames the secret file to a specific file in the Dockerfile `RUN` command to use.
 
+{% comment %}
+For example, with a secret piece of information stored in a text file:
+{% endcomment %}
 For example, with a secret piece of information stored in a text file:
 
 ```
 $ echo 'WARMACHINEROX' > mysecret.txt
 ```
 
+{% comment %}
+And with a Dockerfile that specifies use of a buildkit frontend `docker/dockerfile:1.0-experimental`, the secret can be accessed.
+{% endcomment %}
 And with a Dockerfile that specifies use of a buildkit frontend `docker/dockerfile:1.0-experimental`, the secret can be accessed.
 
 For example:

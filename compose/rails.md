@@ -1,5 +1,5 @@
 ---
-description: Docker Compose と Rails をはじめる。
+description: Rails を使って Docker Compose をはじめる。
 keywords: documentation, docs, docker, compose, orchestration, containers
 title: "クィックスタート: Compose と Rails"
 ---
@@ -9,7 +9,7 @@ This Quickstart guide shows you how to use Docker Compose to set up and run
 a Rails/PostgreSQL app. Before starting, [install Compose](install.md).
 {% endcomment %}
 このクィックスタートガイドでは Docker Compose を使って、簡単な Rails/PostgreSQL アプリを設定し実行する手順を示します。
-はじめるには [Compose をインストール](install.md)しておいてください。
+はじめるには [Compose のインストール](install.md) が必要です。
 
 {% comment %}
 ### Define the project
@@ -445,7 +445,7 @@ host.
 - [ユーザーガイド](index.md)
 - [Compose のインストール](install.md)
 - [はじめよう](gettingstarted.md)
-- [Django とともにはじめよう](django.md)
-- [WordPress とともにはじめよう](wordpress.md)
+- [Django を使ってはじめよう](django.md)
+- [WordPress を使ってはじめよう](wordpress.md)
 - [コマンドラインリファレンス](./reference/index.md)
 - [Compose ファイルリファレンス](compose-file.md)

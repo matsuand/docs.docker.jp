@@ -225,8 +225,8 @@ Compose での作業を、入力は速くミスは少なく！
 {% endcomment %}
 - [ユーザーガイド](index.md)
 - [Compose のインストール](install.md)
-- [Django とともにはじめよう](django.md)
-- [Rails とともにはじめよう](rails.md)
-- [WordPress とともにはじめよう](wordpress.md)
+- [Django を使ってはじめよう](django.md)
+- [Rails を使ってはじめよう](rails.md)
+- [WordPress を使ってはじめよう](wordpress.md)
 - [コマンドラインリファレンス](./reference/index.md)
 - [Compose ファイルリファレンス](compose-file.md)

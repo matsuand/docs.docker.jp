@@ -103,10 +103,10 @@ for Docker Desktop for Mac, and how the two products can coexist.
 {% comment %}
 * **What the install includes**: The installation provides
   [Docker Engine](/engine/userguide/), Docker CLI client,
-  [Docker Compose](/compose/overview/), [Docker Machine](/machine/overview/), and [Kitematic](/kitematic/userguide.md).
+  [Docker Compose](/compose/), [Docker Machine](/machine/overview/), and [Kitematic](/kitematic/userguide.md).
 {% endcomment %}
 * **インストールに含まれるもの**: インストールにより以下のものが利用できます。
-  [Docker Engine](/engine/userguide/)、Docker CLI クライアント、[Docker Compose](/compose/overview/)、[Docker Machine](/machine/overview/)、[Kitematic](/kitematic/userguide.md)。
+  [Docker Engine](/engine/userguide/)、Docker CLI クライアント、[Docker Compose](/compose/)、[Docker Machine](/machine/overview/)、[Kitematic](/kitematic/userguide.md)。
 
 {% comment %}
 ## Install and run Docker Desktop for Mac

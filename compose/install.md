@@ -510,8 +510,8 @@ pip uninstall docker-compose
 {% endcomment %}
 - [ユーザーガイド](index.md)
 - [Compose をはじめよう](gettingstarted.md)
-- [Django とともにはじめる](django.md)
-- [Rails とともにはじめる](rails.md)
-- [WordPress とともにはじめる](wordpress.md)
+- [Django を使ってはじめよう](django.md)
+- [Rails を使ってはじめよう](rails.md)
+- [WordPress を使ってはじめよう](wordpress.md)
 - [コマンドラインリファレンス](/compose/reference/index.md)
 - [Compose ファイルリファレンス](compose-file.md)

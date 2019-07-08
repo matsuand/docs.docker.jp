@@ -64,10 +64,9 @@ container started for that service, much like passing command-line parameters to
 `docker run`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
 {% endcomment %}
-A [container](/engine/reference/glossary.md#container) definition contains configuration which are applied to each
-container started for that service, much like passing command-line parameters to
-`docker run`. Likewise, network and volume definitions are analogous to
-`docker network create` and `docker volume create`.
+[コンテナー](/engine/reference/glossary.md#container) の定義とは、対応するサービスを起動する各コンテナーに適用される設定を行うことです。
+コマンドラインから `docker run` のパラメーターを受け渡すことと、非常によく似ています。
+同様に、ネットワークの定義、ボリュームの定義は、それぞれ `docker network create` と `docker volume create` のコマンドに対応づくものです。
 
 {% comment %}
 As with `docker run`, options specified in the Dockerfile, such as `CMD`,
@@ -96,7 +95,7 @@ definition in version 2.
 {% comment %}
 A set of configuration options to set block IO limits for this service.
 {% endcomment %}
-A set of configuration options to set block IO limits for this service.
+サービスのブロック IO に対する制限を行う設定オプションです。
 
     version: "{{ site.compose_file_v2 }}"
     services:
@@ -126,17 +125,16 @@ A set of configuration options to set block IO limits for this service.
 Set a limit in bytes per second for read / write operations on a given device.
 Each item in the list must have two keys:
 {% endcomment %}
-Set a limit in bytes per second for read / write operations on a given device.
-Each item in the list must have two keys:
+指定されたデバイス上での読み書き操作に対して、秒ごとのバイト上限値を設定します。
+設定するリストの各項目には、以下の 2 つのキーが必要です。
 
 {% comment %}
 * `path`, defining the symbolic path to the affected device
 * `rate`, either as an integer value representing the number of bytes or as
   a string expressing a [byte value](#specifying-byte-values).
 {% endcomment %}
-* `path`, defining the symbolic path to the affected device
-* `rate`, either as an integer value representing the number of bytes or as
-  a string expressing a [byte value](#specifying-byte-values).
+* `path`, 影響を受けるデバイスへのシンボリックパスを指定します。
+* `rate`, バイト数を表わす整数値、または [バイト値](#specifying-byte-values) を表現する文字列を指定します。
 
 #### device_read_iops, device_write_iops
 
@@ -144,17 +142,16 @@ Each item in the list must have two keys:
 Set a limit in operations per second for read / write operations on a given
 device. Each item in the list must have two keys:
 {% endcomment %}
-Set a limit in operations per second for read / write operations on a given
-device. Each item in the list must have two keys:
+指定されたデバイス上での読み書き操作に対して、秒ごとの操作上限値を設定します。
+設定するリストの各項目には、以下の 2 つのキーが必要です。
 
 {% comment %}
 * `path`, defining the symbolic path to the affected device
 * `rate`, as an integer value representing the permitted number of operations
   per second.
 {% endcomment %}
-* `path`, defining the symbolic path to the affected device
-* `rate`, as an integer value representing the permitted number of operations
-  per second.
+* `path`, 影響を受けるデバイスへのシンボリックパスを指定します。
+* `rate`, 許容する操作数を表わす整数値を指定します。
 
 #### weight
 
@@ -163,9 +160,8 @@ Modify the proportion of bandwidth allocated to this service relative to other
 services. Takes an integer value between 10 and 1000, with 500 being the
 default.
 {% endcomment %}
-Modify the proportion of bandwidth allocated to this service relative to other
-services. Takes an integer value between 10 and 1000, with 500 being the
-default.
+他のサービスと比べたときの、当サービスに割り当てる処理性能比を設定します。
+10 から 1000 までの整数値を割り当てるもので、デフォルト値は 500 です。
 
 #### weight_device
 
@@ -173,15 +169,15 @@ default.
 Fine-tune bandwidth allocation by device. Each item in the list must have
 two keys:
 {% endcomment %}
-Fine-tune bandwidth allocation by device. Each item in the list must have
-two keys:
+デバイスへの処理割り当て量を調整します。
+設定するリストの各項目には、以下の 2 つのキーが必要です。
 
 {% comment %}
 * `path`, defining the symbolic path to the affected device
 * `weight`, an integer value between 10 and 1000
 {% endcomment %}
-* `path`, defining the symbolic path to the affected device
-* `weight`, an integer value between 10 and 1000
+* `path`, 影響を受けるデバイスへのシンボリックパスを指定します。
+* `weight`, 10 から 1000 までの整数値を指定します。
 
 ### build
 
@@ -246,8 +242,8 @@ A list of images that the engine uses for cache resolution.
 > [Version 2 file format](compose-versioning.md#version-2) and up. In version 1, just use
 > [build](#build).
 {% endcomment %}
-> [Version 2 file format](compose-versioning.md#version-2) and up. In version 1, just use
-> [build](#build).
+> [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) またはそれ以降。
+> バージョン 1 の場合は [build](#build) を用いてください。
 
 {% comment %}
 Either a path to a directory containing a Dockerfile, or a url to a git repository.
@@ -293,7 +289,7 @@ Compose は指定された別の Dockerfile を使ってビルドを行います
 {% comment %}
 > [Version 2 file format](compose-versioning.md#version-2) and up.
 {% endcomment %}
-> [Version 2 file format](compose-versioning.md#version-2) and up.
+> [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) またはそれ以降。
 
 {% comment %}
 Add build arguments, which are environment variables accessible only during the
@@ -337,55 +333,92 @@ or a list:
 > If you need an argument to be available in both places, also specify it under the `FROM` instruction.
 > See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
 {% endcomment %}
-> **メモ**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
-> If you need an argument to be available in both places, also specify it under the `FROM` instruction.
-> See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
+> **メモ**: Dockerfile にて `FROM` 命令の前に `ARG` 命令を指定した場合、`FROM` 以降のビルド命令において `ARG` の値は利用することができません。
+> `FROM` の前後どこでも、そして特に `FROM` 命令の後でもその値を利用したい場合は、[ARG と FROM の関連について](/engine/reference/builder/#understand-how-arg-and-from-interact)を参照してください。
 
+{% comment %}
 You can omit the value when specifying a build argument, in which case its value
 at build time is the value in the environment where Compose is running.
+{% endcomment %}
+ビルド引数の指定にあたって、その値設定を省略することができます。
+この場合、ビルド時におけるその値は、Compose を起動している環境での値になります。
 
     args:
       - buildno
       - gitcommithash
 
+{% comment %}
 > **Note**: YAML boolean values (`true`, `false`, `yes`, `no`, `on`, `off`) must
 > be enclosed in quotes, so that the parser interprets them as strings.
+{% endcomment %}
+> **メモ**: YAML のブール値 (`true`, `false`, `yes`, `no`, `on`, `off`) を用いる場合は、クォートで囲む必要があります。
+> そうすることで、これらの値は文字列として解釈されます。
 
 #### extra_hosts
 
+{% comment %}
 Add hostname mappings at build-time. Use the same values as the docker client `--add-host` parameter.
+{% endcomment %}
+ビルド時におけるホスト名のマッピングを追加します。
+Docker Client の `--add-host` パラメーターと同じ値を設定してください。
 
     extra_hosts:
      - "somehost:162.242.195.82"
      - "otherhost:50.31.209.229"
 
+{% comment %}
 An entry with the ip address and hostname is created in `/etc/hosts` inside containers for this build, e.g:
+{% endcomment %}
+ホスト名と IP アドレスによるこの設定内容は、サービスコンテナー内の `/etc/hosts` に追加されます。
+たとえば以下のとおりです。
 
     162.242.195.82  somehost
     50.31.209.229   otherhost
 
 #### isolation
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
+{% endcomment %}
+> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
+{% comment %}
 Specify a build’s container isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
 [Docker Engine docs](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
 for details.
+{% endcomment %}
+ビルドにおけるコンテナーの分離技術（isolation technology）を設定します。
+Linux においてサポートされるのは `default` のみです。
+Windows では `default`, `process`, `hyperv` の設定が可能です。
+詳しくは [Docker Engine ドキュメント](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation) を参照してください。
 
+{% comment %}
 If unspecified, Compose will use the `isolation` value found in the service's definition
 to determine the value to use for builds.
+{% endcomment %}
+設定されていない場合、Compose は service 定義の中から `isolation` 値を見つけて、これをビルド時に利用する値とします。
 
 #### labels
 
+{% comment %}
 > Added in [version 2.1](compose-versioning.md#version-21) file format
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
+{% comment %}
 Add metadata to the resulting image using [Docker labels](/engine/userguide/labels-custom-metadata.md).
 You can use either an array or a dictionary.
+{% endcomment %}
+[Docker labels](/engine/userguide/labels-custom-metadata.md) を使ってビルドされるイメージにメタデータを追加します。
+配列形式と辞書形式のいずれかにより指定します。
 
+{% comment %}
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with
 those used by other software.
+{% endcomment %}
+他のソフトウェアが用いるラベルとの競合を避けるため、逆 DNS 記法とすることをお勧めします。
 
     build:
       context: .
@@ -404,10 +437,16 @@ those used by other software.
 
 #### network
 
+{% comment %}
 > Added in [version 2.2](compose-versioning.md#version-22) file format
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.2](compose-versioning.md#version-22) において追加されました。
 
+{% comment %}
 Set the network containers connect to for the `RUN` instructions during
 build.
+{% endcomment %}
+ビルド時の `RUN` 命令において接続するネットワークコンテナーを設定します。
 
     build:
       context: .
@@ -420,11 +459,18 @@ build.
 
 #### shm_size
 
+{% comment %}
 > Added in [version 2.3](compose-versioning.md#version-23) file format
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.3](compose-versioning.md#version-23) において追加されました。
 
+{% comment %}
 Set the size of the `/dev/shm` partition for this build's containers. Specify
 as an integer value representing the number of bytes or as a string expressing
 a [byte value](#specifying-byte-values).
+{% endcomment %}
+このビルドコンテナーにおける `/dev/shm` パーティションのサイズを設定します。
+指定する値は、バイト数を表わす整数値か、あるいは[バイト表現](#specifying-byte-values)によって表わされる文字列とします。
 
     build:
       context: .
@@ -437,11 +483,17 @@ a [byte value](#specifying-byte-values).
 
 #### target
 
+{% comment %}
 > Added in [version 2.3](compose-versioning.md#version-23) file format
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.3](compose-versioning.md#version-23) において追加されました。
 
+{% comment %}
 Build the specified stage as defined inside the `Dockerfile`. See the
 [multi-stage build docs](/engine/userguide/eng-image/multistage-build.md) for
 details.
+{% endcomment %}
+`Dockerfile` 内部に定義されている特定のステージをビルドする方法は、[マルチステージビルド](/engine/userguide/eng-image/multistage-build.md)を参照してください。
 
       build:
         context: .
@@ -449,8 +501,12 @@ details.
 
 ### cap_add, cap_drop
 
+{% comment %}
 Add or drop container capabilities.
 See `man 7 capabilities` for a full list.
+{% endcomment %}
+コンテナーケーパビリティーの機能を追加または削除します。
+詳細な一覧は `man 7 capabilities` を参照してください。
 
     cap_add:
       - ALL
@@ -461,50 +517,87 @@ See `man 7 capabilities` for a full list.
 
 ### command
 
+{% comment %}
 Override the default command.
+{% endcomment %}
+デフォルトコマンドを上書きします。
 
     command: bundle exec thin -p 3000
 
+{% comment %}
 The command can also be a list, in a manner similar to
 [dockerfile](/engine/reference/builder.md#cmd):
+{% endcomment %}
+このコマンドは [dockerfile](/engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
 
     command: ["bundle", "exec", "thin", "-p", "3000"]
 
 ### cgroup_parent
 
+{% comment %}
 Specify an optional parent cgroup for the container.
+{% endcomment %}
+コンテナーに対して、オプションで指定する親の cgroup を指定します。
 
     cgroup_parent: m-executor-abcd
 
 ### container_name
 
+{% comment %}
 Specify a custom container name, rather than a generated default name.
+{% endcomment %}
+デフォルトのコンテナー名ではない、独自のコンテナー名を設定します。
 
     container_name: my-web-container
 
+{% comment %}
 Because Docker container names must be unique, you cannot scale a service
 beyond 1 container if you have specified a custom name. Attempting to do so
 results in an error.
+{% endcomment %}
+Docker コンテナー名はユニークである必要があります。
+そこで独自のコンテナー名を設定したときは、サービスをスケールアップして複数コンテナーとすることはできません。
+これを行うとエラーが発生します。
 
 ### cpu_rt_runtime, cpu_rt_period
 
+{% comment %}
 > Added in [version 2.2](compose-versioning.md#version-22) file format
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.2](compose-versioning.md#version-22) において追加されました。
 
+{% comment %}
 Configure CPU allocation parameters using the Docker daemon realtime scheduler.
+{% endcomment %}
+Docker デーモンのリアルタイムスケジューラーが利用する CPU 割り当てパラメーターを設定します。
 
+    {% comment %}
     cpu_rt_runtime: '400ms'
     cpu_rt_period: '1400us'
 
     # Integer values will use microseconds as units
     cpu_rt_runtime: 95000
     cpu_rt_period: 11000
+    {% endcomment %}
+    cpu_rt_runtime: '400ms'
+    cpu_rt_period: '1400us'
+
+    # マイクロ秒単位で整数値を指定します。
+    cpu_rt_runtime: 95000
+    cpu_rt_period: 11000
 
 
 ### device_cgroup_rules
 
+{% comment %}
 > [Added in version 2.3 file format](compose-versioning.md#version-23).
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.3](compose-versioning.md#version-23) において追加されました。
 
+{% comment %}
 Add rules to the cgroup allowed devices list.
+{% endcomment %}
+cgroup としてアクセス許可されているデバイスリストにルールを追加します。
 
     device_cgroup_rules:
       - 'c 1:3 mr'
@@ -512,26 +605,48 @@ Add rules to the cgroup allowed devices list.
 
 ### devices
 
+{% comment %}
 List of device mappings.  Uses the same format as the `--device` docker
 client create option.
+{% endcomment %}
+デバイスのマッピングをリスト形式で設定します。
+Docker クライアントの create オプションの `--device` と同じ書式にします。
 
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
 
 ### depends_on
 
+{% comment %}
 > [Version 2 file format](compose-versioning.md#version-2) and up.
+{% endcomment %}
+> [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) またはそれ以降。
 
+{% comment %}
 Express dependency between services, which has two effects:
+{% endcomment %}
+サービス間の依存関係を表わします。
+これにより以下の 2 つの効果が表れます。
 
+{% comment %}
 - `docker-compose up` starts services in dependency order. In the following
   example, `db` and `redis` are started before `web`.
+{% endcomment %}
+- `docker-compose up` は依存関係の順にサービスを起動します。
+  以下の例において `db` と `redis` は `web` の後に起動します。
 
+{% comment %}
 - `docker-compose up SERVICE` automatically include `SERVICE`'s
   dependencies. In the following example, `docker-compose up web` also
   create and start `db` and `redis`.
+{% endcomment %}
+- `docker-compose up SERVICE` を実行すると `SERVICE` における依存関係をもとに動作します。
+  以下の例において `docker-compose up web` を実行すると `db` と `redis` を生成して起動します。
 
+{% comment %}
 Simple example:
+{% endcomment %}
+以下がその簡単な例です。
 
     version: "{{ site.compose_file_v2 }}"
     services:
@@ -545,17 +660,35 @@ Simple example:
       db:
         image: postgres
 
+{% comment %}
 > **Note**: `depends_on` does not wait for `db` and `redis` to be "ready" before
 > starting `web` - only until they have been started. If you need to wait
 > for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 > for more on this problem and strategies for solving it.
+{% endcomment %}
+> **メモ**: `depends_on` では `db` や `redis` が「準備」状態になるのを待たずに、つまりそれらを開始したらすぐに `web` を起動します。
+>   準備状態になるのを待ってから次のサービスを起動することが必要な場合は、[Compose における起動順の制御](/compose/startup-order.md)にて示す内容と解決方法を確認してください。
 
+
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
+{% endcomment %}
+### healthcheck
 
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
+
+{% comment %}
+A healthcheck indicates that you want a dependency to wait
+for another container to be "healthy" (as indicated by a successful state from
+the healthcheck) before starting.
+{% endcomment %}
 A healthcheck indicates that you want a dependency to wait
 for another container to be "healthy" (as indicated by a successful state from
 the healthcheck) before starting.
 
+{% comment %}
+Example:
+{% endcomment %}
 Example:
 
     version: "{{ site.compose_file_v2 }}"
@@ -574,15 +707,27 @@ Example:
         healthcheck:
           test: "exit 0"
 
+{% comment %}
+In the above example, Compose waits for the `redis` service to be started
+(legacy behavior) and the `db` service to be healthy before starting `web`.
+{% endcomment %}
 In the above example, Compose waits for the `redis` service to be started
 (legacy behavior) and the `db` service to be healthy before starting `web`.
 
+{% comment %}
+See the [healthcheck section](#healthcheck) for complementary
+information.
+{% endcomment %}
 See the [healthcheck section](#healthcheck) for complementary
 information.
 
 ### dns
 
+{% comment %}
 Custom DNS servers. Can be a single value or a list.
+{% endcomment %}
+DNS サーバーを設定します。
+設定は 1 つだけとするか、リストにすることができます。
 
     dns: 8.8.8.8
     dns:
@@ -591,6 +736,9 @@ Custom DNS servers. Can be a single value or a list.
 
 ### dns_opt
 
+{% comment %}
+List of custom DNS options to be added to the container's `resolv.conf` file.
+{% endcomment %}
 List of custom DNS options to be added to the container's `resolv.conf` file.
 
     dns_opt:
@@ -599,7 +747,11 @@ List of custom DNS options to be added to the container's `resolv.conf` file.
 
 ### dns_search
 
+{% comment %}
 Custom DNS search domains. Can be a single value or a list.
+{% endcomment %}
+DNS 検索ドメインを設定します。
+設定は 1 つだけとするか、リストにすることができます。
 
     dns_search: example.com
     dns_search:
@@ -608,7 +760,11 @@ Custom DNS search domains. Can be a single value or a list.
 
 ### tmpfs
 
+{% comment %}
 Mount a temporary file system inside the container. Can be a single value or a list.
+{% endcomment %}
+コンテナー内においてテンポラリファイルシステムをマウントします。
+設定は 1 つだけとするか、リストにすることができます。
 
     tmpfs: /run
     tmpfs:
@@ -617,12 +773,19 @@ Mount a temporary file system inside the container. Can be a single value or a l
 
 ### entrypoint
 
+{% comment %}
 Override the default entrypoint.
+{% endcomment %}
+デフォルトのエントリーポイントを上書きします。
 
     entrypoint: /code/entrypoint.sh
 
+{% comment %}
 The entrypoint can also be a list, in a manner similar to
 [dockerfile](/engine/reference/builder.md#entrypoint):
+{% endcomment %}
+エントリーポイントはリスト形式で設定することができます。
+その指定方法は [Dockerfile](/engine/reference/builder.md#entrypoint) と同様です。
 
     entrypoint:
         - php
@@ -632,21 +795,36 @@ The entrypoint can also be a list, in a manner similar to
         - memory_limit=-1
         - vendor/bin/phpunit
 
+{% comment %}
 > **Note**: Setting `entrypoint` both overrides any default entrypoint set
 > on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
 > clears out any default command on the image - meaning that if there's a `CMD`
 > instruction in the Dockerfile, it is ignored.
+{% endcomment %}
+> **メモ**: `entrypoint` を設定すると、サービスイメージ内に Dockerfile 命令の `ENTRYPOINT` によって設定されているデフォルトのエントリーポイントは上書きされ、**さらに**イメージ内のあらゆるデフォルトコマンドもクリアされます。
+> これはつまり、Dockerfile に `CMD` 命令があったとしたら無視されるということです。
 
 ### env_file
 
+{% comment %}
 Add environment variables from a file. Can be a single value or a list.
+{% endcomment %}
+ファイルを用いて環境変数を追加します。
+設定は 1 つだけとするか、リストにすることができます。
 
+{% comment %}
 If you have specified a Compose file with `docker-compose -f FILE`, paths in
 `env_file` are relative to the directory that file is in.
+{% endcomment %}
+Compose ファイルを `docker-compose -f FILE` という起動により指定している場合、`env_file` におけるパスは、Compose ファイルがあるディレクトリからの相対パスとします。
 
+{% comment %}
 Environment variables declared in the [environment](#environment) section
 _override_ these values &ndash; this holds true even if those values are
 empty or undefined.
+{% endcomment %}
+環境変数が [environment](#environment) の項に宣言されていれば、ここでの設定を**オーバーライド**します。
+たとえ設定値が空や未定義であっても、これは変わりません。
 
     env_file: .env
 
@@ -655,28 +833,50 @@ empty or undefined.
       - ./apps/web.env
       - /opt/secrets.env
 
+{% comment %}
 Compose expects each line in an env file to be in `VAR=VAL` format. Lines
 beginning with `#` are processed as comments and are ignored. Blank lines are
 also ignored.
+{% endcomment %}
+env ファイルの各行は `VAR=VAL` の書式とします。
+行先頭に `#` があると、コメント行となり無視されます。
+空行も無視されます。
 
     # Set Rails/Rack environment
     RACK_ENV=development
 
+{% comment %}
 > **Note**: If your service specifies a [build](#build) option, variables
 > defined in environment files are _not_ automatically visible during the
 > build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
+{% endcomment %}
+> **メモ**: サービスに [build](#build) オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
+> その場合は `build` のサブオプション [args](#args) を利用して、ビルド時の環境変数を設定してください。
 
+{% comment %}
 The value of `VAL` is used as is and not modified at all. For example if the
 value is surrounded by quotes (as is often the case of shell variables), the
 quotes are included in the value passed to Compose.
+{% endcomment %}
+`VAL` の値は記述されたとおりに用いられ、一切修正はされません。
+たとえば値がクォートにより囲まれている（よくシェル変数に対して行う）場合、クォートもそのまま値として Compose に受け渡されます。
 
+{% comment %}
 Keep in mind that _the order of files in the list is significant in determining
 the value assigned to a variable that shows up more than once_. The files in the
 list are processed from the top down. For the same variable specified in file
 `a.env` and assigned a different value in file `b.env`, if `b.env` is
 listed below (after), then the value from `b.env` stands. For example, given the
 following declaration in `docker-compose.yml`:
+{% endcomment %}
+ファイルを複数用いる場合の順番には気をつけてください。
+特に何度も出現する変数に対して、値がどのように決定されるかです。
+ファイルが複数指定された場合、その処理は上から順に行われます。
+たとえば `a.env` ファイルに変数が指定されていて、`b.env` ファイルには同じ変数が異なる値で定義されていたとします。
+ここで `b.env` ファイルが下に（後に）指定されているとします。
+このとき変数の値は `b.env` のものが採用されます。
+さらに例として `docker-compose.yml` に以下のような宣言があったとします。
 
 ```yaml
 services:
@@ -686,30 +886,47 @@ services:
       - b.env
 ```
 
+{% comment %}
 And the following files:
+{% endcomment %}
+ファイルの内容は以下であるとします。
 
 ```none
 # a.env
 VAR=1
 ```
 
+{% comment %}
 and
+{% endcomment %}
 
 ```none
 # b.env
 VAR=hello
 ```
 
+{% comment %}
 $VAR is `hello`.
+{% endcomment %}
+この結果 `$VAR` は `hello` になります。
 
 ### environment
 
+{% comment %}
 Add environment variables. You can use either an array or a dictionary. Any
 boolean values; true, false, yes no, need to be enclosed in quotes to ensure
 they are not converted to True or False by the YML parser.
+{% endcomment %}
+環境変数を追加します。
+配列形式または辞書形式での指定が可能です。
+ブール値 `true`, `false`, `yes`, `no` を用いる場合は、クォートで囲むことで YML パーサーによって True や False に変換されてしまうのを防ぐ必要があります。
 
+{% comment %}
 Environment variables with only a key are resolved to their values on the
 machine Compose is running on, which can be helpful for secret or host-specific values.
+{% endcomment %}
+環境変数だけが記述されている場合は、Compose が起動しているマシン上にて定義されている値が設定されます。
+これは機密情報やホスト固有の値を設定する場合に利用できます。
 
     environment:
       RACK_ENV: development
@@ -721,15 +938,24 @@ machine Compose is running on, which can be helpful for secret or host-specific 
       - SHOW=true
       - SESSION_SECRET
 
+{% comment %}
 > **Note**: If your service specifies a [build](#build) option, variables
 > defined in `environment` are _not_ automatically visible during the
 > build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
+{% endcomment %}
+> **メモ**: サービスに [build](#build) オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
+> その場合は `build` のサブオプション [args](#args) を利用して、ビルド時の環境変数を設定してください。
 
 ### expose
 
+{% comment %}
 Expose ports without publishing them to the host machine - they'll only be
 accessible to linked services. Only the internal port can be specified.
+{% endcomment %}
+ホストマシンにはポートを公開せずに、ポートを expose します。
+これはリンクされたサービスのみアクセスが可能になります。
+内部ポートのみが指定できます。
 
     expose:
      - "3000"
@@ -737,32 +963,59 @@ accessible to linked services. Only the internal port can be specified.
 
 ### extends
 
+{% comment %}
 Extend another service, in the current file or another, optionally overriding
 configuration.
+{% endcomment %}
+現ファイルや別のファイルにある他のサービスを拡張します。
+必要に応じて設定を上書きすることもできます。
 
+{% comment %}
 You can use `extends` on any service together with other configuration keys.
 The `extends` value must be a dictionary defined with a required `service`
 and an optional `file` key.
+{% endcomment %}
+別のサービスを `extends` により拡張する際には、合わせて他の設定キーを指定することができます。
+`extends` に設定する値は辞書形式であり、`service` キーが必須です。
+また必要に応じて指定する `file` キーがあります。
 
     extends:
       file: common.yml
       service: webapp
 
+{% comment %}
 The `service` the name of the service being extended, for example
 `web` or `database`. The `file` is the location of a Compose configuration
 file defining that service.
+{% endcomment %}
+`service` は拡張するサービスの名前を指定します。
+たとえば `web` や `database` です。
+`file` は、サービスを定義する Compose 設定ファイルのパスを指定します。
 
+{% comment %}
 If you omit the `file` Compose looks for the service configuration in the
 current file. The `file` value can be an absolute or relative path. If you
 specify a relative path, Compose treats it as relative to the location of the
 current file.
+{% endcomment %}
+`file` の指定を省略した場合、Compose はそのサービス設定を現ファイルの中から探します。
+`file` に指定する値は絶対パス、相対パスのいずれでも構いません。
+相対パスを指定した場合、Compose は現ファイルのあるディレクトリからの相対パスとして扱います。
 
+{% comment %}
 You can extend a service that itself extends another. You can extend
 indefinitely. Compose does not support circular references and `docker-compose`
 returns an error if it encounters one.
+{% endcomment %}
+拡張するサービスそのものが、他のサービスを拡張したものも指定可能です。
+拡張の繰り返しはいくらでもできます。
+ただし Compose は循環参照をサポートしていないため、そのような状況が発生した場合は `docker-compose` がエラーを返します。
 
+{% comment %}
 For more on `extends`, see the
 [the extends documentation](/compose/extends.md#extending-services).
+{% endcomment %}
+`extends` に関する詳細は [extends ドキュメント](/compose/extends.md#extending-services) を参照してください。
 
 ### external_links
 

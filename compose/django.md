@@ -1,5 +1,5 @@
 ---
-description: Docker Compose と Django をはじめる。
+description: Django を使って Docker Compose をはじめる。
 keywords: documentation, docs,  docker, compose, orchestration, containers
 title: "クィックスタート: Compose と Django"
 ---
@@ -9,7 +9,7 @@ This quick-start guide demonstrates how to use Docker Compose to set up and run 
 [install Compose](install.md).
 {% endcomment %}
 このクィックスタートガイドでは Docker Compose を使って、簡単な Django/PostgreSQL アプリを設定し実行する手順を示します。
-はじめる前に [Compose をインストール](install.md)してください。
+はじめるには [Compose のインストール](install.md) が必要です。
 
 {% comment %}
 ### Define the project components
@@ -418,7 +418,7 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
 - [ユーザーガイド](index.md)
 - [Compose のインストール](install.md)
 - [はじめよう](gettingstarted.md)
-- [Rails とともにはじめる](rails.md)
-- [WordPress とともにはじめる](wordpress.md)
+- [Rails  を使ってはじめよう](rails.md)
+- [WordPress を使ってはじめよう](wordpress.md)
 - [コマンドラインリファレンス](./reference/index.md)
 - [Compose ファイルリファレンス](compose-file.md)

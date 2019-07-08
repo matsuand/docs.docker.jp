@@ -6,8 +6,14 @@ redirect_from:
 - /docker-cloud/orgs/
 ---
 
+{% comment %}
+Docker Hub Organizations let you create teams so you can give your team access to shared image repositories.
+{% endcomment %}
 Docker Hub Organizations let you create teams so you can give your team access to shared image repositories.
 
+{% comment %}
+### How Organizations & Teams Work
+{% endcomment %}
 ### How Organizations & Teams Work
 
 - **Organizations** are a collection of teams and repositories that can be managed together.
