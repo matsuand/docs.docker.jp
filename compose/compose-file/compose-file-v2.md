@@ -682,14 +682,13 @@ A healthcheck indicates that you want a dependency to wait
 for another container to be "healthy" (as indicated by a successful state from
 the healthcheck) before starting.
 {% endcomment %}
-A healthcheck indicates that you want a dependency to wait
-for another container to be "healthy" (as indicated by a successful state from
-the healthcheck) before starting.
+ヘルスチェックは、依存するコンテナーが起動する場合には、別のコンテナーが「健康」（healthy）となることを待って起動するようにチェックすることを指します。
+（「健康」であることは、ヘルスチェックによって正常な状態であることが示されたことを表わします。）
 
 {% comment %}
 Example:
 {% endcomment %}
-Example:
+以下がその例です。
 
     version: "{{ site.compose_file_v2 }}"
     services:
@@ -711,15 +710,14 @@ Example:
 In the above example, Compose waits for the `redis` service to be started
 (legacy behavior) and the `db` service to be healthy before starting `web`.
 {% endcomment %}
-In the above example, Compose waits for the `redis` service to be started
-(legacy behavior) and the `db` service to be healthy before starting `web`.
+上の例において Compose は `redis` サービスが起動するのを待ちます（従来からの動作）。
+さらに `db` サービスが「健康」になることを待って `web` サービスを起動します。
 
 {% comment %}
 See the [healthcheck section](#healthcheck) for complementary
 information.
 {% endcomment %}
-See the [healthcheck section](#healthcheck) for complementary
-information.
+さらなる情報については [ヘルスチェックの節](#healthcheck) を参照してください。
 
 ### dns
 
@@ -739,7 +737,7 @@ DNS サーバーを設定します。
 {% comment %}
 List of custom DNS options to be added to the container's `resolv.conf` file.
 {% endcomment %}
-List of custom DNS options to be added to the container's `resolv.conf` file.
+コンテナーの `resolv.conf` ファイルに追加する独自の DNS オプションを、リスト形式で設定します。
 
     dns_opt:
       - use-vc
@@ -1019,35 +1017,62 @@ For more on `extends`, see the
 
 ### external_links
 
+{% comment %}
 Link to containers started outside this `docker-compose.yml` or even outside
 of Compose, especially for containers that provide shared or common services.
 `external_links` follow semantics similar to `links` when specifying both the
 container name and the link alias (`CONTAINER:ALIAS`).
+{% endcomment %}
+今の `docker-compose.yml` からではない別のところから起動されたコンテナーをリンクします。
+あるいは Compose の外から、特に共有サービスや汎用サービスとして提供されるコンテナーをリンクします。
+`external_links` の文法は、オプション `links` と同様です。
+つまりコンテナー名とリンクのエイリアス名（`CONTAINER:ALIAS`）を同時に指定します。
 
     external_links:
      - redis_1
      - project_db_1:mysql
      - project_db_1:postgresql
 
+{% comment %}
 > **Note**: For version 2 file format, the
 > externally-created containers must be connected to at least one of the same
 > networks as the service which is linking to them.
+{% endcomment %}
+> **メモ**: ファイルフォーマットバージョン 2 を利用しているときに、外部にて生成されたコンテナーをネットワークに接続する場合は、そのコンテナーがサービスとしてリンクしているネットワークのうちの 1 つでなければなりません。
 
 ### extra_hosts
 
+{% comment %}
 Add hostname mappings. Use the same values as the docker client `--add-host` parameter.
+{% endcomment %}
+ホスト名のマッピングを追加します。
+Docker Client の `--add-host` パラメーターと同じ値を設定してください。
 
     extra_hosts:
      - "somehost:162.242.195.82"
      - "otherhost:50.31.209.229"
 
+{% comment %}
 An entry with the ip address and hostname is created in `/etc/hosts` inside containers for this service, e.g:
+{% endcomment %}
+ホスト名と IP アドレスによるこの設定内容は、サービスコンテナー内の `/etc/hosts` に追加されます。
+たとえば以下のとおりです。
 
     162.242.195.82  somehost
     50.31.209.229   otherhost
 
 ### group_add
 
+{% comment %}
+Specify additional groups (by name or number) which the user inside the
+container should be a member of. Groups must exist in both the container and the
+host system to be added. An example of where this is useful is when multiple
+containers (running as different users) need to all read or write the same
+file on the host system. That file can be owned by a group shared by all the
+containers, and specified in `group_add`. See the
+[Docker documentation](/engine/reference/run.md#additional-groups) for more
+details.
+{% endcomment %}
 Specify additional groups (by name or number) which the user inside the
 container should be a member of. Groups must exist in both the container and the
 host system to be added. An example of where this is useful is when multiple
@@ -1057,6 +1082,9 @@ containers, and specified in `group_add`. See the
 [Docker documentation](/engine/reference/run.md#additional-groups) for more
 details.
 
+{% comment %}
+A full example:
+{% endcomment %}
 A full example:
 
 ```
@@ -1068,14 +1096,28 @@ services:
       - mail
 ```
 
+{% comment %}
+Running `id` inside the created container shows that the user belongs to
+the `mail` group, which would not have been the case if `group_add` were not
+used.
+{% endcomment %}
 Running `id` inside the created container shows that the user belongs to
 the `mail` group, which would not have been the case if `group_add` were not
 used.
 
 ### healthcheck
 
+{% comment %}
+> [Version 2.1 file format](compose-versioning.md#version-21) and up.
+{% endcomment %}
 > [Version 2.1 file format](compose-versioning.md#version-21) and up.
 
+{% comment %}
+Configure a check that's run to determine whether or not containers for this
+service are "healthy". See the docs for the
+[HEALTHCHECK Dockerfile instruction](/engine/reference/builder.md#healthcheck)
+for details on how healthchecks work.
+{% endcomment %}
 Configure a check that's run to determine whether or not containers for this
 service are "healthy". See the docs for the
 [HEALTHCHECK Dockerfile instruction](/engine/reference/builder.md#healthcheck)
@@ -1088,9 +1130,18 @@ for details on how healthchecks work.
       retries: 3
       start_period: 40s
 
+{% comment %}
+`interval`, `timeout` and `start_period` are specified as
+[durations](#specifying-durations).
+{% endcomment %}
 `interval`, `timeout` and `start_period` are specified as
 [durations](#specifying-durations).
 
+{% comment %}
+`test` must be either a string or a list. If it's a list, the first item must be
+either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
+specifying `CMD-SHELL` followed by that string.
+{% endcomment %}
 `test` must be either a string or a list. If it's a list, the first item must be
 either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
 specifying `CMD-SHELL` followed by that string.
@@ -1102,12 +1153,20 @@ specifying `CMD-SHELL` followed by that string.
     test: ["CMD-SHELL", "curl -f http://localhost && echo 'cool, it works'"]
     test: curl -f https://localhost && echo 'cool, it works'
 
+{% comment %}
+To disable any default healthcheck set by the image, you can use `disable:
+true`. This is equivalent to specifying `test: ["NONE"]`.
+{% endcomment %}
 To disable any default healthcheck set by the image, you can use `disable:
 true`. This is equivalent to specifying `test: ["NONE"]`.
 
     healthcheck:
       disable: true
 
+{% comment %}
+> **Note**: The `start_period` option is a more recent feature and is only
+> available with the [2.3 file format](compose-versioning.md#version-23).
+{% endcomment %}
 > **Note**: The `start_period` option is a more recent feature and is only
 > available with the [2.3 file format](compose-versioning.md#version-23).
 
