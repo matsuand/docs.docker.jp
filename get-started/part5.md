@@ -490,7 +490,7 @@ Redis service. Be sure to replace `username/repo:tag` with your image details.
     ![ブラウザー上での Redis を用いた Hello World](images/app-in-browser-redis.png)
 
     {% comment %}
-    Also, check the visualizer at port 8080 on either node's IP address, and notice see the `redis` service running along with the `web` and `visualizer` services.
+    Also, check the visualizer at port 8080 on either node's IP address, and notice the `redis` service running along with the `web` and `visualizer` services.
     {% endcomment %}
     同じく、いずれかのノードの IP アドレスとポート 8080 を用いてビジュアライザーを確認します。
     そして `web` や `visualizer` サービスとともに `redis` サービスも稼動していることを確認します。
