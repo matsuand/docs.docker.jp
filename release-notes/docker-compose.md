@@ -5,6 +5,11 @@ keywords: release notes, compose
 toc_max: 2
 ---
 
+## 1.24.1
+(2019-06-24)
+
+This release contains minor improvements and bug fixes.
+
 ## 1.24.0
 (2019-03-28)
 

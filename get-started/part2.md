@@ -697,9 +697,9 @@ application by running this container in a **service**.
 [3 部へ >>](part3.md){: class="button outline-btn"}
 
 {% comment %}
-Or, learn how to [launch your container on your own machine using Digital Ocean](https://docs.docker.com/machine/examples/ocean/){: target="_blank" class="_" }.
+Or, learn how to [launch your container on your own machine using DigitalOcean](https://docs.docker.com/machine/examples/ocean/){: target="_blank" class="_" }.
 {% endcomment %}
-あるいは [Digital Ocean を使って自マシン内でコンテナーを起動する](https://docs.docker.com/machine/examples/ocean/){: target="_blank" class="_" } 方法もあります。
+あるいは [DigitalOcean を使って自マシン内でコンテナーを起動する](https://docs.docker.com/machine/examples/ocean/){: target="_blank" class="_" } 方法もあります。
 
 {% comment %}
 ## Recap and cheat sheet (optional)
