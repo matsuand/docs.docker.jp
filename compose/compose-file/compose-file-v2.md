@@ -1073,19 +1073,16 @@ containers, and specified in `group_add`. See the
 [Docker documentation](/engine/reference/run.md#additional-groups) for more
 details.
 {% endcomment %}
-Specify additional groups (by name or number) which the user inside the
-container should be a member of. Groups must exist in both the container and the
-host system to be added. An example of where this is useful is when multiple
-containers (running as different users) need to all read or write the same
-file on the host system. That file can be owned by a group shared by all the
-containers, and specified in `group_add`. See the
-[Docker documentation](/engine/reference/run.md#additional-groups) for more
-details.
+コンテナー内部のユーザーを所属させたい追加のグループを（グループ名か ID により）指定します。
+追加のグループは、コンテナーとホストシステムの双方に存在している必要があります。
+これが必要になるのは、たとえば複数コンテナーが別々のユーザーによって起動していて、しかもホストシステム上の同一のファイルへの読み書きを行いたいような場合です。
+そのファイルが、コンテナーすべてに共通するグループにより所有されているようにすればよく、これを `group_add` により実現できます。
+詳しくは [Docker ドキュメント](/engine/reference/run.md#additional-groups) を参照してください。
 
 {% comment %}
 A full example:
 {% endcomment %}
-A full example:
+全体的な例として以下です。
 
 ```
 version: "{{ site.compose_file_v2 }}"
@@ -1101,16 +1098,15 @@ Running `id` inside the created container shows that the user belongs to
 the `mail` group, which would not have been the case if `group_add` were not
 used.
 {% endcomment %}
-Running `id` inside the created container shows that the user belongs to
-the `mail` group, which would not have been the case if `group_add` were not
-used.
+生成されたコンテナー内において `id` を実行すると、ユーザーが `mail` グループに所属していることがわかります。
+`group_add` がなかったとしたら、このようにはなりません。
 
 ### healthcheck
 
 {% comment %}
 > [Version 2.1 file format](compose-versioning.md#version-21) and up.
 {% endcomment %}
-> [Version 2.1 file format](compose-versioning.md#version-21) and up.
+> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) またはそれ以降。
 
 {% comment %}
 Configure a check that's run to determine whether or not containers for this
@@ -1118,10 +1114,8 @@ service are "healthy". See the docs for the
 [HEALTHCHECK Dockerfile instruction](/engine/reference/builder.md#healthcheck)
 for details on how healthchecks work.
 {% endcomment %}
-Configure a check that's run to determine whether or not containers for this
-service are "healthy". See the docs for the
-[HEALTHCHECK Dockerfile instruction](/engine/reference/builder.md#healthcheck)
-for details on how healthchecks work.
+このサービスを起動させているコンテナーが「健康」（healthy）かどうかを確認する処理を設定します。
+ヘルスチェックがどのように動作するのかの詳細は [Dockerfile の HEALTHCHECK 命令](/engine/reference/builder.md#healthcheck) を参照してください。
 
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
@@ -1134,22 +1128,29 @@ for details on how healthchecks work.
 `interval`, `timeout` and `start_period` are specified as
 [durations](#specifying-durations).
 {% endcomment %}
-`interval`, `timeout` and `start_period` are specified as
-[durations](#specifying-durations).
+`interval`, `timeout`, `start_period` は [時間](#specifying-durations) を設定します。
 
 {% comment %}
 `test` must be either a string or a list. If it's a list, the first item must be
 either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
 specifying `CMD-SHELL` followed by that string.
 {% endcomment %}
-`test` must be either a string or a list. If it's a list, the first item must be
-either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
-specifying `CMD-SHELL` followed by that string.
+`test` は 1 つの文字列かリスト形式である必要があります。
+リスト形式の場合、第 1 要素は必ず `NONE`, `CMD`, `CMD-SHELL` のいずれかとします。
+文字列の場合は、`CMD-SHELL` に続けてその文字列を指定することと同じになります。
 
+    {% comment %}
     # Hit the local web app
     test: ["CMD", "curl", "-f", "http://localhost"]
 
     # As above, but wrapped in /bin/sh. Both forms below are equivalent.
+    test: ["CMD-SHELL", "curl -f http://localhost && echo 'cool, it works'"]
+    test: curl -f https://localhost && echo 'cool, it works'
+    {% endcomment %}
+    # ローカルのウェブアプリにアクセスします。
+    test: ["CMD", "curl", "-f", "http://localhost"]
+
+    # 上と同様。ただし /bin/sh によりラップ。両書式は同等。
     test: ["CMD-SHELL", "curl -f http://localhost && echo 'cool, it works'"]
     test: curl -f https://localhost && echo 'cool, it works'
 
@@ -1157,8 +1158,8 @@ specifying `CMD-SHELL` followed by that string.
 To disable any default healthcheck set by the image, you can use `disable:
 true`. This is equivalent to specifying `test: ["NONE"]`.
 {% endcomment %}
-To disable any default healthcheck set by the image, you can use `disable:
-true`. This is equivalent to specifying `test: ["NONE"]`.
+イメージが設定するデフォルトのヘルスチェックを無効にするには、`disable: true` を指定します。
+これは `test: ["NONE"]` と指定することと同じです。
 
     healthcheck:
       disable: true
@@ -1167,13 +1168,16 @@ true`. This is equivalent to specifying `test: ["NONE"]`.
 > **Note**: The `start_period` option is a more recent feature and is only
 > available with the [2.3 file format](compose-versioning.md#version-23).
 {% endcomment %}
-> **Note**: The `start_period` option is a more recent feature and is only
-> available with the [2.3 file format](compose-versioning.md#version-23).
+> **メモ**: `start_period` オプションは最新の機能であり、[ファイルフォーマット 2.3](compose-versioning.md#version-23) においてのみ利用可能です。
 
 ### image
 
+{% comment %}
 Specify the image to start the container from. Can either be a repository/tag or
 a partial image ID.
+{% endcomment %}
+コンテナーを起動させるイメージを設定します。
+リポジトリ/タグの形式か、あるいは部分イメージ ID により指定します。
 
     image: redis
     image: ubuntu:14.04
@@ -1181,16 +1185,27 @@ a partial image ID.
     image: example-registry.com:4000/postgresql
     image: a4bc65fd
 
+{% comment %}
 If the image does not exist, Compose attempts to pull it, unless you have also
 specified [build](#build), in which case it builds it using the specified
 options and tags it with the specified tag.
+{% endcomment %}
+イメージが存在しなかった場合、[build](#build) を指定していなければ Compose はイメージを取得しようとします。
+取得する際には、指定されたオプションを使ってビルドを行い、指定されたタグ名によりタグづけを行います。
 
 ### init
 
+{% comment %}
 > [Added in version 2.2 file format](compose-versioning.md#version-22).
+{% endcomment %}
+> [ファイルフォーマットバージョン 2.2](compose-versioning.md#version-22) において追加。
 
+{% comment %}
 Run an init inside the container that forwards signals and reaps processes.
 Set this option to `true` to enable this feature for the service.
+{% endcomment %}
+コンテナー内にて init を実行し、シグナルを送信してプロセスを停止させます。
+このオプションに `true` を設定することで、サービスに対するこの機能を有効にします。
 
     version: "{{ site.compose_file_v2 }}"
     services:
@@ -1198,27 +1213,47 @@ Set this option to `true` to enable this feature for the service.
         image: alpine:latest
         init: true
 
+{% comment %}
 > The default init binary that is used is [Tini](https://github.com/krallin/tini),
 > and is installed in `/usr/libexec/docker-init` on the daemon host. You can
 > configure the daemon to use a custom init binary through the
 > [`init-path` configuration option](/engine/reference/commandline/dockerd/#daemon-configuration-file).
+{% endcomment %}
+> 利用されるデフォルトの init の実行モジュールは [Tini](https://github.com/krallin/tini) であり、デーモンホストの `/usr/libexec/docker-init` にインストールされています。
+> デーモンに対して独自の init 実行モジュールを設定するには、[`init-path` 設定オプション](/engine/reference/commandline/dockerd/#daemon-configuration-file) を利用します。
 
 
 ### isolation
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
+{% endcomment %}
+> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加。
 
+{% comment %}
 Specify a container’s isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
 [Docker Engine docs](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
 for details.
+{% endcomment %}
+コンテナーの分離技術（isolation technology）を設定します。
+Linux においてサポートされるのは `default` のみです。
+Windows では `default`, `process`, `hyperv` の設定が可能です。
+詳しくは [Docker Engine ドキュメント](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation) を参照してください。
 
 ### labels
 
+{% comment %}
 Add metadata to containers using [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either an array or a dictionary.
+{% endcomment %}
+[Docker labels](/engine/userguide/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+配列形式と辞書形式のいずれかにより指定します。
 
+{% comment %}
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.
+{% endcomment %}
+他のソフトウェアが用いるラベルとの競合を避けるため、逆 DNS 記法とすることをお勧めします。
 
     labels:
       com.example.description: "Accounting webapp"
@@ -1232,11 +1267,19 @@ It's recommended that you use reverse-DNS notation to prevent your labels from c
 
 ### links
 
+{% comment %}
 Link to containers in another service. Either specify both the service name and
 a link alias (`"SERVICE:ALIAS"`), or just the service name.
+{% endcomment %}
+他サービスのコンテナーをリンクします。
+サービス名とリンクのエイリアス名（`"SERVICE:ALIAS"`）を指定するか、直接サービス名を指定します。
 
+{% comment %}
 > Links are a legacy option. We recommend using
 > [networks](#networks) instead.
+{% endcomment %}
+> links は古いオプションです。
+> この代わりに [networks](#networks) オプションを用いることをお勧めします。
 
     web:
       links:
@@ -1244,43 +1287,78 @@ a link alias (`"SERVICE:ALIAS"`), or just the service name.
        - "db:database"
        - "redis"
 
+{% comment %}
 Containers for the linked service are reachable at a hostname identical to
 the alias, or the service name if no alias was specified.
+{% endcomment %}
+リンクされたサービスのコンテナーは、エイリアスと同等のホスト名により到達可能になります。
+エイリアスが設定されていない場合はサービス名により到達可能です。
 
+{% comment %}
 Links also express dependency between services in the same way as
 [depends_on](#depends_on), so they determine the order of service startup.
+{% endcomment %}
+Links は [depends_on](#depends_on) と同様にサービス間の依存関係を表わします。
+したがってサービスの起動順を設定するものになります。
 
+{% comment %}
 > **Note**: If you define both links and [networks](#networks), services with
 > links between them must share at least one network in common in order to
 > communicate. We recommend using networks instead.
+{% endcomment %}
+> **メモ**： links と [networks](#networks) をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。
+> このオプションではなく networks オプションを用いることをお勧めします。
 
 ### logging
 
 
+{% comment %}
 Logging configuration for the service.
+{% endcomment %}
+サービスに対するログ記録の設定をします。
 
     logging:
       driver: syslog
       options:
         syslog-address: "tcp://192.168.0.42:123"
 
+{% comment %}
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
 ([documented here](/engine/admin/logging/overview.md)).
+{% endcomment %}
+`driver` 名にはサービスコンテナーにおけるロギングドライバーを指定します。
+これは docker run コマンドに対する `--log-driver` オプションと同じです。
+（[ドキュメントはこちら](/engine/admin/logging/overview.md)）
 
+{% comment %}
 The default value is json-file.
+{% endcomment %}
+デフォルトは json-file です。
 
     driver: "json-file"
     driver: "syslog"
     driver: "none"
 
+{% comment %}
 > **Note**: Only the `json-file` and `journald` drivers make the logs available directly from
 > `docker-compose up` and `docker-compose logs`. Using any other driver does not
 > print any logs.
+{% endcomment %}
+> **メモ**: ドライバーのうち `json-file` と `journald` だけが、`docker-compose up` と `docker-compose logs` によって直接ログ参照ができます。
+その他のドライバーではログ表示は行われません。
 
+{% comment %}
 Specify logging options for the logging driver with the ``options`` key, as with the ``--log-opt`` option for `docker run`.
+{% endcomment %}
+ロギングドライバーへのロギングオプションの設定は ``options`` キーにより行います。
+これは `docker run` コマンドの ``--log-opt`` オプションと同じです。
 
+{% comment %}
 Logging options are key-value pairs. An example of `syslog` options:
+{% endcomment %}
+ロギングオプションはキーバリューのペアで指定します。
+たとえば `syslog` オプションは以下のようになります。
 
     driver: "syslog"
     options:
@@ -1288,10 +1366,19 @@ Logging options are key-value pairs. An example of `syslog` options:
 
 ### network_mode
 
+{% comment %}
 > [Version 2 file format](compose-versioning.md#version-2) and up. Replaces the version 1 [net](compose-file-v1.md#net) option.
+{% endcomment %}
+> [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) またはそれ以降。
+> バージョン 1 の [net](compose-file-v1.md#net) オプションに置き換わるものです。
 
+{% comment %}
 Network mode. Use the same values as the docker client `--net` parameter, plus
 the special form `service:[service name]`.
+{% endcomment %}
+ネットワークモードを設定します。
+Docker クライアントの `--net` パラメーターと同じ値を設定します。
+これに加えて `service:[service name]` という特別な書式も指定可能です。
 
     network_mode: "bridge"
     network_mode: "host"
@@ -1301,10 +1388,18 @@ the special form `service:[service name]`.
 
 ### networks
 
+{% comment %}
 > [Version 2 file format](compose-versioning.md#version-2) and up. Replaces the version 1 [net](compose-file-v1.md#net) option.
+{% endcomment %}
+> [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) またはそれ以降。
+> バージョン 1 の [net](compose-file-v1.md#net) オプションに置き換わるものです。
 
+{% comment %}
 Networks to join, referencing entries under the
 [top-level `networks` key](#network-configuration-reference).
+{% endcomment %}
+ネットワークへの参加を設定します。
+設定には [最上位の `networks` キー](#network-configuration-reference) に設定された値を用います。
 
     services:
       some-service:
@@ -1314,13 +1409,29 @@ Networks to join, referencing entries under the
 
 #### aliases
 
+{% comment %}
 Aliases (alternative hostnames) for this service on the network. Other containers on the same network can use either the service name or this alias to connect to one of the service's containers.
+{% endcomment %}
+ネットワーク上のサービスに対して、ホスト名の別名となるエイリアスを設定します。
+同じネットワーク上にある他のコンテナーは、この 1 つのサービスコンテナーに対して、サービス名か、あるいはそのエイリアスを使ってアクセスすることができます。
 
+{% comment %}
 Since `aliases` is network-scoped, the same service can have different aliases on different networks.
+{% endcomment %}
+`aliases` はネットワーク範囲内において有効です。
+ネットワークが異なれば、同一サービスに違うエイリアスを持たせることができます。
 
+{% comment %}
 > **Note**: A network-wide alias can be shared by multiple containers, and even by multiple services. If it is, then exactly which container the name resolves to is not guaranteed.
+{% endcomment %}
+> **メモ**: ネットワーク全体にわたってのエイリアスを複数コンテナー間で共有することができます。
+> それは複数サービス間でも可能です。
+> ただしこの場合、名前解決がどのコンテナーに対して行われるかは保証されません。
 
+{% comment %}
 The general format is shown here.
+{% endcomment %}
+一般的な書式は以下のとおりです。
 
     services:
       some-service:
@@ -1333,7 +1444,12 @@ The general format is shown here.
             aliases:
              - alias2
 
+{% comment %}
 In the example below, three services are provided (`web`, `worker`, and `db`), along with two networks (`new` and `legacy`). The `db` service is reachable at the hostname `db` or `database` on the `new` network, and at `db` or `mysql` on the `legacy` network.
+{% endcomment %}
+以下の例では 3 つのサービス（`web`, `worker`, `db`）と 2 つのネットワーク（`new` と `legacy`）を提供します。
+`db` サービスは `new` ネットワーク上では、ホスト名 `db` あるいは `database` としてアクセスできます。
+一方 `legacy` ネットワーク上では `db` あるいは `mysql` としてアクセスできます。
 
     version: "{{ site.compose_file_v2 }}"
 
@@ -1364,11 +1480,22 @@ In the example below, three services are provided (`web`, `worker`, and `db`), a
 
 #### ipv4_address, ipv6_address
 
+{% comment %}
 Specify a static IP address for containers for this service when joining the network.
+{% endcomment %}
+サービスをネットワークに参加させる際、そのコンテナーに対してスタティック IP アドレスを設定します。
 
+{% comment %}
 The corresponding network configuration in the [top-level networks section](#network-configuration-reference) must have an `ipam` block with subnet and gateway configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set.
+{% endcomment %}
+[最上位の networks セクション](#network-configuration-reference) の対応するネットワーク設定においては、`ipam` ブロックが必要です。
+そこでは各スタティックアドレスに応じたサブネットの設定が必要になります。
+IPv6 アドレスが必要である場合は、[`enable_ipv6`](#enableipv6) オプションの設定が必要になります。
 
+{% comment %}
 An example:
+{% endcomment %}
+以下に例を示します。
 
     version: "{{ site.compose_file_v2 }}"
 
@@ -1395,14 +1522,26 @@ An example:
 
 #### link_local_ips
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
+{% endcomment %}
+> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
+{% comment %}
 Specify a list of link-local IPs. Link-local IPs are special IPs which belong
 to a well known subnet and are purely managed by the operator, usually
 dependent on the architecture where they are deployed. Therefore they are not
 managed by docker (IPAM driver).
+{% endcomment %}
+リンクローカル IP（link-local IP） のリストを設定します。
+リンクローカル IP とは特別な IP アドレスのことであり、よく知られた（well known）サブネットに属し、ユーザーが自由に管理するものを指します。
+普通、このアドレスはデプロイされたアーキテクチャーとはまったく関係のないものです。
+したがって Docker（IPAM ドライバー）によって管理されるものではありません。
 
+{% comment %}
 Example usage:
+{% endcomment %}
+利用例を以下に示します。
 
     version: "{{ site.compose_file_v2 }}"
     services:
@@ -1420,12 +1559,22 @@ Example usage:
 
 #### priority
 
+{% comment %}
 Specify a priority to indicate in which order Compose should connect the
 service's containers to its networks. If unspecified, the default value is `0`.
+{% endcomment %}
+Compose がサービスのコンテナーをネットワークに接続する際に、その接続の優先順位を設定します。
+設定されていない場合のデフォルト値は `0` です。
 
+{% comment %}
 In the following example, the `app` service connects to `app_net_1` first
 as it has the highest priority. It then connects to `app_net_3`, then
 `app_net_2`, which uses the default priority value of `0`.
+{% endcomment %}
+以下の例において `app` サービスは初めに `app_net_1` に接続します。
+そこに一番高い優先順位が設定されているためです。
+次に接続されるのは `app_net_3` です。
+最後に、デフォルトの優先順位である `0` が用いられている `app_net_2` に接続します。
 
     version: "{{ site.compose_file_v2 }}"
     services:
@@ -1444,8 +1593,11 @@ as it has the highest priority. It then connects to `app_net_3`, then
       app_net_2:
       app_net_3:
 
+{% comment %}
 > **Note**: If multiple networks have the same priority, the connection order
 > is undefined.
+{% endcomment %}
+> **メモ**: 複数のネットワークに同一の優先順位が設定された場合、接続順は定義されません。
 
 ### pid
 
@@ -1453,15 +1605,30 @@ as it has the highest priority. It then connects to `app_net_3`, then
     pid: "container:custom_container_1"
     pid: "service:foobar"
 
+{% comment %}
+If set to one of the following forms: `container:<container_name>`,
+`service:<service_name>`, the service shares the PID address space of the
+designated container or service.
+{% endcomment %}
 If set to one of the following forms: `container:<container_name>`,
 `service:<service_name>`, the service shares the PID address space of the
 designated container or service.
 
+{% comment %}
+If set to "host", the service's PID mode is the host PID mode.  This turns
+on sharing between container and the host operating system the PID address
+space. Containers launched with this flag can access and manipulate
+other containers in the bare-metal machine's namespace and vice versa.
+{% endcomment %}
 If set to "host", the service's PID mode is the host PID mode.  This turns
 on sharing between container and the host operating system the PID address
 space. Containers launched with this flag can access and manipulate
 other containers in the bare-metal machine's namespace and vice versa.
 
+{% comment %}
+> **Note**: the `service:` and `container:` forms require
+> [version 2.1](compose-versioning.md#version-21) or above
+{% endcomment %}
 > **Note**: the `service:` and `container:` forms require
 > [version 2.1](compose-versioning.md#version-21) or above
 
