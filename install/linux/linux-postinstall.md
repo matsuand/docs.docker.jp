@@ -89,6 +89,15 @@ To create the `docker` group and add your user:
     {% endcomment %}
     X ウィンドウのような Linux デスクトップ環境においては、いったんセッションから完全にログアウトして、再ログインを行ってください。
 
+    {% comment %}
+    On Linux, you can also run the following command to activate the changes to groups:
+    {% endcomment %}
+    Linux ではまた、以下のコマンドによってグループ変更を行うこともできます。
+
+    ```bash
+    $ newgrp docker
+    ```
+
 {% comment %}
 4.  Verify that you can run `docker` commands without `sudo`.
 {% endcomment %}

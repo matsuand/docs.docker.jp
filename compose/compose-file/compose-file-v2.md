@@ -1610,9 +1610,7 @@ If set to one of the following forms: `container:<container_name>`,
 `service:<service_name>`, the service shares the PID address space of the
 designated container or service.
 {% endcomment %}
-If set to one of the following forms: `container:<container_name>`,
-`service:<service_name>`, the service shares the PID address space of the
-designated container or service.
+これが `container:<container_name>`、または `service:<service_name>` の形で設定された場合は、そのサービスは、指定されたコンテナーまたはサービスの PID アドレス空間を共有します。
 
 {% comment %}
 If set to "host", the service's PID mode is the host PID mode.  This turns
@@ -1620,50 +1618,75 @@ on sharing between container and the host operating system the PID address
 space. Containers launched with this flag can access and manipulate
 other containers in the bare-metal machine's namespace and vice versa.
 {% endcomment %}
-If set to "host", the service's PID mode is the host PID mode.  This turns
-on sharing between container and the host operating system the PID address
-space. Containers launched with this flag can access and manipulate
-other containers in the bare-metal machine's namespace and vice versa.
+これが "host" に設定された場合は、サービスの PID モードをホスト PID モードに設定します。
+これはコンテナーとホストオペレーティングシステムとの間で、PID アドレス空間の共有を開始します。
+このフラグを使って起動したコンテナーは、ベアメタルマシンの名前空間にあるコンテナーにアクセスし、操作することが可能になります。
+逆もまた可能です。
 
 {% comment %}
 > **Note**: the `service:` and `container:` forms require
 > [version 2.1](compose-versioning.md#version-21) or above
 {% endcomment %}
-> **Note**: the `service:` and `container:` forms require
-> [version 2.1](compose-versioning.md#version-21) or above
+> **メモ**: `service:` と `container:` の書式を利用するには [バージョン 2.1](compose-versioning.md#version-21) またはそれ以降である必要があります。
 
 ### pids_limit
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
+{% endcomment %}
+> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
+{% comment %}
 Tunes a container's PIDs limit. Set to `-1` for unlimited PIDs.
+{% endcomment %}
+コンテナーの PID 上限を設定します。
+`-1` に設定すると無制限になります。
 
     pids_limit: 10
 
 
 ### platform
 
+{% comment %}
 > [Added in version 2.4 file format](compose-versioning.md#version-24).
+{% endcomment %}
+> [ファイルフォーマットバージョン 2.4](compose-versioning.md#version-24) において追加されました。
 
+{% comment %}
 Target platform containers for this service will run on, using the
 `os[/arch[/variant]]` syntax, e.g.
+{% endcomment %}
+サービスのコンテナーが稼動することになるプラットフォームを設定します。
+その記述は `os[/arch[/variant]]` といった書式で行います。
 
     platform: osx
     platform: windows/amd64
     platform: linux/arm64/v8
 
+{% comment %}
 This parameter determines which version of the image will be pulled and/or
 on which platform the service's build will be performed.
+{% endcomment %}
+このパラメーターは、どのバージョンのイメージを取得するのか、あるいはサービスがどのプラットフォームでビルドされるかを決定します。
 
 ### ports
 
+{% comment %}
 Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
 port (an ephemeral host port is chosen).
+{% endcomment %}
+公開用ポートを設定します。
+設定は両側のポートを指定するか（`HOST:CONTAINER`）、あるいはコンテナー側のポートのみを指定します（その場合、ホスト側はエフェメラルポートが採用されます）。
 
+{% comment %}
 > **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
 > erroneous results when using a container port lower than 60, because YAML
 > parses numbers in the format `xx:yy` as a base-60 value. For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
+{% endcomment %}
+> **メモ**: `HOST:CONTAINER` の書式によってポートをマッピングした場合に、コンテナー側のポートが 60 番未満であるとエラーになることがあります。
+> これは YAML パーサーが `xx:yy` の書式内にある数値を 60 進数値として解釈するからです。
+> このことからポートマッピングを指定する際には、常に文字列として設定することをお勧めします。
 
     ports:
      - "3000"
@@ -1678,8 +1701,15 @@ port (an ephemeral host port is chosen).
 
 ### runtime
 
+{% comment %}
 > [Added in version 2.3 file format](compose-versioning.md#version-23)
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.3](compose-versioning.md#version-23) において追加されました。
 
+{% comment %}
+Specify which runtime to use for the service's containers. Default runtime
+and available runtimes are listed in the output of `docker info`.
+{% endcomment %}
 Specify which runtime to use for the service's containers. Default runtime
 and available runtimes are listed in the output of `docker info`.
 

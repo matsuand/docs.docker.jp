@@ -557,7 +557,7 @@ The notation for associating a local image with a repository on a registry is
 the mechanism that registries use to give Docker images a version. Give the
 repository and tag meaningful names for the context, such as
 `get-started:part2`. This puts the image in the `get-started` repository and
-tag it as `part2`.
+tags it as `part2`.
 {% endcomment %}
 レジストリ内のレポジトリをローカルイメージに関連づけるには `username/repository:tag` という書き方をします。
 タグ（tag）はオプションですが、指定することが推奨されます。

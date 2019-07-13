@@ -1302,10 +1302,16 @@ like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`
 > useradd に対して `--no-log-init` フラグをつけることで、とりあえずこの問題は回避できます。
 > ただし Debian/Ubuntu の `adduser` ラッパーは `--no-log-init` フラグをサポートしていないため、利用することはできません。
 
+{% comment %}
 Avoid installing or using `sudo` as it has unpredictable TTY and
 signal-forwarding behavior that can cause problems. If you absolutely need
 functionality similar to `sudo`, such as initializing the daemon as `root` but
-running it as non-`root`), consider using ["gosu"](https://github.com/tianon/gosu).
+running it as non-`root`, consider using [“gosu”](https://github.com/tianon/gosu).
+{% endcomment %}
+Avoid installing or using `sudo` as it has unpredictable TTY and
+signal-forwarding behavior that can cause problems. If you absolutely need
+functionality similar to `sudo`, such as initializing the daemon as `root` but
+running it as non-`root`, consider using [“gosu”](https://github.com/tianon/gosu).
 
 Lastly, to reduce layers and complexity, avoid switching `USER` back and forth
 frequently.
@@ -1354,12 +1360,12 @@ Docker によるビルドにおいては `ONBUILD` の実行が済んでから�
 `ONBUILD` is useful for images that are going to be built `FROM` a given
 image. For example, you would use `ONBUILD` for a language stack image that
 builds arbitrary user software written in that language within the
-`Dockerfile`, as you can see in [Ruby’s `ONBUILD` variants](https://github.com/docker-library/ruby/blob/master/2.4/jessie/onbuild/Dockerfile).
+`Dockerfile`, as you can see in [Ruby’s `ONBUILD` variants](https://github.com/docker-library/ruby/blob/c43fef8a60cea31eb9e7d960a076d633cb62ba8d/2.4/jessie/onbuild/Dockerfile).
 {% endcomment %}
 `ONBUILD` は、所定のイメージから `FROM` を使ってイメージをビルドしようとするときに利用できます。
 たとえば特定言語のスタックイメージは `ONBUILD` を利用します。
 `Dockerfile` 内にて、その言語で書かれたどのようなユーザーソフトウェアであってもビルドすることができます。
-その例として [Ruby's ONBUILD variants](https://github.com/docker-library/ruby/blob/master/2.1/onbuild/Dockerfile) があります。
+その例として [Ruby's ONBUILD variants](https://github.com/docker-library/ruby/blob/c43fef8a60cea31eb9e7d960a076d633cb62ba8d/2.4/jessie/onbuild/Dockerfile) があります。
 
 {% comment %}
 Images built from `ONBUILD` should get a separate tag, for example:

@@ -352,19 +352,33 @@ Introduces the following additional parameters:
 - [`runtime`](compose-file-v2.md#runtime) for service definitions
 - [`device_cgroup_rules`](compose-file-v2.md#device_cgroup_rules)
 
+{% comment %}
 ### Version 2.4
+{% endcomment %}
+### バージョン 2.4
 
 An upgrade of [version 2.3](#version-23) that introduces new parameters only
 available with Docker Engine version **17.12.0+**. Version 2.4 files are
 supported by **Compose 1.21.0+**.
 
+{% comment %}
 Introduces the following additional parameters:
+{% endcomment %}
+以下のパラメーターが追加されました。
 
+{% comment %}
 - [`platform`](compose-file-v2.md#platform) for service definitions
 - Support for extension fields at the root of service, network, and volume
   definitions
+{% endcomment %}
+- サービス定義における [`platform`](compose-file-v2.md#platform)
+- Support for extension fields at the root of service, network, and volume
+  definitions
 
+{% comment %}
 ### Version 3
+{% endcomment %}
+### バージョン 3
 
 Designed to be cross-compatible between Compose and the Docker Engine's
 [swarm mode](/engine/swarm/index.md), version 3 removes several options and adds
