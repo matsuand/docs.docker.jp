@@ -12,8 +12,8 @@ toc_min: 1
 {% comment %}
 ## Reference and guidelines
 {% endcomment %}
+{: id="reference-and-guidelines" }
 ## リファレンスとガイドライン
-{: #reference-and-guidelines }
 
 {% comment %}
 These topics describe version 3 of the Compose file format. This is the newest
@@ -25,8 +25,8 @@ version.
 {% comment %}
 ## Compose and Docker compatibility matrix
 {% endcomment %}
+{: id="compose-and-docker-compatibility-matrix" }
 ## Compose と Docker の互換マトリックス
-{: #compose-and-docker-compatibility-matrix }
 
 {% comment %}
 There are several versions of the Compose file format – 1, 2, 2.x, and 3.x. The
@@ -42,8 +42,8 @@ Compose ファイルフォーマットには 1、2、2.x、3.x という複数�
 {% comment %}
 ## Compose file structure and examples
 {% endcomment %}
+{: id="compose-file-structure-and-examples" }
 ## Compose ファイルの構造と記述例
-{: #compose-file-structure-and-examples }
 
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
@@ -193,8 +193,8 @@ Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md
 {% comment %}
 ## Service configuration reference
 {% endcomment %}
+{: id="service-configuration-reference" }
 ## サービス設定リファレンス
-{: #service-configuration-reference }
 
 {% comment %}
 The Compose file is a [YAML](http://yaml.org/) file defining
@@ -500,7 +500,7 @@ as an integer value representing the number of bytes or as a string expressing
 a [byte value](#specifying-byte-values).
 {% endcomment %}
 このビルドコンテナーにおける `/dev/shm` パーティションのサイズを設定します。
-指定する値は、バイト数を表わす整数値か、あるいは[バイト表現](#specifying-byte-values)によって表わされる文字列とします。
+指定する値は、バイト数を表わす整数値か、あるいは [バイト表現](#specifying-byte-values) によって表わされる文字列とします。
 
 ```yaml
 build:
@@ -623,8 +623,8 @@ configs に関する詳細は [configs](/engine/swarm/configs.md) を参照し�
 {% comment %}
 #### Short syntax
 {% endcomment %}
+{: id="short-syntax" }
 #### 短い文法
-{: #short-syntax }
 
 {% comment %}
 The short syntax variant only specifies the config name. This grants the
@@ -678,8 +678,8 @@ configs:
 {% comment %}
 #### Long syntax
 {% endcomment %}
+{: id="long-syntax" }
 #### 長い文法
-{: #long-syntax }
 
 {% comment %}
 The long syntax provides more granularity in how the config is created within
@@ -1354,8 +1354,8 @@ services:
 {% comment %}
 #### Not supported for `docker stack deploy`
 {% endcomment %}
+{: id="not-supported-for-docker-stack-deploy" }
 #### `docker stack deploy` でサポートされないオプション
-{: #not-supported-for-docker-stack-deploy }
 
 {% comment %}
 The following sub-options (supported for `docker-compose up` and `docker-compose run`) are _not supported_ for `docker stack deploy` or the `deploy` key.
@@ -2359,8 +2359,8 @@ Expose ports.
 {% comment %}
 #### Short syntax
 {% endcomment %}
+{: id="short-syntax" }
 #### 短い文法
-{: #short-syntax }
 
 {% comment %}
 Either specify both ports (`HOST:CONTAINER`), or just the container
@@ -2393,8 +2393,8 @@ ports:
 {% comment %}
 #### Long syntax
 {% endcomment %}
+{: id="long-syntax" }
 #### 長い文法
-{: #long-syntax }
 
 {% comment %}
 The long form syntax allows the configuration of additional fields that can't be
@@ -2478,8 +2478,8 @@ secrets に関する詳細は [secrets](/engine/swarm/secrets.md) を参照し�
 {% comment %}
 #### Short syntax
 {% endcomment %}
+{: id="secrets-short-syntax" }
 #### Short syntax
-{: #secrets-short-syntax }
 
 {% comment %}
 The short syntax variant only specifies the secret name. This grants the
@@ -2526,8 +2526,8 @@ secrets:
 {% comment %}
 #### Long syntax
 {% endcomment %}
+{: id="secrets-long-syntax" }
 #### 長い文法
-{: #secrets-long-syntax }
 
 {% comment %}
 The long syntax provides more granularity in how the secret is created within
@@ -2859,8 +2859,8 @@ volumes:
 {% comment %}
 #### Short syntax
 {% endcomment %}
+{: id="volumes-short-syntax" }
 #### 短い文法
-{: #volumes-short-syntax }
 
 {% comment %}
 Optionally specify a path on the host machine
@@ -2917,8 +2917,8 @@ volumes:
 {% comment %}
 #### Long syntax
 {% endcomment %}
+{: id="volumes-long-syntax" }
 #### 長い文法
-{: #volumes-long-syntax }
 
 {% comment %}
 The long form syntax allows the configuration of additional fields that can't be
@@ -2989,8 +2989,8 @@ volumes:
 {% comment %}
 #### Volumes for services, swarms, and stack files
 {% endcomment %}
+{: id="volumes-for-services-swarms-and-stack-files" }
 #### サービス、スウォーム、スタックファイルに対するボリューム設定
-{: #volumes-for-services-swarms-and-stack-files }
 
 {% comment %}
 When working with services, swarms, and `docker-stack.yml` files, keep in mind
@@ -3048,8 +3048,8 @@ services:
 {% comment %}
 #### Caching options for volume mounts (Docker Desktop for Mac)
 {% endcomment %}
+{: id="caching-options-for-volume-mounts-docker-desktop-for-mac" }
 #### ボリュームマウントに対するキャッシュオプション（Docker for Mac）
-{: #caching-options-for-volume-mounts-docker-desktop-for-mac }
 
 {% comment %}
 On Docker 17.04 CE Edge and up, including 17.06 CE Edge and Stable, you can
@@ -3143,8 +3143,8 @@ tty: true
 {% comment %}
 ## Specifying durations
 {% endcomment %}
+{: id="specifying-durations" }
 ## 時間の指定
-{: #specifying-durations }
 
 {% comment %}
 Some configuration options, such as the `interval` and `timeout` sub-options for
@@ -3169,8 +3169,8 @@ The supported units are `us`, `ms`, `s`, `m` and `h`.
 {% comment %}
 ## Specifying byte values
 {% endcomment %}
-## バイト値の表現
 {: #specifying-byte-values }
+## バイト値の表現
 
 {% comment %}
 Some configuration options, such as the `shm_size` sub-option for
@@ -3197,8 +3197,8 @@ The supported units are `b`, `k`, `m` and `g`, and their alternative notation `k
 {% comment %}
 ## Volume configuration reference
 {% endcomment %}
+{: id="volume-configuration-reference" }
 ## ボリューム設定リファレンス
-{: #volume-configuration-reference }
 
 {% comment %}
 While it is possible to declare [volumes](#volumes) on the file as part of the
@@ -3443,8 +3443,8 @@ volumes:
 {% comment %}
 ## Network configuration reference
 {% endcomment %}
+{: id="network-configuration-reference" }
 ## ネットワーク設定リファレンス
-{: #network-configuration-reference }
 
 {% comment %}
 The top-level `networks` key lets you specify networks to be created.
@@ -3526,8 +3526,8 @@ Architecture](https://github.com/docker/labs/blob/master/networking/concepts/06-
 {% comment %}
 #### host or none
 {% endcomment %}
+{: id="host-or-none" }
 #### host または none
-{: #host-or-none }
 
 {% comment %}
 Use the host's networking stack, or no networking. Equivalent to
@@ -3843,8 +3843,8 @@ networks:
 {% comment %}
 ## configs configuration reference
 {% endcomment %}
+{: id="configs-configuration-reference" }
 ## configs 設定リファレンス
-{: #configs-configuration-reference }
 
 {% comment %}
 The top-level `configs` declaration defines or references
@@ -3918,8 +3918,8 @@ stack.
 {% comment %}
 ## secrets configuration reference
 {% endcomment %}
+{: id="secrets-configuration-reference" }
 ## secrets 設定リファレンス
-{: #secrets-configuration-reference }
 
 {% comment %}
 The top-level `secrets` declaration defines or references
@@ -3976,8 +3976,8 @@ example modifies the previous one to use the external secret called
 {% comment %}
 ### Compose File v3.5 and above
 {% endcomment %}
+{: id="compose-file-v35-and-above" }
 ### Compose ファイル v3.5 またはそれ以降の場合
-{: #compose-file-v35-and-above }
 
 ```yaml
 secrets:
@@ -3991,8 +3991,8 @@ secrets:
 {% comment %}
 ### Compose ファイル v3.4 またそれ以前の場合
 {% endcomment %}
+{: id="compose-file-v34-and-under" }
 ### Compose File v3.4 and under
-{: #compose-file-v34-and-under }
 
 ```yaml
   my_second_secret:
@@ -4009,14 +4009,15 @@ stack.
 {% comment %}
 ## Variable substitution
 {% endcomment %}
+{: id="variable-substitution" }
 ## 変数の置換
-{: #variable-substitution }
 
 {% include content/compose-var-sub.md %}
 
 {% comment %}
 ## Extension fields
 {% endcomment %}
+{: id="extension-fields" }
 ## 拡張項目
 
 {% comment %}
@@ -4029,6 +4030,7 @@ stack.
 {% comment %}
 ## Compose documentation
 {% endcomment %}
+{: id="compose-documentation" }
 ## Compose ドキュメント
 
 {% comment %}

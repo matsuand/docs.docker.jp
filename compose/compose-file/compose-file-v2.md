@@ -11,8 +11,8 @@ toc_min: 1
 {% comment %}
 ## Reference and guidelines
 {% endcomment %}
+{: id="reference-and-guidelines" }
 ## リファレンスとガイドライン
-{: #reference-and-guidelines }
 
 {% comment %}
 These topics describe version 2 of the Compose file format.
@@ -22,8 +22,8 @@ These topics describe version 2 of the Compose file format.
 {% comment %}
 ## Compose and Docker compatibility matrix
 {% endcomment %}
+{: id="compose-and-docker-compatibility-matrix" }
 ## Compose と Docker の互換マトリックス
-{: #compose-and-docker-compatibility-matrix }
 
 {% comment %}
 There are several versions of the Compose file format – 1, 2, 2.x, and 3.x The
@@ -39,8 +39,8 @@ Compose ファイルフォーマットには 1、2、2.x、3.x という複数�
 {% comment %}
 ## Service configuration reference
 {% endcomment %}
+{: id="service-configuration-reference" }
 ## サービス設定リファレンス
-{: #service-configuration-reference }
 
 {% comment %}
 The Compose file is a [YAML](http://yaml.org/) file defining
@@ -1710,8 +1710,8 @@ port (an ephemeral host port is chosen).
 Specify which runtime to use for the service's containers. Default runtime
 and available runtimes are listed in the output of `docker info`.
 {% endcomment %}
-Specify which runtime to use for the service's containers. Default runtime
-and available runtimes are listed in the output of `docker info`.
+サービスのコンテナーにおいてどのランタイム（runtime）を用いるかを設定します。
+デフォルトのランタイムおよび利用可能なランタイムは、`docker info` 出力から確認できます。
 
     web:
       image: busybox:latest
@@ -1721,12 +1721,20 @@ and available runtimes are listed in the output of `docker info`.
 
 ### scale
 
+{% comment %}
 > [Added in version 2.2 file format](compose-versioning.md#version-22)
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.2](compose-versioning.md#version-22) において追加されました。
 
+{% comment %}
 Specify the default number of containers to deploy for this service. Whenever
 you run `docker-compose up`, Compose creates or removes containers to match
 the specified number. This value can be overridden using the
 [`--scale`](/compose/reference/up.md) flag.
+{% endcomment %}
+本サービスに対して、デプロイするコンテナーのデフォルト数を設定します。
+`docker-compose up` を実行したとき、Compose はこの設定数に従ってコンテナーの生成や削除を行います。
+この値は [`--scale`](/compose/reference/up.md) フラグを使って上書きすることができます。
 
     web:
       image: busybox:latest
@@ -1735,7 +1743,10 @@ the specified number. This value can be overridden using the
 
 ### security_opt
 
+{% comment %}
 Override the default labeling scheme for each container.
+{% endcomment %}
+各コンテナーにおけるデフォルトのラベリングスキーム（labeling scheme）を上書きします。
 
     security_opt:
       - label:user:USER
@@ -1743,40 +1754,65 @@ Override the default labeling scheme for each container.
 
 ### stop_grace_period
 
+{% comment %}
 Specify how long to wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whatever stop signal has been specified with
 [`stop_signal`](#stopsignal)), before sending SIGKILL. Specified
 as a [duration](#specifying-durations).
+{% endcomment %}
+コンテナーが SIGKILL を送信するまでに、SIGTERM（あるいは [`stop_signal`](#stopsignal) によって設定されたストップシグナル）をどれだけ待つかを設定します。
+指定には [時間](#specifying-durations) を用います。
 
     stop_grace_period: 1s
     stop_grace_period: 1m30s
 
+{% comment %}
 By default, `stop` waits 10 seconds for the container to exit before sending
 SIGKILL.
+{% endcomment %}
+デフォルトで、コンテナーが SIGKILL を送信する前に `stop` は 10 秒待ちます。
 
 ### stop_signal
 
+{% comment %}
 Sets an alternative signal to stop the container. By default `stop` uses
 SIGTERM. Setting an alternative signal using `stop_signal` causes
 `stop` to send that signal instead.
+{% endcomment %}
+コンテナーに対して別の停止シグナルを設定します。
+デフォルトにおいて `stop` は SIGTERM を用います。
+`stop_signal` を使って別のシグナルを設定すると `stop` にはそのシグナルが代わりに送信されます。
 
     stop_signal: SIGUSR1
 
 ### storage_opt
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
+{% comment %}
 Set storage driver options for this service.
+{% endcomment %}
+本サービスに対するストレージドライバーのオプションを設定します。
 
     storage_opt:
       size: '1G'
 
 ### sysctls
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
+{% comment %}
 Kernel parameters to set in the container. You can use either an array or a
 dictionary.
+{% endcomment %}
+コンテナーに設定するカーネルパラメーターを設定します。
+配列または辞書形式での指定ができます。
 
     sysctls:
       net.core.somaxconn: 1024
@@ -1788,8 +1824,12 @@ dictionary.
 
 ### ulimits
 
+{% comment %}
 Override the default ulimits for a container. You can either specify a single
 limit as an integer or soft/hard limits as a mapping.
+{% endcomment %}
+コンテナーにおけるデフォルトの ulimits を上書きします。
+1 つの limit を整数値として指定するか、ソフト、ハードの limit をマッピングとして指定することができます。
 
 
     ulimits:
@@ -1800,30 +1840,57 @@ limit as an integer or soft/hard limits as a mapping.
 
 ### userns_mode
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
     userns_mode: "host"
 
+{% comment %}
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
 See [dockerd](/engine/reference/commandline/dockerd.md#disable-user-namespace-for-a-container) for
 more information.
+{% endcomment %}
+Docker デーモンにおいてユーザー名前空間が設定されていても、サービスに対してユーザー名前空間を無効にします。
+詳しくは [dockerd](/engine/reference/commandline/dockerd.md#disable-user-namespace-for-a-container) を参照してください。
 
 ### volumes
 
+{% comment %}
 Mount host folders or named volumes. Named volumes need to be specified with the
 [top-level `volumes` key](#volume-configuration-reference).
+{% endcomment %}
+マウントホストフォルダーや名前つきボリュームをマウントします。
+名前つきボリュームは [最上位の `volumes` キー](#volume-configuration-reference) として設定する必要があります。
 
+{% comment %}
 You can mount a relative path on the host, which expands relative to
 the directory of the Compose configuration file being used. Relative paths
 should always begin with `.` or `..`.
+{% endcomment %}
+ホスト上の相対パスをマウントすることができます。
+これは、用いられている Compose 設定ファイルのディレクトリからの相対パスとして展開されます。
+相対パスは `.` または `..` で書き始める必要があります。
 
+{% comment %}
 #### Short syntax
+{% endcomment %}
+{: id="short-syntax" }
+#### 短い文法
 
+{% comment %}
 The short syntax uses the generic `[SOURCE:]TARGET[:MODE]` format, where
 `SOURCE` can be either a host path or volume name. `TARGET` is the container
 path where the volume is mounted. Standard modes are `ro` for read-only
 and `rw` for read-write (default).
+{% endcomment %}
+短い文法では汎用的な `[SOURCE:]TARGET[:MODE]` という書式を用います。
+ここで `SOURCE` はホストパスまたはボリューム名のどちらでも可です。
+`TARGET` はボリュームがマウントされるコンテナーパスです。
+標準的なモードは、読み込み専用の場合 `ro`、読み書き可能の場合 `rw`（デフォルト）です。
 
+    {% comment %}
     volumes:
       # Just specify a path and let the Engine create a volume
       - /var/lib/mysql
@@ -1839,14 +1906,41 @@ and `rw` for read-write (default).
 
       # Named volume
       - datavolume:/var/lib/mysql
+    {% endcomment %}
+    volumes:
+      # パス指定のみ。Engine にボリュームを生成させます。
+      - /var/lib/mysql
 
+      # 絶対パスのマッピングを指定。
+      - /opt/data:/var/lib/mysql
+
+      # ホストからのパス指定。Compose ファイルからの相対パス。
+      - ./cache:/tmp/cache
+
+      # ユーザーディレクトリからの相対パス。
+      - ~/configs:/etc/configs/:ro
+
+      # 名前つきボリューム。
+      - datavolume:/var/lib/mysql
+
+{% comment %}
 #### Long syntax
+{% endcomment %}
+{: id="long-syntax" }
+#### 長い文法
 
+{% comment %}
 > [Added in version 2.3 file format](compose-versioning.md#version-23).
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.3](compose-versioning.md#version-23) において追加されました。
 
+{% comment %}
 The long form syntax allows the configuration of additional fields that can't be
 expressed in the short form.
+{% endcomment %}
+長い文法は追加の設定項目が加えられていて、短い文法では表現できないものです。
 
+{% comment %}
 - `type`: the mount type `volume`, `bind`, `tmpfs` or `npipe`
 - `source`: the source of the mount, a path on the host for a bind mount, or the
   name of a volume defined in the
@@ -1860,6 +1954,19 @@ expressed in the short form.
     created
 - `tmpfs`: configure additional tmpfs options
   - `size`: the size for the tmpfs mount in bytes
+{% endcomment %}
+- `type`: マウントタイプを表わす `volume`, `bind`, `tmpfs`, `npipe` のいずれかを指定します。
+- `source`: マウント元。バインドマウントにおいてはホスト上のパスを指定します。
+  また [最上位の `volumes` キー](#volume-configuration-reference) で定義したボリューム名を指定します。
+  tmpfs マウントはできません。
+- `target`: ボリュームがマウントされるコンテナー内のパスを指定します。
+- `read_only`: ボリュームを読み込み専用に設定します。
+- `bind`: 追加のバインドオプションを設定します。
+  - `propagation`: バインドにおいて伝播モード（propagation mode）を利用します。
+- `volume`: 追加のボリュームオプションを設定します。
+  - `nocopy`: ボリュームの生成時にはコンテナーからのデータコピーを無効にします。
+- `tmpfs`: 追加の tmpfs オプションを設定します。
+  - `size`: tmpfs マウントのサイズをバイト数で指定します。
 
 
 ```none
@@ -1886,34 +1993,55 @@ volumes:
   mydata:
 ```
 
+{% comment %}
 > **Note**: When creating bind mounts, using the long syntax requires the
 > referenced folder to be created beforehand. Using the short syntax
 > creates the folder on the fly if it doesn't exist.
 > See the [bind mounts documentation](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior)
 > for more information.
+{% endcomment %}
+> **Note**: 長い文法を使ってバインドマウントを生成する際には、参照されるフォルダーをあらかじめ生成しておく必要があります。
+> 短い文法を利用する場合、そのフォルダーが存在しなければ生成されます。
+> 詳しくは [バインドマウントのドキュメント](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior) を参照してください。
 
 ### volume\_driver
 
+{% comment %}
 Specify a default volume driver to be used for all declared volumes on this
 service.
+{% endcomment %}
+本サービス上に宣言されているボリュームすべてに対して、利用するデフォルトのボリュームドライバーを設定します。
 
     volume_driver: mydriver
 
+{% comment %}
 > **Note**: In [version 2 files](compose-versioning.md#version-2), this
 > option only applies to anonymous volumes (those specified in the image,
 > or specified under `volumes` without an explicit named volume or host path).
 > To configure the driver for a named volume, use the `driver` key under the
 > entry in the [top-level `volumes` option](#volume-configuration-reference).
+{% endcomment %}
+> **メモ**: [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) においてこのオプションは、無名ボリューム（anonymous volume）に対してのみ適用されます。
+> （これはイメージ内で無名として設定されるか、あるいは `volumes` キー配下において明示的な名前やホストパスが指定されずに設定されるものです。）
+> 名前つきボリュームに対してドライバーを設定するには、[最上位の `volumes` オプション](#volume-configuration-reference) の配下にて `driver` キーを使ってください。
 
 
+{% comment %}
 See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
+{% endcomment %}
+詳しくは [Docker ボリューム](/engine/userguide/dockervolumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume.md) を参照してください。
 
 ### volumes_from
 
+{% comment %}
 Mount all of the volumes from another service or container, optionally
 specifying read-only access (``ro``) or read-write (``rw``). If no access level is specified,
 then read-write is used.
+{% endcomment %}
+別のサービスやコンテナーのボリュームをすべてマウントします。
+任意の設定として、アクセスを読み込み専用（`ro`）とするか、読み書き可能（`rw`）とするかを指定できます。
+アクセスレベルが何も設定されていないときは、読み書き可能として設定されます。
 
     volumes_from:
      - service_name
@@ -1921,6 +2049,7 @@ then read-write is used.
      - container:container_name
      - container:container_name:rw
 
+{% comment %}
 > **Notes**
 >
 >* The `container:...` formats are only supported in the
@@ -1933,10 +2062,27 @@ then read-write is used.
 >     - `service_name:ro`
 >     - `container_name`
 >     - `container_name:rw`
+{% endcomment %}
+> **メモ**
+>
+>* `container:...` という書式は [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) においてのみサポートされます。
+>
+>* [バージョン 1](compose-versioning.md#version-1) の場合、コンテナー名は以下のように `container:` をつけずに設定することができます。
+>
+>     - `service_name`
+>     - `service_name:ro`
+>     - `container_name`
+>     - `container_name:rw`
 
 ### restart
 
+{% comment %}
 `no` is the default restart policy, and it doesn't restart a container under any circumstance. When `always` is specified, the container always restarts. The `on-failure` policy restarts a container if the exit code indicates an on-failure error.
+{% endcomment %}
+再起動ポリシー（restart policy）のデフォルトは `no` です。
+この場合はどういう状況であってもコンテナーは再起動しません。
+`always` を指定した場合、コンテナーは常に再起動することになります。
+また `on-failure` ポリシーでは、終了コードが on-failure エラーを表わしている場合にコンテナーが再起動します。
 
       - restart: no
       - restart: always
@@ -1944,15 +2090,25 @@ then read-write is used.
 
 {: id="cpu-and-other-resources"}
 
+{% comment %}
+### cpu_count, cpu_percent, cpu\_shares, cpu\_period, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
+{% endcomment %}
 ### cpu_count, cpu_percent, cpu\_shares, cpu\_period, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
+{% comment %}
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
+{% endcomment %}
+ここに示すオプションはいずれも、値 1 つを設定するものであり、[docker run](/engine/reference/run.md) のオプションに対応づいています。
 
+{% comment %}
 > **Note**: The following options were added in [version 2.2](compose-versioning.md#version-22):
 > `cpu_count`, `cpu_percent`, `cpus`.
 > The following options were added in [version 2.1](compose-versioning.md#version-21):
 > `oom_kill_disable`, `cpu_period`
+{% endcomment %}
+> **Note**: `cpu_count`, `cpu_percent`, `cpus` の各オプションは [バージョン 2.2](compose-versioning.md#version-22) において追加されました。
+> また `oom_kill_disable`, `cpu_period` のオプションは [バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
     cpu_count: 2
     cpu_percent: 50
@@ -1985,11 +2141,19 @@ Each of these is a single value, analogous to its
 
 {: id="orig-resources" }
 
+{% comment %}
 ## Specifying durations
+{% endcomment %}
+{: id="specifying-durations" }
+## 時間の指定
 
+{% comment %}
 Some configuration options, such as the `interval` and `timeout` sub-options for
 [`healthcheck`](#healthcheck), accept a duration as a string in a
 format that looks like this:
+{% endcomment %}
+[`healthcheck`](#healthcheck) のサブオプション `interval`、`timeout` のように、時間を設定するオプションがあります。
+これは以下のような書式による文字列を時間として受け付けるものです。
 
     2.5s
     10s
@@ -1997,13 +2161,24 @@ format that looks like this:
     2h32m
     5h34m56s
 
+{% comment %}
 The supported units are `us`, `ms`, `s`, `m` and `h`.
+{% endcomment %}
+サポートされる単位は `us`, `ms`, `s`, `m`, `h` です。
 
+{% comment %}
 ## Specifying byte values
+{% endcomment %}
+{: id="specifying-byte-values" }
+## バイト値の表現
 
+{% comment %}
 Some configuration options, such as the `device_read_bps` sub-option for
 [`blkio_config`](#blkioconfig), accept a byte value as a string in a format
 that looks like this:
+{% endcomment %}
+[`blkio_config`](#blkioconfig) のサブオプション `device_read_bps` のようにバイト値を設定するオプションがあります。
+バイト値は文字列として指定するものであり、以下のようになります。
 
     2b
     1024kb
@@ -2011,21 +2186,39 @@ that looks like this:
     300m
     1gb
 
+{% comment %}
 The supported units are `b`, `k`, `m` and `g`, and their alternative notation `kb`,
 `mb` and `gb`. Decimal values are not supported at this time.
+{% endcomment %}
+サポートされる単位は `b`, `k`, `m`, `g` とそれに応じた `kb`, `mb`, `gb` です。
+現時点にて 10 進数値の指定はサポートされていません。
 
+{% comment %}
 ## Volume configuration reference
+{% endcomment %}
+{: id="volume-configuration-reference" }
+## ボリューム設定リファレンス
 
+{% comment %}
 While it is possible to declare volumes on the fly as part of the service
 declaration, this section allows you to create named volumes that can be
 reused across multiple services (without relying on `volumes_from`), and are
 easily retrieved and inspected using the docker command line or API.
 See the [docker volume](/engine/reference/commandline/volume_create.md)
 subcommand documentation for more information.
+{% endcomment %}
+サービスの宣言の一部として、ファイル上に [ボリューム](#volumes) を宣言することが可能ですが、このセクションでは（`volumes_from` を利用せずに）名前つきボリュームを生成する方法を説明します。
+このボリュームは、複数のサービスにわたっての再利用が可能であり、docker コマンドラインや API を使って簡単に抽出したり確認したりすることができます。
+詳しくは [docker volume](/engine/reference/commandline/volume_create.md) のサブコマンドを確認してください。
 
+{% comment %}
 Here's an example of a two-service setup where a database's data directory is
 shared with another service as a volume so that it can be periodically backed
 up:
+{% endcomment %}
+以下の例では 2 つのサービスを用います。
+データベースのデータディレクトリは、もう一方のサービスに対してボリュームとして共有させます。
+これによりデータが定期的に反映されます。
 
     version: "{{ site.compose_file_v2 }}"
 
@@ -2042,24 +2235,42 @@ up:
     volumes:
       data-volume:
 
+{% comment %}
 An entry under the top-level `volumes` key can be empty, in which case it
 uses the default driver configured by the Engine (in most cases, this is the
 `local` driver). Optionally, you can configure it with the following keys:
+{% endcomment %}
+最上位の `volumes` キーは指定しないようにすることもできます。
+その場合は Engine によってデフォルトで設定されているドライバーが用いられます。
+（たいていは `local` ドライバーとなります。）
+さらに追加で、以下のようなキーを設定することができます。
 
 ### driver
 
+{% comment %}
 Specify which volume driver should be used for this volume. Defaults to whatever
 driver the Docker Engine has been configured to use, which in most cases is
 `local`. If the driver is not available, the Engine returns an error when
 `docker-compose up` tries to create the volume.
+{% endcomment %}
+どのボリュームドライバーを現在のボリュームに対して用いるかを指定します。
+デフォルトは Docker Engine が利用するものとして設定されているドライバーになります。
+たいていは `local` です。
+ドライバーが利用できない場合、`docker-compose up` によってボリューム生成が行われる際に Engine がエラーを返します。
 
      driver: foobar
 
 ### driver_opts
 
+{% comment %}
 Specify a list of options as key-value pairs to pass to the driver for this
 volume. Those options are driver-dependent - consult the driver's
 documentation for more information. Optional.
+{% endcomment %}
+このボリュームが利用するドライバーに対して、受け渡したいオプションをキーバリューペアのリストとして設定します。
+このオプションは各ドライバーによって異なります。
+詳しくは各ドライバーのドキュメントを参照してください。
+設定は任意です。
 
      driver_opts:
        foo: "bar"
@@ -2067,18 +2278,30 @@ documentation for more information. Optional.
 
 ### external
 
+{% comment %}
 If set to `true`, specifies that this volume has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
+{% endcomment %}
+このオプションを `true` に設定することにより、Compose の外部において生成されているボリュームを設定します。
+`docker-compose up` はボリュームを生成しないようになりますが、ボリュームが存在しなければエラーとなります。
 
+{% comment %}
 For version 2.0 of the format, `external` cannot be used in
 conjunction with other volume configuration keys (`driver`, `driver_opts`,
 `labels`). This limitation no longer exists for
 [version 2.1](compose-versioning.md#version-21) and above.
+{% endcomment %}
+バージョン 2.0 にて、`external` は他のボリューム設定キー（`driver`, `driver_opts`, `labels`）と同時に用いることはできませんでした。
+この制約は [バージョン 2.1](compose-versioning.md#version-21) 以降においてはなくなりました。
 
+{% comment %}
 In the example below, instead of attempting to create a volume called
 `[projectname]_data`, Compose looks for an existing volume simply
 called `data` and mount it into the `db` service's containers.
+{% endcomment %}
+以下の例では `[projectname]_data` というボリュームは生成されることはなく、Compose はすでに存在している `data` という単純な名前のボリュームを探しにいきます。
+そしてこれを `db` サービスコンテナー内にマウントします。
 
     version: "{{ site.compose_file_v2 }}"
 
@@ -2092,27 +2315,44 @@ called `data` and mount it into the `db` service's containers.
       data:
         external: true
 
+{% comment %}
 You can also specify the name of the volume separately from the name used to
 refer to it within the Compose file:
+{% endcomment %}
+ボリューム名として指定する名前は、Compose ファイル内で参照されている名前以外でも指定することができます。
 
     volumes:
       data:
         external:
           name: actual-name-of-volume
 
-> **Note**: In newer versions of Compose, the `external.name` property is
+{% comment %}
+> **メモ**: In newer versions of Compose, the `external.name` property is
 > deprecated in favor of simply using the `name` property.
+{% endcomment %}
+> **Note**: 最近の Compose バージョンでは、`external.name` プロパティは廃止予定となり、単純に `name` プロパティを用いるものになっています。
 
 ### labels
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
+{% endcomment %}
+> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
+{% comment %}
 Add metadata to containers using
 [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
 an array or a dictionary.
+{% endcomment %}
+[Docker labels](/engine/userguide/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+配列形式と辞書形式のいずれかにより指定します。
 
+{% comment %}
 It's recommended that you use reverse-DNS notation to prevent your labels from
 conflicting with those used by other software.
+{% endcomment %}
+ここでは逆 DNS 記法とすることをお勧めします。
+この記法にしておけば、他のソフトウェアが用いるラベルとの競合が避けられるからです。
 
     labels:
       com.example.description: "Database volume"
@@ -2127,16 +2367,25 @@ conflicting with those used by other software.
 
 ### name
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21)
+{% endcomment %}
+> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
+{% comment %}
 Set a custom name for this volume.
+{% endcomment %}
+ボリュームに対して独自の名前を設定します。
 
     version: "{{ site.compose_file_v2 }}"
     volumes:
       data:
         name: my-app-data
 
+{% comment %}
 It can also be used in conjunction with the `external` property:
+{% endcomment %}
+これは `external` プロパティと同時に利用することができます。
 
     version: "{{ site.compose_file_v2 }}"
     volumes:
@@ -2144,26 +2393,51 @@ It can also be used in conjunction with the `external` property:
         external: true
         name: my-app-data
 
+{% comment %}
 ## Network configuration reference
+{% endcomment %}
+{: #network-configuration-reference }
+## ネットワーク設定リファレンス
 
+{% comment %}
 The top-level `networks` key lets you specify networks to be created. For a full
 explanation of Compose's use of Docker networking features, see the
 [Networking guide](/compose/networking.md).
+{% endcomment %}
+最上位の `networks` キーは、生成するネットワークを指定します。
+Compose が利用する Docker ネットワーク機能に関して、詳細は [ネットワークガイド](/compose/networking.md) を参照してください。
 
 ### driver
 
+{% comment %}
 Specify which driver should be used for this network.
+{% endcomment %}
+現在のネットワークにおいて利用するドライバーを設定します。
 
+{% comment %}
 The default driver depends on how the Docker Engine you're using is configured,
 but in most instances it is `bridge` on a single host and `overlay` on a
 Swarm.
+{% endcomment %}
+デフォルトとなるドライバーは、Docker Engine においてどのドライバーを用いているかによって変わります。
+たいていの場合、単一ホストであれば `bridge`、スウォーム上では `overlay` となります。
 
+{% comment %}
 The Docker Engine returns an error if the driver is not available.
+{% endcomment %}
+ドライバーが利用できない場合、Docker Engine はエラーを返します。
 
     driver: overlay
 
+{% comment %}
 Starting in Compose file format 2.1, overlay networks are always created as
 `attachable`, and this is not configurable. This means that standalone
+containers can connect to overlay networks.
+{% endcomment %}
+Compose ファイルフォーマット 2.1 から、オーバーレイネットワークは、必ず「アタッチ可能」（attachable）として生成されます。
+そしてこれは変更できません。
+
+This means that standalone
 containers can connect to overlay networks.
 
 ### driver_opts
