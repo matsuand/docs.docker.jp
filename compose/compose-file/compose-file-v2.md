@@ -1357,7 +1357,7 @@ Specify logging options for the logging driver with the ``options`` key, as with
 {% comment %}
 Logging options are key-value pairs. An example of `syslog` options:
 {% endcomment %}
-ロギングオプションはキーバリューのペアで指定します。
+ロギングオプションはキーバリューのペアで設定します。
 たとえば `syslog` オプションは以下のようになります。
 
     driver: "syslog"
@@ -2434,17 +2434,20 @@ Starting in Compose file format 2.1, overlay networks are always created as
 `attachable`, and this is not configurable. This means that standalone
 containers can connect to overlay networks.
 {% endcomment %}
-Compose ファイルフォーマット 2.1 から、オーバーレイネットワークは、必ず「アタッチ可能」（attachable）として生成されます。
-そしてこれは変更できません。
-
-This means that standalone
-containers can connect to overlay networks.
+Compose ファイルフォーマット 2.1 から、オーバーレイネットワークは、必ず「アタッチ可能」（attachable）として生成されますが、ただし変更できません。
+スタンドアロンコンテナーであれば、オーバーレイネットワークに接続することができます。
 
 ### driver_opts
 
+{% comment %}
 Specify a list of options as key-value pairs to pass to the driver for this
 network. Those options are driver-dependent - consult the driver's
 documentation for more information. Optional.
+{% endcomment %}
+このネットワーク上で利用するドライバーに対して、受け渡したいオプションをキーバリューペアのリストとして設定します。
+このオプションは各ドライバーによって異なります。
+詳しくは各ドライバーのドキュメントを参照してください。
+設定は任意です。
 
       driver_opts:
         foo: "bar"
@@ -2452,15 +2455,26 @@ documentation for more information. Optional.
 
 ### enable_ipv6
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
+{% endcomment %}
+> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
+{% comment %}
 Enable IPv6 networking on this network.
+{% endcomment %}
+現在のネットワークにおいて IPv6 ネットワークを有効にします。
 
 ### ipam
 
+{% comment %}
 Specify custom IPAM config. This is an object with several properties, each of
 which is optional:
+{% endcomment %}
+独自の IPAM 設定を行います。
+いくつかのプロパティにより表わされるオブジェクトであり、それぞれの指定は任意です。
 
+{% comment %}
 -   `driver`: Custom IPAM driver, instead of the default.
 -   `config`: A list with zero or more config blocks, each containing any of
     the following keys:
@@ -2470,8 +2484,21 @@ which is optional:
     - `aux_addresses`: Auxiliary IPv4 or IPv6 addresses used by Network driver,
       as a mapping from hostname to IP
 -   `options`: Driver-specific options as a key-value mapping.
+{% endcomment %}
+-   `driver`: デフォルトではない独自の IPAM ドライバーを指定します。
+-   `config`: 設定ブロックを指定します。要素数はゼロでも複数でも可です。
+    以下のキーを用いることができます。
+    - `subnet`: ネットワークセグメントを表わす CIDR 形式のサブネットを指定します。
+    - `ip_range`: コンテナー IP としてどこからどこまで割り当てるかの範囲を指定します。
+    - `gateway`: マスターサブネットに対する IPv4 または IPv6 のゲートウェイを指定します。
+    - `aux_addresses`: ネットワークドライバーが利用する追加の IPv4 または IPv6 アドレス。
+      ホスト名から IP へのマッピングとして利用されます。
+-   `options`: キーバリューペアによりドライバー固有のオプションを指定します。
 
+{% comment %}
 A full example:
+{% endcomment %}
+すべてを利用した例が以下です。
 
     ipam:
       driver: default
@@ -2489,20 +2516,35 @@ A full example:
 
 ### internal
 
+{% comment %}
 By default, Docker also connects a bridge network to it to provide external
 connectivity. If you want to create an externally isolated overlay network,
 you can set this option to `true`.
+{% endcomment %}
+デフォルトにおいて Docker はブリッジネットワークに接続する際に、外部接続機能も提供します。
+外部に独立した overlay ネットワークを生成したい場合、本オプションを `true` にします。
 
 ### labels
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
+{% endcomment %}
+> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
+{% comment %}
 Add metadata to containers using
 [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
 an array or a dictionary.
+{% endcomment %}
+[Docker labels](/engine/userguide/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+配列形式と辞書形式のいずれかにより指定します。
 
+{% comment %}
 It's recommended that you use reverse-DNS notation to prevent your labels from
 conflicting with those used by other software.
+{% endcomment %}
+ここでは逆 DNS 記法とすることをお勧めします。
+この記法にしておけば、他のソフトウェアが用いるラベルとの競合が避けられるからです。
 
     labels:
       com.example.description: "Financial transaction network"
@@ -2516,19 +2558,31 @@ conflicting with those used by other software.
 
 ### external
 
+{% comment %}
 If set to `true`, specifies that this network has been created outside of
 Compose. `docker-compose up` does not attempt to create it, and raises
 an error if it doesn't exist.
+{% endcomment %}
+このオプションを `true` に設定することにより、Compose の外部において生成されているボリュームを設定します。
+`docker-compose up` はボリュームを生成しないようになりますが、ボリュームが存在しなければエラーとなります。
 
+{% comment %}
 For version 2.0 of the format, `external` cannot be used in conjunction with
 other network configuration keys (`driver`, `driver_opts`, `ipam`, `internal`).
 This limitation no longer exists for
 [version 2.1](compose-versioning.md#version-21) and above.
+{% endcomment %}
+バージョン 2.0 にて `external` は、他のボリューム設定キー（`driver`, `driver_opts`, `ipam`, `internal`）と同時に用いることはできませんでした。
+この制約は [バージョン 2.1](compose-versioning.md#version-21) 以降においてはなくなりました。
 
+{% comment %}
 In the example below, `proxy` is the gateway to the outside world. Instead of
 attempting to create a network called `[projectname]_outside`, Compose
 looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
+{% endcomment %}
+以下の例において `proxy` は外部ネットワークとの間のゲートウェイです。
+`[projectname]_outside` というネットワークは生成されることはなく、Compose はすでに存在している `outside` という単純な名前のネットワークを探しにいって、`proxy` サービスのコンテナーに接続します。
 
     version: "{{ site.compose_file_v2 }}"
 
@@ -2547,8 +2601,11 @@ service's containers to it.
       outside:
         external: true
 
+{% comment %}
 You can also specify the name of the network separately from the name used to
 refer to it within the Compose file:
+{% endcomment %}
+ネットワーク名として指定する名前は、Compose ファイル内で参照されている名前以外でも指定することができます。
 
     networks:
       outside:
@@ -2556,21 +2613,34 @@ refer to it within the Compose file:
           name: actual-name-of-network
 
 
+{% comment %}
 Not supported for version 2 `docker-compose` files. Use
 [network_mode](#network_mode) instead.
+{% endcomment %}
+バージョン 2 の `docker-compose` ファイルではサポートされません。
+かわりに [network_mode](#network_mode) を利用してください。
 
 ### name
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21)
+{% endcomment %}
+> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
+{% comment %}
 Set a custom name for this network.
+{% endcomment %}
+ネットワークに対して独自の名前を設定します。
 
     version: "{{ site.compose_file_v2 }}"
     networks:
       network1:
         name: my-app-net
 
+{% comment %}
 It can also be used in conjunction with the `external` property:
+{% endcomment %}
+これは `external` プロパティと同時に利用することができます。
 
     version: "{{ site.compose_file_v2 }}"
     networks:
@@ -2578,18 +2648,34 @@ It can also be used in conjunction with the `external` property:
         external: true
         name: my-app-net
 
+{% comment %}
 ## Variable substitution
+{% endcomment %}
+{: #variable-substitution }
+## 変数の置換
 
 {% include content/compose-var-sub.md %}
 
+{% comment %}
 ## Extension fields
+{% endcomment %}
+{: #extension-fields }
+## 拡張項目
 
+{% comment %}
 > [Added in version 2.1 file format](compose-versioning.md#version-21).
+{% endcomment %}
+> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
 {% include content/compose-extfields-sub.md %}
 
+{% comment %}
 ## Compose documentation
+{% endcomment %}
+{: #compose-documentation }
+## Compose ドキュメント
 
+{% comment %}
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
@@ -2597,3 +2683,11 @@ It can also be used in conjunction with the `external` property:
 - [Get started with Rails](/compose/rails.md)
 - [Get started with WordPress](/compose/wordpress.md)
 - [Command line reference](/compose/reference/)
+{% endcomment %}
+- [ユーザーガイド](/compose/index.md)
+- [Compose のインストール](/compose/install.md)
+- [Compose ファイルのバージョンとアップグレード](compose-versioning.md)
+- [Django を使ってはじめよう](/compose/django.md)
+- [Rails を使ってはじめよう](/compose/rails.md)
+- [WordPress を使ってはじめよう](/compose/wordpress.md)
+- [コマンドラインリファレンス](/compose/reference/)

@@ -504,10 +504,10 @@ of Compose, especially for containers that provide shared or common services.
 `external_links` follow semantics similar to `links` when specifying both the
 container name and the link alias (`CONTAINER:ALIAS`).
 {% endcomment %}
-Link to containers started outside this `docker-compose.yml` or even outside
-of Compose, especially for containers that provide shared or common services.
-`external_links` follow semantics similar to `links` when specifying both the
-container name and the link alias (`CONTAINER:ALIAS`).
+今の `docker-compose.yml` からではない別のところから起動されたコンテナーをリンクします。
+あるいは Compose の外から、特に共有サービスや汎用サービスとして提供されるコンテナーをリンクします。
+`external_links` の文法は、オプション `links` と同様です。
+つまりコンテナー名とリンクのエイリアス名（`CONTAINER:ALIAS`）を同時に指定します。
 
     external_links:
      - redis_1
@@ -516,21 +516,33 @@ container name and the link alias (`CONTAINER:ALIAS`).
 
 ### extra_hosts
 
+{% comment %}
 Add hostname mappings. Use the same values as the docker client `--add-host` parameter.
+{% endcomment %}
+ホスト名のマッピングを追加します。
+Docker Client の `--add-host` パラメーターと同じ値を設定してください。
 
     extra_hosts:
      - "somehost:162.242.195.82"
      - "otherhost:50.31.209.229"
 
+{% comment %}
 An entry with the ip address and hostname is created in `/etc/hosts` inside containers for this service, e.g:
+{% endcomment %}
+ホスト名と IP アドレスによるこの設定内容は、サービスコンテナー内の `/etc/hosts` に追加されます。
+たとえば以下のとおりです。
 
     162.242.195.82  somehost
     50.31.209.229   otherhost
 
 ### image
 
+{% comment %}
 Specify the image to start the container from. Can either be a repository/tag or
 a partial image ID.
+{% endcomment %}
+コンテナーを起動させるイメージを設定します。
+リポジトリ/タグの形式か、あるいは部分イメージ ID により指定します。
 
     image: redis
     image: ubuntu:14.04
@@ -538,25 +550,33 @@ a partial image ID.
     image: example-registry.com:4000/postgresql
     image: a4bc65fd
 
+{% comment %}
 If the image does not exist, Compose attempts to pull it, unless you have also
 specified [build](#build), in which case it builds it using the specified
 options and tags it with the specified tag.
+{% endcomment %}
+イメージが存在しなかった場合、[build](#build) を指定していなければ Compose はイメージを取得しようとします。
+取得する際には、指定されたオプションを使ってビルドを行い、指定されたタグ名によりタグづけを行います。
 
 {% comment %}
 > **Note**: In the [version 1 file format](compose-versioning.md#version-1), using [`build`](#build) together
 > with `image` is not allowed. Attempting to do so results in an error.
 {% endcomment %}
-> **Note**: In the [version 1 file format](compose-versioning.md#version-1), using [`build`](#build) together
-> with `image` is not allowed. Attempting to do so results in an error.
+> **メモ**: [ファイルフォーマットバージョン 1](compose-versioning.md#version-1) において [`build`](#build) を `image` とともに利用することはできません。
+これを行うとエラーになります。
 
 ### labels
 
 {% comment %}
 Add metadata to containers using [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either an array or a dictionary.
 {% endcomment %}
-Add metadata to containers using [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either an array or a dictionary.
+[Docker labels](/engine/userguide/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+配列形式と辞書形式のいずれかにより指定します。
 
+{% comment %}
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.
+{% endcomment %}
+他のソフトウェアが用いるラベルとの競合を避けるため、逆 DNS 記法とすることをお勧めします。
 
     labels:
       com.example.description: "Accounting webapp"
@@ -570,11 +590,19 @@ It's recommended that you use reverse-DNS notation to prevent your labels from c
 
 ### links
 
+{% comment %}
 Link to containers in another service. Either specify both the service name and
 a link alias (`SERVICE:ALIAS`), or just the service name.
+{% endcomment %}
+他サービスのコンテナーをリンクします。
+サービス名とリンクのエイリアス名（`SERVICE:ALIAS`）を指定するか、直接サービス名を指定します。
 
+{% comment %}
 > Links are a legacy option. We recommend using
 > [networks](#networks) instead.
+{% endcomment %}
+> links は古いオプションです。
+> かわりに [networks](#networks) を用いることをお勧めします。
 
     web:
       links:
@@ -582,43 +610,79 @@ a link alias (`SERVICE:ALIAS`), or just the service name.
        - db:database
        - redis
 
+{% comment %}
 Containers for the linked service are reachable at a hostname identical to
 the alias, or the service name if no alias was specified.
+{% endcomment %}
+リンクされたサービスのコンテナーは、エイリアスと同等のホスト名により到達可能になります。
+エイリアスが設定されていない場合はサービス名により到達可能です。
 
+{% comment %}
 Links also express dependency between services in the same way as
 [depends_on](#depends_on), so they determine the order of service startup.
+{% endcomment %}
+Links は [depends_on](#depends_on) と同様にサービス間の依存関係を表わします。
+したがってサービスの起動順を設定するものになります。
 
+{% comment %}
 > **Note**: If you define both links and [networks](#networks), services with
 > links between them must share at least one network in common in order to
 > communicate.
+{% endcomment %}
+> **メモ**： links と [networks](#networks) をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。
 
 ### log_driver
 
+{% comment %}
 > [Version 1 file format](compose-versioning#version-1) only. In version 2 and up, use
 > [logging](/compose/compose-file/index.md#logging).
+{% endcomment %}
+> [ファイルフォーアットバージョン 1](compose-versioning#version-1) のみ。
+> バージョン 2 またはそれ以降においては、[logging](/compose/compose-file/index.md#logging) を用いてください。
 
+{% comment %}
 Specify a log driver. The default is `json-file`.
+{% endcomment %}
+ログドライバーを設定します。
+デフォルトは `json-file` です。
 
     log_driver: syslog
 
 ### log_opt
 
+{% comment %}
 > [Version 1 file format](compose-versioning#version-1) only. In version 2 and up, use
 > [logging](/compose/compose-file/index.md#logging).
+{% endcomment %}
+> [ファイルフォーアットバージョン 1](compose-versioning#version-1) のみ。
+> バージョン 2 またはそれ以降においては、[logging](/compose/compose-file/index.md#logging) を用いてください。
 
+{% comment %}
 Specify logging options as key-value pairs. An example of `syslog` options:
+{% endcomment %}
+ロギングオプションはキーバリューのペアで設定します。
+たとえば `syslog` オプションは以下のようになります。
 
     log_opt:
       syslog-address: "tcp://192.168.0.42:123"
 
 ### net
 
+{% comment %}
 > [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and up, use
 > [network_mode](/compose/compose-file/index.md#networkmode) and [networks](/compose/compose-file/index.md#networks).
+{% endcomment %}
+> [ファイルフォーアットバージョン 1](compose-versioning#version-1) のみ。
+> バージョン 2 またはそれ以降においては、[network_mode](/compose/compose-file/index.md#networkmode) と [networks](/compose/compose-file/index.md#networks) を用いてください。
 
+{% comment %}
 Network mode. Use the same values as the docker client `--net` parameter.
 The `container:...` form can take a service name instead of a container name or
 id.
+{% endcomment %}
+ネットワークモードを設定します。
+Docker クライアントの `--net` パラメーターと同じ値を設定します。
+`container:...` という書式を使えば、コンテナー名や ID ではなく、サービス名を指定することができます。
 
     net: "bridge"
     net: "host"
@@ -629,20 +693,35 @@ id.
 
     pid: "host"
 
+{% comment %}
 Sets the PID mode to the host PID mode. This turns on sharing between
 container and the host operating system the PID address space. Containers
 launched with this flag can access and manipulate other
 containers in the bare-metal machine's namespace and vice versa.
+{% endcomment %}
+PID モードをホスト PID モードに設定します。
+これはコンテナーとホストオペレーティングシステムとの間で、PID アドレス空間の共有を開始します。
+このフラグを使って起動したコンテナーは、ベアメタルマシンの名前空間にあるコンテナーにアクセスし、操作することが可能になります。
+逆もまた可能です。
 
 ### ports
 
+{% comment %}
 Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
 port (an ephemeral host port is chosen).
+{% endcomment %}
+公開用ポートを設定します。
+設定は両側のポートを指定するか（`HOST:CONTAINER`）、あるいはコンテナー側のポートのみを指定します（その場合、ホスト側はエフェメラルポートが採用されます）。
 
+{% comment %}
 > **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
 > erroneous results when using a container port lower than 60, because YAML
 > parses numbers in the format `xx:yy` as a base-60 value. For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
+{% endcomment %}
+> **メモ**: `HOST:CONTAINER` の書式によってポートをマッピングした場合に、コンテナー側のポートが 60 番未満であるとエラーになることがあります。
+> これは YAML パーサーが `xx:yy` の書式内にある数値を 60 進数値として解釈するからです。
+> このことからポートマッピングを指定する際には、常に文字列として設定することをお勧めします。
 
     ports:
      - "3000"
@@ -656,7 +735,10 @@ port (an ephemeral host port is chosen).
 
 ### security_opt
 
+{% comment %}
 Override the default labeling scheme for each container.
+{% endcomment %}
+各コンテナーにおけるデフォルトのラベリングスキーム（labeling scheme）を上書きします。
 
     security_opt:
       - label:user:USER
@@ -664,16 +746,25 @@ Override the default labeling scheme for each container.
 
 ### stop_signal
 
+{% comment %}
 Sets an alternative signal to stop the container. By default `stop` uses
 SIGTERM. Setting an alternative signal using `stop_signal` causes
 `stop` to send that signal instead.
+{% endcomment %}
+コンテナーに対して別の停止シグナルを設定します。
+デフォルトにおいて `stop` は SIGTERM を用います。
+`stop_signal` を使って別のシグナルを設定すると `stop` にはそのシグナルが代わりに送信されます。
 
     stop_signal: SIGUSR1
 
 ### ulimits
 
+{% comment %}
 Override the default ulimits for a container. You can either specify a single
 limit as an integer or soft/hard limits as a mapping.
+{% endcomment %}
+コンテナーにおけるデフォルトの ulimits を上書きします。
+1 つの limit を整数値として指定するか、ソフト、ハードの limit をマッピングとして指定することができます。
 
 
     ulimits:
@@ -684,17 +775,29 @@ limit as an integer or soft/hard limits as a mapping.
 
 ### volumes, volume\_driver
 
+{% comment %}
 Mount paths or named volumes, optionally specifying a path on the host machine
 (`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
 For [version 2 files](compose-versioning#version-2), named volumes need to be specified with the
 [top-level `volumes` key](compose-file-v2.md#volume-configuration-reference).
 When using [version 1](compose-versioning#version-1), the Docker Engine creates the named
 volume automatically if it doesn't exist.
+{% endcomment %}
+パスまたは名前つきボリュームをマウントします。
+任意の設定としてホストマシン上のパスを指定したり（`HOST:CONTAINER`）、アクセスモードを指定したり(`HOST:CONTAINER:ro`)することができます。
+[ファイルフォーマットバージョン 2](compose-versioning#version-2) における名前つきボリュームは、[最上位の `volumes` キー](compose-file-v2.md#volume-configuration-reference) において指定しておく必要があります。
+[バージョン 1](compose-versioning#version-1) を利用している場合、名前つきボリュームが存在しないときは Docker Engine が自動的に生成します。
 
+{% comment %}
 You can mount a relative path on the host, which expands relative to
 the directory of the Compose configuration file being used. Relative paths
 should always begin with `.` or `..`.
+{% endcomment %}
+ホスト上の相対パスをマウントすることができます。
+これは、用いられている Compose 設定ファイルのディレクトリからの相対パスとして展開されます。
+相対パスは `.` または `..` で書き始める必要があります。
 
+    {% comment %}
     volumes:
       # Just specify a path and let the Engine create a volume
       - /var/lib/mysql
@@ -710,29 +813,67 @@ should always begin with `.` or `..`.
 
       # Named volume
       - datavolume:/var/lib/mysql
+    {% endcomment %}
+    volumes:
+      # パス指定のみ。Engine にボリュームを生成させます。
+      - /var/lib/mysql
 
+      # 絶対パスのマッピングを指定。
+      - /opt/data:/var/lib/mysql
+
+      # ホストからのパス指定。Compose ファイルからの相対パス。
+      - ./cache:/tmp/cache
+
+      # ユーザーディレクトリからの相対パス。
+      - ~/configs:/etc/configs/:ro
+
+      # 名前つきボリューム。
+      - datavolume:/var/lib/mysql
+
+{% comment %}
 If you do not use a host path, you may specify a `volume_driver`.
+{% endcomment %}
+ホストパスを利用せずに `volume_driver` を設定することもできます。
 
     volume_driver: mydriver
 
+{% comment %}
 There are several things to note, depending on which
 [Compose file version](compose-versioning#versioning) you're using:
+{% endcomment %}
+[Compose ファイルバージョン](compose-versioning#versioning) に応じて、以下のことを明記しておきます。
 
+{% comment %}
 -   For [version 1 files](compose-versioning#version-1), both named volumes and
     container volumes use the specified driver.
+{% endcomment %}
+-   [ファイルフォーマットバージョン 1](compose-versioning#version-1) においては, 名前つきボリュームとコンテナーボリュームは、どちらも特定のドライバーを利用します。
 
+{% comment %}
 -   No path expansion is done if you have also specified a `volume_driver`.
     For example, if you specify a mapping of `./foo:/data`, the `./foo` part
     is passed straight to the volume driver without being expanded.
+{% endcomment %}
+-   `volume_driver` も合わせて指定していた場合、パスの解釈は行われません。
+    たとえばパスのマッピングを `./foo:/data` としたとします。
+    このとき `./foo` の部分はボリュームドライバーにそのまま引き渡され、パスが展開されることはありません。
 
+{% comment %}
 See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
+{% endcomment %}
+詳しくは [Docker ボリューム](/engine/userguide/dockervolumes.md) と [ボリュームプラグイン](/engine/extend/plugins_volume.md) を参照してください。
 
 ### volumes_from
 
+{% comment %}
 Mount all of the volumes from another service or container, optionally
 specifying read-only access (``ro``) or read-write (``rw``). If no access level
 is specified, then read-write is used.
+{% endcomment %}
+別のサービスやコンテナーのボリュームをすべてマウントします。
+任意の設定として、アクセスを読み込み専用（`ro`）とするか、読み書き可能（`rw`）とするかを指定できます。
+アクセスレベルが何も設定されていないときは、読み書き可能として設定されます。
 
     volumes_from:
      - service_name
@@ -740,8 +881,11 @@ is specified, then read-write is used.
 
 ### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
 
+{% comment %}
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
+{% endcomment %}
+ここに示すオプションはいずれも、値 1 つを設定するものであり、[docker run](/engine/reference/run.md) のオプションに対応づいています。
 
     cpu_shares: 73
     cpu_quota: 50000
@@ -766,8 +910,13 @@ Each of these is a single value, analogous to its
     stdin_open: true
     tty: true
 
+{% comment %}
 ## Compose documentation
+{% endcomment %}
+{: #compose-documentation }
+## Compose ドキュメント
 
+{% comment %}
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
@@ -775,3 +924,11 @@ Each of these is a single value, analogous to its
 - [Get started with Rails](/compose/rails/)
 - [Get started with WordPress](/compose/wordpress/)
 - [Command line reference](/compose/reference/)
+{% endcomment %}
+- [ユーザーガイド](/compose/index.md)
+- [Compose のインストール](/compose/install/)
+- [Compose ファイルバージョン and upgrading](compose-versioning.md)
+- [Django を使ってはじめよう](/compose/django/)
+- [Rails を使ってはじめよう](/compose/rails/)
+- [WordPress を使ってはじめよう](/compose/wordpress/)
+- [コマンドラインリファレンス](/compose/reference/)

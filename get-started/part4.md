@@ -600,7 +600,7 @@ myvm2   -        hyperv   Running   tcp://192.168.200.181:2376           v17.06.
 {% comment %}
 Now that you have `myvm1`, you can use its powers as a swarm manager to
 deploy your app by using the same `docker stack deploy` command you used in part
-3 to `myvm1`, and your local copy of `docker-compose.yml.`. This command may take a few seconds
+3 to `myvm1`, and your local copy of `docker-compose.yml`. This command may take a few seconds
 to complete and the deployment takes some time to be available. Use the
 `docker service ps <service_name>` command on a swarm manager to verify that
 all services have been redeployed.
@@ -745,11 +745,11 @@ You can access your app from the IP address of **either** `myvm1` or `myvm2`.
 {% comment %}
 The network you created is shared between them and load-balancing. Run
 `docker-machine ls` to get your VMs' IP addresses and visit either of them on a
-browser, hitting refresh (or just `curl` them).
+browser on port 4000, hitting refresh (or just `curl` them).
 {% endcomment %}
 作り出されたネットワークは、各マシン間で共有され負荷分散が行われます。
 `docker-machine ls` を実行して VM の IP アドレスを確認してください。
-そしてどちらでもよいので、ブラウザーを使ってアクセスし更新ボタンを押してください（あるいは `curl` コマンドを使うのでも構いません）。
+そしてどちらでもよいので、ブラウザー上からポート 4000 番にして更新ボタンを押してください（あるいは `curl` コマンドを使うのでも構いません）。
 
 {% comment %}
 ![Hello World in browser](images/app-in-browser-swarm.png)

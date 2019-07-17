@@ -47,7 +47,7 @@ Docker Enterprise をソリューションにおいて利用すれば、管理�
 <div class="row">
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-### Docker コミュニティエディション
+### Docker Community エディション
 
 {% comment %}
 Get started with Docker and experimenting with container-based apps. Docker CE
