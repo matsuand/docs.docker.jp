@@ -4,6 +4,16 @@ keywords: dotnet, .NET, Core, example, ASP.NET Core, SQL Server, mssql
 title: "Quickstart: Compose and ASP.NET Core with SQL Server"
 ---
 
+{% comment %}
+This quick-start guide demonstrates how to use Docker Engine on Linux and Docker
+Compose to set up and run the sample ASP.NET Core application using the
+[.NET Core SDK image](hub.docker.com/_/microsoft-dotnet-core-sdk)
+with the
+[SQL Server on Linux image](https://hub.docker.com/_/microsoft-mssql-server).
+You just need to have [Docker Engine](/install/index.md)
+and [Docker Compose](/compose/install/) installed on your
+platform of choice: Linux, Mac or Windows.
+{% endcomment %}
 This quick-start guide demonstrates how to use Docker Engine on Linux and Docker
 Compose to set up and run the sample ASP.NET Core application using the
 [.NET Core SDK image](hub.docker.com/_/microsoft-dotnet-core-sdk)
@@ -13,22 +23,42 @@ You just need to have [Docker Engine](/install/index.md)
 and [Docker Compose](/compose/install/) installed on your
 platform of choice: Linux, Mac or Windows.
 
+{% comment %}
+For this sample, we create a sample .NET Core Web Application using the
+`microsoft/dotnet:2.1-sdk` Docker image. After that, we create a `Dockerfile`,
+configure this app to use our SQL Server database, and then create a
+`docker-compose.yml` that defines the behavior of all of these components.
+{% endcomment %}
 For this sample, we create a sample .NET Core Web Application using the
 `microsoft/dotnet:2.1-sdk` Docker image. After that, we create a `Dockerfile`,
 configure this app to use our SQL Server database, and then create a
 `docker-compose.yml` that defines the behavior of all of these components.
 
+{% comment %}
 > **Note**: This sample is made for Docker Engine on Linux. For Windows
 > Containers, visit
 > [Docker Labs for Windows Containers](https://github.com/docker/labs/tree/master/windows).
+{% endcomment %}
+> **メモ**: この例は Docker Engine on Linux を使って実現しています。
+> Windows コンテナーを用いる場合は、[Docker Labs for Windows Containers](https://github.com/docker/labs/tree/master/windows) を参照してください。
 
+{% comment %}
+1.  Create a new directory for your application.
+{% endcomment %}
 1.  Create a new directory for your application.
 
+    {% comment %}
+    {% endcomment %}
     This directory is the context of your docker-compose project. For
     [Docker Desktop for Windows](/docker-for-windows/#/shared-drives) and
     [Docker Desktop for Mac](/docker-for-mac/#/file-sharing), you
     need to set up file sharing for the volume that you need to map.
 
+{% comment %}
+1.  Within your directory, use the `dotnet:2.1-sdk` Docker image to generate a
+    sample web application within the container under the `/app` directory and
+    into your host machine in the working directory:
+{% endcomment %}
 1.  Within your directory, use the `dotnet:2.1-sdk` Docker image to generate a
     sample web application within the container under the `/app` directory and
     into your host machine in the working directory:
@@ -37,9 +67,16 @@ configure this app to use our SQL Server database, and then create a
     $ docker run -v ${PWD}:/app --workdir /app microsoft/dotnet:2.1-sdk dotnet new mvc --auth Individual
     ```
 
+    {% comment %}
+    > **Note**: If running in Docker Desktop for Windows, make sure to use Powershell
+    or specify the absolute path of your app directory.
+    {% endcomment %}
     > **Note**: If running in Docker Desktop for Windows, make sure to use Powershell
     or specify the absolute path of your app directory.
 
+{% comment %}
+1.  Create a `Dockerfile` within your app directory and add the following content:
+{% endcomment %}
 1.  Create a `Dockerfile` within your app directory and add the following content:
 
     ```conf
@@ -53,16 +90,32 @@ configure this app to use our SQL Server database, and then create a
     CMD /bin/bash ./entrypoint.sh
     ```
 
+    {% comment %}
+    This file defines how to build the web app image. It uses the
+    [.NET Core SDK image](https://hub.docker.com/_/microsoft-dotnet-core-sdk),
+    maps the volume with the generated code, restores the dependencies, builds the
+    project and exposes port 80. After that, it calls an `entrypoint` script
+    that we create in the next step.
+    {% endcomment %}
     This file defines how to build the web app image. It uses the
     [.NET Core SDK image](https://hub.docker.com/_/microsoft-dotnet-core-sdk),
     maps the volume with the generated code, restores the dependencies, builds the
     project and exposes port 80. After that, it calls an `entrypoint` script
     that we create in the next step.
 
+{% comment %}
+1.  The `Dockerfile` makes use of an entrypoint to your webapp Docker
+    image. Create this script in a file called `entrypoint.sh` and paste the
+    contents below.
+{% endcomment %}
 1.  The `Dockerfile` makes use of an entrypoint to your webapp Docker
     image. Create this script in a file called `entrypoint.sh` and paste the
     contents below.
 
+    {% comment %}
+    > **Note**: Make sure to use UNIX line delimiters. The script doesn't work if
+    > you use Windows-based delimiters (Carriage return and line feed).
+    {% endcomment %}
     > **Note**: Make sure to use UNIX line delimiters. The script doesn't work if
     > you use Windows-based delimiters (Carriage return and line feed).
 
@@ -81,6 +134,11 @@ configure this app to use our SQL Server database, and then create a
     exec $run_cmd
     ```
 
+    {% comment %}
+    This script restores the database after it starts up, and then runs
+    the application. This allows some time for the SQL Server database image to
+    start up.
+    {% endcomment %}
     This script restores the database after it starts up, and then runs
     the application. This allows some time for the SQL Server database image to
     start up.

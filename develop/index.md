@@ -1,6 +1,6 @@
 ---
 title: Docker を用いた開発
-description: Overview of developer resources
+description: 開発リソースの概要。
 keywords: developer, developing, apps, api, sdk
 ---
 
@@ -12,6 +12,7 @@ This page lists resources for application developers using Docker.
 {% comment %}
 ## Develop new apps on Docker
 {% endcomment %}
+{: #develop-new-apps-on-docker }
 ## Docker 上での新たなアプリ開発
 
 {% comment %}
@@ -39,14 +40,29 @@ Docker を使って新しいアプリを開発しようとしている方は、�
 {% comment %}
 ## Learn about language-specific app development with Docker
 {% endcomment %}
+{: #learn-about-language-specific-app-development-with-docker }
 ## 特定言語でのDocker アプリ開発について学ぶ
 
+{% comment %}
+- [Docker for Java developers](https://github.com/docker/labs/tree/master/developer-tools/java/){: target="_blank" class="_"} lab
+- [Port a node.js app to Docker](https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting){: target="_blank" class="_"}
+- [Ruby on Rails app on Docker](https://github.com/docker/labs/tree/master/developer-tools/ruby){: target="_blank" class="_"} lab
+- [Dockerize a .Net Core application](/engine/examples/dotnetcore/){: target="_blank" class="_"}
+- [Dockerize an ASP.NET Core application with SQL Server on Linux](/compose/aspnet-mssql-compose/){: target="_blank" class="_"} using Docker Compose
+{% endcomment %}
 - [Docker for Java developers](https://github.com/docker/labs/tree/master/developer-tools/java/){: target="_blank" class="_"} lab
 - [Port a node.js app to Docker](https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting){: target="_blank" class="_"}
 - [Ruby on Rails app on Docker](https://github.com/docker/labs/tree/master/developer-tools/ruby){: target="_blank" class="_"} lab
 - [Dockerize a .Net Core application](/engine/examples/dotnetcore/){: target="_blank" class="_"}
 - [Dockerize an ASP.NET Core application with SQL Server on Linux](/compose/aspnet-mssql-compose/){: target="_blank" class="_"} using Docker Compose
 
+{% comment %}
+## Advanced development with the SDK or API
+{% endcomment %}
+{: #advanced-development-with-the-sdk-or-api }
 ## Advanced development with the SDK or API
 
+{% comment %}
+After you can write Dockerfiles or Compose files and use Docker CLI, take it to the next level by using Docker Engine SDK for Go/Python or use the HTTP API directly.
+{% endcomment %}
 After you can write Dockerfiles or Compose files and use Docker CLI, take it to the next level by using Docker Engine SDK for Go/Python or use the HTTP API directly.

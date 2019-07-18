@@ -215,7 +215,7 @@ guides:
     - path: /network/macvlan/
       title: Macvlan ネットワークの利用
     - path: /network/none/
-      title: Disable networking for a container
+      title: コンテナーのネットワーク無効化
     - sectiontitle: ネットワークチュートリアル
       section:
       - path: /network/network-tutorial-standalone/
