@@ -83,12 +83,10 @@ keep image size small:
   derivative images use memory on the Docker host more efficiently and load more
   quickly.
 {% endcomment %}
-- If you have multiple images with a lot in common, consider creating your own
-  [base image](/engine/userguide/eng-image/baseimages.md) with the shared
-  components, and basing your unique images on that. Docker only needs to load
-  the common layers once, and they are cached. This means that your
-  derivative images use memory on the Docker host more efficiently and load more
-  quickly.
+- 共有するイメージがたくさんある場合は、[ベースイメージ](/engine/userguide/eng-image/baseimages.md) を作ることを考えてみてください。
+  これを用いてコンポーネントを共有し、これをベースとした独自のイメージを作っていくことができます。
+  Docker は共通するレイヤーであれば 1 度しかロードする必要がなく、ロードした内容はキャッシュされます。
+  つまりベースイメージから派生させたイメージは、Docker ホスト上でのメモリ利用が効率よく行われ、ロードもすばやく行われることになります。
 
 {% comment %}
 - To keep your production image lean but allow for debugging, consider using the
@@ -96,8 +94,7 @@ keep image size small:
   debugging tooling can be added on top of the production image.
 {% endcomment %}
 - 本番環境向けのイメージはスリムにしたいものの、デバッグは可能にしたいといった場合は、デバッグ環境向けとして、本番環境イメージをベースイメージとすることを考えてみてください。
-  Additional testing or
-  debugging tooling can be added on top of the production image.
+  さらにテストやデバッグツールを加えたい場合でも、本番環境イメージの上に追加ができます。
 
 {% comment %}
 - When building images, always tag them with useful tags which codify version
@@ -105,10 +102,10 @@ keep image size small:
   or other information that is useful when deploying the application in
   different environments. Do not rely on the automatically-created `latest` tag.
 {% endcomment %}
-- When building images, always tag them with useful tags which codify version
-  information, intended destination (`prod` or `test`, for instance), stability,
-  or other information that is useful when deploying the application in
-  different environments. Do not rely on the automatically-created `latest` tag.
+- イメージをビルドする場合には、常にわかりやすいタグをつけるようにします。
+  このタグを用いて、バージョン情報をコード化したり、目的とする用途（たとえば `prod` や `test` など）や安定性など、いろいろな情報を付与したりします。
+  こうしておけば、アプリケーションをさまざまな環境にデプロイする際にわかりやすくなります。
+  自動的に生成される `latest` タグには頼らないようにします。
 
 {% comment %}
 ## Where and how to persist application data
@@ -133,20 +130,15 @@ keep image size small:
   standalone containers, consider migrating to use single-replica services, so
   that you can take advantage of these service-only features.
 {% endcomment %}
-- **Avoid** storing application data in your container's writable layer using
-  [storage drivers](/engine/userguide/storagedriver.md). This increases the
-  size of your container and is less efficient from an I/O perspective than
-  using volumes or bind mounts.
-- そのかわりに、データ保存には [ボリューム](/engine/admin/volumes/volumes.md) を利用します。
-- One case where it is appropriate to use
-  [bind mounts](/engine/admin/volumes/bind-mounts.md) is during development,
-  when you may want to mount your source directory or a binary you just built
-  into your container. For production, use a volume instead, mounting it into
-  the same location as you mounted a bind mount during development.
-- For production, use [secrets](/engine/swarm/secrets.md) to store sensitive
-  application data used by services, and use [configs](/engine/swarm/configs.md)
-  for non-sensitive data such as configuration files. If you currently use
-  standalone containers, consider migrating to use single-replica services, so
+- [ストレージドライバー](/engine/userguide/storagedriver.md) によって、コンテナーの書き込み可能レイヤーへデータ保存を行うことができますが、アプリケーションデータの保存を行うことは**避けます**。
+  これを行ってしまうと、コンテナーのサイズが増えることになり、I/O 観点で言えば、ボリュームやバインドマウントを用いることに比べて非効率なものになります。
+- そのかわりに、データ保存は [ボリューム](/engine/admin/volumes/volumes.md) を利用します。
+- [バインドマウント](/engine/admin/volumes/bind-mounts.md) を用いるのが適当な例として、開発時での利用が考えられます。
+  開発時には、ソースディレクトリや生成したばかりのバイナリを、コンテナー内にマウントしたくなります。
+  本番環境ではボリュームを利用しますが、本番環境がマウントする同じ場所を、開発環境時はバインドマウントによりマウントします。
+- 本番環境において、サービスが機密情報を利用している場合、その保存には [secrets](/engine/swarm/secrets.md) を利用します。そして機密情報ではない設定ファイルなどの情報は [configs](/engine/swarm/configs.md) を利用します。
+  今利用しているコンテナーがスタンドアロンである場合、
+  consider migrating to use single-replica services, so
   that you can take advantage of these service-only features.
 
 {% comment %}
@@ -176,12 +168,9 @@ keep image size small:
   that are down. Also, when new nodes are added to the swarm, images are
   pulled automatically.
 {% endcomment %}
-- When possible, design your application with the ability to scale using swarm
-  services.
-- Even if you only need to run a single instance of your application, swarm
-  services provide several advantages over standalone containers. A service's
-  configuration is declarative, and Docker is always working to keep the
-  desired and actual state in sync.
+- 可能であればスウォームサービスを利用し、スケールが可能なアプリケーション設計とします。
+- アプリケーションの実行インスタンスがただ 1 つあれば良い場合であっても、スタンドアロンコンテナーに比べてスウォームサービスには有用な機能が提供されます。
+  サービスの設定は宣言によって行われるため、Docker は常に、設定された内容と実際が同期して動作します。
 - Networks and volumes can be connected and disconnected from swarm services,
   and Docker handles redeploying the individual service containers in a
   non-disruptive way. Standalone containers need to be manually stopped, removed,
