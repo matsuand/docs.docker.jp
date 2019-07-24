@@ -28,10 +28,10 @@ Compose の機能に関する詳細は、[機能一覧](overview.md#features) �
 {% comment %}
 Compose works in all environments: production, staging, development, testing, as
 well as CI workflows. You can learn more about each case in [Common Use
-Cases](overview.md#common-use-cases).
+Cases](#common-use-cases).
 {% endcomment %}
 Compose は本番環境、ステージング環境、開発環境において動作し、CI ワークフローとしても利用することができます。
-それぞれの使い方については、[一般的な利用例](overview.md#common-use-cases)を確認してください。
+それぞれの使い方については、[一般的な利用例](#common-use-cases)を確認してください。
 
 {% comment %}
 Using Compose is basically a three-step process:

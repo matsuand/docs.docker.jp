@@ -2952,7 +2952,7 @@ expressed in the short form.
 長い文法は追加の設定項目が加えられていて、短い文法では表現できないものです。
 
 {% comment %}
-- `type`: the mount type `volume`, `bind` or `tmpfs`
+- `type`: the mount type `volume`, `bind`, `tmpfs` or `npipe`
 - `source`: the source of the mount, a path on the host for a bind mount, or the
   name of a volume defined in the
   [top-level `volumes` key](#volume-configuration-reference). Not applicable for a tmpfs mount.
@@ -2967,7 +2967,7 @@ expressed in the short form.
   - `size`: the size for the tmpfs mount in bytes
 - `consistency`: the consistency requirements of the mount, one of `consistent` (host and container have identical view), `cached` (read cache, host view is authoritative) or `delegated` (read-write cache, container's view is authoritative)
 {% endcomment %}
-- `type`: マウントタイプを表わす `volume`, `bind`, `tmpfs` のいずれかを指定します。
+- `type`: マウントタイプを表わす `volume`, `bind`, `tmpfs`, `npipe` のいずれかを指定します。
 - `source`: マウント元。バインドマウントにおいてはホスト上のパスを指定します。
   また [最上位の `volumes` キー](#volume-configuration-reference) で定義したボリューム名を指定します。
   tmpfs マウントはできません。
