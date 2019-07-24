@@ -173,11 +173,10 @@ repository's status between public and private, if you have an available
 repository slot open. Otherwise, you can upgrade your
 [Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
 {% endcomment %}
-You can designate collaborators and manage their access to a private
-repository from that repository's *Settings* page. You can also toggle the
-repository's status between public and private, if you have an available
-repository slot open. Otherwise, you can upgrade your
-[Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
+プライベートリポジトリに対してはコラボレーター（collaborator）を指定し、リポジトリへのアクセスを管理することができます。
+これはリポジトリの *Settings* ページから行います。
+またリポジトリスロットに空きがある場合は、リポジトリの状態を公開とするかプライベートとするかを切り替えることもできます。
+空きスロットがない場合は、[Docker Hub](https://hub.docker.com/account/billing-plans/) のプランをアップグレードすることになります。
 
 {% comment %}
 ## Collaborators and their role
@@ -242,12 +241,12 @@ when you `docker save` an image.
 {% comment %}
 To edit tags, click on Manage Repository or find your repository under *Repositories*:
 {% endcomment %}
-To edit tags, click on Manage Repository or find your repository under *Repositories*:
+タグの編集は、Manage Repository をクリックするか、あるいは *Repositories* 配下から目的のリポジトリを探し出して行います。
 
 {% comment %}
 ![Manage Repo Tags](images/repos-tags-manage.png)
 {% endcomment %}
-![Manage Repo Tags](images/repos-tags-manage.png)
+![リポジトリタグの管理](images/repos-tags-manage.png)
 
 {% comment %}
 ## Searching for Repositories

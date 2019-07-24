@@ -15,7 +15,7 @@ notags: true
 ## Docker をはじめよう
 
 {% comment %}
-Try our new multi-part walkthrough that covers writing your first app,
+Try our multi-part walkthrough that covers writing your first app,
 data storage, networking, and swarms, and ends with your app running on
 production servers in the cloud. Total reading time is less than an hour.
 {% endcomment %}
@@ -42,55 +42,63 @@ Docker Enterprise をソリューションにおいて利用すれば、管理�
 </div>
 </div>
 
-## Docker のエディション
+{% comment %}
+## Docker products
+{% endcomment %}
+{: #docker-products }
+## Docker 製品
 
 <div class="row">
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-### Docker Community エディション
+{% comment %}
+### Docker Engine - Community
+{% endcomment %}
+{: #docker-engine-community }
+### Docker Engine - Community
 
 {% comment %}
-Get started with Docker and experimenting with container-based apps. Docker CE
+Get started with Docker and experimenting with container-based apps. Docker Engine - Community
 is available on many platforms, from desktop to cloud to server. Build and share
 containers and automate the development pipeline from a single environment.
 Choose the Edge channel to get access to the latest features, or the Stable
 channel for more predictability.
 {% endcomment %}
 Docker を使い、コンテナーをベースとしたアプリケーションを体験しましょう。
-Docker CE はデスクトップからクラウドのサーバーに至るまで、多くのプラットフォームで利用可能です。
+Docker Engine - Community はデスクトップからクラウドのサーバーに至るまで、多くのプラットフォームで利用可能です。
 単一の環境から自動デプロイパイプラインを通し、コンテナーを構築、共有します。
 最新機能をいち早く試したい場合はエッジ（edge）チャンネルを選んでください。
 また理解できているものを利用したい場合は安定（stable）チャンネルを選んでください。
 
 {% comment %}
-[Learn more about Docker CE](/install/){: class="button outline-btn"}
+[Learn more about Docker Engine - Community](/install/){: class="button outline-btn"}
 {% endcomment %}
-[Docker CE について学ぶ](/install/){: class="button outline-btn"}
+[Docker Engine - Community について学ぶ](/install/){: class="button outline-btn"}
 
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 
-### Docker Enterprise プラットフォーム
+### Docker Enterprise
 
 {% comment %}
 Designed for enterprise development and IT teams who build, ship, and run
 business critical applications in production at scale. Integrated, certified,
 and supported to provide enterprises with the most secure container platform in
-the industry to modernize all applications. Docker Enterprise Advanced comes with enterprise
+the industry to modernize all applications. Docker Enterprise comes with enterprise
 [add-ons](#docker-ee-add-ons) like Universal Control Plane (UCP) for managing and
 orchestrating the container runtime, and Docker Trusted Registry (DTR) for storing and
 securing images in an enterprise grade registry.
 {% endcomment %}
 エンタープライズ開発や IT チーム向けに設計されたものであり、最重要のビジネスアプリケーションが、稼働中にその規模を拡大していっても、アプリケーションの構築、導入、実行を容易に実現できます。
 エンタープライズ開発の統合、認証、サポートを行い、先進的なアプリケーションを提供する業界において、もっとも安全なコンテナープラットフォームを提供します。
-Docker Enterprise Advanced には Universal Control Plane (UCP) や Docker Trusted Registry (DTR) といった[アドオン](#docker-ee-add-ons) が含まれます。
+Docker Enterprise には Universal Control Plane (UCP) や Docker Trusted Registry (DTR) といった[アドオン](#docker-ee-add-ons) が含まれます。
 UCP はコンテナー実行時の管理とオーケストレーションを行います。
 DTR はエンタープライズレベルのレジストリにおいてイメージの保存と保護を行います。
 
 {% comment %}
-[Learn more about Docker Enterprise](/ee/supported-platforms/){: class="button outline-btn"}
+[Learn more about Docker Enterprise products](/ee/supported-platforms/){: class="button outline-btn"}
 {% endcomment %}
-[Docker Enterprise について学ぶ](/ee/supported-platforms/){: class="button outline-btn"}
+[Docker Enterprise 製品について学ぶ](/ee/supported-platforms/){: class="button outline-btn"}
 
 </div>
 </div><!-- end row -->

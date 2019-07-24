@@ -1,6 +1,6 @@
 ---
 title: Docker Enterprise について
-description: Docker Enterprise 2.1 に関する情報
+description: Docker Enterprise の製品情報
 keywords: Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine, commercially supported
 redirect_from:
   - /enterprise/supported-platforms/
@@ -14,18 +14,20 @@ install-prefix-ee: '/install/linux/docker-ee'
 ---
 
 {% comment %}
-Docker Enterprise is designed for enterprise development as well as IT teams who
-build, ship, and run business-critical applications
-in production and at scale. Docker Enterprise is integrated, certified,
-and supported to provide enterprises with the most secure container platform
-in the industry. For more info about Docker Enterprise, including purchasing
-options, see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
+Docker Enterprise is designed for enterprise development as well as IT teams who build, share, and run business-critical
+applications at scale in production. Docker Enterprise is an integrated container platform that includes
+Docker Desktop Enterprise, a secure image registry, advanced management control plane, and Docker Engine - Enterprise.
+Docker Engine - Enterprise is a certified and supported container runtime that is also available as a standalone
+solution  to provide enterprises with the most secure container engine in the industry. For more information
+about Docker Enterprise and Docker Engine - Enterprise, including purchasing options,
+see [Docker Enterprise](https://www.docker.com/enterprise-edition/).
 {% endcomment %}
 Docker Enterprise はエンタープライズ開発向けとして設計されています。
 これは IT チームが開発する重要なビジネスアプリケーションを、相当規模の本番環境において構築、導入、実行するためのものです。
-Docker Enterprise is integrated, certified,
-and supported to provide enterprises with the most secure container platform
-in the industry.
+Docker Enterprise is an integrated container platform that includes
+Docker Desktop Enterprise, a secure image registry, advanced management control plane, and Docker Engine - Enterprise.
+Docker Engine - Enterprise is a certified and supported container runtime that is also available as a standalone
+solution  to provide enterprises with the most secure container engine in the industry.
 より詳細な Docker Enterprise の情報や、その購入オプションなどに関しては [Docker Enterprise](https://www.docker.com/enterprise-edition/) を参照してください。
 
 {% comment %}
@@ -41,12 +43,12 @@ in the industry.
 {: .important}
 
 {% comment %}
-## Docker Enterprise tiers
+## Docker Enterprise products
 {% endcomment %}
-## Docker Enterprise の各階層
-{: #docker-enterprise-tiers }
+## Docker Enterprise 製品
+{: #docker-enterprise-products }
 
-{% include docker_ce_ee.md %}
+{% include docker_ee.md %}
 
 {% comment %}
 > Note
@@ -65,11 +67,10 @@ in the industry.
 {: #docker-enterprise }
 
 {% comment %}
-With Docker Enterprise, you can deploy Docker Engine --- Enterprise
-to manage your container workloads in a flexible way. You can manage workloads
-on Windows, Linux, on site, or on the cloud.
+With Docker Enterprise, you can manage container workloads on Windows, Linux, on site, or on the cloud
+in a flexible way.
 {% endcomment %}
-Docker Enterprise を用いると、Docker Engine --- Enterprise をデプロイして、コンテナー作業をより柔軟に管理できるようになります。
+Docker Enterprise を用いると、コンテナー作業をより柔軟に管理できるようになります。
 同じ作業は Windows でも Linux でも行うことができ、さらには自サイト上でもクラウド上でも可能です。
 
 {% comment %}
@@ -87,51 +88,43 @@ scan your images for vulnerabilities. It also has support with defined SLAs and 
 maintenance cycles for patches for up to 24 months.
 
 {% comment %}
-### New Licensing for Docker Enterprise
+### New licensing for Docker Enterprise
 {% endcomment %}
-### New Licensing for Docker Enterprise
+### New licensing for Docker Enterprise
 {: #new-licensing-for-docker-enterprise }
 
 {% comment %}
-In version 18.09, the Docker Enterprise --- Engine is aware of the license
-applied on the system. The license summary is available in the `docker info`
-output on standalone or manager nodes.
+Starting in version 18.09, Docker Enterprise is aware of the license applied on
+the system. The license summary is available in the `docker info` output on
+standalone or manager nodes.
 {% endcomment %}
-In version 18.09, the Docker Enterprise --- Engine is aware of the license
-applied on the system. The license summary is available in the `docker info`
-output on standalone or manager nodes.
+Starting in version 18.09, Docker Enterprise is aware of the license applied on
+the system. The license summary is available in the `docker info` output on
+standalone or manager nodes.
 
 {% comment %}
-For EE platform customers, when you license UCP, this same license is applied to
-the underlying engines in the cluster. Docker recommends platform customers use
-UCP to manage their license.
+For Docker Enterprise customers, when you license Universal Control Plane
+(UCP), this same license is applied to the underlying engines in the cluster.
+Docker recommends that Enterprise customers use UCP to manage their license.
 {% endcomment %}
-For EE platform customers, when you license UCP, this same license is applied to
-the underlying engines in the cluster. Docker recommends platform customers use
-UCP to manage their license.
+For Docker Enterprise customers, when you license Universal Control Plane
+(UCP), this same license is applied to the underlying engines in the cluster.
+Docker recommends that Enterprise customers use UCP to manage their license.
 
 {% comment %}
-Standalone EE engines can be licensed using `docker engine activate`.
+Standalone Docker Engine - Enterprise users can license engines using `docker engine activate`.
 {% endcomment %}
-Standalone EE engines can be licensed using `docker engine activate`.
+Standalone Docker Engine - Enterprise users can license engines using `docker engine activate`.
 
 {% comment %}
-Offline activation of standalone EE engines can be performed by downloading the
-license and using the command `docker engine activate --license filename.lic`.
+Offline activation of standalone enterprise engines can be performed by downloading the license and using the command `docker engine activate --license filename.lic`.
 {% endcomment %}
-Offline activation of standalone EE engines can be performed by downloading the
-license and using the command `docker engine activate --license filename.lic`.
+Offline activation of standalone enterprise engines can be performed by downloading the license and using the command `docker engine activate --license filename.lic`.
 
 {% comment %}
-Additionally, Docker is now distributing the CLI as a separate installation
-package. This gives Enterprise users the ability to install as many CLI
-packages as needed without using the Engine node licenses for client-only
-systems.
+Additionally, Docker is now distributing the CLI as a separate installation package. This gives Docker Enterprise users the ability to install as many CLI packages as needed without using the Engine node licenses for client-only systems.
 {% endcomment %}
-Additionally, Docker is now distributing the CLI as a separate installation
-package. This gives Enterprise users the ability to install as many CLI
-packages as needed without using the Engine node licenses for client-only
-systems.
+Additionally, Docker is now distributing the CLI as a separate installation package. This gives Docker Enterprise users the ability to install as many CLI packages as needed without using the Engine node licenses for client-only systems.
 
 {% comment %}
 [Learn more about Docker Enterprise](/ee/index.md).
@@ -141,14 +134,10 @@ systems.
 
 {% comment %}
 > When using Docker Enterprise
->
-> IBM Power is not supported as managers or workers.
 > Microsoft Windows Server is not supported as a manager. Microsoft Windows
 > Server 1803 is not supported as a worker.
 {% endcomment %}
 > When using Docker Enterprise
->
-> IBM Power is not supported as managers or workers.
 > Microsoft Windows Server is not supported as a manager. Microsoft Windows
 > Server 1803 is not supported as a worker.
 
@@ -159,31 +148,26 @@ systems.
 {: #docker-certified-infrastructure }
 
 {% comment %}
-Docker Certified Infrastructure is Docker’s prescriptive approach to deploying
-Docker Enterprise on a range of infrastructure choices. Each Docker
-Certified Infrastructure includes a reference architecture, automation templates,
-and third-party ecosystem solution briefs.
+Docker Certified Infrastructure is Docker’s prescriptive approach to deploying Docker Enterprise
+on a variety of infrastructures. Each Docker Certified Infrastructure option includes a reference architecture,
+a CLI plugin for automated deployment and configuration, and third-party ecosystem solution briefs.
 {% endcomment %}
-Docker Certified Infrastructure is Docker’s prescriptive approach to deploying
-Docker Enterprise on a range of infrastructure choices. Each Docker
-Certified Infrastructure includes a reference architecture, automation templates,
-and third-party ecosystem solution briefs.
+Docker Certified Infrastructure is Docker’s prescriptive approach to deploying Docker Enterprise
+on a variety of infrastructures. Each Docker Certified Infrastructure option includes a reference architecture,
+a CLI plugin for automated deployment and configuration, and third-party ecosystem solution briefs.
 
 {% comment %}
-| Platform                                                                                | Docker Enterprise Edition |
-|:----------------------------------------------------------------------------------------|:-------------------------:|
-| [VMware](https://success.docker.com/article/certified-infrastructures-vmware-vsphere)   |  {{ page.green-check }}   |
-| [Amazon Web Services](https://success.docker.com/article/certified-infrastructures-aws) |  {{ page.green-check }}   |
-| [Microsoft Azure](https://success.docker.com/article/certified-infrastructures-azure)   |  {{ page.green-check }}   |
-| IBM Cloud                                                                               |        Coming soon        |
+| Platform  | Docker Enterprise support |
+:----------------------------------------------------------------------------------------|:-------------------------:|
+| [Amazon Web Services](..\cluster\aws.md) |  {{ page.green-check }}   |
+| VMware  |  coming soon  |
+| Microsoft Azure  | coming soon  |
 {% endcomment %}
-| プラットフォーム                                                                        | Docker Enterprise エディション |
-|:----------------------------------------------------------------------------------------|:------------------------------:|
-| [VMware](https://success.docker.com/article/certified-infrastructures-vmware-vsphere)   |  {{ page.green-check }}        |
-| [Amazon Web Services](https://success.docker.com/article/certified-infrastructures-aws) |  {{ page.green-check }}        |
-| [Microsoft Azure](https://success.docker.com/article/certified-infrastructures-azure)   |  {{ page.green-check }}        |
-| IBM Cloud                                                                               |        Coming soon             |
-
+| プラットフォーム | Docker Enterprise エディション |
+:----------------------------------------------------------------------------------------|:-------------------------:|
+| [Amazon Web Services](..\cluster\aws.md) |  {{ page.green-check }}   |
+| VMware  |  coming soon  |
+| Microsoft Azure  | coming soon  |
 
 {% comment %}
 ## Docker Enterprise release cycles
@@ -206,39 +190,38 @@ period of three stable releases. Docker 1.13 introduced improved
 interoperability between clients and servers using different API versions,
 including dynamic feature negotiation.
 {% endcomment %}
-Docker API のバージョンは Docker プラットフォームのバージョンとは独立しています。
-API の保守においては注意深く後方互換性を維持し、API や機能の廃止に関しては慎重にゆっくりと行っています。
+Docker API のバージョンは Docker バージョンとは独立しています。
+API の保守においては注意深く下位互換性を維持し、API や機能の廃止に関しては慎重にゆっくりと行っています。
 機能の削除は、廃止予定としてから後に、3 回の安定版リリースを経た上で行うものとしています。
-Docker 1.13 introduced improved
-interoperability between clients and servers using different API versions,
-including dynamic feature negotiation.
+Docker 1.13 introduced improved interoperability
+between clients and servers using different API versions, including dynamic
+feature negotiation.
 
 {% comment %}
 ## Upgrades and support
 {% endcomment %}
 ## アップグレードとサポート
 {: #upgrades-and-support }
-
 {% comment %}
-If you're a Docker DDC or CS Engine customer, you don't need to upgrade to
-Docker Enterprise to continue to get support. We will continue to support
-customers with valid subscriptions whether the subscription covers Docker
-Enterprise or Commercially Supported Docker. You can choose to stay with your
-current deployed version, or you can upgrade to the latest Docker Enterprise
-version. For more info, see [Scope of Coverage and Maintenance Lifecycle](https://success.docker.com/Policies/Scope_of_Support).
+Docker supports Docker Enterprise minor releases for 24 months. Upgrades to the
+latest minor release of Docker Enterprise are not required, however we
+recommend staying on the latest maintenance release of the supported minor
+release you are on. Please see [Maintenance
+Lifecycle](https://success.docker.com/article/maintenance-lifecycle) for more
+details on EOL of minor and major versions of Docker Enterprise.
 {% endcomment %}
-If you're a Docker DDC or CS Engine customer, you don't need to upgrade to
-Docker Enterprise to continue to get support. We will continue to support
-customers with valid subscriptions whether the subscription covers Docker
-Enterprise or Commercially Supported Docker. You can choose to stay with your
-current deployed version, or you can upgrade to the latest Docker Enterprise
-version. For more info, see [Scope of Coverage and Maintenance Lifecycle](https://success.docker.com/Policies/Scope_of_Support).
+Docker supports Docker Enterprise minor releases for 24 months. Upgrades to the
+latest minor release of Docker Enterprise are not required, however we
+recommend staying on the latest maintenance release of the supported minor
+release you are on. Please see [Maintenance
+Lifecycle](https://success.docker.com/article/maintenance-lifecycle) for more
+details on EOL of minor and major versions of Docker Enterprise.
 
 {% comment %}
 ## Where to go next
 {% endcomment %}
-## Where to go next
 {: #where-to-go-next }
+## Where to go next
 
 {% comment %}
 - [Install Docker](/engine/installation/index.md)

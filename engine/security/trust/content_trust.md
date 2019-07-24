@@ -229,9 +229,15 @@ Hub](https://hub.docker.com/search?image_filter=official&type=image), or User
 trusted sources, with repositories and tags signed with the commands [above](#signing-images-with-docker-content-trust).
 
 Engine Signature Verification prevents the following:
-* `$ docker container run` of an unsigned image.
-* `$ docker pull` of an unsigned image.
+* `$ docker container run` of an unsigned or altered image.
+* `$ docker pull` of an unsigned or altered image.
 * `$ docker build` where the `FROM` image is not signed or is not scratch.
+
+> **Note**: The implicit pulls and runs performed by worker
+> nodes for a [Swarm service](/engine/swarm/services.md) on `$ docker service create` and
+> `$ docker service update` are also verified. Tag resolution of services
+> requires that all nodes in the Swarm including managers have content trust
+> enabled and similarly configured.
 
 DCT does not verify that a running container’s filesystem has not been altered
 from what was in the image. For example, it does not prevent a container from

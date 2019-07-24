@@ -1,4 +1,4 @@
-<!-- This file is included in Docker CE or EE installation docs for Linux. -->
+<!-- This file is included in Docker Engine - Community or EE installation docs for Linux. -->
 
 {% comment %}
 ### Install using the convenience script
@@ -9,7 +9,7 @@
 {% comment %}
 Docker provides convenience scripts at [get.docker.com](https://get.docker.com/)
 and [test.docker.com](https://test.docker.com/) for installing edge and
-testing versions of Docker CE into development environments quickly and
+testing versions of Docker Engine - Community into development environments quickly and
 non-interactively. The source code for the scripts is in the
 [`docker-install` repository](https://github.com/docker/docker-install).
 **Using these scripts is not recommended for production
@@ -17,7 +17,7 @@ environments**, and you should understand the potential risks before you use
 them:
 {% endcomment %}
 Docker では [get.docker.com](https://get.docker.com/) と [test.docker.com](https://test.docker.com/) において便利なスクリプトを提供しています。
-これは Docker CE の安定版あるいはテスト版を、開発機にすばやく対話形式をとらずにインストールするものです。
+これは Docker Engine - Community の安定版あるいはテスト版を、開発機にすばやく対話形式をとらずにインストールするものです。
 このスクリプトのソースコードは [`docker-install` リポジトリ](https://github.com/docker/docker-install)にあります。
 このスクリプトを本番環境において利用することはお勧めしません。
 またこのスクリプトの潜在的リスクについては、十分理解した上で利用してください。
@@ -54,11 +54,11 @@ Docker では [get.docker.com](https://get.docker.com/) と [test.docker.com](ht
 
 {% comment %}
 This example uses the script at [get.docker.com](https://get.docker.com/) to
-install the latest release of Docker CE on Linux. To install the latest
+install the latest release of Docker Engine - Community on Linux. To install the latest
 testing version, use [test.docker.com](https://test.docker.com/) instead. In
 each of the commands below, replace each occurrence of `get` with `test`.
 {% endcomment %}
-次の例は Linux に Docker CE の最新安定版リリースのインストールに [get.docker.com](https://get.docker.com/) のスクリプトを使います。
+次の例は Linux に Docker Engine - Community の最新安定版リリースのインストールに [get.docker.com](https://get.docker.com/) のスクリプトを使います。
 最新テスト版を使いたい場合は、代わりに [test.docker.com](https://test.docker.com/) を指定します。
 その場合はコマンド中の `get` を `test` に置き換えて実行します。
 
@@ -116,12 +116,12 @@ Remember to log out and back in for this to take effect!
 {:.warning}
 
 {% comment %}
-Docker CE is installed. It starts automatically on `DEB`-based distributions. On
+Docker Engine - Community is installed. It starts automatically on `DEB`-based distributions. On
 `RPM`-based distributions, you need to start it manually using the appropriate
 `systemctl` or `service` command. As the message indicates, non-root users can't
 run Docker commands by default.
 {% endcomment %}
-Docker CE がインストールされました。
+Docker Engine - Community がインストールされました。
 `DEB` ベースのディストリビューションでは Docker が自動的に開始されます。
 `RPM` ベースの場合は手動での実行が必要となるため、 `systemctl` か `service` のいずれか適当なものを実行します。
 上の出力メッセージに示されているように、デフォルトで非 root ユーザーは Docker コマンドを実行できません。

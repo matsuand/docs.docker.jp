@@ -1,5 +1,5 @@
 command: docker pull
-short: Pull an image or a repository from a registry
+short: レジストリからイメージまたはリポジトリを取得します。
 long: |-
   Most of your images will be created on top of a base image from the
   [Docker Hub](https://hub.docker.com) registry.
@@ -54,6 +54,16 @@ options:
   deprecated: false
   min_api_version: "1.32"
   experimental: true
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: Suppress verbose output
+  deprecated: false
+  experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false

@@ -15,9 +15,289 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](admin/install/upgrade.md) to
 upgrade your installation to the latest release.
 
+* [Version 3.2](#version-32)
 * [Version 3.1](#version-31)
 * [Version 3.0](#version-30)
 * [Version 2.2](#version-22)
+
+**Note**: For archived versions of UCP documentation, refer to [View the docs archives](https://docs.docker.com/docsarchive/).
+
+# Version 3.2
+(2019-7-22)
+
+### Security
+Refer to [UCP image vulnerabilities](https://success.docker.com/article/ucp-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates, issues, and recommendations.
+
+### New features
+
+- Group Managed Service Accounts (gMSA).
+On Windows, you can create or update a service using ```--credential-spec``` with the ```config://<config-name>``` format.
+This passes the gMSA credentials file directly to nodes before a container starts.
+- Open Security Controls Assessment Language (OSCAL).
+OSCAL API endpoints have been added in Engine and UCP. These endpoints are enabled by default.
+- Container storage interface (CSI).
+Version 1.0 of the CSI specification is now supported for container orchestrators to manage storage plugins.
+Note: As of May 2019, none of the [available CSI drivers](https://kubernetes-csi.github.io/docs/drivers.html) are production quality and are considered pre-GA.
+- Internet Small Computer System Interface (iSCSI).
+Using iSCSI, a storage admin can now provision a UCP cluster with persistent storage from which UCP end
+users can request storage resources without needing underlying infrastructure knowledge.
+- System for Cross-domain Identity Management (SCIM).
+SCIM implementation allows proactive synchronization with UCP and eliminates manual intervention for changing
+user status and group membership.
+- Support for Pod Security Policies (PSPs) within Kubernetes.
+Pod Security Policies are enabled by default in UCP 3.2 allowing platform
+operators to enforce security controls on what can run on top of Kubernetes. For
+more information see
+[Using Pod Security](/ee/ucp/kubernetes/pod-security-policies/).
+- Client Cert-based Authentication
+    - Users can now use UCP client bundles for DTR authentication.
+    - Users can now add their client certificate and key to their local Engine for performing pushes and pulls without logging in.
+    - Users can now use client certificates to make API requests to DTR instead of providing their credentials.
+
+### Enhancements
+
+#### Backup/restore
+
+- Backups no longer halt UCP containers.
+- Backup contents can now be redirected to a file instead of stdout/err.
+- You can now view information for all backups performed, including the date, status, and contents filenames. Error log information can be accessed for troubleshooting.
+
+#### Upgrade
+
+- Improved progress information for install and upgrade.
+- You can now manually control worker node upgrades.
+- User workloads no longer experience downtime during an upgrade.
+
+#### Buildkit
+
+- You can now use a UCP client bundle with buildkit.
+
+### Deprecations
+The following features are deprecated in UCP 3.2:
+
+- Collections
+    - The ability to create a nested collection of more than 2 layers deep within the root /Swarm/collection is
+    now deprecated and will not be included in future versions of the product. However, current nested collections
+    with more than 2 layers are still retained.
+    - Docker recommends a maximum of two layers when creating collections within UCP under the shared cluster
+    collection designated as /Swarm/. For example, if a production collection called /Swarm/production is created
+    under the shared cluster collection /Swarm/, only one level of nesting should be created, for
+    example, /Swarm/production/app/. See Nested collections for more details.
+- UCP `stop` and `restart`
+    - Additional upgrade functionality has been included which eliminates the need for these commands.
+- `ucp-agent-pause`
+    - `ucp-agent-pause` is no longer supported. To pause UCP reconciliation on a specific node, for example, when repairing unhealthy `etcd` or `rethinkdb` replicas, you can use swarm node labels as shown in the following example:
+    ```
+    docker node update --label-add com.docker.ucpagent-pause=true <NODE>
+    ```
+- Windows 2016 is formally deprecated from Docker Enterprise 3.0. Only non-overlay networks are supported
+on Windows 2016 in Docker Enterprise 3.0. EOL of Windows Server 2016 support will occur in Docker
+Enterprise 3.1. Upgrade to Windows Server 2019 for continued support on Docker Enterprise.
+- Support for updating the UCP config with `docker service update ucp-manager-agent --config-add <Docker config> ...`
+is deprecated and will be removed in a future release. To update the UCP config, use the `/api/ucp/config-toml`
+endpoint described in https://docs.docker.com/ee/ucp/admin/configure/ucp-configuration-file/.
+- Generating a backup from a UCP manager that has lost quorum is no longer supported. We recommend that you
+regularly schedule backups on your cluster so that you have always have a recent backup.
+Refer to [UCP backup information](/ee/admin/backup/back-up-ucp/) for detailed UCP back up information.
+
+If your cluster has lost quorum and you cannot recover it on your own, please contact Docker Support.
+
+- Browser support
+In order to optimize user experience and security, support for Internet Explorer (IE) version 11 is not provided for Windows 7 with UCP version 3.2. Docker recommends updating to a newer browser version if you plan to use UCP 3.2, or remaining on UCP 3.1.x or older until EOL of IE11 in January 2020.
+
+- Kubernetes
+
+    -  Integrated Kubernetes Ingress
+        - You can now dynamiclly deploy L7 routes for applications, scale out multi-tenant ingress for shared clusters,
+    and give applications TLS termination, path-based routing, and high-performance L7 load-balancing in a
+    centralized and controlled manner.
+
+    - Updated Kubernetes to version 1.14.
+
+        - Enhancements:
+            - PodShareProcessNamespace
+
+                - The PodShareProcessNamespace feature, available by default, configures PID namespace sharing within a pod. See [Share Process Namespace between Containers in a Pod](https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/) for more information.
+                - https://github.com/kubernetes/kubernetes/pull/66507
+            - Volume Dynamic Provisioning
+                - Combined `VolumeScheduling` and `DynamicProvisioningScheduling`.
+                - Added allowedTopologies description in kubectl.
+                - ACTION REQUIRED: The DynamicProvisioningScheduling alpha feature gate has been removed. The VolumeScheduling beta feature gate is still required for this feature. - https://github.com/kubernetes/kubernetes/pull/67432
+            - TokenRequest and TokenRequestProjection
+            - Enable these features by starting the API server with the following flags:
+                * --service-account-issuer
+                * --service-account-signing-key-file
+                * --service-account-api-audiences
+                - https://github.com/kubernetes/kubernetes/pull/67349
+        - Removed `--cadvisor-port flag` from kubelet
+
+            - ACTION REQUIRED: The cAdvisor web UI that the kubelet started using `--cadvisor-port` was removed
+        in 1.12. If cAdvisor is needed, run it via a DaemonSet.
+            - https://github.com/kubernetes/kubernetes/pull/65707
+            - Support for Out-of-tree CSI Volume Plugins (stable) with API
+
+                - Allows volume plugins to be developed out-of-tree.
+                - Not require building volume plugins (or their dependencies) into Kubernetes binaries.
+                - Not requiring direct machine access to deploy new volume plugins (drivers).
+                - https://github.com/kubernetes/enhancements/issues/178
+            - Server-side Apply leveraged by the UCP GUI for the yaml create page
+
+                - Moved "apply" and declarative object management from kubectl to the apiserver. Added "field ownership".
+                - https://github.com/kubernetes/enhancements/issues/555
+            - The PodPriority admission plugin
+
+                - For `kube-apiserver`, the `Priority` admission plugin is now enabled by default when using `--enable-admission-plugins`. If using `--admission-control` to fully specify the set of admission plugins, the `Priority` admission plugin should be added if using the `PodPriority` feature, which is enabled by default in 1.11.
+            - The priority admission plugin:
+                - Allows pod creation to include an explicit priority field if it matches the computed
+            priority (allows export/import cases to continue to work on the same cluster, between
+            clusters that match priorityClass values, and between clusters where priority is unused
+            and all pods get priority:0)
+                - Preserves existing priority if a pod update does not include a priority value and the old
+            pod did (allows POST, PUT, PUT, PUT workflows to continue to work, with the admission-set value
+            on create being preserved by the admission plugin on update)
+                - https://github.com/kubernetes/kubernetes/pull/65739
+            - Volume Topology
+
+                - Made the scheduler aware of a Pod's volume's topology constraints, such as zone or node.
+                - https://github.com/kubernetes/enhancements/issues/490
+                - Docs pr here: kubernetes/website#10736
+            - Admin RBAC role and edit RBAC roles
+                - The admin RBAC role is aggregated from edit and view.  The edit RBAC role is aggregated from a
+        separate edit and view.
+                - https://github.com/kubernetes/kubernetes/pull/66684
+            - API
+                - `autoscaling/v2beta2` and `custom_metrics/v1beta2` implement metric selectors for Object and Pods
+        metrics, as well as allow AverageValue targets on Objects, similar to External metrics.
+                - https://github.com/kubernetes/kubernetes/pull/64097
+        - Version updates
+            - Client-go libraries bump
+                - ACTION REQUIRED: the API server and client-go libraries support additional non-alpha-numeric
+    characters in UserInfo "extra" data keys. Both support extra data containing "/" characters or
+    other characters disallowed in HTTP headers.
+                - Old clients sending keys that were %-escaped by the user have their values unescaped by new API servers.
+    New clients sending keys containing illegal characters (or "%") to old API servers do not have their values unescaped.
+                - https://github.com/kubernetes/kubernetes/pull/65799
+            - audit.k8s.io API group bump
+            - The audit.k8s.io API group has been bumped to v1.
+            - Deprecated element metav1.ObjectMeta and Timestamp are removed from audit Events in v1 version.
+            - Default value of option --audit-webhook-version and --audit-log-version are changed from `audit.k8s.io/v1beta1` to `audit.k8s.io/v1`.
+            - https://github.com/kubernetes/kubernetes/pull/65891
+
+
+### Known issues
+
+- kubelets or Calico-node pods are Down
+
+    The symptom of this issue is that kubelets or Calico-node pods are down with one of the following error messages:
+    - Kubelet is unhealthy
+    - Calico-node pod is unhealthy
+
+    This is a rare issue, but there is a race condition in UCP today where Docker iptables rules get permanently deleted. This happens when Calico tries to update the iptables state using delete commands passed to iptables-restore while Docker simultaneously updates its iptables state and Calico ends up deleting the wrong rules.
+
+    Rules that are affected:
+    ```
+    /sbin/iptables --wait -I FORWARD -o docker_gwbridge -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+    /sbin/iptables --wait -I FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+    /sbin/iptables --wait -I  POSTROUTING -s 172.17.0.0/24 ! -o docker0 -j MASQUERADE
+    ```
+
+    The fix for this issue should be available as a minor version release in Calico and incorporated into UCP in a subsequent patch release.
+
+    Until then as a workaround we recommend:
+    - re-adding the above rules manually or via cron or
+    - restarting Docker
+
+- Running the engine with `"selinux-enabled": true` and installing UCP returns the following error:
+    ```
+    time="2019-05-22T00:27:54Z" level=fatal msg="the following required ports are blocked on your host: 179, 443, 2376, 6443, 6444, 10250, 12376, 12378 - 12386.  Check your firewall settings"
+    ```
+    This is due to an updated selinux context.
+    Versions affected: 18.09 or 19.03-rc3 engine on Centos 7.6 with selinux enabled.
+    Until `container-selinux-2.99` is available for CentOS7, current workaround on CentOS7 is to downgrade to `container-selinux-2.74`:
+    ```
+    $ sudo yum downgrade container-selinux-2.74-1.el7
+    ```
+- Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
+    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount
+   to a `cluster-admin` `ClusterRole`, as shown in the following example:
+       ```
+       apiVersion: rbac.authorization.k8s.io/v1
+       kind: ClusterRoleBinding
+       metadata:
+         labels:
+           subjectName: kube-system-persistent-volume-binder
+         name: kube-system-persistent-volume-binder:cluster-admin
+       roleRef:
+         apiGroup: rbac.authorization.k8s.io
+         kind: ClusterRole
+         name: cluster-admin
+       subjects:
+       - kind: ServiceAccount
+         name: persistent-volume-binder
+         namespace: kube-system
+       ```
+
+- Using iSCSI on a SLES 15 Kubernetes cluster results in failures
+  - Using Kubernetes iSCSI on SLES 15 hosts results in failures. Kubelet logs might have errors similar to the following, when there's an attempt to attach the iSCSI based persistent volume:
+  ```
+  {kubelet ip-172-31-13-214.us-west-2.compute.internal} FailedMount: MountVolume.WaitForAttach failed for volume "iscsi-4mpvj" : exit   status 127"
+  ```
+  - Reason: The failure is because the containerized kubelet in UCP does not contain the library dependency (libopeniscsiusr) for iscsiadm version 2.0.876 on SLES15.
+  - Workaround: use a swarm service to deploy this change across the cluster as follows:
+    1. Install UCP and have nodes configured as swarm workers.
+    2. Perform iSCSI initiator related configuration on the nodes.
+        - Install packages:
+        ```
+        zypper -n install open-iscsi
+        ```
+        - Modprobe the relevant kernel modules
+        ```
+        modprobe iscsi_tcp
+        ```
+        - Start the iscsi daemon
+        ```
+        service start iscsid
+        ```
+
+    3. Create a global  docker service that updates the dynamic library configuration path of the ucp-kubelet with relevant host paths. For this, use the UCP client bundle to point to the UCP cluster and run the following swarm commands:
+        ```
+        docker service create --mode=global --restart-condition none --mount   type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock mavenugo/swarm-exec:17.03.0-ce docker exec ucp-kubelet "/bin/bash" "-c" "echo /rootfs/usr/lib64 >> /etc/ld.so.conf.d/libc.conf && ldconfig"
+        4b1qxigqht0vf5y4rtplhygj8
+        overall progress: 0 out of 3 tasks
+        overall progress: 0 out of 3 tasks
+        overall progress: 0 out of 3 tasks
+        ugb24g32knzv: running
+        overall progress: 0 out of 3 tasks
+        overall progress: 0 out of 3 tasks
+        overall progress: 0 out of 3 tasks
+        overall progress: 0 out of 3 tasks
+
+        <Ctrl-C>
+        Operation continuing in background.
+        Use `docker service ps 4b1qxigqht0vf5y4rtplhygj8` to check progress.
+
+        $ docker service ps 4b1qxigqht0vf5y4rtplhygj8
+        ID                  NAME                                         IMAGE                            NODE                                DESIRED STATE       CURRENT STATE
+        ERROR               PORTS
+        bkgqsbsffsvp        hopeful_margulis.ckh79t5dot7pdv2jsl3gs9ifa   mavenugo/swarm-exec:17.03.0-ce   user-testkit-4DA6F6-sles-1   Shutdown            Complete 7 minutes ago
+        nwnur7r1mq77        hopeful_margulis.2gzhtgazyt3hyjmffq8f2vro4   mavenugo/swarm-exec:17.03.0-ce   user-testkit-4DA6F6-sles-0   Shutdown            Complete 7 minutes ago
+        uxd7uxde21gx        hopeful_margulis.ugb24g32knzvvjq9d82jbuba1   mavenugo/swarm-exec:17.03.0-ce   user
+        -testkit-4DA6F6-sles-2   Shutdown            Complete 7 minutes ago
+        ```
+
+    4. Switch cluster to run kubernetes workloads. Your cluster is now set to run iSCSI workloads.
+
+### Components
+
+| Component      | Version |
+| ----------- | ----------- |
+| UCP      | 3.2.0 |
+| Kubernetes   | 1.14.3 |
+| Calico      | 3.5.7 |
+| Interlock   | 2.4.0 |
+| Interlock NGINX proxy | 1.14.2 |
 
 # Version 3.1
 
@@ -514,7 +794,6 @@ The following features are deprecated in UCP 3.1.
 | Interlock (nginx)   | 1.13.12 |
 
 ## 3.0.11
-
 2019-05-06
 
 ### Bug fixes
@@ -1039,7 +1318,6 @@ instead of the correct image for the worker architecture.
  `<node-name>/<network-name>`.
 
 ## Version 2.2.18
-
 2019-05-06
 
 ### Bug fixes

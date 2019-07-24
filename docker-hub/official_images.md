@@ -25,10 +25,10 @@ Docker の [公式イメージ](https://hub.docker.com/search?q=&type=image&imag
 
 {% comment %}
 * Provide drop-in solutions for popular programming language runtimes, data
-  stores, and other services, similar to what a Platform-as-a-Service (PAAS)
+  stores, and other services, similar to what a Platform as a Service (PAAS)
   would offer.
 {% endcomment %}
-* 代表的なプログラミング言語環境、データストア、各種サービスといった、PAAS（Platform-as-a-Service）が提供するものにも似た、一時的な実現環境を提供します。
+* 代表的なプログラミング言語環境、データストア、各種サービスといった、PAAS（Platform as a Service）が提供するものにも似た、一時的な実現環境を提供します。
 
 {% comment %}
 * Exemplify [`Dockerfile` best practices](/engine/userguide/eng-image/dockerfile_best-practices/)
@@ -115,8 +115,8 @@ these efforts.
 {% comment %}
 ## Official Image Vulnerability Scanning
 {% endcomment %}
-## Official Image Vulnerability Scanning
 {: #official-image-vulnerability-scanning }
+## 公式イメージのぜい弱性スキャニング
 
 {% comment %}
 Each of the images in the Official Images is scanned for vulnerabilities. The results of
@@ -124,10 +124,9 @@ these security scans provide valuable information about which images contain
 security vulnerabilities, and allow you to choose images that align with your
 security standards.
 {% endcomment %}
-Each of the images in the Official Images is scanned for vulnerabilities. The results of
-these security scans provide valuable information about which images contain
-security vulnerabilities, and allow you to choose images that align with your
-security standards.
+公式イメージにある各イメージに対しては、ぜい弱性に関するスキャン処理が行われます。
+このセキュリティスキャンの結果には有用な情報が示されます。
+どのイメージにぜい弱性があるのかがわかるので、所望のセキュリティ標準を満たすイメージを選ぶことができます。
 
 {% comment %}
 To view the Docker Security Scanning results:
@@ -140,15 +139,15 @@ Docker セキュリティスキャニングの結果を見るには、以下を�
 2. Navigate to the repository of the Official Image whose security scan you want to view.
 3. Click the `Tags` tab to see a list of tags and their security scan summaries.
 {% endcomment %}
-1. Make sure you're logged in to Docker Hub.
-    You can view Official Images even while logged out, however the scan results are only available once you log in.
-2. Navigate to the repository of the Official Image whose security scan you want to view.
-3. Click the `Tags` tab to see a list of tags and their security scan summaries.
+1. Docker Hub へログインしていることを確認します。
+    公式イメージはログアウトしていても参照することができますが、スキャン結果はログインしていなければ見ることはできません。
+2. 公式イメージのリポジトリにアクセスし、セキュリティスキャン結果を参照します。
+3. `Tags` タブをクリックして、タグ一覧とそのセキュリティスキャン結果の概要を確認します。
 
 {% comment %}
 ![Official Image Tags](images/official_images-tags.png)
 {% endcomment %}
-![Official Image Tags](images/official_images-tags.png)
+![公式イメージタグ](images/official_images-tags.png)
 
 {% comment %}
 You can click into a tag's detail page to see more information about which
@@ -156,10 +155,8 @@ layers in the image and which components within the layer are vulnerable.
 Details including a link to the official CVE report for the vulnerability appear
 when you click an individual vulnerable component.
 {% endcomment %}
-You can click into a tag's detail page to see more information about which
-layers in the image and which components within the layer are vulnerable.
-Details including a link to the official CVE report for the vulnerability appear
-when you click an individual vulnerable component.
+タグの詳細ページにクリック移動すれば、イメージ内のどのレイヤに、あるいはレイヤ内のどのコンポーネントにぜい弱性があるかの詳細情報を見ることができます。
+ぜい弱性のある個々のコンポーネントをクリックすると、ぜい弱性に関する詳細が表示され、公式の CVE 報告へのリンクが示されます。
 
 {% comment %}
 ## Submitting Feedback for Official Images
@@ -181,8 +178,8 @@ questions should be directed to `#docker-library` on Freenode IRC.
 {% comment %}
 ## Creating an Official Image
 {% endcomment %}
-## Creating an Official Image
 {: #creating-an-official-image }
+## 公式イメージの生成
 
 {% comment %}
 From a high level, an Official Image starts out as a proposal in the form
@@ -193,7 +190,6 @@ requirements are documented in the following GitHub repositories:
 詳細な具体的な提案のあり方については、以下の GitHub リポジトリに示されています。
 
 * [docker-library/official-images](https://github.com/docker-library/official-images)
-* [docker-library/official-images](https://github.com/docker-library/official-images)
 
 * [docker-library/docs](https://github.com/docker-library/docs)
 
@@ -202,9 +198,8 @@ The Official Images team, with help from community contributors, formally
 review each proposal and provide feedback to the author. This initial review
 process may require a bit of back-and-forth before the proposal is accepted.
 {% endcomment %}
-The Official Images team, with help from community contributors, formally
-review each proposal and provide feedback to the author. This initial review
-process may require a bit of back-and-forth before the proposal is accepted.
+公式イメージの担当チームは、コミュニティに貢献する方々からの協力も得ながら、正式に各提案をレビューし、提案者へのフィードバックを行っています。
+ただし提案を受け付けてからレビューを開始するまでには、多少もたつくことがあるかもしれません。
 
 {% comment %}
 There are also subjective considerations during the review process. These
@@ -214,12 +209,10 @@ Official Image is "generally useful" to the larger Python developer
 community, whereas an obscure text adventure game written in Python last week is
 not.
 {% endcomment %}
-There are also subjective considerations during the review process. These
-subjective concerns boil down to the basic question: "is this image generally
-useful?" For example, the [python](https://hub.docker.com/_/python/)
-Official Image is "generally useful" to the larger Python developer
-community, whereas an obscure text adventure game written in Python last week is
-not.
+レビューを行っていく際には、主観的な議論となることもあります。
+そのような主観的な疑問は、「このイメージは汎用的に使えますか？」といった単純な質問に帰着します。
+たとえば [python](https://hub.docker.com/_/python/) の公式イメージは、幅広い Python 開発コミュニティにとって「汎用的に使えます」と言えます。
+ところが「先週作った Python のアドベンチャーゲーム」といったあいまいな文章では、何も答えられません。
 
 {% comment %}
 Once a new proposal is accepted, the author is responsible for keeping

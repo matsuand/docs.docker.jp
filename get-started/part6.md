@@ -1,7 +1,7 @@
 ---
 title: "はじめよう 6部: アプリのデプロイ"
 keywords: deploy, production, datacenter, cloud, aws, azure, provider, admin, enterprise
-description: Docker CE または EE を使ってアプリを本番環境にデプロイする。
+description: Docker Engine - Community または EE を使ってアプリを本番環境にデプロイする。
 ---
 {% include_relative nav.html selected="6" %}
 

@@ -786,9 +786,10 @@ Docker コンテナー名はユニークである必要があります。
 ### credential_spec
 
 {% comment %}
-> **Note**: this option was added in v3.3.
+> **Note**: This option was added in v3.3. Using group Managed Service Account (gMSA) configurations with compose files is supported in Compose version 3.8.
 {% endcomment %}
 > **メモ**: このオプションは v3.3 で追加されました。
+> Compopse ファイルにおける group Managed Service Account (gMSA) の設定は Compose バージョン 3.8 においてサポートされています。
 
 {% comment %}
 Configure the credential spec for managed service account. This option is only
@@ -832,6 +833,30 @@ in the registry:
 ```yaml
 credential_spec:
   registry: my-credential-spec
+```
+
+{% comment %}
+#### Example gMSA configuration
+{% endcomment %}
+{: #example-gmsa-configuration }
+#### gMSA の設定例
+{% comment %}
+When configuring a gMSA credential spec for a service, you only need
+to specify a credential spec with `config`, as shown in the following example:
+{% endcomment %}
+サービスに対して credential spec における gMSA を設定する場合、credential spec の `config` を設定するだけです。
+その例を以下に示します。
+```
+version: "3.8"
+services:
+  myservice:
+    image: myimage:latest
+    credential_spec:
+      config: my_credential_spec
+
+configs:
+  my_credentials_spec:
+    file: ./my-credential-spec.json|
 ```
 
 ### depends_on

@@ -1,33 +1,33 @@
 ---
-description: Debian 上に Docker CE をインストールする手順を説明。
+description: Debian 上に Docker Engine - Community をインストールする手順を説明。
 keywords: requirements, apt, installation, debian, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/debian/
 - /engine/installation/linux/raspbian/
 - /engine/installation/linux/debian/
 - /engine/installation/linux/docker-ce/debian/
-title: Docker CE の入手（Debian 向け）
+title: Docker Engine - Community の入手（Debian 向け）
 toc_max: 4
 ---
 
 {% comment %}
-To get started with Docker CE on Debian, make sure you
+To get started with Docker Engine - Community on Debian, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ce).
 {% endcomment %}
-Debian 向けに Docker CE を始めるには、[前提条件を満たしているか](#prerequisites)を確認してから、[Docker をインストール](#install-docker-ce)してください。
+Debian 向けに Docker Engine - Community を始めるには、[前提条件を満たしているか](#prerequisites)を確認してから、[Docker をインストール](#install-docker-ce)してください。
 
 {% comment %}
 ## Prerequisites
 {% endcomment %}
-## 前提条件
 {: #prerequisites }
+## 前提条件
 
 {% comment %}
 ### Docker EE customers
 {% endcomment %}
-### Docker EE を利用する方は
 {: #docker-ee-customers }
+### Docker EE を利用する方は
 
 {% comment %}
 Docker EE is not supported on Debian. For a list of supported operating systems
@@ -40,28 +40,28 @@ Docker EE は Debian ではサポートされていません。
 {% comment %}
 ### OS requirements
 {% endcomment %}
-### OS 要件
 {: #os-requirements }
+### OS 要件
 
 {% comment %}
-To install Docker CE, you need the 64-bit version of one of these Debian or
+To install Docker Engine - Community, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 {% endcomment %}
-Docker CE をインストールするには、Debian か Raspbian の 64 ビットバージョンが必要です。
+Docker Engine - Community をインストールするには、Debian か Raspbian の 64 ビットバージョンが必要です。
 
 - Buster 10
 - Stretch 9 (安定版) / Raspbian Stretch
 
 {% comment %}
-Docker CE is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
+Docker Engine - Community is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
 {% endcomment %}
-Docker CE は `x86_64`（または `amd64`）、`armhf`、`arm64` の各アーキテクチャーをサポートします。
+Docker Engine - Community は `x86_64`（または `amd64`）、`armhf`、`arm64` の各アーキテクチャーをサポートします。
 
 {% comment %}
 ### Uninstall old versions
 {% endcomment %}
-### 古いバージョンのアンインストール
 {: #uninstall-old-versions }
+### 古いバージョンのアンインストール
 
 {% comment %}
 Older versions of Docker were called `docker`, `docker.io `, or `docker-engine`.
@@ -81,21 +81,21 @@ It's OK if `apt-get` reports that none of these packages are installed.
 
 {% comment %}
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker CE package is now called `docker-ce`.
+networks, are preserved. The Docker Engine - Community package is now called `docker-ce`.
 {% endcomment %}
 `/var/lib/docker/` にはイメージ、コンテナー、ボリューム、ネットワークが含まれていて、それは保持されたまま残ります。
-なお Docker CE パッケージは、今は `docker-ce` と呼ばれます。
+なお Docker Engine - Community パッケージは、今は `docker-ce` と呼ばれます。
 
 {% comment %}
-## Install Docker CE
+## Install Docker Engine - Community
 {% endcomment %}
-## Docker CE のインストール
-{: #install-docker-ce }
+{: #install-docker-engine-community }
+## Docker Engine - Community のインストール
 
 {% comment %}
-You can install Docker CE in different ways, depending on your needs:
+You can install Docker Engine - Community in different ways, depending on your needs:
 {% endcomment %}
-Docker CE のインストール方法はいくつかあります。
+Docker Engine - Community のインストール方法はいくつかあります。
 必要に応じて選んでください。
 
 {% comment %}
@@ -130,15 +130,15 @@ Docker CE のインストール方法はいくつかあります。
 {% comment %}
 ### Install using the repository
 {% endcomment %}
-### リポジトリを利用したインストール
 {: #install-using-the-repository }
+### リポジトリを利用したインストール
 
 {% comment %}
-Before you install Docker CE for the first time on a new host machine, you need
+Before you install Docker Engine - Community for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker
 from the repository.
 {% endcomment %}
-新しいホストマシンに Docker CE を初めてインストールするときは、その前に Docker リポジトリをセットアップしておくことが必要です。
+新しいホストマシンに Docker Engine - Community を初めてインストールするときは、その前に Docker リポジトリをセットアップしておくことが必要です。
 これを行った後に、リポジトリからの Docker のインストールやアップグレードができるようになります。
 
 {% comment %}
@@ -155,8 +155,8 @@ from the repository.
 {% comment %}
 #### Set up the repository
 {% endcomment %}
-#### リポジトリのセットアップ
 {: #set-up-the-repository }
+#### リポジトリのセットアップ
 
 {% assign download-url-base = "https://download.docker.com/linux/debian" %}
 
@@ -272,10 +272,10 @@ from the repository.
     </div> <!-- tab-content -->
 
 {% comment %}
-#### Install Docker CE
+#### Install Docker Engine - Community
 {% endcomment %}
-#### Docker CE のインストール
-{: #install-docker-ce }
+{: #install-docker-engine-community }
+#### Docker Engine - Community のインストール
 
 {% comment %}
 > **Note**: This procedure works for Debian on `x86_64` / `amd64`, Debian ARM,
@@ -295,9 +295,9 @@ from the repository.
     ```
 
 {% comment %}
-2.  Install the _latest version_ of Docker CE and containerd, or go to the next step to install a specific version:
+2.  Install the _latest version_ of Docker Engine - Community and containerd, or go to the next step to install a specific version:
 {% endcomment %}
-2.  Docker CE と containerd の最新版をインストールします。あるいは次の手順に行って、特定のバージョンをインストールします。
+2.  Docker Engine - Community と containerd の最新版をインストールします。あるいは次の手順に行って、特定のバージョンをインストールします。
 
     ```bash
     $ sudo apt-get install docker-ce docker-ce-cli containerd.io
@@ -318,9 +318,9 @@ from the repository.
     > 安定した版が必要である場合には、適切でない場合があります。
 
 {% comment %}
-3.  To install a _specific version_ of Docker CE, list the available versions in the repo, then select and install:
+3.  To install a _specific version_ of Docker Engine - Community, list the available versions in the repo, then select and install:
 {% endcomment %}
-3.  特定バージョンの Docker CE をインストールする場合は、リポジトリにある利用可能なバージョンの一覧を確認し、いずれかを選んでインストールします。
+3.  特定バージョンの Docker Engine - Community をインストールする場合は、リポジトリにある利用可能なバージョンの一覧を確認し、いずれかを選んでインストールします。
 
     {% comment %}
     a. List the versions available in your repo:
@@ -349,10 +349,10 @@ from the repository.
     ```
 
 {% comment %}
-4.  Verify that Docker CE is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
     image.
 {% endcomment %}
-4.  Docker CE が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
+4.  Docker Engine - Community が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
 
     ```bash
     $ sudo docker run hello-world
@@ -366,29 +366,29 @@ from the repository.
     コンテナーが起動すると、メッセージを表示して終了します。
 
 {% comment %}
-Docker CE is installed and running. The `docker` group is created but no users
+Docker Engine - Community is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
 Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 {% endcomment %}
-Docker CE がインストールされ、実行できました。
+Docker Engine - Community がインストールされ、実行できました。
 グループ `docker` が生成されていますが、このグループにはまだユーザーが存在していない状態です。
 Docker コマンドの実行には ``sudo`` が必要になります。
 続いて [Linux のインストール後](/engine/installation/linux/linux-postinstall.md)に進み、非特権ユーザーでも Docker コマンドが実行できるように、またその他の追加の設定について見ていきます。
 
 {% comment %}
-#### Upgrade Docker CE
+#### Upgrade Docker Engine - Community
 {% endcomment %}
-#### Docker CE のアップグレード
-{: #upgrade-docker-ce }
+{: #upgrade-docker-engine-community }
+#### Docker Engine - Community のアップグレード
 
 {% comment %}
-To upgrade Docker CE, first run `sudo apt-get update`, then follow the
+To upgrade Docker Engine - Community, first run `sudo apt-get update`, then follow the
 [installation instructions](#install-docker-ce), choosing the new version you want
 to install.
 {% endcomment %}
-Docker CE をアップグレードするには、まず `sudo apt-get update` を実行します。
+Docker Engine - Community をアップグレードするには、まず `sudo apt-get update` を実行します。
 そして[インストール手順](#install-docker-ce)に従って、インストールしたい新たなバージョンを選んでください。
 
 {% comment %}
@@ -398,21 +398,22 @@ Docker CE をアップグレードするには、まず `sudo apt-get update` �
 {: #install-from-a-package }
 
 {% comment %}
-If you cannot use Docker's repository to install Docker CE, you can download the
+If you cannot use Docker's repository to install Docker Engine - Community, you can download the
 `.deb` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker.
 {% endcomment %}
-Docker リポジトリを利用した Docker インストールができない場合は、目的とするリリースの `.deb` ファイルをダウンロードして、手動でインストールする方法があります。この場合 Docker をアップグレードするには、毎回新たな `.deb` ファイルをダウンロードして利用することになります
+Docker リポジトリを利用した Docker Engine - Community のインストールができない場合は、目的とするリリースの `.deb` ファイルをダウンロードして、手動でインストールする方法があります。
+この場合 Docker をアップグレードするには、毎回新たな `.deb` ファイルをダウンロードして利用することになります
 
 {% comment %}
 1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" class="_" },
     choose your Debian version, browse to `pool/stable/`, choose `amd64`,
-    `armhf`, or `arm64` and download the `.deb` file for the Docker CE version
+    `armhf`, or `arm64` and download the `.deb` file for the Docker Engine - Community version
     you want to install.
 {% endcomment %}
 1.  [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/){: target="_blank" class="_" }
     にアクセスして、インストールしたい Debian バージョンを選びます。
-    そして `pool/stable/` にアクセスし、`amd64`、`armhf`、`arm64` のいずれかを選び、インストールしたい `.deb` ファイルをダウンロードします。
+    そして `pool/stable/` にアクセスし、`amd64`、`armhf`、`arm64` のいずれかを選び、インストールしたいバージョンの Docker Engine - Community に対応する `.deb` ファイルをダウンロードします。
 
     {% comment %}
     > **Note**: To install a **nightly**  package, change the word
@@ -426,10 +427,10 @@ Docker リポジトリを利用した Docker インストールができない�
     > [**最新版**と**テスト版**チャンネルを学ぶにはこちら](/install/index.md)。
 
 {% comment %}
-2.  Install Docker CE, changing the path below to the path where you downloaded
+2.  Install Docker Engine - Community, changing the path below to the path where you downloaded
     the Docker package.
 {% endcomment %}
-2.  Docker CE をインストールします。
+2.  Docker Engine - Community をインストールします。
     以下に示すパス部分は、Docker パッケージをダウンロードしたパスに書き換えます。
 
     ```bash
@@ -442,10 +443,10 @@ Docker リポジトリを利用した Docker インストールができない�
     Docker デーモンは自動的に起動します。
 
 {% comment %}
-3.  Verify that Docker CE is installed correctly by running the `hello-world`
+3.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
     image.
 {% endcomment %}
-3.  Docker CE が正しくインストールされているのを確認するため `hello-world` イメージを実行します。
+3.  Docker Engine - Community が正しくインストールされているのを確認するため `hello-world` イメージを実行します。
 
     ```bash
     $ sudo docker run hello-world
@@ -459,41 +460,41 @@ Docker リポジトリを利用した Docker インストールができない�
     コンテナーが起動すると、メッセージを表示して終了します。
 
 {% comment %}
-Docker CE is installed and running. The `docker` group is created but no users
+Docker Engine - Community is installed and running. The `docker` group is created but no users
 are added to it. You need to use `sudo` to run Docker commands.
 Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
 to allow non-privileged users to run Docker commands and for other optional
 configuration steps.
 {% endcomment %}
-Docker CE がインストールされ、実行できました。
+Docker Engine - Community がインストールされ、実行できました。
 グループ `docker` が生成されていますが、このグループにはまだユーザーが存在していない状態です。
 Docker コマンドの実行には ``sudo`` が必要になります。
 続いて [Linux のインストール後](/engine/installation/linux/linux-postinstall.md)に進み、非特権ユーザーでも Docker コマンドが実行できるように、またその他の追加の設定について見ていきます。
 
 {% comment %}
-#### Upgrade Docker CE
+#### Upgrade Docker Engine - Community
 {% endcomment %}
-#### Docker CE のアップグレード
-{: #upgrade-docker-ce }
+{: #upgrade-docker-engine-community }
+#### Docker Engine - Community のアップグレード
 
 {% comment %}
-To upgrade Docker CE, download the newer package file and repeat the
+To upgrade Docker Engine - Community, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), pointing to the new file.
 {% endcomment %}
-Docker CE をアップグレードするには、[インストール手順](#install-from-a-package)に従って、インストールしたい新たなバージョンを選んでください。
+Docker Engine - Community をアップグレードするには、[インストール手順](#install-from-a-package)に従って、インストールしたい新たなバージョンを選んでください。
 
 {% include install-script.md %}
 
 {% comment %}
-## Uninstall Docker CE
+## Uninstall Docker Engine - Community
 {% endcomment %}
-## Docker CE のアンインストール
-{: #uninstall-docker-ce }
+{: #uninstall-docker-engine-community }
+## Docker Engine - Community のアンインストール
 
 {% comment %}
-1.  Uninstall the Docker CE package:
+1.  Uninstall the Docker Engine - Community package:
 {% endcomment %}
-1. the Docker CE パッケージをアンインストールします。
+1. the Docker Engine - Community パッケージをアンインストールします。
 
     ```bash
     $ sudo apt-get purge docker-ce
@@ -519,8 +520,8 @@ You must delete any edited configuration files manually.
 {% comment %}
 ## Next steps
 {% endcomment %}
-## 次のステップ
 {: #next-steps }
+## 次のステップ
 
 {% comment %}
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)

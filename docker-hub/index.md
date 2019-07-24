@@ -92,7 +92,7 @@ redirect_from:
 [Docker Hub](https://hub.docker.com) は、開発チームに向けて Docker のコンテナーイメージを検索したり共有したりするために Docker が提供しているサービスの 1 つです。
 主な機能として以下があります。
 * [リポジトリ](/docker-hub/repos.md): コンテナーイメージのプッシュ、プルを行います。
-* [開発チームや組織](/docker-hub/orgs.md): コンテナーイメージを配するプライベートリポジトリへのアクセスを管理します。
+* [チームと組織](/docker-hub/orgs.md): コンテナーイメージを配するプライベートリポジトリへのアクセスを管理します。
 * [公式イメージ](/docker-hub/official_images.md): Docker が提供している高品質のコンテナーイメージをプルして利用します。
 * [開発提供イメージ](/docker-hub/publish/customer_faq.md): 外部ベンダーによって提供されている高品質のコンテナーイメージをプルして利用します。
   認定されているイメージであれば、Docker Enterprise との互換性が保証されサポートされます。

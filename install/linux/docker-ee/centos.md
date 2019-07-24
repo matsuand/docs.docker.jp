@@ -89,13 +89,13 @@ Docker EE 17.06.2-ee-5 およびこれ以上においては、`overlay2` の利�
 {: #uninstall-old-docker-versions }
 
 {% comment %}
-The Docker EE package is called `docker-ee`. Older versions were called `docker` or `docker-engine`. Uninstall all older versions and associated dependencies. The contents of `/var/lib/docker/` are preserved, including images, containers, volumes, and networks. If you are upgrading from Docker CE to Docker EE, remove the Docker CE package as well.
+The Docker EE package is called `docker-ee`. Older versions were called `docker` or `docker-engine`. Uninstall all older versions and associated dependencies. The contents of `/var/lib/docker/` are preserved, including images, containers, volumes, and networks. If you are upgrading from Docker Engine - Community to Docker EE, remove the Docker Engine - Community package as well.
 {% endcomment %}
 Docker EE パッケージは `docker-ee` という名称です。
 古いバージョンでは `docker` あるいは `docker-engine` というものでした。
 古いバージョンと関連する依存パッケージはすべてアンインストールします。
 `/var/lib/docker/` にはイメージ、コンテナー、ボリューム、ネットワークが含まれていて、それは保持されたまま残ります。
-Docker CE から Docker EE へのアップグレードを行っている場合は、Docker CE パッケージも同じく削除します。
+Docker Engine - Community から Docker EE へのアップグレードを行っている場合は、Docker Engine - Community パッケージも同じく削除します。
 
 ```bash
 $ sudo yum remove docker \

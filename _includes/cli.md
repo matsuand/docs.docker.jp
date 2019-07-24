@@ -2,6 +2,10 @@
 {% capture dockerBaseDesc %}The base command for the Docker CLI.{% endcapture %}
 {% if include.datafolder and include.datafile %}
 
+{% comment %}
+## Description
+{% endcomment %}
+{: #description }
 ## 説明
 
 {% if include.datafile=="docker" %}<!-- docker.yaml is textless, so override -->
@@ -37,6 +41,8 @@ your client and daemon API versions.
 > To enable experimental features on the Docker daemon, edit the
 > [daemon.json](/engine/reference/commandline/dockerd.md#daemon-configuration-file)
 > and set `experimental` to `true`.
+>
+> {% include experimental.md %}
 {: .important }
 
 {% endif %}
@@ -49,6 +55,8 @@ your client and daemon API versions.
 > To enable experimental features in the Docker CLI, edit the
 > [config.json](/engine/reference/commandline/cli.md#configuration-files)
 > and set `experimental` to `enabled`.
+>
+> {% include experimental.md %}
 {: .important }
 
 {% endif %}
@@ -69,9 +77,10 @@ your client and daemon API versions.
 
 {% if site.data[include.datafolder][include.datafile].usage %}
 
-<!--
+{% comment %}
 ## Usage
--->
+{% endcomment %}
+{: #usage }
 ## 利用方法
 
 ```none
@@ -85,9 +94,10 @@ your client and daemon API versions.
   {% else %}
     {% assign alloptions = site.data[include.datafolder][include.datafile].options %}
   {% endif %}
-<!--
+{% comment %}
 ## Options
--->
+{% endcomment %}
+{: #options }
 ## オプション
 
 <table>
@@ -130,9 +140,10 @@ your client and daemon API versions.
 
 {% if site.data[include.datafolder][include.datafile].cname %}
 
-<!--
+{% comment %}
 ## Child commands
--->
+{% endcomment %}
+{: #child-commands }
 ## 下位コマンド
 
 <table>
@@ -175,6 +186,11 @@ your client and daemon API versions.
   {% capture parentDesc %}{{ site.data[include.datafolder][parentdatafile].short }}{% endcapture %}
 {% endif %}
 
+{% comment %}
+| Command | Description |
+| ------- | ----------- |
+| [{{ site.data[include.datafolder][include.datafile].pname }}]({{ parentfile }}) | {{ parentDesc }}|
+{% endcomment %}
 | コマンド | 説明        |
 | -------- | ----------- |
 | [{{ site.data[include.datafolder][include.datafile].pname }}]({{ parentfile }}) | {{ parentDesc }}|
@@ -184,9 +200,10 @@ your client and daemon API versions.
 
 {% unless site.data[include.datafolder][include.datafile].pname == "docker" or site.data[include.datafolder][include.datafile].pname == "dockerd" or include.datafile=="docker" %}
 
-<!--
+{% comment %}
 ## Related commands
--->
+{% endcomment %}
+{: #related-commands }
 ## 関連コマンド
 
 <table>
@@ -215,9 +232,10 @@ your client and daemon API versions.
 
 {% unless site.data[include.datafolder][include.datafile].long == site.data[include.datafolder][include.datafile].short %}
 
-<!--
+{% comment %}
 ## Extended description
--->
+{% endcomment %}
+{: #extended-description }
 ## 追加説明
 
 {{ site.data[include.datafolder][include.datafile].long }}
@@ -226,9 +244,10 @@ your client and daemon API versions.
 
 {% if site.data[include.datafolder][include.datafile].examples %}
 
-<!--
+{% comment %}
 ## Examples
--->
+{% endcomment %}
+{: #examples }
 ## 利用例
 
 {{ site.data[include.datafolder][include.datafile].examples }}

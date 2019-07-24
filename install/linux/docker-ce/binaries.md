@@ -1,7 +1,7 @@
 ---
 description: Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments.
 keywords: binaries, installation, docker, documentation, linux
-title: Docker CE の入手（バイナリモジュール）
+title: Docker Engine - Community のインストール（バイナリモジュール）
 redirect_from:
 - /engine/installation/binaries/
 - /engine/installation/linux/docker-ce/binaries/
@@ -167,12 +167,12 @@ SELinux や AppArmor を設定し有効にする手順については、各 Linu
     [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/)
     (or change `stable` to `nightly` or `test`),
     choose your hardware platform, and download the `.tgz` file relating to the
-    version of Docker CE you want to install.
+    version of Docker Engine - Community you want to install.
 {% endcomment %}
 1.  スタティックバイナリのアーカイブをダウンロードします。
     [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/) へ行き、対応するハードウェアプラットフォーム向けのものを選びます。
     （`stable` の部分は必要に応じて `nightly` や `test` とします。）
-    必要としている Docker CE のバージョンに対応づいた `.tgz` ファイルをダウンロードします。
+    必要としている Docker Engine - Community のバージョンに対応づいた `.tgz` ファイルをダウンロードします。
 
 {% comment %}
 2.  Extract the archive using the `tar` utility. The `dockerd` and `docker`
@@ -247,13 +247,13 @@ macOS のバイナリには Docker クライアントのみが提供されます
 1.  Download the static binary archive. Go to
     [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/),
     (or change `stable` to `nightly` or `test`),
-    and download the `.tgz` file relating to the version of Docker CE you want
+    and download the `.tgz` file relating to the version of Docker Engine - Community you want
     to install.
 {% endcomment %}
 1.  スタティックバイナリのアーカイブをダウンロードします。
     [https://download.docker.com/mac/static/stable/x86_64/](https://download.docker.com/mac/static/stable/x86_64/) へ行きます。
     （`stable` の部分は必要に応じて `nightly` や `test` とします。）
-    必要としている Docker CE のバージョンに対応づいた `.tgz` ファイルをダウンロードします。
+    必要としている Docker Engine - Community のバージョンに対応づいた `.tgz` ファイルをダウンロードします。
 
 {% comment %}
 2.  Extract the archive using the `tar` utility. The `docker` binary is
@@ -305,12 +305,12 @@ macOS のバイナリには Docker クライアントのみが提供されます
 {: #upgrade-static-binaries }
 
 {% comment %}
-To upgrade your manual installation of Docker CE, first stop any
+To upgrade your manual installation of Docker Engine - Community, first stop any
 `dockerd` or `dockerd.exe`  processes running locally, then follow the
 regular installation steps to install the new version on top of the existing
 version.
 {% endcomment %}
-Docker CE を手動によりインストールしていて、これをアップデートする場合は、まずローカルで起動させている `dockerd` あるいは `dockerd.exe` のプロセスをすべて終了させます。
+Docker Engine - Community を手動によりインストールしていて、これをアップデートする場合は、まずローカルで起動させている `dockerd` あるいは `dockerd.exe` のプロセスをすべて終了させます。
 そして通常の手順により新しいバージョンをインストールします。
 
 {% comment %}

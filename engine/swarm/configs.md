@@ -90,6 +90,10 @@ Docker 17.06 またはそれ以上には、Windows コンテナーに対する c
 - Windows コンテナーを利用するサービスが生成されるとき、UID、GID を指定するオプションやモードは configs においてサポートされません。
   configs は現在のところ、コンテナー内の administrators か `system` アクセス可能なユーザーのみがアクセス可能であるからです。
 
+- On Windows, create or update a service using `--credential-spec` with the `config://<config-name>` format.
+This passes the gMSA credentials file directly to nodes before a container starts. No gMSA credentials are written
+to disk on worker nodes. For more information, refer to [Deploy services to a swarm](/engine/swarmservices/).
+
 {% comment %}
 ## How Docker manages configs
 {% endcomment %}

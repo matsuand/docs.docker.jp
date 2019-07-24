@@ -1,7 +1,7 @@
 ---
-title: Docker CE について
+title: Docker Engine - Community について
 description: インストール方法を一覧列記。
-keywords: docker, installation, install, docker ce, docker ee, docker editions, stable, edge
+keywords: docker, installation, install, Docker Engine - Community, Docker Engine - Enterprise, docker editions, stable, edge
 redirect_from:
 - /installation/
 - /engine/installation/linux/
@@ -18,12 +18,12 @@ redirect_from:
 ---
 
 {% comment %}
-Docker Community Edition (CE) is ideal for developers and small
+Docker Engine - Community is ideal for developers and small
 teams looking to get started with Docker and experimenting with container-based
-apps. Docker CE has three types of update channels, **stable**, **test**, and **nightly**:
+apps. Docker Engine - Community has three types of update channels, **stable**, **test**, and **nightly**:
 {% endcomment %}
-Docker Community エディション（Community Edition; CE）は個人の開発者や小さな開発チームに向けたものであり、Docker をはじめようとしたり、コンテナーベースのアプリケーションを試そうとしたりする方に適しています。
-Docker CE には更新チャネルとして **安定版**（stable）、**テスト版**（test）、**最新版**（nightly）の 3 つがあります。
+Docker Engine - Community は個人の開発者や小さな開発チームに向けたものであり、Docker をはじめようとしたり、コンテナーベースのアプリケーションを試そうとしたりする方に適しています。
+Docker Engine - Community  には更新チャネルとして **安定版**（stable）、**テスト版**（test）、**最新版**（nightly）の 3 つがあります。
 
 {% comment %}
 * **Stable** gives you latest releases for general availability.
@@ -35,23 +35,17 @@ Docker CE には更新チャネルとして **安定版**（stable）、**テス
 * **最新版**（nightly）は、次のメジャーリリースに向けての開発途上の最新ビルド版です。
 
 {% comment %}
-For more information about Docker CE, see
-[Docker Community Edition](https://www.docker.com/community-edition/){: target="_blank" class="_" }.
-{% endcomment %}
-Docker CE についての詳細は [Docker Community エディション](https://www.docker.com/community-edition/){: target="_blank" class="_" } を参照してください。
-
-{% comment %}
 ## Releases
 {% endcomment %}
-## リリース
 {: #releases }
+## リリース
 
 {% comment %}
-For the Docker CE engine, the open
+For the Docker Engine - Community engine, the open
 repositories [Docker Engine](https://github.com/docker/engine) and
 [Docker Client](https://github.com/docker/cli) apply.
 {% endcomment %}
-Docker CE エンジンには、[Docker Engine](https://github.com/docker/engine) と
+Docker Engine - Community エンジンには、[Docker Engine](https://github.com/docker/engine) と
 [Docker Client](https://github.com/docker/cli) を提供するオープンリポジトリがあります。
 
 {% comment %}
@@ -80,23 +74,23 @@ place as needed to address bug fixes during its support cycle.
 その年月リリースに対するパッチのリリースは必要に応じて行われ、年月リリースのサイクルの合間のバグフィックスとして提供されます。
 
 {% comment %}
-Docker CE binaries for a release are available on [download.docker.com](https://download.docker.com/)
-as packages for the supported operating systems. Docker EE binaries are
+Docker Engine - Community binaries for a release are available on [download.docker.com](https://download.docker.com/)
+as packages for the supported operating systems. Docker Engine - Enterprise binaries are
 available on the [Docker Hub](https://hub.docker.com/) for the supported operating systems. The
 release channels are available for each of the year-month releases and
 allow users to "pin" on a year-month release of choice. The release
 channel also receives patch releases when they become available.
 {% endcomment %}
-Docker CE のバイナリリリースは [download.docker.com](https://download.docker.com/) から、サポートするオペレーティングシステム向けのパッケージとして提供されます。
-Docker EE のバイナリリリースは [Docker Hub](https://hub.docker.com/) から、サポートするオペレーティングシステム向けに提供されます。
+Docker Engine - Community のバイナリリリースは [download.docker.com](https://download.docker.com/) から、サポートするオペレーティングシステム向けのパッケージとして提供されます。
+Docker Engine - Enterprise のバイナリリリースは [Docker Hub](https://hub.docker.com/) から、サポートするオペレーティングシステム向けに提供されます。
 リリースチャネルは、個々の年月リリースを提供するものなので、年月リリースを選びやすくしています。
 リリースチャネルはまた、パッチリリースが提供された際に、そのパッチリリースを得ることもできます。
 
 {% comment %}
 ### Nightly builds
 {% endcomment %}
-### 最新版
 {: #nightly-builds }
+### 最新版
 
 {% comment %}
 Nightly builds are created once per day from the master branch. The version
@@ -190,35 +184,31 @@ test channel.
 テストチャネルについても同様です。
 
 {% comment %}
-### Relationship between CE and EE code
+### Relationship between Docker Engine - Community and Docker Engine - Enterprise code
 {% endcomment %}
-### Docker CE と EE のコード関係
-{: #relationship-between-ce-and-ee-code }
+### Docker Engine - Community と Docker Engine - Enterprise のコード関係
+{: #relationship-between-docker-engine-community-and-docker-engine-enterprise-code }
 
 {% comment %}
-For a given year-month release, Docker releases both CE and EE
-variants concurrently. EE is a superset of the code delivered in
-CE. Docker maintains publicly visible repositories for the CE code
-as well as private repositories for the EE code. Automation (a bot)
-is used to keep the branches between CE and EE in sync so as features
-and fixes are merged on the various branches in the CE repositories
-(upstream), the corresponding EE repositories and branches are kept
+For a given year-month release, Docker releases both Docker Engine - Community and Docker Engine - Enterprise variants concurrently. Docker Engine - Enterprise is a superset of the code delivered in Docker Engine - Community. Docker maintains publicly visible repositories for the Docker Engine - Community code
+as well as private repositories for the Docker Engine - Enterprise code. Automation (a bot) is used to keep the branches between Docker Engine - Community and Docker Engine - Enterprise in sync so as features
+and fixes are merged on the various branches in the Docker Engine - Community repositories (upstream), the corresponding Docker Engine - Enterprise repositories and branches are kept
 in sync (downstream). While Docker and its partners make every effort
-to minimize merge conflicts between CE and EE, occasionally they will
-happen, and Docker will work hard to resolve them in a timely fashion.
+to minimize merge conflicts between Docker Engine - Community and Docker Engine - Enterprise, occasionally they will happen, and Docker will work hard to resolve them in a timely fashion.
 {% endcomment %}
-各年月のリリース時には、Docker CE、Docker EE の双方が同時にリリースされます。
-EE は CE の提供コードの上位セットです。
-Docker では、CE のコードをどなたもが見ることができる公開リポジトリ上で管理していますが、EE コードに対してはプライベートリポジトリを管理しています。CE と EE 間にあるブランチは、自動的に（bot を用いて）同期が取られています。
-いろいろなブランチ上における機能や修正が CE リポジトリ上でマージされ（アップストリーム）、対応する EE リポジトリやブランチが同期されます（ダウンストリーム）。
-Docker や開発パートナーは、CE と EE 間のマージ時の衝突をできるだけ少なくするように努めています。
+各年月のリリース時には、Docker Engine - Community、Docker Engine - Enterprise の双方が同時にリリースされます。
+Docker Engine - Enterprise は Docker Engine - Community の提供コードの上位セットです。
+Docker では、Engine - Community のコードをどなたもが見ることができる公開リポジトリ上で管理していますが、Engine - Enterprise コードに対してはプライベートリポジトリを管理しています。
+Engine - Community と Engine - Enterprise 間にあるブランチは、自動的に（bot を用いて）同期が取られています。
+いろいろなブランチ上における機能や修正が Engine - Community リポジトリ上でマージされ（アップストリーム）、対応する Engine - Enterprise リポジトリやブランチが同期されます（ダウンストリーム）。
+Docker や開発パートナーは、Engine - Community と Engine - Enterprise 間のマージ時の衝突をできるだけ少なくするように努めています。
 ただし衝突は起きることがあるため、Docker では適宜、解決を図る努力を行っていきます。
 
 {% comment %}
 ## Next release
 {% endcomment %}
-## 次期リリース
 {: #next-release }
+## 次期リリース
 
 {% comment %}
 The activity for upcoming year-month releases is tracked in the milestones
@@ -229,17 +219,17 @@ of the repository.
 {% comment %}
 ## Support
 {% endcomment %}
-## サポート
 {: #support }
+## サポート
 
 {% comment %}
-Docker CE releases of a year-month branch are supported with patches
+Docker Engine - Community releases of a year-month branch are supported with patches
 as needed for 7 months after the first year-month general availability
-release. Docker EE releases are supported for 24 months after the first
+release. Docker Engine - Enterprise releases are supported for 24 months after the first
 year-month general availability release.
 {% endcomment %}
-年月で定めたブランチに基づいた Docker CE のリリースは、関連するパッチも含めて、正規安定版としてリリースした日から、必要に応じて 7ヶ月後までサポートされます。
-Docker EE のリリースは、正規安定版のリリース日から 24 ヶ月後までサポートされます。
+年月で定めたブランチに基づいた Docker Engine - Community のリリースは、関連するパッチも含めて、正規安定版としてリリースした日から、必要に応じて 7ヶ月後までサポートされます。
+Docker Engine - Enterprise のリリースは、正規安定版のリリース日から 24 ヶ月後までサポートされます。
 
 {% comment %}
 This means bug reports and backports to release branches are assessed
@@ -256,8 +246,8 @@ deleted from the repository.
 {% comment %}
 ### Reporting security issues
 {% endcomment %}
-### セキュリティに関する問題の報告
 {: #reporting-security-issues }
+### セキュリティに関する問題の報告
 
 {% comment %}
 The Docker maintainers take security seriously. If you discover a security
@@ -287,21 +277,21 @@ Docker からは公開で感謝を示します。
 {% comment %}
 ### Supported platforms
 {% endcomment %}
-### 対応プラットフォーム
 {: #supported-platforms }
+### 対応プラットフォーム
 
 {% comment %}
-Docker CE is available on multiple platforms. Use the following tables
+Docker Engine - Community is available on multiple platforms. Use the following tables
 to choose the best installation path for you.
 {% endcomment %}
-Docker CE は各種のプラットフォームにて利用可能です。
+Docker Engine - Community は各種のプラットフォームにて利用可能です。
 以下の表を参考にして、適切なインストールを選んでください。
 
 {% comment %}
 #### Desktop
 {% endcomment %}
-#### デスクトップ
 {: #desktop }
+#### デスクトップ
 
 {% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
 

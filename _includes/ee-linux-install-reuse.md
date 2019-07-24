@@ -13,41 +13,42 @@ Usage: {% include ee-linux-install-reuse.md section="ee-install-intro" %}
 {% if section == "ee-install-intro" %}
 
 {% comment %}
-There are two ways to install and upgrade [Docker Enterprise Edition (Docker EE)](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }
+There are two ways to install and upgrade [Docker Enterprise](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }
 on {{ linux-dist-long }}:
 {% endcomment %}
-[Docker Enterprise エディション (Docker EE)](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" } を {{ linux-dist-long }} にインストールしアップグレードする方法には二種類あります。
+[Docker Enterprise](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" } を {{ linux-dist-long }} にインストールしアップグレードする方法には二種類あります。
 
 {% comment %}
-- [YUM repository](#repo-install-and-upgrade): Set up a Docker repository and install Docker EE from it. This is the recommended approach because installation and upgrades are managed with YUM and easier to do.
+- [YUM repository](#repo-install-and-upgrade): Set up a Docker repository and install Docker Engine - Enterprise from it. This is the recommended approach because installation and upgrades are managed with YUM and easier to do.
 {% endcomment %}
-- [YUM リポジトリ](#repo-install-and-upgrade)利用: Docker リポジトリを設定して、そこから Docker EE をインストールします。YUM を使ってインストールしアップグレードも行うため、簡単に操作できます。
+- [YUM リポジトリ](#repo-install-and-upgrade)利用: Docker リポジトリを設定して、そこから Docker Engine - Enterprise をインストールします。
+YUM を使ってインストールしアップグレードも行うため、簡単に操作できます。
 この方法を推奨します。
 
 {% comment %}
-- [RPM package](#package-install-and-upgrade): Download the {{ package-format }} package, install it manually, and manage upgrades manually. This is useful when installing Docker EE on air-gapped systems with no access to the internet.
+- [RPM package](#package-install-and-upgrade): Download the {{ package-format }} package, install it manually, and manage upgrades manually. This is useful when installing Docker Engine - Enterprise on air-gapped systems with no access to the internet.
 {% endcomment %}
-- [RPM パッケージ](#package-install-and-upgrade)利用: {{ package-format }} パッケージをダウンロードして、手動でインストールやアップグレードの管理を行います。この方法は、インターネットへのアクセスができない環境において Docker EE をインストールすることができます。
+- [RPM パッケージ](#package-install-and-upgrade)利用: {{ package-format }} パッケージをダウンロードして、手動でインストールやアップグレードの管理を行います。この方法は、インターネットへのアクセスができない環境において Docker Engine - Enterprise をインストールすることができます。
 
 {% if linux-dist == "rhel" or linux-dist == "oraclelinux" %}
 {% comment %}
-Docker Community Edition (Docker CE) is _not_ supported on {{ linux-dist-long }}.
+Docker Engine - Community is _not_ supported on {{ linux-dist-long }}.
 {% endcomment %}
-Docker Community エディション (Docker CE) は {{ linux-dist-long }} に対してサポート_されていません_。
+Docker Engine - Community は {{ linux-dist-long }} に対してサポート_されていません_。
 {% endif %}
 {% if linux-dist == "centos" %}
 {% comment %}
-For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker CE for CentOS](/install/linux/docker-ce/centos.md).
+For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker Engine - Community for CentOS](/install/linux/docker-ce/centos.md).
 {% endcomment %}
-{{ linux-dist-cap }} 向けの Docker Community エディションについては、[Docker CE の入手（CentOS 向け）](/install/linux/docker-ce/centos.md) を参照してください。
+{{ linux-dist-cap }} 向けの Docker Community エディションについては、[Docker Engine - Community の入手（CentOS 向け）](/install/linux/docker-ce/centos.md) を参照してください。
 {% endif %}
 
 {% elsif section == "find-ee-repo-url" %}
 
 {% comment %}
-To install Docker EE, you will need the URL of the Docker EE repository associated with your trial or subscription:
+To install Docker Enterprise, you will need the URL of the Docker Enterprise repository associated with your trial or subscription:
 {% endcomment %}
-Docker EE をインストールするには、Docker EE リポジトリ上のお試し用（trial） URL、あるいは購入者用（subscription）URL を必要とします。
+Docker Enterprise をインストールするには、Docker Enterprise リポジトリ上のお試し用（trial） URL、あるいは購入者用（subscription）URL を必要とします。
 
 {% comment %}
 1.  Go to [https://hub.docker.com/my-content](https://hub.docker.com/my-content){: target="_blank" class="_" }. All of your subscriptions and trials are listed.
@@ -68,18 +69,18 @@ You will use this URL in a later step to create a variable called, `DOCKERURL`.
 {% elsif section == "using-yum-repo" %}
 
 {% comment %}
-The advantage of using a repository from which to install Docker EE (or any software) is that it provides a certain level of automation. RPM-based distributions such as {{ linux-dist-long }}, use a tool called YUM that work with your repositories to manage dependencies and provide automatic updates.
+The advantage of using a repository from which to install Docker Engine - Enterprise (or any software) is that it provides a certain level of automation. RPM-based distributions such as {{ linux-dist-long }}, use a tool called YUM that work with your repositories to manage dependencies and provide automatic updates.
 {% endcomment %}
-リポジトリを使って Docker EE を（あるいはどんなソフトウェアでも）インストールする利点は、ある程度、自動的に操作を進めることができるところです。
+リポジトリを使って Docker Engine - Enterprise を（あるいはどんなソフトウェアでも）インストールする利点は、ある程度、自動的に操作を進めることができるところです。
 {{ linux-dist-long }} のような RPM ベースのディストリビューションでは、YUM というツールを使ってリポジトリを操作し、依存パッケージの管理や自動アップデート機能を提供しています。
 
 
 {% elsif section == "set-up-yum-repo" %}
 {% comment %}
-You only need to set up the repository once, after which you can install Docker EE _from_ the repo and repeatedly upgrade as necessary.
+You only need to set up the repository once, after which you can install Docker Engine - Enterprise _from_ the repo and repeatedly upgrade as necessary.
 {% endcomment %}
 リポジトリをセットアップする必要があるのは一回だけです。
-その後は Docker EE のインストールを、必要であれば何度でも行うことができます。
+その後は Docker Engine - Enterprise のインストールを、必要であれば何度でも行うことができます。
 
 {% comment %}
 1.  Remove existing Docker repositories from `/etc/yum.repos.d/`:
@@ -210,9 +211,9 @@ You only need to set up the repository once, after which you can install Docker 
 {% endif %}
 
 {% comment %}
-6.  Add the Docker EE **stable** repository:
+6.  Add the Docker Engine - Enterprise **stable** repository:
 {% endcomment %}
-6.  Docker EE の**安定版**（stable）リポジトリを追加します。
+6.  Docker Engine - Enterprise の**安定版**（stable）リポジトリを追加します。
 
     ```bash
     $ sudo -E yum-config-manager \
@@ -224,13 +225,13 @@ You only need to set up the repository once, after which you can install Docker 
 {% elsif section == "install-using-yum-repo" %}
 
 {% comment %}
-> **Note**: If you need to run Docker EE 2.0, please see the following instructions:
-> * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker EE Engine only release
+> **Note**: If you need to run Docker Engine - Enterprise 2.0, please see the following instructions:
+> * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - Older Docker Engine - Enterprise Engine only release
 > * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise Edition 2.0 (Docker Engine,
 > UCP, and DTR).
 {% endcomment %}
-> **メモ**: Docker EE 2.0 を利用する必要がある場合は、以下の手順を参照してください。
-> * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - かつての Docker EE Engine のみリリース
+> **メモ**: Docker Engine - Enterprise 2.0 を利用する必要がある場合は、以下の手順を参照してください。
+> * [18.03](https://docs.docker.com/v18.03/ee/supported-platforms/) - かつての Docker Engine - Enterprise のみリリース
 > * [17.06](https://docs.docker.com/v17.06/engine/installation/) - Docker Enterprise エディション 2.0（Docker Engine、UCP、DTR）
 
 {% comment %}
@@ -250,9 +251,9 @@ You only need to set up the repository once, after which you can install Docker 
 
 
 {% comment %}
-2.  To install a _specific version_ of Docker EE (recommended in production), list versions and install:
+2.  To install a _specific version_ of Docker Engine - Enterprise (recommended in production), list versions and install:
 {% endcomment %}
-2.  Docker EE の特定バージョンをインストールする場合（本番環境向けにはこれを推奨する）、リポジトリにある利用可能なバージョンの一覧を確認し、いずれかを選んでインストールします。
+2.  Docker Engine - Enterprise の特定バージョンをインストールする場合（本番環境向けにはこれを推奨する）、リポジトリにある利用可能なバージョンの一覧を確認し、いずれかを選んでインストールします。
 
     {% comment %}
     a.  List and sort the versions available in your repo. This example sorts results by version number, highest to lowest, and is truncated:
@@ -317,11 +318,11 @@ You only need to set up the repository once, after which you can install Docker 
     ```
 
 {% comment %}
-4.  Verify that Docker EE is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine - Enterprise is installed correctly by running the `hello-world`
     image. This command downloads a test image, runs it in a container, prints
     an informational message, and exits:
 {% endcomment %}
-4.  Docker CE が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
+4.  Docker Engine - Enterprise が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
     このコマンドはテストイメージをダウンロードし、コンテナー内で実行します。
     コンテナーが起動すると、メッセージを表示して終了します。
 
@@ -330,11 +331,11 @@ You only need to set up the repository once, after which you can install Docker 
     ```
 
     {% comment %}
-    Docker EE is installed and running. Use `sudo` to run Docker commands. See
+    Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
     [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
     {% endcomment %}
-    Docker EE がインストールされ、実行できました。
+    Docker Engine - Enterprise がインストールされ、実行できました。
     Docker コマンドの実行には `sudo` が必要になります。
     続いて [Linux のインストール後](/engine/installation/linux/linux-postinstall.md)に進み、非特権ユーザーでも Docker コマンドが実行できる設定方法を参照してください。
 
@@ -355,10 +356,10 @@ You only need to set up the repository once, after which you can install Docker 
 {% elsif section == "package-installation" %}
 
 {% comment %}
-To manually install Docker EE, download the `.{{ package-format | downcase }}` file for your release. You need to download a new file each time you want to upgrade Docker EE.
+To manually install Docker Enterprise, download the `.{{ package-format | downcase }}` file for your release. You need to download a new file each time you want to upgrade Docker Enterprise.
 {% endcomment %}
-Docker EE を手動でインストールするには、ディストリビューションに応じた `.{{ package-format | downcase }}` ファイルをダウンロードします。
-Docker EE をアップグレードする際には、常に新しいファイルをダウンロードすることが必要です。
+Docker Enterprise を手動でインストールするには、ディストリビューションに応じた `.{{ package-format | downcase }}` ファイルをダウンロードします。
+Docker Enterprise をアップグレードする際には、常に新しいファイルをダウンロードすることが必要です。
 
 {% elsif section == "install-using-yum-package" %}
 
@@ -382,23 +383,23 @@ Docker EE をアップグレードする際には、常に新しいファイル�
 
 {% if linux-dist == "centos" %}
 {% comment %}
-1.  Go to the Docker EE repository URL associated with your trial or subscription
+1.  Go to the Docker Engine - Enterprise repository URL associated with your trial or subscription
     in your browser. Go to `{{ linux-dist-url-slug }}/7/x86_64/stable-<VERSION>/Packages`
     and download the `.{{ package-format | downcase }}` file for the Docker version you want to install.
 {% endcomment %}
-1.  ブラウザーから Docker EE リポジトリ上のお試し用（trial） URL、あるいは購入者用（subscription）URL にアクセスします。
+1.  ブラウザーから Docker Engine - Enterprise リポジトリ上のお試し用（trial） URL、あるいは購入者用（subscription）URL にアクセスします。
     そして `{{ linux-dist-url-slug }}/7/x86_64/stable-<VERSION>/Packages` を開いて、目的とするバージョンの `.{{ package-format | downcase }}` ファイルをダウンロードします。
 {% endif %}
 
 {% if linux-dist == "rhel" or linux-dist == "oraclelinux" %}
 {% comment %}
-1.  Go to the Docker EE repository URL associated with your
+1.  Go to the Docker Engine - Enterprise repository URL associated with your
     trial or subscription in your browser. Go to
     `{{ linux-dist-url-slug }}/`. Choose your {{ linux-dist-long }} version,
     architecture, and Docker version. Download the
     `.{{ package-format | downcase }}` file from the `Packages` directory.
 {% endcomment %}
-1.  ブラウザーから Docker EE リポジトリ上のお試し用（trial） URL、あるいは購入者用（subscription）URL にアクセスします。
+1.  ブラウザーから Docker Engine - Enterprise リポジトリ上のお試し用（trial） URL、あるいは購入者用（subscription）URL にアクセスします。
     そして `{{ linux-dist-url-slug }}/` を開いて、目的とするアーキテクチャーとバージョンの {{ linux-dist-long }} を選びます。
     `Package` ディレクトリから `.{{ package-format | downcase }}` ファイルをダウンロードします。
 
@@ -414,10 +415,10 @@ Docker EE をアップグレードする際には、常に新しいファイル�
 {% endif %}
 
 {% comment %}
-2.  Install Docker EE, changing the path below to the path where you downloaded
+2.  Install Docker Enterprise, changing the path below to the path where you downloaded
     the Docker package.
 {% endcomment %}
-2.  Docker EE をインストールします。
+2.  Docker Enterprise をインストールします。
     以下に示すパス部分は、Docker パッケージをダウンロードしたパスに書き換えます。
 
     ```bash
@@ -446,11 +447,11 @@ Docker EE をアップグレードする際には、常に新しいファイル�
     ```
 
 {% comment %}
-4.  Verify that Docker EE is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine - Enterprise is installed correctly by running the `hello-world`
     image. This command downloads a test image, runs it in a container, prints
     an informational message, and exits:
 {% endcomment %}
-4.  Docker CE が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
+4.  Docker Engine - Enterprise が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
     このコマンドはテストイメージをダウンロードし、コンテナー内で実行します。
     コンテナーが起動すると、メッセージを表示して終了します。
 
@@ -459,11 +460,11 @@ Docker EE をアップグレードする際には、常に新しいファイル�
     ```
 
     {% comment %}
-    Docker EE is installed and running. Use `sudo` to run Docker commands. See
+    Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
     [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
     {% endcomment %}
-    Docker EE がインストールされ、実行できました。
+    Docker Engine - Enterprise がインストールされ、実行できました。
     Docker コマンドの実行には `sudo` が必要になります。
     続いて [Linux のインストール後](/engine/installation/linux/linux-postinstall.md)に進み、非特権ユーザーでも Docker コマンドが実行できる設定方法を参照してください。
 
@@ -487,9 +488,9 @@ Docker EE をアップグレードする際には、常に新しいファイル�
 {% elsif section == "yum-uninstall" %}
 
 {% comment %}
-1.  Uninstall the Docker EE package:
+1.  Uninstall the Docker Engine - Enterprise package:
 {% endcomment %}
-1.  Docker EE パッケージをアンインストールします。
+1.  Docker Engine - Enterprise パッケージをアンインストールします。
 
     ```bash
     $ sudo yum -y remove docker-ee

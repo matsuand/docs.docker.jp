@@ -1,28 +1,27 @@
 ---
 title: Docker Enterprise
-description: Docker Enterprise エディション、つまり Docker によりエンタープライズレベルのクラスター管理ソリューションについて学びます。
-keywords: Docker EE, UCP, DTR, orchestration, cluster, Kubernetes
+description: Docker Enterprise、つまり Docker によりエンタープライズレベルのクラスター管理ソリューションについて学びます。
+keywords: Docker Enterprise, UCP, DTR, orchestration, cluster, Kubernetes
 redirect_from:
   - /enterprise/
   - /manuals/
 ---
 
 {% comment %}
-Docker Enterprise 2.1 is a Containers-as-a-Service (CaaS) platform that enables a secure software supply
+Docker Enterprise is a Containers as a Service (CaaS) platform that enables a secure software supply
 chain and deploys diverse applications for high availability across disparate
 infrastructure, both on-premises and in the cloud.
 {% endcomment %}
-Docker Enterprise 2.1 は CaaS（Containers as a Service； サービスとしてのコンテナー）プラットフォームです。
+Docker Enterprise は CaaS（Containers as a Service； サービスとしてのコンテナー）プラットフォームです。
 これは安全なソフトウェアサプライチェーンの実現を可能とし、さまざまなインフラストラクチャーにわたって、可用性の高い多様なアプリケーションをデプロイできるものです。
 対象は自社サーバーでもクラウド上でもかわりません。
 
 {% comment %}
-Docker Enterprise is a secure, scalable, and supported container
-platform for building and orchestrating applications across multi-tenant Linux,
-Windows Server 2016, and IBM Z environments.
+Docker Enterprise is a secure, scalable, and supported container platform for building and
+orchestrating applications across multi-tenant Linux, Windows Server 2016, and Windows Server 2019.
 {% endcomment %}
 Docker Enterprise は、セキュアでスケーラブルなコンテナープラットフォームです。
-Linux、Windows Server 2016、IBM Z 環境など複数テナントにわたって、アプリケーションのビルドとオーケストレーションを行います。
+Linux、Windows Server 2016、Windows Server 2019 環境など複数テナントにわたって、アプリケーションのビルドとオーケストレーションを行います。
 
 {% comment %}
 Docker Enterprise enables deploying your workloads for high availability (HA) onto the
@@ -38,12 +37,12 @@ resources. Self-healing components ensure that Docker Enterprise clusters remain
 available.
 
 {% comment %}
-Role-based access control applies to Kubernetes and Swarm orchestrators, and
+Role-based access control (RBAC) applies to Kubernetes and Swarm orchestrators, and
 communication within the cluster is secured with TLS.
 [Docker Content Trust](/engine/security/trust/content_trust/) is enforced
 for images on all of the orchestrators.
 {% endcomment %}
-Role-based access control applies to Kubernetes and Swarm orchestrators, and
+Role-based access control (RBAC) applies to Kubernetes and Swarm orchestrators, and
 communication within the cluster is secured with TLS.
 [Docker Content Trust](/engine/security/trust/content_trust/) is enforced
 for images on all of the orchestrators.
@@ -67,16 +66,16 @@ cluster and applications through a single interface.
 {% comment %}
 ## Docker Enterprise features
 {% endcomment %}
-## Docker エンタープライズの機能
 {: #docker-enterprise-features }
+## Docker エンタープライズの機能
 
 {% comment %}
-Docker Enterprise 2.1 provides multi-architecture orchestration for Kubernetes and
+Docker Enterprise provides multi-architecture orchestration for Kubernetes and
 Swarm workloads. Docker Enterprise enables a secure software supply chain, with image
 promotion, mirroring between registries, and signing/scanning enforcement for
 Kubernetes images.
 {% endcomment %}
-Docker Enterprise 2.1 provides multi-architecture orchestration for Kubernetes and
+Docker Enterprise provides multi-architecture orchestration for Kubernetes and
 Swarm workloads. Docker Enterprise enables a secure software supply chain, with image
 promotion, mirroring between registries, and signing/scanning enforcement for
 Kubernetes images.
@@ -158,29 +157,14 @@ components across the cluster, so every newly joined worker node is ready
 to schedule Kubernetes or Swarm workloads.
 
 {% comment %}
-> IBM z Systems
->
-> Kubernetes workloads aren't supported on IBM z Systems clusters. On a mixed
-> cluster with z Systems, Docker EE won't schedule Kubernetes workloads
-> on z Systems nodes.
-{: .important}
-{% endcomment %}
-> IBM z Systems
->
-> Kubernetes workloads aren't supported on IBM z Systems clusters. On a mixed
-> cluster with z Systems, Docker EE won't schedule Kubernetes workloads
-> on z Systems nodes.
-{: .important}
-
-{% comment %}
 ### Orchestration platform features
 {% endcomment %}
 ### Orchestration platform features
 
 {% comment %}
-![](images/docker-ee-overview-4.svg){: .with-border}
+![](images/docker-ee-overview-4.png){: .with-border}
 {% endcomment %}
-![](images/docker-ee-overview-4.svg){: .with-border}
+![](images/docker-ee-overview-4.png){: .with-border}
 
 {% comment %}
 - Docker Enterprise manager nodes are both Swarm managers and Kubernetes masters,
@@ -264,16 +248,12 @@ You can also deploy and monitor your applications and services.
 ## Built-in security and access control
 
 {% comment %}
-Docker Enterprise has its own built-in authentication mechanism with role-based access
-control (RBAC), so that you can control who can access and make changes to your
-swarm and applications. Also, Docker Enterprise authentication integrates with LDAP
-services.
+Docker Enterprise has its own built-in authentication mechanism with RBAC, so that you can control who can access and make changes to your
+swarm and applications. Also, Docker Enterprise authentication integrates with LDAP services.
 [Learn about role-based access control](access-control/index.md).
 {% endcomment %}
-Docker Enterprise has its own built-in authentication mechanism with role-based access
-control (RBAC), so that you can control who can access and make changes to your
-swarm and applications. Also, Docker Enterprise authentication integrates with LDAP
-services.
+Docker Enterprise has its own built-in authentication mechanism with RBAC, so that you can control who can access and make changes to your
+swarm and applications. Also, Docker Enterprise authentication integrates with LDAP services.
 [Learn about role-based access control](access-control/index.md).
 
 {% comment %}

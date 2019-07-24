@@ -1,26 +1,26 @@
 ---
-description: Fedora 上に Docker CE をインストールする手順を説明。
+description: Fedora 上に Docker Engine - Community をインストールする手順を説明。
 keywords: requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/fedora/
 - /engine/installation/linux/fedora/
 - /engine/installation/linux/docker-ce/fedora/
-title: Docker CE の入手（Fedora 向け）
+title: Docker Engine - Community の入手（Fedora 向け）
 toc_max: 4
 ---
 
 {% comment %}
-To get started with Docker CE on Fedora, make sure you
+To get started with Docker Engine - Community on Fedora, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker-ce).
 {% endcomment %}
-Fedora 向けに Docker CE を始めるには、[前提条件を満たしているか](#prerequisites)を確認してから、[Docker をインストール](#install-docker-ce)してください。
+Fedora 向けに Docker Engine - Community を始めるには、[前提条件を満たしているか](#prerequisites)を確認してから、[Docker をインストール](#install-docker-ce)してください。
 
 {% comment %}
 ## Prerequisites
 {% endcomment %}
-## 前提条件
 {: #prerequisites }
+## 前提条件
 
 {% comment %}
 ### Docker EE customers
@@ -83,21 +83,21 @@ It's OK if `dnf` reports that none of these packages are installed.
 
 {% comment %}
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker CE package is now called `docker-ce`.
+networks, are preserved. The Docker Engine - Community package is now called `docker-ce`.
 {% endcomment %}
 `/var/lib/docker/` にはイメージ、コンテナー、ボリューム、ネットワークが含まれていて、それは保持されたまま残ります。
-なお Docker CE パッケージは、今は `docker-ce` と呼ばれます。
+なお Docker Engine - Community パッケージは、今は `docker-ce` と呼ばれます。
 
 {% comment %}
-## Install Docker CE
+## Install Docker Engine - Community
 {% endcomment %}
-## Docker CE のインストール
-{: #install-docker-ce }
+{: #install-docker-engine-community }
+## Docker Engine - Community のインストール
 
 {% comment %}
-You can install Docker CE in different ways, depending on your needs:
+You can install Docker Engine - Community in different ways, depending on your needs:
 {% endcomment %}
-Docker CE のインストール方法はいくつかあります。
+Docker Engine - Community のインストール方法はいくつかあります。
 必要に応じて選んでください。
 
 {% comment %}
@@ -130,22 +130,22 @@ Docker CE のインストール方法はいくつかあります。
 {% comment %}
 ### Install using the repository
 {% endcomment %}
-### リポジトリを利用したインストール
 {: #install-using-the-repository }
+### リポジトリを利用したインストール
 
 {% comment %}
-Before you install Docker CE for the first time on a new host machine, you need
+Before you install Docker Engine - Community for the first time on a new host machine, you need
 to set up the Docker repository. Afterward, you can install and update Docker
 from the repository.
 {% endcomment %}
-新しいホストマシンに Docker CE を初めてインストールするときは、その前に Docker リポジトリをセットアップしておくことが必要です。
+新しいホストマシンに Docker Engine - Community を初めてインストールするときは、その前に Docker リポジトリをセットアップしておくことが必要です。
 これを行った後に、リポジトリからの Docker のインストールやアップグレードができるようになります。
 
 {% comment %}
 #### Set up the repository
 {% endcomment %}
-#### リポジトリのセットアップ
 {: #set-up-the-repository }
+#### リポジトリのセットアップ
 
 {% assign download-url-base = "https://download.docker.com/linux/fedora" %}
 
@@ -226,15 +226,15 @@ from the repository.
 > [**最新版** と **テスト版** チャネルについて学ぶのはこちら](/install/index.md)。
 
 {% comment %}
-#### Install Docker CE
+#### Install Docker Engine - Community
 {% endcomment %}
-#### Docker CE のインストール
-{: #install-docker-ce }
+{: #install-docker-engine-community }
+#### Docker Engine - Community のインストール
 
 {% comment %}
-1.  Install the _latest version_ of Docker CE and containerd, or go to the next step to install a specific version:
+1.  Install the _latest version_ of Docker Engine - Community and containerd, or go to the next step to install a specific version:
 {% endcomment %}
-1.  Docker CE と containerd の最新版をインストールします。
+1.  Docker Engine - Community と containerd の最新版をインストールします。
     あるいは次の手順に行って、特定のバージョンをインストールします。
 
     ```bash
@@ -268,10 +268,10 @@ from the repository.
     グループ `docker` が生成されていますが、このグループにはまだユーザーが存在していない状態です。
 
 {% comment %}
-2.  To install a _specific version_ of Docker CE, list the available versions
+2.  To install a _specific version_ of Docker Engine - Community, list the available versions
     in the repo, then select and install:
 {% endcomment %}
-2.  特定バージョンの Docker CE をインストールする場合は、リポジトリにある利用可能なバージョンの一覧を確認し、いずれかを選んでインストールします。
+2.  特定バージョンの Docker Engine - Community をインストールする場合は、リポジトリにある利用可能なバージョンの一覧を確認し、いずれかを選んでインストールします。
 
     {% comment %}
     a. List and sort the versions available in your repo. This example sorts
@@ -327,10 +327,10 @@ from the repository.
     ```
 
 {% comment %}
-4.  Verify that Docker CE is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
     image.
 {% endcomment %}
-4.  Docker CE が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
+4.  Docker Engine - Community が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
 
     ```bash
     $ sudo docker run hello-world
@@ -344,39 +344,39 @@ from the repository.
     コンテナーが起動すると、メッセージを表示して終了します。
 
 {% comment %}
-Docker CE is installed and running. You need to use `sudo` to run Docker
+Docker Engine - Community is installed and running. You need to use `sudo` to run Docker
 commands. Continue to [Linux postinstall](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 {% endcomment %}
-Docker CE がインストールされ、実行できました。
+Docker Engine - Community がインストールされ、実行できました。
 Docker コマンドの実行には ``sudo`` が必要になります。
 続いて [Linux のインストール後](/engine/installation/linux/linux-postinstall.md)に進み、非特権ユーザーでも Docker コマンドが実行できるように、またその他の追加の設定について見ていきます。
 
 {% comment %}
-#### Upgrade Docker CE
+#### Upgrade Docker Engine - Community
 {% endcomment %}
-#### Docker CE のアップグレード
-{: #upgrade-docker-ce }
+{: #upgrade-docker-engine-community }
+#### Docker Engine - Community のアップグレード
 
 {% comment %}
-To upgrade Docker CE, follow the [installation instructions](#install-docker-ce),
+To upgrade Docker Engine - Community, follow the [installation instructions](#install-docker-ce),
 choosing the new version you want to install.
 {% endcomment %}
-Docker CE をアップグレードするには、[インストール手順](#install-docker-ce)に従って、インストールしたい新たなバージョンを選んでください。
+Docker Engine - Community をアップグレードするには、[インストール手順](#install-docker-ce)に従って、インストールしたい新たなバージョンを選んでください。
 
 {% comment %}
 ### Install from a package
 {% endcomment %}
-### パッケージからのインストール
 {: #install-from-a-package }
+### パッケージからのインストール
 
 {% comment %}
 If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You need to download
-a new file each time you want to upgrade Docker CE.
+a new file each time you want to upgrade Docker Engine - Community.
 {% endcomment %}
-Docker リポジトリを利用した Docker インストールができない場合は、目的とするリリースの `.rpm` ファイルをダウンロードして、手動でインストールする方法があります。この場合 Docker をアップグレードするには、毎回新たな `.rpm` ファイルをダウンロードして利用することになります
+Docker リポジトリを利用した Docker インストールができない場合は、目的とするリリースの `.rpm` ファイルをダウンロードして、手動でインストールする方法があります。この場合 Docker Engine - Community をアップグレードするには、毎回新たな `.rpm` ファイルをダウンロードして利用することになります
 
 {% comment %}
 1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/) and choose your
@@ -396,10 +396,10 @@ Docker リポジトリを利用した Docker インストールができない�
     > [**最新版**と**テスト版**チャンネルを学ぶにはこちら](/install/index.md)。
 
 {% comment %}
-2.  Install Docker CE, changing the path below to the path where you downloaded
+2.  Install Docker Engine - Community, changing the path below to the path where you downloaded
     the Docker package.
 {% endcomment %}
-2.  Docker CE をインストールします。
+2.  Docker Engine - Community をインストールします。
     以下に示すパス部分は、Docker パッケージをダウンロードしたパスに書き換えます。
 
     ```bash
@@ -416,10 +416,10 @@ Docker リポジトリを利用した Docker インストールができない�
     ```
 
 {% comment %}
-4.  Verify that Docker CE is installed correctly by running the `hello-world`
+4.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
     image.
 {% endcomment %}
-4.  Docker CE が正しくインストールされているのを確認するため `hello-world` イメージを実行します。
+4.  Docker Engine - Community が正しくインストールされているのを確認するため `hello-world` イメージを実行します。
 
     ```bash
     $ sudo docker run hello-world
@@ -433,37 +433,37 @@ Docker リポジトリを利用した Docker インストールができない�
     コンテナーが起動すると、メッセージを表示して終了します。
 
 {% comment %}
-Docker CE is installed and running. You need to use `sudo` to run Docker commands.
+Docker Engine - Community is installed and running. You need to use `sudo` to run Docker commands.
 Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 {% endcomment %}
-Docker CE がインストールされ、実行できました。
+Docker Engine - Community がインストールされ、実行できました。
 Docker コマンドの実行には ``sudo`` が必要になります。
 続いて [Linux のインストール後](/engine/installation/linux/linux-postinstall.md)に進み、非特権ユーザーでも Docker コマンドが実行できるように、またその他の追加の設定について見ていきます。
 
 {% comment %}
-#### Upgrade Docker CE
+#### Upgrade Docker Engine - Community
 {% endcomment %}
-#### Docker CE のアップグレード
-{: #upgrade-docker-ce }
+{: #upgrade-docker-engine-community }
+#### Docker Engine - Community のアップグレード
 
 {% comment %}
-To upgrade Docker CE, download the newer package file and repeat the
+To upgrade Docker Engine - Community, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `dnf -y upgrade`
 instead of `dnf -y install`, and pointing to the new file.
 {% endcomment %}
-Docker CE をアップグレードする場合は、新たなパッケージファイルをダウンロードして、[インストール手順](#install-from-a-package)をもう一度行います。
+Docker Engine - Community をアップグレードする場合は、新たなパッケージファイルをダウンロードして、[インストール手順](#install-from-a-package)をもう一度行います。
 その際には `dnf -y install` でなく `dnf -y upgrade` を実行します。
 またパッケージには新しいものを指定します。
 
 {% include install-script.md %}
 
 {% comment %}
-## Uninstall Docker CE
+## Uninstall Docker Engine - Community
 {% endcomment %}
-## Docker CE のアンインストール
-{: #uninstall-docker-ce }
+{: #uninstall-docker-engine-community }
+## Docker Engine - Community のアンインストール
 
 {% comment %}
 1.  Uninstall the Docker package:
@@ -494,8 +494,8 @@ You must delete any edited configuration files manually.
 {% comment %}
 ## Next steps
 {% endcomment %}
-## 次のステップ
 {: #next-steps }
+## 次のステップ
 
 {% comment %}
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
