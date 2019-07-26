@@ -1116,12 +1116,10 @@ reference:
       title: images
     - path: /reference/ucp/3.2/cli/install/
       title: install
-    - path: /reference/ucp/3.2/cli/restart/
-      title: restart
+    - path: /reference/ucp/3.2/cli/port-check-server/
+      title: port-check-server
     - path: /reference/ucp/3.2/cli/restore/
       title: restore
-    - path: /reference/ucp/3.2/cli/stop/
-      title: stop
     - path: /reference/ucp/3.2/cli/support/
       title: support
     - path: /reference/ucp/3.2/cli/uninstall-ucp/
@@ -1140,7 +1138,7 @@ reference:
     - path: /engine/api/sdks/
       title: SDKs
     - path: /engine/api/latest/
-      title: v1.40 reference (latest)
+      title: v{{ site.latest_engine_api_version }} reference (latest)
     - sectiontitle: API reference by version
       section:
       - path: /engine/api/version-history/

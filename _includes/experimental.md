@@ -5,3 +5,7 @@
 試験的な機能は本番環境では利用しないでください。
 Docker ではこの試験的機能に対するサポートは行っていません。
 詳しくは [Experimental features](https://success.docker.com/article/experimental-features) を参照してください。
+>
+> To enable experimental features in the Docker CLI, edit the `config.json` file and set `experimental` to enabled.
+>
+> To enable experimental features from the Docker Desktop menu, click **Settings** (**Preferences** on macOS) > **Daemon** and then select the **Experimental features** check box.
