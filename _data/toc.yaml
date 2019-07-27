@@ -233,7 +233,7 @@ guides:
       - path: /storage/storagedriver/
         title: ストレージドライバーについて
       - path: /storage/storagedriver/select-storage-driver/
-        title: ストレージドライバーの選択
+        title: ストレージドライバーの選定
       - path: /storage/storagedriver/aufs-driver/
         title: AUFS ストレージドライバーの利用
       - path: /storage/storagedriver/btrfs-driver/

@@ -1,7 +1,7 @@
 ---
 description: Learn the technologies that support storage drivers.
 keywords: container, storage, driver, AUFS, btfs, devicemapper,zvfs
-title: About storage drivers
+title: ストレージドライバーについて
 redirect_from:
 - /en/latest/terms/layer/
 - /engine/installation/userguide/storagedriver/
@@ -9,25 +9,51 @@ redirect_from:
 - /storage/storagedriver/imagesandcontainers/
 ---
 
+{% comment %}
 To use storage drivers effectively, it's important to know how Docker builds and
 stores images, and how these images are used by containers. You can use this
 information to make informed choices about the best way to persist data from
 your applications and avoid performance problems along the way.
+{% endcomment %}
+ストレージドライバーを効率よく利用するためには、Docker がどのようにしてイメージをビルドし保存するのか、またそのイメージをコンテナーがどのように利用するのかを理解しておくことが重要です。
+これがわかっていれば、その知識に基づいた判断として、アプリケーションデータの適切な保存方法や、アプリケーション稼動中のパフォーマンス問題に対して、最良の方策をとることができます。
 
+{% comment %}
 Storage drivers allow you to create data in the writable layer of your container.
 The files won't be persisted after the container is deleted, and both read and
 write speeds are lower than native file system performance.
+{% endcomment %}
+ストレージドライバーは、コンテナー内の書き込み可能なレイヤーにデータを保存するものです。
+これがファイルデータであると、コンテナーが削除された後にデータは維持されず、通常のファイルシステム上でのパフォーマンスに比べて、読み書きの速度は低下します。
 
+{% comment %}
  > **Note**: Operations that are known to be problematic include write-intensive database storage,
 particularly when pre-existing data exists in the write-only layer. More details are provided in this document.
+{% endcomment %}
+ > **メモ**: 問題が発生すると言われる処理として、書き込みを重点的に行うデータベースストレージの利用があります。
+ > 特に書き込み専用レイヤーに既にデータが存在している場合が挙げられます。
+ > 詳しくは本文にて説明します。
 
+{% comment %}
 [Learn how to use volumes](../volumes.md) to persist data and improve performance.
+{% endcomment %}
+[ボリューム利用方法について学ぶ](../volumes.md) を参照してデータ保存方法やパフォーマンス改善について確認してください。
 
+{% comment %}
 ## Images and layers
+{% endcomment %}
+{: #images-and-layers }
+## イメージとレイヤー
 
+{% comment %}
 A Docker image is built up from a series of layers. Each layer represents an
 instruction in the image's Dockerfile. Each layer except the very last one is
 read-only. Consider the following Dockerfile:
+{% endcomment %}
+Docker イメージは一連のレイヤーから構成されます。
+個々のレイヤーは、そのイメージの Dockerfile 内にある 1 つの命令に対応づいています。
+一番最後にあるレイヤーを除き、これ以外はすべて読み込み専用のレイヤーです。
+たとえば以下のような Dockerfile を考えてみます。
 
 ```conf
 FROM ubuntu:18.04
@@ -36,12 +62,21 @@ RUN make /app
 CMD python /app/app.py
 ```
 
+{% comment %}
 This Dockerfile contains four commands, each of which creates a layer. The
 `FROM` statement starts out by creating a layer from the `ubuntu:18.04` image.
 The `COPY` command adds some files from your Docker client's current directory.
 The `RUN` command builds your application using the `make` command. Finally,
 the last layer specifies what command to run within the container.
+{% endcomment %}
+この Dockerfile には 4 つのコマンドがあります。
+コマンドのそれぞれが 1 つのレイヤーを生成します。
+まずは `FROM` 命令によって `ubuntu:18.04` イメージから 1 つのレイヤーが生成されるところから始まります。
+`COPY` 命令は Docker クライアントのカレントディレクトリから複数のファイルを追加します。
+`RUN` 命令は `make` コマンドを実行してアプリケーションをビルドします。
+そして最後のレイヤーが、コンテナー内にて実行するべきコマンドを指定しています。
 
+{% comment %}
 Each layer is only a set of differences from the layer before it. The layers are
 stacked on top of each other. When you create a new container, you add a new
 writable layer on top of the underlying layers. This layer is often called the
@@ -49,44 +84,96 @@ writable layer on top of the underlying layers. This layer is often called the
 new files, modifying existing files, and deleting files, are written to this thin
 writable container layer. The diagram below shows a container based on the Ubuntu
 18.04 image.
+{% endcomment %}
+各レイヤーは、その直前のレイヤーからの差異だけを保持します。
+そしてレイヤーは順に積み上げられていきます。
+新しいコンテナーを生成したときには、それまで存在していたレイヤー群の最上部に、新たな書き込み可能なレイヤーが加えられます。
+このレイヤーは「コンテナーレイヤー」と呼ばれることがあります。
+実行中のコンテナーに対して実行される変更処理すべて、たとえば新規ファイル生成、既存ファイル修正、ファイル削除といったことは、その薄い皮のような書き込み可能なコンテナーレイヤーに対して書き込まれます。
+以下の図は Ubuntu 18.04 イメージに基づいて生成されたコンテナーを表わしています。
 
+{% comment %}
 ![Layers of a container based on the Ubuntu image](images/container-layers.jpg)
+{% endcomment %}
+![Ubuntu イメージに基づくコンテナーのレイヤー](images/container-layers.jpg)
 
+{% comment %}
 A _storage driver_ handles the details about the way these layers interact with
 each other. Different storage drivers are available, which have advantages
 and disadvantages in different situations.
+{% endcomment %}
+**ストレージドライバー** というものは、そういった各レイヤーが互いにやり取りできるようにします。
+さまざまなストレージドライバーが利用可能であり、利用状況に応じて一長一短があります。
 
+{% comment %}
 ## Container and layers
+{% endcomment %}
+{: #container-and-layers }
+## コンテナーとレイヤー
 
+{% comment %}
 The major difference between a container and an image is the top writable layer.
 All writes to the container that add new or modify existing data are stored in
 this writable layer. When the container is deleted, the writable layer is also
 deleted. The underlying image remains unchanged.
+{% endcomment %}
+コンテナーとイメージの最大の違いは、最上部に書き込みレイヤーがあるかどうかです。
+コンテナーに対して新たに加えられたり修正されたりしたデータは、すべてこの書き込みレイヤーに保存されます。
+コンテナーが削除されると、その書き込みレイヤーも同じく削除されます。
+ただしその元にあったイメージは、変更されずに残ります。
 
+{% comment %}
 Because each container has its own writable container layer, and all changes are
 stored in this container layer, multiple containers can share access to the same
 underlying image and yet have their own data state. The diagram below shows
 multiple containers sharing the same Ubuntu 18.04 image.
+{% endcomment %}
+複数のコンテナーを見た場合、そのコンテナーごとに個々の書き込み可能なコンテナーレイヤーがあって、データ更新はそのコンテナーレイヤーに保存されます。
+したがって複数コンテナーでは、同一のイメージを共有しながらアクセスすることができ、しかも個々に見れば独自の状態を持つことができることになります。
+以下の図は、Ubuntu 18.04 という同一のイメージを共有する複数コンテナーを示しています。
 
+{% comment %}
 ![Containers sharing same image](images/sharing-layers.jpg)
+{% endcomment %}
+![同一のイメージを共有する複数コンテナー](images/sharing-layers.jpg)
 
+{% comment %}
 > **Note**: If you need multiple images to have shared access to the exact
 > same data, store this data in a Docker volume and mount it into your
 > containers.
+{% endcomment %}
+> **メモ**: 複数イメージを必要としていて、さらに同一のデータを共有してアクセスしたい場合は、そのデータを Docker ボリュームに保存して、コンテナー内でそれをマウントします。
 
+{% comment %}
 Docker uses storage drivers to manage the contents of the image layers and the
 writable container layer. Each storage driver handles the implementation
 differently, but all drivers use stackable image layers and the copy-on-write
 (CoW) strategy.
+{% endcomment %}
+Docker はストレージドライバーを利用して、イメージレイヤーと書き込み可能なコンテナーレイヤーの各内容を管理します。
+さまざまなストレージドライバーでは、異なる実装によりデータを扱います。
+しかしどのようなドライバーであっても、積み上げ可能な（stackable）イメージレイヤーを取り扱い、コピーオンライト（copy-on-write; CoW）方式を採用します。
 
+{% comment %}
 ## Container size on disk
+{% endcomment %}
+{: #container-size-on-disk }
+## ディスク上のコンテナーサイズ
 
+{% comment %}
 To view the approximate size of a running container, you can use the `docker ps -s`
 command. Two different columns relate to size.
+{% endcomment %}
+稼働中コンテナーの概算サイズを確認するには `docker ps -s` コマンドを実行します。
+サイズに関連した 2 つのデータがカラム表示されます。
 
+{% comment %}
 - `size`: the amount of data (on disk) that is used for the writable layer of
   each container.
+{% endcomment %}
+- `size`: （ディスク上の）データ総量。各コンテナーの書き込み可能レイヤーに対して利用されるデータ部分です。
 
+{% comment %}
 - `virtual size`: the amount of data used for the read-only image data
   used by the container plus the container's writable layer `size`.
   Multiple containers may share some or all read-only
@@ -95,16 +182,45 @@ command. Two different columns relate to size.
   in common share those common layers. Therefore, you can't just total the
   virtual sizes. This over-estimates the total disk usage by a potentially
   non-trivial amount.
+{% endcomment %}
+- `virtual size`: コンテナーにおいて利用されている読み込み専用のイメージデータと、コンテナーの書き込み可能レイヤーの `size` を足し合わせたデータ総量。
+  複数コンテナーにおいては、読み込み専用イメージデータの全部または一部を共有しているかもしれません。
+  Two containers started from the same image share 100% of the
+  read-only data, while two containers with different images which have layers
+  in common share those common layers. Therefore, you can't just total the
+  virtual sizes. This over-estimates the total disk usage by a potentially
+  non-trivial amount.
 
+{% comment %}
+The total disk space used by all of the running containers on disk is some
+combination of each container's `size` and the `virtual size` values. If
+multiple containers started from the same exact image, the total size on disk for
+these containers would be SUM (`size` of containers) plus one image size
+(`virtual size`- `size`).
+{% endcomment %}
 The total disk space used by all of the running containers on disk is some
 combination of each container's `size` and the `virtual size` values. If
 multiple containers started from the same exact image, the total size on disk for
 these containers would be SUM (`size` of containers) plus one image size
 (`virtual size`- `size`).
 
+{% comment %}
+This also does not count the following additional ways a container can take up
+disk space:
+{% endcomment %}
 This also does not count the following additional ways a container can take up
 disk space:
 
+{% comment %}
+- Disk space used for log files if you use the `json-file` logging driver. This
+  can be non-trivial if your container generates a large amount of logging data
+  and log rotation is not configured.
+- Volumes and bind mounts used by the container.
+- Disk space used for the container's configuration files, which are typically
+  small.
+- Memory written to disk (if swapping is enabled).
+- Checkpoints, if you're using the experimental checkpoint/restore feature.
+{% endcomment %}
 - Disk space used for log files if you use the `json-file` logging driver. This
   can be non-trivial if your container generates a large amount of logging data
   and log rotation is not configured.
@@ -114,8 +230,21 @@ disk space:
 - Memory written to disk (if swapping is enabled).
 - Checkpoints, if you're using the experimental checkpoint/restore feature.
 
+{% comment %}
 ## The copy-on-write (CoW) strategy
+{% endcomment %}
+{: #the-copy-on-write-cow-strategy }
+## コピーオンライト方式
 
+{% comment %}
+Copy-on-write is a strategy of sharing and copying files for maximum efficiency.
+If a file or directory exists in a lower layer within the image, and another
+layer (including the writable layer) needs read access to it, it just uses the
+existing file. The first time another layer needs to modify the file (when
+building the image or running the container), the file is copied into that layer
+and modified. This minimizes I/O and the size of each of the subsequent layers.
+These advantages are explained in more depth below.
+{% endcomment %}
 Copy-on-write is a strategy of sharing and copying files for maximum efficiency.
 If a file or directory exists in a lower layer within the image, and another
 layer (including the writable layer) needs read access to it, it just uses the
@@ -124,13 +253,21 @@ building the image or running the container), the file is copied into that layer
 and modified. This minimizes I/O and the size of each of the subsequent layers.
 These advantages are explained in more depth below.
 
+{% comment %}
 ### Sharing promotes smaller images
+{% endcomment %}
+{: #sharing-promotes-smaller-images }
+### 共有によりイメージサイズはより小さく
 
+{% comment %}
 When you use `docker pull` to pull down an image from a repository, or when you
 create a container from an image that does not yet exist locally, each layer is
 pulled down separately, and stored in Docker's local storage area, which is
 usually `/var/lib/docker/` on Linux hosts. You can see these layers being pulled
 in this example:
+{% endcomment %}
+`docker pull` を実行してリポジトリからイメージをプルするとき、あるいはイメージから新たにコンテナーを生成するにあたってそのイメージがまだローカルに生成されていないとき、各レイヤーはプルによって個別に取得されて、Docker のローカル保存領域、たとえば Linux では通常 `/var/lib/docker/` に保存されます。
+取得された各レイヤーは、以下の例のようにして確認することができます。
 
 ```bash
 $ docker pull ubuntu:18.04
@@ -143,10 +280,15 @@ Digest: sha256:ab6cb8de3ad7bb33e2534677f865008535427390b117d7939193f8d1a6613e34
 Status: Downloaded newer image for ubuntu:18.04
 ```
 
+{% comment %}
 Each of these layers is stored in its own directory inside the Docker host's
 local storage area. To examine the layers on the filesystem, list the contents
 of `/var/lib/docker/<storage-driver>`. This example uses the `overlay2`
 storage driver:
+{% endcomment %}
+各レイヤーは、Docker ホストのローカル保存領域内にて、それぞれのディレクトリ配下に保存されます。
+ファイルシステム上のレイヤーデータを確認するなら、`/var/lib/docker/<storage-driver>` の内容を一覧表示します。
+以下は `overlay2` ストレージドライバーに対する例です。
 
 ```bash
 $ ls /var/lib/docker/overlay2
@@ -157,58 +299,96 @@ ec1ec45792908e90484f7e629330666e7eee599f08729c93890a7205a6ba35f5
 l
 ```
 
+{% comment %}
 The directory names do not correspond to the layer IDs (this has been true since
 Docker 1.10).
+{% endcomment %}
+ディレクトリ名はレイヤー ID に対応するものではありません。
+（Docker 1.10 以降は、対応づくものになりました。）
 
+{% comment %}
 Now imagine that you have two different Dockerfiles. You use the first one to
 create an image called `acme/my-base-image:1.0`.
+{% endcomment %}
+ここで 2 つの異なる Dockerfile を利用している状況を考えます。
+1 つめの Dockerfile からは `acme/my-base-image:1.0` というイメージが作られるものとします。
 
 ```conf
 FROM ubuntu:18.04
 COPY . /app
 ```
 
+{% comment %}
 The second one is based on `acme/my-base-image:1.0`, but has some additional
 layers:
+{% endcomment %}
+2 つめの Dockerfile は `acme/my-base-image:1.0` をベースとして、さらにレイヤーを追加するものとします。
 
 ```conf
 FROM acme/my-base-image:1.0
 CMD /app/hello.sh
 ```
 
+{% comment %}
 The second image contains all the layers from the first image, plus a new layer
 with the `CMD` instruction, and a read-write container layer. Docker already
 has all the layers from the first image, so it does not need to pull them again.
 The two images share any layers they have in common.
+{% endcomment %}
+2 つめのイメージには 1 つめのイメージが持つレイヤーがすべて含まれ、さらに `CMD` 命令による新たなレイヤーと、読み書き可能なコンテナーレイヤーが加わっています。
+Docker にとって 1 つめのイメージにおけるレイヤーはすべて取得済であるため、再度プルによって取得する必要がありません。
+2 つのイメージにおいて共通して存在しているレイヤーは、すべて共有します。
 
+{% comment %}
 If you build images from the two Dockerfiles, you can use `docker image ls` and
 `docker history` commands to verify that the cryptographic IDs of the shared
 layers are the same.
+{% endcomment %}
+この 2 つの Dockerfile からイメージをビルドした場合、`docker image ls` や `docker history` コマンドを使ってみると、共有されているレイヤーに対する暗号化 ID は同一になっていることがわかります。
 
+{% comment %}
 1.  Make a new directory `cow-test/` and change into it.
+{% endcomment %}
+1.  新規に `cow-test/` というディレクトリを生成して移動します。
 
+{% comment %}
 2.  Within `cow-test/`, create a new file with the following contents:
+{% endcomment %}
+2.  `cow-test/` ディレクトリにて、以下の内容で新規ファイルを生成します。
 
     ```bash
     #!/bin/sh
     echo "Hello world"
     ```
 
-    Save the file, and make it executable:
+    {% comment %}
+    {% endcomment %}
+    ファイルを保存して実行可能にします。
 
     ```bash
     chmod +x hello.sh
     ```
 
+{% comment %}
 3.  Copy the contents of the first Dockerfile above into a new file called
     `Dockerfile.base`.
+{% endcomment %}
+3.  前述した 1 つめの Dockerfile の内容を、新規ファイル `Dockerfile.base` にコピーします。
 
+{% comment %}
 4.  Copy the contents of the second Dockerfile above into a new file called
     `Dockerfile`.
+{% endcomment %}
+4.  前述した 2 つめの Dockerfile の内容を、新規ファイル `Dockerfile` にコピーします。
 
+{% comment %}
 5.  Within the `cow-test/` directory, build the first image. Don't forget to
     include the final `.` in the command. That sets the `PATH`, which tells
     Docker where to look for any files that need to be added to the image.
+{% endcomment %}
+5.  `cow-test/` ディレクトリ内にて 1 つめのイメージをビルドします。
+    コマンドでは最後の `.` を記述するのを忘れないでください。
+    これは `PATH` を指定するものであり、イメージに対してファイルの追加が必要となる場合に、そのファイルを探し出す場所を Docker に指示するものです。
 
     ```bash
     $ docker build -t acme/my-base-image:1.0 -f Dockerfile.base .
@@ -222,7 +402,10 @@ layers are the same.
     Successfully tagged acme/my-base-image:1.0
     ```
 
+{% comment %}
 6.  Build the second image.
+{% endcomment %}
+6.  2 つめのイメージをビルドします。
 
     ```bash
     $ docker build -t acme/my-final-image:1.0 -f Dockerfile .
@@ -238,7 +421,10 @@ layers are the same.
     Successfully tagged acme/my-final-image:1.0
     ```
 
+{% comment %}
 7.  Check out the sizes of the images:
+{% endcomment %}
+7.  2 つのイメージのサイズを確認します。
 
     ```bash
     $ docker image ls
@@ -248,7 +434,10 @@ layers are the same.
     acme/my-base-image                 1.0                     bd09118bcef6        3 minutes ago       103MB
     ```
 
+{% comment %}
 8.  Check out the layers that comprise each image:
+{% endcomment %}
+8.  それぞれのイメージに含まれるレイヤーを確認します。
 
     ```bash
     $ docker history bd09118bcef6
@@ -276,63 +465,139 @@ layers are the same.
     <missing>           3 months ago        /bin/sh -c #(nop) ADD file:eef57983bd66e3a...   103MB
     ```
 
+    {% comment %}
     Notice that all the layers are identical except the top layer of the second
     image. All the other layers are shared between the two images, and are only
     stored once in `/var/lib/docker/`. The new layer actually doesn't take any
     room at all, because it is not changing any files, but only running a command.
+    {% endcomment %}
+    ほぼすべてのレイヤーが同一であって、ただ 2 つめのイメージの最上位レイヤーだけが違うのがわかります。
+    これを除けば、すべてのレイヤーが 2 つのイメージ間で共有されているので、各レイヤーは `/var/lib/docker/` には一度しか保存されません。
+    新たにできたレイヤーは、まったくと言ってよいほどに容量をとっていません。
+    というのも、そのレイヤーは何かのファイルを変更するわけでなく、単にコマンドを実行するだけのものであるからです。
 
+    {% comment %}
     > **Note**: The `<missing>` lines in the `docker history` output indicate
     > that those layers were built on another system and are not available
     > locally. This can be ignored.
+    {% endcomment %}
+    > **メモ**: `docker history` の出力において `<missing>` として示される行は、そのレイヤーが他のシステムにおいてビルドされていることを示しています。
+    > したがってローカルシステム上では利用することができません。
+    > この表示は無視して構いません。
 
+{% comment %}
 ### Copying makes containers efficient
+{% endcomment %}
+{: #copying-makes-containers-efficient }
+### コピーによりコンテナーを効率的に
 
+{% comment %}
+When you start a container, a thin writable container layer is added on top of
+the other layers. Any changes the container makes to the filesystem are stored
+here. Any files the container does not change do not get copied to this writable
+layer. This means that the writable layer is as small as possible.
+{% endcomment %}
 When you start a container, a thin writable container layer is added on top of
 the other layers. Any changes the container makes to the filesystem are stored
 here. Any files the container does not change do not get copied to this writable
 layer. This means that the writable layer is as small as possible.
 
+{% comment %}
+When an existing file in a container is modified, the storage driver performs a
+copy-on-write operation. The specifics steps involved depend on the specific
+storage driver. For the `aufs`, `overlay`, and `overlay2` drivers, the
+copy-on-write operation follows this rough sequence:
+{% endcomment %}
 When an existing file in a container is modified, the storage driver performs a
 copy-on-write operation. The specifics steps involved depend on the specific
 storage driver. For the `aufs`, `overlay`, and `overlay2` drivers, the
 copy-on-write operation follows this rough sequence:
 
+{% comment %}
+*  Search through the image layers for the file to update. The process starts
+   at the newest layer and works down to the base layer one layer at a time.
+   When results are found, they are added to a cache to speed future operations.
+{% endcomment %}
 *  Search through the image layers for the file to update. The process starts
    at the newest layer and works down to the base layer one layer at a time.
    When results are found, they are added to a cache to speed future operations.
 
+{% comment %}
+*  Perform a `copy_up` operation on the first copy of the file that is found, to
+   copy the file to the container's writable layer.
+{% endcomment %}
 *  Perform a `copy_up` operation on the first copy of the file that is found, to
    copy the file to the container's writable layer.
 
+{% comment %}
+*  Any modifications are made to this copy of the file, and the container cannot
+   see the read-only copy of the file that exists in the lower layer.
+{% endcomment %}
 *  Any modifications are made to this copy of the file, and the container cannot
    see the read-only copy of the file that exists in the lower layer.
 
+{% comment %}
+Btrfs, ZFS, and other drivers handle the copy-on-write differently. You can
+read more about the methods of these drivers later in their detailed
+descriptions.
+{% endcomment %}
 Btrfs, ZFS, and other drivers handle the copy-on-write differently. You can
 read more about the methods of these drivers later in their detailed
 descriptions.
 
+{% comment %}
+Containers that write a lot of data consume more space than containers
+that do not. This is because most write operations consume new space in the
+container's thin writable top layer.
+{% endcomment %}
 Containers that write a lot of data consume more space than containers
 that do not. This is because most write operations consume new space in the
 container's thin writable top layer.
 
+{% comment %}
+> **Note**: for write-heavy applications, you should not store the data in
+> the container. Instead, use Docker volumes, which are independent of the
+> running container and are designed to be efficient for I/O. In addition,
+> volumes can be shared among containers and do not increase the size of your
+> container's writable layer.
+{% endcomment %}
 > **Note**: for write-heavy applications, you should not store the data in
 > the container. Instead, use Docker volumes, which are independent of the
 > running container and are designed to be efficient for I/O. In addition,
 > volumes can be shared among containers and do not increase the size of your
 > container's writable layer.
 
+{% comment %}
+A `copy_up` operation can incur a noticeable performance overhead. This overhead
+is different depending on which storage driver is in use. Large files,
+lots of layers, and deep directory trees can make the impact more noticeable.
+This is mitigated by the fact that each `copy_up` operation only occurs the first
+time a given file is modified.
+{% endcomment %}
 A `copy_up` operation can incur a noticeable performance overhead. This overhead
 is different depending on which storage driver is in use. Large files,
 lots of layers, and deep directory trees can make the impact more noticeable.
 This is mitigated by the fact that each `copy_up` operation only occurs the first
 time a given file is modified.
 
+{% comment %}
+To verify the way that copy-on-write works, the following procedures spins up 5
+containers based on the `acme/my-final-image:1.0` image we built earlier and
+examines how much room they take up.
+{% endcomment %}
 To verify the way that copy-on-write works, the following procedures spins up 5
 containers based on the `acme/my-final-image:1.0` image we built earlier and
 examines how much room they take up.
 
+{% comment %}
+> **Note**: This procedure doesn't work on Docker Desktop for Mac or Docker Desktop for Windows.
+{% endcomment %}
 > **Note**: This procedure doesn't work on Docker Desktop for Mac or Docker Desktop for Windows.
 
+{% comment %}
+1.  From a terminal on your Docker host, run the following `docker run` commands.
+    The strings at the end are the IDs of each container.
+{% endcomment %}
 1.  From a terminal on your Docker host, run the following `docker run` commands.
     The strings at the end are the IDs of each container.
 
@@ -351,6 +616,9 @@ examines how much room they take up.
     ```
 
 
+{% comment %}
+2.  Run the `docker ps` command to verify the 5 containers are running.
+{% endcomment %}
 2.  Run the `docker ps` command to verify the 5 containers are running.
 
     ```bash
@@ -363,6 +631,9 @@ examines how much room they take up.
     ```
 
 
+{% comment %}
+3.  List the contents of the local storage area.
+{% endcomment %}
 3.  List the contents of the local storage area.
 
     ```bash
@@ -375,6 +646,9 @@ examines how much room they take up.
     dcad7101795e4206e637d9358a818e5c32e13b349e62b00bf05cd5a4343ea513
     ```
 
+{% comment %}
+4.  Now check out their sizes:
+{% endcomment %}
 4.  Now check out their sizes:
 
     ```bash
@@ -389,16 +663,35 @@ examines how much room they take up.
 
     Each of these containers only takes up 32k of space on the filesystem.
 
+{% comment %}
+Not only does copy-on-write save space, but it also reduces start-up time.
+When you start a container (or multiple containers from the same image), Docker
+only needs to create the thin writable container layer.
+{% endcomment %}
 Not only does copy-on-write save space, but it also reduces start-up time.
 When you start a container (or multiple containers from the same image), Docker
 only needs to create the thin writable container layer.
 
+{% comment %}
+If Docker had to make an entire copy of the underlying image stack each time it
+started a new container, container start times and disk space used would be
+significantly increased. This would be similar to the way that virtual machines
+work, with one or more virtual disks per virtual machine.
+{% endcomment %}
 If Docker had to make an entire copy of the underlying image stack each time it
 started a new container, container start times and disk space used would be
 significantly increased. This would be similar to the way that virtual machines
 work, with one or more virtual disks per virtual machine.
 
+{% comment %}
 ## Related information
+{% endcomment %}
+{: #related-information }
+## 関連情報
 
+{% comment %}
 * [Volumes](/storage/volumes.md)
 * [Select a storage driver](select-storage-driver.md)
+{% endcomment %}
+* [ボリューム](/storage/volumes.md)
+* [ストレージドライバーの選定](select-storage-driver.md)

@@ -340,7 +340,7 @@ from the repository.
     あるいは次の手順に行って、特定のバージョンをインストールします。
 
     ```bash
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+    $ sudo apt-get install docker docker-compose
     ```
 
     {% comment %}

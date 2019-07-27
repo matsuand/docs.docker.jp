@@ -123,7 +123,7 @@ To create a team:
 {% comment %}
 > **Note**: you are not automatically added to teams created by your organization.
 {% endcomment %}
-> **メモ**: you are not automatically added to teams created by your organization.
+> **メモ**: 組織から生成したチームへは、操作したユーザーが自動的に追加されるわけではありません。
 
 {% comment %}
 ### Removing team members
@@ -145,12 +145,12 @@ To remove a member from a team, click the **x** next to their name:
 ### Giving a team access to a repository
 {% endcomment %}
 {: #giving-a-team-access-to-a-repository }
-### Giving a team access to a repository
+### リポジトリに対するチームアクセスの追加
 
 {% comment %}
 To provide a team access to a repository:
 {% endcomment %}
-To provide a team access to a repository:
+リポジトリに対してチームアクセスを設定するには以下のようにします。
 
 {% comment %}
 1. Visit the repository list on Docker Hub by clicking on **Repositories**
@@ -160,56 +160,59 @@ To provide a team access to a repository:
 5. Select the team, permissions level (more on this below) and click **+**
 6. Click the **+** button to add ![Add Repo Permissions for Team](images/orgs-add-team-permissions.png)
 {% endcomment %}
-1. Visit the repository list on Docker Hub by clicking on **Repositories**
-2. Select your organization in the namespace dropdown list
-3. Click the repository you'd like to edit ![Org Repos](images/orgs-list-repos.png)
-4. Click the **Permissions** tab
-5. Select the team, permissions level (more on this below) and click **+**
-6. Click the **+** button to add ![Add Repo Permissions for Team](images/orgs-add-team-permissions.png)
+1. Docker Hub 上において **Repositories** をクリックしてリポジトリ一覧を表示します。
+2. 名前空間ドロップダウンリストから、目的の組織を選択します。
+3. 編集したいリポジトリをクリックします。
+   ![組織のリポジトリ](images/orgs-list-repos.png)
+4. **Permissions** タブをクリックします。
+5. チームを選択し、さらに（以下に示すようにいくつかある）パーミッションレベルを選択して **+** をクリックします。
+6. **+** ボタンのクリックによりパーミッションが追加されます。
+   ![チームに対するリポジトリパーミッションの追加](images/orgs-add-team-permissions.png)
 
 {% comment %}
 ### Viewing a team's permissions for all repositories
 {% endcomment %}
 {: #viewing-a-teams-permissions-for-all-repositories }
-### Viewing a team's permissions for all repositories
+### リポジトリすべてに対するチームパーミッションの確認
 
 {% comment %}
 To view a team's permissions over all repos:
 1. Click on **Organizations**, then select your organization and team.
 2. Click on the **Permissions** tab where you can view which repositories this team has access to ![Team Audit Permissions](images/orgs-audit-permissions.png)
 {% endcomment %}
-To view a team's permissions over all repos:
-1. Click on **Organizations**, then select your organization and team.
-2. Click on the **Permissions** tab where you can view which repositories this team has access to ![Team Audit Permissions](images/orgs-audit-permissions.png)
+リポジトリすべてにわたってのチームのパーミッションを確認するには、以下を行います。
+1. **Organizations** をクリックします。
+   そして目的の組織とチームを選択します。
+2. **Permissions** タブをクリックすれば、チームがアクセス可能なリポジトリはどれであるかが確認できます。
+
+   ![チームのパーミッションの確認](images/orgs-audit-permissions.png)
 
 
 {% comment %}
 ### Permissions Reference
 {% endcomment %}
 {: #permissions-reference }
-### Permissions Reference
+### パーミッションに関するリファレンス
 
 {% comment %}
 Permissions are cumulative. For example, if you have Write permissions, you
 automatically have Read permissions:
 {% endcomment %}
-Permissions are cumulative. For example, if you have Write permissions, you
-automatically have Read permissions:
+パーミッションは積み上げられるような性質を持っています。
+たとえば書き込みパーミッションがあったとすると、それは自動的に読み込みパーミッションも有していることになります。
 
 {% comment %}
 - `Read` access allows users to view, search, and pull a private repository in the same way as they can a public repository.
 - `Write` access allows users to push to repositories on Docker Hub.
 - `Admin` access allows users to modify the repositories "Description", "Collaborators" rights, "Public/Private" visibility and "Delete".
 {% endcomment %}
-- `Read` access allows users to view, search, and pull a private repository in the same way as they can a public repository.
-- `Write` access allows users to push to repositories on Docker Hub.
-- `Admin` access allows users to modify the repositories "Description", "Collaborators" rights, "Public/Private" visibility and "Delete".
+- `Read`（読み込み）権限は、公開リポジトリに対する操作と同じように、 プライベートリポジトリの参照、検索、プルを行うことができます。
+- `Write`（書き込み）権限は、Docker Hub 上のリポジトリにプッシュすることができます。
+- `Admin`（管理）権限は、リポジトリに対して "Description"、"Collaborators" の権限、"Public/Private" の別を編集したり、"Delete" を行ったりすることができます。
 
 {% comment %}
 > **Note**: A User who has not yet verified their email address only has
 > `Read` access to the repository, regardless of the rights their team
 > membership has given them.
 {% endcomment %}
-> **メモ**: A User who has not yet verified their email address only has
-> `Read` access to the repository, regardless of the rights their team
-> membership has given them.
+> **メモ**: メールアドレスの検証が済んでいないユーザーは、たとえチームメンバーとしての権限が与えられていても、リポジトリに対しては `Read` 権限しか与えられません。
