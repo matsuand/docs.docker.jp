@@ -117,7 +117,7 @@ All writes to the container that add new or modify existing data are stored in
 this writable layer. When the container is deleted, the writable layer is also
 deleted. The underlying image remains unchanged.
 {% endcomment %}
-コンテナーとイメージの最大の違いは、最上部に書き込みレイヤーがあるかどうかです。
+コンテナーとイメージの大きな違いは、最上部に書き込みレイヤーがあるかどうかです。
 コンテナーに対して新たに加えられたり修正されたりしたデータは、すべてこの書き込みレイヤーに保存されます。
 コンテナーが削除されると、その書き込みレイヤーも同じく削除されます。
 ただしその元にあったイメージは、変更されずに残ります。
@@ -128,7 +128,7 @@ stored in this container layer, multiple containers can share access to the same
 underlying image and yet have their own data state. The diagram below shows
 multiple containers sharing the same Ubuntu 18.04 image.
 {% endcomment %}
-複数のコンテナーを見た場合、そのコンテナーごとに個々の書き込み可能なコンテナーレイヤーがあって、データ更新はそのコンテナーレイヤーに保存されます。
+複数のコンテナーを見た場合、そのコンテナーごとに個々の書き込み可能なコンテナーレイヤーがあって、データ更新結果はそのコンテナーレイヤーに保存されます。
 したがって複数コンテナーでは、同一のイメージを共有しながらアクセスすることができ、しかも個々に見れば独自の状態を持つことができることになります。
 以下の図は、Ubuntu 18.04 という同一のイメージを共有する複数コンテナーを示しています。
 
@@ -171,7 +171,8 @@ command. Two different columns relate to size.
 - `size`: the amount of data (on disk) that is used for the writable layer of
   each container.
 {% endcomment %}
-- `size`: （ディスク上の）データ総量。各コンテナーの書き込み可能レイヤーに対して利用されるデータ部分です。
+- `size`: （ディスク上の）データ総量。
+  各コンテナーの書き込みレイヤーが利用するデータ部分です。
 
 {% comment %}
 - `virtual size`: the amount of data used for the read-only image data
@@ -183,13 +184,12 @@ command. Two different columns relate to size.
   virtual sizes. This over-estimates the total disk usage by a potentially
   non-trivial amount.
 {% endcomment %}
-- `virtual size`: コンテナーにおいて利用されている読み込み専用のイメージデータと、コンテナーの書き込み可能レイヤーの `size` を足し合わせたデータ総量。
+- `virtual size`: コンテナーにおいて利用されている読み込み専用のイメージデータと、コンテナーの書き込みレイヤーの `size` を足し合わせたデータ総量。
   複数コンテナーにおいては、読み込み専用イメージデータの全部または一部を共有しているかもしれません。
-  Two containers started from the same image share 100% of the
-  read-only data, while two containers with different images which have layers
-  in common share those common layers. Therefore, you can't just total the
-  virtual sizes. This over-estimates the total disk usage by a potentially
-  non-trivial amount.
+  1 つのイメージをベースとして作った 2 つのコンテナーでは、読み込み専用データを 100% 共有します。
+  一方で 2 つの異なるイメージが一部に共通するレイヤーを持っていて、そこからそれぞれに 2 つのコンテナーを作ったとすると、共有するのはその共通レイヤー部分のみです。
+  したがって `virtual size` は単純に足し合わせで計算できるものではありません。
+  これはディスク総量を多く見積もってしまい、その量は無視できないほどになることがあります。
 
 {% comment %}
 The total disk space used by all of the running containers on disk is some
@@ -198,18 +198,14 @@ multiple containers started from the same exact image, the total size on disk fo
 these containers would be SUM (`size` of containers) plus one image size
 (`virtual size`- `size`).
 {% endcomment %}
-The total disk space used by all of the running containers on disk is some
-combination of each container's `size` and the `virtual size` values. If
-multiple containers started from the same exact image, the total size on disk for
-these containers would be SUM (`size` of containers) plus one image size
-(`virtual size`- `size`).
+起動しているコンテナーすべてが利用するディスク総量は、各コンテナーの `size` と `virtual size` を適宜組み合わせた値になります。
+1 つのイメージだけに基づいた複数コンテナーの場合、そのディスク総量は、すべての `size` の合計に 1 つのイメージサイズ（`virtual size`- `size`）を加えて得られます。
 
 {% comment %}
 This also does not count the following additional ways a container can take up
 disk space:
 {% endcomment %}
-This also does not count the following additional ways a container can take up
-disk space:
+またコンテナーがディスク領域を消費するものであっても、以下に示す状況はディスク総量の算定には含まれません。
 
 {% comment %}
 - Disk space used for log files if you use the `json-file` logging driver. This
@@ -221,14 +217,13 @@ disk space:
 - Memory written to disk (if swapping is enabled).
 - Checkpoints, if you're using the experimental checkpoint/restore feature.
 {% endcomment %}
-- Disk space used for log files if you use the `json-file` logging driver. This
-  can be non-trivial if your container generates a large amount of logging data
-  and log rotation is not configured.
-- Volumes and bind mounts used by the container.
-- Disk space used for the container's configuration files, which are typically
-  small.
-- Memory written to disk (if swapping is enabled).
-- Checkpoints, if you're using the experimental checkpoint/restore feature.
+- ロギングドライバー `json-file` を利用している場合に、そのログファイルが利用するディスク量。
+  コンテナーにおいてログ出力を大量に行っていて、ログローテーションを用いていない場合には、このディスク量は無視できないものになります。
+- コンテナーが利用するボリュームやバインドマウント。
+- コンテナーの設定ファイルが利用するディスク領域。
+  そのデータ容量は少ないのが普通です。
+- （スワップが有効である場合に）ディスクに書き込まれるメモリデータ。
+- 試験的な checkpoint/restore 機能を利用している場合のチェックポイント。
 
 {% comment %}
 ## The copy-on-write (CoW) strategy
@@ -245,13 +240,12 @@ building the image or running the container), the file is copied into that layer
 and modified. This minimizes I/O and the size of each of the subsequent layers.
 These advantages are explained in more depth below.
 {% endcomment %}
-Copy-on-write is a strategy of sharing and copying files for maximum efficiency.
-If a file or directory exists in a lower layer within the image, and another
-layer (including the writable layer) needs read access to it, it just uses the
-existing file. The first time another layer needs to modify the file (when
-building the image or running the container), the file is copied into that layer
-and modified. This minimizes I/O and the size of each of the subsequent layers.
-These advantages are explained in more depth below.
+コピーオンライト（copy-on-write; CoW）は、ファイルの共有とコピーを最も効率よく行う方式です。
+イメージ内の下の方にあるレイヤーに、ファイルやディレクトリが存在していた場合に、別のレイヤー（書き込みレイヤーを含む）からの読み込みアクセスが必要であるとします。
+このときには、当然のことながら存在しているそのファイルを利用します。
+そのファイルを修正する必要のある別のレイヤーがあったとすると、これを初めて修正するとき（イメージがビルドされたときやコンテナーが起動したときなど）、そのファイルはレイヤーにコピーされた上で修正されます。
+こうすることで入出力を最小限に抑え、次に続くレイヤーの各サイズも増やさずに済みます。
+この利点に関しては、さらに詳しく後述します。
 
 {% comment %}
 ### Sharing promotes smaller images
@@ -304,7 +298,7 @@ The directory names do not correspond to the layer IDs (this has been true since
 Docker 1.10).
 {% endcomment %}
 ディレクトリ名はレイヤー ID に対応するものではありません。
-（Docker 1.10 以降は、対応づくものになりました。）
+（Docker 1.10 以前は対応づいていました。）
 
 {% comment %}
 Now imagine that you have two different Dockerfiles. You use the first one to
@@ -497,10 +491,10 @@ the other layers. Any changes the container makes to the filesystem are stored
 here. Any files the container does not change do not get copied to this writable
 layer. This means that the writable layer is as small as possible.
 {% endcomment %}
-When you start a container, a thin writable container layer is added on top of
-the other layers. Any changes the container makes to the filesystem are stored
-here. Any files the container does not change do not get copied to this writable
-layer. This means that the writable layer is as small as possible.
+コンテナーを起動すると、それまであったレイヤーの最上部に、書き込み可能な薄いコンテナーレイヤーが加えられます。
+コンテナーがファイルシステムに対して行った変更は、すべてそこに保存されます。
+コンテナーが変更を行っていないファイルは、その書き込みレイヤーにはコピーされません。
+つまり書き込みレイヤーは、できるだけ容量が小さく抑えられることになります。
 
 {% comment %}
 When an existing file in a container is modified, the storage driver performs a
@@ -508,51 +502,48 @@ copy-on-write operation. The specifics steps involved depend on the specific
 storage driver. For the `aufs`, `overlay`, and `overlay2` drivers, the
 copy-on-write operation follows this rough sequence:
 {% endcomment %}
-When an existing file in a container is modified, the storage driver performs a
-copy-on-write operation. The specifics steps involved depend on the specific
-storage driver. For the `aufs`, `overlay`, and `overlay2` drivers, the
-copy-on-write operation follows this rough sequence:
+コンテナー内にあるファイルが修正されると、ストレージドライバーはコピーオンライト方式により動作します。
+そこで実行される各処理は、ストレージドライバーによってさまざまです。
+`aufs`, `overlay`, `overlay2` といったドライバーの場合、だいたい以下のような順にコピーオンライト方式による処理が行われます。
 
 {% comment %}
 *  Search through the image layers for the file to update. The process starts
    at the newest layer and works down to the base layer one layer at a time.
    When results are found, they are added to a cache to speed future operations.
 {% endcomment %}
-*  Search through the image layers for the file to update. The process starts
-   at the newest layer and works down to the base layer one layer at a time.
-   When results are found, they are added to a cache to speed future operations.
+*  更新するべきファイルをイメージレイヤー内から探します。
+   この処理は最新のレイヤーから始まって、ベースレイヤーに向けて順に降りていき、一度に 1 つのレイヤーを処理していきます。
+   ファイルが見つかるとこれをキャッシュに加えて、次回以降の処理スピードを上げることに備えます。
 
 {% comment %}
 *  Perform a `copy_up` operation on the first copy of the file that is found, to
    copy the file to the container's writable layer.
 {% endcomment %}
-*  Perform a `copy_up` operation on the first copy of the file that is found, to
-   copy the file to the container's writable layer.
+*  見つかったファイルを初めてコピーするときには `copy_up` という処理が行われます。
+   これによってそのファイルをコンテナーの書き込みレイヤーにコピーします。
 
 {% comment %}
 *  Any modifications are made to this copy of the file, and the container cannot
    see the read-only copy of the file that exists in the lower layer.
 {% endcomment %}
-*  Any modifications are made to this copy of the file, and the container cannot
-   see the read-only copy of the file that exists in the lower layer.
+*  修正が発生すると、コピーを行ったそのファイルが処理されます。
+   つまりコンテナーは、下位のレイヤー内に存在している読み込み専用のそのファイルを見にいくことはありません。
 
 {% comment %}
 Btrfs, ZFS, and other drivers handle the copy-on-write differently. You can
 read more about the methods of these drivers later in their detailed
 descriptions.
 {% endcomment %}
-Btrfs, ZFS, and other drivers handle the copy-on-write differently. You can
-read more about the methods of these drivers later in their detailed
-descriptions.
+Btrfs, ZFS といったドライバーにおけるコピーオンライト方式は、これとは異なります。
+そのようなドライバーが行う手法の詳細は、後述するそれぞれの詳細説明を参照してください。
 
 {% comment %}
 Containers that write a lot of data consume more space than containers
 that do not. This is because most write operations consume new space in the
 container's thin writable top layer.
 {% endcomment %}
-Containers that write a lot of data consume more space than containers
-that do not. This is because most write operations consume new space in the
-container's thin writable top layer.
+データを大量に書き込むようなコンテナーは、そういった書き込みを行わないコンテナーに比べて、データ領域をより多く消費します。
+コンテナーの最上位にある書き込み可能な薄いレイヤー上に対して、書き込み処理を行うことは、たいていが新たなデータ領域を必要とするためです。
 
 {% comment %}
 > **Note**: for write-heavy applications, you should not store the data in
@@ -561,11 +552,10 @@ container's thin writable top layer.
 > volumes can be shared among containers and do not increase the size of your
 > container's writable layer.
 {% endcomment %}
-> **Note**: for write-heavy applications, you should not store the data in
-> the container. Instead, use Docker volumes, which are independent of the
-> running container and are designed to be efficient for I/O. In addition,
-> volumes can be shared among containers and do not increase the size of your
-> container's writable layer.
+> **メモ**: 書き込みが頻繁に行われるアプリケーションにおいては、コンテナー内にデータを保存するべきではありません。
+> かわりに Docker ボリュームを利用してください。
+> Docker ボリュームは起動されるコンテナーからは独立していて、効率的な入出力を行うように設計されています。
+> さらにボリュームは複数のコンテナー間での共有が可能であり、書き込みレイヤーのサイズを増加させることもありません。
 
 {% comment %}
 A `copy_up` operation can incur a noticeable performance overhead. This overhead
@@ -574,32 +564,30 @@ lots of layers, and deep directory trees can make the impact more noticeable.
 This is mitigated by the fact that each `copy_up` operation only occurs the first
 time a given file is modified.
 {% endcomment %}
-A `copy_up` operation can incur a noticeable performance overhead. This overhead
-is different depending on which storage driver is in use. Large files,
-lots of layers, and deep directory trees can make the impact more noticeable.
-This is mitigated by the fact that each `copy_up` operation only occurs the first
-time a given file is modified.
+`copy_up` 処理は際立った性能のオーバーヘッドを招きます。
+このオーバーヘッドは、利用しているストレージドライバーによってさまざまです。
+大容量ファイル、多数のレイヤー、深いディレクトリ階層といったものが、さらに影響します。
+`copy_up` 処理は対象となるファイルが初めて修正されたときにだけ実行されるので、オーバーヘッドはそれでも最小限に抑えられています。
 
 {% comment %}
 To verify the way that copy-on-write works, the following procedures spins up 5
 containers based on the `acme/my-final-image:1.0` image we built earlier and
 examines how much room they take up.
 {% endcomment %}
-To verify the way that copy-on-write works, the following procedures spins up 5
-containers based on the `acme/my-final-image:1.0` image we built earlier and
-examines how much room they take up.
+コピーオンライトが動作している様子を確認するため、以下の例においては、前述した `acme/my-final-image:1.0` イメージをベースとする 5 つのコンテナーを見ていきます。
+そして各コンテナーがどれだけの容量を消費しているかを確認します。
 
 {% comment %}
 > **Note**: This procedure doesn't work on Docker Desktop for Mac or Docker Desktop for Windows.
 {% endcomment %}
-> **Note**: This procedure doesn't work on Docker Desktop for Mac or Docker Desktop for Windows.
+> **メモ**: 以下の手順は Docker Desktop for Mac または Docker Desktop for Windows では動作しません。
 
 {% comment %}
 1.  From a terminal on your Docker host, run the following `docker run` commands.
     The strings at the end are the IDs of each container.
 {% endcomment %}
-1.  From a terminal on your Docker host, run the following `docker run` commands.
-    The strings at the end are the IDs of each container.
+1.  Docker ホスト上の端末画面から、以下のような `docker run` コマンドを実行します。
+    各行の終わりには、各コンテナーの ID を入力します。
 
     ```bash
     $ docker run -dit --name my_container_1 acme/my-final-image:1.0 bash \
@@ -619,7 +607,7 @@ examines how much room they take up.
 {% comment %}
 2.  Run the `docker ps` command to verify the 5 containers are running.
 {% endcomment %}
-2.  Run the `docker ps` command to verify the 5 containers are running.
+2.  `docker ps` コマンドを実行して、5 つのコンテナーが実行中であることを確認します。
 
     ```bash
     CONTAINER ID      IMAGE                     COMMAND     CREATED              STATUS              PORTS      NAMES
@@ -634,7 +622,7 @@ examines how much room they take up.
 {% comment %}
 3.  List the contents of the local storage area.
 {% endcomment %}
-3.  List the contents of the local storage area.
+3.  ローカルの保存ディレクトリの内容を一覧表示します。
 
     ```bash
     $ sudo ls /var/lib/docker/containers
@@ -649,7 +637,7 @@ examines how much room they take up.
 {% comment %}
 4.  Now check out their sizes:
 {% endcomment %}
-4.  Now check out their sizes:
+4.  各サイズを確認します。
 
     ```bash
     $ sudo du -sh /var/lib/docker/containers/*
@@ -661,16 +649,18 @@ examines how much room they take up.
     32K  /var/lib/docker/containers/dcad7101795e4206e637d9358a818e5c32e13b349e62b00bf05cd5a4343ea513
     ```
 
+    {% comment %}
     Each of these containers only takes up 32k of space on the filesystem.
+    {% endcomment %}
+    各コンテナーは、ファイルシステム上において 32k しか容量をとっていません。
 
 {% comment %}
 Not only does copy-on-write save space, but it also reduces start-up time.
 When you start a container (or multiple containers from the same image), Docker
 only needs to create the thin writable container layer.
 {% endcomment %}
-Not only does copy-on-write save space, but it also reduces start-up time.
-When you start a container (or multiple containers from the same image), Docker
-only needs to create the thin writable container layer.
+コピーオンライト方式は容量を抑えるだけでなく、起動時間も節約します。
+コンテナーを起動するとき（あるいは同一イメージからなる複数コンテナーを起動するとき）、Docker が必要とするのは、書き込み可能な薄いコンテナーレイヤーを生成することだけだからです。
 
 {% comment %}
 If Docker had to make an entire copy of the underlying image stack each time it
@@ -678,10 +668,8 @@ started a new container, container start times and disk space used would be
 significantly increased. This would be similar to the way that virtual machines
 work, with one or more virtual disks per virtual machine.
 {% endcomment %}
-If Docker had to make an entire copy of the underlying image stack each time it
-started a new container, container start times and disk space used would be
-significantly increased. This would be similar to the way that virtual machines
-work, with one or more virtual disks per virtual machine.
+仮に Docker が新たなコンテナーを起動するたびに、その元にあるイメージ層をすべてコピーしなければならないとしたら、起動時間やディスク容量は著しく増大しているはずです。
+このことは仮想マシン技術において、複数の仮想ディスクが仮想マシン 1 つに対して動作している様子にも似ています。
 
 {% comment %}
 ## Related information
