@@ -1,11 +1,16 @@
 ---
-description: Get started with Docker Cluster on AWS
+description: AWS 上にて Docker Cluster をはじめよう。
 keywords: documentation, docs, docker, cluster, infrastructure, automation, AWS
-title: Get started with Docker Cluster on AWS
+title: AWS 上にて Docker Cluster をはじめよう
 ---
 
+{% comment %}
 This topic discusses working with docker clusters in AWS, including how to:
+{% endcomment %}
+このトピックでは AWS 上に Docker Cluster を動作させることを示します。
+以下のような方法を説明しています。
 
+{% comment %}
 - [Create a cluster](#create-a-cluster)
 - [View cluster information](#view-cluster-information)
 - [Use context](#use-context)
@@ -13,19 +18,48 @@ This topic discusses working with docker clusters in AWS, including how to:
 - [Back up a cluster](#back-up-a-cluster)
 - [Upgrade a cluster](#upgrade-a-cluster)
 - [Destroy a cluster](#destroy-a-cluster)
+{% endcomment %}
+- [クラスターの生成](#create-a-cluster)
+- [クラスター情報の参照](#view-cluster-information)
+- [コンテキストの利用](#use-context)
+- [クラスターのスケール変更](#scale-a-cluster)
+- [クラスターのバックアップ](#back-up-a-cluster)
+- [クラスターのアップグレード](#upgrade-a-cluster)
+- [クラスターの削除](#destroy-a-cluster)
 
+{% comment %}
 ## Prerequisites
+{% endcomment %}
+{: #prerequisites }
+## 前提条件
 
+{% comment %}
+- Completed installation of [Docker Desktop Enterprise](/ee/desktop/admin/install).
+- [Access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to an AWS subscription. You can provide these credentials in many ways, but the recommended way is to create an `~/.aws/credentials` file. Refer to [AWS CLI configuration](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for details on creating one.
+{% endcomment %}
 - Completed installation of [Docker Desktop Enterprise](/ee/desktop/admin/install).
 - [Access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to an AWS subscription. You can provide these credentials in many ways, but the recommended way is to create an `~/.aws/credentials` file. Refer to [AWS CLI configuration](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for details on creating one.
 
+{% comment %}
 ## Create a cluster
+{% endcomment %}
+{: #create-a-cluster }
+## クラスターの生成
+{% comment %}
+When you create a docker cluster in AWS, the created cluster has:
+ - 3 UCP Managers
+ - 3 Workers
+ - 3 DTR Replicas
+{% endcomment %}
 When you create a docker cluster in AWS, the created cluster has:
  - 3 UCP Managers
  - 3 Workers
  - 3 DTR Replicas
 
+{% comment %}
 Create a `cluster.yml` file with the following information:
+{% endcomment %}
+以下のような情報を含む `cluster.yml` ファイルを生成します。
 ```yaml
     variable:
       domain: "YOUR DOMAIN, e.g. docker.com"
@@ -90,22 +124,40 @@ Create a `cluster.yml` file with the following information:
           domain: ${domain}
           subdomain: ${subdomain}
 ```
+{% comment %}
 In this example, the cluster takes on the following topology:
+{% endcomment %}
+この例において、クラスターは以下のようなトポロジーを構成します。
 
+{% comment %}
 ![Docker Cluster Topology](./images/docker_cluster_aws.png)
+{% endcomment %}
+![Docker Cluster トポロジー](./images/docker_cluster_aws.png)
 
+{% comment %}
 Provide values for the variable section.  For example:
+{% endcomment %}
+variable の項には適切な値を設定します。
+たとえば以下のとおりです。
 
     domain: "docker.notreal"
     subdomain: "quickstart"
     region: "us-east-1"
     email: "cluster@docker.com"
 
+{% comment %}
+The values are substituted in the cluster definition, which makes it
+easy to define a re-usable cluster definition and then change the variables
+to create multiple instances of a cluster.
+{% endcomment %}
 The values are substituted in the cluster definition, which makes it
 easy to define a re-usable cluster definition and then change the variables
 to create multiple instances of a cluster.
 
+{% comment %}
 Run `docker cluster create --file cluster.yml --name quickstart`.
+{% endcomment %}
+`docker cluster create --file cluster.yml --name quickstart` を実行します。
 
     $ docker cluster create --file cluster.yml --name quickstart
     Please provide a value for ucp_password
@@ -114,7 +166,11 @@ Run `docker cluster create --file cluster.yml --name quickstart`.
     Planning cluster on aws                                                    [OK]
     Creating: [===========================                                   ] 44%
 
+{% comment %}
 After approximately 10 minutes, resources are provisioned, and Docker Enterprise installation is started:
+{% endcomment %}
+10 分程度でリソースが導入（provision）されます。
+そして Docker Enterprise のインストールが始まります。
 
     $ docker cluster create --file cluster.yml --name quickstart
     Please provide a value for ucp_password
@@ -125,7 +181,10 @@ After approximately 10 minutes, resources are provisioned, and Docker Enterprise
     Installing Docker Enterprise Platform Requirements                         [OK]
     docker-ee : Ensure old versions of Docker are not installed.               [-]
 
+{% comment %}
 After approximately 20 minutes, Docker Enterprise installation completes:
+{% endcomment %}
+20 分程度たつと、Docker Enterprise のインストールが完了します。
 
     $ docker cluster create -f examples/docs.yml -n quickstart
     Please provide a value for ucp_password
@@ -145,17 +204,31 @@ After approximately 20 minutes, Docker Enterprise installation completes:
 
     911c882340b2
 
+{% comment %}
 After all operations complete succesfully, the cluster ID is the last statement
 to print. You can now log in to the URL and begin interacting with the cluster.
+{% endcomment %}
+すべての処理が正常終了すると、クラスター ID が最終行に出力されます。
+URL にログインしてクラスターとのやり取りを行うことができます。
 
+{% comment %}
 ## View cluster information
+{% endcomment %}
+{: #view-cluster-information }
+## クラスター情報の参照
 
+{% comment %}
+To view an inventory of the clusters you created, run `docker cluster ls`:
+{% endcomment %}
 To view an inventory of the clusters you created, run `docker cluster ls`:
 
     $ docker cluster ls
     ID             NAME         PROVIDER    ENGINE              UCP                DTR                STATE
     911c882340b2   quickstart   acme, aws   ee-stable-18.09.5   docker/ucp:3.1.6   docker/dtr:2.6.5   running
 
+{% comment %}
+For detailed information about the cluster, run `docker cluster inspect quickstart`.
+{% endcomment %}
 For detailed information about the cluster, run `docker cluster inspect quickstart`.
 
     $ docker cluster inspect quickstart
@@ -225,16 +298,27 @@ resource:
       domain: docker.notreal
       subdomain: quickstart
 ```
+{% comment %}
+The information displayed by `docker cluster inspect` can be used as a cluster definition to clone the cluster.
+{% endcomment %}
 The information displayed by `docker cluster inspect` can be used as a cluster definition to clone the cluster.
 
+{% comment %}
 ## Use context
+{% endcomment %}
+{: #use-context }
+## コンテキストの利用
 
+{% comment %}
+{% endcomment %}
 `docker cluster` creates a context on your local machine.  To use this context and interact with the cluster, run `docker context use quickstart`:
 
     $ docker context use quickstart
     quickstart
     Current context is now "quickstart"
 
+{% comment %}
+{% endcomment %}
 To verify that the client is connected to the cluster, run `docker version`:
 
     $ docker version
@@ -283,13 +367,21 @@ To verify that the client is connected to the cluster, run `docker version`:
       kube-controllers: v3.5.3
       node:             v3.5.3
 
+{% comment %}
+{% endcomment %}
 To change the context back to your local machine, run `docker context use default`:
 
     $ docker context use default
     default
     Current context is now "default"
 
+{% comment %}
 ## Scale a cluster
+{% endcomment %}
+{: #scale-a-cluster }
+## クラスターのスケール変更
+{% comment %}
+{% endcomment %}
 Open `cluster.yml`.  Change the number of workers to 6:
 ```yaml
       workers:
@@ -306,6 +398,8 @@ desired state. Run  `docker cluster update quickstart --file cluster.yml`:
     Planning cluster on aws                                                    [OK]
     Updating: [==================                                            ] 30%
 
+{% comment %}
+{% endcomment %}
 After approximately 10 minutes, use the `update` operation to add the new nodes and join them to the cluster:
 
     $ docker cluster update quickstart --file examples/docs.yml
@@ -321,6 +415,8 @@ After approximately 10 minutes, use the `update` operation to add the new nodes 
 
     911c882340b2
 
+{% comment %}
+{% endcomment %}
 To view the new nodes in the cluster:
 
     $ docker --context quickstart node ls
@@ -338,10 +434,18 @@ To view the new nodes in the cluster:
     qu84bv2zytv5nubcuntkzwbu5     ip-172-31-43-6.us-east-2.compute.internal     Ready               Active                                  18.09.5
     j6kzzog8a2yv4ragpx826juyv     ip-172-31-43-108.us-east-2.compute.internal   Ready               Active              Reachable           18.09.5
 
+{% comment %}
 ## Back up a cluster
+{% endcomment %}
+{: #back-up-a-cluster }
+## クラスターのバックアップ
 
+{% comment %}
+{% endcomment %}
 Before performing operations on the cluster, perform a full backup of the running cluster by running `docker cluster backup quickstart --file "backup-$(date '+%Y-%m-%d').tar.gz" `.
 
+{% comment %}
+{% endcomment %}
 Provide a passphrase to encrypt the UCP backup.
 
     $ docker cluster backup quickstart --file "backup-$(date '+%Y-%m-%d').tar.gz"
@@ -351,13 +455,25 @@ Provide a passphrase to encrypt the UCP backup.
 
     Backup of 911c882340b2 saved to backup-2019-05-07.tar.gz
 
+{% comment %}
+{% endcomment %}
 Save the backup on external storage for disaster recovery.
 
+{% comment %}
+{% endcomment %}
 To restore a cluster, run `docker cluster restore quickstart --file backup-2019-05-07.tar.gz`.
 
+{% comment %}
+{% endcomment %}
 Provide the passphrase from the backup step to decrypt the UCP backup.
 
+{% comment %}
 ## Upgrade a cluster
+{% endcomment %}
+{: #upgrade-a-cluster }
+## クラスターのアップグレード
+{% comment %}
+{% endcomment %}
 Open `cluster.yml`.  Change the cluster versions:
 ```yaml
 cluster:
@@ -383,7 +499,14 @@ Run  `docker cluster update quickstart --file cluster.yml `:
 
     911c882340b2
 
+{% comment %}
 ## Destroy a cluster
+{% endcomment %}
+{: #destroy-a-cluster }
+## クラスターの削除
+{% comment %}
+When the cluster has reached end-of-life, run `docker cluster rm quickstart`:
+{% endcomment %}
 When the cluster has reached end-of-life, run `docker cluster rm quickstart`:
 
     $ docker cluster rm quickstart
@@ -393,10 +516,22 @@ When the cluster has reached end-of-life, run `docker cluster rm quickstart`:
     quickstart
     911c882340b2
 
+{% comment %}
+All provisioned resources are destroyed and the context for the cluster is removed.
+{% endcomment %}
 All provisioned resources are destroyed and the context for the cluster is removed.
 
+{% comment %}
+## Where to go next
+{% endcomment %}
+{: #where-to-go-next }
 ## Where to go next
 
+{% comment %}
+- View the quick start guide for [Azure](azure.md) or [vSphere](vsphere.md)
+- [Explore the full list of Cluster commands](/engine/reference/commandline/cluster/)
+- [Cluster configuration file reference](./cluster-file.md)
+{% endcomment %}
 - View the quick start guide for [Azure](azure.md) or [vSphere](vsphere.md)
 - [Explore the full list of Cluster commands](/engine/reference/commandline/cluster/)
 - [Cluster configuration file reference](./cluster-file.md)

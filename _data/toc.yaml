@@ -1293,7 +1293,7 @@ manuals:
   - sectiontitle: Docker Cluster
     section:
     - path: /cluster/
-      title: Overview
+      title: 概要
     - path: /cluster/aws/
       title: Docker Cluster on AWS
     - path: /cluster/cluster-file/
