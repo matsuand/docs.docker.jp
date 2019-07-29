@@ -1312,12 +1312,12 @@ manuals:
   - sectiontitle: Universal Control Plane
     section:
     - path: /ee/ucp/
-      title: Universal Control Plane overview
+      title: Universal Control Plane 概要
     - path: /ee/ucp/ucp-architecture/
       title: UCP アーキテクチャー
-    - sectiontitle: Administration
+    - sectiontitle: 管理
       section:
-      - sectiontitle: Install
+      - sectiontitle: インストール
         section:
         - path: /ee/ucp/admin/install/system-requirements/
           title: システム要件
