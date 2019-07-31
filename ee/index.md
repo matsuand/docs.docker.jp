@@ -235,7 +235,7 @@ You can manage and monitor your container cluster using a graphical web interfac
 {% comment %}
 ### Deploy, manage, and monitor
 {% endcomment %}
-### Deploy, manage, and monitor
+### デプロイ、管理、監視
 
 {% comment %}
 With Docker Enterprise, you can manage all of the infrastructure

@@ -1,5 +1,5 @@
 ---
-title: Docker Engine リリースノート
+title: Docker Engine release notes
 description: Learn about the new features, bug fixes, and breaking changes for Docker Engine - Community and EE
 keywords: docker, docker engine, ee, ce, whats new, release notes
 toc_min: 1
@@ -263,7 +263,7 @@ The missing rules are :
         - Import your own RHEL images into Azure and do not rely on the Extended Update Support (EUS) RHEL images.
         - Use a RHEL image that does not contain a minor version in the SKU. These are not attached to EUS repositories. Some examples of those are the first three images (SKUs: 7-RAW, 7-LVM, 7-RAW-CI) listed here : https://docs.microsoft.com/en-us/azure/virtual-machines/linux/rhel-images#list-of-rhel-images-available.
 
-## 18.09.08
+## 18.09.8
 2019-07-17
 
 ### Runtime

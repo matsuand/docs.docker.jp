@@ -246,17 +246,17 @@ guides:
         title: ZFS ストレージドライバーの利用
       - path: /storage/storagedriver/vfs-driver/
         title: VFS ストレージドライバーの利用
-- sectiontitle: Run your app in production
+- sectiontitle: 本番環境でのアプリ運用
   section:
-  - sectiontitle: Configure all objects
+  - sectiontitle: 全オブジェクトの設定
     section:
     - path: /config/labels-custom-metadata/
-      title: Apply custom metadata to objects
+      title: 独自のメタデータをオブジェクトに適用
     - path: /config/pruning/
       title: Prune unused objects
     - path: /config/formatting/
       title: Format command and log output
-  - sectiontitle: Configure the daemon
+  - sectiontitle: デーモンの設定
     section:
     - path: /config/daemon/
       title: Configure and run Docker
@@ -1289,7 +1289,7 @@ manuals:
   - path: /ee/
     title: 概要
   - path: /ee/release-notes/
-    title: Release notes
+    title: リリースノート
   - sectiontitle: Docker Cluster
     section:
     - path: /cluster/
@@ -3743,17 +3743,17 @@ manuals:
         title: Troubleshoot DDE issues on Mac
       - path: /ee/desktop/troubleshoot/windows-issues/
         title: Troubleshoot DDE issues on Windows
-  - sectiontitle: Manage Docker Enterprise
+  - sectiontitle: Docker Enterprise の管理
     section:
     - path: /ee/docker-ee-architecture/
-      title: Docker Enterprise Architecture
+      title: Docker Enterprise アーキテクチャー
     - path: /ee/supported-platforms/
-      title: Supported platforms
+      title: 対応プラットフォーム
       nosync: true
     - path: /ee/end-to-end-install/
-      title: Deploy Docker Enterprise
+      title: Docker Enterprise のデプロイ
     - path: /ee/upgrade/
-      title: Upgrade Docker Enterprise
+      title: Docker Enterprise のアップグレード
     - sectiontitle: Back up Docker Enterprise
       section:
       - path: /ee/admin/backup/

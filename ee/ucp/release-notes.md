@@ -1,5 +1,5 @@
 ---
-title: UCP リリースノート
+title: UCP release notes
 description: Release notes for Docker Universal Control Plane. Learn more about the
   changes introduced in the latest versions.
 keywords: UCP, release notes
@@ -340,20 +340,13 @@ In order to optimize user experience and security, support for Internet Explorer
 ## 3.1.9
 (2019-07-17)
 
-{% comment %}
 ### Bug fixes
-{% endcomment %}
-{: #3-1-9-bug-fixes }
-### バグフィックス
 
+* Added toleration to calico-node DaemonSet so it can run on all nodes in the cluster
 * Fixed an issue where sensitive command line arguments provided to the UCP installer command were also printed in the debug logs.
 * Added a restrictive `robots.txt` to the root of the UCP API server.
 
-{% comment %}
 ### Known issues
-{% endcomment %}
-{: #3-1-9-known-issues }
-### 既知の問題
 
 * There are important changes to the upgrade process that, if not correctly followed, can impact the availability of applications running on the Swarm during upgrades. These constraints impact any upgrades coming from any Docker Engine version before 18.09 to version 18.09 or greater. For more information about upgrading Docker Enterprise to version 2.1, see [Upgrade Docker](../upgrade).
 * To deploy Pods with containers using Restricted Parameters, the user must be an admin and a service account must explicitly have a **ClusterRoleBinding** with `cluster-admin` as the  **ClusterRole**. Restricted Parameters on Containers include:
@@ -405,11 +398,7 @@ In order to optimize user experience and security, support for Internet Explorer
   Installation](/ee/ucp/admin/install/plan-installation.md#avoid-ip-range-conflicts)
   for more details. (ENGCORE-683)
 
-{% comment %}
 ### Bug fixes
-{% endcomment %}
-{: #3-1-8-bug-fixes }
-### バグフィックス
 
 * Added a migration logic to remove all actions on `pods/exec` and `pods/attach` Kubernetes subresource from the migrated UCP View-Only role. (ENGORC-2434)
 * Fixed an issue that allows unauthenticated user to list directories. (ENGORC-2175)

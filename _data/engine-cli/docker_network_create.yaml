@@ -1,7 +1,8 @@
 command: docker network create
-short: Create a network
+short: ネットワークの生成
 long: |-
-  Creates a new network. The `DRIVER` accepts `bridge` or `overlay` which are the
+  新たなネットワークを生成します。
+  The `DRIVER` accepts `bridge` or `overlay` which are the
   built-in network drivers. If you have installed a third party or your own custom
   network driver you can specify that `DRIVER` here also. If you don't specify the
   `--driver` option, the command automatically creates a `bridge` network for you.
@@ -161,7 +162,8 @@ options:
 - option: ipam-opt
   value_type: map
   default_value: map[]
-  description: Set IPAM driver specific options
+  #description: Set IPAM driver specific options
+  description: IPAM ドライバーに固有のオプションを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -170,7 +172,8 @@ options:
 - option: ipv6
   value_type: bool
   default_value: "false"
-  description: Enable IPv6 networking
+  #description: Enable IPv6 networking
+  description: IPv6 ネットワークを有効にします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -178,7 +181,8 @@ options:
   swarm: false
 - option: label
   value_type: list
-  description: Set metadata on a network
+  #description: Set metadata on a network
+  description: ネットワークにメタデータを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -188,7 +192,8 @@ options:
   shorthand: o
   value_type: map
   default_value: map[]
-  description: Set driver specific options
+  #description: Set driver specific options
+  description: ドライバーに固有のオプションを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -196,7 +201,8 @@ options:
   swarm: false
 - option: scope
   value_type: string
-  description: Control the network's scope
+  #description: Control the network's scope
+  description: ネットワークのスコープを制御します。
   deprecated: false
   min_api_version: "1.30"
   experimental: false
