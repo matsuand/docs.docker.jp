@@ -224,8 +224,10 @@ details on EOL of minor and major versions of Docker Enterprise.
 ## Where to go next
 
 {% comment %}
-- [Install Docker](/engine/installation/index.md)
-- [Get Started with Docker](/get-started/index.md)
+- [Install Docker Engine - Enterprise for RHEL](/install/linux/docker-ee/rhel/)
+- [Install Docker Engine - Enterprise for Ubuntu](/install/linux/docker-ee/ubuntu/)
+- [Install Docker Engine - Enterprise for Windows Server](/install/windows/docker-ee/)
 {% endcomment %}
-- [Docker のインストール](/engine/installation/index.md)
-- [Docker をはじめよう](/get-started/index.md)
+- [Install Docker Engine - Enterprise for RHEL](/install/linux/docker-ee/rhel/)
+- [Install Docker Engine - Enterprise for Ubuntu](/install/linux/docker-ee/ubuntu/)
+- [Install Docker Engine - Enterprise for Windows Server](/install/windows/docker-ee/)

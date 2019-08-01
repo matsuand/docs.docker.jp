@@ -1,38 +1,66 @@
 ---
-title: Networking with standalone containers
+title: スタンドアロンなコンテナーのネットワーク
 description: Tutorials for networking with standalone containers
 keywords: networking, bridge, routing, ports, overlay
 ---
 
+{% comment %}
+This series of tutorials deals with networking for standalone Docker containers.
+For networking with swarm services, see
+[Networking with swarm services](network-tutorial-overlay.md). If you need to
+learn more about Docker networking in general, see the [overview](index.md).
+{% endcomment %}
 This series of tutorials deals with networking for standalone Docker containers.
 For networking with swarm services, see
 [Networking with swarm services](network-tutorial-overlay.md). If you need to
 learn more about Docker networking in general, see the [overview](index.md).
 
+{% comment %}
+This topic includes three different tutorials. You can run each of them on
+Linux, Windows, or a Mac, but for the last two, you need a second Docker
+host running elsewhere.
+{% endcomment %}
 This topic includes three different tutorials. You can run each of them on
 Linux, Windows, or a Mac, but for the last two, you need a second Docker
 host running elsewhere.
 
+{% comment %}
 - [Use the default bridge network](#use-the-default-bridge-network) demonstrates
   how to use the default `bridge` network that Docker sets up for you
   automatically. This network is not the best choice for production systems.
+{% endcomment %}
+- [デフォルトのブリッジネットワークの利用](#use-the-default-bridge-network) demonstrates
+  how to use the default `bridge` network that Docker sets up for you
+  automatically. This network is not the best choice for production systems.
 
+{% comment %}
+{% endcomment %}
 - [Use user-defined bridge networks](#use-user-defined-bridge-networks) shows
   how to create and use your own custom bridge networks, to connect containers
   running on the same Docker host. This is recommended for standalone containers
   running in production.
 
+{% comment %}
+{% endcomment %}
 Although [overlay networks](overlay.md) are generally used for swarm services,
 Docker 17.06 and higher allow you to use an overlay network for standalone
 containers. That's covered as part of the
 [tutorial on using overlay networks](network-tutorial-overlay.md#use-an-overlay-network-for-standalone-containers).
 
+{% comment %}
 ## Use the default bridge network
+{% endcomment %}
+{: #use-the-default-bridge-network }
+## デフォルトのブリッジネットワークの利用
 
+{% comment %}
+{% endcomment %}
 In this example, you start two different `alpine` containers on the same Docker
 host and do some tests to understand how they communicate with each other. You
 need to have Docker installed and running.
 
+{% comment %}
+{% endcomment %}
 1.  Open a terminal window. List current networks before you do anything else.
     Here's what you should see if you've never added a network or initialized a
     swarm on this Docker daemon. You may see different networks, but you should
@@ -47,12 +75,16 @@ need to have Docker installed and running.
     7092879f2cc8        none                null                local
     ```
 
+    {% comment %}
+    {% endcomment %}
     The default `bridge` network is listed, along with `host` and `none`. The
     latter two are not fully-fledged networks, but are used to start a container
     connected directly to the Docker daemon host's networking stack, or to start
     a container with no network devices. **This tutorial will connect two
     containers to the `bridge` network.**
 
+{% comment %}
+{% endcomment %}
 2.  Start two `alpine` containers running `ash`, which is Alpine's default shell
     rather than `bash`. The `-dit` flags mean to start the container detached
     (in the background), interactive (with the ability to type into it), and
@@ -67,6 +99,8 @@ need to have Docker installed and running.
     $ docker run -dit --name alpine2 alpine ash
     ```
 
+    {% comment %}
+    {% endcomment %}
     Check that both containers are actually started:
 
     ```bash
@@ -77,6 +111,8 @@ need to have Docker installed and running.
     da33b7aa74b0        alpine              "ash"               17 seconds ago      Up 16 seconds                           alpine1
     ```
 
+{% comment %}
+{% endcomment %}
 3.  Inspect the `bridge` network to see what containers are connected to it.
 
     ```bash
@@ -131,12 +167,16 @@ need to have Docker installed and running.
     ]
     ```
 
+    {% comment %}
+    {% endcomment %}
     Near the top, information about the `bridge` network is listed, including
     the IP address of the gateway between the Docker host and the `bridge`
     network (`172.17.0.1`). Under the `Containers` key, each connected container
     is listed, along with information about its IP address (`172.17.0.2` for
     `alpine1` and `172.17.0.3` for `alpine2`).
 
+{% comment %}
+{% endcomment %}
 4.  The containers are running in the background. Use the `docker attach`
     command to connect to `alpine1`.
 
@@ -146,6 +186,8 @@ need to have Docker installed and running.
     / #
     ```
 
+    {% comment %}
+    {% endcomment %}
     The prompt changes to `#` to indicate that you are the `root` user within
     the container. Use the `ip addr show` command to show the network interfaces
     for `alpine1` as they look from within the container:
@@ -167,10 +209,14 @@ need to have Docker installed and running.
            valid_lft forever preferred_lft forever
     ```
 
+    {% comment %}
+    {% endcomment %}
     The first interface is the loopback device. Ignore it for now. Notice that
     the second interface has the IP address `172.17.0.2`, which is the same
     address shown for `alpine1` in the previous step.
 
+{% comment %}
+{% endcomment %}
 5.  From within `alpine1`, make sure you can connect to the internet by
     pinging `google.com`. The `-c 2` flag limits the command to two `ping`
     attempts.
@@ -187,6 +233,8 @@ need to have Docker installed and running.
     round-trip min/avg/max = 9.841/9.869/9.897 ms
     ```
 
+{% comment %}
+{% endcomment %}
 6.  Now try to ping the second container. First, ping it by its IP address,
     `172.17.0.3`:
 
@@ -202,6 +250,8 @@ need to have Docker installed and running.
     round-trip min/avg/max = 0.086/0.090/0.094 ms
     ```
 
+    {% comment %}
+    {% endcomment %}
     This succeeds. Next, try pinging the `alpine2` container by container
     name. This will fail.
 
@@ -211,11 +261,15 @@ need to have Docker installed and running.
     ping: bad address 'alpine2'
     ```
 
+{% comment %}
+{% endcomment %}
 7.  Detach from `alpine1` without stopping it by using the detach sequence,
     `CTRL` + `p` `CTRL` + `q` (hold down `CTRL` and type `p` followed by `q`).
     If you wish, attach to `alpine2` and repeat steps 4, 5, and 6 there,
     substituting `alpine1` for `alpine2`.
 
+{% comment %}
+{% endcomment %}
 8.  Stop and remove both containers.
 
     ```bash
@@ -223,12 +277,18 @@ need to have Docker installed and running.
     $ docker container rm alpine1 alpine2
     ```
 
+{% comment %}
+{% endcomment %}
 Remember, the default `bridge` network is not recommended for production. To
 learn about user-defined bridge networks, continue to the
 [next tutorial](#use-user-defined-bridge-networks).
 
+{% comment %}
+{% endcomment %}
 ## Use user-defined bridge networks
 
+{% comment %}
+{% endcomment %}
 In this example, we again start two `alpine` containers, but attach them to a
 user-defined network called `alpine-net` which we have already created. These
 containers are not connected to the default `bridge` network at all. We then
@@ -236,6 +296,8 @@ start a third `alpine` container which is connected to the `bridge` network but
 not connected to `alpine-net`, and a fourth `alpine` container which is
 connected to both networks.
 
+{% comment %}
+{% endcomment %}
 1.  Create the `alpine-net` network. You do not need the `--driver bridge` flag
     since it's the default, but this example shows how to specify it.
 
@@ -243,6 +305,8 @@ connected to both networks.
     $ docker network create --driver bridge alpine-net
     ```
 
+{% comment %}
+{% endcomment %}
 2.  List Docker's networks:
 
     ```bash
@@ -255,6 +319,8 @@ connected to both networks.
     7092879f2cc8        none                null                local
     ```
 
+    {% comment %}
+    {% endcomment %}
     Inspect the `alpine-net` network. This shows you its IP address and the fact
     that no containers are connected to it:
 
@@ -288,10 +354,14 @@ connected to both networks.
     ]
     ```
 
+    {% comment %}
+    {% endcomment %}
     Notice that this network's gateway is `172.18.0.1`, as opposed to the
     default bridge network, whose gateway is `172.17.0.1`. The exact IP address
     may be different on your system.
 
+{% comment %}
+{% endcomment %}
 3.  Create your four containers. Notice the `--network` flags. You can only
     connect to one network during the `docker run` command, so you need to use
     `docker network connect` afterward to connect `alpine4` to the `bridge`
@@ -309,6 +379,8 @@ connected to both networks.
     $ docker network connect bridge alpine4
     ```
 
+    {% comment %}
+    {% endcomment %}
     Verify that all containers are running:
 
     ```bash
@@ -321,6 +393,8 @@ connected to both networks.
     0a02c449a6e9        alpine              "ash"               About a minute ago   Up About a minute                       alpine1
     ```
 
+{% comment %}
+{% endcomment %}
 4.  Inspect the `bridge` network and the `alpine-net` network again:
 
     ```bash
@@ -375,6 +449,8 @@ connected to both networks.
     ]
     ```
 
+    {% comment %}
+    {% endcomment %}
     Containers `alpine3` and `alpine4` are connected to the `bridge` network.
 
     ```bash
@@ -429,9 +505,13 @@ connected to both networks.
     ]
     ```
 
+    {% comment %}
+    {% endcomment %}
     Containers `alpine1`, `alpine2`, and `alpine4` are connected to the
     `alpine-net` network.
 
+{% comment %}
+{% endcomment %}
 5.  On user-defined networks like `alpine-net`, containers can not only
     communicate by IP address, but can also resolve a container name to an IP
     address. This capability is called **automatic service discovery**. Let's
@@ -472,6 +552,8 @@ connected to both networks.
     round-trip min/avg/max = 0.026/0.040/0.054 ms
     ```
 
+{% comment %}
+{% endcomment %}
 6.  From `alpine1`, you should not be able to connect to `alpine3` at all, since
     it is not on the `alpine-net` network.
 
@@ -481,6 +563,8 @@ connected to both networks.
     ping: bad address 'alpine3'
     ```
 
+    {% comment %}
+    {% endcomment %}
     Not only that, but you can't connect to `alpine3` from `alpine1` by its IP
     address either. Look back at the `docker network inspect` output for the
     `bridge` network and find `alpine3`'s IP address: `172.17.0.2` Try to ping
@@ -495,9 +579,13 @@ connected to both networks.
     2 packets transmitted, 0 packets received, 100% packet loss
     ```
 
+    {% comment %}
+    {% endcomment %}
     Detach from `alpine1` using detach sequence,
     `CTRL` + `p` `CTRL` + `q` (hold down `CTRL` and type `p` followed by `q`).
 
+{% comment %}
+{% endcomment %}
 7.  Remember that `alpine4` is connected to both the default `bridge` network
     and `alpine-net`. It should be able to reach all of the other containers.
     However, you will need to address `alpine3` by its IP address. Attach to it
@@ -550,6 +638,8 @@ connected to both networks.
     round-trip min/avg/max = 0.033/0.048/0.064 ms
     ```
 
+{% comment %}
+{% endcomment %}
 8.  As a final test, make sure your containers can all connect to the internet
     by pinging `google.com`. You are already attached to `alpine4` so start by
     trying from there. Next, detach from `alpine4` and connect to `alpine3`
@@ -599,6 +689,8 @@ connected to both networks.
     CTRL+p CTRL+q
     ```
 
+{% comment %}
+{% endcomment %}
 9.  Stop and remove all containers and the `alpine-net` network.
 
     ```
@@ -610,11 +702,17 @@ connected to both networks.
     ```
 
 
+{% comment %}
+{% endcomment %}
 ## Other networking tutorials
 
+{% comment %}
+{% endcomment %}
 Now that you have completed the networking tutorials for standalone containers,
 you might want to run through these other networking tutorials:
 
+{% comment %}
+{% endcomment %}
 - [Host networking tutorial](network-tutorial-host.md)
 - [Overlay networking tutorial](network-tutorial-overlay.md)
 - [Macvlan networking tutorial](network-tutorial-macvlan.md)
