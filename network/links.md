@@ -4,9 +4,10 @@ keywords: Examples, Usage, user guide, links, linking, docker, documentation, ex
 redirect_from:
 - /userguide/dockerlinks/
 - /engine/userguide/networking/default_network/dockerlinks/
-title: Legacy container links
+title: コンテナーリンク（古い機能）
 ---
 
+{% comment %}
 >**Warning**:
 >The `--link` flag is a legacy feature of Docker. It may eventually
 be removed. Unless you absolutely need to continue using it, we recommend that you use
@@ -19,135 +20,264 @@ between containers in a more controlled way.
 > See [Differences between user-defined bridges and the default bridge](bridge.md##differences-between-user-defined-bridges-and-the-default-bridge)
 > for some alternatives to using `--link`.
 {:.warning}
+{% endcomment %}
+>**警告**:
+>Docker の `--link` フラグは過去の機能です。
+>そのうちに削除されるかもしれません。
+>この機能を確実に必要としているのでなければ `--link` を使わず、2 つのコンテナー間の通信を実現するユーザー定義のネットワークを利用することをお勧めします。
+>`--link` に存在していて、ユーザー定義のネットワークにない機能は、コンテナー間で環境変数を共有できる機能です。
+>ただしボリュームのような別の機能を使えば、コンテナー間での環境変数の共有は、より制御しやすく利用できます。
+>
+> [ユーザー定義のブリッジとデフォルトブリッジの違い](bridge.md##differences-between-user-defined-bridges-and-the-default-bridge) を参照して、`--link` とは違う方法について確認してください。
+{:.warning}
 
+{% comment %}
 The information in this section explains legacy container links within the
 Docker default `bridge` network which is created automatically when you install
 Docker.
+{% endcomment %}
+ここでは古い機能であるコンテナーリンクについて説明します。
+これは Docker のデフォルトである `bridge` ネットワーク内にあるもので、この `bridge` ネットワークは Docker をインストールした際に自動的に生成されます。
 
+{% comment %}
 Before the [Docker networks feature](/engine/userguide/networking/index.md), you could use the
 Docker link feature to allow containers to discover each other and securely
 transfer information about one container to another container. With the
 introduction of the Docker networks feature, you can still create links but they
 behave differently between default `bridge` network and
 [user defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks).
+{% endcomment %}
+[Docker のネットワーク機能](/engine/userguide/networking/index.md) が提供される以前は、Docker のリンク機能によって複数のコンテナーが互いを検出し、一方から他方への情報送信を安全に行うようにしていました。
+Docker のネットワーク機能が導入されてからも、リンクを生成することはできます。
+ただしデフォルトの `bridge` ネットワークであるか、[ユーザー定義のネットワーク](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks) であるかによって、その動作は異なることになります。
 
+{% comment %}
 This section briefly discusses connecting via a network port and then goes into
 detail on container linking in default `bridge` network.
+{% endcomment %}
+この節においてはネットワークポートを通じてネットワークに接続する方法を簡単に説明した上で、デフォルトの `bridge` ネットワーク内でのコンテナーリンクを行う方法へ進んでいきます。
 
+{% comment %}
 ## Connect using network port mapping
+{% endcomment %}
+{: #connect-using-network-port-mapping }
+## ネットワークポートマッピングを利用した接続
 
+{% comment %}
 Let's say you used this command to run a simple Python Flask application:
+{% endcomment %}
+以下のコマンドによって、Python Flask アプリケーションを起動しているとします。
 
     $ docker run -d -P training/webapp python app.py
 
+{% comment %}
 > **Note**:
 > Containers have an internal network and an IP address.
 > Docker can have a variety of network configurations. You can see more
 > information on Docker networking [here](/engine/userguide/networking/index.md).
+{% endcomment %}
+> **メモ**:
+> コンテナーには内部ネットワークと IP アドレスがあります。
+> そして Docker にはさまざまなネットワーク設定方法があります。
+> Docker のネットワーク機能の詳細は [こちら](/engine/userguide/networking/index.md) を参照してください。
 
+{% comment %}
 When that container was created, the `-P` flag was used to automatically map
 any network port inside it to a random high port within an *ephemeral port
 range* on your Docker host. Next, when `docker ps` was run, you saw that port
 5000 in the container was bound to port 49155 on the host.
+{% endcomment %}
+このコンテナーの生成時には `-P` フラグが指定されているので、コンテナー内部のネットワークポートはすべて、Docker ホスト上の「エフェメラルポート」範囲内にあるランダムな高位ポートに自動的に割り当てられます。
+その後に `docker ps` を実行すれば、コンテナー内の 5000 番ポートが、ホスト上の 49155 番ポートに割り当てられているのがわかります。
 
     $ docker ps nostalgic_morse
 
     CONTAINER ID  IMAGE                   COMMAND       CREATED        STATUS        PORTS                    NAMES
     bc533791f3f5  training/webapp:latest  python app.py 5 seconds ago  Up 2 seconds  0.0.0.0:49155->5000/tcp  nostalgic_morse
 
+{% comment %}
 You also saw how you can bind a container's ports to a specific port using
 the `-p` flag. Here port 80 of the host is mapped to port 5000 of the
 container:
+{% endcomment %}
+またコンテナーのポートを特定のポートに割り当てるには `-p` フラグを使えばよいことも、すでに見てきました。
+以下はホストの 80 番ポートを、コンテナーの 5000 番ポートに割り当てます。
 
     $ docker run -d -p 80:5000 training/webapp python app.py
 
+{% comment %}
 And you saw why this isn't such a great idea because it constrains you to
 only one container on that specific port.
+{% endcomment %}
+ただしこれはあまり良い方法でないのは、すでにお分かりでしょう。
+これでは、特定のポートを指定できるのが、ただ一つのコンテナーでしかないからです。
 
+{% comment %}
 Instead, you may specify a range of host ports to bind a container port to
 that is different than the default *ephemeral port range*:
+{% endcomment %}
+上とは違って、コンテナーポートに対して、ホストのポート範囲を指定することができます。
+この範囲は「エフェメラルポート」の範囲とは異なるものです。
 
     $ docker run -d -p 8000-9000:5000 training/webapp python app.py
 
+{% comment %}
 This would bind port 5000 in the container to a randomly available port
 between 8000 and 9000 on the host.
+{% endcomment %}
+これによるとコンテナーの 5000 番ポートは、ホスト上の 8000 から 9000 の中で利用可能なポートがランダムに選び出されます。
 
+{% comment %}
 There are also a few other ways you can configure the `-p` flag. By
 default the `-p` flag binds the specified port to all interfaces on
 the host machine. But you can also specify a binding to a specific
 interface, for example only to the `localhost`.
+{% endcomment %}
+`-p` フラグの設定方法には他にもいくつかあります。
+デフォルトにおいて `-p` フラグは、ホストマシン上のすべてのインターフェースに対して、指定されたポートを割り当てます。
+しかし特定のインターフェースに対しての割り当てを行うこともできます。
+たとえば以下は `loalhost` にのみ割り当てる例です。
 
     $ docker run -d -p 127.0.0.1:80:5000 training/webapp python app.py
 
+{% comment %}
 This would bind port 5000 inside the container to port 80 on the
 `localhost` or `127.0.0.1` interface on the host machine.
+{% endcomment %}
+これはコンテナー内の 5000 番ポートを、ホストマシン上の 80 番ポートに割り当てますが、これは `localhost` つまり `127.0.0.1` インターフェースに対してのみです。
 
+{% comment %}
 Or, to bind port 5000 of the container to a dynamic port but only on the
 `localhost`, you could use:
+{% endcomment %}
+コンテナー内の 5000 番ポートを `localhost` 上の動的ポートに割り当てるなら、以下のようにします。
 
     $ docker run -d -p 127.0.0.1::5000 training/webapp python app.py
 
+{% comment %}
 You can also bind UDP and SCTP (typically used by telecom protocols such as SIGTRAN, Diameter, and S1AP/X2AP) ports by adding a trailing `/udp` or `/sctp`. For example:
+{% endcomment %}
+UDP や SCTP を割り当てることもできます。
+（SCTP は一般に SIGTRAN、Diameter、S1AP/X2AP といった通信プロトコルにおいて利用されています。）
+UDP や SCTP は、以下の例のように `/udp` や `/sctp` をつけて指定します。
 
     $ docker run -d -p 127.0.0.1:80:5000/udp training/webapp python app.py
 
+{% comment %}
 You also learned about the useful `docker port` shortcut which showed us the
 current port bindings. This is also useful for showing you specific port
 configurations. For example, if you've bound the container port to the
 `localhost` on the host machine, then the `docker port` output reflects that.
+{% endcomment %}
+便利なコマンド `docker port` についてはこれまでにも使ってきました。
+これによって現時点でのポート割り当ての状況がすぐにわかります。
+また特定のポートがどのように設定されているかがわかります。
+たとえばコンテナーの特定のポートを、ホストマシンの `localhost` に割り当てていたとします。
+`docker port` コマンドの出力には、そのことが示されます。
 
     $ docker port nostalgic_morse 5000
 
     127.0.0.1:49155
 
+{% comment %}
 > **Note**:
 > The `-p` flag can be used multiple times to configure multiple ports.
+{% endcomment %}
+> **メモ**:
+> `-p` フラグは複数個の指定が可能であり、これにより複数ポートの指定を行うことができます。
 
+{% comment %}
 ## Connect with the linking system
+{% endcomment %}
+{: #connect-with-the-linking-system }
+## リンクシステムを用いた接続
 
+{% comment %}
 > **Note**:
 > This section covers the legacy link feature in the default `bridge` network.
 > Refer to [linking containers in user-defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks)
 > for more information on links in user-defined networks.
+{% endcomment %}
+> **メモ**:
+> この節ではデフォルトの `bridge` ネットワークにおける、古い機能であるリンク機能について説明します。
+> ユーザー定義ネットワーク上でのリンクに関しては [ユーザー定義ネットワークでのコンテナーのリンク](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks) を参照してください。
 
+{% comment %}
 Network port mappings are not the only way Docker containers can connect to one
 another. Docker also has a linking system that allows you to link multiple
 containers together and send connection information from one to another. When
 containers are linked, information about a source container can be sent to a
 recipient container. This allows the recipient to see selected data describing
 aspects of the source container.
+{% endcomment %}
+Docker コンテナーが別のコンテナーと接続するのは、ネットワークのポート割り当てだけが唯一の方法ではありません。
+Docker にはリンクシステム（linking system）があります。
+このシステムにより複数のコンテナーは互いにリンクすることが可能となり、接続情報をやり取りできるようになります。
+複数のコンテナーがリンクされていると、1 つのコンテナーの情報を別のコンテナーに送信することが可能です。
+つまり情報を受け取る側のコンテナーは、情報元のコンテナーに関する情報の中から、必要な情報を取り出して見ることができます。
 
+{% comment %}
 ### The importance of naming
+{% endcomment %}
+{: #the-importance-of-naming }
+### 名前づけの重要性
 
+{% comment %}
 To establish links, Docker relies on the names of your containers.
 You've already seen that each container you create has an automatically
 created name; indeed you've become familiar with our old friend
 `nostalgic_morse` during this guide. You can also name containers
 yourself. This naming provides two useful functions:
+{% endcomment %}
+Docker がリンクを確立するためには、コンテナーの名前が重要になります。
+これまでコンテナーを生成した際には、各コンテナーに自動的に名前がつけられることを見てきました。
+実際にここまでの説明において `nostalgic_morse` という名前が、すっかりおなじみでしょう。
+コンテナーの名前は自由につけることができます。
+名前をつけておくことが、以下の 2 つを実現させます。
 
+{% comment %}
+1. It can be useful to name containers that do specific functions in a way
+   that makes it easier for you to remember them, for example naming a
+   container containing a web application `web`.
+{% endcomment %}
 1. It can be useful to name containers that do specific functions in a way
    that makes it easier for you to remember them, for example naming a
    container containing a web application `web`.
 
+{% comment %}
+2. It provides Docker with a reference point that allows it to refer to other
+   containers, for example, you can specify to link the container `web` to container `db`.
+{% endcomment %}
 2. It provides Docker with a reference point that allows it to refer to other
    containers, for example, you can specify to link the container `web` to container `db`.
 
+{% comment %}
 You can name your container by using the `--name` flag, for example:
+{% endcomment %}
+たとえば以下のようにして `--name` フラグを使ってコンテナーに名前をつけることができます。
 
     $ docker run -d -P --name web training/webapp python app.py
 
+{% comment %}
 This launches a new container and uses the `--name` flag to
 name the container `web`. You can see the container's name using the
 `docker ps` command.
+{% endcomment %}
+上のコマンドは、新規にコンテナーを起動させ、`--name` フラグの情報からコンテナーに `web` という名前をつけます。
+`docker ps` コマンドによってコンテナー名を確認することができます。
 
     $ docker ps -l
 
     CONTAINER ID  IMAGE                  COMMAND        CREATED       STATUS       PORTS                    NAMES
     aed84ee21bde  training/webapp:latest python app.py  12 hours ago  Up 2 seconds 0.0.0.0:49154->5000/tcp  web
 
+{% comment %}
 You can also use `docker inspect` to return the container's name.
+{% endcomment %}
+`docker inspect` の結果からも、コンテナー名を得ることができます。
 
 
+{% comment %}
 > **Note**:
 > Container names must be unique. That means you can only call
 > one container `web`. If you want to re-use a container name you must delete
@@ -155,9 +285,23 @@ You can also use `docker inspect` to return the container's name.
 > container with the same name. As an alternative you can use the `--rm`
 > flag with the `docker run` command. This deletes the container
 > immediately after it is stopped.
+{% endcomment %}
+> **メモ**:
+> コンテナー名はユニークである必要があります。
+> つまり `web` と呼ぶことができるコンテナーは 1 つだけということです。
+> コンテナー名を再利用したい場合は、それまでの古いコンテナーを（`docker container rm` を使って）削除する必要があります。
+> その後であれば、同一名のコンテナーを生成して利用することができます。
+> これとは別に `docker run` の `--rm` フラグを利用する方法もあります。
+> この方法ではそれまでのコンテナーが停止され、すぐに削除されます。
 
+{% comment %}
 ## Communication across links
+{% endcomment %}
+{: #communication-across-links }
+## リンク間の通信
 
+{% comment %}
+{% endcomment %}
 Links allow containers to discover each other and securely transfer information
 about one container to another container. When you set up a link, you create a
 conduit between a source container and a recipient container. The recipient can
@@ -166,34 +310,55 @@ flag. First, create a new container, this time one containing a database.
 
     $ docker run -d --name db training/postgres
 
+{% comment %}
+This creates a new container called `db` from the `training/postgres`
+image, which contains a PostgreSQL database.
+{% endcomment %}
 This creates a new container called `db` from the `training/postgres`
 image, which contains a PostgreSQL database.
 
+{% comment %}
+Now, you need to delete the `web` container you created previously so you can replace it
+with a linked one:
+{% endcomment %}
 Now, you need to delete the `web` container you created previously so you can replace it
 with a linked one:
 
     $ docker container rm -f web
 
+{% comment %}
+{% endcomment %}
 Now, create a new `web` container and link it with your `db` container.
 
     $ docker run -d -P --name web --link db:db training/webapp python app.py
 
+{% comment %}
+{% endcomment %}
 This links the new `web` container with the `db` container you created
 earlier. The `--link` flag takes the form:
 
     --link <name or id>:alias
 
+{% comment %}
+{% endcomment %}
 Where `name` is the name of the container we're linking to and `alias` is an
 alias for the link name. That alias is used shortly.
 The `--link` flag also takes the form:
 
 	--link <name or id>
 
+{% comment %}
+In this case the alias matches the name. You could write the previous
+example as:
+{% endcomment %}
 In this case the alias matches the name. You could write the previous
 example as:
 
     $ docker run -d -P --name web --link db training/webapp python app.py
 
+{% comment %}
+Next, inspect your linked containers with `docker inspect`:
+{% endcomment %}
 Next, inspect your linked containers with `docker inspect`:
 
     {% raw %}
@@ -202,9 +367,13 @@ Next, inspect your linked containers with `docker inspect`:
     [/db:/web/db]
     {% endraw %}
 
+{% comment %}
+{% endcomment %}
 You can see that the `web` container is now linked to the `db` container
 `web/db`. Which allows it to access information about the `db` container.
 
+{% comment %}
+{% endcomment %}
 So what does linking the containers actually do? You've learned that a link allows a
 source container to provide information about itself to a recipient container. In
 our example, the recipient, `web`, can access information about the source `db`. To do
@@ -214,26 +383,42 @@ expose any ports externally on the container; when we started the
 linking: we don't need to expose the source container, here the PostgreSQL database, to
 the network.
 
+{% comment %}
+{% endcomment %}
 Docker exposes connectivity information for the source container to the
 recipient container in two ways:
 
+{% comment %}
+{% endcomment %}
 * Environment variables,
 * Updating the `/etc/hosts` file.
 
+{% comment %}
 ### Environment variables
+{% endcomment %}
+{: #environment-variables }
+### 環境変数
 
+{% comment %}
+{% endcomment %}
 Docker creates several environment variables when you link containers. Docker
 automatically creates environment variables in the target container based on
 the `--link` parameters. It also exposes all environment variables
 originating from Docker from the source container. These include variables from:
 
+{% comment %}
+{% endcomment %}
 * the `ENV` commands in the source container's Dockerfile
 * the `-e`, `--env`, and `--env-file` options on the `docker run`
 command when the source container is started
 
+{% comment %}
+{% endcomment %}
 These environment variables enable programmatic discovery from within the
 target container of information related to the source container.
 
+{% comment %}
+{% endcomment %}
 > **Warning**:
 > It is important to understand that *all* environment variables originating
 > from Docker within a container are made available to *any* container
@@ -241,24 +426,36 @@ target container of information related to the source container.
 > data is stored in them.
 {:.warning}
 
+{% comment %}
+{% endcomment %}
 Docker sets an `<alias>_NAME` environment variable for each target container
 listed in the `--link` parameter. For example, if a new container called
 `web` is linked to a database container called `db` via `--link db:webdb`,
 then Docker creates a `WEBDB_NAME=/web/webdb` variable in the `web` container.
 
+{% comment %}
+{% endcomment %}
 Docker also defines a set of environment variables for each port exposed by the
 source container. Each variable has a unique prefix in the form:
 
 `<name>_PORT_<port>_<protocol>`
 
+{% comment %}
+{% endcomment %}
 The components in this prefix are:
 
+{% comment %}
+{% endcomment %}
 * the alias `<name>` specified in the `--link` parameter (for example, `webdb`)
 * the `<port>` number exposed
 * a `<protocol>` which is either TCP or UDP
 
+{% comment %}
+{% endcomment %}
 Docker uses this prefix format to define three distinct environment variables:
 
+{% comment %}
+{% endcomment %}
 * The `prefix_ADDR` variable contains the IP Address from the URL, for
 example `WEBDB_PORT_5432_TCP_ADDR=172.17.0.82`.
 * The `prefix_PORT` variable contains just the port number from the URL for
@@ -266,22 +463,30 @@ example `WEBDB_PORT_5432_TCP_PORT=5432`.
 * The `prefix_PROTO` variable contains just the protocol from the URL for
 example `WEBDB_PORT_5432_TCP_PROTO=tcp`.
 
+{% comment %}
+{% endcomment %}
 If the container exposes multiple ports, an environment variable set is
 defined for each one. This means, for example, if a container exposes 4 ports
 that Docker creates 12 environment variables, 3 for each port.
 
+{% comment %}
+{% endcomment %}
 Additionally, Docker creates an environment variable called `<alias>_PORT`.
 This variable contains the URL of the source container's first exposed port.
 The 'first' port is defined as the exposed port with the lowest number.
 For example, consider the `WEBDB_PORT=tcp://172.17.0.82:5432` variable. If
 that port is used for both tcp and udp, then the tcp one is specified.
 
+{% comment %}
+{% endcomment %}
 Finally, Docker also exposes each Docker originated environment variable
 from the source container as an environment variable in the target. For each
 variable Docker creates an `<alias>_ENV_<name>` variable in the target
 container. The variable's value is set to the value Docker used when it
 started the source container.
 
+{% comment %}
+{% endcomment %}
 Returning back to our database example, you can run the `env`
 command to list the specified container's environment variables.
 
@@ -298,6 +503,8 @@ command to list the specified container's environment variables.
     . . .
 ```
 
+{% comment %}
+{% endcomment %}
 You can see that Docker has created a series of environment variables with
 useful information about the source `db` container. Each variable is prefixed
 with
@@ -307,19 +514,33 @@ environment variables to configure your applications to connect to the database
 on the `db` container. The connection is secure and private; only the
 linked `web` container can communicate with the `db` container.
 
+{% comment %}
 ### Important notes on Docker environment variables
+{% endcomment %}
+{: #important-notes-on-docker-environment-variables }
+### Docker 環境変数に関する重要事項
 
+{% comment %}
+{% endcomment %}
 Unlike host entries in the [`/etc/hosts` file](#updating-the-etchosts-file),
 IP addresses stored in the environment variables are not automatically updated
 if the source container is restarted. We recommend using the host entries in
 `/etc/hosts` to resolve the IP address of linked containers.
 
+{% comment %}
+{% endcomment %}
 These environment variables are only set for the first process in the
 container. Some daemons, such as `sshd`, scrub them when spawning shells
 for connection.
 
+{% comment %}
 ### Updating the `/etc/hosts` file
+{% endcomment %}
+{: #updating-the-etchosts-file }
+### `/etc/hosts` ファイルの更新
 
+{% comment %}
+{% endcomment %}
 In addition to the environment variables, Docker adds a host entry for the
 source container to the `/etc/hosts` file. Here's an entry for the `web`
 container:
@@ -332,6 +553,8 @@ container:
     . . .
     172.17.0.5  webdb 6e5cdeb2d300 db
 
+{% comment %}
+{% endcomment %}
 You can see two relevant host entries. The first is an entry for the `web`
 container that uses the Container ID as a host name. The second entry uses the
 link alias to reference the IP address of the `db` container. In addition to
@@ -349,19 +572,27 @@ that host via any of these entries:
     56 bytes from 172.17.0.5: icmp_seq=1 ttl=64 time=0.250 ms
     56 bytes from 172.17.0.5: icmp_seq=2 ttl=64 time=0.256 ms
 
+{% comment %}
+{% endcomment %}
 > **Note**:
 > In the example, you had to install `ping` because it was not included
 > in the container initially.
 
+{% comment %}
+{% endcomment %}
 Here, you used the `ping` command to ping the `db` container using its host entry,
 which resolves to `172.17.0.5`. You can use this host entry to configure an application
 to make use of your `db` container.
 
+{% comment %}
+{% endcomment %}
 > **Note**:
 > You can link multiple recipient containers to a single source. For
 > example, you could have multiple (differently named) web containers attached to your
 >`db` container.
 
+{% comment %}
+{% endcomment %}
 If you restart the source container, the `/etc/hosts` files on the linked containers
 are automatically updated with the source container's new IP address,
 allowing linked communication to continue.
