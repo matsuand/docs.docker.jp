@@ -14,7 +14,7 @@ title: Dockerfile 記述のベストプラクティス
 This document covers recommended best practices and methods for building
 efficient images.
 {% endcomment %}
-このドキュメントは、効果的なイメージを構築するための、お勧めのベストプラクティスや方法について示します。
+このドキュメントは、効果的なイメージを構築する方法、お勧めのベストプラクティスについて示します。
 
 {% comment %}
 Docker builds images automatically by reading the instructions from a
@@ -23,8 +23,8 @@ build a given image. A `Dockerfile` adheres to a specific format and set of
 instructions which you can find at [Dockerfile reference](/engine/reference/builder/).
 {% endcomment %}
 Docker は `Dockerfile` に書かれた指示を読み込んで、自動的にイメージを構築します。
-これは、あらゆる命令を含んだテキストファイルであり、順に処理することで指定されたイメージを構築するために必要となるものです。
-`Dockerfile` は所定のフォーマットにこだわっていて、特定の指示を用いることにしています。
+このファイルはあらゆる命令を含んだテキストファイルであり、順に処理することで指定されたイメージを構築するために必要となるものです。
+`Dockerfile` は所定のフォーマットや各種の命令に従います。
 その内容は [Dockerfile リファレンス](/engine/reference/builder/) に示しています。
 
 {% comment %}
@@ -32,9 +32,9 @@ A Docker image consists of read-only layers each of which represents a
 Dockerfile  instruction. The layers are stacked and each one is a delta of the
 changes from the previous layer. Consider this `Dockerfile`:
 {% endcomment %}
-Docker イメージは読み取り専用のレイヤにより構成されます。
-個々のレイヤは Dockerfile の各コマンドを表現しています。
-レイヤは順に積み上げられ、直前のレイヤからの差分を表わします。
+Docker イメージは読み取り専用のレイヤーにより構成されます。
+個々のレイヤーは Dockerfile の各命令を表現しています。
+レイヤーは順に積み上げられ、それぞれは直前のレイヤーからの差分を表わします。
 以下のような `Dockerfile` を見てみます。
 
 ```Dockerfile
@@ -47,7 +47,7 @@ CMD python /app/app.py
 {% comment %}
 Each instruction creates one layer:
 {% endcomment %}
-各コマンドからは 1つずつレイヤーが生成されます。
+各コマンドからは 1 つずつレイヤーが生成されます。
 
 {% comment %}
 - `FROM` creates a layer from the `ubuntu:18.04` Docker image.
@@ -55,7 +55,7 @@ Each instruction creates one layer:
 - `RUN` builds your application with `make`.
 - `CMD` specifies what command to run within the container.
 {% endcomment %}
-- `FROM` Docker イメージ `ubuntu:18.04` からレイヤを 1 つ生成します。
+- `FROM` Docker イメージ `ubuntu:18.04` からレイヤーを 1 つ生成します。
 - `COPY` Docker クライアントのカレントディレクトリからファイルをコピーします。
 - `RUN` `make` を使ってアプリケーションをビルドします。
 - `CMD` コンテナー内にて実行するコマンドを指定します。
@@ -66,14 +66,14 @@ When you run an image and generate a container, you add a new _writable layer_
 the running container, such as writing new files, modifying existing files, and
 deleting files, are written to this thin writable container layer.
 {% endcomment %}
-イメージを実行してコンテナーが生成されると、それまであったレイヤの上に_書き込み可能やレイヤ_（"コンテナーレイヤ"）が加えられます。
-実行されているコンテナーへの変更、つまり新規ファイル生成や既存ファイル編集、ファイル削除などはすべて、その薄くできあがった書き込みレイヤに書き込まれます。
+イメージを実行してコンテナーが生成されると、それまであったレイヤーの上に_書き込み可能なレイヤー（"コンテナーレイヤー"）が加えられます。
+実行されているコンテナーへの変更、つまり新規ファイル生成や既存ファイル編集、ファイル削除などはすべて、その薄くできあがった書き込みレイヤーに書き込まれます。
 
 {% comment %}
 For more on image layers (and how Docker builds and stores images), see
 [About storage drivers](/storage/storagedriver/).
 {% endcomment %}
-イメージレイヤ（また Docker がイメージをどう作り保存するか）については [ストレージドライバーについて](/storage/storagedriver/) を参照してください。
+イメージレイヤー（また Docker がイメージをどう作り保存するか）については [ストレージドライバーについて](/storage/storagedriver/) を参照してください。
 
 {% comment %}
 ## General guidelines and recommendations
@@ -83,7 +83,7 @@ For more on image layers (and how Docker builds and stores images), see
 {% comment %}
 ### Create ephemeral containers
 {% endcomment %}
-### "はかない" (ephemeral) コンテナーの生成
+### エフェメラルなコンテナーの生成
 
 {% comment %}
 The image defined by your `Dockerfile` should generate containers that are as
@@ -91,9 +91,10 @@ ephemeral as possible. By "ephemeral", we mean that the container can be stopped
 and destroyed, then rebuilt and replaced with an absolute minimum set up and
 configuration.
 {% endcomment %}
-`Dockerfile` によって定義されるイメージからコンテナーが作り出されますが、このコンテナーはできる限り "はかないもの"（ephemeral）と考えておくべきです。
-"はかない" という語を使うのは、コンテナーが停止、破棄されて、すぐに新たなものが作り出されるからです。
-最小限の構成や設定があれば、新たなものに置き換えられます。
+`Dockerfile` によって定義されるイメージからコンテナーが作り出されます。
+このコンテナーはできるだけエフェメラルな（ephemeral; はかない）ものとして生成されます。
+「エフェメラル」という語を使うのは、コンテナーが停止、破棄されて、すぐに新たなものが作り出されるからです。
+最小限の構成や設定を行うだけで、新たなものに置き換えられます。
 
 {% comment %}
 Refer to [Processes](https://12factor.net/processes) under _The Twelve-factor App_
@@ -105,7 +106,7 @@ _The Twelve-factor App_ 手法にある[プロセス](https://12factor.net/proce
 {% comment %}
 ### Understand build context
 {% endcomment %}
-### ビルドコンテキストを理解する
+### ビルドコンテキストの理解
 
 {% comment %}
 When you issue a `docker build` command, the current working directory is called
@@ -115,10 +116,10 @@ of where the `Dockerfile` actually lives, all recursive contents of files and
 directories in the current directory are sent to the Docker daemon as the build
 context.
 {% endcomment %}
-``docker build`` コマンドを実行したときの、カレントなワーキングディレクトリのことを _ビルドコンテキスト_（build context）と呼びます。
-デフォルトで Dockerfile は、カレントなワーキングディレクトリを指すものとしていますが、ファイルフラグ（`-f`）を使って別のディレクトリを指定することもできます。
-Regardless of where the `Dockerfile` actually lives, all recursive contents of files and
-directories in the current directory are sent to the Docker daemon as the build context.
+``docker build`` コマンドを実行したときの、カレントなワーキングディレクトリのことを *ビルドコンテキスト*（build context）と呼びます。
+デフォルトで Dockerfile は、カレントなワーキングディレクトリにあるものとみなされます。
+ただしファイルフラグ（`-f`）を使って別のディレクトリとすることもできます。
+`Dockerfile` が実際にどこにあったとしても、カレントディレクトリ配下にあるファイルやディレクトリの内容がすべて、ビルドコンテキストとして Docker デーモンに送られることになります。
 
 {% comment %}
 > Build context example
@@ -157,7 +158,7 @@ directories in the current directory are sent to the Docker daemon as the build 
 > docker build -t helloapp:v1 .
 > ```
 >
-> `Dockerfile` と `hello` をそれぞれ別のディレクトリに移動させて、（上でビルドした際のキャッシュには頼らずに）2 つめのイメージをビルドします。
+> `Dockerfile` と `hello` をそれぞれ別のディレクトリに移動させて、（上でビルドした際のキャッシュは用いずに）2 つめのイメージをビルドします。
 > Dockerfile に対して `-f` を使い、ビルドコンテキストとなるディレクトリを指定します。
 >
 > ```shell
@@ -166,11 +167,16 @@ directories in the current directory are sent to the Docker daemon as the build 
 > docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
 > ```
 
+{% comment %}
 Inadvertently including files that are not necessary for building an image
 results in a larger build context and larger image size. This can increase the
 time to build the image, time to pull and push it, and the container runtime
 size. To see how big your build context is, look for a message like this when
 building your `Dockerfile`:
+{% endcomment %}
+イメージのビルドには必要のないファイルを誤って含めてしまうと、ビルドコンテキストがそれだけ大きくなり、結果としてサイズの大きなイメージが生成されることになります。
+こうしてしまうと、イメージビルドの時間、このイメージをプッシュしたりプルしたりする時間が、その分だけ要することとなり、コンテナーの実行時の容量も増えてしまいます。
+ビルドコンテキストのサイズがどれだけになったかは、`Dockerfile` を使ってビルド処理を行った際の以下のようなメッセージを確認すればわかります。
 
 ```none
 Sending build context to Docker daemon  187.8MB
@@ -181,12 +187,19 @@ Sending build context to Docker daemon  187.8MB
 {% endcomment %}
 ### `stdin` を通じた Dockerfile のパイプ
 
+{% comment %}
 Docker has the ability to build images by piping `Dockerfile` through `stdin`
 with a _local or remote build context_. Piping a `Dockerfile` through `stdin`
 can be useful to perform one-off builds without writing a Dockerfile to disk,
 or in situations where the `Dockerfile` is generated, and should not persist
 afterwards.
+{% endcomment %}
+Docker には、`Dockerfile` を `stdin` からパイプ入力してイメージをビルドできる機能があります。
+その際には *ローカルの、あるいはリモートのビルドコンテキスト* を利用することができます。
+`stdin` からの `Dockerfile` のパイプ入力機能は、Dockerfile をディスクに書き込む必要のない、1 度きりのイメージビルドを行う場合に利用できます。
+あるいは `Dockerfile` は生成されているものの、その後は必要がなくなるような場合にも活用できます。
 
+{% comment %}
 > The examples in this section use [here documents](http://tldp.org/LDP/abs/html/here-docs.html)
 > for convenience, but any method to provide the `Dockerfile` on `stdin` can be
 > used.
@@ -206,21 +219,52 @@ afterwards.
 >
 > You can substitute the examples with your preferred approach, or the approach
 > that best fits your use-case.
+{% endcomment %}
+> この節における利用例では、扱いやすい [ヒアドキュメント](http://tldp.org/LDP/abs/html/here-docs.html) を使っていますが、`stdin` から `Dockerfile` を与える方法には、他にもいろいろとあります。
+>
+> たとえば以下の 2 つのコマンドは同じ処理を行います。
+>
+> ```bash
+> echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
+> ```
+>
+> ```bash
+> docker build -<<EOF
+> FROM busybox
+> RUN echo "hello world"
+> EOF
+> ```
+>
+> この例に示している方法は、好みの方法あるいは作業に適した方法に置き換えてください。
 
 
+{% comment %}
 #### Build an image using a Dockerfile from stdin, without sending build context
+{% endcomment %}
+{: #build-an-image-using-a-dockerfile-from-stdin-without-sending-build-context }
+#### ビルドコンテキストの送信なく `stdin` からの Dockerfile によりイメージをビルド
 
+{% comment %}
 Use this syntax to build an image using a `Dockerfile` from `stdin`, without
 sending additional files as build context. The hyphen (`-`) takes the position
 of the `PATH`, and instructs Docker to read the build context (which only
 contains a `Dockerfile`) from `stdin` instead of a directory:
+{% endcomment %}
+以下に示す構文は、`stdin` から Dockerfile を指定してイメージをビルドしますが、その際にビルドコンテキストとして余計なファイルは送信しないようになります。
+ハイフン（`-`）を `PATH` の指定場所に記述します。
+こうすると Docker は、ディレクトリからではなく `stdin` からビルドコンテキストを読み込むことになります。
+（そこには `Dockerfile` しかありません。）
 
 ```bash
 docker build [OPTIONS] -
 ```
 
+{% comment %}
 The following example builds an image using a `Dockerfile` that is passed through
 `stdin`. No files are sent as build context to the daemon.
+{% endcomment %}
+以下の例は `stdin` から受け渡された `Dockerfile` を使ってイメージをビルドします。
+ビルドコンテキストからデーモンに送信されるファイルは 1 つもありません。
 
 ```bash
 docker build -t myimage:latest -<<EOF
@@ -229,13 +273,21 @@ RUN echo "hello world"
 EOF
 ```
 
+{% comment %}
 Omitting the build context can be useful in situations where your `Dockerfile`
 does not require files to be copied into the image, and improves the build-speed,
 as no files are sent to the daemon.
+{% endcomment %}
+ビルドコンテキストを省略するのは、イメージにコピーするファイルが何もないような `Dockerfile` を用いる際に利用できます。
+その場合はデーモンへのファイル送信がない分だけ、ビルド時間が短縮されます。
 
+{% comment %}
 If you want to improve the build-speed by excluding _some_ files from the build-
 context, refer to [exclude with .dockerignore](#exclude-with-dockerignore).
+{% endcomment %}
+ビルドコンテキストからファイルを除外することによって、イメージビルドの時間を短縮しようとする場合は、[.dockerignore によるファイル除外の指定](#exclude-with-dockerignore) を参照してください。
 
+{% comment %}
 > **Note**: Attempting to build a Dockerfile that uses `COPY` or `ADD` will fail
 > if this syntax is used. The following example illustrates this:
 >
@@ -258,22 +310,61 @@ context, refer to [exclude with .dockerignore](#exclude-with-dockerignore).
 > Step 2/3 : COPY somefile.txt .
 > COPY failed: stat /var/lib/docker/tmp/docker-builder249218248/somefile.txt: no such file or directory
 > ```
+{% endcomment %}
+> **メモ**: この構文を用いる際に、Dockerfile に `COPY` や `ADD` を含めるとビルドに失敗します。
+> 以下にその例を説明します。
+>
+> ```bash
+> # 作業ディレクトリを生成します。
+> mkdir example
+> cd example
+>
+> # サンプルのファイルを生成します。
+> touch somefile.txt
+>
+> docker build -t myimage:latest -<<EOF
+> FROM busybox
+> COPY somefile.txt .
+> RUN cat /somefile.txt
+> EOF
+>
+> # ビルドが失敗する様子を確認します。
+> ...
+> Step 2/3 : COPY somefile.txt .
+> COPY failed: stat /var/lib/docker/tmp/docker-builder249218248/somefile.txt: no such file or directory
+> ```
 
+{% comment %}
 #### Build from a local build context, using a Dockerfile from stdin
+{% endcomment %}
+{: #build-from-a-local-build-context-using-a-dockerfile-from-stdin }
+#### ローカルのビルドコンテキストを使ったビルド、`stdio` からの Dockerfile 利用
 
+{% comment %}
 Use this syntax to build an image using files on your local filesystem, but using
 a `Dockerfile` from `stdin`. The syntax uses the `-f` (or `--file`) option to
 specify the `Dockerfile` to use, using a hyphen (`-`) as filename to instruct
 Docker to read the `Dockerfile` from `stdin`:
+{% endcomment %}
+以下の構文により、ローカルファイルシステム上のファイルを使ってイメージをビルドします。
+ただし `Dockerfile` は `stdin` からの入力とします。
+この構文では `-f`（または `--file`）オプションによって `Dockerfile` を指定します。
+そしてファイル名にはハイフン（`-`）を指定することで、`Dockerfile` を `stdin` から読み込むことを指示しています。
 
 ```bash
 docker build [OPTIONS] -f- PATH
 ```
 
+{% comment %}
 The example below uses the current directory (`.`) as the build context, and builds
 an image using a `Dockerfile` that is passed through `stdin` using a [here
 document](http://tldp.org/LDP/abs/html/here-docs.html).
+{% endcomment %}
+以下の例ではビルドコンテキストとしてカレントディレクトリ（`.`）を利用します。
+そして `stdin` から受け渡される `Dockerfile` を使ってイメージをビルドします。
+この際には [ヒアドキュメント](http://tldp.org/LDP/abs/html/here-docs.html) を使っています。
 
+{% comment %}
 ```bash
 # create a directory to work in
 mkdir example
@@ -289,24 +380,59 @@ COPY somefile.txt .
 RUN cat /somefile.txt
 EOF
 ```
+{% endcomment %}
+```bash
+# 作業ディレクトリを生成します。
+mkdir example
+cd example
 
+# サンプルのファイルを生成します。
+touch somefile.txt
+
+# カレントディレクトリをコンテキストとして stdin から Dockerfile をビルドします。
+docker build -t myimage:latest -f- . <<EOF
+FROM busybox
+COPY somefile.txt .
+RUN cat /somefile.txt
+EOF
+```
+
+{% comment %}
 #### Build from a remote build context, using a Dockerfile from stdin
+{% endcomment %}
+{: #build-from-a-remote-build-context-using-a-dockerfile-from-stdin }
+#### リモートのビルドコンテキストを使ったビルド、`stdio` からの Dockerfile 利用
 
+{% comment %}
 Use this syntax to build an image using files from a remote `git` repository,
 using a `Dockerfile` from `stdin`. The syntax uses the `-f` (or `--file`) option to
 specify the `Dockerfile` to use, using a hyphen (`-`) as filename to instruct
 Docker to read the `Dockerfile` from `stdin`:
+{% endcomment %}
+以下の構文により、リモートの git リポジトリ上のファイルを使ってイメージをビルドします。
+ここでも `Dockerfile` は `stdin` からの入力とします。
+この構文では `-f`（または `--file`）オプションによって `Dockerfile` を指定します。
+そしてファイル名にはハイフン（`-`）を指定することで、`Dockerfile` を `stdin` から読み込むことを指示しています。
 
 ```bash
 docker build [OPTIONS] -f- PATH
 ```
 
+{% comment %}
 This syntax can be useful in situations where you want to build an image from a
 repository does not contain a `Dockerfile`, or if you want to build with a custom
 `Dockerfile`, without maintaining your own fork of the repository.
+{% endcomment %}
+この構文は、イメージをビルドするために利用するリポジトリに `Dockerfile` が含まれていないような場合に用いることができます。
+あるいは `Dockerfile` には独自のものを使ってビルドを行いたい場合です。
+つまりフォークしたリポジトリを変更しなくて済みます。
 
+{% comment %}
 The example below builds an image using a `Dockerfile` from `stdin`, and adds
 the `README.md` file from the ["hello-world" Git repository on GitHub](https://github.com/docker-library/hello-world).
+{% endcomment %}
+以下の例は `stdin` から `Dockerfile` を指定してイメージをビルドします。
+そして [GitHub 上の git リポジトリ "hello-world"](https://github.com/docker-library/hello-world) から `README.md` ファイルを取得して加えます。
 
 ```bash
 docker build -t myimage:latest -f- https://github.com/docker-library/hello-world.git <<EOF
@@ -315,41 +441,85 @@ COPY README.md .
 EOF
 ```
 
+{% comment %}
 > **Under the hood**
 >
 > When building an image using a remote Git repository as build context, Docker
 > performs a `git clone` of the repository on the local machine, and sends
 > those files as build context to the daemon. This feature requires `git` to be
 > installed on the host where you run the `docker build` command.
+{% endcomment %}
+> **内部の処理**
+>
+> ビルドコンテキストとしてリモートの git リポジトリを使ってイメージをビルドする場合、Docker はローカルマシン上において、そのリポジトリに対して `git clone` を実行します。
+> そして取得されるファイルをビルドコンテキストとしてデーモンに送ります。
+> つまりこの機能を実行するには、`docker build` コマンドを実行するホスト上に `git` をインストールしていることが必要です。
 
+{% comment %}
 ### Exclude with .dockerignore
+{% endcomment %}
+{: #exclude-with-dockerignore }
+### .dockerignore を使ったファイル除外の指定
 
+{% comment %}
 To exclude files not relevant to the build (without restructuring your source
 repository) use a `.dockerignore` file. This file supports exclusion patterns
 similar to `.gitignore` files. For information on creating one, see the
 [.dockerignore file](/engine/reference/builder.md#dockerignore-file).
+{% endcomment %}
+ビルドに関係のないファイルを（ソースリポジトリを変更することなく）除外するには `.dockerignore` ファイルを利用します。
+このファイルは `.gitignore` ファイルと同様のファイル除外指定パターンに対応しています。
+ファイルの生成に関しては [.dockerignore ファイル](/engine/reference/builder.md#dockerignore-file) を参照してください。
 
+{% comment %}
 ### Use multi-stage builds
+{% endcomment %}
+{: #use-multi-stage-builds }
+### マルチステージビルドの利用
 
+{% comment %}
 [Multi-stage builds](multistage-build.md) allow you to drastically reduce the
 size of your final image, without struggling to reduce the number of intermediate
 layers and files.
+{% endcomment %}
+[マルチステージビルド](multistage-build.md) は、最終的なイメージサイズを激減させることができます。
+中間的に生成されるレイヤーやファイルの数を減らすような苦労は必要ありません。
 
+{% comment %}
 Because an image is built during the final stage of the build process, you can
 minimize image layers by [leveraging build cache](#leverage-build-cache).
+{% endcomment %}
+イメージというものは、ビルド処理の最終段階で生成されるものです。
+したがってイメージのレイヤーは [ビルドキャッシュの活用](#leverage-build-cache) によって最小限に抑えることができます。
 
+{% comment %}
 For example, if your build contains several layers, you can order them from the
 less frequently changed (to ensure the build cache is reusable) to the more
 frequently changed:
+{% endcomment %}
+たとえばビルドするイメージにレイヤーがいくつかある場合、変更があまり行われないもの（ビルドキャッシュが確実に再利用されるもの）から、頻繁に変更されるものへと並び順を定めることができます。
 
+{% comment %}
 * Install tools you need to build your application
+{% endcomment %}
+* アプリケーションのビルドに必要なツールのインストール
 
+{% comment %}
 * Install or update library dependencies
+{% endcomment %}
+* 依存するライブラリのインストールまたはアップデート
 
+{% comment %}
 * Generate your application
+{% endcomment %}
+* アプリケーションのビルド
 
+{% comment %}
 A Dockerfile for a Go application could look like:
+{% endcomment %}
+たとえば Go 言語アプリケーションの Dockerfile は以下のようになります。
 
+{% comment %}
 ```Dockerfile
 FROM golang:1.11-alpine AS build
 
@@ -376,10 +546,38 @@ COPY --from=build /bin/project /bin/project
 ENTRYPOINT ["/bin/project"]
 CMD ["--help"]
 ```
+{% endcomment %}
+```Dockerfile
+FROM golang:1.11-alpine AS build
+
+# 本プロジェクトに必要なツールをインストール。
+# `docker build --no-cache .` を実行して依存パッケージのアップデート。
+RUN apk add --no-cache git
+RUN go get github.com/golang/dep/cmd/dep
+
+# プロジェクトの依存関係を Gopkg.toml と Gopkg.lock に列記。
+# これに対応するレイヤーは Gopkg ファイルの更新時のみ再ビルド。
+COPY Gopkg.lock Gopkg.toml /go/src/project/
+WORKDIR /go/src/project/
+# 依存ライブラリをインストール。
+RUN dep ensure -vendor-only
+
+# プロジェクト全体をコピーしてビルド。
+# このレイヤーはプロジェクトディレクトリ内のファイル変更時に再ビルド。
+COPY . /go/src/project/
+RUN go build -o /bin/project
+
+# 以下によりイメージを 1 レイヤーに。
+FROM scratch
+COPY --from=build /bin/project /bin/project
+ENTRYPOINT ["/bin/project"]
+CMD ["--help"]
+```
 
 {% comment %}
 ### Don't install unnecessary packages
 {% endcomment %}
+{: #dont-install-unnecessary-packages }
 ### 不要なパッケージをインストールしない
 
 {% comment %}
@@ -387,12 +585,13 @@ To reduce complexity, dependencies, file sizes, and build times, avoid
 installing extra or unnecessary packages just because they might be "nice to
 have." For example, you don’t need to include a text editor in a database image.
 {% endcomment %}
-複雑さ、依存関係、ファイルサイズ、構築時間をそれぞれ減らすためには、余分な、または必須ではない「あった方が良いだろう」程度のパッケージをインストールすべきではありません。
-例えば、データベースイメージであればテキストエディターは不要でしょう。
+Dockerfile をわかりやすくして、依存関係、ファイルサイズ、構築時間をいずれも減らすためには、余分で必須ではない「あった方が良いだろう」程度のパッケージはインストールしないようにします。
+例えば、データベースイメージであればテキストエディターは不要のはずです。
 
 {% comment %}
 ### Decouple applications
 {% endcomment %}
+{: #decouple-applications }
 ### アプリケーションの分割
 
 {% comment %}
@@ -402,10 +601,10 @@ For instance, a web application stack might consist of three separate
 containers, each with its own unique image, to manage the web application,
 database, and an in-memory cache in a decoupled manner.
 {% endcomment %}
-1 つのコンテナーにとって関心のあることといえば、ただ 1 つです。
-アプリケーションを複数のコンテナーに分けることにより、スケールアウトやコンテナーの再利用がしやすくなります。
-たとえばウェブアプリケーションが３つの独立したコンテナーにより成り立っているとします。
-それらは個々のイメージを持つものとなり、それぞれに分かれてウェブアプリケーション、データベース、メモリキャッシュを管理するようになります。
+1 つのコンテナーが取り扱う内容は 1 つにしぼるべきです。
+アプリケーションを複数のコンテナーに分けると、スケールアウトやコンテナーの再利用がしやすくなります。
+たとえばウェブアプリケーションが 3 つの独立したコンテナーにより成り立っているとします。
+それらは個々のイメージを持ち、それぞれに分かれてウェブアプリケーション、データベース、メモリキャッシュを管理するようになります。
 
 {% comment %}
 Limiting each container to one process is a good rule of thumb, but it is not a
@@ -416,8 +615,9 @@ instance, [Celery](http://www.celeryproject.org/) can spawn multiple worker
 processes, and [Apache](https://httpd.apache.org/) can create one process per
 request.
 {% endcomment %}
-個々のコンテナーを１つのプロセスのみに限定して割り当てることは、優れた経験則となることがありますが、決して厳密な規則というわけでもありません。
-たとえばコンテナーは[初期プロセスにおいて起動](/engine/reference/run/#/specifying-an-init-process)することが可能であり、プログラムの中には都合に応じて追加のプロセスを起動するようなものもあります。
+個々のコンテナーを 1 つのプロセスのみに限定して割り当てることは、優れた経験則となることがあります。
+しかし決して厳密な規則というわけでもありません。
+たとえばコンテナーは [初期プロセスにおいて起動](/engine/reference/run/#/specifying-an-init-process) することが可能であり、プログラムの中には必要に応じて追加のプロセスを起動するようなものもあります。
 例をあげると、[Celery](http://www.celeryproject.org/) はワーカープロセスを複数起動し、[Apache](https://httpd.apache.org/) はリクエストごとにプロセスを生成します。
 
 {% comment %}
@@ -425,29 +625,44 @@ Use your best judgment to keep containers as clean and modular as possible. If
 containers depend on each other, you can use [Docker container networks](/engine/userguide/networking/)
 to ensure that these containers can communicate.
 {% endcomment %}
-コンテナーはできる限りすっきりとモジュラー化されるように、適切な判断をしてください。
-コンテナーが互いに依存している場合は、[Docker container ネットワーク](https://docs.docker.com/engine/userguide/networking/>)を用いることで、コンテナー間の通信を確実に行うことができます。
+コンテナーはできるかぎりすっきりとモジュール分割されるように、適切に判断してください。
+コンテナーが互いに依存している場合は、[Docker container ネットワーク](https://docs.docker.com/engine/userguide/networking/>) を用いることで、コンテナー間の通信を確実に行うことができます。
 
 {% comment %}
 ### Minimize the number of layers
 {% endcomment %}
-### レイヤ数は最小に
+{: #minimize-the-number-of-layers }
+### レイヤー数は最小に
 
+{% comment %}
 In older versions of Docker, it was important that you minimized the number of
 layers in your images to ensure they were performant. The following features
 were added to reduce this limitation:
+{% endcomment %}
+Docker の古いバージョンでは、イメージに含まれるレイヤー数を最小におさえることが重要であり、これにより処理性能を確保していました。
+この制約は後々、以下のような機能が加えられることで軽減されました。
 
+{% comment %}
 - Only the instructions `RUN`, `COPY`, `ADD` create layers. Other instructions
   create temporary intermediate images, and do not increase the size of the build.
+{% endcomment %}
+- `RUN`, `COPY`, `ADD` の命令のみレイヤーを生成します。
+  他の命令は一時的な中間イメージを生成するため、ビルドイメージのサイズは増加させません。
 
+{% comment %}
 - Where possible, use [multi-stage builds](multistage-build.md), and only copy
   the artifacts you need into the final image. This allows you to include tools
   and debug information in your intermediate build stages without increasing the
   size of the final image.
+{% endcomment %}
+- 可能であれば [マルチステージビルド](multistage-build.md) を利用します。
+  そして必要な成果物のみを最終イメージに含めるようにします。
+  途中で利用するツールやデバッグ情報は、中間的なビルドステージの中で取り扱うことができ、最終イメージのサイズを増やさずに済みます。
 
 {% comment %}
 ### Sort multi-line arguments
 {% endcomment %}
+{: #sort-multi-line-arguments }
 ### 複数行にわたる引数は並びを適切に
 
 {% comment %}
@@ -456,7 +671,7 @@ alphanumerically. This helps to avoid duplication of packages and make the
 list much easier to update. This also makes PRs a lot easier to read and
 review. Adding a space before a backslash (`\`) helps as well.
 {% endcomment %}
-複数行にわたる引数は、できるなら後々の変更を容易にするために、その並びはアルファベット順にしましょう。
+複数行にわたる引数は、後々の変更を容易にするために、できるならその並びはアルファベット順にします。
 そうしておけば、パッケージを重複指定することはなくなり、一覧の変更も簡単になります。
 プルリクエストを読んだりレビューしたりすることも、さらに楽になります。
 バックスラッシュ（`\`） の前に空白を含めておくことも同様です。
@@ -478,6 +693,7 @@ RUN apt-get update && apt-get install -y \
 {% comment %}
 ### Leverage build cache
 {% endcomment %}
+{: #leverage-build-cache }
 ### ビルドキャッシュの利用
 
 {% comment %}
@@ -487,7 +703,7 @@ examined, Docker looks for an existing image in its cache that it can reuse,
 rather than creating a new (duplicate) image.
 {% endcomment %}
 イメージの構築時に Docker は `Dockerfile` 内に示されている命令を記述順に実行していきます。
-個々の命令が検査される際に Docker は、既存イメージのキャッシュが再利用できるかどうかを調べます。
+個々の命令が処理される際に Docker は、既存イメージのキャッシュが再利用できるかどうかを調べます。
 そこでは新たな（同じ）イメージを作ることはしません。
 
 {% comment %}
@@ -526,7 +742,7 @@ Docker が従っている規則は以下のとおりです。
   checksum in the existing images. If anything has changed in the file(s), such
   as the contents and metadata, then the cache is invalidated.
 {% endcomment %}
-- ``ADD`` 命令や ``COPY`` 命令では、イメージに含まれるファイルの内容が検査され、個々のファイルについてチェックサムが計算されます。
+- `ADD` 命令や `COPY` 命令では、イメージに含まれるファイルの内容が検査され、個々のファイルについてチェックサムが計算されます。
   この計算において、ファイルの最終更新時刻、最終アクセス時刻は考慮されません。
   キャッシュを探す際に、このチェックサムと既存イメージのチェックサムが比較されます。
   ファイル内の何かが変更になったとき、たとえばファイル内容やメタデータが変わっていれば、キャッシュは無効になります。
@@ -538,7 +754,7 @@ Docker が従っている規則は以下のとおりです。
   are not examined to determine if a cache hit exists.  In that case just
   the command string itself is used to find a match.
 {% endcomment %}
-`ADD` と `COPY` 以外のコマンドの場合、キャッシュのチェックは、コンテナー内のファイル内容を見ることはなく、それによってキャッシュと合致しているかどうかが決定されるわけでありません。
+- `ADD` と `COPY` 以外のコマンドの場合、キャッシュのチェックは、コンテナー内のファイル内容を見ることはなく、それによってキャッシュと合致しているかどうかが決定されるわけでありません。
   たとえば `RUN apt-get -y update` コマンドの処理が行われる際には、コンテナー内にて更新されたファイルは、キャッシュが合致するかどうかの判断のために用いられません。
   この場合にはコマンド文字列そのものが、キャッシュの合致判断に用いられます。
 
@@ -551,14 +767,14 @@ images and the cache is not used.
 {% comment %}
 ## Dockerfile instructions
 {% endcomment %}
+{: #dockerfile-instructions }
 ## Dockerfile コマンド
 
 {% comment %}
 These recommendations are designed to help you create an efficient and
 maintainable `Dockerfile`.
 {% endcomment %}
-These recommendations are designed to help you create an efficient and
-maintainable `Dockerfile`.
+効率のよい保守性に優れた `Dockerfile` を生成するために、推奨する内容を以下に示します。
 
 ### FROM
 
@@ -591,7 +807,7 @@ label, add a line beginning with `LABEL` and with one or more key-value pairs.
 The following examples show the different acceptable formats. Explanatory comments are included inline.
 {% endcomment %}
 イメージにラベルを追加するのは、プロジェクト内でのイメージ管理をしやすくしたり、ライセンス情報の記録や自動化の助けとするなど、さまざまな目的があります。
-ラベルを指定するには、 ``LABEL`` で始まる行を追加して、そこにキーと値のペア（key-value pair）をいくつか設定します。
+ラベルを指定するには、 `LABEL` で始まる行を追加して、そこにキーバリューペアをいくつか設定します。
 以下に示す例は、いずれも正しい構文です。
 説明をコメントとしてつけています。
 
@@ -603,6 +819,16 @@ The following examples show the different acceptable formats. Explanatory commen
 > 文字列内に引用符がある場合も、同様にエスケープしてください。
 
 
+{% comment %}
+```Dockerfile
+# Set one or more individual labels
+LABEL com.example.version="0.0.1-beta"
+LABEL vendor1="ACME Incorporated"
+LABEL vendor2=ZENITH\ Incorporated
+LABEL com.example.release-date="2015-02-12"
+LABEL com.example.version.is-production=""
+```
+{% endcomment %}
 ```Dockerfile
 # 個々にラベルを設定
 LABEL com.example.version="0.0.1-beta"
@@ -612,13 +838,26 @@ LABEL com.example.release-date="2015-02-12"
 LABEL com.example.version.is-production=""
 ```
 
+{% comment %}
 An image can have more than one label. Prior to Docker 1.10, it was recommended
 to combine all labels into a single `LABEL` instruction, to prevent extra layers
 from being created. This is no longer necessary, but combining labels is still
 supported.
+{% endcomment %}
+イメージには複数のラベルを設定することができます。
+Docker 1.10 以前のバージョンでは、ラベルをすべてまとめて 1 つの `LABEL` 命令にすることが推奨されていました。
+これによって余分なレイヤーが生成されることを防ぐためです。
+このことは、現在は必要ではなくなっています。
+ただしラベルをまとめる機能は今もサポートされています。
 
+{% comment %}
 ```Dockerfile
-# 1行でラベルを設定
+# Set multiple labels on one line
+LABEL com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"
+```
+{% endcomment %}
+```Dockerfile
+# 1 行でラベルを設定
 LABEL com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"
 ```
 
@@ -627,6 +866,16 @@ The above can also be written as:
 {% endcomment %}
 上は以下のように書くこともできます。
 
+{% comment %}
+```Dockerfile
+# Set multiple labels at once, using line-continuation characters to break long lines
+LABEL vendor=ACME\ Incorporated \
+      com.example.is-beta= \
+      com.example.is-production="" \
+      com.example.version="0.0.1-beta" \
+      com.example.release-date="2015-02-12"
+```
+{% endcomment %}
 ```Dockerfile
 # 複数のラベルを一度に設定、ただし行継続の文字を使い、長い文字列を改行する
 LABEL vendor=ACME\ Incorporated \
@@ -636,11 +885,16 @@ LABEL vendor=ACME\ Incorporated \
       com.example.release-date="2015-02-12"
 ```
 
+{% comment %}
 See [Understanding object labels](/config/labels-custom-metadata.md)
 for guidelines about acceptable label keys and values. For information about
 querying labels, refer to the items related to filtering in [Managing labels on
 objects](/config/labels-custom-metadata.md#managing-labels-on-objects). See also
 [LABEL](/engine/reference/builder/#label) in the Dockerfile reference.
+{% endcomment %}
+利用可能なラベルのキーおよび値に関するガイドラインが [オブジェクトラベルの理解](/config/labels-custom-metadata.md) に示されています。
+ラベルを検索する方法については、[オブジェクト内のラベル管理](/config/labels-custom-metadata.md#managing-labels-on-objects) に示されているフィルタリングに関する項目を参照してください。
+また Dockerfile リファレンスの [LABEL](/engine/reference/builder/#label) も参考になります。
 
 ### RUN
 
@@ -983,10 +1237,16 @@ auto-magically bump the version of the software in your container.
 プログラムにおける（ハードコーディングではない）定数定義と同じことで、この方法をとっておくのが便利です。
 ただ１つの `ENV` コマンドを変更するだけで、コンテナー内のソフトウェアバージョンは、いとも簡単に変えてしまうことができるからです。
 
+{% comment %}
 Each `ENV` line creates a new intermediate layer, just like `RUN` commands. This
 means that even if you unset the environment variable in a future layer, it
 still persists in this layer and its value can be dumped. You can test this by
 creating a Dockerfile like the following, and then building it.
+{% endcomment %}
+それぞれの `ENV` 行からは新たな中間レイヤーが生成されます。
+`RUN` コマンドと同じです。
+ということはつまり、環境変数を先々のレイヤーにおいて無効化したとしても、その中間レイヤーに変数データは残ることになり、データを失うことなく取得することができます。
+このことを確認するには、以下のような Dockerfile を生成してビルドを行ってみればわかります。
 
 ```Dockerfile
 FROM alpine
@@ -1001,6 +1261,7 @@ $ docker run --rm test sh -c 'echo $ADMIN_USER'
 mark
 ```
 
+{% comment %}
 To prevent this, and really unset the environment variable, use a `RUN` command
 with shell commands, to set, use, and unset the variable all in a single layer.
 You can separate your commands with `;` or `&&`. If you use the second method,
@@ -1008,6 +1269,14 @@ and one of the commands fails, the `docker build` also fails. This is usually a
 good idea. Using `\` as a line continuation character for Linux Dockerfiles
 improves readability. You could also put all of the commands into a shell script
 and have the `RUN` command just run that shell script.
+{% endcomment %}
+このようにはならないように、つまり本当に環境変数を無効化したい場合には、シェルコマンドを用いた `RUN` コマンドを利用します。
+そして環境変数への値設定、利用、無効化を、すべて 1 つのレイヤー内にて行うようにします。
+各コマンドの区切りには `;` や `&&` を使います。
+この 2 つめの方法をとった場合、コマンドが 1 つでも失敗すれば `docker build` も失敗します。
+この方が適切なやり方です。
+Linux における Dockerfile では行継続文字を表わす `\` を用いると、読みやすくなります。
+あるいは実行する命令をすべてシェルスクリプトに書き入れて、`RUN` コマンドによってそのシェルスクリプトを実行するようなこともできます。
 
 ```Dockerfile
 FROM alpine
@@ -1026,6 +1295,7 @@ $ docker run --rm test sh -c 'echo $ADMIN_USER'
 {% comment %}
 ### ADD or COPY
 {% endcomment %}
+{: #add-or-copy }
 ### ADD と COPY
 
 {% comment %}
@@ -1086,7 +1356,7 @@ things like:
 {% endcomment %}
 イメージサイズの問題があるので、`ADD` を用いてリモート URL からパッケージを取得することはやめてください。
 かわりに `curl` や `wget` を使ってください。
-こうしておくことで、ファイルを取得し展開した後や、イメージ内の他のレイヤにファイルを加える必要がないのであれば、その後にファイルを削除することができます。
+こうしておくことで、ファイルを取得し展開した後や、イメージ内の他のレイヤーにファイルを加える必要がないのであれば、その後にファイルを削除することができます。
 たとえば以下に示すのは、やってはいけない例です。
 
 ```Dockerfile
@@ -1171,8 +1441,11 @@ when starting the tool may require more than one step.
 そのスクリプトは、上記のコマンド例と同じように機能させられます。
 たとえ対象ツールの起動に複数ステップを要するような場合でも、それが可能です。
 
+{% comment %}
 For example, the [Postgres Official Image](https://hub.docker.com/_/postgres/)
 uses the following script as its `ENTRYPOINT`:
+{% endcomment %}
+たとえば [Postgres 公式イメージ](https://hub.docker.com/_/postgres/) では `ENTRYPOINT` として以下のスクリプトを利用しています。
 
 ```bash
 #!/bin/bash
@@ -1191,6 +1464,14 @@ fi
 exec "$@"
 ```
 
+{% comment %}
+> Configure app as PID 1
+>
+> This script uses [the `exec` Bash command](http://wiki.bash-hackers.org/commands/builtin/exec)
+> so that the final running application becomes the container's PID 1. This
+> allows the application to receive any Unix signals sent to the container.
+> For more, see the [`ENTRYPOINT` reference](/engine/reference/builder.md#entrypoint).
+{% endcomment %}
 > Configure app as PID 1
 >
 > This script uses [the `exec` Bash command](http://wiki.bash-hackers.org/commands/builtin/exec)
@@ -1298,7 +1579,7 @@ like `RUN groupadd -r postgres && useradd --no-log-init -r -g postgres postgres`
 > Go 言語の archive/tar パッケージが取り扱うスパースファイルにおいて
 > [未解決のバグ](https://github.com/golang/go/issues/13548)があります。
 > これは Docker コンテナー内にて非常に大きな値の UID を使ってユーザーを生成しようとするため、ディスク消費が異常に発生します。
-> コンテナーレイヤ内の `/var/log/faillog` が NUL (\0) キャラクターにより埋められてしまいます。
+> コンテナーレイヤー内の `/var/log/faillog` が NUL (\0) キャラクターにより埋められてしまいます。
 > useradd に対して `--no-log-init` フラグをつけることで、とりあえずこの問題は回避できます。
 > ただし Debian/Ubuntu の `adduser` ラッパーは `--no-log-init` フラグをサポートしていないため、利用することはできません。
 
