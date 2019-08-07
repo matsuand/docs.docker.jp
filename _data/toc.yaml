@@ -1407,7 +1407,7 @@ manuals:
           title: Troubleshoot with logs
         - path: /ee/ucp/admin/monitor-and-troubleshoot/troubleshoot-configurations/
           title: Troubleshoot configurations
-      - title: CLI reference
+      - title: CLI リファレンス
         path: /reference/ucp/3.2/cli/
         nosync: true
     - sectiontitle: Authorize role-based access
@@ -1898,7 +1898,7 @@ manuals:
               title: Troubleshoot configurations
           - path: /datacenter/ucp/3.0/guides/admin/backups-and-disaster-recovery/
             title: Backups and disaster recovery
-          - sectiontitle: CLI reference
+          - sectiontitle: CLI リファレンス
             section:
             - path: /datacenter/ucp/3.0/reference/cli/
               title: docker/ucp overview
@@ -2113,7 +2113,7 @@ manuals:
               title: Troubleshoot configurations
           - path: /datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery/
             title: Backups and disaster recovery
-          - sectiontitle: CLI reference
+          - sectiontitle: CLI リファレンス
             section:
             - path: /datacenter/ucp/2.2/reference/cli/
               title: docker/ucp overview
@@ -2280,7 +2280,7 @@ manuals:
               title: Troubleshoot configurations
           - path: /datacenter/ucp/2.1/guides/admin/backups-and-disaster-recovery/
             title: Backups and disaster recovery
-          - sectiontitle: CLI reference
+          - sectiontitle: CLI リファレンス
             section:
             - path: /datacenter/ucp/2.1/reference/cli/
               title: docker/ucp overview
@@ -2420,7 +2420,7 @@ manuals:
             title: Manage trusted repositories
           - path: /datacenter/ucp/2.0/guides/content-trust/continuous-integration/
             title: Use trusted images for continuous integration
-        - sectiontitle: CLI reference
+        - sectiontitle: CLI リファレンス
           section:
           - path: /datacenter/ucp/2.0/reference/cli/
             title: docker/ucp overview
@@ -2684,7 +2684,7 @@ manuals:
           path: /ee/dtr/admin/disaster-recovery/create-a-backup/
         - title: Restore from a backup
           path: /ee/dtr/admin/disaster-recovery/restore-from-backup/
-      - title: CLI reference
+      - title: CLI リファレンス
         path: /reference/dtr/2.7/cli/
         nosync: true
     - sectiontitle: User guides
@@ -3027,7 +3027,7 @@ manuals:
               title: Troubleshoot batch jobs
           - path: /datacenter/dtr/2.5/guides/admin/backups-and-disaster-recovery/
             title: Backups and disaster recovery
-          - sectiontitle: CLI reference
+          - sectiontitle: CLI リファレンス
             section:
             - path: /datacenter/dtr/2.5/reference/cli/
               title: Overview
@@ -3168,7 +3168,7 @@ manuals:
               title: Troubleshoot batch jobs
           - path: /datacenter/dtr/2.4/guides/admin/backups-and-disaster-recovery/
             title: Backups and disaster recovery
-          - sectiontitle: CLI reference
+          - sectiontitle: CLI リファレンス
             section:
             - path: /datacenter/dtr/2.4/reference/cli/
               title: Overview
@@ -3307,7 +3307,7 @@ manuals:
               title: Troubleshoot batch jobs
           - path: /datacenter/dtr/2.3/guides/admin/backups-and-disaster-recovery/
             title: Backups and disaster recovery
-          - sectiontitle: CLI reference
+          - sectiontitle: CLI リファレンス
             section:
             - path: /datacenter/dtr/2.3/reference/cli/
               title: Overview
@@ -3441,7 +3441,7 @@ manuals:
               title: Troubleshoot batch jobs
           - path: /datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/
             title: Backups and disaster recovery
-          - sectiontitle: CLI reference
+          - sectiontitle: CLI リファレンス
             section:
             - path: /datacenter/dtr/2.2/reference/cli/
               title: Overview
@@ -3573,7 +3573,7 @@ manuals:
           section:
           - path: /datacenter/dtr/2.1/reference/api/
             title: API reference
-          - sectiontitle: CLI reference
+          - sectiontitle: CLI リファレンス
             section:
             - path: /datacenter/dtr/2.1/reference/cli/
               title: Overview
@@ -3803,13 +3803,13 @@ manuals:
   - path: /assemble/adv-backend-manage/
     title: Advanced Backend Management
   - path: /engine/reference/commandline/assemble/
-    title: CLI reference
+    title: CLI リファレンス
 - sectiontitle: Docker App
   section:
   - path: /app/working-with-app/
     title: Working with Docker App
   - path: /engine/reference/commandline/app/
-    title: CLI reference
+    title: CLI リファレンス
 - sectiontitle: Docker Template
   section:
   - path: /app-template/working-with-template/
@@ -3817,13 +3817,13 @@ manuals:
   - path: /app-template/api-reference/
     title: API reference
   - path: /engine/reference/commandline/template/
-    title: CLI reference
+    title: CLI リファレンス
 - sectiontitle: Docker Buildx
   section:
   - path: /buildx/working-with-buildx/
     title: Working with Docker Buildx
   - path: /engine/reference/commandline/buildx/
-    title: CLI reference
+    title: CLI リファレンス
 - sectiontitle: Docker Compose
   section:
   - path: /compose/

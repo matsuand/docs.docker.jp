@@ -1472,12 +1472,12 @@ exec "$@"
 > allows the application to receive any Unix signals sent to the container.
 > For more, see the [`ENTRYPOINT` reference](/engine/reference/builder.md#entrypoint).
 {% endcomment %}
-> Configure app as PID 1
+> アプリを PID 1 として実行
 >
-> This script uses [the `exec` Bash command](http://wiki.bash-hackers.org/commands/builtin/exec)
-> so that the final running application becomes the container's PID 1. This
-> allows the application to receive any Unix signals sent to the container.
-> For more, see the [`ENTRYPOINT` reference](/engine/reference/builder.md#entrypoint).
+> このスクリプトでは [Bash の `exec` コマンド](http://wiki.bash-hackers.org/commands/builtin/exec) を利用しています。
+> このため最後に実行されるアプリケーションが、コンテナーの PID 1 になります。
+> したがってコンテナーに送信される Unix シグナルは、そのアプリケーションが受け取ることになります。
+> 詳しくは [`ENTRYPOINT` リファレンス](/engine/reference/builder.md#entrypoint) を参照してください。
 
 {% comment %}
 The helper script is copied into the container and run via `ENTRYPOINT` on
@@ -1508,7 +1508,7 @@ $ docker run postgres
 {% comment %}
 Or, it can be used to run Postgres and pass parameters to the server:
 {% endcomment %}
-あるいは PostgreSQL 実行時にサーバーに対してパラメーターを渡せます。
+あるいは PostgreSQL 実行時にサーバーに対してパラメーターを渡すことができます。
 
 ```bash
 $ docker run postgres postgres --help
@@ -1589,13 +1589,15 @@ signal-forwarding behavior that can cause problems. If you absolutely need
 functionality similar to `sudo`, such as initializing the daemon as `root` but
 running it as non-`root`, consider using [“gosu”](https://github.com/tianon/gosu).
 {% endcomment %}
-Avoid installing or using `sudo` as it has unpredictable TTY and
-signal-forwarding behavior that can cause problems. If you absolutely need
-functionality similar to `sudo`, such as initializing the daemon as `root` but
-running it as non-`root`, consider using [“gosu”](https://github.com/tianon/gosu).
+`sudo` のインストールやその利用は避けてください。
+これは予期できない TTY 動作やシグナルフォワーディングが起こってしまい問題となるためです。
+たとえば デーモンは `root` で初期化するものの、実行は `root` 以外で行うといったように、`sudo` と同等の機能が本当に必要なのであれば、[“gosu”](https://github.com/tianon/gosu) の利用を検討してみてください。
 
+{% comment %}
 Lastly, to reduce layers and complexity, avoid switching `USER` back and forth
 frequently.
+{% endcomment %}
+最後に、レイヤー数を減らしてわかりやすいものとなるように、`USER` を何度も切り替えるようなことは避けてください。
 
 ### WORKDIR
 
@@ -1610,9 +1612,9 @@ For clarity and reliability, you should always use absolute paths for your
 like `RUN cd … && do-something`, which are hard to read, troubleshoot, and
 maintain.
 {% endcomment %}
-`WORKDIR` に設定するパスは、分かり易く確実なものとするために、絶対パス指定としてください。
+`WORKDIR` に設定するパスは、わかりやすく確実なものとするために、絶対パス指定としてください。
 また `RUN cd … && do-something` といった長くなる一方のコマンドを書くくらいなら、`WORKDIR` を利用してください。
-そのような書き方は読みにくく、トラブル発生時には解決しにくく保守が困難になるためです。
+そのような書き方は読みにくいため、トラブル発生時には解決を遅らせ保守が困難になるためです。
 
 ### ONBUILD
 

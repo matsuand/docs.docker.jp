@@ -4,15 +4,26 @@ description: Working with Docker Buildx
 keywords: Docker, buildx, multi-arch
 ---
 
->This is an experimental feature.
+>これは試験的な（experimental）機能です。
 >
 >{% include experimental.md %}
 
+{% comment %}
 ## Overview
+{% endcomment %}
+{: #overview }
+## 概要
 
+{% comment %}
+Docker Buildx is a CLI plugin that extends the docker command with the full support of the features provided by [Moby BuildKit](https://github.com/moby/buildkit) builder toolkit. It provides the same user experience as docker build with many new features like creating scoped builder instances and building against multiple nodes concurrently.
+{% endcomment %}
 Docker Buildx is a CLI plugin that extends the docker command with the full support of the features provided by [Moby BuildKit](https://github.com/moby/buildkit) builder toolkit. It provides the same user experience as docker build with many new features like creating scoped builder instances and building against multiple nodes concurrently.
 
+{% comment %}
 ## Install
+{% endcomment %}
+{: #install }
+## インストール
 
 Docker Buildx is included in Docker 19.03 and is also bundled with the following Docker Desktop releases. Note that you must enable the 'Experimental features' option to use Docker Buildx.
 

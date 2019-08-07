@@ -51,6 +51,7 @@ Commands:
 {% comment %}
 ## Description
 {% endcomment %}
+{: #description }
 ## Description
 
 {% comment %}
@@ -74,8 +75,8 @@ the [installation](https://docs.docker.com/install/) instructions for your opera
 {% comment %}
 ### Environment variables
 {% endcomment %}
-### 環境変数
 {: #environment-variables }
+### 環境変数
 
 {% comment %}
 For easy reference, the following list of environment variables are supported
@@ -152,8 +153,8 @@ variables.
 {% comment %}
 ### Configuration files
 {% endcomment %}
-### 設定ファイル
 {: #configuration-files }
+### 設定ファイル
 
 {% comment %}
 By default, the Docker command line stores its configuration files in a
@@ -496,14 +497,14 @@ list of root Certificate Authorities.
 {% comment %}
 ## Examples
 {% endcomment %}
-## Examples
 {: #examples }
+## Examples
 
 {% comment %}
 ### Display help text
 {% endcomment %}
-### Display help text
 {: #display-help-text }
+### Display help text
 
 {% comment %}
 To list the help on any command just execute the command, followed by the
@@ -526,8 +527,8 @@ To list the help on any command just execute the command, followed by the
 {% comment %}
 ### Option types
 {% endcomment %}
-### Option types
 {: #option-types }
+### Option types
 
 {% comment %}
 Single character command line options can be combined, so rather than
@@ -541,8 +542,8 @@ you can write `docker run -it --name test busybox sh`.
 {% comment %}
 #### Boolean
 {% endcomment %}
-#### Boolean
 {: #boolean }
+#### Boolean
 
 {% comment %}
 Boolean options take the form `-d=false`. The value you see in the help text is
@@ -576,8 +577,8 @@ $ docker build --rm=false .
 {% comment %}
 #### Multi
 {% endcomment %}
-#### Multi
 {: #multi }
+#### Multi
 
 {% comment %}
 You can specify options like `-a=[]` multiple times in a single command line,
@@ -615,8 +616,8 @@ $ docker run -v /host:/container example/mysql
 {% comment %}
 #### Strings and Integers
 {% endcomment %}
-#### Strings and Integers
 {: #strings-and-integers }
+#### Strings and Integers
 
 {% comment %}
 Options like `--name=""` expect a string, and they
