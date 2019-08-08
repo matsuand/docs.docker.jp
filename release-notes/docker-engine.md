@@ -1,6 +1,6 @@
 ---
-title: Docker Engine release notes
-description: Release notes for Docker CE
+title: Docker Engine リリースノート
+description: Docker CE リリースノート
 keywords: release notes, community
 toc_max: 2
 redirect_from:
@@ -10,12 +10,23 @@ redirect_from:
   - /cs-engine/1.13/release-notes/
 ---
 
+{% comment %}
 These release notes are for Docker Engine versions 1.13.1 and lower. For newer
 Docker releases, see [Docker CE](docker-ce.md) or
 [Docker EE](/ee/engine/release-notes.md).
+{% endcomment %}
+ここに示すリリースノートは Docker Engine バージョン 1.13.1 およびそれ以前に対するものです。
+より最新の Docker リリースについては [Docker CE](docker-ce.md) または [Docker EE](/ee/engine/release-notes.md) を参照してください。
 
 ## 1.13.1 (2017-02-08)
 
+{% comment %}
+**Important**: On Linux distributions where `devicemapper` was the default storage driver,
+the `overlay2`, or `overlay` is now used by default (if the kernel supports it).
+To use devicemapper, you can manually configure the storage driver to use through
+the `--storage-driver` daemon option, or by setting "storage-driver" in the `daemon.json`
+configuration file.
+{% endcomment %}
 **Important**: On Linux distributions where `devicemapper` was the default storage driver,
 the `overlay2`, or `overlay` is now used by default (if the kernel supports it).
 To use devicemapper, you can manually configure the storage driver to use through

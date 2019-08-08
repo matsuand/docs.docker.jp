@@ -9,21 +9,36 @@ redirect_from:
  - /release-notes/docker-ce/
 ---
 
+{% comment %}
 This document describes the latest changes, additions, known issues, and fixes
 for Docker Engine Enterprise (Docker EE).
+{% endcomment %}
+このリリースノートは Docker Engine Enterprise (Docker EE) における最新の変更、追加、既知の問題、修正点について示すものです。
 
+{% comment %}
 Docker EE builds upon the corresponding Docker CE that it
 references. Docker EE includes enterprise features as well as back-ported fixes (security-related
 and priority defects) from the open source. It also incorporates defect fixes for environments
 in which new features cannot be adopted as quickly for consistency and compatibility reasons.
+{% endcomment %}
+Docker EE は、これに対応する Docker CE の上に構築されています。
+Docker EE にはエンタープライズ機能があり、これと同時にオープンソースから行うバックポート修正（セキュリティ関連および優先度の高い不備）が含まれます。
+また一貫性や互換性に起因して、新規機能が早期には適用できないような環境に対して、機能修正を組み入れることがあります。
 
+{% comment %}
 > **Note**:
 > New in 18.09 is an aligned release model for Docker Engine - Community and Docker
 > Engine - Enterprise. The new versioning scheme is YY.MM.x where x is an incrementing
 > patch version. The enterprise engine is a superset of the community engine. They
 > will ship concurrently with the same x patch version based on the same code base.
+{% endcomment %}
+> **メモ**:
+> New in 18.09 is an aligned release model for Docker Engine - Community and Docker
+> Engine - Enterprise. The new versioning scheme is YY.MM.x where x is an incrementing
+> patch version. The enterprise engine is a superset of the community engine. They
+> will ship concurrently with the same x patch version based on the same code base.
 
-> **Note**:
+> **メモ**:
 > The client and container runtime are now in separate packages from the daemon in
 > Docker Engine 18.09. Users should install and update all three packages at the same time
 > to get the latest patch releases. For example, on Ubuntu:
@@ -33,12 +48,33 @@ in which new features cannot be adopted as quickly for consistency and compatibi
 ## 19.03.1
 2019-07-25
 
+{% comment %}
 ### Security
+{% endcomment %}
+{: #security }
+### セキュリティ
 
+ {% comment %}
+ * Fixed loading of nsswitch based config inside chroot under Glibc. [CVE-2019-14271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14271)
+ {% endcomment %}
  * Fixed loading of nsswitch based config inside chroot under Glibc. [CVE-2019-14271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14271)
 
+{% comment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues }
+### 既知の問題
 
+ {% comment %}
+ * In some circumstances, in large clusters, docker information might, as part of the Swarm section,
+ include the error `code = ResourceExhausted desc = grpc: received message larger than
+ max (5351376 vs. 4194304)`. This does not indicate any failure or misconfiguration by the user,
+ and requires no response.
+ * Orchestrator port conflict can occur when redeploying all services as new. Due to many swarm manager
+ requests in a short amount of time, some services are not able to receive traffic and are causing a `404`
+ error after being deployed.
+    - Workaround: restart all tasks via `docker service update --force`.
+ {% endcomment %}
  * In some circumstances, in large clusters, docker information might, as part of the Swarm section,
  include the error `code = ResourceExhausted desc = grpc: received message larger than
  max (5351376 vs. 4194304)`. This does not indicate any failure or misconfiguration by the user,

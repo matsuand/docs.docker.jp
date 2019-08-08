@@ -69,7 +69,7 @@ guides:
         - path: /docker-for-azure/opensource/
           title: オープンソースライセンス
         - path: /docker-for-azure/release-notes/
-          title: Release notes
+          title: リリースノート
         - path: /docker-for-azure/archive/
           title: Template archive
     - sectiontitle: Linux
@@ -1307,7 +1307,7 @@ manuals:
     - path: /ee/supported-platforms/
       title: Install Docker Engine - Enterprise
       nosync: true
-    - title: Release notes
+    - title: リリースノート
       path: /engine/release-notes/
   - sectiontitle: Universal Control Plane
     section:
@@ -1564,7 +1564,7 @@ manuals:
       path: /reference/ucp/3.2/api/
       nosync: true
     - path: /ee/ucp/release-notes/
-      title: Release notes
+      title: リリースノート
     - sectiontitle: Previous versions
       section:
       - sectiontitle: Universal Control Plane 3.1
@@ -2031,7 +2031,7 @@ manuals:
         - path: /datacenter/ucp/3.0/reference/api/
           title: API reference
         - path: /ee/ucp/release-notes/#version-30
-          title: Release notes
+          title: リリースノート
           nosync: true
         - path: /datacenter/ucp/3.0/guides/get-support/
           title: Get support
@@ -2198,7 +2198,7 @@ manuals:
         - path: /datacenter/ucp/2.2/reference/api/
           title: API reference
         - path: /ee/ucp/release-notes/#version-22
-          title: Release notes
+          title: リリースノート
           nosync: true
         - path: /datacenter/ucp/2.2/guides/get-support/
           title: Get support
@@ -2335,7 +2335,7 @@ manuals:
         - sectiontitle: Release notes
           section:
           - path: /datacenter/ucp/2.1/guides/release-notes/
-            title: Release notes
+            title: リリースノート
           - path: /datacenter/ucp/2.1/guides/release-notes/incompatibilities-and-breaking-changes/
             title: Incompatibilities and breaking changes
         - path: /datacenter/ucp/2.1/guides/get-support/
@@ -2451,7 +2451,7 @@ manuals:
         - path: /datacenter/ucp/2.0/guides/support/
           title: Get support
         - path: /datacenter/ucp/2.0/guides/release-notes/
-          title: Release notes
+          title: リリースノート
       - sectiontitle: Universal Control Plane 1.0
         section:
         - path: /datacenter/ucp/1.1/overview/
@@ -2747,7 +2747,7 @@ manuals:
       path: /reference/dtr/2.7/api/
       nosync: true
     - path: /ee/dtr/release-notes/
-      title: Release notes
+      title: リリースノート
     - sectiontitle: Previous versions
       section:
       - sectiontitle: Docker Trusted Registry 2.6
@@ -3086,7 +3086,7 @@ manuals:
         - path: /datacenter/dtr/2.5/reference/api/
           title: API reference
         - path: /ee/dtr/release-notes/
-          title: Release notes
+          title: リリースノート
           nosync: true
         - path: /datacenter/dtr/2.5/guides/support/
           title: Get support
@@ -3227,7 +3227,7 @@ manuals:
         - path: /datacenter/dtr/2.4/reference/api/
           title: API reference
         - path: /ee/dtr/release-notes/
-          title: Release notes
+          title: リリースノート
           nosync: true
         - path: /datacenter/dtr/2.4/guides/support/
           title: Get support
@@ -3368,7 +3368,7 @@ manuals:
         - path: /datacenter/dtr/2.3/reference/api/
           title: API reference
         - path: /datacenter/dtr/2.3/guides/release-notes/
-          title: Release notes
+          title: リリースノート
         - path: /datacenter/dtr/2.3/guides/support/
           title: Get support
       - sectiontitle: Docker Trusted Registry 2.2
@@ -3500,7 +3500,7 @@ manuals:
         - sectiontitle: Release notes
           section:
           - path: /datacenter/dtr/2.2/guides/release-notes/
-            title: Release notes
+            title: リリースノート
           - path: /datacenter/dtr/2.2/guides/release-notes/incompatibilities-and-breaking-changes/
             title: Incompatibilities and breaking changes
         - path: /datacenter/dtr/2.2/guides/support/
@@ -3596,7 +3596,7 @@ manuals:
             - path: /datacenter/dtr/2.1/reference/cli/upgrade/
               title: upgrade
         - path: /datacenter/dtr/2.1/guides/release-notes/
-          title: Release notes
+          title: リリースノート
         - path: /datacenter/dtr/2.1/guides/support/
           title: Get support
       - sectiontitle: Docker Trusted Registry 2.0
@@ -3714,7 +3714,7 @@ manuals:
     - path: /ee/desktop/
       title: Overview
     - path: /ee/desktop/release-notes/
-      title: Release notes
+      title: リリースノート
     - sectiontitle: Admin
       section:
       - sectiontitle: Install
@@ -4129,7 +4129,7 @@ manuals:
         - path: /registry/spec/auth/token/
           title: Token authentication specification
 - path: /release-notes/
-  title: Release notes
+  title: リリースノート
 - sectiontitle: Superseded products and tools
   section:
   - path: /cs-engine/1.13/release-notes/
@@ -4301,7 +4301,7 @@ manuals:
     - path: /swarm/swarm-api/
       title: Docker Swarm API
     - path: /release-notes/docker-swarm/
-      title: Docker Swarm release notes
+      title: Docker Swarm リリースノート
   - sectiontitle: Docker Toolbox (旧版)
     section:
     - path: /toolbox/overview/
