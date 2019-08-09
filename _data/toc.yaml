@@ -1290,6 +1290,8 @@ manuals:
     title: 概要
   - path: /ee/release-notes/
     title: リリースノート
+  - path: /ee/licensing/
+    title: ライセンス
   - sectiontitle: Docker Cluster
     section:
     - path: /cluster/
