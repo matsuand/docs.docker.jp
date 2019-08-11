@@ -8,59 +8,60 @@ keywords: build, security, engine, secret, buildkit
 Docker Build is one of the most used features of the Docker Engine - users ranging from developers, build teams, and release teams all use Docker Build.
 {% endcomment %}
 Docker によるビルドは、Docker Engine においてもっとも利用されている機能と言えます。
-開発者、ビルドチーム、リリースチームなど幅広いユーザーが、この Docker ビルドを行います。
+開発者、ビルドチーム、リリースチームなど幅広いユーザーがこの Docker ビルドを行います。
 
 {% comment %}
 Docker Build enhancements for 18.09 release introduces a much-needed overhaul of the build architecture. By integrating BuildKit, users should see an improvement on performance, storage management, feature functionality, and security.
 {% endcomment %}
-Docker Build enhancements for 18.09 release introduces a much-needed overhaul of the build architecture. By integrating BuildKit, users should see an improvement on performance, storage management, feature functionality, and security.
+Docker 18.09 のリリースにおいて行われたビルド機能の拡張は、ビルドアーキテクチャーの総見直しにより必要となる機能を導入しています。
+BuildKit を統合したことによって、処理性能、ストレージ管理、ツール機能、セキュリティのどれをとっても改善が見られるはずです。
 
 {% comment %}
 * Docker images created with buildkit can be pushed to Docker Hub and DTR just like Docker images created with legacy build
 * the Dockerfile format that works on legacy build will also work with buildkit builds
 * The new `--secret` command line option allows the user to pass secret information for building new images with a specified Dockerfile
 {% endcomment %}
-* ビルドキットを用いて生成された Docker イメージは、従来の Docker イメージと同じように、Docker Hub や DTR にプッシュすることができます。
-* 従来のビルドに対して動作している Dockerfile の記述は、ビルドキットを用いてビルドを行っても同様に動作します。
+* BuildKit を用いて生成された Docker イメージは、従来の Docker イメージと同じように、Docker Hub や DTR にプッシュすることができます。
+* 従来のビルドに対して動作している Dockerfile の記述は、BuildKit を用いてビルドを行っても同様に動作します。
 * 新しくコマンドラインオプション `--secret` が導入され、Dockerfile を用いたイメージビルドにあたり、機密情報を受け渡すことができるようになりました。
 
 {% comment %}
 For more information on build options, see the reference guide on the [command line build options](../../engine/reference/commandline/build/).
 {% endcomment %}
-For more information on build options, see the reference guide on the [command line build options](../../engine/reference/commandline/build/).
+ビルド時のオプションに関しては [コマンドライン build オプション](../../engine/reference/commandline/build/) を参照してください。
 
 
 {% comment %}
 ## Requirements
 {% endcomment %}
-## システム要件
 {: #requirements }
+## システム要件
 
 {% comment %}
 * System requirements are docker-ce x86_64, ppc64le, s390x, aarch64, armhf; or docker-ee x86_64 only
 * Network connection required for downloading images of custom frontends
 {% endcomment %}
-* System requirements are docker-ce x86_64, ppc64le, s390x, aarch64, armhf; or docker-ee x86_64 only
-* Network connection required for downloading images of custom frontends
+* システム要件は docker-ce x86_64, ppc64le, s390x, aarch64, armhf、また docker-ee であれば x86_64 のみです。
+* 独自のフロントエンドイメージをダウンロードするにはネットワーク接続が必要です。
 
 {% comment %}
 ## Limitations
 {% endcomment %}
-## 制約条件
 {: #limitations }
+## 制約条件
 
 {% comment %}
 * BuildKit mode is incompatible with UCP and Swarm Classic
 * Only supported for building Linux containers
 {% endcomment %}
-* ビルドキットモードは、UCP や Swarm Classic とは互換性がありません。
+* BuildKit モードは、UCP や Swarm Classic とは互換性がありません。
 * Linux コンテナーのビルドのみがサポートされます。
 
 {% comment %}
 ## To enable buildkit builds
 {% endcomment %}
-## ビルドキットによるビルドの有効化
 {: #to-enable-buildkit-builds }
+## BuildKit によるビルドの有効化
 
 {% comment %}
 Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1` environment variable when invoking the `docker build` command, such as:
@@ -83,13 +84,13 @@ To enable docker buildkit by default, set daemon configuration in `/etc/docker/d
 {% comment %}
 ## New Docker Build command line build output
 {% endcomment %}
-## 新たな Docker コマンドラインによるビルド時の出力
 {: #new-docker-build-command-line-build-output }
+## 新たな Docker ビルドのコマンドライン出力
 
 {% comment %}
 New docker build BuildKit TTY output (default):
 {% endcomment %}
-新たな Docker ビルドキットによる TTY 出力は（デフォルトで）以下のとおりです。
+新たな Docker BuildKit の TTY 出力は（デフォルトで）以下のとおりです。
 ```
 $ docker build .
 [+] Building 70.9s (34/59)
@@ -120,7 +121,7 @@ $ docker build .
 {% comment %}
 New docker build BuildKit plain output:
 {% endcomment %}
-ビルドキットの簡易な出力は以下のとおりです。
+BuildKit の簡易な出力は以下のとおりです。
 ```
 $ docker build --progress=plain .
 
@@ -151,8 +152,8 @@ $ docker build --progress=plain .
 {% comment %}
 ## Overriding default frontends
 {% endcomment %}
-## デフォルトフロントエンドの上書き設定
 {: #overriding-default-frontends }
+## デフォルトフロントエンドの上書き設定
 
 {% comment %}
 The new syntax features in `Dockerfile` are available if you override the default frontend. To override
@@ -170,8 +171,8 @@ the default frontend, set the first line of the `Dockerfile` as a comment with a
 {% comment %}
 ## New Docker Build secret information
 {% endcomment %}
-## 新たな Docker ビルドにおける機密情報の扱い
 {: #new-docker-build-secret-information }
+## 新たな Docker ビルドにおける機密情報の扱い
 
 {% comment %}
 The new `--secret` flag for docker build allows the user to pass secret information to be used in the Dockerfile for building docker images in a safe way that will not end up stored in the final image.
@@ -272,9 +273,19 @@ Once the `Dockerfile` is created, use the `--ssh` option for connectivity with t
 $ docker build --ssh default .
 ```
 
+{% comment %}
 ## Troubleshooting : issues with private registries
+{% endcomment %}
+{: #troubleshooting--issues-with-private-registries }
+## トラブルシューティング： プライベートレジストリに関する問題
 
+{% comment %}
 #### x509: certificate signed by unknown authority
+{% endcomment %}
+{: #x509-certificate-signed-by-unknown-authority }
+#### x509: certificate signed by unknown authority
+{% comment %}
+{% endcomment %}
 If you are fetching images from insecure registry (with self-signed certificates) and/or using such a registry as a mirror, you are facing a known issue in Docker 18.09 :
 ```
 [+] Building 0.4s (3/3) FINISHED
@@ -291,6 +302,10 @@ failed to do request: Head https://repo.mycompany.com/v2/docker/dockerfile/manif
 Solution : secure your registry properly. You can get SSL certificates from Let's Encrypt for free. See https://docs.docker.com/registry/deploying/
 
 
+{% comment %}
+#### image not found when the private registry is running on Sonatype Nexus version < 3.15
+{% endcomment %}
+{: #image-not-found-when-the-private-registry-is-running-on-sonatype-nexus-version--315 }
 #### image not found when the private registry is running on Sonatype Nexus version < 3.15
 
 If you are running a private registry using Sonatype Nexus version < 3.15, and receive an error similar to the following :

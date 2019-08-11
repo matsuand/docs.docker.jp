@@ -11,7 +11,9 @@ redirect_from:
 {% comment %}
 The Docker Enterprise platform is the leading container platform for continuous, high-velocity innovation. Docker is the only independent container platform that enables developers to seamlessly build and share any application — from legacy to modern — and operators to securely run them anywhere - from hybrid cloud to the edge.
 {% endcomment %}
-The Docker Enterprise platform is the leading container platform for continuous, high-velocity innovation. Docker is the only independent container platform that enables developers to seamlessly build and share any application — from legacy to modern — and operators to securely run them anywhere - from hybrid cloud to the edge.
+Docker Enterprise プラットフォームは、継続可能な高速度の新技術であるコンテナープラットフォームをリードしています。
+Docker の利用によって開発者はどのようなアプリケーションであっても、そして旧来のものから最新のものまで、シームレスな構築と共有が可能となり、ハイブリッドクラウドや最先端環境など、さまざまな環境のもとで利用者が安全に運用していくことができます。
+そのような独立したコンテナープラットフォームこそが Docker なのです。
 
 {% comment %}
 Docker Enterprise is a secure, scalable, and supported container platform for building and
@@ -33,10 +35,8 @@ communication within the cluster is secured with TLS.
 [Docker Content Trust](/engine/security/trust/content_trust/) is enforced
 for images on all of the orchestrators.
 {% endcomment %}
-Role-based access control (RBAC) applies to Kubernetes and Swarm orchestrators, and
-communication within the cluster is secured with TLS.
-[Docker Content Trust](/engine/security/trust/content_trust/) is enforced
-for images on all of the orchestrators.
+Kubernetes や Swarm オーケストレーターに対しては ロールベースのアクセス管理（role-based access control; RBAC）が適用され、クラスター間の通信は TLS により暗号化されます。
+オーケストレーターすべてにおいて、イメージに対して [Docker Content Trust](/engine/security/trust/content_trust/) が必須となります。
 
 {% comment %}
 Docker Enterprise includes Docker Universal Control Plane (UCP), the
@@ -44,10 +44,10 @@ cluster management solution from Docker. UCP can be installed
 on-premises or in your public cloud of choice, and helps manage your
 cluster and applications through a single interface.
 {% endcomment %}
-Docker Enterprise includes Docker Universal Control Plane (UCP), the
-cluster management solution from Docker. UCP can be installed
-on-premises or in your public cloud of choice, and helps manage your
-cluster and applications through a single interface.
+Docker Enterprise には Docker Universal Control Plane (UCP) が含まれます。
+これは Docker が提供するクラスター管理ソリューションです。
+UCP は自社サーバーでもパブリッククラウドでもインストールすることが可能です。
+そしてクラスターやアプリケーションを、統一された 1 つのインタフェースを通じて管理します。
 
 {% comment %}
 ![](images/docker-ee-overview-1.png){: .with-border}
@@ -65,29 +65,30 @@ Docker Enterprise provides multi-architecture orchestration using the Docker Kub
 Docker Swarm orchestrators. Docker Enterprise enables a secure software supply chain, with policy-based image
 promotion, image mirroring between registries - including Docker Hub, and signing & scanning enforcement for container images.
 {% endcomment %}
-Docker Enterprise provides multi-architecture orchestration using the Docker Kubernetes Service and
-Docker Swarm orchestrators. Docker Enterprise enables a secure software supply chain, with policy-based image
+Docker Enterprise は Docker Kubernetes サービスと Docker Swarm オーケストレーターを利用してマルチアーキテクチャーによるオーケストレーションを提供します。
+Docker Enterprise enables a secure software supply chain, with policy-based image
 promotion, image mirroring between registries - including Docker Hub, and signing & scanning enforcement for container images.
 
 {% comment %}
 ### Docker Kubernetes Service
 {% endcomment %}
-### Docker Kubernetes サポート
 {: #docker-kubernetes-support }
+### Docker Kubernetes サポート
 
 {% comment %}
 The Docker Kubernetes Service fully supports all Docker Enterprise features, including
 role-based access control, LDAP/AD integration, image scanning and signing enforcement policies,
 and security policies.
 {% endcomment %}
-The Docker Kubernetes Service fully supports all Docker Enterprise features, including
+Docker Kubernetes サービスは、Docker Enterprise の全機能に対応します。
+including
 role-based access control, LDAP/AD integration, image scanning and signing enforcement policies,
 and security policies.
 
 {% comment %}
 Docker Kubernetes Services features include:
 {% endcomment %}
-Docker Kubernetes Services features include:
+Docker Kubernetes サービス機能は以下のものです。
 
 {% comment %}
 - Kubernetes orchestration full feature set
@@ -162,6 +163,7 @@ to schedule Kubernetes or Swarm workloads.
 {% comment %}
 ### Orchestration platform features
 {% endcomment %}
+{: #orchestration-platform-features }
 ### Orchestration platform features
 
 {% comment %}
@@ -189,6 +191,7 @@ to schedule Kubernetes or Swarm workloads.
 {% comment %}
 ### Secure supply chain
 {% endcomment %}
+{: #secure-supply-chain }
 ### Secure supply chain
 
 {% comment %}
@@ -214,6 +217,7 @@ to schedule Kubernetes or Swarm workloads.
 {% comment %}
 ### Centralized cluster management
 {% endcomment %}
+{: #centralized-cluster-management }
 ### Centralized cluster management
 
 {% comment %}
@@ -235,6 +239,7 @@ You can manage and monitor your container cluster using a graphical web interfac
 {% comment %}
 ### Deploy, manage, and monitor
 {% endcomment %}
+{: #deploy-manage-and-monitor }
 ### デプロイ、管理、監視
 
 {% comment %}
@@ -252,6 +257,7 @@ You can also deploy and monitor your applications and services.
 {% comment %}
 ### Built-in security and access control
 {% endcomment %}
+{: #built-in-security-and-access-control }
 ### Built-in security and access control
 
 {% comment %}
@@ -290,8 +296,8 @@ Windows applications typically require Active Directory authentication in order 
 {% comment %}
 ## Docker Enterprise and the CLI
 {% endcomment %}
-## Docker Enterprise と CLI
 {: #docker-enterprise-and-the-cli }
+## Docker Enterprise と CLI
 
 {% comment %}
 Docker Enterprise exposes the standard Docker API, so you can continue using the tools
@@ -337,8 +343,8 @@ Managers: 1
 {% comment %}
 ## Use the Kubernetes CLI
 {% endcomment %}
-## Use the Kubernetes CLI
 {: #use-the-kubernetes-cli }
+## Use the Kubernetes CLI
 
 {% comment %}
 Docker Enterprise exposes the standard Kubernetes API, so you can use `kubectl` to
@@ -370,8 +376,8 @@ A new Docker CLI plugin called `docker context` is available with this release. 
 {% comment %}
 ## Where to go next
 {% endcomment %}
-## Where to go next
 {: #where-to-go-next }
+## Where to go next
 
 {% comment %}
 - [Supported platforms](supported-platforms.md)

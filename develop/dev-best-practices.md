@@ -16,6 +16,7 @@ Docker を使ってアプリケーション開発を行う方々にとって、�
 {% comment %}
 ## How to keep your images small
 {% endcomment %}
+{: #how-to-keep-your-images-small }
 ## どうやってイメージを小さく保つか
 
 {% comment %}
@@ -137,9 +138,8 @@ keep image size small:
   開発時には、ソースディレクトリや生成したばかりのバイナリを、コンテナー内にマウントしたくなります。
   本番環境ではボリュームを利用しますが、本番環境がマウントする同じ場所を、開発環境時はバインドマウントによりマウントします。
 - 本番環境において、サービスが機密情報を利用している場合、その保存には [secrets](/engine/swarm/secrets.md) を利用します。そして機密情報ではない設定ファイルなどの情報は [configs](/engine/swarm/configs.md) を利用します。
-  今利用しているコンテナーがスタンドアロンである場合、
-  consider migrating to use single-replica services, so
-  that you can take advantage of these service-only features.
+  今利用しているコンテナーがスタンドアロンである場合は、1 つのレプリカからなるサービスコンテナーに移行することを考えてみてください。
+  これを行うと、サービスコンテナーのみに提供される機能を活用することができます。
 
 {% comment %}
 ## Use swarm services when possible
@@ -168,22 +168,17 @@ keep image size small:
   that are down. Also, when new nodes are added to the swarm, images are
   pulled automatically.
 {% endcomment %}
-- 可能であればスウォームサービスを利用し、スケールが可能なアプリケーション設計とします。
+- 可能であればスウォームサービスを利用し、スケーラブルなアプリケーション設計とします。
 - アプリケーションの実行インスタンスがただ 1 つあれば良い場合であっても、スタンドアロンコンテナーに比べてスウォームサービスには有用な機能が提供されます。
   サービスの設定は宣言によって行われるため、Docker は常に、設定された内容と実際が同期して動作します。
-- Networks and volumes can be connected and disconnected from swarm services,
-  and Docker handles redeploying the individual service containers in a
-  non-disruptive way. Standalone containers need to be manually stopped, removed,
-  and recreated to accommodate configuration changes.
-- Several features, such as the ability to store
-  [secrets](/engine/swarm/secrets.md) and [configs](/engine/swarm/configs.md),
-  are only available to services rather than standalone containers. These
-  features allow you to keep your images as generic as possible and to avoid
-  storing sensitive data within the Docker images or containers themselves.
-- Let `docker stack deploy` handle any image pulls for you, instead of using
-  `docker pull`. This way, your deployment doesn't try to pull from nodes
-  that are down. Also, when new nodes are added to the swarm, images are
-  pulled automatically.
+- ネットワークやボリュームは、スウォームサービスに対して接続および切断が可能です。
+  そして Docker は個々のサービスコンテナーを、なにも壊すことなく再デプロイします。
+  スタンドアロンコンテナーであれば、設定の変更が発生した場合、コンテナーの停止、削除、再生成を手動で行わなければなりません。
+- サービスコンテナーにはあってスタンドアロンコンテナーにはない機能として、たとえば [secrets](/engine/swarm/secrets.md) や [configs](/engine/swarm/configs.md) を保存する機能といったものがいくつかあります。
+  こういった機能があれば、ビルドするイメージをできるだけ汎用的に作り上げることができ、イメージやコンテナーそのものに機密情報を含ませずに済みます。
+- どのようなイメージであっても、イメージをプルする際には `docker pull` ではなく `docker stack deploy` を用いるようにしてください。
+  こうしておくとデプロイの際に、停止しているノードにおいてプルは行われなくなります。
+  また逆に、スウォームに対して新たにノードが追加された際には、イメージが自動的にプルされます。
 
 {% comment %}
 There are limitations around sharing data amongst nodes of a swarm service.
@@ -193,17 +188,15 @@ Cloudstor plugin to share data amongst your swarm service nodes. You can also
 write your application data into a separate database which supports simultaneous
 updates.
 {% endcomment %}
-There are limitations around sharing data amongst nodes of a swarm service.
-If you use [Docker for AWS](/docker-for-aws/persistent-data-volumes.md) or
-[Docker for Azure](/docker-for-azure/persistent-data-volumes.md), you can use the
-Cloudstor plugin to share data amongst your swarm service nodes. You can also
-write your application data into a separate database which supports simultaneous
-updates.
+スウォームサービスを構成するノード間においてデータを共有する際には、制約がいくつかあります。
+[Docker for AWS](/docker-for-aws/persistent-data-volumes.md) や [Docker for Azure](/docker-for-azure/persistent-data-volumes.md) を利用している場合なら、Cloudstor プラグインを使ってスウォームサービス内のノード間でのデータ共有が可能です。
+またデータベースが同時更新に対応していれば、分散した個々のデータベースに対してアプリケーションからの書き込みも可能になります。
 
 {% comment %}
 ## Use CI/CD for testing and deployment
 {% endcomment %}
-## Use CI/CD for testing and deployment
+{: #use-cicd-for-testing-and-deployment }
+## テストやデプロイ時の CI/CD 利用
 
 {% comment %}
 - When you check a change into source control or create a pull request, use
@@ -211,10 +204,7 @@ updates.
   another CI/CD pipeline to automatically build and tag a Docker image and test
   it.
 {% endcomment %}
-- When you check a change into source control or create a pull request, use
-  [Docker Hub](/docker-hub/builds/automated-build.md) or
-  another CI/CD pipeline to automatically build and tag a Docker image and test
-  it.
+- ソース管理上の変更を確認したりプルリクエストを生成したりする場合には、[Docker Hub](/docker-hub/builds/automated-build.md) やこれに似た別の CI/CD を利用し、自動的なイメージビルド、タグづけ、テストを行うようにしてください。
 
 {% comment %}
 - Take this even further with [Docker Engine - Enterprise](/ee/index.md) by requiring
@@ -223,16 +213,15 @@ updates.
   deployed into production, it has been tested and signed off by, for instance,
   development, quality, and security teams.
 {% endcomment %}
-- Take this even further with [Docker Engine - Enterprise](/ee/index.md) by requiring
-  your development, testing, and security teams to sign images before they can
-  be deployed into production. This way, you can be sure that before an image is
-  deployed into production, it has been tested and signed off by, for instance,
-  development, quality, and security teams.
+- 上のことは [Docker Engine - Enterprise](/ee/index.md) を用いるなら、より一層進めてください。
+  本番環境へデプロイできるようになるまでに、開発、テスト、セキュリティチームによるイメージ認証といったことが必要になるからです。
+  こうする場合に確実にしておくべきことは、イメージを本番環境にデプロイするのであれば、たとえば開発、品質管理、セキュリティの各チームにおいて十分にテストされ承認されていなければなりません。
 
 {% comment %}
 ## Differences in development and production environments
 {% endcomment %}
-## Differences in development and production environments
+{: #differences-in-development-and-production-environments }
+## 開発環境と本番環境の違い
 
 {% comment %}
 | Development                                                         | Production                                                                                                                                                                                                                                       |
@@ -241,8 +230,8 @@ updates.
 | Use Docker Desktop for Mac or Docker Desktop for Windows.                           | Use Docker EE if possible, with [userns mapping](/engine/security/userns-remap.md) for greater isolation of Docker processes from host processes.                                                                                                |
 | Don't worry about time drift.                                       | Always run an NTP client on the Docker host and within each container process and sync them all to the same NTP server. If you use swarm services, also ensure that each Docker node syncs its clocks to the same time source as the containers. |
 {% endcomment %}
-| Development                                                         | Production                                                                                                                                                                                                                                       |
+| 開発環境                                                            | 本番環境                                                                                                                                                                                                                                         |
 |:--------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Use bind mounts to give your container access to your source  code. | Use volumes to store container data.                                                                                                                                                                                                             |
-| Use Docker Desktop for Mac or Docker Desktop for Windows.                           | Use Docker EE if possible, with [userns mapping](/engine/security/userns-remap.md) for greater isolation of Docker processes from host processes.                                                                                                |
-| Don't worry about time drift.                                       | Always run an NTP client on the Docker host and within each container process and sync them all to the same NTP server. If you use swarm services, also ensure that each Docker node syncs its clocks to the same time source as the containers. |
+| バインドマウントを用いて、コンテナーからソースコードへアクセスできるようにします。| ボリュームを利用してコンテナーデータを保存します。                                                                                                                                                                                               |
+| Docker Desktop for Mac または Docker Desktop for Windows を利用します。           | 可能であれば Docker EE を利用してください。[userns mapping](/engine/security/userns-remap.md) を利用すると、ホストプロセスからの Docker プロセスの独立性をさらに高めることになります。 |
+| 時間のずれは、気にする必要はありません。                            | Docker ホスト上、あるいは各コンテナープロセス内においては NTP クライアントを常時稼動させてください。そして同一の NTP サーバーによって同期をとるようにしてください。スウォームサービスを用いる場合、各 Docker ノードは、コンテナーとして同一時刻となるように同期をとるようにしてください。|

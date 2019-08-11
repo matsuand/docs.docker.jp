@@ -3997,7 +3997,7 @@ manuals:
   - path: /docker-hub/orgs/
     title: チームと組織
   - path: /docker-hub/webhooks/
-    title: Webhooks
+    title: ウェブフック
   - path: /docker-hub/slack_integration/
     title: Slack Integration
   - path: /docker-hub/upgrade/
@@ -4009,7 +4009,7 @@ manuals:
       - path: /docker-hub/builds/automated-testing/
         title: 自動ビルドのテスト
       - path: /docker-hub/builds/advanced/
-        title: Advanced Automated Builds
+        title: 自動ビルドの応用
       - path: /docker-hub/builds/link-source/
         title: Link to GitHub and BitBucket
       - path: /docker-hub/builds/classic/

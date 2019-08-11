@@ -4,8 +4,18 @@ keywords: trust, security, docker,  index
 title: Use trusted images
 ---
 
+{% comment %}
+The following topics are available:
+{% endcomment %}
 The following topics are available:
 
+{% comment %}
+* [Content trust in Docker](content_trust.md)
+* [Manage keys for content trust](trust_key_mng.md)
+* [Automation with content trust](trust_automation.md)
+* [Delegations for content trust](trust_delegation.md)
+* [Play in a content trust sandbox](trust_sandbox.md)
+{% endcomment %}
 * [Content trust in Docker](content_trust.md)
 * [Manage keys for content trust](trust_key_mng.md)
 * [Automation with content trust](trust_automation.md)
