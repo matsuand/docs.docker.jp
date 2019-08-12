@@ -14,7 +14,7 @@ the integrity and the publisher of all the data received from a registry over
 any channel.
 {% endcomment %}
 ネットワークシステム内においてデータの受け渡しを行う際には、信頼（**trust**）というものが最も大切になります。
-特にインターネットのような信頼性に欠ける媒体との間で通信を行うとき、システムが取り扱うことになるデータはすべて完全性を保ち、発信者が誰であるかを常に確実なものとすることが極めて重要です。
+特にインターネットのような信頼性に欠ける媒体との間でやり取りを行うとき、システムが取り扱うことになるデータはすべて完全性を保ち、発信者が誰であるかを常に確実にすることが重要です。
 Docker Engine を利用する際には、イメージ（データ）を公開レジストリあるいはプライベートレジストリとの間でプッシュしたりプルしたりします。
 Content Trust とは、あやゆるチャネルにわたってレジストリから取得するデータの完全性と公開者情報を検証する機能を提供するものです。
 
@@ -125,25 +125,36 @@ DCT を有効にするというのは、レジストリに対していわば「�
 
 {% comment %}
 {% endcomment %}
-![信頼する画面](images/trust_view.png)
+![信頼性を確認する画面](images/trust_view.png)
 
 {% comment %}
-{% endcomment %}
 To the consumer who has not enabled DCT, nothing about how they work with Docker
 images changes. Every image is visible regardless of whether it is signed or
 not.
+{% endcomment %}
+DCT を有効にしていない利用者にとって、Docker イメージに関する作業は何も変わりません。
+イメージはすべて「見える」ものであって、署名されている、されていないは関係がありません。
 
 {% comment %}
-{% endcomment %}
 ### Docker Content Trust Keys
+{% endcomment %}
+{: #docker-content-trust-keys }
+### Docker Content Trust 署名鍵
 
 {% comment %}
-{% endcomment %}
 Trust for an image tag is managed through the use of signing keys. A key set is
 created when an operation using DCT is first invoked. A key set consists
 of the following classes of keys:
+{% endcomment %}
+イメージタグへの信頼性は、署名鍵を利用して行われます。
+DCT を用いて初めて操作をする際に、鍵情報が生成されます。
+鍵情報は、以下に示すような鍵のクラスから構成されます。
 
 {% comment %}
+- an offline key that is the root of DCT for an image tag
+- repository or tagging keys that sign tags
+- server-managed keys such as the timestamp key, which provides freshness
+	security guarantees for your repository
 {% endcomment %}
 - an offline key that is the root of DCT for an image tag
 - repository or tagging keys that sign tags
@@ -151,15 +162,15 @@ of the following classes of keys:
 	security guarantees for your repository
 
 {% comment %}
-{% endcomment %}
 The following image depicts the various signing keys and their relationships:
+{% endcomment %}
+以下の図は、さまざまな署名鍵とその関係性を示すものです。
 
 {% comment %}
 {% endcomment %}
-![Content Trust components](images/trust_components.png)
+![Content Trust のコンポーネント](images/trust_components.png)
 
 {% comment %}
-{% endcomment %}
 >**WARNING**:
 > Loss of the root key is **very difficult** to recover from.
 >Correcting this loss requires intervention from [Docker
@@ -167,8 +178,20 @@ The following image depicts the various signing keys and their relationships:
 >also requires **manual intervention** from every consumer that used a signed
 >tag from this repository prior to the loss.
 {:.warning}
+{% endcomment %}
+>**警告**:
+> ルート鍵を紛失してしまうと、回復は **非常に困難** になります。
+> これを復旧するには [Docker サポート](https://support.docker.com) に連絡し、リポジトリの状態をリセットすることが必要です。
+> This loss
+>also requires **manual intervention** from every consumer that used a signed
+>tag from this repository prior to the loss.
+{:.warning}
 
 {% comment %}
+You should back up the root key somewhere safe. Given that it is only required
+to create new repositories, it is a good idea to store it offline in hardware.
+For details on securing, and backing up your keys, make sure you
+read how to [manage keys for DCT](trust_key_mng.md).
 {% endcomment %}
 You should back up the root key somewhere safe. Given that it is only required
 to create new repositories, it is a good idea to store it offline in hardware.
@@ -176,15 +199,21 @@ For details on securing, and backing up your keys, make sure you
 read how to [manage keys for DCT](trust_key_mng.md).
 
 {% comment %}
-{% endcomment %}
 ## Signing Images with Docker Content Trust
+{% endcomment %}
+{: #signing-images-with-docker-content-trust }
+## Docker Content Trust によるイメージへの署名
 
 {% comment %}
-{% endcomment %}
 > Note this applies to Docker Community Engine 17.12 and newer, and Docker
 > Enterprise Engine 18.03 and newer.
+{% endcomment %}
+> ここに示す内容は Docker Community Engine 17.12 およびそれ以降、Docker Enterprise Engine 18.03 およびそれ以降に適用されます。
 
 {% comment %}
+Within the Docker CLI we can sign and push a container image with the
+`$ docker trust` command syntax. This is built on top of the Notary feature
+set, more information on Notary can be found [here](/notary/getting_started/).
 {% endcomment %}
 Within the Docker CLI we can sign and push a container image with the
 `$ docker trust` command syntax. This is built on top of the Notary feature
