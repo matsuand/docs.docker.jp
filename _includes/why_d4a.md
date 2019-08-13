@@ -12,11 +12,12 @@ generally available and can now be used by everyone.
 As an informed user, you might be curious to know what this project offers
 you for running your development, staging, or production workloads.
 {% endcomment %}
-状況がわかるユーザーであれば、このプロジェクトがどのように開発環境を動作させ、ステージングを行い、本番環境における作業を行うものか、おそらく知りたいところでしょう。
+知識を豊富に持つユーザーであれば、このプロジェクトがどのように開発環境を動作させ、ステージングを行い、本番環境における作業を行うものか知りたいところでしょう。
 
 {% comment %}
 ## Native to Docker
 {% endcomment %}
+{: #native-to-docker }
 ## Docker ネイティブであること
 
 {% comment %}
@@ -24,7 +25,7 @@ Docker for {{cloudprovider}} provides a Docker-native solution that avoids
 operational complexity and adding unneeded additional APIs to the Docker stack.
 {% endcomment %}
 Docker for {{cloudprovider}} は Docker ネイティブなソリューションを提供するものです。
-操作が複雑になったり、Docker スタックに対して不必要に API を加えたりするようなことがありません。
+操作が複雑になるわけでなく、Docker スタックに対して不必要に API を加えたりするようなこともありません。
 
 {% comment %}
 Docker for {{cloudprovider}} allows you to interact with Docker directly
@@ -34,12 +35,12 @@ thing that matters most: running your workloads. This helps you and your
 team to deliver more value to the business faster, to speak one common
 "language", and to have fewer details to keep in your head at once.
 {% endcomment %}
-Docker for {{cloudprovider}} allows you to interact with Docker directly
-(including native Docker orchestration), instead of distracting you with the
-need to navigate extra layers on top of Docker. You can focus instead on the
-thing that matters most: running your workloads. This helps you and your
-team to deliver more value to the business faster, to speak one common
-"language", and to have fewer details to keep in your head at once.
+Docker for {{cloudprovider}} は Docker を使った直接の操作（ネイティブな Docker オーケストレーションを含む）を可能としています。
+Docker の上にさらに別の手法を求めるようなものではありません。
+では何に注力していくべきかと言えば、それはイメージを動作させることです。
+つまり開発者やチームに向けて、より多くの価値を迅速なビジネス実現に向けて提供します。
+利用するのは共通の「ことば」です。
+細かなことを同時に覚えていく必要はありません。
 
 {% comment %}
 The skills that you and your team have already learned, and continue to
@@ -48,17 +49,16 @@ using Docker on {{cloudprovider}}. The added consistency across clouds also
 helps to ensure that a migration or multi-cloud strategy is easier to accomplish
 in the future if desired.
 {% endcomment %}
-The skills that you and your team have already learned, and continue to
-learn, using Docker on the desktop or elsewhere automatically carry over to
-using Docker on {{cloudprovider}}. The added consistency across clouds also
-helps to ensure that a migration or multi-cloud strategy is easier to accomplish
-in the future if desired.
+デスクトップ版などの Docker 製品を用いて、これまでに開発者やチームでは多くのスキルを得てきたはずです。
+そして今も学び続けているでしょう。
+そのスキルは Docker on {{cloudprovider}} を用いる際にも自動的に受け継がれます。
+クラウド間においては一貫性が加わるため、移行やマルチクラウド対応などが将来必要になったとしても、容易に実現することもできます。
 
 {% comment %}
 ## Skip the boilerplate and maintenance work
 {% endcomment %}
-## Skip the boilerplate and maintenance work
 {: #skip-the-boilerplate-and-maintenance-work }
+## 定型的作業や保守作業の省略
 
 {% comment %}
 Docker for {{cloudprovider}} bootstraps all of the recommended infrastructure to
@@ -66,10 +66,8 @@ start using Docker on {{cloudprovider}} automatically. You don't need to worry
 about rolling your own instances, security groups, or load balancers when using
 Docker for {{cloudprovider}}.
 {% endcomment %}
-Docker for {{cloudprovider}} bootstraps all of the recommended infrastructure to
-start using Docker on {{cloudprovider}} automatically. You don't need to worry
-about rolling your own instances, security groups, or load balancers when using
-Docker for {{cloudprovider}}.
+Docker for {{cloudprovider}} では、これを利用してシステム起動するために推奨されるインフラストラクチャーをすべて自動的に初期設定します。
+Docker for {{cloudprovider}} を利用するにあたって、実行インスタンスをどう動かしていくのか、セキュリティグループは、ロードバランサーは、といった心配をする必要がありません。
 
 {% comment %}
 Likewise, setting up and using Docker swarm mode functionality for container
@@ -102,8 +100,8 @@ when they are released.
 {% comment %}
 ## Minimal, Docker-focused base
 {% endcomment %}
-## Minimal, Docker-focused base
 {: #minimal-docker-focused-base }
+## Minimal, Docker-focused base
 
 {% comment %}
 The custom Linux distribution used by Docker for {{cloudprovider}} is carefully
@@ -132,8 +130,8 @@ experience for you and your team.
 {% comment %}
 ## Self-cleaning and self-healing
 {% endcomment %}
-## Self-cleaning and self-healing
 {: #self-cleaning-and-self-healing }
+## Self-cleaning and self-healing
 
 {% comment %}
 Even the most conscientious admin can be caught off guard by issues such as
@@ -175,8 +173,8 @@ reduced.
 {% comment %}
 ## Logging native to the platforms
 {% endcomment %}
-## Logging native to the platforms
 {: #logging-native-to-the-platforms }
+## Logging native to the platforms
 
 {% comment %}
 Centralized logging is a critical component of many modern infrastructure
@@ -194,8 +192,8 @@ abstraction ({{cloudprovider_log_dest}}).
 {% comment %}
 ## Next-generation Docker bug reporting tools
 {% endcomment %}
-## Next-generation Docker bug reporting tools
 {: #next-generation-docker-bug-reporting-tools }
+## Next-generation Docker bug reporting tools
 
 {% comment %}
 One common pain point in open source issue reporting is effectively
@@ -221,6 +219,7 @@ in bug reports.
 {% comment %}
 # Try it today
 {% endcomment %}
+{: #try-it-today }
 # Try it today
 
 {% comment %}
