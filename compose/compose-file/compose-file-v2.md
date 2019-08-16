@@ -2097,9 +2097,9 @@ then read-write is used.
 
 {% comment %}
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md) counterpart.
+[docker run](/engine/reference/run.md#runtime-constraints-on-resources) counterpart.
 {% endcomment %}
-ここに示すオプションはいずれも、値 1 つを設定するものであり、[docker run](/engine/reference/run.md) のオプションに対応づいています。
+ここに示すオプションはいずれも、値 1 つを設定するものであり、[docker run](/engine/reference/run.md#runtime-constraints-on-resources) のオプションに対応づいています。
 
 {% comment %}
 > **Note**: The following options were added in [version 2.2](compose-versioning.md#version-22):

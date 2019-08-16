@@ -429,15 +429,15 @@ repository does not contain a `Dockerfile`, or if you want to build with a custo
 
 {% comment %}
 The example below builds an image using a `Dockerfile` from `stdin`, and adds
-the `README.md` file from the ["hello-world" Git repository on GitHub](https://github.com/docker-library/hello-world).
+the `hello.c` file from the ["hello-world" Git repository on GitHub](https://github.com/docker-library/hello-world).
 {% endcomment %}
 以下の例は `stdin` から `Dockerfile` を指定してイメージをビルドします。
-そして [GitHub 上の git リポジトリ "hello-world"](https://github.com/docker-library/hello-world) から `README.md` ファイルを取得して加えます。
+そして [GitHub 上の git リポジトリ "hello-world"](https://github.com/docker-library/hello-world) から `hello.c` ファイルを取得して加えます。
 
 ```bash
 docker build -t myimage:latest -f- https://github.com/docker-library/hello-world.git <<EOF
 FROM busybox
-COPY README.md .
+COPY hello.c .
 EOF
 ```
 

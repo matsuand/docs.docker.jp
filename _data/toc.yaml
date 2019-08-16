@@ -29,11 +29,11 @@ guides:
       - sectiontitle: Docker for AWS
         section:
         - path: /docker-for-aws/why/
-          title: なぜ Docker for AWS？
+          title: なぜ Docker for AWS か？
         - path: /docker-for-aws/
           title: セットアップと前提条件
         - path: /docker-for-aws/iam-permissions/
-          title: IAM permissions
+          title: IAM パーミッション
         - path: /docker-for-aws/scaling/
           title: スケーリング
         - path: /docker-for-aws/upgrade/
@@ -45,7 +45,7 @@ guides:
         - path: /docker-for-aws/load-balancer/
           title: ロードバランサー
         - path: /docker-for-aws/faqs/
-          title: FAQ
+          title: FAQs
         - path: /docker-for-aws/opensource/
           title: オープンソースライセンス
         - path: /docker-for-aws/release-notes/
@@ -55,7 +55,7 @@ guides:
       - sectiontitle: Docker for Azure
         section:
         - path: /docker-for-azure/why/
-          title: Why Docker for Azure?
+          title: なぜ Docker for Azure か？
         - path: /docker-for-azure/
           title: Setup & prerequisites
         - path: /docker-for-azure/upgrade/
@@ -3823,7 +3823,7 @@ manuals:
 - sectiontitle: Docker Buildx
   section:
   - path: /buildx/working-with-buildx/
-    title: Working with Docker Buildx
+    title: Docker Buildx の利用
   - path: /engine/reference/commandline/buildx/
     title: CLI リファレンス
 - sectiontitle: Docker Compose

@@ -6,8 +6,11 @@ description: Docker 風に簡単なアプリを書き、ビルドし実行する
 
 {% include_relative nav.html selected="2" %}
 
-## 前提条件
+{% comment %}
+## Prerequisites
+{% endcomment %}
 {: #prerequisites }
+## 前提条件
 
 {% comment %}
 - [Install Docker version 1.13 or higher](/engine/installation/).
@@ -22,8 +25,11 @@ description: Docker 風に簡単なアプリを書き、ビルドし実行する
   docker run hello-world
   ```
 
-## はじめに
+{% comment %}
+## Introduction
+{% endcomment %}
 {: #introduction }
+## はじめに
 
 {% comment %}
 It's time to begin building an app the Docker way. We start at the bottom of the hierarchy of such app, a container, which this page covers. Above this level is a service, which defines how containers behave in
@@ -357,6 +363,39 @@ be something like `--tag=friendlyhello:v0.0.1`.
 > `sudo service docker restart`
 >
 > 設定ができたら、再度 `build` コマンドを実行します。
+>
+{% comment %}
+> _MTU settings_
+>
+> If the MTU (default is 1500) on the default bridge network is greater than the MTU of the host external network, then `pip` fails. Set the MTU of the docker bridge network to match that of the host by editing (or creating) the configuration file at `/etc/docker/daemon.json` with the `mtu` key, as follows:
+>
+> ```json
+>{
+>   "mtu": 1450
+>}
+> ```
+> Before proceeding, save `daemon.json` and restart the docker service.
+>
+> `sudo systemctl restart docker`
+>
+> Re-run the `build` command.
+{% endcomment %}
+> _MTU 設定_
+>
+> デフォルトブリッジネットワーク上の MTU（デフォルトは 1500）がホストの外部ネットワークにおける MTU を越えている場合には `pip` が失敗します。
+> この場合は Docker ブリッジネットワークの MTU の値をホストに合わせるようにしてください。
+> これは設定ファイル `/etc/docker/daemon.json` を編集（または新規生成）して、キー項目 `mtu` を以下のように設定します。
+>
+> ```json
+>{
+>   "mtu": 1450
+>}
+> ```
+> 処理を進めるには、まずこの `daemon.json` を保存した上で Docker サービスを再起動します。
+>
+> `sudo systemctl restart docker`
+>
+> そしてもう一度 `build` コマンドを実行してください。
 
 {% comment %}
 ## Run the app

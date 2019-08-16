@@ -5,7 +5,7 @@ can enjoy a fantastic out-of-the-box experience on {{cloudprovider}}. It is now
 generally available and can now be used by everyone.
 {% endcomment %}
 [Docker for {{cloudprovider}}](/docker-for-{{cloudprovider | downcase}}/) プロジェクトは開始されて以来、活発に活動を続けています。
-そして Docker ユーザーへは、{{cloudprovider}} 上に即座に実現できる優れた環境を満喫していただけるようにしています。
+そして Docker ユーザーへは、{{cloudprovider}} 上に即座に実現できる優れた環境を提供しています。
 今この環境は広く入手可能となり、どなたでも利用できるものとなりました。
 
 {% comment %}
@@ -77,12 +77,9 @@ you would otherwise be gluing together on your own to bootstrap Docker swarm
 mode on these platforms. When the cluster is finished booting, you can jump
 right in and start running `docker service` commands.
 {% endcomment %}
-Likewise, setting up and using Docker swarm mode functionality for container
-orchestration is managed across the cluster's lifecycle when you use Docker for
-{{cloudprovider}}. Docker has already coordinated the various bits of automation
-you would otherwise be gluing together on your own to bootstrap Docker swarm
-mode on these platforms. When the cluster is finished booting, you can jump
-right in and start running `docker service` commands.
+さらに Docker for {{cloudprovider}} を用いれば、コンテナーオーケストレーション実現のための Docker スウォームモードの設定とその利用が、クラスターのライフサイクル全般にわたって管理されます。
+Docker では数多くの自動化が組み入れられているため、ユーザー自らがまとめるようなことをしなくても、各種プラットフォーム上において Docker スウォームモードを稼動していくことができます。
+クラスターの起動が成功すれば、`docker service` コマンドを使った作業に進んでいきます。
 
 {% comment %}
 We also provide a prescriptive upgrade path that helps users upgrade between
@@ -91,17 +88,15 @@ experiencing "maintenance dread" as you ponder your future responsibilities
 upgrading the software you are using, you can easily upgrade to new versions
 when they are released.
 {% endcomment %}
-We also provide a prescriptive upgrade path that helps users upgrade between
-various versions of Docker in a smooth and automatic way. Instead of
-experiencing "maintenance dread" as you ponder your future responsibilities
-upgrading the software you are using, you can easily upgrade to new versions
-when they are released.
+確立されたアップグレード手順が提供されているので、各種の Docker バージョンにおいてのアップグレードをスムーズに自動化により行うことができます。
+利用中のソフトウェアをアップグレードする際に、自分の責任として降りかかってくる「メンテナンスの恐怖」を感じる必要はありません。
+新バージョンがリリースされたらすぐにアップグレードすることができます。
 
 {% comment %}
 ## Minimal, Docker-focused base
 {% endcomment %}
 {: #minimal-docker-focused-base }
-## Minimal, Docker-focused base
+## Docker に焦点をあてて必要最小限に
 
 {% comment %}
 The custom Linux distribution used by Docker for {{cloudprovider}} is carefully
@@ -111,21 +106,20 @@ to run Docker. For instance, we make sure that the kernel versions are
 compatible with the latest and greatest in Docker functionality, such as the
 `overlay2` storage driver.
 {% endcomment %}
-The custom Linux distribution used by Docker for {{cloudprovider}} is carefully
-developed and configured to run Docker well. Everything from the kernel
-configuration to the networking stack is customized to make it a favorable place
-to run Docker. For instance, we make sure that the kernel versions are
-compatible with the latest and greatest in Docker functionality, such as the
-`overlay2` storage driver.
+Docker for {{cloudprovider}} は独自の Linux ディストリビューションを利用しています。
+そしてこれは Docker が適切に動作するように慎重に開発され設定されています。
+カーネルの設定からネットワーク関連まで、あらゆることを Docker が快適に動作するようにカスタマイズしているものです。
+たとえばカーネルのバージョンは、最新の Docker 機能が最大限稼動できるように、常に互換性を保つようにしています。
+`overlay2` ストレージドライバーがその例です。
 
 {% comment %}
 Instead of facing the trade-offs of a general purpose operating system, Docker's
 custom Linux distribution focuses on only one thing: providing the best _Docker_
 experience for you and your team.
 {% endcomment %}
-Instead of facing the trade-offs of a general purpose operating system, Docker's
-custom Linux distribution focuses on only one thing: providing the best _Docker_
-experience for you and your team.
+汎用目的のオペレーティングシステムを利用することでのトレードオフに直面することはありません。
+Docker の独自 Linux ディストリビューションは、ただ 1 点を目指しています。
+それはユーザーや開発チームが、最大限 _Docker_ を利用できるようにすることです。
 
 {% comment %}
 ## Self-cleaning and self-healing
@@ -193,7 +187,7 @@ abstraction ({{cloudprovider_log_dest}}).
 ## Next-generation Docker bug reporting tools
 {% endcomment %}
 {: #next-generation-docker-bug-reporting-tools }
-## Next-generation Docker bug reporting tools
+## 次世代の Docker バグレポートツール
 
 {% comment %}
 One common pain point in open source issue reporting is effectively

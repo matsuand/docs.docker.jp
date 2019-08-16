@@ -51,7 +51,7 @@ Docker for AWS. Depending on changes in the next version, an upgrade involves:
 {% comment %}
 New releases are announced on [Release Notes](release-notes.md) page.
 {% endcomment %}
-New releases are announced on [Release Notes](release-notes.md) page.
+新規リリースは [リリースノート](release-notes.md) のページにて公表されます。
 
 {% comment %}
 To initiate an update, use either the AWS Console or the AWS cli to initiate a
@@ -69,7 +69,7 @@ scaled services should not experience downtime during an upgrade.
 {% comment %}
 ![Upgrade in AWS console](img/cloudformation_update.png)
 {% endcomment %}
-![Upgrade in AWS console](img/cloudformation_update.png)
+![AWS コンソールでのアップグレード](img/cloudformation_update.png)
 
 {% comment %}
 Single containers started (for example) with `docker run -d` are
@@ -89,7 +89,7 @@ objects, but are known only to the individual Docker engines.
 ## Changing instance sizes and other template parameters
 {% endcomment %}
 {: #changing-instance-sizes-and-other-template-parameters }
-## Changing instance sizes and other template parameters
+## インスタンスサイズなどのテンプレートパラメーターの変更
 
 {% comment %}
 In addition to upgrading Docker for AWS from one version to the next you can
@@ -98,4 +98,5 @@ worker count and instance type. Changing manager count is **not** supported.
 {% endcomment %}
 In addition to upgrading Docker for AWS from one version to the next you can
 also use the AWS Update Stack feature to change template parameters such as
-worker count and instance type. Changing manager count is **not** supported.
+worker count and instance type.
+マネージャーカウントの変更には対応して**いません**。

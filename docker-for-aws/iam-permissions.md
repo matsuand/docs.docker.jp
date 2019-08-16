@@ -1,16 +1,27 @@
 ---
-description: IAM permissions
+description: IAM パーミッション
 keywords: aws iam permissions
-title: Docker for AWS IAM permissions
+title: Docker for AWS の IAM パーミッション
 ---
 
+{% comment %}
 The following IAM permissions are required to use Docker for AWS.
+{% endcomment %}
+Docker for AWS を利用するには、以下に示す IAM パーミッションが必要です。
 
+{% comment %}
 Before you deploy Docker for AWS, your account needs these permissions for the stack to deploy correctly.
 If you create and use an IAM role with these permissions for creating the stack, CloudFormation uses the role's permissions instead of your own, using the AWS CloudFormation Service Role feature.
+{% endcomment %}
+Docker for AWS によるデプロイを行うには、ユーザーアカウントにおいて、スタックを正常にデプロイできるこのパーミッションが必要となります。
+スタックを生成するパーミッションとして IAM ロールを生成して利用する場合、CloudFormation ではユーザーのパーミッションではなく、このロールによるパーミッションが利用されます。
+ここに利用されるのは AWS CloudFormation サービスロール機能です。
 
+{% comment %}
 This feature is called [AWS CloudFormation Service Role](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-servicerole.html?icmpid=docs_cfn_console)
 follow the link for more information.
+{% endcomment %}
+[AWS CloudFormation サービスロール](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-servicerole.html?icmpid=docs_cfn_console) と呼ばれるこの機能の詳細は、このリンクを参照してください。
 
 {% raw %}
 ```none

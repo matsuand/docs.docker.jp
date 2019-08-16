@@ -1,54 +1,97 @@
 ---
-description: Release notes
+description: リリースノート
 keywords: aws, amazon, iaas, release, edge, stable
-title: Docker for AWS release notes
+title: Docker for AWS リリースノート
 ---
 
 {% include d4a_buttons.md %}
 
+{% comment %}
+{% endcomment %}
 > **Note** Starting with 18.02.0-CE EFS encryption option has been removed to prevent the [recreation of the EFS volume](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html){: target="_blank" class="_"}.
 
 
+{% comment %}
 ## Stable channel
+{% endcomment %}
+{: #stable-channel }
+## 安定版チャネル
 {{aws_blue_latest}}
 
+{% comment %}
 ### 18.09.2
 Release date: 2/24/2019
+{% endcomment %}
+### 18.09.2
+リリース日付: 2019/2/24
 
+{% comment %}
+- Docker Engine upgraded to [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2){: target="_blank" class="_"}
+{% endcomment %}
 - Docker Engine upgraded to [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2){: target="_blank" class="_"}
 
 ### 18.06.1 CE
 
+{% comment %}
 Release date: 8/24/2018
+{% endcomment %}
+リリース日付: 2018/8/24
 
+{% comment %}
+- Docker Engine upgraded to [Docker 18.06.1 CE](https://github.com/docker/docker-ce/releases/tag/v18.06.1-ce){: target="_blank" class="_"}
+{% endcomment %}
 - Docker Engine upgraded to [Docker 18.06.1 CE](https://github.com/docker/docker-ce/releases/tag/v18.06.1-ce){: target="_blank" class="_"}
 
 ### 18.03 CE
 
+{% comment %}
 Release date: 3/21/2018
+{% endcomment %}
+リリース日付: 2018/3/21
 
+{% comment %}
+- Docker Engine upgraded to [Docker 18.03.0 CE](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce){: target="_blank" class="_"}
+- [Elastic Network Interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html){: target="_blank" class="_"} enabled in the AMI kernel
+{% endcomment %}
 - Docker Engine upgraded to [Docker 18.03.0 CE](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce){: target="_blank" class="_"}
 - [Elastic Network Interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html){: target="_blank" class="_"} enabled in the AMI kernel
 
 ### 17.12.1 CE
 
+{% comment %}
 Release date: 3/1/2018
+{% endcomment %}
+リリース日付: 2018/3/1
 
+{% comment %}
+- Docker Engine upgraded to [Docker 17.12.1 CE](https://github.com/docker/docker-ce/releases/tag/v17.12.1-ce){: target="_blank" class="_"}
+- Added baked-in rules for ECR IAM role
+{% endcomment %}
 - Docker Engine upgraded to [Docker 17.12.1 CE](https://github.com/docker/docker-ce/releases/tag/v17.12.1-ce){: target="_blank" class="_"}
 - Added baked-in rules for ECR IAM role
 
 ### 17.12 CE
 
+{% comment %}
 Release date: 1/9/2018
+{% endcomment %}
+リリース日付: 2018/1/9
 
+{% comment %}
+- Docker Engine upgraded to [Docker 17.12.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce){: target="_blank" class="_"}
+- Kernel patch to mitigates Meltdown attacks ( CVE-2017-5754) and enable KPTI
+{% endcomment %}
 - Docker Engine upgraded to [Docker 17.12.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce){: target="_blank" class="_"}
 - Kernel patch to mitigates Meltdown attacks ( CVE-2017-5754) and enable KPTI
 
+{% comment %}
+> **Note** There was an issue in LinuxKit that prevented containers from [starting after a machine reboot](https://github.com/moby/moby/issues/36189){: target="_blank" class="_"}.
+{% endcomment %}
 > **Note** There was an issue in LinuxKit that prevented containers from [starting after a machine reboot](https://github.com/moby/moby/issues/36189){: target="_blank" class="_"}.
 
 ### 17.09 CE
 
-Release date: 10/6/2017
+リリース日付: 2017/10/6
 
 - Docker Engine upgraded to [Docker 17.09.0 CE](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce){: target="_blank" class="_"}
 - CloudStor EBS updates
