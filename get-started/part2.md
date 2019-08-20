@@ -295,7 +295,7 @@ be something like `--tag=friendlyhello:v0.0.1`.
 > _Proxy server settings_
 >
 > Proxy servers can block connections to your web app once it's up and running.
-> If you are behind a proxy server, add the following lines to your
+> If you are behind a proxy server, add the following lines before `RUN pip` in your
 > Dockerfile, using the `ENV` command to specify the host and port for your
 > proxy servers:
 >
@@ -327,13 +327,28 @@ be something like `--tag=friendlyhello:v0.0.1`.
 > `sudo service docker restart`
 >
 > Once fixed, retry to run the `build` command.
+>
+> _MTU settings_
+>
+> If the MTU (default is 1500) on the default bridge network is greater than the MTU of the host external network, then `pip` fails. Set the MTU of the docker bridge network to match that of the host by editing (or creating) the configuration file at `/etc/docker/daemon.json` with the `mtu` key, as follows:
+>
+> ```json
+>{
+>   "mtu": 1450
+>}
+> ```
+> Before proceeding, save `daemon.json` and restart the docker service.
+>
+> `sudo systemctl restart docker`
+>
+> Re-run the `build` command.
 {% endcomment %}
 >  Linux ユーザー向けのトラブルシューティング
 >
 > _Proxy サーバー設定_
 >
 > プロキシーサーバーが稼動していると、ウェブアプリへの接続がブロックされることがあります。
-> プロキシーサーバーを動かしているなら、Dockerfile に以下の記述を追加してください。
+> プロキシーサーバーを動かしているなら、Dockerfile における `RUN pip` の記述行より前に、以下の記述を追加してください。
 > これは `ENV` コマンドを使って、プロキシーサーバーのホストとポートを指定するものです。
 >
 > ```conf
@@ -364,22 +379,6 @@ be something like `--tag=friendlyhello:v0.0.1`.
 >
 > 設定ができたら、再度 `build` コマンドを実行します。
 >
-{% comment %}
-> _MTU settings_
->
-> If the MTU (default is 1500) on the default bridge network is greater than the MTU of the host external network, then `pip` fails. Set the MTU of the docker bridge network to match that of the host by editing (or creating) the configuration file at `/etc/docker/daemon.json` with the `mtu` key, as follows:
->
-> ```json
->{
->   "mtu": 1450
->}
-> ```
-> Before proceeding, save `daemon.json` and restart the docker service.
->
-> `sudo systemctl restart docker`
->
-> Re-run the `build` command.
-{% endcomment %}
 > _MTU 設定_
 >
 > デフォルトブリッジネットワーク上の MTU（デフォルトは 1500）がホストの外部ネットワークにおける MTU を越えている場合には `pip` が失敗します。

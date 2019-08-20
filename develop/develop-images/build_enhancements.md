@@ -50,12 +50,13 @@ For more information on build options, see the reference guide on the [command l
 {: #limitations }
 ## 制約条件
 
-{% comment %}
-* BuildKit mode is incompatible with UCP and Swarm Classic
 * Only supported for building Linux containers
+{% comment %}
+* BuildKit mode is compatible with UCP 3.2 or newer
+* BuildKit mode is incompatible with Swarm Classic
 {% endcomment %}
-* BuildKit モードは、UCP や Swarm Classic とは互換性がありません。
-* Linux コンテナーのビルドのみがサポートされます。
+* BuildKit モードは、UCP 3.2 およびそれ以降と互換性があります。
+* BuildKit モードは、Swarm Classic とは互換性がありません。
 
 {% comment %}
 ## To enable buildkit builds

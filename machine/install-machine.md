@@ -57,7 +57,7 @@ GitHub 上の [docker/machine リリースページ](https://github.com/docker/m
     ```console
     $ base=https://github.com/docker/machine/releases/download/v{{site.machine_version}} &&
       curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
-      sudo install /tmp/docker-machine /usr/local/bin/docker-machine
+      sudo mv /tmp/docker-machine /usr/local/bin/docker-machine
     ```
 
     {% comment %}
