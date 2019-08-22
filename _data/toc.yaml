@@ -514,9 +514,9 @@ reference:
     - path: /engine/reference/run/
       title: Docker run リファレンス
     - path: /engine/reference/commandline/cli/
-      title: Use the Docker command line
+      title: Docker コマンドラインの利用
     - path: /engine/reference/commandline/docker/
-      title: docker (base command)
+      title: docker (ベースコマンド)
     - sectiontitle: docker app *
       section:
         - path: /engine/reference/commandline/app/

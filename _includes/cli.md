@@ -1,5 +1,5 @@
 {% capture tabChar %}	{% endcapture %}<!-- Make sure atom is using hard tabs -->
-{% capture dockerBaseDesc %}The base command for the Docker CLI.{% endcapture %}
+{% capture dockerBaseDesc %}Docker CLI のベースとなるコマンド。{% endcapture %}
 {% if include.datafolder and include.datafile %}
 
 {% comment %}

@@ -1,5 +1,5 @@
 ---
-description: Getting Started
+description: はじめよう。
 keywords: mac, edge, tutorial
 redirect_from:
 - /mackit/
@@ -11,21 +11,37 @@ redirect_from:
 - /engine/installation/mac/
 - /docker-for-mac/index/
 - /docker-for-mac/osx/
-title: Get started with Docker Desktop for Mac
+title: Docker Desktop for Mac をはじめよう
 ---
 
+{% comment %}
 Welcome to Docker Desktop for Mac! Docker is a full development platform for creating
 containerized apps, and Docker Desktop for Mac is the best way to get started with
 Docker _on a Mac_.
+{% endcomment %}
+Docker Desktop for Mac へようこそ！
+Docker is a full development platform for creating
+containerized apps, and Docker Desktop for Mac is the best way to get started with
+Docker _on a Mac_.
 
+{% comment %}
+{% endcomment %}
 > See [Install Docker Desktop for Mac](install.md){: target="_blank" class="_"} for
 > information on system requirements and stable & edge channels.
 
+{% comment %}
 ## Check versions
+{% endcomment %}
+{: #check-versions }
+## バージョンの確認
 
+{% comment %}
 Ensure your versions of `docker`, `docker-compose`, and `docker-machine` are
 up-to-date and compatible with `Docker.app`. Your output may differ if you are
 running different versions.
+{% endcomment %}
+利用している `docker`、`docker-compose`、`docker-machine` のバージョンが最新であること、そして `Docker.app` との互換性があることを確認します。
+以下に示すバージョン出力は、利用しているものにより異なるかもしれません。
 
 ```shell
 $ docker --version
@@ -38,16 +54,30 @@ $ docker-machine --version
 docker-machine version {{ site.machine_version }}, build 9ba6da9
 ```
 
+{% comment %}
+## Explore the application
+{% endcomment %}
+{: #explore-the-application }
 ## Explore the application
 
+{% comment %}
 1.  Open a command-line terminal and test that your installation works by
     running the simple Docker image,
     [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank"
     class="_"}:
+{% endcomment %}
+1.  コマンドラインターミナルを開いて、単純な Docker イメージ [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"} が動作するかどうかを確認します。
 
     ```shell
     $ docker run hello-world
 
+    {% comment %}
+    Unable to find image 'hello-world:latest' locally
+    latest: Pulling from library/hello-world
+    ca4f61b1923c: Pull complete
+    Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
+    Status: Downloaded newer image for hello-world:latest
+    {% endcomment %}
     Unable to find image 'hello-world:latest' locally
     latest: Pulling from library/hello-world
     ca4f61b1923c: Pull complete
@@ -59,23 +89,43 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
     ...
     ```
 
+{% comment %}
 2.  Start a Dockerized web server. Like the `hello-world` image above, if the
     image is not found locally, Docker pulls it from Docker Hub.
+{% endcomment %}
+2.  Docker 化されたウェブサーバーを起動します。
+    上の `hello-world` イメージの場合と同じように、ローカルにそのイメージが見つからないときは Docker Hub からプルされます。
 
     ```bash
     $ docker run --detach --publish=80:80 --name=webserver nginx
     ```
 
+{% comment %}
 3.  In a web browser, go to `http://localhost/` to view the nginx homepage.
     Because we specified the default HTTP port, it isn't necessary to append
     `:80` at the end of the URL.
+{% endcomment %}
+3.  ウェブブラウザーから `http://localhost/` にアクセスして nginx ホームページを開きます。
+    デフォルトの HTTP ポートを指定しているので、URL の最後に `:80` をつける必要はありません。
 
+    {% comment %}
     ![nginx home page](images/hello-world-nginx.png){:width="500px"}
+    {% endcomment %}
+    ![nginx ホームページ](images/hello-world-nginx.png){:width="500px"}
 
+    {% comment %}
+    > Early beta releases used `docker` as the hostname to build the URL. Now,
+    > ports are exposed on the private IP addresses of the VM and forwarded to
+    > `localhost` with no other host name set.
+    {% endcomment %}
     > Early beta releases used `docker` as the hostname to build the URL. Now,
     > ports are exposed on the private IP addresses of the VM and forwarded to
     > `localhost` with no other host name set.
 
+{% comment %}
+4.  View the details on the container while your web server is running (with
+    `docker container ls` or `docker ps`):
+{% endcomment %}
 4.  View the details on the container while your web server is running (with
     `docker container ls` or `docker ps`):
 
@@ -85,6 +135,10 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
     56f433965490   nginx   "nginx -g 'daemon off"   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp, 443/tcp   webserver
     ```
 
+{% comment %}
+5.  Stop and remove containers and images with the following commands. Use the
+    "all" flag (`--all` or `-a`) to view stopped containers.
+{% endcomment %}
 5.  Stop and remove containers and images with the following commands. Use the
     "all" flag (`--all` or `-a`) to view stopped containers.
 
@@ -97,86 +151,169 @@ docker-machine version {{ site.machine_version }}, build 9ba6da9
     $ docker image rm nginx
     ```
 
+{% comment %}
+## Preferences menu
+{% endcomment %}
+{: #preferences-menu }
 ## Preferences menu
 
+{% comment %}
+Choose ![whale menu](images/whale-x.png){: .inline}  → **Preferences** from the
+menu bar and configure the runtime options described below.
+{% endcomment %}
 Choose ![whale menu](images/whale-x.png){: .inline}  → **Preferences** from the
 menu bar and configure the runtime options described below.
 
+{% comment %}
+![Docker context menu](images/menu/prefs.png){:width="250px"}
+{% endcomment %}
 ![Docker context menu](images/menu/prefs.png){:width="250px"}
 
+{% comment %}
+### General
+{% endcomment %}
+{: #general }
 ### General
 
+{% comment %}
+![Preferences](images/menu/prefs-general.png){:width="400px"}
+{% endcomment %}
 ![Preferences](images/menu/prefs-general.png){:width="400px"}
 
+{% comment %}
+General settings are:
+{% endcomment %}
 General settings are:
 
+{% comment %}
+- **Start Docker when you log in**: Uncheck this option if you don't want Docker
+  to start when you open your session.
+{% endcomment %}
 - **Start Docker when you log in**: Uncheck this option if you don't want Docker
   to start when you open your session.
 
+{% comment %}
+- **Automatically check for updates** notifies you when an update is available.
+  Click **OK** to accept and install updates (or cancel to keep the current
+  version). If you disable this option, you can still find out about updates
+  manually by choosing ![whale menu](images/whale-x.png){: .inline} → **Check
+  for Updates**.
+{% endcomment %}
 - **Automatically check for updates** notifies you when an update is available.
   Click **OK** to accept and install updates (or cancel to keep the current
   version). If you disable this option, you can still find out about updates
   manually by choosing ![whale menu](images/whale-x.png){: .inline} → **Check
   for Updates**.
 
+{% comment %}
+- **Include VM in Time Machine backups** backs up the Docker Desktop for Mac virtual
+  machine. (Disabled by default.)
+{% endcomment %}
 - **Include VM in Time Machine backups** backs up the Docker Desktop for Mac virtual
   machine. (Disabled by default.)
 
+{% comment %}
+- **Securely store Docker logins in MacOS keychain** stores your Docker login
+  credentials. (Enabled by default.)
+{% endcomment %}
 - **Securely store Docker logins in MacOS keychain** stores your Docker login
   credentials. (Enabled by default.)
 
+{% comment %}
+- **Send usage statistics** &mdash; Send diagnostics, crash reports, and usage
+  data to Docker. This information helps Docker improve the application and get
+  more context for troubleshooting problems. (Enabled by default.)
+{% endcomment %}
 - **Send usage statistics** &mdash; Send diagnostics, crash reports, and usage
   data to Docker. This information helps Docker improve the application and get
   more context for troubleshooting problems. (Enabled by default.)
 
+{% comment %}
+### File sharing
+{% endcomment %}
+{: #file-sharing }
 ### File sharing
 
+{% comment %}
+{% endcomment %}
 Choose which local directories to share with your containers. File sharing is
 required for volume mounting if the project lives outside of the `/Users`
 directory. In that case, share the drive where the Dockerfile and volume are
 located. Otherwise, you get `file not found` or `cannot start service errors at
 runtime`.
 
+{% comment %}
+{% endcomment %}
 ![File Sharing](images/menu/prefs-fileshare.png){:width="400px"}
 
+{% comment %}
+{% endcomment %}
 File share settings are:
 
+{% comment %}
+{% endcomment %}
 - **Add a Directory**: Click `+` and navigate to the directory you want to add.
 
+{% comment %}
+{% endcomment %}
 - **Apply & Restart** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
 
+  {% comment %}
+  {% endcomment %}
   There are some limitations on the directories that can be shared:
 
+  {% comment %}
+  {% endcomment %}
   - They cannot be a subdirectory of an already shared directory.
   - They cannot already exist inside of Docker.
 
+{% comment %}
+{% endcomment %}
 For more information, see:
 
+{% comment %}
+{% endcomment %}
 - [Namespaces](osxfs.md#namespaces){: target="_blank" class="_"} in the topic on
   [osxfs file system sharing](osxfs.md).
 - [Volume mounting requires file sharing for any project directories outside of
   `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
+{% comment %}
+{% endcomment %}
 ### Advanced
 
+{% comment %}
+{% endcomment %}
 On the Advanced tab, you can limit resources available to Docker.
 
+{% comment %}
+{% endcomment %}
 ![Advanced Preference
 settings-advanced](images/menu/prefs-advanced.png){:width="400px"}
 
+{% comment %}
+{% endcomment %}
 Advanced settings are:
 
+{% comment %}
+{% endcomment %}
 **CPUs**: By default, Docker Desktop for Mac is set to use half the number of processors
 available on the host machine. To increase processing power, set this to a
 higher number; to decrease, lower the number.
 
+{% comment %}
+{% endcomment %}
 **Memory**: By default, Docker Desktop for Mac is set to use `2` GB runtime memory,
 allocated from the total available memory on your Mac. To increase RAM, set this
 to a higher number; to decrease it, lower the number.
 
+{% comment %}
+{% endcomment %}
 **Swap**: Configure swap file size as needed. The default is 1 GB.
 
+{% comment %}
+{% endcomment %}
 ### Disk
 
 Specify the **Disk image location** of the Linux volume, where containers and
