@@ -37,8 +37,11 @@ This topic discusses working with docker clusters in AWS, including how to:
 - Completed installation of [Docker Desktop Enterprise](../ee/desktop/).
 - [Access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to an AWS subscription. You can provide these credentials in many ways, but the recommended way is to create an `~/.aws/credentials` file. Refer to [AWS CLI configuration](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for details on creating one.
 {% endcomment %}
-- Completed installation of [Docker Desktop Enterprise](../ee/desktop/).
-- [Access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to an AWS subscription. You can provide these credentials in many ways, but the recommended way is to create an `~/.aws/credentials` file. Refer to [AWS CLI configuration](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for details on creating one.
+- [Docker Desktop Enterprise](../ee/desktop/) のインストールを終えていること。
+- AWS サブスクリプションに対する [アクセスキー](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) を有していること。
+  この認証情報を設定する方法は数多くあります。
+  ただし推奨されるのは `~/.aws/credentials` ファイルを生成することです。
+  生成に関する詳しい情報は [AWS CLI configuration](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) を参照してください。
 
 {% comment %}
 ## Create a cluster
@@ -51,15 +54,15 @@ When you create a docker cluster in AWS, the created cluster has:
  - 3 Workers
  - 3 DTR Replicas
 {% endcomment %}
-When you create a docker cluster in AWS, the created cluster has:
- - 3 UCP Managers
- - 3 Workers
- - 3 DTR Replicas
+AWS 上に Docker Cluster を生成すると、そのクラスターには以下が生成されます。
+ - 3 つの UCP マネージャー
+ - 3 つのワーカー
+ - 3 つの DTR レプリカ
 
 {% comment %}
 Create a `cluster.yml` file with the following information:
 {% endcomment %}
-以下のような情報を含む `cluster.yml` ファイルを生成します。
+`cluster.yml` というファイルを生成して、以下の情報を含めます。
 ```yaml
     variable:
       domain: "YOUR DOMAIN, e.g. docker.com"
@@ -150,14 +153,13 @@ The values are substituted in the cluster definition, which makes it
 easy to define a re-usable cluster definition and then change the variables
 to create multiple instances of a cluster.
 {% endcomment %}
-The values are substituted in the cluster definition, which makes it
-easy to define a re-usable cluster definition and then change the variables
-to create multiple instances of a cluster.
+上の値はクラスター定義として置換されます。
+これは再利用可能なクラスターの定義を簡単に行うものであり、変数値を変更することでクラスターの複数インスタンスの生成も行うことができます。
 
 {% comment %}
 Run `docker cluster create --file cluster.yml --name quickstart`.
 {% endcomment %}
-`docker cluster create --file cluster.yml --name quickstart` を実行します。
+そこで `docker cluster create --file cluster.yml --name quickstart` を実行します。
 
     $ docker cluster create --file cluster.yml --name quickstart
     Please provide a value for ucp_password
@@ -184,7 +186,7 @@ After approximately 10 minutes, resources are provisioned, and Docker Enterprise
 {% comment %}
 After approximately 20 minutes, Docker Enterprise installation completes:
 {% endcomment %}
-20 分程度たつと、Docker Enterprise のインストールが完了します。
+20 分程度たつと Docker Enterprise のインストールが完了します。
 
     $ docker cluster create -f examples/docs.yml -n quickstart
     Please provide a value for ucp_password
@@ -220,7 +222,7 @@ URL にログインしてクラスターとのやり取りを行うことがで�
 {% comment %}
 To view an inventory of the clusters you created, run `docker cluster ls`:
 {% endcomment %}
-To view an inventory of the clusters you created, run `docker cluster ls`:
+生成したクラスターの一覧を見るには `docker cluster ls` を実行します。
 
     $ docker cluster ls
     ID             NAME         PROVIDER    ENGINE              UCP                DTR                STATE
@@ -229,9 +231,10 @@ To view an inventory of the clusters you created, run `docker cluster ls`:
 {% comment %}
 For detailed information about the cluster, run `docker cluster inspect quickstart`.
 {% endcomment %}
-For detailed information about the cluster, run `docker cluster inspect quickstart`.
+クラスターのより詳細な情報を見るには `docker cluster inspect quickstart` を実行します。
 
     $ docker cluster inspect quickstart
+
 ```yaml
 name: quickstart
 shortid: 911c882340b2
@@ -301,7 +304,7 @@ resource:
 {% comment %}
 The information displayed by `docker cluster inspect` can be used as a cluster definition to clone the cluster.
 {% endcomment %}
-The information displayed by `docker cluster inspect` can be used as a cluster definition to clone the cluster.
+`docker cluster inspect` を実行して得られた出力情報は、クラスターのクローンを生成するためのクラスター定義に活用することができます。
 
 {% comment %}
 ## Use context
@@ -310,16 +313,19 @@ The information displayed by `docker cluster inspect` can be used as a cluster d
 ## コンテキストの利用
 
 {% comment %}
-{% endcomment %}
 `docker cluster` creates a context on your local machine.  To use this context and interact with the cluster, run `docker context use quickstart`:
+{% endcomment %}
+`docker cluster` の実行により、ローカルマシンにはコンテキストが生成されます。
+このコンテキストを利用してクラスターに対する操作を行うには `docker context use quickstart` を実行します。
 
     $ docker context use quickstart
     quickstart
     Current context is now "quickstart"
 
 {% comment %}
-{% endcomment %}
 To verify that the client is connected to the cluster, run `docker version`:
+{% endcomment %}
+クライアントがクラスターに接続しているかどうかを確認するには `docker version` を実行します。
 
     $ docker version
 
@@ -368,8 +374,9 @@ To verify that the client is connected to the cluster, run `docker version`:
       node:             v3.5.3
 
 {% comment %}
-{% endcomment %}
 To change the context back to your local machine, run `docker context use default`:
+{% endcomment %}
+コンテキストをローカルマシンに戻すには `docker context use default` を実行します。
 
     $ docker context use default
     default
@@ -381,16 +388,21 @@ To change the context back to your local machine, run `docker context use defaul
 {: #scale-a-cluster }
 ## クラスターのスケール変更
 {% comment %}
-{% endcomment %}
 Open `cluster.yml`.  Change the number of workers to 6:
+{% endcomment %}
+`cluster.yml` ファイルを開いて、ワーカー数を 6 に変更してみます。
 ```yaml
       workers:
         instance_type: t2.xlarge
         os: Ubuntu 16.04
         quantity: 6
 ```
+{% comment %}
 Since the cluster is already created, the next step is to `update` the cluster's
 desired state. Run  `docker cluster update quickstart --file cluster.yml`:
+{% endcomment %}
+このクラスターはすでに生成済であるため、ここからやるべきことは、設定した状態に更新することです。
+そこで `docker cluster update quickstart --file cluster.yml` を実行します。
 
     $ docker cluster update quickstart --file cluster.yml
     Docker Enterprise Platform 3.0
@@ -399,6 +411,7 @@ desired state. Run  `docker cluster update quickstart --file cluster.yml`:
     Updating: [==================                                            ] 30%
 
 {% comment %}
+After approximately 10 minutes, use the `update` operation to add the new nodes and join them to the cluster:
 {% endcomment %}
 After approximately 10 minutes, use the `update` operation to add the new nodes and join them to the cluster:
 

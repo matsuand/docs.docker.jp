@@ -496,7 +496,7 @@ pip uninstall docker-compose
 {% comment %}
 ## Where to go next
 {% endcomment %}
-## 次は何を読むか
+## 次に読むものは
 {: #where-to-go-next }
 
 {% comment %}

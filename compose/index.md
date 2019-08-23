@@ -18,12 +18,12 @@ Compose is a tool for defining and running multi-container Docker applications.
 With Compose, you use a YAML file to configure your application's services.
 Then, with a single command, you create and start all the services
 from your configuration. To learn more about all the features of Compose,
-see [the list of features](overview.md#features).
+see [the list of features](#features).
 {% endcomment %}
 Compose とは、複数のコンテナーを定義し実行する Docker アプリケーションのためのツールです。
 Compose においては YAML ファイルを使ってアプリケーションサービスの設定を行います。
 コマンドを 1 つ実行するだけで、設定内容に基づいたアプリケーションサービスの生成、起動を行います。
-Compose の機能に関する詳細は、[機能一覧](overview.md#features) を参照してください。
+Compose の機能に関する詳細は、[機能一覧](#features) を参照してください。
 
 {% comment %}
 Compose works in all environments: production, staging, development, testing, as

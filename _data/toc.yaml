@@ -1297,7 +1297,7 @@ manuals:
     - path: /cluster/
       title: 概要
     - path: /cluster/aws/
-      title: Docker Cluster on AWS
+      title: AWS 上の Docker Cluster
     - path: /cluster/cluster-file/
       title: Cluster file structure
     - path: /cluster/reference/envvars/
