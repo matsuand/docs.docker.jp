@@ -68,26 +68,45 @@ configurable for volumes.
 ## Choose the -v or --mount flag
 {% endcomment %}
 {: #choose-the--v-or---mount-flag }
-## Choose the -v or --mount flag
+## -v または --mount フラグの選択
 
 {% comment %}
-{% endcomment %}
 Originally, the `-v` or `--volume` flag was used for standalone containers and
 the `--mount` flag was used for swarm services. However, starting with Docker
 17.06, you can also use `--mount` with standalone containers. In general,
 `--mount` is more explicit and verbose. The biggest difference is that the `-v`
 syntax combines all the options together in one field, while the `--mount`
 syntax separates them. Here is a comparison of the syntax for each flag.
+{% endcomment %}
+もともと `-v` フラグや `--volume` フラグはスタンドアロンコンテナーに対して、また `--mount` フラグはスウォームサービスに対して用いられてきたものです。
+しかし Docker 17.06 からは `--mount` をスタンドアロンコンテナーに対しても利用できるようになりました。
+全般に `--mount` の方が明示的であり、
+In general,
+`--mount` is more explicit and verbose. The biggest difference is that the `-v`
+syntax combines all the options together in one field, while the `--mount`
+syntax separates them. Here is a comparison of the syntax for each flag.
 
 {% comment %}
-{% endcomment %}
 > New users should try `--mount` syntax which is simpler than `--volume` syntax.
-
-{% comment %}
 {% endcomment %}
-If you need to specify volume driver options, you must use `--mount`.
+> はじめて利用する方は、`--volume` よりも `--mount` の方が文法は簡単なので、`--mount` を利用してください。
 
 {% comment %}
+If you need to specify volume driver options, you must use `--mount`.
+{% endcomment %}
+ボリュームドライバーのオプションを指定する必要がある場合は、`--mount` を用いなければなりません。
+
+{% comment %}
+- **`-v` or `--volume`**: Consists of three fields, separated by colon characters
+  (`:`). The fields must be in the correct order, and the meaning of each field
+  is not immediately obvious.
+  - In the case of named volumes, the first field is the name of the volume, and is
+    unique on a given host machine. For anonymous volumes, the first field is
+    omitted.
+  - The second field is the path where the file or directory are mounted in
+    the container.
+  - The third field is optional, and is a comma-separated list of options, such
+    as `ro`. These options are discussed below.
 {% endcomment %}
 - **`-v` or `--volume`**: Consists of three fields, separated by colon characters
   (`:`). The fields must be in the correct order, and the meaning of each field
@@ -101,6 +120,23 @@ If you need to specify volume driver options, you must use `--mount`.
     as `ro`. These options are discussed below.
 
 {% comment %}
+- **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
+  consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
+  than `-v` or `--volume`, but the order of the keys is not significant, and
+  the value of the flag is easier to understand.
+  - The `type` of the mount, which can be [`bind`](bind-mounts.md), `volume`, or
+    [`tmpfs`](tmpfs.md). This topic discusses volumes, so the type is always
+    `volume`.
+  - The `source` of the mount. For named volumes, this is the name of the volume.
+    For anonymous volumes, this field is omitted. May be specified as `source`
+    or `src`.
+  - The `destination` takes as its value the path where the file or directory
+    is mounted in the container. May be specified as `destination`, `dst`,
+    or `target`.
+  - The `readonly` option, if present, causes the bind mount to be [mounted into
+    the container as read-only](#use-a-read-only-volume).
+  - The `volume-opt` option, which can be specified more than once, takes a
+    key-value pair consisting of the option name and its value.
 {% endcomment %}
 - **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
@@ -121,6 +157,21 @@ If you need to specify volume driver options, you must use `--mount`.
     key-value pair consisting of the option name and its value.
 
 {% comment %}
+> Escape values from outer CSV parser
+>
+> If your volume driver accepts a comma-separated list as an option,
+> you must escape the value from the outer CSV parser. To escape a `volume-opt`,
+> surround it with double quotes (`"`) and surround the entire mount parameter
+> with single quotes (`'`).
+>
+> For example, the `local` driver accepts mount options as a comma-separated
+> list in the `o` parameter. This example shows the correct way to escape the list.
+>
+>     $ docker service create \
+>          --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
+>         --name myservice \
+>         <IMAGE>
+> {: .warning}
 {% endcomment %}
 > Escape values from outer CSV parser
 >
@@ -140,28 +191,38 @@ If you need to specify volume driver options, you must use `--mount`.
 
 
 {% comment %}
+The examples below show both the `--mount` and `-v` syntax where possible, and
+    `--mount` is presented first.
 {% endcomment %}
 The examples below show both the `--mount` and `-v` syntax where possible, and
     `--mount` is presented first.
 
 {% comment %}
+### Differences between `-v` and `--mount` behavior
 {% endcomment %}
 ### Differences between `-v` and `--mount` behavior
 
 {% comment %}
+As opposed to bind mounts, all options for volumes are available for both
+`--mount` and `-v` flags.
 {% endcomment %}
 As opposed to bind mounts, all options for volumes are available for both
 `--mount` and `-v` flags.
 
 {% comment %}
+When using volumes with services, only `--mount` is supported.
 {% endcomment %}
 When using volumes with services, only `--mount` is supported.
 
 {% comment %}
-{% endcomment %}
 ## Create and manage volumes
+{% endcomment %}
+{: #create-and-manage-volumes }
+## ボリュームの生成と管理
 
 {% comment %}
+Unlike a bind mount, you can create and manage volumes outside the scope of any
+container.
 {% endcomment %}
 Unlike a bind mount, you can create and manage volumes outside the scope of any
 container.

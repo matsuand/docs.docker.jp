@@ -146,7 +146,7 @@ To create the `docker` group and add your user:
 {% comment %}
 ## Configure Docker to start on boot
 {% endcomment %}
-## ブート時の Docker の起動設定
+## システムブート時の Docker 起動設定
 {: #configure-docker-to-start-on-boot }
 
 {% comment %}

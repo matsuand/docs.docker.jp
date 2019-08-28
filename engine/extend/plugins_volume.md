@@ -31,8 +31,8 @@ Docker Engine ボリュームプラグインは、Amazon EBS のような外部�
 {% comment %}
 ## Changelog
 {% endcomment %}
-## 変更履歴
 {: #changelog }
+## 変更履歴
 
 ### 1.13.0
 
@@ -83,8 +83,8 @@ Docker Engine ボリュームプラグインは、Amazon EBS のような外部�
 {% comment %}
 ## Command-line changes
 {% endcomment %}
-## コマンドラインによる変更
 {: #command-line-changes }
+## コマンドラインによる変更
 
 {% comment %}
 To give a container access to a volume, use the `--volume` and `--volume-driver`
@@ -136,8 +136,8 @@ volumes external to a single host, such as those on EBS.
 {% comment %}
 ## Create a VolumeDriver
 {% endcomment %}
-## VolumeDriver の生成
 {: #create-a-volumedriver }
+## VolumeDriver の生成
 
 {% comment %}
 The container creation endpoint (`/containers/create`) accepts a `VolumeDriver`
@@ -151,8 +151,8 @@ specified, it defaults to `"local"` (the default driver for local volumes).
 {% comment %}
 ## Volume plugin protocol
 {% endcomment %}
-## ボリュームプラグインプロトコル
 {: #volume-plugin-protocol }
+## ボリュームプラグインプロトコル
 
 {% comment %}
 If a plugin registers itself as a `VolumeDriver` when activated, it must

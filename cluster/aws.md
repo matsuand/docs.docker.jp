@@ -34,10 +34,11 @@ This topic discusses working with docker clusters in AWS, including how to:
 ## 前提条件
 
 {% comment %}
-- Completed installation of [Docker Desktop Enterprise](../ee/desktop/).
+- Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker CLI](https://docs.docker.com/ee/supported-platforms/) on Linux.
 - [Access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to an AWS subscription. You can provide these credentials in many ways, but the recommended way is to create an `~/.aws/credentials` file. Refer to [AWS CLI configuration](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for details on creating one.
 {% endcomment %}
-- [Docker Desktop Enterprise](../ee/desktop/) のインストールを終えていること。
+- [Docker Desktop Enterprise](../ee/desktop/) on Windows または on Mac のインストールを終えていること。
+  あるいは Linux 上の [Docker CLI](https://docs.docker.com/ee/supported-platforms/) のインストールを終えていること。
 - AWS サブスクリプションに対する [アクセスキー](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) を有していること。
   この認証情報を設定する方法は数多くあります。
   ただし推奨されるのは `~/.aws/credentials` ファイルを生成することです。
