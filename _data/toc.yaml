@@ -233,7 +233,7 @@ guides:
       - path: /storage/storagedriver/
         title: ストレージドライバーについて
       - path: /storage/storagedriver/select-storage-driver/
-        title: ストレージドライバーの選定
+        title: ストレージドライバーの選択
       - path: /storage/storagedriver/aufs-driver/
         title: AUFS ストレージドライバーの利用
       - path: /storage/storagedriver/btrfs-driver/
@@ -1326,9 +1326,9 @@ manuals:
         - path: /ee/ucp/admin/install/plan-installation/
           title: Plan your installation
         - path: /ee/ucp/admin/install/
-          title: Install
+          title: インストール
         - path: /ee/ucp/admin/install/install-offline/
-          title: Install offline
+          title: オフラインでのインストール
         - sectiontitle: クラウドプロバイダー
           section:
           - path: /ee/ucp/admin/install/cloudproviders/install-on-azure/

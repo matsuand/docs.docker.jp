@@ -16,22 +16,22 @@ in.
 {% endcomment %}
 理想を言えば、コンテナーの書き込みレイヤーへのデータの書き込みは最小とし、データ出力先には Docker ボリュームを利用します。
 しかし処理内容によっては、書き込みレイヤーにデータを書き込めるようにする必要が出てきます。
-これがあるからこそ、ストレージドライバーが必要になります。
+これがあるからこそストレージドライバーが必要になります。
 
 {% comment %}
 Docker supports several different storage drivers, using a pluggable
 architecture. The storage driver controls how images and containers are stored
 and managed on your Docker host.
 {% endcomment %}
-Docker はいくつもの種類のストレージドライバーがサポートされ、それは交換可能なプラガブルなアーキテクチャーに基づいています。
-ストレージドライバーは Docker ホスト上において、イメージやコンテナーの保存や管理を制御します。
+Docker では複数のストレージドライバーがサポートされ、これは交換可能な、つまりプラガブルなアーキテクチャーに基づいています。
+ストレージドライバーは Docker ホスト上において、イメージやコンテナーが行うデータ保存や管理を制御します。
 
 {% comment %}
 After you have read the [storage driver overview](index.md), the
 next step is to choose the best storage driver for your workloads. In making
 this decision, there are three high-level factors to consider:
 {% endcomment %}
-[ストレージドライバーの概要](index.md) を読み終えたら、次は作業に必要となる最良のストレージドライバーを選定することです。
+[ストレージドライバーの概要](index.md) を読み終えたら、次は作業に必要となる最良のストレージドライバーを選択することです。
 ドライバーを決定するにあたっては、考えておくべき高度な要因が 3 つあります。
 
 {% comment %}
@@ -39,16 +39,14 @@ If multiple storage drivers are supported in your kernel, Docker has a prioritiz
 list of which storage driver to use if no storage driver is explicitly configured,
 assuming that the storage driver meets the prerequisites.
 {% endcomment %}
-If multiple storage drivers are supported in your kernel, Docker has a prioritized
-list of which storage driver to use if no storage driver is explicitly configured,
-assuming that the storage driver meets the prerequisites.
+利用するカーネルが複数のストレージドライバーに対応している場合に Docker は、ストレージドライバーが設定されていなかったとしても、どのストレージドライバーを用いるべきであるかを示す優先リストを持ちます。
+あくまでストレージドライバーが利用できる前提条件を満たしている場合に限ります。
 
 {% comment %}
 Use the storage driver with the best overall performance and stability in the most
 usual scenarios.
 {% endcomment %}
-Use the storage driver with the best overall performance and stability in the most
-usual scenarios.
+ストレージドライバーは多くの利用状況において、最大限の性能と安定性を持つものを利用します。
 
 {% comment %}
 Docker supports the following storage drivers:
@@ -75,54 +73,52 @@ Docker は以下のストレージドライバーをサポートします。
    where no copy-on-write filesystem can be used. Performance of this storage
    driver is poor, and is not generally recommended for production use.
 {% endcomment %}
-* `overlay2` is the preferred storage driver, for all currently supported
-   Linux distributions, and requires no extra configuration.
-* `aufs` is the preferred storage driver for Docker 18.06 and older, when
-   running on Ubuntu 14.04 on kernel 3.13 which has no support for `overlay2`.
-* `devicemapper` is supported, but requires `direct-lvm` for production
-   environments, because `loopback-lvm`, while zero-configuration, has very
-   poor performance. `devicemapper` was the recommended storage driver for
-   CentOS and RHEL, as their kernel version did not support `overlay2`. However,
-   current versions of CentOS and RHEL now have support for `overlay2`,
-   which is now the recommended driver.
- * The `btrfs` and `zfs` storage drivers are used if they are the backing
-   filesystem (the filesystem of the host on which Docker is installed).
-   These filesystems allow for advanced options, such as creating "snapshots",
-   but require more maintenance and setup. Each of these relies on the backing
-   filesystem being configured correctly.
- * The `vfs` storage driver is intended for testing purposes, and for situations
-   where no copy-on-write filesystem can be used. Performance of this storage
-   driver is poor, and is not generally recommended for production use.
+* `overlay2` は、現在サポートしている Linux ディストリビューションの中で、よく用いられているストレージドライバーです。
+   特別な設定は必要ありません。
+* `aufs` は Docker 18.06 あるいはそれ以前においては、よく用いられていました。
+   そのときはカーネル 3.13 を利用する Ubuntu 14.04 において稼動しており、`overlay2` がサポートされていないときでした。
+* `devicemapper` はサポートされているものですが、本番環境において `direct-lvm` が必要となります。
+   というのも `loopback-lvm` は何も設定する必要がないのですが、処理性能が極めて低いためです。
+   `devicemapper` は CentOS や RHEL において推奨されていました。
+   これらのカーネルバージョンが `overlay2` をサポートしていなかったためです。
+   最新の CentOS と RHEL においては `overlay2` がサポートされ、今では `overlay2` が推奨ドライバーとなっています。
+ * `btrfs` と `zfs` というストレージドライバーは、その名前が示すファイルシステム上において利用します。
+   （ファイルシステムは Docker がインストールされているホスト上のファイルシステムを表わします。）
+   このファイルシステムに対しては「snapshots」を生成するような高度なオプションがありますが、他に比べて設定と保守を必要とします。
+   このドライバーを利用するためには、それぞれのファイルシステムが適切に設定できていることが必要です。
+ * `vfs` ストレージドライバーはテスト目的を意図しています。
+   またはコピーオンライト方式のファイルシステムを利用しなくて構わない状況での利用を意図しています。
+   このストレージドライバーの性能は低く、一般に本番環境での利用は推奨されません。
 
 {% comment %}
 Docker's source code defines the selection order. You can see the order at
 [the source code for Docker Engine - Community {{ site.docker_ce_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_version }}/components/engine/daemon/graphdriver/driver_linux.go#L50)
 {% endcomment %}
-Docker's source code defines the selection order. You can see the order at
-[the source code for Docker Engine - Community {{ site.docker_ce_version }}](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_version }}/components/engine/daemon/graphdriver/driver_linux.go#L50)
+Docker のソースコードにおいては優先順位を定義しています。
+その順番は [Docker Engine - Community {{ site.docker_ce_version }} のソースコード](https://github.com/docker/docker-ce/blob/{{ site.docker_ce_version }}/components/engine/daemon/graphdriver/driver_linux.go#L50) を見ればわかります。
 
 {% comment %}
 If you run a different version of Docker, you can use the branch selector at the top of the file viewer to choose a different branch.
 {: id="storage-driver-order" }
 {% endcomment %}
-If you run a different version of Docker, you can use the branch selector at the top of the file viewer to choose a different branch.
+上のサイトのファイル参照画面において Docker バージョンが利用するものと異なっている場合は、画面上部にあるブランチ切り替えボタンを使って、利用しているバージョンブランチに切り替えてください。
 {: id="storage-driver-order" }
 
 {% comment %}
 Some storage drivers require you to use a specific format for the backing filesystem. If you have external
 requirements to use a specific backing filesystem, this may limit your choices. See [Supported backing filesystems](#supported-backing-filesystems).
 {% endcomment %}
-Some storage drivers require you to use a specific format for the backing filesystem. If you have external
-requirements to use a specific backing filesystem, this may limit your choices. See [Supported backing filesystems](#supported-backing-filesystems).
+ストレージドライバーにおいては、それが基づいているファイルシステムに対応した所定のフォーマットを必要とします。
+特定のファイルシステムを利用するべき理由がある場合には、ドライバーの選択肢が少なくなるかもしれません。
+[対応するファイルシステム](#supported-backing-filesystems) を参照してください。
 
 {% comment %}
 After you have narrowed down which storage drivers you can choose from, your choice is determined by the
 characteristics of your workload and the level of stability you need. See [Other considerations](#other-considerations)
 for help in making the final decision.
 {% endcomment %}
-After you have narrowed down which storage drivers you can choose from, your choice is determined by the
-characteristics of your workload and the level of stability you need. See [Other considerations](#other-considerations)
-for help in making the final decision.
+どのストレージドライバーを利用するべきかが絞り込めてきたら、開発作業の特性や必要となる安定性に基づいて最終決定を行います。
+[その他の考慮事項](#other-considerations) を参考にして、最終的な決定を行ってください。
 
 {% comment %}
 > ***NOTE***: Your choice may be limited by your Docker edition, operating system, and distribution.
@@ -131,18 +127,17 @@ for help in making the final decision.
 > Enterprise. See [Support storage drivers per Linux distribution](#supported-storage-drivers-per-linux-distribution)
 > for more information.
 {% endcomment %}
-> ***NOTE***: Your choice may be limited by your Docker edition, operating system, and distribution.
-> For instance, `aufs` is only supported on Ubuntu and Debian, and may require extra packages
-> to be installed, while `btrfs` is only supported on SLES, which is only supported with Docker
-> Enterprise. See [Support storage drivers per Linux distribution](#supported-storage-drivers-per-linux-distribution)
-> for more information.
+> ***メモ***: ドライバーの選択は Docker エディション、オペレーティングシステム、ディストリビューションにより限定されることがあります。
+> たとえば `aufs` は Ubuntu と Debian においてのみサポートされるものであって、しかも追加パッケージのインストールを必要とします。
+> また `btrfs` は SLES に対してのみサポートされ、さらに Docker Enterprise にしか対応していません。
+> 詳しくは [Linux ディストリビューションがサポートするストレージドライバー](#supported-storage-drivers-per-linux-distribution) を参照してください。
 
 
 {% comment %}
 ## Supported storage drivers per Linux distribution
 {% endcomment %}
 {: #supported-storage-drivers-per-linux-distribution }
-## Linux ディストリビューションごとにサポートされるストレージドライバー
+## Linux ディストリビューションがサポートするストレージドライバー
 
 {% comment %}
 At a high level, the storage drivers you can use is partially determined by
@@ -163,7 +158,8 @@ disable security features of your operating system, such as the need to disable
 {% comment %}
 ### Docker Engine - Enterprise and Docker Enterprise
 {% endcomment %}
-### Docker Engine - Enterprise and Docker Enterprise
+{: #docker-engine---enterprise-and-docker-enterprise }
+### Docker Engine - Enterprise と Docker Enterprise
 
 {% comment %}
 For Docker Engine - Enterprise and Docker Enterprise, the definitive resource for which
@@ -330,7 +326,7 @@ backing filesystems.
 | `zfs`                 | `zfs`                         |
 | `vfs`                 | any filesystem                 |
 {% endcomment %}
-| ストレージjドライバー | Supported backing filesystems  |
+| ストレージドライバー  | Supported backing filesystems  |
 |:----------------------|:------------------------------|
 | `overlay2`, `overlay` | `xfs` with ftype=1, `ext4`    |
 | `aufs`                | `xfs`, `ext4`                 |
@@ -342,7 +338,8 @@ backing filesystems.
 {% comment %}
 ## Other considerations
 {% endcomment %}
-## Other considerations
+{: #other-considerations }
+## その他の考慮事項
 
 {% comment %}
 ### Suitability for your workload
