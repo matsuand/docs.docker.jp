@@ -160,14 +160,14 @@ a CLI plugin for automated deployment and configuration, and third-party ecosyst
 | Platform  | Docker Enterprise support |
 :----------------------------------------------------------------------------------------|:-------------------------:|
 | [Amazon Web Services](..\cluster\aws.md) |  {{ page.green-check }}   |
+| [Azure](..\cluster\azure.md) |  {{ page.green-check }}   |
 | VMware  |  coming soon  |
-| Microsoft Azure  | coming soon  |
 {% endcomment %}
 | プラットフォーム | Docker Enterprise エディション |
 :----------------------------------------------------------------------------------------|:-------------------------:|
 | [Amazon Web Services](..\cluster\aws.md) |  {{ page.green-check }}   |
+| [Azure](..\cluster\azure.md) |  {{ page.green-check }}   |
 | VMware  |  coming soon  |
-| Microsoft Azure  | coming soon  |
 
 {% comment %}
 ## Docker Enterprise release cycles

@@ -29,11 +29,10 @@ Dockerfile は普通は親イメージから作り始めます。
   Dockerfile は普通は親イメージから作り始め、ベースイメージから作るのはまれです。
   ただしこの用語は混同されて用いられることもあります。
 
-  {% comment %}
-  - A [base image](/glossary.md?term=base%20image) either has no `FROM` line
-    in its Dockerfile, or has `FROM scratch`.
-  {% endcomment %}
-- [ベースイメージ](/glossary.md?term=base%20image)は Dockerfile において `FROM` 行がないか、あるいは `FROM scratch` が記述されます。
+{% comment %}
+- A [base image](/glossary.md?term=base%20image) has `FROM scratch` in its Dockerfile.
+{% endcomment %}
+- [ベースイメージ](/glossary.md?term=base%20image) は Dockerfile において `FROM scratch` に記述されるものです。
 
 {% comment %}
 This topic shows you several ways to create a base image. The specific process

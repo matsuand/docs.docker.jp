@@ -5,40 +5,17 @@ title: AWS 上にて Docker Cluster をはじめよう
 ---
 
 {% comment %}
-This topic discusses working with docker clusters in AWS, including how to:
-{% endcomment %}
-このトピックでは AWS 上に Docker Cluster を動作させることを示します。
-以下のような方法を説明しています。
-
-{% comment %}
-- [Create a cluster](#create-a-cluster)
-- [View cluster information](#view-cluster-information)
-- [Use context](#use-context)
-- [Scale a cluster](#scale-a-cluster)
-- [Back up a cluster](#back-up-a-cluster)
-- [Upgrade a cluster](#upgrade-a-cluster)
-- [Destroy a cluster](#destroy-a-cluster)
-{% endcomment %}
-- [クラスターの生成](#create-a-cluster)
-- [クラスター情報の参照](#view-cluster-information)
-- [コンテキストの利用](#use-context)
-- [クラスターのスケール変更](#scale-a-cluster)
-- [クラスターのバックアップ](#back-up-a-cluster)
-- [クラスターのアップグレード](#upgrade-a-cluster)
-- [クラスターの削除](#destroy-a-cluster)
-
-{% comment %}
 ## Prerequisites
 {% endcomment %}
 {: #prerequisites }
 ## 前提条件
 
 {% comment %}
-- Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker CLI](https://docs.docker.com/ee/supported-platforms/) on Linux.
+- Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
 - [Access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to an AWS subscription. You can provide these credentials in many ways, but the recommended way is to create an `~/.aws/credentials` file. Refer to [AWS CLI configuration](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for details on creating one.
 {% endcomment %}
 - [Docker Desktop Enterprise](../ee/desktop/) on Windows または on Mac のインストールを終えていること。
-  あるいは Linux 上の [Docker CLI](https://docs.docker.com/ee/supported-platforms/) のインストールを終えていること。
+  あるいは Linux 上の [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) のインストールを終えていること。
 - AWS サブスクリプションに対する [アクセスキー](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) を有していること。
   この認証情報を設定する方法は数多くあります。
   ただし推奨されるのは `~/.aws/credentials` ファイルを生成することです。

@@ -233,7 +233,7 @@ guides:
       - path: /storage/storagedriver/
         title: ストレージドライバーについて
       - path: /storage/storagedriver/select-storage-driver/
-        title: ストレージドライバーの選定
+        title: ストレージドライバーの選択
       - path: /storage/storagedriver/aufs-driver/
         title: AUFS ストレージドライバーの利用
       - path: /storage/storagedriver/btrfs-driver/
@@ -1296,8 +1296,12 @@ manuals:
     section:
     - path: /cluster/
       title: 概要
+    - path: /cluster/release-notes/
+      title: リリースノート
     - path: /cluster/aws/
       title: AWS 上の Docker Cluster
+    - path: /cluster/azure/
+      title: Docker Cluster on Azure
     - path: /cluster/cluster-file/
       title: Cluster file structure
     - path: /cluster/reference/envvars/
@@ -1326,9 +1330,9 @@ manuals:
         - path: /ee/ucp/admin/install/plan-installation/
           title: Plan your installation
         - path: /ee/ucp/admin/install/
-          title: Install
+          title: インストール
         - path: /ee/ucp/admin/install/install-offline/
-          title: Install offline
+          title: オフラインでのインストール
         - sectiontitle: クラウドプロバイダー
           section:
           - path: /ee/ucp/admin/install/cloudproviders/install-on-azure/
@@ -4100,6 +4104,8 @@ manuals:
           title: Image manifest v 2, schema 1
         - path: /registry/spec/manifest-v2-2/
           title: Image manifest v 2, schema 2
+        - path: /registry/spec/deprecated-schema-v1/
+          title: Update deprecated schema v1 images
       - sectiontitle: Registry storage drivers
         section:
         - path: /registry/storage-drivers/

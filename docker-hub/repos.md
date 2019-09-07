@@ -220,33 +220,45 @@ Docker Hub 上において組織とチームに関する機能を利用すれば
 {: #viewing-repository-tags }
 
 {% comment %}
-Docker Hub's repository "Tags" view shows you the available tags and the size
-of the associated image.
+Docker Hub's individual repositories view shows you the available tags and the
+size of the associated image. Go to the "Repositories" view and click on a
+repository to see its tags.
 {% endcomment %}
-Docker Hub リポジトリ上の「タグ」（Tags）画面では、利用可能なタグと、関連するイメージのサイズ情報が示されています。
+それぞれの Docker Hub リポジトリでは、利用可能なタグと関連イメージのサイズが確認できます。
+「Repositories」画面を表示し、リポジトリの 1 つをクリックしてそのタグを確認します。
 
 {% comment %}
-![View Repo Tags](images/repos-tags-view.png)
+![Repository View](images/repo-view-2019.png)
 {% endcomment %}
-![リポジトリタグの参照](images/repos-tags-view.png)
+![リポジトリ画面](images/repo-view-2019.png)
+
+{% comment %}
+![View Repo Tags](images/repos-tags-view-2019.png)
+{% endcomment %}
+![リポジトリタグの参照](images/repos-tags-view-2019.png)
 
 {% comment %}
 Image sizes are the cumulative space taken up by the image and all its parent
-images. This is also the disk space used by the contents of the .tar file created
-when you `docker save` an image.
+images. This is also the disk space used by the contents of the .tar file
+created when you `docker save` an image.
 {% endcomment %}
 イメージサイズは、そのイメージと親イメージを含んだすべての容量です。
 これはイメージを保存する際に `docker save` によって生成される .tar ファイルの容量でもあります。
 
 {% comment %}
-To edit tags, click on Manage Repository or find your repository under *Repositories*:
+To view tags, click on "Tags" tab and then select a tag to view.
 {% endcomment %}
-タグの編集は、Manage Repository をクリックするか、あるいは *Repositories* 配下から目的のリポジトリを探し出して行います。
+タグの参照は「Tags」タブをクリックして、参照したいタグを選びます。
 
 {% comment %}
-![Manage Repo Tags](images/repos-tags-manage.png)
+![Manage Repo Tags](images/repos-tags-manage-2019.png)
 {% endcomment %}
-![リポジトリタグの管理](images/repos-tags-manage.png)
+![リポジトリタグの管理](images/repos-tags-manage-2019.png)
+
+{% comment %}
+![View Tag](images/repo-single-tag-view-2019.png)
+{% endcomment %}
+![タグの参照](images/repo-single-tag-view-2019.png)
 
 {% comment %}
 ## Searching for Repositories

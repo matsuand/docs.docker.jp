@@ -420,7 +420,7 @@ docker build [OPTIONS] -f- PATH
 
 {% comment %}
 This syntax can be useful in situations where you want to build an image from a
-repository does not contain a `Dockerfile`, or if you want to build with a custom
+repository that does not contain a `Dockerfile`, or if you want to build with a custom
 `Dockerfile`, without maintaining your own fork of the repository.
 {% endcomment %}
 この構文は、イメージをビルドするために利用するリポジトリに `Dockerfile` が含まれていないような場合に用いることができます。
@@ -1651,7 +1651,7 @@ builds arbitrary user software written in that language within the
 その例として [Ruby's ONBUILD variants](https://github.com/docker-library/ruby/blob/c43fef8a60cea31eb9e7d960a076d633cb62ba8d/2.4/jessie/onbuild/Dockerfile) があります。
 
 {% comment %}
-Images built from `ONBUILD` should get a separate tag, for example:
+Images built with `ONBUILD` should get a separate tag, for example:
 `ruby:1.9-onbuild` or `ruby:2.0-onbuild`.
 {% endcomment %}
 `ONBUILD` によって構築するイメージは、異なったタグを指定してください。

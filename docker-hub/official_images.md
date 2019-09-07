@@ -119,10 +119,10 @@ these efforts.
 ## 公式イメージのぜい弱性スキャニング
 
 {% comment %}
-Each of the images in the Official Images is scanned for vulnerabilities. The results of
-these security scans provide valuable information about which images contain
-security vulnerabilities, and allow you to choose images that align with your
-security standards.
+Each of the images in the Official Images is scanned for vulnerabilities. The
+results of these security scans provide valuable information about which images
+contain security vulnerabilities, and allow you to choose images that align with
+your security standards.
 {% endcomment %}
 公式イメージにある各イメージに対しては、ぜい弱性に関するスキャン処理が行われます。
 このセキュリティスキャンの結果には有用な情報が示されます。
@@ -134,20 +134,33 @@ To view the Docker Security Scanning results:
 Docker セキュリティスキャニングの結果を見るには、以下を行います。
 
 {% comment %}
-1. Make sure you're logged in to Docker Hub.
-    You can view Official Images even while logged out, however the scan results are only available once you log in.
-2. Navigate to the repository of the Official Image whose security scan you want to view.
-3. Click the `Tags` tab to see a list of tags and their security scan summaries.
+1. Make sure you're logged in to Docker Hub. You can view Official Images even
+    while logged out, however the scan results are only available once you log
+    in.
 {% endcomment %}
 1. Docker Hub へログインしていることを確認します。
     公式イメージはログアウトしていても参照することができますが、スキャン結果はログインしていなければ見ることはできません。
-2. 公式イメージのリポジトリにアクセスし、セキュリティスキャン結果を参照します。
-3. `Tags` タブをクリックして、タグ一覧とそのセキュリティスキャン結果の概要を確認します。
 
 {% comment %}
-![Official Image Tags](images/official_images-tags.png)
+2. Navigate to the repository of the Official Image whose security scan you want
+   to view.
 {% endcomment %}
-![公式イメージタグ](images/official_images-tags.png)
+2. 公式イメージのリポジトリにアクセスし、セキュリティスキャン結果を参照します。
+
+{% comment %}
+3. Click the `Tags` tab to see a list of tags. and their security scan summaries.
+{% endcomment %}
+3. `Tags` タブをクリックして、タグ一覧とそのセキュリティスキャン結果の概要を確認します。
+
+    {% comment %}
+    ![Official Image Tags](images/official_images-tags-home.png)
+    {% endcomment %}
+    ![公式イメージタグ](images/official_images-tags.png)
+
+4. Click on a tag to see the image's security scan summary.
+
+    ![Official Image Tags](images/official_images-tags-2019.png)
+
 
 {% comment %}
 You can click into a tag's detail page to see more information about which

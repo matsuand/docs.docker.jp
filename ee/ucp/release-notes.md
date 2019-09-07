@@ -23,7 +23,45 @@ upgrade your installation to the latest release.
 **Note**: For archived versions of UCP documentation, refer to [View the docs archives](https://docs.docker.com/docsarchive/).
 
 # Version 3.2
-(2019-7-22)
+
+## 3.2.1
+2019-09-03
+
+### Bug fixes
+* Fixed an issue where UCP did not install on GCP due to missing metadata.google.internal in /etc/hosts
+
+### Kubernetes
+* Kubernetes has been upgraded to version 1.14.6.
+* Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more
+  than 1 replica by default.
+
+### Networking
+* Calico has been upgraded to version 3.8.2. For more information see the [Calico Release
+  Notes](https://docs.projectcalico.org/v3.8/release-notes/).
+* Interlock has been upgraded to version 2.6.1.
+* The `azure-ip-count` variable is now exposed at install time, allowing a User
+  to customize the number of IP addresses UCP provisions for each node.
+  Additional information can be found
+  [here](/ee/ucp/admin/install/cloudproviders/install-on-azure/#adjust-the-ip-count-value)
+
+### Security
+* Upgraded Golang to 1.12.9.
+* Added CSP header to prevent cross-site scripting attacks (XSS)
+
+### Bootstrap
+* Fixed various issues in install, uninstall, backup and restore when UCP
+  Telemetry data had been disabled.
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.2.1   |
+| Kubernetes            | 1.14.6  |
+| Calico                | 3.8.2   |
+| Interlock             | 2.6.1   |
+| Interlock NGINX proxy | 1.14.2  |
+
+## 3.2.0
+2019-7-22
 
 ### Security
 Refer to [UCP image vulnerabilities](https://success.docker.com/article/ucp-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates, issues, and recommendations.
@@ -66,7 +104,6 @@ more information see
 
 - Improved progress information for install and upgrade.
 - You can now manually control worker node upgrades.
-- User workloads no longer experience downtime during an upgrade.
 
 #### Buildkit
 
@@ -256,24 +293,25 @@ In order to optimize user experience and security, support for Internet Explorer
     $ sudo yum downgrade container-selinux-2.74-1.el7
     ```
 - Attempts to deploy local PV fail with regular UCP configuration unless PV binder SA is bound to cluster admin role.
-    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` serviceaccount
+    - Workaround: Create a `ClusterRoleBinding` that binds the `persistent-volume-binder` ServiceAccount
    to a `cluster-admin` `ClusterRole`, as shown in the following example:
-       ```
-       apiVersion: rbac.authorization.k8s.io/v1
-       kind: ClusterRoleBinding
-       metadata:
-         labels:
-           subjectName: kube-system-persistent-volume-binder
-         name: kube-system-persistent-volume-binder:cluster-admin
-       roleRef:
-         apiGroup: rbac.authorization.k8s.io
-         kind: ClusterRole
-         name: cluster-admin
-       subjects:
-       - kind: ServiceAccount
-         name: persistent-volume-binder
-         namespace: kube-system
-       ```
+
+      ```
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        labels:
+          subjectName: kube-system-persistent-volume-binder
+        name: kube-system-persistent-volume-binder:cluster-admin
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+      - kind: ServiceAccount
+        name: persistent-volume-binder
+        namespace: kube-system
+      ```
 
 - Using iSCSI on a SLES 12 or SLES 15 Kubernetes cluster results in failures
   - Using Kubernetes iSCSI on SLES 12 or SLES 15 hosts results in failures. Kubelet logs might have errors similar to the following, when there's an attempt to attach the iSCSI based persistent volume:
@@ -337,8 +375,39 @@ In order to optimize user experience and security, support for Internet Explorer
 
 # Version 3.1
 
+## 3.1.10
+2019-09-03
+
+### Kubernetes
+* Kubernetes has been upgraded to version 1.11.10-docker-1, this has been built
+  with Golang 1.12.9.
+* Kubernetes DNS has been upgraded to 1.14.13 and is now deployed with more
+  than 1 replica by default.
+
+### Networking
+* Calico has been upgraded to version 3.8.2. For more information see the [Calico Release
+  Notes](https://docs.projectcalico.org/v3.8/release-notes/).
+* Interlock has been upgraded to version 2.6.1.
+
+### Security
+* Upgraded Golang to 1.12.9.
+
+### UI
+* A warning message will be shown when one attempts to upgrade from 3.1.x to
+  3.2.x via the UCP UI. This upgrade can only be performed by the CLI.
+
+### Components
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.1.10  |
+| Kubernetes            | 1.11.10 |
+| Calico                | 3.8.2   |
+| Interlock             | 2.6.1   |
+| Interlock NGINX proxy | 1.14.2  |
+
 ## 3.1.9
-(2019-07-17)
+2019-07-17
 
 ### Bug fixes
 
@@ -778,6 +847,36 @@ The following features are deprecated in UCP 3.1.
 
 # Version 3.0
 
+## 3.0.14
+2019-09-03
+
+### Kubernetes
+* Kubernetes has been upgraded to version 1.8.15-docker-7, this has been built
+  with Golang 1.12.9.
+* Kubernetes DNS has been upgraded to 1.14.13.
+
+### Networking
+* Calico has been upgraded to version 3.8.2. For more information see the [Calico Release
+  Notes](https://docs.projectcalico.org/v3.8/release-notes/).
+* Interlock has been upgraded to version 2.6.1.
+
+### Security
+* Upgraded Golang to 1.12.9.
+
+### UI
+* A warning message will be shown when one attempts to upgrade from 3.1.x to
+  3.2.x via the UCP UI. This upgrade can only be performed by the CLI.
+
+### Components
+
+| Component             | Version |
+| --------------------- | ------- |
+| UCP                   | 3.0.14  |
+| Kubernetes            | 1.8.15  |
+| Calico                | 3.8.2   |
+| Interlock             | 2.6.1   |
+| Interlock NGINX proxy | 1.14.2  |
+
 ## 3.0.13
 2019-07-17
 
@@ -1133,8 +1232,7 @@ Azure Disk when installing UCP with the `--cloud-provider` option.
 | Calico      | 3.0.1 |
 | Interlock (nginx)   | 1.13.8 |
 
-## Version 3.0.0
-
+## 3.0.0
 2018-04-17
 
 The UCP system requirements were updated with 3.0.0. Make sure to
@@ -1292,6 +1390,13 @@ deprecated. Deploy your applications as Swarm services or Kubernetes workloads.
 | Interlock (nginx)   | 1.13.8 |
 
 # Version 2.2
+
+## Version 2.2.21
+2019-09-03
+
+### Security
+
+* Upgraded Golang to 1.12.9.
 
 ## Version 2.2.20
 2019-07-17
