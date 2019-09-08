@@ -391,7 +391,7 @@ desired state. Run  `docker cluster update quickstart --file cluster.yml`:
 {% comment %}
 After approximately 10 minutes, use the `update` operation to add the new nodes and join them to the cluster:
 {% endcomment %}
-After approximately 10 minutes, use the `update` operation to add the new nodes and join them to the cluster:
+10 分程度たってから `update` 処理が開始し、新たなノードの生成とクラスターへの追加が行われます。
 
     $ docker cluster update quickstart --file examples/docs.yml
     Please provide a value for ucp_password
@@ -407,8 +407,9 @@ After approximately 10 minutes, use the `update` operation to add the new nodes 
     911c882340b2
 
 {% comment %}
-{% endcomment %}
 To view the new nodes in the cluster:
+{% endcomment %}
+クラスター内の新たなノードを参照するには以下を実行します。
 
     $ docker --context quickstart node ls
     ID                            HOSTNAME                                      STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
@@ -516,7 +517,7 @@ All provisioned resources are destroyed and the context for the cluster is remov
 ## Where to go next
 {% endcomment %}
 {: #where-to-go-next }
-## Where to go next
+## 次に読むものは
 
 {% comment %}
 - View the quick start guide for [Azure](azure.md) or [vSphere](vsphere.md)

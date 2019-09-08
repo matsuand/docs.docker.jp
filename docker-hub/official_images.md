@@ -157,9 +157,15 @@ Docker セキュリティスキャニングの結果を見るには、以下を�
     {% endcomment %}
     ![公式イメージタグ](images/official_images-tags.png)
 
+{% comment %}
 4. Click on a tag to see the image's security scan summary.
+{% endcomment %}
+4. タグをクリックして、そのイメージに対するセキュリティスキャン結果の概要を確認します。
 
+    {% comment %}
     ![Official Image Tags](images/official_images-tags-2019.png)
+    {% endcomment %}
+    ![公式イメージタグ](images/official_images-tags-2019.png)
 
 
 {% comment %}

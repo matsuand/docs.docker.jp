@@ -17,8 +17,8 @@ understandable even if you're not familiar with it.
 {% comment %}
 ## Prerequisites
 {% endcomment %}
-## 前提条件
 {: #prerequisites }
+## 前提条件
 
 {% comment %}
 Make sure you have already installed both [Docker Engine](/install/index.md) and [Docker
@@ -32,8 +32,8 @@ Python や Redis はインストールする必要はありません。
 {% comment %}
 ## Step 1: Setup
 {% endcomment %}
-## ステップ 1: セットアップ
 {: #step-1-setup }
+## ステップ 1: セットアップ
 
 {% comment %}
 Define the application dependencies.
@@ -118,8 +118,8 @@ paste this in:
 {% comment %}
 ## Step 2: Create a Dockerfile
 {% endcomment %}
-## ステップ 2: Dockerfile の生成
 {: #step-2-create-a-dockerfile }
+## ステップ 2: Dockerfile の生成
 
 {% comment %}
 In this step, you write a Dockerfile that builds a Docker image. The image
@@ -178,8 +178,8 @@ Dockerfile の書き方の詳細については、 [Docker ユーザーガイド
 {% comment %}
 ## Step 3: Define services in a Compose file
 {% endcomment %}
-## ステップ 3: Compose ファイル内でのサービス定義
 {: #step-3-define-services-in-a-compose-file }
+## ステップ 3: Compose ファイル内でのサービス定義
 
 {% comment %}
 Create a file called `docker-compose.yml` in your project directory and paste
@@ -204,8 +204,8 @@ This Compose file defines two services: `web` and `redis`.
 {% comment %}
 ### Web service
 {% endcomment %}
-### ウェブサービス
 {: #web-service }
+### ウェブサービス
 
 {% comment %}
 The `web` service uses an image that's built from the `Dockerfile` in the current directory.
@@ -219,8 +219,8 @@ the Flask web server, `5000`.
 {% comment %}
 ### Redis service
 {% endcomment %}
-### Redis サービス
 {: #redis-service }
+### Redis サービス
 
 {% comment %}
 The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/)
@@ -231,8 +231,8 @@ image pulled from the Docker Hub registry.
 {% comment %}
 ## Step 4: Build and run your app with Compose
 {% endcomment %}
-## ステップ 4: Compose によるアプリケーションの構築と実行
 {: #step-4-build-and-run-your-app-with-compose }
+## ステップ 4: Compose によるアプリケーションの構築と実行
 
 {% comment %}
 1.  From your project directory, start up your application by running `docker-compose up`.
@@ -361,8 +361,8 @@ hitting CTRL+C in the original terminal where you started the app.
 {% comment %}
 ## Step 5: Edit the Compose file to add a bind mount
 {% endcomment %}
-## ステップ 5: Compose ファイルにバインドマウントを追加
 {: #step-5-edit-the-compose-file-to-add-a-bind-mount }
+## ステップ 5: Compose ファイルにバインドマウントを追加
 
 {% comment %}
 Edit `docker-compose.yml` in your project directory to add a [bind mount](/engine/admin/volumes/bind-mounts.md) for the `web` service:
@@ -462,8 +462,8 @@ need VirtualBox.
 {% comment %}
 ## Step 7: Update the application
 {% endcomment %}
-## ステップ 7: アプリケーションの更新
 {: #step-7-update-the-application }
+## ステップ 7: アプリケーションの更新
 
 {% comment %}
 Because the application code is now mounted into the container using a volume,
@@ -498,8 +498,8 @@ to rebuild the image.
 {% comment %}
 ## Step 8: Experiment with some other commands
 {% endcomment %}
-## ステップ 8: その他のコマンドを試す
 {: #step-8-experiment-with-some-other-commands }
+## ステップ 8: その他のコマンドを試す
 
 {% comment %}
 If you want to run your services in the background, you can pass the `-d` flag
@@ -562,8 +562,8 @@ At this point, you have seen the basics of how Compose works.
 {% comment %}
 ## Where to go next
 {% endcomment %}
-## 次は何を読みますか
 {: #where-to-go-next }
+## 次に読むものは
 
 {% comment %}
 - Next, try the quick start guide for [Django](django.md),
