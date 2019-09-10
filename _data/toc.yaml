@@ -3994,6 +3994,8 @@ manuals:
   section:
   - path: /docker-hub/
     title: クィックスタート
+  - path: /docker-hub/release-notes/
+    title: リリースノート
   - path: /docker-hub/repos/
     title: リポジトリ
   - path: /docker-hub/official_images/
