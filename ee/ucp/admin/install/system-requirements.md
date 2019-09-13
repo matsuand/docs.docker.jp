@@ -59,7 +59,7 @@ nodes and for any DTR setups that store Windows container images.
 
 {% comment %}
 {% endcomment %}
-Also, make sure the nodes are running an [operating system support by Docker Enterprise](https://success.docker.com/Policies/Compatibility_Matrix).
+Also, make sure the nodes are running an [operating system supported by Docker Enterprise](https://success.docker.com/Policies/Compatibility_Matrix).
 
 {% comment %}
 {% endcomment %}
@@ -101,8 +101,8 @@ host types:
 | managers, workers | TCP 179                 | Internal           | Port for BGP peers, used for kubernetes networking                            |
 | managers          | TCP 443  (configurable) | External, Internal | Port for the UCP web UI and API                                               |
 | managers          | TCP 2376 (configurable) | Internal           | Port for the Docker Swarm manager. Used for backwards compatibility           |
-| managers          | TCP 2377 (configurable) | Internal,          | Port for control communication between swarm nodes                            |
-| managers, workers | UDP 4789                | Internal,          | Port for overlay networking                                                   |
+| managers          | TCP 2377 (configurable) | Internal           | Port for control communication between swarm nodes                            |
+| managers, workers | UDP 4789                | Internal           | Port for overlay networking                                                   |
 | managers          | TCP 6443 (configurable) | External, Internal | Port for Kubernetes API server endpoint                                       |
 | managers, workers | TCP 6444                | Self               | Port for Kubernetes API reverse proxy                                         |
 | managers, workers | TCP, UDP 7946           | Internal           | Port for gossip-based clustering                                              |
@@ -148,7 +148,7 @@ To turn off the FW_LO_NOTRACK option, edit the `/etc/sysconfig/SuSEfirewall2` fi
 
 {% comment %}
 {% endcomment %}
-For For SUSE Linux Enterprise Server 12 SP3, the default value for `FW_LO_NOTRACK` was changed to `no`.
+For SUSE Linux Enterprise Server 12 SP3, the default value for `FW_LO_NOTRACK` was changed to `no`.
 
 {% comment %}
 {% endcomment %}
