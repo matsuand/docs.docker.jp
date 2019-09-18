@@ -59,10 +59,10 @@ To fix this problem, try the following:
 To fix this problem, try the following:
 
 {% comment %}
-* Make sure you're using the JSON form of `CMD` and `ENTRYPOINT`
+* Make sure you're using the exec form of `CMD` and `ENTRYPOINT`
 in your Dockerfile.
 {% endcomment %}
-* Make sure you're using the JSON form of `CMD` and `ENTRYPOINT`
+* Make sure you're using the exec form of `CMD` and `ENTRYPOINT`
 in your Dockerfile.
 
   {% comment %}

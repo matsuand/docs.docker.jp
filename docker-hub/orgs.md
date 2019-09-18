@@ -31,9 +31,9 @@ Docker Hub の組織（organizations）は、チームの生成を行い、チ�
 > ユーザーは、あくまで組織内にあるチームに属するものです。
 
 {% comment %}
-### Creating an organization
+### Create an organization
 {% endcomment %}
-{: #creating-an-organization }
+{: #create-an-organization }
 ### 組織の生成
 
 {% comment %}
@@ -81,9 +81,9 @@ Members of this team can:
 - 組織に属しているリポジトリすべてにアクセスし更新することができます。
 
 {% comment %}
-### Creating a team
+### Create a team
 {% endcomment %}
-{: #creating-a-team }
+{: #create-a-team }
 ### チームの生成
 
 {% comment %}
@@ -104,9 +104,9 @@ To create a team:
    ![チーム生成のモーダル画面](images/orgs-team-create-submit.png)
 
 {% comment %}
-### Adding a member to a team
+### Add a member to a team
 {% endcomment %}
-{: #adding-a-member-to-a-team }
+{: #add-a-member-to-a-team }
 ### チームへのメンバー追加
 
 {% comment %}
@@ -121,14 +121,14 @@ To create a team:
    ![チームへのユーザー追加](images/orgs-team-add-user.png)
 
 {% comment %}
-> **Note**: you are not automatically added to teams created by your organization.
+> **Note**: You are not automatically added to teams created by your organization.
 {% endcomment %}
 > **メモ**: 組織から生成したチームへは、操作したユーザーが自動的に追加されるわけではありません。
 
 {% comment %}
-### Removing team members
+### Remove team members
 {% endcomment %}
-{: #removing-team-members }
+{: #remove-team-members }
 ### チームメンバーの削除
 
 {% comment %}
@@ -142,9 +142,9 @@ To remove a member from a team, click the **x** next to their name:
 ![チームメンバーの削除](images/orgs-team-remove-user.png)
 
 {% comment %}
-### Giving a team access to a repository
+### Give a team access to a repository
 {% endcomment %}
-{: #giving-a-team-access-to-a-repository }
+{: #give-a-team-access-to-a-repository }
 ### リポジトリに対するチームアクセスの追加
 
 {% comment %}
@@ -170,9 +170,9 @@ To provide a team access to a repository:
    ![チームに対するリポジトリパーミッションの追加](images/orgs-add-team-permissions.png)
 
 {% comment %}
-### Viewing a team's permissions for all repositories
+### View a team's permissions for all repositories
 {% endcomment %}
-{: #viewing-a-teams-permissions-for-all-repositories }
+{: #view-a-teams-permissions-for-all-repositories }
 ### リポジトリすべてに対するチームパーミッションの確認
 
 {% comment %}
@@ -189,7 +189,7 @@ To view a team's permissions over all repos:
 
 
 {% comment %}
-### Permissions Reference
+### Permissions reference
 {% endcomment %}
 {: #permissions-reference }
 ### パーミッションに関するリファレンス

@@ -61,6 +61,9 @@ and
 for a much greater depth of technical detail.
 
 {% comment %}
+In addition, this topic does not provide any tutorials for how to create,
+manage, and use Docker networks. Each section includes links to relevant
+tutorials and command references.
 {% endcomment %}
 In addition, this topic does not provide any tutorials for how to create,
 manage, and use Docker networks. Each section includes links to relevant
@@ -243,7 +246,7 @@ understanding using the following tutorials:
 - [Overlay networking tutorial](network-tutorial-overlay.md)
 - [Macvlan networking tutorial](network-tutorial-macvlan.md)
 {% endcomment %}
-- [Standalone networking tutorial](network-tutorial-standalone.md)
-- [Host networking tutorial](network-tutorial-host.md)
-- [Overlay networking tutorial](network-tutorial-overlay.md)
-- [Macvlan networking tutorial](network-tutorial-macvlan.md)
+- [スタンドアロンネットワークチュートリアル](network-tutorial-standalone.md)
+- [ホストネットワークチュートリアル](network-tutorial-host.md)
+- [Overlay ネットワークチュートリアル](network-tutorial-overlay.md)
+- [Macvlan ネットワークチュートリアル](network-tutorial-macvlan.md)

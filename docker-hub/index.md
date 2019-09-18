@@ -132,7 +132,8 @@ To create a repo:
 
     ![Welcome](images/index-welcome.png)
 
-3. Name it **&lt;your-username&gt;/my-first-repo** as shown below. Select **Private**:
+3. Name it **&lt;your-username&gt;/my-first-repo** as shown below. Select
+   **Private**:
 {% endcomment %}
 リポジトリ生成の手順は以下です。
 
@@ -176,7 +177,8 @@ Docker Hub.
 1. Download and install [Docker Desktop](https://docker.com/get-started). If on
 Linux, download [Docker Engine - Community](https://hub.docker.com/search?type=edition&offering=community).
 
-2. Open the terminal and sign in to Docker Hub on your computer by running `docker login`.
+2. Open the terminal and sign in to Docker Hub on your computer by running
+   `docker login`.
 {% endcomment %}
 1. [Docker Desktop](https://docker.com/get-started) をダウンロードしてインストールします。
    Linux の場合は [Docker Engine - Community](https://hub.docker.com/search?type=edition&offering=community) をダウンロードします。
@@ -210,7 +212,8 @@ EOF
 ```
 
 {% comment %}
-2. Run `docker build -t <your_username>/my-first-repo .` to build your Docker image.
+2. Run `docker build -t <your_username>/my-first-repo .` to build your Docker
+   image.
 {% endcomment %}
 2. Docker イメージを構築するために、コマンド `docker build -t <your_username>/my-first-repo` を実行します。
 

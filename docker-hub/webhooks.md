@@ -20,9 +20,9 @@ Docker Hub のリポジトリ画面において「Webhooks」タブを通じて�
 ![ウェブフックページ](images/webhooks-empty.png)
 
 {% comment %}
-### Creating Webhooks
+### Create Webhooks
 {% endcomment %}
-{: #creating-webhooks }
+{: #create-webhooks }
 ### ウェブフックの生成
 
 {% comment %}
@@ -40,9 +40,9 @@ To create a webhook, visit the webhooks tab for your repository. Then:
 ![ウェブフックの生成](images/webhooks-create.png)
 
 {% comment %}
-### Viewing Webhook Delivery History
+### View Webhook delivery history
 {% endcomment %}
-{: #viewing-webhook-delivery-history }
+{: #view-webhook-delivery-history }
 ### ウェブフック送信履歴の参照
 
 {% comment %}
@@ -67,7 +67,7 @@ You can then view the delivery history, and whether delivering the POST request 
 ![ウェブフック履歴](images/webhooks-history.png)
 
 {% comment %}
-### Example Webhook Payload
+### Example Webhook payload
 {% endcomment %}
 {: #example-webhook-payload }
 ### ウェブフック本体部分の例
@@ -111,9 +111,9 @@ Docker Hub ウェブフックの本体部分は、以下のような JSON 形式
 ```
 
 {% comment %}
-### Validating a webhook callback
+### Validate a webhook callback
 {% endcomment %}
-{: #validating-a-webhook-callback }
+{: #validate-a-webhook-callback }
 ### ウェブフックコールバックの検証
 
 {% comment %}

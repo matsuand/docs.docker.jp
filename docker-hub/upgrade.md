@@ -13,7 +13,7 @@ User and organization accounts maintain separate Docker Hub billing profiles.
 ## Upgrade your personal plan
 {% endcomment %}
 {: #upgrade-your-personal-plan }
-## 個人アカウントにおけるプランのアップグレード
+## 個人アカウントのプランのアップグレード
 
 {% comment %}
 Docker Hub includes one private Docker Hub repository for free. If you need
@@ -24,39 +24,52 @@ Docker Hub には、無償のプライベートリポジトリが 1 つだけ提
 それ以上にプライベートリポジトリが必要な場合は、無償アカウントから有償プランに切り替えることになります。
 
 {% comment %}
-To upgrade:
-1. Visit the [Plans Page](https://hub.docker.com/account/billing-plans/)
-2. Click Change Plan
-3. Select your plan and provide your payment information to upgrade ![Upgrade Plan](images/index-upgrade-plan.png)
+To upgrade your personal plan:
+
+1. Open the [billing page](https://hub.docker.com/billing/plan) for your
+account.
+
+2. Click **Upgrade Plan**.
+
+3. Select your plan and provide your payment information to upgrade.
+
+    ![Upgrade Plan](images/index-upgrade-plan2019.png)
 {% endcomment %}
-アップグレードは以下のように行います。
-1. [Plans Page](https://hub.docker.com/account/billing-plans/) にアクセスします。
-2. Change Plan をクリックします。
+個人プランのアップグレードは以下のように行います。
+
+1. 個人アカウントの [課金情報](https://hub.docker.com/billing/plan) にアクセスします。
+
+2. **Upgrade Plan** をクリックします。
+
 3. プランを選択し支払い情報を入力してアップグレードします。
-   ![プランのアップグレード](images/index-upgrade-plan.png)
+
+    ![プランのアップグレード](images/index-upgrade-plan2019.png)
 
 {% comment %}
 ## Upgrade your organization's plan
 {% endcomment %}
 {: #upgrade-your-organizations-plan }
-## 組織アカウントにおけるプランのアップグレード
+## 組織アカウントのプランのアップグレード
 
 {% comment %}
-To upgrade an Organization's plan:
+To upgrade an organization's plan:
 {% endcomment %}
 組織アカウントのアップグレードは以下のように行います。
 
 {% comment %}
-1. Visit the [Plans Page](https://hub.docker.com/account/billing-plans/)
-2. Change the selected account to your Organization whose plan you'd like to upgrade ![Change Account](images/upgrade-change-account.png)
+1. Visit the [Plans Page](https://hub.docker.com/account/billing-plans/).
+
+2. Change the selected account to your Organization whose plan you'd like to upgrade. ![Change Account](images/upgrade-change-account.png)
 {% endcomment %}
-1. [Plans Page](https://hub.docker.com/account/billing-plans/) にアクセスします。
-2. Change the selected account to your Organization whose plan you'd like to upgrade ![Change Account](images/upgrade-change-account.png)
+1. [Plans ページ](https://hub.docker.com/account/billing-plans/) にアクセスします。
+
+2. 選択されているアカウントを、プランのアップグレードを行いたい組織に切り替えます。
+   ![アカウントの変更](images/upgrade-change-account.png)
 
 {% comment %}
-3. Click Change Plan ![Change Plan](images/upgrade-change-plan.png)
+3. Click **Change Plan**. ![Change Plan](images/upgrade-change-plan.png)
 {% endcomment %}
-3. Change Plan をクリックします。
+3. **Change Plan** をクリックします。
    ![プランの変更](images/upgrade-change-plan.png)
 
 
