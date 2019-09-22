@@ -187,10 +187,10 @@ in addition to the values in the `docker-compose.yml` file.
 {: #specifying-a-path-to-a-single-compose-file }
 
 {% comment %}
-You can use `-f` flag to specify a path to Compose file that is not located in
-the current directory, either from the command line or by setting up a
-[COMPOSE_FILE environment variable](envvars.md#compose_file) in your shell or in
-an environment file.
+You can use the `-f` flag to specify a path to a Compose file that is not
+located in the current directory, either from the command line or by setting up
+a [COMPOSE_FILE environment variable](envvars.md#compose_file) in your shell or
+in an environment file.
 {% endcomment %}
 `-f` フラグを利用すると、カレントディレクトリではない場所にある Compose ファイルを指定することができます。
 これはコマンドラインから与えますが、シェル内あるいは環境ファイル内から[環境変数 COMPOSE_FILE](envvars.md#compose_file)
