@@ -77,7 +77,7 @@ with a new worker node. The type of upgrade you perform depends on what is neede
 
     - [Automated, in-place cluster upgrade](#automated-in-place-cluster-upgrade): Performed on any
     manager node. Automatically upgrades the entire cluster.
-    - Manual cluster upgrade: Performed using the CLI or the UCP UI. Automatically upgrades manager
+    - Manual cluster upgrade: Performed using the CLI. Automatically upgrades manager
     nodes and allows you to control the upgrade order of worker nodes. This type of upgrade is more
     advanced than the automated, in-place cluster upgrade.
         - [Upgrade existing nodes in place](#phased-in-place-cluster-upgrade): Performed using the CLI.
@@ -125,7 +125,7 @@ of manager node upgrades.
 
 - [Automated, in-place cluster upgrade](#automated-in-place-cluster-upgrade): Performed on any
 manager node. Automatically upgrades the entire cluster.
-- Manual cluster upgrade: Performed using the CLI or the UCP UI. Automatically upgrades manager
+- Manual cluster upgrade: Performed using the CLI. Automatically upgrades manager
 nodes and allows you to control the upgrade order of worker nodes. This type of upgrade is more
 advanced than the automated, in-place cluster upgrade.
     - [Upgrade existing nodes in place](#phased-in-place-cluster-upgrade): Performed using the CLI.
@@ -137,28 +137,6 @@ advanced than the automated, in-place cluster upgrade.
         schedule workloads to run on new nodes, pause, drain, and remove old worker nodes
         in batches of multiple nodes rather than one at a time, and shut down servers to
         remove worker nodes. This type of upgrade is the most advanced.
-
-### Use the web interface to perform an upgrade
-
-> **Note**: If you plan to add nodes to the UCP cluster, use the [CLI](#use-the-cli-to-perform-an-upgrade) for the upgrade.
-
-When an upgrade is available for a UCP installation, a banner appears.
-
-![](../../images/upgrade-ucp-1.png){: .with-border}
-
-Clicking this message takes an admin user directly to the upgrade process.
-It can be found under the **Upgrade** tab of the **Admin Settings** section.
-
-![](../../images/upgrade-ucp-2.png){: .with-border}
-
-In the **Available Versions** drop down, select the version you want to update.
-Copy and paste the CLI command provided into a terminal on a manager node to
-perform the upgrade.
-
-During the upgrade, the web interface will be unavailable, and you should wait
-until completion before continuing to interact with it. When the upgrade
-completes, you'll see a notification that a newer version of the web interface
-is available and a browser refresh is required to see it.
 
 ### Use the CLI to perform an upgrade
 
@@ -348,7 +326,7 @@ nodes in the cluster at one time.
       Kubelet is unhealthy: Kubelet stopped posting node status
       ```
 
-      - Alternatively, you may see other port errors such as the one below in the ucp-controller
+    - Alternatively, you may see other port errors such as the one below in the ucp-controller
       container logs:
       ```
       http: proxy error: dial tcp 10.14.101.141:12388: connect: no route to host
