@@ -76,13 +76,13 @@ Docker Cluster has commands for managing the whole lifecycle of your cluster:
 {% endcomment %}
 Docker Cluster には、クラスターの全ライフサイクルを管理するコマンドがあります。
 
-{% comment %}
+ {% comment %}
  * Create and destroy clusters
- * Scale up or Scale down clusters
+ * Scale up or scale down clusters
  * Upgrade clusters
  * View the status of clusters
- * Backup and Restore clusters
-{% endcomment %}
+ * Backup and restore clusters
+ {% endcomment %}
  * クラスターの生成と削除
  * クラスターのスケールアップまたはスケールダウン
  * クラスターの更新
@@ -90,10 +90,30 @@ Docker Cluster には、クラスターの全ライフサイクルを管理す�
  * クラスターのバックアップと復元
 
 {% comment %}
-## Cluster reference pages
+## Export Docker Cluster artifacts
 {% endcomment %}
-{: #cluster-reference-pages }
-## Cluster リファレンスページ
+{: #export-docker-cluster-artifacts }
+## Export Docker Cluster artifacts
+
+{% comment %}
+You can export both Terraform and Ansible scripts to deploy certain components standalone or with custom configurations. Use the following commands to export those scripts:
+{% endcomment %}
+コンポーネントをスタンドアロンにデプロイするため、あるいは設定をカスタマイズするために、Terraform と Ansible によるスクリプトがエクスポートできるようになっています。
+以下のコマンドによりそのようなスクリプトをエクスポートします。
+
+```yaml
+docker run -d --name dci --entrypoint sh
+docker/cluster:latest -ldocker cp dci:/cluster/terraform terraform
+docker cp dci:/cluster/ansible ansible
+docker stop dci
+docker rm dci
+```
+
+{% comment %}
+## Where to go next
+{% endcomment %}
+{: #where-to-go-next }
+## 次に読むものは
 
 {% comment %}
 - [Get started with Docker Cluster on AWS](aws.md)
