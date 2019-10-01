@@ -1,11 +1,23 @@
 ---
-description: Get started with Docker Cluster on Azure
+description: Azure 上にて Docker Cluster をはじめよう。
 keywords: documentation, docs, docker, cluster, infrastructure, automation, Azure
-title: Get started with Docker Cluster on Azure
+title: Azure 上にて Docker Cluster をはじめよう
 ---
 
+{% comment %}
 ## Prerequisites
+{% endcomment %}
+{: #prerequisites }
+## 前提条件
 
+{% comment %}
+- Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
+- Sign up for the following items for your Azure account:
+  - Service Principal UUID
+  - Service Principal App Secret
+  - Subscription UUID
+  - Tenant UUID
+{% endcomment %}
 - Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
 - Sign up for the following items for your Azure account:
   - Service Principal UUID
@@ -13,8 +25,16 @@ title: Get started with Docker Cluster on Azure
   - Subscription UUID
   - Tenant UUID
 
+{% comment %}
+More information can be found on obtaining these with either the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest) or through the [Azure Portal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).
+{% endcomment %}
 More information can be found on obtaining these with either the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest) or through the [Azure Portal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).
 
+{% comment %}
+To securely utilize this Azure credential information, we will create a cluster secrets
+file which will inject this data into the environment at runtime.  For example, create
+a file named `my-azure-creds.sh` similar to the following containing your credentials:
+{% endcomment %}
 To securely utilize this Azure credential information, we will create a cluster secrets
 file which will inject this data into the environment at runtime.  For example, create
 a file named `my-azure-creds.sh` similar to the following containing your credentials:
@@ -26,6 +46,12 @@ export ARM_SUBSCRIPTION_ID='ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj'
 export ARM_TENANT_ID='kkkkkkkk-llll-mmmm-nnnn-oooooooooooo'
 ```
 
+{% comment %}
+This file should be treated as sensitive data with file permissions set appropriately.
+To use this file, we _do not_ source or run this file directly in the shell.  Instead,
+we reference this file via the CLUSTER_SECRETS_FILE variable in our environment before
+running cluster:
+{% endcomment %}
 This file should be treated as sensitive data with file permissions set appropriately.
 To use this file, we _do not_ source or run this file directly in the shell.  Instead,
 we reference this file via the CLUSTER_SECRETS_FILE variable in our environment before
@@ -36,17 +62,34 @@ $ export CLUSTER_SECRETS_FILE=~/.my-secrets/my-azure-creds.sh
 $ docker cluster create ....
 ```
 
+{% comment %}
+Docker cluster will bindmount this file into its container runtime to inject the
+credential data as needed.
+{% endcomment %}
 Docker cluster will bindmount this file into its container runtime to inject the
 credential data as needed.
 
+{% comment %}
 ## Create a cluster
+{% endcomment %}
+{: #create-a-cluster }
+## クラスターの生成
 
+{% comment %}
 When you create a docker cluster in Azure, the cluster created has:
  - 3 UCP Managers
  - 3 Workers
  - 3 DTR Replicas
+{% endcomment %}
+Azure 上に Docker Cluster を生成すると、そのクラスターには以下が生成されます。
+ - 3 つの UCP マネージャー
+ - 3 つのワーカー
+ - 3 つの DTR レプリカ
 
+{% comment %}
 Create a file called `cluster.yml` in your directory and paste this in:
+{% endcomment %}
+`cluster.yml` というファイルを生成して、以下の情報を含めます。
 
 ```yaml
 variable:
@@ -86,15 +129,26 @@ resource:
       - "6443:6443"
 ```
 
+{% comment %}
 Provide values for the variable section.  For instance:
+{% endcomment %}
+variable の項には適切な値を設定します。
+たとえば以下のとおりです。
 
     region: "centralus"
 
+{% comment %}
 The values will be substituted in the cluster definition.  This makes it
 easy to define a reusable cluster definition and then change the variables
 to create multiple instances of a cluster.
+{% endcomment %}
+上の値はクラスター定義として置換されます。
+これは再利用可能なクラスターの定義を簡単に行うものであり、変数値を変更することでクラスターの複数インスタンスの生成も行うことができます。
 
+{% comment %}
 Run `docker cluster create --file cluster.yml --name quickstart`
+{% endcomment %}
+そこで `docker cluster create --file cluster.yml --name quickstart` を実行します。
 
     $ docker cluster create --file cluster.yml --name quickstart
     Please provide a value for ucp_password:
@@ -103,6 +157,9 @@ Run `docker cluster create --file cluster.yml --name quickstart`
     Planning cluster on azurerm                                                  OK
     Creating: [===========>                                              ]  19%  [ ]
 
+{% comment %}
+After about 5-10 minutes, depending on the number of resources requested, the cluster will be provisioned in the cloud and Docker Enterprise Platform installation will begin:
+{% endcomment %}
 After about 5-10 minutes, depending on the number of resources requested, the cluster will be provisioned in the cloud and Docker Enterprise Platform installation will begin:
 
     $ docker cluster create --file cluster.yml --name quickstart
@@ -113,6 +170,8 @@ After about 5-10 minutes, depending on the number of resources requested, the cl
     Creating: [==========================================================] 100%   OK
     Installing Docker Enterprise Platform                                         OK
 
+{% comment %}
+{% endcomment %}
 After about 15-20 minutes, Docker Enterprise installation will complete:
 
     $ docker cluster create --file cluster.yml --name quickstart
@@ -134,17 +193,25 @@ After about 15-20 minutes, Docker Enterprise installation will complete:
 
     e58dd2a77567
 
+{% comment %}
+{% endcomment %}
 After all operations complete succesfully, the cluster id will be the last statement
 to print.  You can login to the URL and begin interacting with the cluster.
 
+{% comment %}
+{% endcomment %}
 ## View cluster information
 
+{% comment %}
+{% endcomment %}
 To see an inventory of the current clusters you've created, run `docker cluster ls`
 
     $ docker cluster ls
     ID             NAME         PROVIDER        ENDPOINT                                                     STATE
     e58dd2a77567   quickstart   azurerm         https://ucp-e58dd2a77567-y4pl.centralus.cloudapp.azure.com   running
 
+{% comment %}
+{% endcomment %}
 To see detailed information about an individual cluster, run `docker cluster inspect quickstart`
 
 $ docker cluster inspect quickstart
@@ -212,16 +279,24 @@ resource:
       role: worker
 ```
 
+{% comment %}
+{% endcomment %}
 The information displayed by `docker cluster inspect` can be used as a cluster definition to clone the cluster.
 
+{% comment %}
+{% endcomment %}
 ## Use context
 
+{% comment %}
+{% endcomment %}
 Docker cluster creates a context on your local machine.  To use this context, and interact with the cluster, run `docker context use quickstart`
 
     $ docker context use quickstart
     quickstart
     Current context is now "quickstart"
 
+{% comment %}
+{% endcomment %}
 To verify that the client is connected to the cluster, run `docker version`
 
 ```bash
@@ -284,8 +359,12 @@ default
 Current context is now "default"
 ```
 
+{% comment %}
+{% endcomment %}
 ## Scale a cluster
 
+{% comment %}
+{% endcomment %}
 Open `cluster.yml`.  Change the number of workers to 6:
 
 ```yaml
@@ -299,6 +378,8 @@ resource:
       quantity: 6
 ```
 
+{% comment %}
+{% endcomment %}
 Since the cluster is already created, the next step is to `update` the cluster's
 desired state.  Run  `docker cluster update quickstart --file cluster.yml`
 
@@ -308,6 +389,8 @@ desired state.  Run  `docker cluster update quickstart --file cluster.yml`
     Planning cluster on azure                                                  [OK]
     Updating: [==================                                            ] 30%
 
+{% comment %}
+{% endcomment %}
 After about 10 minutes the update operation adds the new nodes and joins them to the cluster:
 
     $ docker cluster update quickstart --file examples/docs.yml
@@ -323,6 +406,8 @@ After about 10 minutes the update operation adds the new nodes and joins them to
 
     e58dd2a77567
 
+{% comment %}
+{% endcomment %}
 A quick `docker cluster inspect e58dd2a77567` will show the worker count increased:
 
 ```yaml
@@ -336,10 +421,16 @@ A quick `docker cluster inspect e58dd2a77567` will show the worker count increas
       role: worker
 ```
 
+{% comment %}
+{% endcomment %}
 ## Backup a cluster
 
+{% comment %}
+{% endcomment %}
 Before we proceed with more operations on the cluster, let's take a backup of the running cluster.  To create a full backup of the cluster, run `docker cluster backup quickstart --file "backup-$(date '+%Y-%m-%d').tar.gz" `
 
+{% comment %}
+{% endcomment %}
 Provide a passphrase to encrypt the UCP backup.
 
     $ docker cluster backup quickstart --file "backup-$(date '+%Y-%m-%d').tar.gz"
@@ -349,14 +440,24 @@ Provide a passphrase to encrypt the UCP backup.
 
     Backup of e58dd2a77567 saved to backup-2019-05-07.tar.gz
 
+{% comment %}
+{% endcomment %}
 Save the backups on external storage for disaster recovery.
 
+{% comment %}
+{% endcomment %}
 To restore a cluster, run `docker cluster restore quickstart --file backup-2019-05-07.tar.gz`
 
+{% comment %}
+{% endcomment %}
 Provide the passphrase from the backup step to decrypt the UCP backup.
 
+{% comment %}
+{% endcomment %}
 ## Upgrade a cluster
 
+{% comment %}
+{% endcomment %}
 Open `cluster.yml`.  Change the cluster versions:
 
 ```yaml
@@ -369,6 +470,8 @@ cluster:
     version: docker/ucp:3.2.0
 ```
 
+{% comment %}
+{% endcomment %}
 Run  `docker cluster update quickstart --file cluster.yml `
 
     $ docker cluster update quickstart --file examples/docs.yml
@@ -384,8 +487,12 @@ Run  `docker cluster update quickstart --file cluster.yml `
 
     e58dd2a77567
 
+{% comment %}
+{% endcomment %}
 ## Destroy a cluster
 
+{% comment %}
+{% endcomment %}
 When the cluster has reached end-of-life, run `docker cluster rm quickstart`
 
     $ docker cluster rm quickstart
@@ -396,7 +503,15 @@ When the cluster has reached end-of-life, run `docker cluster rm quickstart`
     e58dd2a77567
 
 
+{% comment %}
 ## Where to go next
+{% endcomment %}
+{: #where-to-go-next }
+## 次に読むものは
 
+{% comment %}
+- [Explore the full list of Cluster commands](./reference/index.md)
+- [Cluster configuration file reference](./cluster-file/index.md)
+{% endcomment %}
 - [Explore the full list of Cluster commands](./reference/index.md)
 - [Cluster configuration file reference](./cluster-file/index.md)
