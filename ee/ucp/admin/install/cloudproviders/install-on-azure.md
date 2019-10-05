@@ -33,8 +33,7 @@ There are two options for provisoning IPs for the Kubernetes cluster on Azure:
 
 ## Azure Prerequisites
 
-You must meet the following infrastructure prerequisites in order
-to successfully deploy Docker UCP on Azure:
+You must meet the following infrastructure prerequisites to successfully deploy Docker UCP on Azure. **Failure to meet these prerequisites may result in significant errors during the installation process.**
 
 - All UCP Nodes (Managers and Workers) need to be deployed into the same Azure
   Resource Group. The Azure Networking components (Virtual Network, Subnets,
@@ -104,7 +103,13 @@ an Azure subnet.
 
 See the [Kubernetes Azure Cloud Provider Config](https://github.com/kubernetes/cloud-provider-azure/blob/master/docs/cloud-provider-config.md) for more details on this configuration file.
 
-## Considerations for IPAM Configuration
+## Guidelines for IPAM Configuration
+
+> **Warning**
+>
+> You must follow these guidelines and either use the appropriate size network in Azure or take the proper action to fit within the subnet.
+> Failure to follow these guidelines may cause significant issues during the
+> installation process.
 
 The subnet and the virtual network associated with the primary interface of the
 Azure virtual machines need to be configured with a large enough address
@@ -246,7 +251,9 @@ subnet, and the `--host-address` maps to the private IP address of the master
 node. Finally if you want to adjust the amount of IP addresses provisioned to
 each virtual machine pass `--azure-ip-count`.
 
-> Note: The `pod-cidr` range must match the Azure Virtual Network's Subnet
+> **Note**
+>
+> The `pod-cidr` range must match the Azure Virtual Network's Subnet
 > attached the hosts. For example, if the Azure Virtual Network had the range
 > `172.0.0.0/16` with Virtual Machines provisioned on an Azure Subnet of
 > `172.0.1.0/24`, then the Pod CIDR should also be `172.0.1.0/24`.

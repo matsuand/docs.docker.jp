@@ -7,28 +7,30 @@ redirect_from:
 ---
 
 {% comment %}
-Docker Hub Organizations let you create teams so you can give your team access to shared image repositories.
+Docker Hub Organizations let you create teams so you can give your team access
+to shared image repositories.
 {% endcomment %}
 Docker Hub の組織（organizations）は、チームの生成を行い、チームメンバーがイメージリポジトリを共有アクセスできるようにするものです。
 
 {% comment %}
-### How Organizations & Teams Work
-{% endcomment %}
-{: #how-organizations--teams-work }
-### 組織やチームがどのように動作するか
-
-{% comment %}
-- **Organizations** are a collection of teams and repositories that can be managed together.
-- **Teams** are groups of Docker Hub users that belong to your organization.
+- **Organizations** are collections of teams and repositories that can be managed together.
+- **Teams** are groups of Docker Hub users that belong to an organization.
 {% endcomment %}
 - **組織**（organizations）とは、チームやリポジトリが集まったものであり、一括して管理できるものを指します。
 - **チーム**（teams）とは、組織に属している Docker Hub ユーザーのグループのことです。
 
 {% comment %}
-> **Note**: in Docker Hub, users cannot be associated directly to an organization. They belong only to teams within an organization.
+> **Note**: in Docker Hub, users cannot belong directly to an organization.
+They belong only to teams within an organization.
 {% endcomment %}
-> **メモ**: Docker Hub におけるユーザーは、組織に直接関連づけられるわけではありません。
+> **メモ**: Docker Hub におけるユーザーは、組織に直接属するものではありません。
 > ユーザーは、あくまで組織内にあるチームに属するものです。
+
+{% comment %}
+## Working with organizations
+{% endcomment %}
+{: #working-with-organizations }
+## 組織の利用
 
 {% comment %}
 ### Create an organization
@@ -37,48 +39,63 @@ Docker Hub の組織（organizations）は、チームの生成を行い、チ�
 ### 組織の生成
 
 {% comment %}
-1. Start by clicking on [Organizations](https://cloud.docker.com/orgs) in Docker Hub
-2. Click on "Create Organization"
-3. Provide information about your organization:
+1. Start by clicking on **[Organizations](https://hub.docker.com/orgs)** in
+Docker Hub.
 {% endcomment %}
 1. Docker Hub の [Organizations](https://cloud.docker.com/orgs) をクリックするところから始めます。
-2. 「Create Organization」をクリックします。
+
+{% comment %}
+2. Click on **Create Organization**.
+{% endcomment %}
+2. **Create Organization** をクリックします。
+
+{% comment %}
+3. Provide information about your organization:
+{% endcomment %}
 3. 組織に関する情報を入力します。
 
-{% comment %}
-![Create Organization](images/orgs-create.png)
-{% endcomment %}
-![組織の生成](images/orgs-create.png)
+      {% comment %}
+      ![Create organization](images/orgs-create2019.png)
+      {% endcomment %}
+      ![組織の生成](images/orgs-create.png)
 
 {% comment %}
-You've created an organization. You'll see you have a team, the **owners** team with a single member (you!)
+You've created an organization. You'll see you have a team, the **owners** team
+with a single member (you!).
 {% endcomment %}
 こうして組織が生成できました。
 1 つのチームができているはずです。
 これは **owners** チームであり、ただ一人のメンバー、つまりあなた自身が含まれています。
 
 {% comment %}
-### The owners team
+#### The owners team
 {% endcomment %}
 {: #the-owners-team }
-### owners チーム
+#### owners チーム
 
 {% comment %}
-The **owners** team is a special team that has full access to all repositories in the Organization.
+The **owners** team is a special team that has full access to all repositories
+in the organization.
 {% endcomment %}
 **owners** チームは特別なチームです。
 組織内にあるリポジトリすべてに対して、フルアクセスを行うことができます。
 
 {% comment %}
 Members of this team can:
-- Manage Organization settings and billing
+- Manage organization settings and billing
 - Create a team and modify the membership of any team
-- Access and modify any repository belonging to the Organization
+- Access and modify any repository belonging to the organization
 {% endcomment %}
 このチームのメンバーは以下のことができます。
 - 組織の設定や支払い方法を管理できます。
 - チームを生成し、チームメンバーの管理を行うことができます。
 - 組織に属しているリポジトリすべてにアクセスし更新することができます。
+
+{% comment %}
+## Working with teams and members
+{% endcomment %}
+{: #working-with-teams-and-members }
+## チームとメンバーの利用
 
 {% comment %}
 ### Create a team
@@ -87,21 +104,30 @@ Members of this team can:
 ### チームの生成
 
 {% comment %}
-To create a team:
+1. Go to **Organizations** in Docker Hub, and select your organization.
 {% endcomment %}
-チームの生成は以下のようにします。
+1. Docker Hub の **Organizations** へアクセスし、目的の組織を選びます。
 
 {% comment %}
-1. Go to your organization by clicking on **Organizations** in Docker Hub, and select your organization.
-2. Click **Create Team** ![Create Team](images/orgs-team-create.png)
-3. Fill out your team's information and click **Create** ![Create Modal](images/orgs-team-create-submit.png)
+2. Open the **Teams** tab and click **Create Team**.
 {% endcomment %}
-1. Docker Hub の **Organizations** をクリックして組織の画面へアクセスします。
-   そして目的の組織を選びます。
-2. **Create Team** をクリックします。
-   ![チームの生成](images/orgs-team-create.png)
+2. **Teams** タブを開いて **Create Team** をクリックします。
+
+      {% comment %}
+      ![Teams view](images/orgs-teams2019.png)
+      {% endcomment %}
+      ![チーム画面](images/orgs-teams2019.png)
+
+{% comment %}
+3. Fill out your team's information and click **Create**.
+{% endcomment %}
 3. チーム情報を入力し、**Create** をクリックします。
-   ![チーム生成のモーダル画面](images/orgs-team-create-submit.png)
+
+      {% comment %}
+      ![Create a team](images/orgs-new-team2019.png)
+      {% endcomment %}
+      ![チームの生成](images/orgs-new-team2019.png)
+
 
 {% comment %}
 ### Add a member to a team
@@ -110,20 +136,70 @@ To create a team:
 ### チームへのメンバー追加
 
 {% comment %}
-1. Visit your team's page in Docker Hub. Click on **Organizations** > **_Your Organization_** > **_Your Team Name_**
-2. Click on **Add User**
-3. Provide the user's Docker ID username _or_ email to add them to the team ![Add User to Team](images/orgs-team-add-user.png)
+You can add a member to a team in one of two ways.
 {% endcomment %}
-1. Docker Hub のチームのページにアクセスします。
-   そして **Organizations** > **_目的の組織_** > **_目的のチーム_** をクリックします。
-2. **Add User** をクリックします。
-3. 追加するユーザーの Docker ID ユーザー名かメールアドレスを入力して、このユーザーをチームに追加します。
-   ![チームへのユーザー追加](images/orgs-team-add-user.png)
+チームに対してメンバーを追加するには以下の 2 つの方法があります。
 
 {% comment %}
-> **Note**: You are not automatically added to teams created by your organization.
+If the user isn't in your organization:
 {% endcomment %}
-> **メモ**: 組織から生成したチームへは、操作したユーザーが自動的に追加されるわけではありません。
+ユーザーが組織に含まれていない場合、
+
+{% comment %}
+1. Go **Organizations** in Docker Hub, and select your organization.
+{% endcomment %}
+1. Docker Hub の **Organizations** へアクセスし、目的の組織を選びます。
+
+{% comment %}
+2. Click **Add Member**.
+{% endcomment %}
+2. **Add Member** をクリックします。
+
+      {% comment %}
+      ![Add member from members list](images/org-members2019.png)
+      {% endcomment %}
+      ![メンバー一覧からのメンバー追加](images/org-members2019.png)
+
+{% comment %}
+3. Provide the user's Docker ID username _or_ email, and select a team from the dropdown.
+{% endcomment %}
+3. 追加するユーザーの Docker ID ユーザー名かメールアドレスを入力して、ドロップダウンリストからチームを選びます。
+
+      {% comment %}
+      ![Add user to team from org page](images/orgs-add-member2019.png)
+      {% endcomment %}
+      ![組織ページにおけるチームへのユーザー追加](images/orgs-add-member2019.png)
+
+
+{% comment %}
+If the user already belongs to another team in the organization:
+{% endcomment %}
+目的のユーザーが、組織内の別のチームにすでに属している場合、
+
+{% comment %}
+1. Open the team's page in Docker Hub: **Organizations** > **_Your Organization_** > **Teams** > **_Your Team Name_**
+{% endcomment %}
+1. Docker Hub のチームページを開きます。
+   **Organizations** > **＜目的の組織＞** > **Teams** > **＜目的のチーム＞**
+
+{% comment %}
+2. Click **Add User**.
+{% endcomment %}
+2. **Add User** をクリックします。
+{% comment %}
+3. Provide the user's Docker ID username _or_ email to add them to the team.
+{% endcomment %}
+3. 追加するユーザーの Docker ID ユーザー名かメールアドレスを入力して、チームへ追加します。
+
+      {% comment %}
+      ![Add user to team from team page](images/teams-add-member2019.png)
+      {% endcomment %}
+      ![チームページにおけるチームへのユーザー追加](images/teams-add-member2019.png)
+
+      {% comment %}
+      > **Note**: You are not automatically added to teams created by your organization.
+      {% endcomment %}
+      > **メモ**: 組織から生成したチームへは、操作したユーザーが自動的に追加されるわけではありません。
 
 {% comment %}
 ### Remove team members
@@ -132,14 +208,66 @@ To create a team:
 ### チームメンバーの削除
 
 {% comment %}
-To remove a member from a team, click the **x** next to their name:
+To remove a member from all teams in an organization:
 {% endcomment %}
-チームからメンバーを削除するには、メンバー名の横にある **x** をクリックします。
+組織内のすべてのチームから、メンバー 1 名を削除するには、
 
 {% comment %}
-![Add User to Team](images/orgs-team-remove-user.png)
+1. Go **Organizations** in Docker Hub, and select your organization.
 {% endcomment %}
-![チームメンバーの削除](images/orgs-team-remove-user.png)
+1. Docker Hub の **Organizations** にアクセスして、目的の組織を選択します。
+
+{% comment %}
+2. Click the **x** next to a member's name:
+{% endcomment %}
+2. メンバー名の横にある **x** をクリックします。
+
+      {% comment %}
+      ![Add User to Team](images/org-members2019.png)
+      {% endcomment %}
+      ![チームへのユーザー追加](images/org-members2019.png)
+
+
+{% comment %}
+To remove a member from a specific team:
+{% endcomment %}
+1 つのチームからメンバー 1 名を削除するには、
+
+{% comment %}
+1. Open the team this user is on. You can do this in one of two ways:
+{% endcomment %}
+1. そのユーザーが属しているチームを開きます。
+   以下の 2 つの方法があります。
+
+      {% comment %}
+      * If you know the team name, go to **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
+      {% endcomment %}
+      * 目的のチーム名がわかっている場合は、**Organizations** > **＜目的の組織＞** > **Teams** > **＜目的のチーム＞** とアクセスします。
+
+          {% comment %}
+          > **Note:** You can filter the **Teams** tab by username, but you have to use the format _@username_ in the search field (partial names will not work).
+          {% endcomment %}
+          > **メモ**  **Teams** タブにおいてはユーザー名によるフィルタリング検索が可能です。
+            ただし検索は _@username_ という書式を用いる必要があります。
+            （部分検索を行うことはできません。）
+
+      {% comment %}
+      * If you don't know the team name, go to **Organizations** > **_Your Organization_** and search for the user. Hover over **View** to see all of their teams, then click on **View** > **_Team Name_**.
+      {% endcomment %}
+      * チーム名がわかっていない場合は、**Organizations** > **＜目的の組織＞** とアクセスして、そのユーザーを検索します。
+        **View** の上にマウス移動すると、所属するチーム名がすべて表示されます。
+        そこで **View** > **＜目的のチーム＞** をクリックします。
+
+{% comment %}
+2. Find the user in the list, and click the **x** next to the user's name to remove them.
+{% endcomment %}
+2. 目的のユーザーを一覧から探し、ユーザー名の横にある **x** をクリックして削除します。
+
+      {% comment %}
+      ![List of members on a team](images/orgs-team-members2019.png)
+      {% endcomment %}
+      ![チーム内のメンバー一覧](images/orgs-team-members2019.png)
+
 
 {% comment %}
 ### Give a team access to a repository
@@ -148,26 +276,39 @@ To remove a member from a team, click the **x** next to their name:
 ### リポジトリに対するチームアクセスの追加
 
 {% comment %}
-To provide a team access to a repository:
-{% endcomment %}
-リポジトリに対してチームアクセスを設定するには以下のようにします。
-
-{% comment %}
-1. Visit the repository list on Docker Hub by clicking on **Repositories**
-2. Select your organization in the namespace dropdown list
-3. Click the repository you'd like to edit ![Org Repos](images/orgs-list-repos.png)
-4. Click the **Permissions** tab
-5. Select the team, permissions level (more on this below) and click **+**
-6. Click the **+** button to add ![Add Repo Permissions for Team](images/orgs-add-team-permissions.png)
+1. Visit the repository list on Docker Hub by clicking on **Repositories**.
 {% endcomment %}
 1. Docker Hub 上において **Repositories** をクリックしてリポジトリ一覧を表示します。
+
+{% comment %}
+2. Select your organization in the namespace dropdown list.
+{% endcomment %}
 2. 名前空間ドロップダウンリストから、目的の組織を選択します。
+
+{% comment %}
+3. Click the repository you'd like to edit.
+{% endcomment %}
 3. 編集したいリポジトリをクリックします。
-   ![組織のリポジトリ](images/orgs-list-repos.png)
+
+      {% comment %}
+      ![Org Repos](images/repos-list2019.png)
+      {% endcomment %}
+      ![組織のリポジトリ](images/repos-list2019.png)
+
+{% comment %}
+4. Click the **Permissions** tab.
+{% endcomment %}
 4. **Permissions** タブをクリックします。
-5. チームを選択し、さらに（以下に示すようにいくつかある）パーミッションレベルを選択して **+** をクリックします。
-6. **+** ボタンのクリックによりパーミッションが追加されます。
-   ![チームに対するリポジトリパーミッションの追加](images/orgs-add-team-permissions.png)
+
+{% comment %}
+5. Select the team, the [permissions level](#permissions-reference), and click **+** to save.
+{% endcomment %}
+5. チームと [パーミッションレベル](#permissions-reference) を選択して **+** をクリックし保存します。
+
+      {% comment %}
+      ![Add Repo Permissions for Team](images/orgs-repo-perms2019.png)
+      {% endcomment %}
+      ![チームに対するリポジトリパーミッションの追加](images/orgs-repo-perms2019.png)
 
 {% comment %}
 ### View a team's permissions for all repositories
@@ -177,15 +318,25 @@ To provide a team access to a repository:
 
 {% comment %}
 To view a team's permissions over all repos:
-1. Click on **Organizations**, then select your organization and team.
-2. Click on the **Permissions** tab where you can view which repositories this team has access to ![Team Audit Permissions](images/orgs-audit-permissions.png)
 {% endcomment %}
 リポジトリすべてにわたってのチームのパーミッションを確認するには、以下を行います。
-1. **Organizations** をクリックします。
-   そして目的の組織とチームを選択します。
-2. **Permissions** タブをクリックすれば、チームがアクセス可能なリポジトリはどれであるかが確認できます。
 
-   ![チームのパーミッションの確認](images/orgs-audit-permissions.png)
+{% comment %}
+1. Open **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
+{% endcomment %}
+1. **Organizations** > **＜目的の組織＞** > **Teams** > **＜目的のチーム名＞** を開きます。
+
+{% comment %}
+2. Click on the **Permissions** tab, where you can view the repositories this team can access.
+{% endcomment %}
+2. **Permissions** タブをクリックして、チームがアクセス可能なリポジトリはどれであるかを確認します。
+
+      {% comment %}
+      ![Team Audit Permissions](images/orgs-teams-perms2019.png)
+      {% endcomment %}
+      ![チームのパーミッション](images/orgs-teams-perms2019.png)
+
+You can also edit repository permissions from this tab.
 
 
 {% comment %}
@@ -204,7 +355,7 @@ automatically have Read permissions:
 {% comment %}
 - `Read` access allows users to view, search, and pull a private repository in the same way as they can a public repository.
 - `Write` access allows users to push to repositories on Docker Hub.
-- `Admin` access allows users to modify the repositories "Description", "Collaborators" rights, "Public/Private" visibility and "Delete".
+- `Admin` access allows users to modify the repositories "Description", "Collaborators" rights, "Public/Private" visibility, and "Delete".
 {% endcomment %}
 - `Read`（読み込み）権限は、公開リポジトリに対する操作と同じように、 プライベートリポジトリの参照、検索、プルを行うことができます。
 - `Write`（書き込み）権限は、Docker Hub 上のリポジトリにプッシュすることができます。

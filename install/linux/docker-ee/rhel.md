@@ -94,19 +94,28 @@ Docker EE 17.06.2-ee-5 およびこれ以上においては、`overlay2` の利�
 {: #fips-140-2-cryptographic-module-support }
 
 {% comment %}
-[Federal Information Processing Standards (FIPS) Publication 140-2](https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf) is a United States Federal security requirement for cryptographic modules.
+[Federal Information Processing Standards (FIPS) Publication 140-2](https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf)
+is a United States Federal security requirement for cryptographic modules.
 {% endcomment %}
 [連邦情報処理標準（Federal Information Processing Standards; FIPS）文書 140-2](https://csrc.nist.gov/csrc/media/publications/fips/140/2/final/documents/fips1402.pdf) は、米国連邦政府が定める暗号化モジュールのセキュリティ要件です。
 
 {% comment %}
-With Docker EE Basic license for versions 18.03 and later, Docker provides FIPS 140-2 support in RHEL 7.3, 7.4 and 7.5. This includes a FIPS supported cryptographic module. If the RHEL implementation already has FIPS support enabled, FIPS is automatically enabled in the Docker engine.
+With Docker Engine - Enterprise Basic license for versions 18.03 and later,
+Docker provides FIPS 140-2 support in RHEL 7.3, 7.4 and 7.5. This includes a
+FIPS supported cryptographic module. If the RHEL implementation already has FIPS
+support enabled, FIPS is also automatically enabled in the Docker engine. If
+FIPS support is not already enabled in your RHEL implementation, visit the
+[Red Hat Product Documentation](https://access.redhat.com/documentation/en-us/)
+for instructions on how to enable it.
 {% endcomment %}
-Docker では、Docker EE 基本ライセンスバージョン 18.03 またはそれ以上にて、RHEL 7.3、7.4、7.5 に対する FIPS 140-2 サポートを提供しています。
+Docker では、Docker Engine - Enterprise 基本ライセンスバージョン 18.03 またはそれ以上にて、RHEL 7.3、7.4、7.5 に対する FIPS 140-2 サポートを提供しています。
 ここには FIPS がサポートする暗号化モジュールも含まれます。
 RHEL におけるモジュールがすでに FIPS サポートを可能としていれば、FIPS は Docker エンジンにおいて自動的に有効となっています。
+RHEL 実装内にて FIPS サポートが有効になっていない場合は、[Red Hat Product Documentation](https://access.redhat.com/documentation/en-us/) を確認し、これを有効にする手順に従ってください。
 
 {% comment %}
-To verify the FIPS-140-2 module is enabled in the Linux kernel, confirm the file `/proc/sys/crypto/fips_enabled` contains `1`.
+To verify the FIPS-140-2 module is enabled in the Linux kernel, confirm the file
+`/proc/sys/crypto/fips_enabled` contains `1`.
 {% endcomment %}
 Linux カーネルにおいて FIPS-140-2 モジュールが有効かどうかは、`/proc/sys/crypto/fips_enabled` ファイルに `1` が設定されているかどうかでわかります。
 
@@ -116,21 +125,27 @@ $ cat /proc/sys/crypto/fips_enabled
 ```
 
 {% comment %}
-> **Note**: FIPS is only supported in the Docker Engine EE. UCP and DTR currently do not have support for FIPS-140-2.
+> **Note**: FIPS is only supported in the Docker Engine Engine - Enterprise. UCP
+> and DTR currently do not have support for FIPS-140-2.
 {% endcomment %}
-> **メモ**: FIPS は Docker Engine EE でのみサポートされます。
+> **メモ**: FIPS は Docker Engine - Enterprise でのみサポートされます。
 UCP と DTR は今のところ FIPS-140-2 をサポートしていません。
 
 {% comment %}
-To enable FIPS 140-2 compliance on a system that is not in FIPS 140-2 mode, do the following:
+You can override FIPS 140-2 compliance on a system that is not in FIPS 140-2
+mode. Note, this **does not** change FIPS 140-2 mode on the system. To override
+the FIPS 140-2 mode, follow ths steps below.
 {% endcomment %}
-FIPS 140-2 モードになっていないシステムにおいて FIPS 140-2 コンプライアンスを有効にするには、以下の手順に従います。
+FIPS 140-2 モードになっていないシステムにおいて FIPS 140-2 コンプライアンスを有効にすることができます。
+これはシステム内の FIPS 140-2 モードを変更するものでは **ありません**。
+FIPS 140-2 モードを上書き設定するには、以下の手順に従います。
 
 {% comment %}
-Create a file called `/etc/systemd/system/docker.service.d/fips-module.conf`. It needs to contain the following:
+Create a file called `/etc/systemd/system/docker.service.d/fips-module.conf`.
+Add the following:
 {% endcomment %}
 `/etc/systemd/system/docker.service.d/fips-module.conf` というファイルを生成します。
-そこに以下の内容を記述します。
+そこに以下を記述します。
 
 ```
 [Service]
@@ -152,7 +167,8 @@ root ユーザーにより Docker サービスを再起動します。
 `$ sudo systemctl restart docker`
 
 {% comment %}
-To confirm Docker is running with FIPS-140-2 enabled, run the `docker info` command:
+To confirm Docker is running with FIPS-140-2 enabled, run the `docker info`
+command:
 {% endcomment %}
 FIPS-140-2 を有効にした Docker が稼動しているかを確認するため `docker info` コマンドを実行します。
 
@@ -170,14 +186,14 @@ docker info --format {{.SecurityOptions}}
 {: #disabling-fips-140-2 }
 
 {% comment %}
-If the system has the FIPS 140-2 cryptographic module installed on the operating system,
-it is possible to disable FIPS-140-2 compliance.
+If the system has the FIPS 140-2 cryptographic module installed on the operating
+system, it is possible to disable FIPS-140-2 compliance.
 {% endcomment %}
 オペレーティングシステム内に FIPS 140-2 暗号化モジュールがインストールされている場合に、FIPS-140-2 コンプライアンスを無効にすることもできます。
 
 {% comment %}
-To disable FIPS 140-2 in Docker but not the operating system, set the value `DOCKER_FIPS=0`
-in the `/etc/systemd/system/docker.service.d/fips-module.conf`.
+To disable FIPS 140-2 in Docker but not the operating system, set the value
+`DOCKER_FIPS=0` in the `/etc/systemd/system/docker.service.d/fips-module.conf`.
 {% endcomment %}
 FIPS 140-2 を Docker 上では無効とし、オペレーティングシステム上は有効のままとする場合は、`/etc/systemd/system/docker.service.d/fips-module.conf` 内において `DOCKER_FIPS=0` と設定します。
 

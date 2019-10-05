@@ -59,8 +59,8 @@ Docker におけるアプリケーション構築を始めましょう。
 {% comment %}
 ## Your new development environment
 {% endcomment %}
-## 新しい開発環境
 {: #your-new-development-environment }
+## 新しい開発環境
 
 {% comment %}
 In the past, if you were to start writing a Python app, your first
@@ -88,8 +88,8 @@ These portable images are defined by something called a `Dockerfile`.
 {% comment %}
 ## Define a container with `Dockerfile`
 {% endcomment %}
-## `Dockerfile` によるコンテナー定義
 {: #define-a-container-with-Dockerfile }
+## `Dockerfile` によるコンテナー定義
 
 {% comment %}
 `Dockerfile` defines what goes on in the environment inside your
@@ -105,8 +105,8 @@ after doing that, you can expect that the build of your app defined in this
 このようなリソースに接続するには、ポートを外の世界にマッピング（割り当て）する必要がありますし、どのファイルを環境に「複製」（copy in）するか指定する必要もあります。
 しかしながら、これらの作業を `Dockerfile` における構築時の定義で済ませておけば、どこで実行しても同じ挙動となります。
 
-### `Dockerfile`
 {: #dockerfile }
+### `Dockerfile`
 
 {% comment %}
 Create an empty directory on your local machine. Change directories (`cd`) into the new directory,
@@ -151,33 +151,33 @@ This `Dockerfile` refers to a couple of files we haven't created yet, namely
 {% comment %}
 ## The app itself
 {% endcomment %}
-## アプリそのもの
 {: #the-app-itself }
+## アプリそのもの
 
 {% comment %}
 Create two more files, `requirements.txt` and `app.py`, and put them in the same
 folder with the `Dockerfile`. This completes our app, which as you can see is
 quite simple. When the above `Dockerfile` is built into an image, `app.py` and
-`requirements.txt` is present because of that `Dockerfile`'s `COPY` command,
+`requirements.txt` are present because of that `Dockerfile`'s `COPY` command,
 and the output from `app.py` is accessible over HTTP thanks to the `EXPOSE`
 command.
 {% endcomment %}
-さらに２つのファイルを作成します。
+さらに 2 つのファイルを作成します。
 `requirements.txt` と `app.py` です。
 これらを `Dockerfile` と同じフォルダに入れます。
 アプリは見てのとおり、極めて単純になります。
 先ほどの `Dockerfile` でイメージの構築時、 `Dockerfile` の `COPY` 命令で `app.py` と `requirements.txt` をイメージの中に組み込みます。
 
-### `requirements.txt`
 {: #requirementstxt }
+### `requirements.txt`
 
 ```
 Flask
 Redis
 ```
 
-### `app.py`
 {: #apppy }
+### `app.py`
 
 ```python
 from flask import Flask
@@ -238,8 +238,8 @@ you have.
 {% comment %}
 ## Build the app
 {% endcomment %}
-## アプリの構築
 {: #build-the-app }
+## アプリの構築
 
 {% comment %}
 We are ready to build the app. Make sure you are still at the top level of your
@@ -399,8 +399,8 @@ be something like `--tag=friendlyhello:v0.0.1`.
 {% comment %}
 ## Run the app
 {% endcomment %}
-## アプリの実行
 {: #run-the-app }
+## アプリの実行
 
 {% comment %}
 Run the app, mapping your machine's port 4000 to the container's published port
@@ -525,8 +525,8 @@ docker container stop 1fa4ab2cf395
 {% comment %}
 ## Share your image
 {% endcomment %}
-## イメージの共有
 {: #share-your-image}
+## イメージの共有
 
 {% comment %}
 To demonstrate the portability of what we just created, let's upload our built
@@ -562,8 +562,8 @@ Registry](/datacenter/dtr/2.2/guides/).
 {% comment %}
 ### Log in with your Docker ID
 {% endcomment %}
-### Docker ID でログイン
 {: #log-in-with-your-docker-id }
+### Docker ID でログイン
 
 {% comment %}
 If you don't have a Docker account, sign up for one at
@@ -586,8 +586,8 @@ $ docker login
 {% comment %}
 ### Tag the image
 {% endcomment %}
-### イメージへのタグづけ
 {: #tag-the-image }
+### イメージへのタグづけ
 
 {% comment %}
 The notation for associating a local image with a repository on a registry is
@@ -645,8 +645,8 @@ python                   2.7-slim            1c7128a655f6        5 days ago     
 {% comment %}
 ### Publish the image
 {% endcomment %}
-### イメージの公開
 {: #publish-the-image }
+### イメージの公開
 
 {% comment %}
 Upload your tagged image to the repository:
@@ -669,8 +669,8 @@ its pull command.
 {% comment %}
 ### Pull and run the image from the remote repository
 {% endcomment %}
-### リモートリポジトリからのイメージの取得と実行
 {: #pull-and-run-the-image-from-the-remote-repository }
+### リモートリポジトリからのイメージの取得と実行
 
 {% comment %}
 From now on, you can use `docker run` and run your app on any machine with this
@@ -719,8 +719,8 @@ Docker を実行するからといって、ホストマシンには何もイン�
 {% comment %}
 ## Conclusion of part two
 {% endcomment %}
-## 2 部のまとめ
 {: #conclusion-of-part-two }
+## 2 部のまとめ
 
 {% comment %}
 That's all for this page. In the next section, we learn how to scale our
@@ -742,8 +742,8 @@ Or, learn how to [launch your container on your own machine using DigitalOcean](
 {% comment %}
 ## Recap and cheat sheet (optional)
 {% endcomment %}
-## まとめと早見表（おまけ）
 {: #recap-and-cheat-sheet-optional }
+## まとめと早見表（おまけ）
 
 {% comment %}
 Here's [a terminal recording of what was covered on this
