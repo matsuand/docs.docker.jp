@@ -433,12 +433,15 @@ To view the new nodes in the cluster:
 ## クラスターのバックアップ
 
 {% comment %}
-{% endcomment %}
 Before performing operations on the cluster, perform a full backup of the running cluster by running `docker cluster backup quickstart --file "backup-$(date '+%Y-%m-%d').tar.gz" `.
+{% endcomment %}
+クラスターにおける操作を始める前に、稼働中クラスターのフルバックアップをとっておいてください。
+`docker cluster backup quickstart --file "backup-$(date '+%Y-%m-%d').tar.gz" ` を実行します。
 
 {% comment %}
-{% endcomment %}
 Provide a passphrase to encrypt the UCP backup.
+{% endcomment %}
+パスフレーズを入力して UCP バックアップを暗号化します。
 
     $ docker cluster backup quickstart --file "backup-$(date '+%Y-%m-%d').tar.gz"
     Passphrase for UCP backup:
@@ -448,16 +451,19 @@ Provide a passphrase to encrypt the UCP backup.
     Backup of 911c882340b2 saved to backup-2019-05-07.tar.gz
 
 {% comment %}
-{% endcomment %}
 Save the backup on external storage for disaster recovery.
+{% endcomment %}
+ディザスターリカバリのために、このバックアップを外部ストレージに保存します。
 
 {% comment %}
-{% endcomment %}
 To restore a cluster, run `docker cluster restore quickstart --file backup-2019-05-07.tar.gz`.
+{% endcomment %}
+クラスターを復元するには `docker cluster restore quickstart --file backup-2019-05-07.tar.gz` を実行します。
 
 {% comment %}
-{% endcomment %}
 Provide the passphrase from the backup step to decrypt the UCP backup.
+{% endcomment %}
+バックアップをとった際のパスフレーズを入力して、UCP バックアップを復号化します。
 
 {% comment %}
 ## Upgrade a cluster
@@ -465,8 +471,9 @@ Provide the passphrase from the backup step to decrypt the UCP backup.
 {: #upgrade-a-cluster }
 ## クラスターのアップグレード
 {% comment %}
-{% endcomment %}
 Open `cluster.yml`.  Change the cluster versions:
+{% endcomment %}
+`cluster.yml` を開いて、クラスターのバージョンを変更します。
 ```yaml
 cluster:
   dtr:
@@ -476,7 +483,10 @@ cluster:
   ucp:
     version: docker/ucp:3.2.0
 ```
+{% comment %}
 Run  `docker cluster update quickstart --file cluster.yml `:
+{% endcomment %}
+`docker cluster update quickstart --file cluster.yml ` を実行します。
 
     $ docker cluster update quickstart --file examples/docs.yml
     Please provide a value for ucp_password
@@ -499,7 +509,7 @@ Run  `docker cluster update quickstart --file cluster.yml `:
 {% comment %}
 When the cluster has reached end-of-life, run `docker cluster rm quickstart`:
 {% endcomment %}
-When the cluster has reached end-of-life, run `docker cluster rm quickstart`:
+クラスターが不要になったら `docker cluster rm quickstart` を実行します。
 
     $ docker cluster rm quickstart
     Removing quickstart                                                        [OK]
@@ -511,7 +521,7 @@ When the cluster has reached end-of-life, run `docker cluster rm quickstart`:
 {% comment %}
 All provisioned resources are destroyed and the context for the cluster is removed.
 {% endcomment %}
-All provisioned resources are destroyed and the context for the cluster is removed.
+導入したリソースはすべて破棄され、クラスターのコンテキストも削除されます。
 
 {% comment %}
 ## Where to go next
@@ -524,6 +534,6 @@ All provisioned resources are destroyed and the context for the cluster is remov
 - [Explore the full list of Cluster commands](/engine/reference/commandline/cluster/)
 - [Cluster configuration file reference](./cluster-file.md)
 {% endcomment %}
-- View the quick start guide for [Azure](azure.md) or [vSphere](vsphere.md)
-- [Explore the full list of Cluster commands](/engine/reference/commandline/cluster/)
-- [Cluster configuration file reference](./cluster-file.md)
+- [Azure](azure.md) または [vSphere](vsphere.md) に対するクイックスタートガイド
+- [cluster コマンド一覧](/engine/reference/commandline/cluster/)
+- [クラスター設定ファイルリファレンス](./cluster-file.md)
