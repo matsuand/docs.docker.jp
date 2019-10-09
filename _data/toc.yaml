@@ -1447,12 +1447,12 @@ manuals:
           title: Docker Enterprise Standard use case
         - path: /ee/ucp/authorization/ee-advanced/
           title: Docker Enterprise Advanced use case
-    - sectiontitle: Access UCP
+    - sectiontitle: UCP へのアクセス
       section:
       - path: /ee/ucp/user-access/
-        title: Web-based access
+        title: ウェブベースのアクセス
       - path: /ee/ucp/user-access/cli/
-        title: CLI-based access
+        title: CLI ベースのアクセス
       - path: /ee/ucp/user-access/kubectl/
         title: Install the Kubernetes CLI
     - path: /ee/ucp/deploy-application-package/

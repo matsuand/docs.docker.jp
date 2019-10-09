@@ -15,6 +15,23 @@ This page provides information about Docker Cluster versions.
 {: #version-1 }
 # バージョン 1
 
+
+## 1.2.0
+(2019-10-8)
+
+### Features
+
+- Added new env variable type which allows users to supply cluster variable values as an environment variable (DCIS-509)
+
+### Fixes
+
+- Fixed an issue where errors in the cluster commands would return exit code of 0 (DCIS-508)
+
+- New error message displayed when a docker login is required: 
+```Checking for licenses on Docker Hub
+   Error: no Hub login info found; please run 'docker login' first
+```
+
 {% comment %}
 ## Version 1.1.0 
 (2019-09-03)
@@ -82,131 +99,6 @@ This page provides information about Docker Cluster versions.
 First major release.
 {% endcomment %}
 メジャーリリース。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

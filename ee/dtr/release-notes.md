@@ -1,5 +1,5 @@
 ---
-title: DTR リリースノート
+title: DTR release notes
 description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry
 keywords: docker trusted registry, whats new, release notes
 toc_min: 1
@@ -21,6 +21,22 @@ to upgrade your installation to the latest release.
 * [Version 2.4](#version-24)
 
 # Version 2.7
+
+## 2.7.3
+(2019-10-08)
+
+### Bug Fixes
+
+* Fixed a bug where attempting to pull mirror manifest lists would not trigger
+an evaluation of their existing push mirroring policies, and they would not get
+push mirrored to a remote DTR. (docker/dhe-deploy #10676)
+* Fixed a bug where the S3 storage driver did not honor HTTP proxy settings. (docker/dhe-deploy #10639)
+* Content Security Policy (CSSP) headers are now on one line to comply with RFC 7230. (docker/dhe-deploy #10594)
+
+### Security
+
+* Bumped the version of the Alpine base images from `3.9` to `3.10`. (docker/dhe-deploy #10716)
+
 
 ## 2.7.2
 (2019-09-03)
@@ -105,6 +121,14 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 
 # Version 2.6
 
+## 2.6.10
+(2019-10-08)
+
+### Bug fixes
+
+* Fixed a bug where the S3 storage driver did not honor HTTP proxy settings. (docker/dhe-deploy #10639)
+* Content Security Policy (CSSP) headers are now on one line to comply with RFC 7230. (docker/dhe-deploy #10594)
+
 ## 2.6.9
 (2019-09-03)
 
@@ -146,18 +170,12 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 ## 2.6.7
 (2019-6-27)
 
-{% comment %}
 ### Enhancements
-{% endcomment %}
-### 機能拡張
 
 * Added UI support to retain metadata when switching between storage drivers.(docker/dhe-deploy#10340). For more information, see (docker/dhe-deploy #10199) and (docker/dhe-deploy #10181).
 * Added UI support to disable persistent cookies. (docker/dhe-deploy #10353)
 
-{% comment %}
-### Bug Fixes
-{% endcomment %}
-### バグフィックス
+### Bug fixes
 
 * Fixed a UI bug where non-admin namespace owners could not create a repository. (docker/dhe-deploy #10371)
 * Fixed a bug where duplicate scan jobs were causing scans to never exit. (docker/dhe-deploy #10316)
@@ -183,27 +201,18 @@ Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-imag
 ## 2.6.6
 (2019-5-6)
 
-{% comment %}
 ### Security
-{% endcomment %}
-### セキュリティ
 
 * Refer to [DTR image vulnerabilities](https://success.docker.com/article/dtr-image-vulnerabilities) for details regarding actions to be taken, timeline, and any status updates/issues/recommendations.
 
-{% comment %}
 ### Enhancements
-{% endcomment %}
-### 機能拡張
 
 * DTR now supports an option to keep your tag metadata when switching storage backends via the API. This is similar to the `--storage-migrated` option when performing an NFS reconfiguration via `docker run docker/dtr reconfigure --nfs-url ...`. (docker/dhe-deploy#10246)
     - To use this option, first write your current storage settings to a JSON file via `curl ... /api/v0/admin/settings/registry > storage.json`.
     - Next, add `keep_metadata: true` as a top-level key in the JSON you just created and modify it to contain your new storage settings.
     - Finally, update your Registry settings with your modified JSON file via `curl -X PUT .../api/v0/admin/settings/registry -d @storage.json`.
 
-{% comment %}
-### Bug Fixes
-{% endcomment %}
-### バグフィックス
+### Bug fixes
 
 * Fixed an issue where replica version was inferred from DTR volume labels. (docker/dhe-deploy#10266)
 
