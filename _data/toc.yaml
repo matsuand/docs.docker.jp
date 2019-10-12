@@ -127,20 +127,18 @@ guides:
         title: FAQ
 - sectiontitle: はじめよう
   section:
-  - sectiontitle: Docker をはじめよう
+  - sectiontitle: クイックスタート
     section:
-    - title: "1部: 概要"
+    - title: "1部: 概要と準備"
       path: /get-started/
-    - title: "2部: コンテナー"
+    - title: "2部: アプリケーションのコンテナー化"
       path: /get-started/part2/
-    - title: "3部: サービス"
+    - title: "3部: Kubernetes へのデプロイ"
       path: /get-started/part3/
-    - title: "4部: スウォーム"
+    - title: "4部: スウォームへのデプロイ"
       path: /get-started/part4/
-    - title: "5部: スタック"
+    - title: "5部: Docker Hub でのイメージ共有"
       path: /get-started/part5/
-    - title: "6部: アプリのデプロイ"
-      path: /get-started/part6/
   - path: /engine/docker-overview/
     title: Docker 概要
 - sectiontitle: Docker を用いた開発
@@ -1444,9 +1442,9 @@ manuals:
         - path: /ee/ucp/authorization/pull-images/
           title: Allow users to pull images
         - path: /ee/ucp/authorization/ee-standard/
-          title: Docker Enterprise Standard use case
+          title: Access control design
         - path: /ee/ucp/authorization/ee-advanced/
-          title: Docker Enterprise Advanced use case
+          title: Access control design using additional security requirements
     - sectiontitle: UCP へのアクセス
       section:
       - path: /ee/ucp/user-access/
@@ -1559,7 +1557,7 @@ manuals:
           path: /ee/ucp/kubernetes/cluster-ingress/
         - title: Install Ingress
           path: /ee/ucp/kubernetes/cluster-ingress/install/
-        - title: Deploy Simple Application
+        - title: Deploy a Sample Application
           path: /ee/ucp/kubernetes/cluster-ingress/ingress/
         - title: Deploy a Canary Deployment
           path: /ee/ucp/kubernetes/cluster-ingress/canary/
@@ -2600,9 +2598,9 @@ manuals:
         - path: /ee/dtr/admin/configure/use-your-own-tls-certificates/
           title: TLS 証明書の利用
         - path: /ee/dtr/admin/configure/enable-single-sign-on/
-          title: Disable persistent cookies
-        - path: /ee/dtr/admin/configure/disable-persistent-cookies/
           title: シングルサインオンの有効化
+        - path: /ee/dtr/admin/configure/disable-persistent-cookies/
+          title: Disable persistent cookies
         - sectiontitle: 外部ストレージ
           section:
           - path: /ee/dtr/admin/configure/external-storage/

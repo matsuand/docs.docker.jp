@@ -1,13 +1,16 @@
 ---
-title: Install UCP for production
-description: Learn how to install Docker Universal Control Plane on production.
+title: 本番環境向け UCP インストール
+description: 本番環境に Docker Universal Control Plane をインストールします。
 keywords: Universal Control Plane, UCP, install, Docker Enterprise
 ---
 
 Docker Universal Control Plane (UCP) is a containerized application that you
 can install on-premise or on a cloud infrastructure.
 
+{% comment %}
 ## Step 1: Validate the system requirements
+{% endcomment %}
+## ステップ 1： システム要件の確認
 
 The first step to installing UCP is ensuring that your infrastructure has all
 of the [requirements UCP needs to run](system-requirements.md).
@@ -16,13 +19,16 @@ the same version of Docker Enterprise.
 
 > Cloud Providers
 >
-> If you are installing on a public cloud platform there is cloud specific UCP
+> If you are installing on a public cloud platform, there is cloud specific UCP
 > installation documentation. For [Microsoft
 > Azure](./cloudproviders/install-on-azure/) this is **mandatory**, for
 > [AWS](./cloudproviders/install-on-aws/) this is optional.
 {: important}
 
+{% comment %}
 ## Step 2: Install Docker Enterprise on all nodes
+{% endcomment %}
+## ステップ 2： 全ノードへの Docker Enterprise インストール
 
 UCP is a containerized application that requires the commercially supported
 Docker Engine to run.
@@ -51,7 +57,10 @@ will notice that the volumes already exist, and it will start using them.
 If these volumes don't exist, they'll be automatically created when installing
 UCP.
 
+{% comment %}
 ## Step 4: Install UCP
+{% endcomment %}
+## ステップ 4： UCP のインストール
 
 To install UCP, you use the `docker/ucp` image, which has commands to install
 and manage UCP.
@@ -94,7 +103,7 @@ To install UCP:
 
 ## Step 5: License your installation
 
-Now that UCP is installed, you need to license it. To use UCP you are required to have a Docker Enterprise standard or advanced subscription, or you can test the platform with a free trial license.
+Now that UCP is installed, you need to license it. To use UCP, you are required to have a Docker Enterprise subscription, or you can test the platform with a free trial license.
 
 1.  Go to [Docker Hub](https://hub.docker.com/editions/enterprise/docker-ee-trial/trial)
     to get a free trial license.
