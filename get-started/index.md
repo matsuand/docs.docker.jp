@@ -5,6 +5,7 @@ description: Get oriented on some basics of Docker and install Docker Desktop.
 redirect_from:
 - /getstarted/
 - /get-started/part1/
+- /get-started/part6/
 - /engine/getstarted/
 - /learn/
 - /engine/getstarted/step_one/
@@ -215,11 +216,24 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
 
 #### OSX
 
+{% comment %}
 1. After installing Docker Desktop, you should see a Docker icon in your menu bar. Click on it, and navigate **Preferences... -> Kubernetes**.
+{% endcomment %}
+1. Docker Desktop をインストールすると、メニューバーに Docker アイコンが表示されます。
+   これをクリックして **Preferences... -> Kubernetes** を選びます。
 
+{% comment %}
 2. Check the checkbox labeled *Enable Kubernetes*, and click **Apply**. Docker Desktop will automatically set up Kubernetes for you. You'll know everything has completed successfully once you can click on the Docker icon in the menu bar, and see a green light beside 'Kubernetes is Running'.
+{% endcomment %}
+2. *Enable Kubernetes* と書かれたチェックボックスにチェックを入れて **Apply** をクリックします。
+   Docker Desktop では Kubernetes に対する設定が自動的に行われます。
+   メニューバー上の Docker アイコンをクリックしてみれば、すべての作業がうまくできていることがわかります。
+   'Kubernetes is Running' という表記の横に緑色が点灯しているはずです。
 
+{% comment %}
 3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
+{% endcomment %}
+3. Kubernetes の設定と起動が正しく行われていることを確認するために、`pod.yaml` というテキストファイルを生成し、以下の内容としてください。
 
     ```yaml
     apiVersion: v1
@@ -233,34 +247,52 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
         command: ["ping", "8.8.8.8"]
     ```
 
+   {% comment %}
+    This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
+   {% endcomment %}
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
 
+{% comment %}
 4. In a terminal, navigate to where you created `pod.yaml` and create your pod:
+{% endcomment %}
+4. 端末画面から `pod.yaml` を生成したディレクトリに移動し、この pod を生成します。
 
     ```shell
     kubectl apply -f pod.yaml
     ```
 
+{% comment %}
 5. Check that your pod is up and running:
+{% endcomment %}
+5. pod が起動していることを確認します。
 
     ```shell
     kubectl get pods
     ```
 
+    {% comment %}
     You should see something like:
+    {% endcomment %}
+    以下のような表示が行われるはずです。
 
     ```shell
     NAME      READY     STATUS    RESTARTS   AGE
     demo      1/1       Running   0          4s
     ```
 
+{% comment %}
 6. Check that you get the logs you'd expect for a ping process:
+{% endcomment %}
+6. ログ出力内にて行われる ping 処理が正しく行われていることを確認します。
 
     ```shell
     kubectl logs demo
     ```
 
+    {% comment %}
     You should see the output of a healthy ping process:
+    {% endcomment %}
+    ping 処理の出力が正しく行われていることがわかります。
 
     ```shell
     PING 8.8.8.8 (8.8.8.8): 56 data bytes
@@ -270,7 +302,10 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
     ...
     ```
 
+{% comment %}
 7. Finally, tear down your test pod:
+{% endcomment %}
+7. 最後に、テストとして生成した pod を削除します。
 
     ```shell
     kubectl delete -f pod.yaml
@@ -285,9 +320,20 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
 
 #### Windows
 
+{% comment %}
 1. After installing Docker Desktop, you should see a Docker icon in your system tray. Right-click on it, and navigate **Settings -> Kubernetes**.
+{% endcomment %}
+1. Docker Desktop をインストールすると、システムトレイに Docker アイコンが表示されます。
+   このアイコン上で右クリックして、**Settings -> Kubernetes** を選びます。
 
+{% comment %}
 2. Check the checkbox labeled *Enable Kubernetes*, and click **Apply**. Docker Desktop will automatically set up Kubernetes for you. Note this can take a significant amount of time (20 minutes). You'll know everything has completed successfully once you can right-click on the Docker icon in the menu bar, click **Settings**, and see a green light beside 'Kubernetes is running'.
+{% endcomment %}
+2. *Enable Kubernetes* と書かれたチェックボックスにチェックを入れて **Apply** をクリックします。
+   Docker Desktop では Kubernetes に対する設定が自動的に行われます。
+   ただしこれにはかなりの時間（20 分）がかかります。
+   システムトレイ上の Docker アイコンを右クリックして **Settings** をクリックしてみれば、すべての作業がうまくできていることがわかります。
+   'Kubernetes is Running' という表記の横に緑色が点灯しているはずです。
 
 3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
 
