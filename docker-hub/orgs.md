@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 {% comment %}
-Docker Hub Organizations let you create teams so you can give your team access
+Docker Hub organizations let you create teams so you can give your team access
 to shared image repositories.
 {% endcomment %}
 Docker Hub の組織（organizations）は、チームの生成を行い、チームメンバーがイメージリポジトリを共有アクセスできるようにするものです。
@@ -20,10 +20,10 @@ Docker Hub の組織（organizations）は、チームの生成を行い、チ�
 - **チーム**（teams）とは、組織に属している Docker Hub ユーザーのグループのことです。
 
 {% comment %}
-> **Note**: in Docker Hub, users cannot belong directly to an organization.
+> **Note:** in Docker Hub, users cannot belong directly to an organization.
 They belong only to teams within an organization.
 {% endcomment %}
-> **メモ**: Docker Hub におけるユーザーは、組織に直接属するものではありません。
+> **メモ**  Docker Hub におけるユーザーは、組織に直接属するものではありません。
 > ユーザーは、あくまで組織内にあるチームに属するものです。
 
 {% comment %}
@@ -68,6 +68,11 @@ with a single member (you!).
 これは **owners** チームであり、ただ一人のメンバー、つまりあなた自身が含まれています。
 
 {% comment %}
+In some situations, you can also create an organization by [converting a user account](/convert-account.md).
+{% endcomment %}
+状況によっては [ユーザーアカウントの変更](/convert-account.md) を行って組織を生成することもできます。
+
+{% comment %}
 #### The owners team
 {% endcomment %}
 {: #the-owners-team }
@@ -90,6 +95,49 @@ Members of this team can:
 - 組織の設定や支払い方法を管理できます。
 - チームを生成し、チームメンバーの管理を行うことができます。
 - 組織に属しているリポジトリすべてにアクセスし更新することができます。
+
+
+{% comment %}
+### Access an organization
+{% endcomment %}
+{: #access-an-organization }
+### 組織へのアクセス
+
+{% comment %}
+You can't _directly_ log into an organization. This is especially important to note if you create an organization by converting a user account, as conversion means you lose the ability to log into that "account", since it no longer exists.
+{% endcomment %}
+組織には**直接**ログインすることはできません。
+特に気をつけておくべきことですが、ユーザーアカウントを変更し組織として作り直した場合です。
+この際の変更を通じて、その「アカウント」ではログインできなくなります。
+もうその「アカウント」が存在しなくなるからです。
+
+{% comment %}
+To access an organization:
+{% endcomment %}
+組織にアクセスするには以下のようにします。
+
+{% comment %}
+1. Log into Docker Hub with a user account that is a member of any team in the organization.
+{% endcomment %}
+1. ユーザーアカウントを使って Docker Hub にログインします。
+   このユーザーアカウントはその組織内のメンバーであれば、どのチームに属していてもかまいません。
+
+    {% comment %}
+    > If you want access to organization settings, this account has to be part of the **owners** team.
+    {% endcomment %}
+    > 組織の設定を行いたい場合、そのアカウントは **owners** チームに属している必要があります。
+
+{% comment %}
+2. Click **Organizations** in the top navigation bar, then choose your organization from the list.
+{% endcomment %}
+2. 最上段のナビゲーションバーにある **Organizations** をクリックします。
+   そして一覧の中から目的の組織を選びます。
+
+{% comment %}
+If you don't see the organization, then you are neither a member or an owner of it. An organization administrator will need to add you as a member of the organization team.
+{% endcomment %}
+目的の組織が見つからない場合は、つまりログインしたユーザーアカウントはその組織のメンバーや所有者ではないということです。
+組織の管理者から、組織のメンバーに加えてもらってください。
 
 {% comment %}
 ## Working with teams and members

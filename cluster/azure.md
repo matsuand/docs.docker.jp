@@ -17,6 +17,8 @@ title: Azure 上にて Docker Cluster をはじめよう
   - Service Principal App Secret
   - Subscription UUID
   - Tenant UUID
+- Organizations wishing to provision roles with explicit permissions should refer to [custom roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
+and [Azure Permissions](https://github.com/kubernetes/cloud-provider-azure/blob/master/docs/azure-permissions.md) for more information.
 {% endcomment %}
 - Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
 - Sign up for the following items for your Azure account:
@@ -24,6 +26,8 @@ title: Azure 上にて Docker Cluster をはじめよう
   - Service Principal App Secret
   - Subscription UUID
   - Tenant UUID
+- Organizations wishing to provision roles with explicit permissions should refer to [custom roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
+and [Azure Permissions](https://github.com/kubernetes/cloud-provider-azure/blob/master/docs/azure-permissions.md) for more information.
 
 {% comment %}
 More information can be found on obtaining these with either the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest) or through the [Azure Portal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).

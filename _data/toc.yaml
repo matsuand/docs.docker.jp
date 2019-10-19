@@ -127,6 +127,8 @@ guides:
         title: FAQ
 - sectiontitle: はじめよう
   section:
+  - path: /engine/docker-overview/
+    title: Docker 概要
   - sectiontitle: クイックスタート
     section:
     - title: "1部: 概要と準備"
@@ -139,8 +141,8 @@ guides:
       path: /get-started/part4/
     - title: "5部: Docker Hub でのイメージ共有"
       path: /get-started/part5/
-  - path: /engine/docker-overview/
-    title: Docker 概要
+  - path: /get-started/resources/
+    title: "教育的リソース"
 - sectiontitle: Docker を用いた開発
   section:
     - sectiontitle: Docker 上でのアプリ開発
@@ -4003,6 +4005,8 @@ manuals:
     title: 公式イメージ
   - path: /docker-hub/orgs/
     title: チームと組織
+  - path: /docker-hub/convert-account/
+    title: アカウントから組織への変更
   - path: /docker-hub/webhooks/
     title: ウェブフック
   - path: /docker-hub/slack_integration/

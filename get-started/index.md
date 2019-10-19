@@ -119,9 +119,9 @@ Containerization is increasingly popular because containers are:
   any configuration required on the part of the user.
 
 {% comment %}
-![Containers are portable](images/laurel-docker-containers.png){:width="100%"}
+![Containers are portable](images/laurel-docker-containers2019.jpg){:width="100%"}
 {% endcomment %}
-![コンテナーは可搬性に優れる](images/laurel-docker-containers.png){:width="100%"}
+![コンテナーは可搬性に優れる](images/laurel-docker-containers2019.jpg){:width="100%"}
 
 {% comment %}
 ### Images and containers
