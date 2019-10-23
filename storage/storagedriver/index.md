@@ -346,9 +346,9 @@ layers are the same.
 1.  新規に `cow-test/` というディレクトリを生成して移動します。
 
 {% comment %}
-2.  Within `cow-test/`, create a new file with the following contents:
+2.  Within `cow-test/`, create a new file called `hello.sh` with the following contents:
 {% endcomment %}
-2.  `cow-test/` ディレクトリにて、以下の内容で新規ファイルを生成します。
+2.  `cow-test/` ディレクトリにて、以下の内容で新規ファイル `hello.sh` を生成します。
 
     ```bash
     #!/bin/sh

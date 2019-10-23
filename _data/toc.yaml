@@ -142,7 +142,7 @@ guides:
     - title: "5部: Docker Hub でのイメージ共有"
       path: /get-started/part5/
   - path: /get-started/resources/
-    title: "教育的リソース"
+    title: "学習のための各種情報"
 - sectiontitle: Docker を用いた開発
   section:
     - sectiontitle: Docker 上でのアプリ開発
@@ -3997,6 +3997,20 @@ manuals:
   section:
   - path: /docker-hub/
     title: クィックスタート
+  - sectiontitle: Security and authentication
+    section:
+      - path: /docker-hub/access-tokens/
+        title: Managing access tokens
+      - sectiontitle: Two-factor authentication
+        section:
+          - path: /docker-hub/2fa/
+            title: Enable two-factor authentication
+          - path: /docker-hub/2fa/disable-2fa/
+            title: Disable two-factor authentication
+          - path: /docker-hub/2fa/recover-hub-account/
+            title: Recover your Docker Hub account
+          - path: /docker-hub/2fa/new-recovery-code/
+            title: Generate a new recovery code
   - path: /docker-hub/release-notes/
     title: リリースノート
   - path: /docker-hub/repos/
@@ -4010,7 +4024,7 @@ manuals:
   - path: /docker-hub/webhooks/
     title: ウェブフック
   - path: /docker-hub/slack_integration/
-    title: Slack Integration
+    title: Slack integration
   - path: /docker-hub/upgrade/
     title: プランのアップグレード
   - sectiontitle: 自動ビルド
@@ -4025,7 +4039,7 @@ manuals:
         title: Link to GitHub and BitBucket
       - path: /docker-hub/builds/classic/
         title: Classic Automated Builds
-  - sectiontitle: Publisher & Certified Content
+  - sectiontitle: Publisher & certified content
     section:
     - path: /docker-hub/publish/
       title: Overview
@@ -4036,11 +4050,11 @@ manuals:
     - path: /docker-hub/publish/publisher_faq/
       title: Publisher FAQs
     - path: /docker-hub/publish/certify-images/
-      title: Certify Images & Plugins
+      title: Certify images & plugins
     - path: /docker-hub/publish/certify-plugins-logging/
-      title: Certify Logging Plugins
+      title: Certify logging plugins
     - path: /docker-hub/publish/trustchain/
-      title: Trust Chain
+      title: Trust chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
   - path: /docker-hub/deactivate-account/

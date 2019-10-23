@@ -119,9 +119,9 @@ Containerization is increasingly popular because containers are:
   any configuration required on the part of the user.
 
 {% comment %}
-![Containers are portable](images/laurel-docker-containers2019.jpg){:width="100%"}
+![Containers are portable](images/laurel-docker-containers2019.png){:width="100%"}
 {% endcomment %}
-![コンテナーは可搬性に優れる](images/laurel-docker-containers2019.jpg){:width="100%"}
+![コンテナーは可搬性に優れる](images/laurel-docker-containers2019.png){:width="100%"}
 
 {% comment %}
 ### Images and containers
@@ -233,7 +233,7 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
 {% comment %}
 3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
 {% endcomment %}
-3. Kubernetes の設定と起動が正しく行われていることを確認するために、`pod.yaml` というテキストファイルを生成し、以下の内容としてください。
+3. Kubernetes の設定と起動が正しく行われていることを確認するために、`pod.yaml` というテキストファイルを生成し、以下の内容とします。
 
     ```yaml
     apiVersion: v1
@@ -247,10 +247,12 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
         command: ["ping", "8.8.8.8"]
     ```
 
-   {% comment %}
+    {% comment %}
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
-   {% endcomment %}
-    This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
+    {% endcomment %}
+    このファイルは、単一のコンテナーからなる Pod を表わします。
+
+This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
 
 {% comment %}
 4. In a terminal, navigate to where you created `pod.yaml` and create your pod:
@@ -329,13 +331,16 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
 {% comment %}
 2. Check the checkbox labeled *Enable Kubernetes*, and click **Apply**. Docker Desktop will automatically set up Kubernetes for you. Note this can take a significant amount of time (20 minutes). You'll know everything has completed successfully once you can right-click on the Docker icon in the menu bar, click **Settings**, and see a green light beside 'Kubernetes is running'.
 {% endcomment %}
-2. *Enable Kubernetes* と書かれたチェックボックスにチェックを入れて **Apply** をクリックします。
+2. **Enable Kubernetes** と書かれたチェックボックスにチェックを入れて **Apply** をクリックします。
    Docker Desktop では Kubernetes に対する設定が自動的に行われます。
    ただしこれにはかなりの時間（20 分）がかかります。
    システムトレイ上の Docker アイコンを右クリックして **Settings** をクリックしてみれば、すべての作業がうまくできていることがわかります。
    'Kubernetes is Running' という表記の横に緑色が点灯しているはずです。
 
+{% comment %}
 3. In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
+{% endcomment %}
+3. Kubernetes の設定と起動が正しく行われていることを確認するために、`pod.yaml` というテキストファイルを生成し、以下の内容とします。
 
     ```yaml
     apiVersion: v1
@@ -349,20 +354,31 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
         command: ["ping", "8.8.8.8"]
     ```
 
+    {% comment %}
+    This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
+    {% endcomment %}
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
 
+{% comment %}
+4. In powershell, navigate to where you created `pod.yaml` and create your pod:
+{% endcomment %}
 4. In powershell, navigate to where you created `pod.yaml` and create your pod:
 
     ```shell
     kubectl apply -f pod.yaml
     ```
 
+{% comment %}
+5. Check that your pod is up and running:
+{% endcomment %}
 5. Check that your pod is up and running:
 
     ```shell
     kubectl get pods
     ```
 
+    {% comment %}
+    {% endcomment %}
     You should see something like:
 
     ```shell
@@ -370,12 +386,16 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
     demo      1/1       Running   0          4s
     ```
 
+{% comment %}
+{% endcomment %}
 6. Check that you get the logs you'd expect for a ping process:
 
     ```shell
     kubectl logs demo
     ```
 
+    {% comment %}
+    {% endcomment %}
     You should see the output of a healthy ping process:
 
     ```shell
@@ -386,6 +406,8 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
     ...
     ```
 
+{% comment %}
+{% endcomment %}
 7. Finally, tear down your test pod:
 
     ```shell
@@ -398,8 +420,14 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
 <hr>
 </div>
 
+{% comment %}
 ## Enable Docker Swarm
+{% endcomment %}
+{: #enable-docker-swarm }
+## Docker Swarm の有効化
 
+{% comment %}
+{% endcomment %}
 Docker Desktop runs primarily on Docker Engine, which has everything you need to run a Swarm built in. Follow the setup and validation instructions appropriate for your operating system:
 
 <ul class="nav nav-tabs">
@@ -412,12 +440,16 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 #### OSX
 
+{% comment %}
+{% endcomment %}
 1. Open a terminal, and initialize Docker Swarm mode:
 
     ```shell
     docker swarm init
     ```
 
+    {% comment %}
+    {% endcomment %}
     If all goes well, you should see a message similar to the following:
 
     ```shell
@@ -430,18 +462,24 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
     ```
 
+{% comment %}
+{% endcomment %}
 2. Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 
     ```shell
     docker service create --name demo alpine:3.5 ping 8.8.8.8
     ```
 
+{% comment %}
+{% endcomment %}
 3. Check that your service created one running container:
 
     ```shell
     docker service ps demo
     ```
 
+    {% comment %}
+    {% endcomment %}
     You should see something like:
 
     ```shell
@@ -449,12 +487,16 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
     ```
 
+{% comment %}
+{% endcomment %}
 4. Check that you get the logs you'd expect for a ping process:
 
     ```shell
     docker service logs demo
     ```
 
+    {% comment %}
+    {% endcomment %}
     You should see the output of a healthy ping process:
 
     ```shell
@@ -465,6 +507,8 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     ...
     ```
 
+{% comment %}
+{% endcomment %}
 5. Finally, tear down your test service:
 
     ```shell
@@ -480,12 +524,16 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 
 #### Windows
 
+{% comment %}
+{% endcomment %}
 1. Open a powershell, and initialize Docker Swarm mode:
 
     ```shell
     docker swarm init
     ```
 
+    {% comment %}
+    {% endcomment %}
     If all goes well, you should see a message similar to the following:
 
     ```shell
@@ -498,18 +546,24 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
     ```
 
+{% comment %}
+{% endcomment %}
 2. Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 
     ```shell
     docker service create --name demo alpine:3.5 ping 8.8.8.8
     ```
 
+{% comment %}
+{% endcomment %}
 3. Check that your service created one running container:
 
     ```shell
     docker service ps demo
     ```
 
+    {% comment %}
+    {% endcomment %}
     You should see something like:
 
     ```shell
@@ -517,12 +571,16 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     463j2s3y4b5o        demo.1              alpine:3.5          docker-desktop      Running             Running 8 seconds ago
     ```
 
+{% comment %}
+{% endcomment %}
 4. Check that you get the logs you'd expect for a ping process:
 
     ```shell
     docker service logs demo
     ```
 
+    {% comment %}
+    {% endcomment %}
     You should see the output of a healthy ping process:
 
     ```shell
@@ -533,6 +591,9 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     ...
     ```
 
+{% comment %}
+5. Finally, tear down your test service:
+{% endcomment %}
 5. Finally, tear down your test service:
 
     ```shell
@@ -545,14 +606,31 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 <hr>
 </div>
 
+{% comment %}
 ## Conclusion
+{% endcomment %}
+{: #conclusion }
+## まとめ
 
+{% comment %}
+At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kuberentes and Swarm. In the next section, we'll start developing our first containerized application.
+{% endcomment %}
 At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kuberentes and Swarm. In the next section, we'll start developing our first containerized application.
 
+{% comment %}
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
+{% endcomment %}
+[2 部へ >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 
+{% comment %}
 ## CLI References
+{% endcomment %}
+{: #cli-references }
+## CLI リファレンス
 
+{% comment %}
+Further documentation for all CLI commands used in this article are available here:
+{% endcomment %}
 Further documentation for all CLI commands used in this article are available here:
 
 - [`kubectl apply`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply)

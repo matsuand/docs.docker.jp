@@ -1,23 +1,37 @@
 ---
-title: "Educational resources"
+title: "学習のための各種情報"
 keywords: get started, setup, orientation, quickstart, intro, concepts, kubernetes, docker desktop
 description: Get started resources learning docker
 ---
 
 Docker and the broader community of Docker experts have put together many different ways to get further training and hands-on experience with the Docker platform. Expand your understanding of Docker and Kubernetes with these additional free and paid resources.
 
+{% comment %}
 # Instructor-Led Training
+{% endcomment %}
+{: #instructor-led-training }
+# 研修コース
 Docker and our Authorized Training Partners offer instructor-led courses around the world. Great for teams and organizations and also available for private sponsored classrooms, register for an upcoming class at [https://training.docker.com](https://training.docker.com).
 
+{% comment %}
 Courses offered include:
+{% endcomment %}
+提供されているコースには以下のものがあります。
 * [Docker Fundamentals](https://success.docker.com/training/courses/docker-fundamentals)
 * [Docker for Enterprise Developers](https://success.docker.com/training/courses/docker-for-enterprise-developers)
 * [Docker for Enterprise Operations](https://success.docker.com/training/courses/docker-for-enterprise-operations)
 * [Docker Kubernetes Service](https://success.docker.com/training/courses/docker-kubernetes-service)
 * [Docker Troubleshooting and Support](https://success.docker.com/training/courses/docker-support-troubleshooting)
 
+{% comment %}
 \* Courses are fee-based
+{% endcomment %}
+\* これらのコースは有料です。
 
+{% comment %}
+# Hosted Labs
+{% endcomment %}
+{: #hosted-labs }
 # Hosted Labs
 These self-paced and hands-on workshops use free, hosted environments ([Play with Docker](https://labs.play-with-docker.com/) and [Play with Kubernetes](https://labs.play-with-k8s.com/)) that do not require anything to be installed. Follow along and learn more about Docker and Kubernetes.
 
@@ -27,7 +41,11 @@ These self-paced and hands-on workshops use free, hosted environments ([Play wit
 \* Labs are free but require registration with a Docker ID
 
 
+{% comment %}
 # Self-Guided Tutorials
+{% endcomment %}
+{: #self-guided-tutorials }
+# 自己学習チュートリアル
 Created by experts in the Docker community, these free tutorials provide guided step-by-step workflows for working with the Docker platform.
 
 * **Integrating Docker with Your IDE**
@@ -42,7 +60,11 @@ Created by experts in the Docker community, these free tutorials provide guided 
     * [Windows Container Basics](https://training.play-with-docker.com/windows-containers-basics/)
     * [Windows Containers Multi-Container Applications](https://training.play-with-docker.com/windows-containers-multicontainer/)
 
+{% comment %}
 # Books
+{% endcomment %}
+{: #books }
+# 書籍
 If books are your preferred learning style, check out these from Docker Architect Elton Stoneman:
 * [Learn Docker in a Month of Lunches (use the code `webdoc40` for 40% off)](https://www.manning.com/books/learn-docker-in-a-month-of-lunches)
 * [Docker on Windows: From 101 to Production with Docker on Windows](https://www.amazon.com/Docker-Windows-Elton-Stoneman-ebook/dp/B0711Y4J9K/)

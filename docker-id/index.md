@@ -90,9 +90,9 @@ to [Docker Hub](https://hub.docker.com) and [Docker Support](https://support.doc
 Docker ID の登録を行ってメールアドレスの承認を終えたら [Docker Hub](https://hub.docker.com) や [Docker Support](https://support.docker.com) にログインできるようになります。
 
 {% comment %}
-![Login](images/login.png)
+![Login](images/login2019.png)
 {% endcomment %}
-![ログイン](images/login.png)
+![ログイン](images/login2019.png)
 
 {% comment %}
 You can also log in using the `docker login` command. (You can read more about `docker login` [here](/engine/reference/commandline/login.md).)
@@ -103,13 +103,16 @@ You can also log in using the `docker login` command. (You can read more about `
 {% comment %}
 > **Warning**:
 > When you use the `docker login` command, your credentials are
-stored in your home directory in `.docker/config.json`. The password is base64
-encoded in this file. If you require secure storage for this password, use the
-[Docker credential helpers](https://github.com/docker/docker-credential-helpers).
+stored in your home directory in `.docker/config.json`. The password is base64-encoded in this file.
+>
+> For extra security, you can use a [personal access token](/docker-hub/access-tokens) to log in instead, which is still encoded in this file but doesn't allow admin actions (such as changing the password). If you require secure storage for this password or personal access token, use the [Docker credential helpers](https://github.com/docker/docker-credential-helpers).
 {:.warning}
 {% endcomment %}
 > **警告**:
 > `docker login` コマンドを使ってログインすると、認証情報がホームディレクトリ配下の`.docker/config.json`に保存されます。
 そしてパスワードは base64 エンコードにより保存されます。
-より安全なパスワード保存を必要とする場合は [Docker credential helpers](https://github.com/docker/docker-credential-helpers) を利用してください。
+>
+> より強力なセキュリティが必要である場合は [パーソナルアクセストークン](/docker-hub/access-tokens)（personal access token）を使ってログインすることもできます。
+> この場合もパスワードはエンコードされてファイルに保存されますが、管理操作（たとえばパスワード変更など）を行うことはできません。
+> パスワードやパーソナルアクセストークンを安全に保存する必要がある場合は [Docker credential helpers](https://github.com/docker/docker-credential-helpers) を利用してください。
 {:.warning}
