@@ -225,7 +225,7 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
 {% comment %}
 2. Check the checkbox labeled *Enable Kubernetes*, and click **Apply**. Docker Desktop will automatically set up Kubernetes for you. You'll know everything has completed successfully once you can click on the Docker icon in the menu bar, and see a green light beside 'Kubernetes is Running'.
 {% endcomment %}
-2. *Enable Kubernetes* と書かれたチェックボックスにチェックを入れて **Apply** をクリックします。
+2. **Enable Kubernetes** と書かれたチェックボックスにチェックを入れて **Apply** をクリックします。
    Docker Desktop では Kubernetes に対する設定が自動的に行われます。
    メニューバー上の Docker アイコンをクリックしてみれば、すべての作業がうまくできていることがわかります。
    'Kubernetes is Running' という表記の横に緑色が点灯しているはずです。
@@ -251,8 +251,7 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
     {% endcomment %}
     このファイルは、単一のコンテナーからなる Pod を表わします。
-
-This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
+    isolating a simple ping to 8.8.8.8.
 
 {% comment %}
 4. In a terminal, navigate to where you created `pod.yaml` and create your pod:

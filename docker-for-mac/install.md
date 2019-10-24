@@ -61,9 +61,11 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 - Mac hardware must be a 2010 or newer model, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
 
 {% comment %}
-- macOS must be version 10.12 or newer. We recommend upgrading to the latest version of macOS.
+- macOS must be version 10.13 or newer. We recommend upgrading to the latest version of macOS.
 {% endcomment %}
-- macOS must be version 10.12 or newer. We recommend upgrading to the latest version of macOS.
+- macOS must be version 10.13 or newer. We recommend upgrading to the latest version of macOS.
+
+  If you experience any issues after upgrading your macOS to version 10.15, you must install the latest version of Docker Desktop to be compatible with this version of macOS.
 
   {% comment %}
   {% endcomment %}
