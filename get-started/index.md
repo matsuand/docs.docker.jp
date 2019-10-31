@@ -251,7 +251,7 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
     {% endcomment %}
     このファイルは、単一のコンテナーからなる Pod を表わします。
-    isolating a simple ping to 8.8.8.8.
+    そして単純に 8.8.8.8 への ping を確認します。
 
 {% comment %}
 4. In a terminal, navigate to where you created `pod.yaml` and create your pod:
@@ -356,12 +356,13 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
     {% comment %}
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
     {% endcomment %}
-    This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
+    このファイルは、単一のコンテナーからなる Pod を表わします。
+    そして単純に 8.8.8.8 への ping を確認します。
 
 {% comment %}
 4. In powershell, navigate to where you created `pod.yaml` and create your pod:
 {% endcomment %}
-4. In powershell, navigate to where you created `pod.yaml` and create your pod:
+4. powershell から `pod.yaml` を生成したディレクトリに移動し、この pod を生成します。
 
     ```shell
     kubectl apply -f pod.yaml
@@ -370,15 +371,16 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
 {% comment %}
 5. Check that your pod is up and running:
 {% endcomment %}
-5. Check that your pod is up and running:
+5. pod が起動していることを確認します。
 
     ```shell
     kubectl get pods
     ```
 
     {% comment %}
-    {% endcomment %}
     You should see something like:
+    {% endcomment %}
+    以下のような表示が行われるはずです。
 
     ```shell
     NAME      READY     STATUS    RESTARTS   AGE
@@ -386,16 +388,18 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
     ```
 
 {% comment %}
-{% endcomment %}
 6. Check that you get the logs you'd expect for a ping process:
+{% endcomment %}
+6. ログ出力内にて行われる ping 処理が正しく行われていることを確認します。
 
     ```shell
     kubectl logs demo
     ```
 
     {% comment %}
-    {% endcomment %}
     You should see the output of a healthy ping process:
+    {% endcomment %}
+    ping 処理の出力が正しく行われていることがわかります。
 
     ```shell
     PING 8.8.8.8 (8.8.8.8): 56 data bytes
@@ -406,8 +410,9 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
     ```
 
 {% comment %}
-{% endcomment %}
 7. Finally, tear down your test pod:
+{% endcomment %}
+7. 最後に、テストとして生成した pod を削除します。
 
     ```shell
     kubectl delete -f pod.yaml
@@ -426,8 +431,11 @@ Docker Desktop では Kubernetes の設定を素早く簡単に行っていく�
 ## Docker Swarm の有効化
 
 {% comment %}
-{% endcomment %}
 Docker Desktop runs primarily on Docker Engine, which has everything you need to run a Swarm built in. Follow the setup and validation instructions appropriate for your operating system:
+{% endcomment %}
+Docker Desktop は主に Docker Engine 上において動作します。
+この Docker Engine があれば、ビルトインの Swarm を動作させることができます。
+利用するオペーレーティングシステム向けの設定および確認の手順を進めてください。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#swarmosx">OSX</a></li>
@@ -440,16 +448,18 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
 #### OSX
 
 {% comment %}
-{% endcomment %}
 1. Open a terminal, and initialize Docker Swarm mode:
+{% endcomment %}
+1. 端末を開いて Docker Swarm モードを初期化します。
 
     ```shell
     docker swarm init
     ```
 
     {% comment %}
-    {% endcomment %}
     If all goes well, you should see a message similar to the following:
+    {% endcomment %}
+    正常に処理されれば、以下のようなメッセージが出力されます。
 
     ```shell
     Swarm initialized: current node (tjjggogqpnpj2phbfbz8jd5oq) is now a manager.
@@ -462,6 +472,7 @@ Docker Desktop runs primarily on Docker Engine, which has everything you need to
     ```
 
 {% comment %}
+2. Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 {% endcomment %}
 2. Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 

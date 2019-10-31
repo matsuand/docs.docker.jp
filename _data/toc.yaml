@@ -1553,6 +1553,8 @@ manuals:
           path: /ee/ucp/kubernetes/storage/use-azure-files/
         - title: Use AWS EBS Storage
           path: /ee/ucp/kubernetes/storage/configure-aws-storage/
+        - title: Use vSphere Volumes
+          path: /ee/ucp/kubernetes/storage/use-vsphere-volumes/
         - title: Configure iSCSI
           path: /ee/ucp/kubernetes/storage/use-iscsi/
         - title: Deploy a CSI plugin
@@ -4000,7 +4002,7 @@ manuals:
   - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/
-        title: Managing access tokens
+        title: アクセストークンの管理
       - sectiontitle: Two-factor authentication
         section:
           - path: /docker-hub/2fa/
@@ -4019,14 +4021,20 @@ manuals:
     title: 公式イメージ
   - path: /docker-hub/orgs/
     title: チームと組織
-  - path: /docker-hub/convert-account/
-    title: アカウントから組織への変更
+  - sectiontitle: Administration
+    section:
+     - path: /docker-hub/upgrade/
+       title: プランのアップグレード
+     - path: /docker-hub/cancel-downgrade/
+       title: Cancel or downgrade your plan
+     - path: /docker-hub/convert-account/
+       title: アカウントから組織への変更
+     - path: /docker-hub/deactivate-account/
+       title: Deactivate an account or an organization
   - path: /docker-hub/webhooks/
     title: ウェブフック
   - path: /docker-hub/slack_integration/
     title: Slack integration
-  - path: /docker-hub/upgrade/
-    title: プランのアップグレード
   - sectiontitle: 自動ビルド
     section:
       - path: /docker-hub/builds/
@@ -4034,11 +4042,11 @@ manuals:
       - path: /docker-hub/builds/automated-testing/
         title: 自動ビルドのテスト
       - path: /docker-hub/builds/advanced/
-        title: 自動ビルドの応用
+        title: Advanced automated builds
       - path: /docker-hub/builds/link-source/
         title: Link to GitHub and BitBucket
       - path: /docker-hub/builds/classic/
-        title: Classic Automated Builds
+        title: Classic automated builds
   - sectiontitle: Publisher & certified content
     section:
     - path: /docker-hub/publish/
@@ -4057,8 +4065,6 @@ manuals:
       title: Trust chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
-  - path: /docker-hub/deactivate-account/
-    title: Deactivate an account or an organization
 - sectiontitle: Open-source projects
   section:
   - sectiontitle: Docker Notary
