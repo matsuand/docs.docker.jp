@@ -125,7 +125,7 @@ Docker の独自 Linux ディストリビューションは、ただ 1 点を目
 ## Self-cleaning and self-healing
 {% endcomment %}
 {: #self-cleaning-and-self-healing }
-## Self-cleaning and self-healing
+## 自動クリーン機能と自動修正機能
 
 {% comment %}
 Even the most conscientious admin can be caught off guard by issues such as
@@ -133,10 +133,9 @@ unexpectedly aggressive logging or the Linux kernel killing memory-hungry
 processes. In Docker for {{cloudprovider}}, your cluster is resilient to a
 variety of such issues by default.
 {% endcomment %}
-Even the most conscientious admin can be caught off guard by issues such as
-unexpectedly aggressive logging or the Linux kernel killing memory-hungry
-processes. In Docker for {{cloudprovider}}, your cluster is resilient to a
-variety of such issues by default.
+たとえ慎重な管理を行っていたとしても、不意に発生する問題というものがあります。
+たとえば予想に反してログ出力が頻繁に発生したり、Linux カーネルのメモリを大量消費するプロセスが停止したり、といったことです。
+これが Docker for {{cloudprovider}} であれば、そういった諸問題に対してクラスターをすばやく復旧させる能力をデフォルトで有しています。
 
 {% comment %}
 Log rotation native to the host is configured for you automatically, so chatty
@@ -147,28 +146,26 @@ similar constructs, so that if a node enters an unhealthy state for unforeseen
 reasons, the node is taken out of load balancer rotation and/or replaced
 automatically and all of its container tasks are rescheduled.
 {% endcomment %}
-Log rotation native to the host is configured for you automatically, so chatty
-logs don't use up all of your disk space. Likewise, the "system prune" option
-allows you to ensure unused Docker resources such as old images are cleaned up
-automatically. The lifecycle of nodes is managed using auto-scaling groups or
-similar constructs, so that if a node enters an unhealthy state for unforeseen
-reasons, the node is taken out of load balancer rotation and/or replaced
-automatically and all of its container tasks are rescheduled.
+ログローテーションの設定は、ホストに適応したものが自動的に設定されます。
+長々としたログであったとしても、ディスク容量をくいつぶすようなことにはなりません。
+同じようなこととして、Docker には「system prune」オプションなるものがあります。
+これにより、古いイメージなど未使用の Docker リソースは自動的に削除されるようになっています。
+ノードの存続期間は、自動スケーリンググループや同様の構成により管理されるので、予期しない理由によりノードが不健康な状態におちいったとすると、そのノードはロードバランサーのローテーションから除外されたり、自動的に置き換えられたりします。
+そしてコンテナー内のタスクはすべて、再スケジュールされることになります。
 
 {% comment %}
 These self-cleaning and self-healing properties are enabled by default and don't
 need configuration, so you can breathe easier as the risk of downtime is
 reduced.
 {% endcomment %}
-These self-cleaning and self-healing properties are enabled by default and don't
-need configuration, so you can breathe easier as the risk of downtime is
-reduced.
+このような自動クリーン機能や自動修正機能は、デフォルトにおいて有効になっているため、設定は不要です。
+ダウンタイムのリスクは軽減されるので安心して利用できます。
 
 {% comment %}
 ## Logging native to the platforms
 {% endcomment %}
 {: #logging-native-to-the-platforms }
-## Logging native to the platforms
+## プラットフォームに適応したログ出力
 
 {% comment %}
 Centralized logging is a critical component of many modern infrastructure
@@ -177,11 +174,9 @@ debugging application and system issues as they come up. Out of the box, Docker
 for {{cloudprovider}} forwards logs from containers to a native cloud provider
 abstraction ({{cloudprovider_log_dest}}).
 {% endcomment %}
-Centralized logging is a critical component of many modern infrastructure
-stacks. To have these logs indexed and searchable proves invaluable for
-debugging application and system issues as they come up. Out of the box, Docker
-for {{cloudprovider}} forwards logs from containers to a native cloud provider
-abstraction ({{cloudprovider_log_dest}}).
+現代のインフラストラクチャースタックにおいて、ログ処理を集中管理することは欠かせない重要な機能です。
+そのログをインデックスづけして検索可能にしておくことが、アプリケーションのデバッグやシステム障害への備えとして重要です。
+そして Docker for {{cloudprovider}} は、コンテナー内のログをネイティブなクラウドプロバイダー（{{cloudprovider_log_dest}}）へ出力します。
 
 {% comment %}
 ## Next-generation Docker bug reporting tools
@@ -214,13 +209,13 @@ in bug reports.
 # Try it today
 {% endcomment %}
 {: #try-it-today }
-# Try it today
+# すぐにはじめましょう
 
 {% comment %}
 Ready to get started? [Try Docker for {{cloudprovider}} today](/docker-for-{{cloudprovider | downcase}}/).
 Search for existing issues, or create a new one, within the
 [for {{cloudprovider}}](https://github.com/docker/for-{{cloudprovider | downcase}}) repository.
 {% endcomment %}
-Ready to get started? [Try Docker for {{cloudprovider}} today](/docker-for-{{cloudprovider | downcase}}/).
-Search for existing issues, or create a new one, within the
-[for {{cloudprovider}}](https://github.com/docker/for-{{cloudprovider | downcase}}) repository.
+準備はいいですか？
+[今すぐに Docker for {{cloudprovider}} を試してみてください](/docker-for-{{cloudprovider | downcase}}/)。
+なにかの問題を検索したり、報告したりする場合は [Docker for {{cloudprovider}}](https://github.com/docker/for-{{cloudprovider | downcase}}) リポジトリを利用してください。

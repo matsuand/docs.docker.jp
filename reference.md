@@ -13,8 +13,8 @@ various APIs, CLIs, and file formats.
 {% comment %}
 ## File formats
 {% endcomment %}
-## ファイルフォーマット
 {: #file-formats }
+## ファイルフォーマット
 
 {% comment %}
 | File format                                                         | Description                                                     |
@@ -31,8 +31,8 @@ various APIs, CLIs, and file formats.
 {% comment %}
 ## Command-line interfaces (CLIs)
 {% endcomment %}
-## コマンドラインインターフェース（Command-line interfaces; CLI）
 {: #command-line-interfaces-clis }
+## コマンドラインインターフェース（Command-line interfaces; CLI）
 
 {% comment %}
 | CLI                                                           | Description                                                                                                     |
@@ -54,12 +54,12 @@ various APIs, CLIs, and file formats.
 {% comment %}
 ## Application programming interfaces (APIs)
 {% endcomment %}
-## アプリケーションプログラミングインターフェース（API）
 {: #application-programming-interfaces-APIs }
+## アプリケーションプログラミングインターフェース（API）
 
 | API                                                   | Description                                                                            |
 |:------------------------------------------------------|:---------------------------------------------------------------------------------------|
-| [Engine API](/engine/api/)                            | The main API for Docker, provides programmatic access to a [daemon](/glossary/#daemon) |
+| [Engine API](/engine/api/)                            | The main API for Docker, provides programmatic access to a daemon |
 | [Registry API](/registry/spec/api/)                   | Facilitates distribution of images to the engine                                       |
 | [DTR API](/reference/dtr/{{ site.dtr_version }}/api/) | Provides programmatic access to a Docker Trusted Registry deployment                   |
 | [UCP API](/reference/ucp/{{ site.ucp_version }}/api/) | Provides programmatic access to a Universal Control Plane deployment                   |

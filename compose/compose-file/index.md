@@ -45,6 +45,17 @@ Compose ファイルフォーマットには 1、2、2.x、3.x という複数�
 {: id="compose-file-structure-and-examples" }
 ## Compose ファイルの構造と記述例
 
+{% comment %}
+Here is a sample Compose file from the voting app sample used in the
+[Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
+topic on [Deploying an app to a
+Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md):
+{% endcomment %}
+Here is a sample Compose file from the voting app sample used in the
+[Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
+topic on [Deploying an app to a
+Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md):
+
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
     Compose ファイル バージョン 3 の記述例
@@ -159,36 +170,6 @@ Compose file.
 最上位のキー項目とは、設定ファイルにおいてのセクションを定義するものであり、`build`、`deploy`、`depends_on`、`networks`などのことです。
 そのキー項目ごとに、それをサポートするオプションをサブトピックとして説明しています。
 これは Compose ファイルにおいて `<key>: <option>: <value>` という形式のインデント構造に対応します。
-
-{% comment %}
-A good place to start is the [Getting Started](/get-started/index.md) tutorial
-which uses version 3 Compose stack files to implement multi-container apps,
-service definitions, and swarm mode. Here are some Compose files used in the
-tutorial.
-{% endcomment %}
-理解しやすいのは、[はじめよう](/get-started/index.md)にて示しているチュートリアルです。
-そこでは Compose ファイルのバージョン 3 を使って、マルチコンテナーアプリケーション、サービス定義、スウォームモードを実現しています。
-チュートリアルで利用している Compose ファイルは以下のものです。
-
-{% comment %}
-- [Your first docker-compose.yml File](/get-started/part3.md#your-first-docker-composeyml-file)
-{% endcomment %}
-- [はじめての docker-compose.yml ファイル](/get-started/part3.md#your-first-docker-composeyml-file)
-
-{% comment %}
-- [Add a new service and redeploy](/get-started/part5.md#add-a-new-service-and-redeploy)
-{% endcomment %}
-- [サービスの新規追加と再デプロイ](/get-started/part5.md#add-a-new-service-and-redeploy)
-
-{% comment %}
-Another good reference is the Compose file for the voting app sample used in the
-[Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
-topic on [Deploying an app to a
-Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md). This is also shown on the accordion at the top of this section.
-{% endcomment %}
-別のリファレンスとして [Deploying an app to a
-Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md) の中のトピック [Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/) において利用されている投票アプリのサンプルの Compose ファイルが参考になります。
-これも本節の上部にあるプルダウンのコードの中に示しています。
 
 {% comment %}
 ## Service configuration reference

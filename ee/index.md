@@ -301,12 +301,12 @@ Windows applications typically require Active Directory authentication in order 
 
 {% comment %}
 Docker Enterprise exposes the standard Docker API, so you can continue using the tools
-that you already know, including the Docker CLI client, to deploy and manage your
-applications.
+that you already know, [including the Docker CLI client](./ucp/user-access/cli/),
+to deploy and manage your applications.
 {% endcomment %}
 Docker Enterprise exposes the standard Docker API, so you can continue using the tools
-that you already know, including the Docker CLI client, to deploy and manage your
-applications.
+that you already know, [including the Docker CLI client](./ucp/user-access/cli/),
+to deploy and manage your applications.
 
 {% comment %}
 For example, you can use the `docker info` command to check the
@@ -347,11 +347,11 @@ Managers: 1
 ## Use the Kubernetes CLI
 
 {% comment %}
-Docker Enterprise exposes the standard Kubernetes API, so you can use `kubectl` to
-manage your Kubernetes workloads:
+Docker Enterprise exposes the standard Kubernetes API, so you can use [kubectl
+to manage your Kubernetes workloads](./ucp/user-access/cli/):
 {% endcomment %}
-Docker Enterprise exposes the standard Kubernetes API, so you can use `kubectl` to
-manage your Kubernetes workloads:
+Docker Enterprise exposes the standard Kubernetes API, so you can use [kubectl
+to manage your Kubernetes workloads](./ucp/user-access/cli/):
 
 ```bash
 kubectl cluster-info
@@ -370,7 +370,7 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
 ## Docker Context
-A new Docker CLI plugin called `docker context` is available with this release. `docker context` helps manage connections to multiple environments so you do not have to remember and type out connection strings. [Read more](../engine/reference/commandline/context/) about `docker context`.
+A new Docker CLI plugin called `docker context` is available with client version 19.03.0. `docker context` helps manage connections to multiple environments so you do not have to remember and type out connection strings. [Read more](../engine/reference/commandline/context/) about `docker context`.
 
 
 {% comment %}

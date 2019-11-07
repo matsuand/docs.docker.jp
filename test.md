@@ -262,8 +262,8 @@ The glossary source lives in the documentation repository
 
 To update glossary content, edit `_data/glossary.yaml`.
 
-To link to a glossary term, link to `glossary.md?term=YourGlossaryTerm` (for
-example, [swarm](glossary.md?term=swarm)).
+To link to a glossary term, link to `glossary.md#YourGlossaryTerm` (for
+example, [swarm](glossary.md#swarm)).
 
 ## Site-wide variables
 

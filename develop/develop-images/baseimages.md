@@ -17,22 +17,22 @@ Dockerfile は普通は親イメージから作り始めます。
 その違いは以下のとおりです。
 
 {% comment %}
-- A [parent image](/glossary.md?term=parent%20image) is the image that your
+- A [parent image](/glossary.md#parent_image) is the image that your
   image is based on. It refers to the contents of the `FROM` directive in the
   Dockerfile. Each subsequent declaration in the Dockerfile modifies this parent
   image. Most Dockerfiles start from a parent image, rather than a base image.
   However, the terms are sometimes used interchangeably.
 {% endcomment %}
-- [親イメージ](/glossary.md?term=parent%20image)は基準とするイメージのことです。
+- [親イメージ](/glossary.md#parent_image) は基準とするイメージのことです。
   Dockerfile 内の `FROM` ディレクティブによって指定されます。
   Dockerfile 内のこれに続く定義は、その親イメージを修正指示するものとなります。
   Dockerfile は普通は親イメージから作り始め、ベースイメージから作るのはまれです。
   ただしこの用語は混同されて用いられることもあります。
 
 {% comment %}
-- A [base image](/glossary.md?term=base%20image) has `FROM scratch` in its Dockerfile.
+- A [base image](/glossary.md#base_image) has `FROM scratch` in its Dockerfile.
 {% endcomment %}
-- [ベースイメージ](/glossary.md?term=base%20image) は Dockerfile において `FROM scratch` に記述されるものです。
+- [ベースイメージ](/glossary.md#base_image) は Dockerfile において `FROM scratch` に記述されるものです。
 
 {% comment %}
 This topic shows you several ways to create a base image. The specific process
