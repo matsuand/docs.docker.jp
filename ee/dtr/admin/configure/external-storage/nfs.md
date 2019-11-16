@@ -82,6 +82,6 @@ docker run -it --rm {{ page.dtr_org }}/{{ page.dtr_repo }}:{{ page.dtr_version}}
 - [Restore from a backup](/ee/dtr/admin/disaster-recovery/restore-from-backup/)
 - [Configure where images are stored](index.md)
 - CLI reference pages
-  - [docker/dtr install](/reference/dtr/2.6/cli/install/)
-  - [docker/dtr reconfigure](/reference/dtr/2.6/cli/reconfigure/)
-  - [docker/dtr restore](/reference/dtr/2.6/cli/restore/)
+  - [docker/dtr install](/reference/dtr/{{ site.dtr_version }}/cli/install/)
+  - [docker/dtr reconfigure](/reference/dtr/{{ site.dtr_version }}/cli/reconfigure/)
+  - [docker/dtr restore](/reference/dtr/{{ site.dtr_version }}/cli/restore/)

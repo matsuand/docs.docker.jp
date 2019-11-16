@@ -1,5 +1,5 @@
 ---
-title: "はじめよう 1部: 概要とセットアップ"
+title: "概要とセットアップ"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Get oriented on some basics of Docker and install Docker Desktop.
 redirect_from:

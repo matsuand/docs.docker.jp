@@ -1,5 +1,5 @@
 ---
-title: Docker Buildx の利用（試験的）
+title: Docker Buildx
 description: Docker Buildx の利用
 keywords: Docker, buildx, multi-arch
 ---

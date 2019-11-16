@@ -50,16 +50,6 @@ stack files now are fully supported. A stack file is a particular type of
 スタックファイルとは [Compose ファイルバージョン 3](/compose/compose-file/index.md) の特定の形ということができます。
 
 {% comment %}
-If you are just getting started with Docker and want to learn the best way to
-deploy multi-service applications, a good place to start is the [Get Started
-walkthrough](/get-started/). This shows you how to define
-a service configuration in a Compose file, deploy the app, and use
-the relevant tools and commands.
-{% endcomment %}
-Docker に取り掛かかり始めたばかりの方が、次に複数サービスによるアプリケーションのデプロイ方法を学ぶとすれば、[はじめよう](/get-started/) を読んでみるのがよいと思います。
-そこでは Compose ファイルに 1 つのサービス設定を定義して、アプリをデプロイし、関連ツールやコマンドを使っていく方法が示されています。
-
-{% comment %}
 ## Produce a bundle
 {% endcomment %}
 ## バンドルの生成
@@ -419,11 +409,6 @@ A service has the following fields:
 {% endcomment %}
 ## 関連トピック
 {: #related-topics }
-
-{% comment %}
-* [Get started walkthrough](/get-started/)
-{% endcomment %}
-* [はじめよう](/get-started/)
 
 {% comment %}
 * [docker stack deploy](/engine/reference/commandline/stack_deploy/) command

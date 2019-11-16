@@ -1,5 +1,5 @@
 ---
-title: "はじめよう 2 部: アプリのコンテナー化"
+title: "アプリのコンテナー化"
 keywords: containers, images, dockerfiles, node, code, coding, build, push, run
 description: Learn how to create a Docker image by writing a Dockerfile, and use it to run a simple container.
 ---

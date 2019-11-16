@@ -1,12 +1,12 @@
 ---
-description: RHEL 上に Docker EE をインストールする手順を説明。
+description: RHEL 上に Docker Engine - Enterprise をインストールする手順を説明。
 keywords: requirements, installation, rhel, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/rhel/
 - /installation/rhel/
 - /engine/installation/linux/rhel/
 - /engine/installation/linux/docker-ee/rhel/
-title: Docker EE の入手（Red Hat Enterprise Linux 向け）
+title: Docker Engine - Enterprise の入手（Red Hat Enterprise Linux 向け）
 ---
 
 {% assign linux-dist = "rhel" %}
@@ -60,11 +60,11 @@ Docker EE では {{ linux-dist-long }} 64 ビット、バージョン 7.4 また
 {% comment %}
 > Little-endian format only
 >
-> On IBM Power systems, Docker EE only supports little-endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little-endian versions.
+> On IBM Power systems, Docker Engine - Enterprise only supports little-endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little-endian versions.
 {% endcomment %}
 > リトルエンディアン方式のみ
 >
-> {{ linux-dist-cap }} 7 にはビッグエンディアン、リトルエンディアンの両バージョンがありますが、IBM Power システムにおいて Docker EE はリトルエンディアン方式、つまり`ppc64le`のみをサポートします。
+> {{ linux-dist-cap }} 7 にはビッグエンディアン、リトルエンディアンの両バージョンがありますが、IBM Power システムにおいて Docker Engine - Enterprise はリトルエンディアン方式、つまり `ppc64le` のみをサポートします。
 
 {% comment %}
 On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `devicemapper`. In Docker EE 17.06.2-ee-5 and higher, `overlay2` is the recommended storage driver. The following limitations apply:
@@ -212,10 +212,10 @@ root ユーザーにより Docker サービスを再起動します。
 `$ sudo systemctl restart docker`
 
 {% comment %}
-### Find your Docker EE repo URL
+### Find your Docker Engine - Enterprise repo URL
 {% endcomment %}
-### Docker EE のリポジトリ URL
-{: #find-your-docker-ee-repo-url }
+### Docker Engine - Enterprise のリポジトリ URL
+{: #find-your-docker-engine-enterprise-repo-url }
 
 {% include ee-linux-install-reuse.md section="find-ee-repo-url" %}
 
@@ -329,10 +329,10 @@ $ sudo yum remove docker \
 
 
 {% comment %}
-## Uninstall Docker EE
+## Uninstall Docker Engine - Enterprise
 {% endcomment %}
-## Docker EE のアンインストール
-{: #uninstall-docker-ee }
+## Docker Engine - Enterprise のアンインストール
+{: #uninstall-docker-engine-enterprise }
 
 {% include ee-linux-install-reuse.md section="yum-uninstall" %}
 

@@ -90,6 +90,6 @@ DTR supports Amazon S3 or other storage systems that are S3-compatible like Mini
 - [Use NFS](nfs.md)
 - [Use S3](s3.md)
 - CLI reference pages
-  - [docker/dtr install](/reference/dtr/2.6/cli/install/)
-  - [docker/dtr reconfigure](/reference/dtr/2.6/cli/reconfigure/)
-  - [docker/dtr restore](/reference/dtr/2.6/cli/restore/)
+  - [docker/dtr install](/reference/dtr/{{ site.dtr_version }}/cli/install/)
+  - [docker/dtr reconfigure](/reference/dtr/{{ site.dtr_version }}/cli/reconfigure/)
+  - [docker/dtr restore](/reference/dtr/{{ site.dtr_version }}/cli/restore/)

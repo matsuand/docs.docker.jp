@@ -108,7 +108,6 @@ Compose には、アプリケーションのライフサイクルを管理する
 
 {% comment %}
 - [Installing Compose](install.md)
-- [Getting Started](gettingstarted.md)
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
@@ -117,7 +116,6 @@ Compose には、アプリケーションのライフサイクルを管理する
 - [Compose file reference](compose-file/index.md)
 {% endcomment %}
 - [Compose のインストール](install.md)
-- [Compose をはじめよう](gettingstarted.md)
 - [Django を使ってはじめよう](django.md)
 - [Rails を使ってはじめよう](rails.md)
 - [WordPress を使ってはじめよう](wordpress.md)
@@ -137,15 +135,15 @@ The features of Compose that make it effective are:
 Compose には特徴的な以下の機能があります。
 
 {% comment %}
-* [Multiple isolated environments on a single host](overview.md#Multiple-isolated-environments-on-a-single-host)
-* [Preserve volume data when containers are created](overview.md#preserve-volume-data-when-containers-are-created)
-* [Only recreate containers that have changed](overview.md#only-recreate-containers-that-have-changed)
-* [Variables and moving a composition between environments](overview.md#variables-and-moving-a-composition-between-environments)
+* [Multiple isolated environments on a single host](#multiple-isolated-environments-on-a-single-host)
+* [Preserve volume data when containers are created](#preserve-volume-data-when-containers-are-created)
+* [Only recreate containers that have changed](#only-recreate-containers-that-have-changed)
+* [Variables and moving a composition between environments](#variables-and-moving-a-composition-between-environments)
 {% endcomment %}
-* [1 つのホスト上で分離された環境を複数実現](overview.md#Multiple-isolated-environments-on-a-single-host)
-* [コンテナー生成時はボリュームデータを維持](overview.md#preserve-volume-data-when-containers-are-created)
-* [変更のあったコンテナーのみ再作成](overview.md#only-recreate-containers-that-have-changed)
-* [変数と環境間の移行](overview.md#variables-and-moving-a-composition-between-environments)
+* [1 つのホスト上で分離された環境を複数実現](#multiple-isolated-environments-on-a-single-host)
+* [コンテナー生成時はボリュームデータを維持](#preserve-volume-data-when-containers-are-created)
+* [変更のあったコンテナーのみ再作成](#only-recreate-containers-that-have-changed)
+* [変数と環境間の移行](#variables-and-moving-a-composition-between-environments)
 
 {% comment %}
 ### Multiple isolated environments on a single host

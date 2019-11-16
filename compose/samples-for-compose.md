@@ -68,29 +68,4 @@ Docker Compose to set up and run a Rails/PostgreSQL app.
 use Docker Compose to set up and run WordPress in an isolated environment
 with Docker containers.
 {% endcomment %}
-- [クイックスタート: Compose と WordPress](/compose/wordpress.md) - Docker Compose を使って、独立した環境内にて WordPress をセットアップし実行する方法を示します。
-
-{% comment %}
-## Samples that include Compose in the workflows
-{% endcomment %}
-{: #samples-that-include-compose-in-the-workflows }
-## Samples that include Compose in the workflows
-
-{% comment %}
-These samples include working with Docker Compose as part of broader learning
-goals:
-{% endcomment %}
-These samples include working with Docker Compose as part of broader learning
-goals:
-
-{% comment %}
-- [Get Started with Docker](/get-started/index.md) - This multi-part tutorial covers writing your first app, data storage, networking, and swarms,
-and ends with your app running on production servers in the cloud.
-{% endcomment %}
-- [Docker をはじめよう](/get-started/index.md) - This multi-part tutorial covers writing your first app, data storage, networking, and swarms,
-and ends with your app running on production servers in the cloud.
-
-{% comment %}
-- [Deploying an app to a Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md) - This tutorial from [Docker Labs](https://github.com/docker/labs/blob/master/README.md) shows you how to create and customize a sample voting app, deploy it to a [swarm](/engine/swarm.md), test it, reconfigure the app, and redeploy.
-{% endcomment %}
-- [スウォームへのアプリのデプロイ](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md) - This tutorial from [Docker Labs](https://github.com/docker/labs/blob/master/README.md) shows you how to create and customize a sample voting app, deploy it to a [swarm](/engine/swarm.md), test it, reconfigure the app, and redeploy.
+- [クイックスタート: Compose と WordPress](/compose/wordpress.md) - Docker コンテナーを使って、独立した環境内にて WordPress をセットアップし実行する方法を示します。

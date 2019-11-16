@@ -13,7 +13,7 @@ Tag pruning is the process of cleaning up unnecessary or unwanted repository tag
 
 > Tag Pruning
 >
-> When run, tag pruning only deletes a tag and does not carry out any actual blob deletion. For actual blob deletions, see [Garbage Collection](../../admin/configure/garbage-collection.md).
+> When run, tag pruning only deletes a tag and does not carry out any actual blob deletion. For actual blob deletions, see [Garbage Collection](/../admin/configure/garbage-collection.md).
 
 > Known Issue
 >

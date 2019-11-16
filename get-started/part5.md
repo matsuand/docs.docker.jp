@@ -1,5 +1,5 @@
 ---
-title: "はじめよう 5部: Docker Hub でのイメージ共有"
+title: "Docker Hub でのイメージ共有"
 keywords: docker hub, push, images
 description: Learn how to share images on Docker Hub.
 ---
@@ -126,5 +126,3 @@ Now that your image is available on Docker Hub, you'll be able to run it anywher
 Another thing to keep in mind: at the moment, we've only pushed your image to Docker Hub; what about your Dockerfiles, Kube YAML and stack files? A crucial best practice is to keep these in version control, perhaps alongside your source code for your application, and add a link or note in your Docker Hub repository description indicating where these files can be found, preserving the record not only of how your image was built, but how it's meant to be run as a full application.
 {% endcomment %}
 Another thing to keep in mind: at the moment, we've only pushed your image to Docker Hub; what about your Dockerfiles, Kube YAML and stack files? A crucial best practice is to keep these in version control, perhaps alongside your source code for your application, and add a link or note in your Docker Hub repository description indicating where these files can be found, preserving the record not only of how your image was built, but how it's meant to be run as a full application.
-
-

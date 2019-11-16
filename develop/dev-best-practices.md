@@ -141,56 +141,6 @@ keep image size small:
   今利用しているコンテナーがスタンドアロンである場合は、1 つのレプリカからなるサービスコンテナーに移行することを考えてみてください。
   これを行うと、サービスコンテナーのみに提供される機能を活用することができます。
 
-{% comment %}
-## Use swarm services when possible
-{% endcomment %}
-{: #use-swarm-services-when-possible }
-## 可能であればスウォームサービスを利用する
-
-{% comment %}
-- When possible, design your application with the ability to scale using swarm
-  services.
-- Even if you only need to run a single instance of your application, swarm
-  services provide several advantages over standalone containers. A service's
-  configuration is declarative, and Docker is always working to keep the
-  desired and actual state in sync.
-- Networks and volumes can be connected and disconnected from swarm services,
-  and Docker handles redeploying the individual service containers in a
-  non-disruptive way. Standalone containers need to be manually stopped, removed,
-  and recreated to accommodate configuration changes.
-- Several features, such as the ability to store
-  [secrets](/engine/swarm/secrets.md) and [configs](/engine/swarm/configs.md),
-  are only available to services rather than standalone containers. These
-  features allow you to keep your images as generic as possible and to avoid
-  storing sensitive data within the Docker images or containers themselves.
-- Let `docker stack deploy` handle any image pulls for you, instead of using
-  `docker pull`. This way, your deployment doesn't try to pull from nodes
-  that are down. Also, when new nodes are added to the swarm, images are
-  pulled automatically.
-{% endcomment %}
-- 可能であればスウォームサービスを利用し、スケーラブルなアプリケーション設計とします。
-- アプリケーションの実行インスタンスがただ 1 つあれば良い場合であっても、スタンドアロンコンテナーに比べてスウォームサービスには有用な機能が提供されます。
-  サービスの設定は宣言によって行われるため、Docker は常に、設定された内容と実際が同期して動作します。
-- ネットワークやボリュームは、スウォームサービスに対して接続および切断が可能です。
-  そして Docker は個々のサービスコンテナーを、なにも壊すことなく再デプロイします。
-  スタンドアロンコンテナーであれば、設定の変更が発生した場合、コンテナーの停止、削除、再生成を手動で行わなければなりません。
-- サービスコンテナーにはあってスタンドアロンコンテナーにはない機能として、たとえば [secrets](/engine/swarm/secrets.md) や [configs](/engine/swarm/configs.md) を保存する機能といったものがいくつかあります。
-  こういった機能があれば、ビルドするイメージをできるだけ汎用的に作り上げることができ、イメージやコンテナーそのものに機密情報を含ませずに済みます。
-- どのようなイメージであっても、イメージをプルする際には `docker pull` ではなく `docker stack deploy` を用いるようにしてください。
-  こうしておくとデプロイの際に、停止しているノードにおいてプルは行われなくなります。
-  また逆に、スウォームに対して新たにノードが追加された際には、イメージが自動的にプルされます。
-
-{% comment %}
-There are limitations around sharing data amongst nodes of a swarm service.
-If you use [Docker for AWS](/docker-for-aws/persistent-data-volumes.md) or
-[Docker for Azure](/docker-for-azure/persistent-data-volumes.md), you can use the
-Cloudstor plugin to share data amongst your swarm service nodes. You can also
-write your application data into a separate database which supports simultaneous
-updates.
-{% endcomment %}
-スウォームサービスを構成するノード間においてデータを共有する際には、制約がいくつかあります。
-[Docker for AWS](/docker-for-aws/persistent-data-volumes.md) や [Docker for Azure](/docker-for-azure/persistent-data-volumes.md) を利用している場合なら、Cloudstor プラグインを使ってスウォームサービス内のノード間でのデータ共有が可能です。
-またデータベースが同時更新に対応していれば、分散した個々のデータベースに対してアプリケーションからの書き込みも可能になります。
 
 {% comment %}
 ## Use CI/CD for testing and deployment

@@ -1,5 +1,5 @@
 ---
-title: Docker Assemble (試験的)
+title: Docker Assemble
 description: Docker Assemble のインストール。
 keywords: Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#
 ---
