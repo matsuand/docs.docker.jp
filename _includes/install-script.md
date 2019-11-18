@@ -127,6 +127,20 @@ Docker Engine - Community がインストールされました。
 上の出力メッセージに示されているように、デフォルトで非 root ユーザーは Docker コマンドを実行できません。
 
 {% comment %}
+> **Note**:
+>
+> To install Docker without root privileges, see
+> [Run the Docker daemon as a non-root user (Rootless mode)](/engine/security/rootless.md).
+>
+> Rootless mode is currently available as an experimental feature.
+{% endcomment %}
+> **メモ**:
+>
+> ルート権限なしに Docker をインストールする場合は [非ルートユーザーとして Docker デーモンを起動する (rootless モード)](/engine/security/rootless.md) を参照してください。
+>
+> rootless モードは現時点では、試験的機能として利用できます。
+
+{% comment %}
 #### Upgrade Docker after using the convenience script
 {% endcomment %}
 #### 便利スクリプトを使った後の Docker のアップグレード

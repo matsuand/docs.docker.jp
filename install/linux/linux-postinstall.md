@@ -51,6 +51,20 @@ Docker デーモンが起動したときに生成される Unix ソケットは�
 {: .warning}
 
 {% comment %}
+> **Note**:
+>
+> To run Docker without root privileges, see
+> [Run the Docker daemon as a non-root user (Rootless mode)](/engine/security/rootless.md).
+>
+> Rootless mode is currently available as an experimental feature.
+{% endcomment %}
+> **メモ**:
+>
+> ルート権限なしに Docker をインストールする場合は [非ルートユーザーとして Docker デーモンを起動する (rootless モード)](/engine/security/rootless.md) を参照してください。
+>
+> rootless モードは現時点では、試験的機能として利用できます。
+
+{% comment %}
 To create the `docker` group and add your user:
 {% endcomment %}
 `docker` グループを生成してユーザーを追加します。
