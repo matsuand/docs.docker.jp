@@ -5,9 +5,16 @@ title: docker-compose create
 notoc: true
 ---
 
+{% comment %}
+> **This command is deprecated.** Use the [up](up.md) command with `--no-start`
+instead.
+{: .warning }
+{% endcomment %}
+> **このコマンドは廃止予定（deprecated）です**。
+> このかわりに [up](up.md) コマンドに `--no-start` オプションをつけて実行してください。
+{: .warning }
+
 サービスコンテナーを生成します。
-このコマンドは廃止予定（deprecated）です。
-このかわりに `up` コマンドに `--no-start` オプションをつけて実行してください。
 
 {% comment %}
 Usage: create [options] [SERVICE...]

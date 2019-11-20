@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: Docker Machine の導入と概要
 keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
 title: Docker Machine

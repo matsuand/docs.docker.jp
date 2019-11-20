@@ -1,5 +1,4 @@
 ---
-advisory: machine
 description: Docker Machine のインストール方法
 keywords: machine, orchestration, install, installation, docker, documentation, uninstall Docker Machine, uninstall
 title: Docker Machine のインストール
