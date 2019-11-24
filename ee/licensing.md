@@ -7,7 +7,7 @@ toc_max: 2
 ---
 
 {% comment %}
-This page provides information about Docker Enterprise 3.0 licensing. Docker Enterprise 3.0 is a soft bundle of products that deliver the complete the desktop-to-cloud workflow.
+This page provides information about Docker Enterprise 3.0 licensing. Docker Enterprise 3.0 is a soft bundle of products that deliver the complete desktop-to-cloud workflow.
 {% endcomment %}
 このページでは Docker Enterprise 3.0 のライセンスについて説明します。
 Docker Enterprise 3.0 は、デスクトップ環境からクラウド環境への完全なワークフローを実現するソフトウェアバンドルです。

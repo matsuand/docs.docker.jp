@@ -26,63 +26,76 @@ title: Docker Engine - Enterprise の入手（Red Hat Enterprise Linux 向け）
 {: #prerequisites }
 
 {% comment %}
-This section lists what you need to consider before installing Docker EE. Items that require action are explained below.
+This section lists what you need to consider before installing Docker Engine -
+Enterprise. Items that require action are explained below.
 {% endcomment %}
-ここでは Docker EE をインストールする前に考慮しておくべきことを説明します。
+ここでは Docker Engine - Enterprise をインストールする前に考慮しておくべきことを説明します。
 作業を必要とする項目を以下に示します。
 
 {% comment %}
-- Use {{ linux-dist-cap }} 64-bit 7.4 and higher on `x86_64`, or `s390x`.
-- Use storage driver `overlay2` or `devicemapper` (`direct-lvm` mode in production).
-- Find the URL for your Docker EE repo at [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" }.
+- Use {{ linux-dist-cap }} 64-bit 7.4 and higher on `x86_64`.
+- Use storage driver `overlay2` or `devicemapper` (`direct-lvm` mode in
+  production).
+- Find the URL for your Docker Engine - Enterprise repo at [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" }.
 - Uninstall old versions of Docker.
 - Remove old Docker repos from `/etc/yum.repos.d/`.
-- Disable SELinux on `s390x` (IBM Z) systems before install/upgrade.
 {% endcomment %}
-- {{ linux-dist-cap }} 64 ビット 7.4 またはそれ以上、`x86_64`または`s390x`を利用。
+- `x86_64` 上において {{ linux-dist-cap }} 64 ビット 7.4 またはそれ以上を利用。
 - ストレージドライバーとして `overlay2` または `devicemapper`（本番環境では `direct-lvm` モード）を利用。
-- [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" } から Docker EE リポジトリを検索。
+- [Docker Hub](https://hub.docker.com/my-content){: target="_blank" class="_" } から Docker Engine - Enterprise リポジトリの URL を検索。
 - Docker の旧バージョンはアンインストール。
 - `/etc/yum.repos.d/` から古い Docker リポジトリは削除。
-- `s390x` (IBM Z) システムではインストール、アップグレード前に SELinux を無効化。
+
+> **Note:**
+> IBM Z (`s390x`) is supported for Docker Engine - Enterprise 17.06.xx only. If
+> you're going to install Docker on an IBM Z system, disable SELinux before
+> installing/upgrading and make sure you're installing Docker Engine -
+> Enterprise 17.06.xx.
 
 {% comment %}
 ### Architectures and storage drivers
 {% endcomment %}
-### アーキテクチャーとストレージドライバー
 {: #architectures-and-storage-drivers }
+### アーキテクチャーとストレージドライバー
 
 {% comment %}
-Docker EE supports {{ linux-dist-long }} 64-bit, versions 7.4 and higher running on one of the following architectures: `x86_64`, or `s390x` (IBM Z). See [Compatability Matrix](https://success.docker.com/article/compatibility-matrix){: target="_blank" class="_" }) for specific details.
+Docker Engine - Enterprise supports {{ linux-dist-long }} 64-bit, versions 7.4
+and higher running on `x86_64`. See [Compatibility Matrix](https://success.docker.com/article/compatibility-matrix){: target="_blank" class="_" }
+for specific details.
 {% endcomment %}
-Docker EE では {{ linux-dist-long }} 64 ビット、バージョン 7.4 またはそれ以上、`x86_64`または`s390x` (IBM Z) のアーキテクチャーをサポートします。詳細については[互換性マトリックス](https://success.docker.com/article/compatibility-matrix){: target="_blank" class="_" }（Compatability Matrix）を参照してください。
+Docker Engine - Enterprise では {{ linux-dist-long }} 64 ビット、バージョン 7.4 またはそれ以上、`x86_64` のアーキテクチャーをサポートします。
+詳細については[互換性マトリックス](https://success.docker.com/article/compatibility-matrix){: target="_blank" class="_" }（Compatability Matrix）を参照してください。
 
 {% comment %}
-> Little-endian format only
->
-> On IBM Power systems, Docker Engine - Enterprise only supports little-endian format, `ppc64le`, even though {{ linux-dist-cap }} 7 ships both big and little-endian versions.
+On {{ linux-dist-long }}, Docker Engine - Enterprise supports storage drivers,
+`overlay2` and `devicemapper`. In Docker Engine - Enterprise 17.06.2-ee-5 and
+higher, `overlay2` is the recommended storage driver. The following limitations
+apply:
 {% endcomment %}
-> リトルエンディアン方式のみ
->
-> {{ linux-dist-cap }} 7 にはビッグエンディアン、リトルエンディアンの両バージョンがありますが、IBM Power システムにおいて Docker Engine - Enterprise はリトルエンディアン方式、つまり `ppc64le` のみをサポートします。
-
-{% comment %}
-On {{ linux-dist-long }}, Docker EE supports storage drivers, `overlay2` and `devicemapper`. In Docker EE 17.06.2-ee-5 and higher, `overlay2` is the recommended storage driver. The following limitations apply:
-{% endcomment %}
-{{ linux-dist-long }} において Docker EE はストレージドライバー `overlay2` と `devicemapper` をサポートします。
-Docker EE 17.06.2-ee-5 およびこれ以上においては、`overlay2` の利用が推奨されています。
+{{ linux-dist-long }} において Docker Engine - Enterprise はストレージドライバー `overlay2` と `devicemapper` をサポートします。
+Docker Engine - Enterprise 17.06.2-ee-5 およびこれ以上においては、`overlay2` の利用が推奨されています。
 利用にあたっては以下の制約があります。
 
 {% comment %}
-- [OverlayFS](/storage/storagedriver/overlayfs-driver){: target="_blank" class="_" }: If `selinux` is enabled, the `overlay2` storage driver is supported on {{ linux-dist-cap }} 7.4 or higher. If `selinux` is disabled, `overlay2` is supported on {{ linux-dist-cap }} 7.2 or higher with kernel version 3.10.0-693 and higher.
+- [OverlayFS](/storage/storagedriver/overlayfs-driver){: target="_blank" class="_" }:
+  If `selinux` is enabled, the `overlay2` storage driver is supported on
+  {{ linux-dist-cap }} 7.4 or higher. If `selinux` is disabled, `overlay2` is
+  supported on {{ linux-dist-cap }} 7.2 or higher with kernel version 3.10.0-693
+  and higher.
 {% endcomment %}
-- [OverlayFS](/storage/storagedriver/overlayfs-driver){: target="_blank" class="_" }: `selinux` が有効な場合、ストレージドライバー `overlay2` は {{ linux-dist-cap }} 7.4 またはそれ以上においてサポートされます。
-`selinux` が無効な場合、`overlay2` は {{ linux-dist-cap }} 7.2 またはそれ以上、ただしカーネルバージョンは 3.10.0-693 またはそれ以上においてサポートされます。
+- [OverlayFS](/storage/storagedriver/overlayfs-driver){: target="_blank" class="_" }:
+  `selinux` が有効な場合、ストレージドライバー `overlay2` は {{ linux-dist-cap }} 7.4 またはそれ以上においてサポートされます。
+  `selinux` が無効な場合、`overlay2` は {{ linux-dist-cap }} 7.2 またはそれ以上、ただしカーネルバージョンは 3.10.0-693 またはそれ以上においてサポートされます。
 
 {% comment %}
-- [Device Mapper](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }: On production systems using `devicemapper`, you must use `direct-lvm` mode, which requires one or more dedicated block devices. Fast storage such as solid-state media (SSD) is recommended. Do not start Docker until properly configured per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
+- [Device Mapper](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }:
+  On production systems using `devicemapper`, you must use `direct-lvm` mode,
+  which requires one or more dedicated block devices. Fast storage such as
+  solid-state media (SSD) is recommended. Do not start Docker until properly
+  configured per the [storage guide](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }.
 {% endcomment %}
-- [Device Mapper](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }: 本番環境において `devicemapper` を利用する場合は、`direct-lvm` モードを利用するようにしてください。
+- [Device Mapper](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }:
+  本番環境において `devicemapper` を利用する場合は、`direct-lvm` モードを利用するようにしてください。
   これは専用のブロックデバイスをいくつか必要とします。
   SSD（solid-state media）のような高速なストレージが推奨されます。
   各[ストレージドライバー](/storage/storagedriver/device-mapper-driver/){: target="_blank" class="_" }に応じた設定が適切にできていることを確認してから、Docker を起動してください。
@@ -125,11 +138,13 @@ $ cat /proc/sys/crypto/fips_enabled
 ```
 
 {% comment %}
-> **Note**: FIPS is only supported in the Docker Engine Engine - Enterprise. UCP
+> **Note:**
+> FIPS is only supported in Docker Engine Engine - Enterprise. UCP
 > and DTR currently do not have support for FIPS-140-2.
 {% endcomment %}
-> **メモ**: FIPS は Docker Engine - Enterprise でのみサポートされます。
-UCP と DTR は今のところ FIPS-140-2 をサポートしていません。
+> **メモ**:
+> FIPS は Docker Engine - Enterprise でのみサポートされます。
+> UCP と DTR は今のところ FIPS-140-2 をサポートしていません。
 
 {% comment %}
 You can override FIPS 140-2 compliance on a system that is not in FIPS 140-2
@@ -168,7 +183,7 @@ root ユーザーにより Docker サービスを再起動します。
 
 {% comment %}
 To confirm Docker is running with FIPS-140-2 enabled, run the `docker info`
-command:
+command.
 {% endcomment %}
 FIPS-140-2 を有効にした Docker が稼動しているかを確認するため `docker info` コマンドを実行します。
 
@@ -222,13 +237,16 @@ root ユーザーにより Docker サービスを再起動します。
 {% comment %}
 ### Uninstall old Docker versions
 {% endcomment %}
-### Docker の旧バージョンのアンインストール
 {: #uninstall-old-docker-versions }
+### Docker の旧バージョンのアンインストール
 
 {% comment %}
-The Docker EE package is called `docker-ee`. Older versions were called `docker` or `docker-engine`. Uninstall all older versions and associated dependencies. The contents of `/var/lib/docker/` are preserved, including images, containers, volumes, and networks.
+The Docker Engine - Enterprise package is called `docker-ee`. Older versions
+were called `docker` or `docker-engine`. Uninstall all older versions and
+associated dependencies. The contents of `/var/lib/docker/` are preserved,
+including images, containers, volumes, and networks.
 {% endcomment %}
-Docker EE パッケージは `docker-ee` という名称です。
+Docker Engine - Enterprise パッケージは `docker-ee` という名称です。
 古いバージョンでは `docker` あるいは `docker-engine` というものでした。
 古いバージョンと関連する依存パッケージはすべてアンインストールします。
 `/var/lib/docker/` にはイメージ、コンテナー、ボリューム、ネットワークが含まれていて、それは保持されたまま残ります。
@@ -258,19 +276,26 @@ $ sudo yum remove docker \
 
 {% comment %}
 {% capture selinux-warning %}
-> Disable SELinux before installing Docker EE on IBM Z systems
+> Disable SELinux before installing Docker Engine - Enterprise 17.06.xx on IBM Z
+> systems
 >
-> There is currently no support for `selinux` on IBM Z systems. If you attempt to install or upgrade Docker EE on an IBM Z system with `selinux` enabled, an error is thrown that the `container-selinux` package is not found. Disable `selinux` before installing or upgrading Docker on IBM Z.
+> There is currently no support for `selinux` on IBM Z systems. If you attempt
+> to install or upgrade Docker Engine - Enterprise on an IBM Z system with
+> `selinux` enabled, an error is thrown that the `container-selinux` package is
+> not found. Disable `selinux` before installing or upgrading Docker on IBM Z.
+> IBM Z systems are supported on Docker Engine - Enterprise versions 17.06.xx
+> only.
 {:.warning}
 {% endcapture %}
 {{ selinux-warning }}
 {% endcomment %}
 {% capture selinux-warning %}
-> Docker EE を IBM Z システムへのインストール時は SELinux を無効に
+> Docker Engine - Enterprise を IBM Z システムへのインストール時は SELinux を無効に
 >
 > 現在のところ IBM Z システムにおいては `selinux` をサポートしていません。
 > Docker EE を IBM Z システム上にてインストールまたはアップグレードする際に `selinux` を有効にしていると、`container-selinux` パッケージが見つからないというエラーが発生します。
 > IBM Z システム上にてインストールまたはアップグレードする際には `selinux` を無効にしてください。
+> IBM Z システムがサポートされるのは Docker Engine - Enterprise バージョン 17.06.xx のみです。
 {:.warning}
 {% endcapture %}
 {{ selinux-warning }}

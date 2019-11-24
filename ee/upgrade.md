@@ -34,9 +34,9 @@ This makes it possible to recover if anything goes wrong during the upgrade.
 ## Check the compatibility matrix
 
 You should also check the [compatibility matrix](https://success.docker.com/Policies/Compatibility_Matrix),
-to make sure all Docker EE components are certified to work with one another.
+to make sure all Docker Engine - Enterprise components are certified to work with one another.
 You may also want to check the
-[Docker EE maintenance lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle),
+[Docker Engine - Enterprise maintenance lifecycle](https://success.docker.com/Policies/Maintenance_Lifecycle),
 to understand until when your version may be supported.
 
 ## Apply firewall rules
@@ -216,12 +216,12 @@ $ docker node update --availability drain <node>
 To upgrade a node individually by operating system, please follow the instructions
 listed below:
 
-* [Windows Server](/install/windows/docker-ee.md#update-docker-ee)
-* [Ubuntu](/install/linux/docker-ee/ubuntu.md#upgrade-docker-ee)
-* [RHEL](/install/linux/docker-ee/rhel.md#upgrade-docker-ee)
-* [CentOS](/install/linux/docker-ee/centos.md#upgrade-docker-ee)
-* [Oracle Linux](/install/linux/docker-ee/oracle.md#upgrade-docker-ee)
-* [SLES](/install/linux/docker-ee/suse.md#upgrade-docker-ee)
+* [Windows Server](/install/windows/docker-ee/#update-docker-engine---enterprise)
+* [Ubuntu](/install/linux/docker-ee/ubuntu.md/#upgrade-docker-engine---enterprise)
+* [RHEL](/install/linux/docker-ee/rhel/#upgrade-from-the-repository)
+* [CentOS](/install/linux/docker-ee/centos/#upgrade-from-the-repository)
+* [Oracle Linux](/install/linux/docker-ee/oracle/#upgrade-from-the-repository)
+* [SLES](/install/linux/docker-ee/suse/#upgrade-docker-engine---enterprise)
 
 ### Post-Upgrade steps for Docker Engine - Enterprise
 
