@@ -61,7 +61,7 @@ redirect_from:
 Welcome! We are excited that you want to learn Docker. The _Docker Get Started Tutorial_
 teaches you how to:
 {% endcomment %}
-ようこそ！  皆さんが Docker の使い方を学ぼうとしており、私たちは嬉しく思います。
+ようこそ！  皆さんが Docker の使い方を学ぼうとしていることを喜ばしく思います。
 **Docker をはじめよう** では以下のことを学んでいきます。
 
 {% comment %}
@@ -474,23 +474,25 @@ Docker Desktop は主に Docker Engine 上において動作します。
 {% comment %}
 2. Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
 {% endcomment %}
-2. Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
+2. alpine ベースのファイルシステムを利用する簡単な Docker サービスを起動して 8.8.8.8 への ping を行います。
 
     ```shell
     docker service create --name demo alpine:3.5 ping 8.8.8.8
     ```
 
 {% comment %}
-{% endcomment %}
 3. Check that your service created one running container:
+{% endcomment %}
+3. サービスからコンテナーが起動されていることを確認します。
 
     ```shell
     docker service ps demo
     ```
 
     {% comment %}
-    {% endcomment %}
     You should see something like:
+    {% endcomment %}
+    以下のような出力が得られるはずです。
 
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
@@ -498,16 +500,18 @@ Docker Desktop は主に Docker Engine 上において動作します。
     ```
 
 {% comment %}
-{% endcomment %}
 4. Check that you get the logs you'd expect for a ping process:
+{% endcomment %}
+4. ping 処理結果として得られるログを確認します。
 
     ```shell
     docker service logs demo
     ```
 
     {% comment %}
-    {% endcomment %}
     You should see the output of a healthy ping process:
+    {% endcomment %}
+    出力結果から ping 処理が適切に行われていることがわかります。
 
     ```shell
     demo.1.463j2s3y4b5o@docker-desktop    | PING 8.8.8.8 (8.8.8.8): 56 data bytes
@@ -518,8 +522,9 @@ Docker Desktop は主に Docker Engine 上において動作します。
     ```
 
 {% comment %}
-{% endcomment %}
 5. Finally, tear down your test service:
+{% endcomment %}
+5. 最後に、ここで確認したサービスを終了させます。
 
     ```shell
     docker service rm demo
@@ -535,16 +540,18 @@ Docker Desktop は主に Docker Engine 上において動作します。
 #### Windows
 
 {% comment %}
-{% endcomment %}
 1. Open a powershell, and initialize Docker Swarm mode:
+{% endcomment %}
+1. powershell を起動し Docker Swarm モードを初期化します。
 
     ```shell
     docker swarm init
     ```
 
     {% comment %}
-    {% endcomment %}
     If all goes well, you should see a message similar to the following:
+    {% endcomment %}
+    正常に処理されれば、以下のようなメッセージが出力されます。
 
     ```shell
     Swarm initialized: current node (tjjggogqpnpj2phbfbz8jd5oq) is now a manager.
@@ -557,24 +564,27 @@ Docker Desktop は主に Docker Engine 上において動作します。
     ```
 
 {% comment %}
-{% endcomment %}
 2. Run a simple Docker service that uses an alpine-based filesystem, and isolates a ping to 8.8.8.8:
+{% endcomment %}
+2. alpine ベースのファイルシステムを利用する簡単な Docker サービスを起動して 8.8.8.8 への ping を行います。
 
     ```shell
     docker service create --name demo alpine:3.5 ping 8.8.8.8
     ```
 
 {% comment %}
-{% endcomment %}
 3. Check that your service created one running container:
+{% endcomment %}
+3. サービスからコンテナーが起動されていることを確認します。
 
     ```shell
     docker service ps demo
     ```
 
     {% comment %}
-    {% endcomment %}
     You should see something like:
+    {% endcomment %}
+    以下のような出力が得られるはずです。
 
     ```shell
     ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE           ERROR               PORTS
@@ -582,16 +592,18 @@ Docker Desktop は主に Docker Engine 上において動作します。
     ```
 
 {% comment %}
-{% endcomment %}
 4. Check that you get the logs you'd expect for a ping process:
+{% endcomment %}
+4. ping 処理結果として得られるログを確認します。
 
     ```shell
     docker service logs demo
     ```
 
     {% comment %}
-    {% endcomment %}
     You should see the output of a healthy ping process:
+    {% endcomment %}
+    出力結果から ping 処理が適切に行われていることがわかります。
 
     ```shell
     demo.1.463j2s3y4b5o@docker-desktop    | PING 8.8.8.8 (8.8.8.8): 56 data bytes
@@ -604,7 +616,7 @@ Docker Desktop は主に Docker Engine 上において動作します。
 {% comment %}
 5. Finally, tear down your test service:
 {% endcomment %}
-5. Finally, tear down your test service:
+5. 最後に、ここで確認したサービスを終了させます。
 
     ```shell
     docker service rm demo
@@ -625,7 +637,8 @@ Docker Desktop は主に Docker Engine 上において動作します。
 {% comment %}
 At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kuberentes and Swarm. In the next section, we'll start developing our first containerized application.
 {% endcomment %}
-At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kuberentes and Swarm. In the next section, we'll start developing our first containerized application.
+ここまでは開発マシン上に Docker Desktop をインストールし、単純なコンテナーを Kubernetes や Swarm において実行できることを確認しました。
+次の節ではコンテナー化アプリケーションの開発に進んでいきます。
 
 {% comment %}
 [On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
@@ -641,7 +654,7 @@ At this point, you've installed Docker Desktop on your development machine, and 
 {% comment %}
 Further documentation for all CLI commands used in this article are available here:
 {% endcomment %}
-Further documentation for all CLI commands used in this article are available here:
+本節において用いた CLI コマンドの詳細は、以下により確認することができます。
 
 - [`kubectl apply`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply)
 - [`kubectl get`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
