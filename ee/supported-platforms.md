@@ -1,5 +1,5 @@
 ---
-title: Docker Enterprise について
+title: 概要
 description: Docker Enterprise の製品情報
 keywords: Docker Enterprise, enterprise, enterprise edition, ee, docker ee, docker enterprise edition, lts, commercial, cs engine, commercially supported
 redirect_from:
@@ -53,12 +53,13 @@ solution  to provide enterprises with the most secure container engine in the in
 {% comment %}
 > Note
 >
-> Starting with Docker Enterprise 2.1, Docker Enterprise --- Basic, Docker Enterprise --- Standard,
-> and Docker Enterprise --- Advanced are all now called Docker Enterprise.
+> Starting with Docker Enterprise 2.1, Docker Enterprise - Basic is now Docker Engine - Enterprise,
+> and both Docker Enterprise - Standard and Docker Enterprise - Advanced are now called Docker Enterprise.
 {% endcomment %}
 > メモ
 >
-> Docker Enterprise 2.1 をはじめとする、Docker Enterprise --- Basic、Docker Enterprise --- Standard、Docker Enterprise --- Advanced は、現在はすべて Docker Enterprise と呼び表わしています。
+> Docker Enterprise 2.1 をはじめとする、Docker Enterprise - Basic は現在は Docker Engine - Enterprise として、また
+Docker Enterprise - Standard、Docker Enterprise - Advanced は Docker Enterprise と呼び表わしています。
 
 {% comment %}
 ### Docker Enterprise

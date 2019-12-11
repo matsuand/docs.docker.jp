@@ -293,3 +293,19 @@ Docker クライアントは必要なときにはイメージを取得します�
 COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 ```
 
+## Use a previous stage as a new stage
+
+You can pick up where a previous stage left off by referring to it when using the `FROM` directive. For example:
+
+```Dockerfile
+FROM alpine:latest as builder
+RUN apk --no-cache add build-base
+
+FROM builder as build1
+COPY source1.cpp source.cpp
+RUN g++ -o /binary source.cpp
+
+FROM builder as build2
+COPY source2.cpp source.cpp
+RUN g++ -o /binary source.cpp
+```
