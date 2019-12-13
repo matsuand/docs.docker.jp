@@ -656,7 +656,7 @@ Docker Desktop は主に Docker Engine 上において動作します。
 ## まとめ
 
 {% comment %}
-At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kuberentes and Swarm. In the next section, we'll start developing our first containerized application.
+At this point, you've installed Docker Desktop on your development machine, and confirmed that you can run simple containerized workloads in Kubernetes and Swarm. In the next section, we'll start developing our first containerized application.
 {% endcomment %}
 ここまでは開発マシン上に Docker Desktop をインストールし、単純なコンテナーを Kubernetes や Swarm において実行できることを確認しました。
 次の節ではコンテナー化アプリケーションの開発に進んでいきます。

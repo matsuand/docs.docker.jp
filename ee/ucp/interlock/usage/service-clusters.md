@@ -128,9 +128,10 @@ Next, create an Interlock configuration object that contains multiple extensions
 
 > Important
 >
-> The configuration object specified in the following code sample applies to UCP versions 3.0.10 and later, and versions 3.1.4 and later.
-
-If you are working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, specify `com.docker.ucp.interlock.service-clusters.conf`.
+> The configuration object specified in the following code sample applies to
+> UCP versions 3.0.10 and later, and versions 3.1.4 and later. If you are
+> working with UCP version 3.0.0 - 3.0.9 or 3.1.0 - 3.1.3, the config object
+> should be named `com.docker.ucp.interlock.service-clusters.conf`.
 
 ```bash
 $> cat << EOF | docker config create com.docker.ucp.interlock.conf-1 -

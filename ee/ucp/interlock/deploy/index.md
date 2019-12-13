@@ -160,7 +160,7 @@ oqkvv1asncf6p2axhx41vylgt
 Next, create a dedicated network for Interlock and the extensions:
 
 ```bash
-$> docker network create -d overlay interlock
+$> docker network create --driver overlay ucp-interlock
 ```
 
 ### Create the Interlock service
@@ -172,13 +172,12 @@ on setting up for a production environment.
 
 ```bash
 $> docker service create \
-    --name interlock \
+    --name ucp-interlock \
     --mount src=/var/run/docker.sock,dst=/var/run/docker.sock,type=bind \
-    --network interlock \
+    --network ucp-interlock \
     --constraint node.role==manager \
     --config src=service.interlock.conf,target=/config.toml \
     {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }} -D run -c /config.toml
-sjpgq7h621exno6svdnsvpv9z
 ```
 
 At this point, there should be three (3) services created: one for the Interlock service,
@@ -186,10 +185,10 @@ one for the extension service, and one for the proxy service:
 
 ```bash
 $> docker service ls
-ID                  NAME                MODE                REPLICAS            IMAGE                                                       PORTS
-lheajcskcbby        modest_raman        replicated          1/1                 nginx:alpine                                                *:80->80/tcp *:443->443/tcp
-oxjvqc6gxf91        keen_clarke         replicated          1/1                 {{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}
-sjpgq7h621ex        interlock           replicated          1/1                 {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }}
+ID                  NAME                     MODE                REPLICAS            IMAGE                                                                PORTS
+sjpgq7h621ex        ucp-interlock            replicated          1/1                 {{ page.ucp_org }}/ucp-interlock:{{ page.ucp_version }}
+oxjvqc6gxf91        ucp-interlock-extension  replicated          1/1                 {{ page.ucp_org }}/ucp-interlock-extension:{{ page.ucp_version }}
+lheajcskcbby        ucp-interlock-proxy      replicated          1/1                 {{ page.ucp_org }}/ucp-interlock-proxy:{{ page.ucp_version }}        *:80->80/tcp *:443->443/tcp
 ```
 
 The Interlock traffic layer is now deployed.

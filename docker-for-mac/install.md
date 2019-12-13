@@ -15,6 +15,11 @@ title: Docker Desktop on Mac のインストール
 [Docker Hub からのダウンロード](https://hub.docker.com/?overlay=onboarding){: .button .outline-btn}
 
 {% comment %}
+By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
+{% endcomment %}
+By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
+
+{% comment %}
 ## What to know before you install
 {% endcomment %}
 {: #what-to-know-before-you-install }
@@ -59,6 +64,11 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 - Mac hardware must be a 2010 or newer model, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
 {% endcomment %}
 - Mac hardware must be a 2010 or newer model, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
+
+  {% comment %}
+  If your Mac supports the Hypervisor framework, the command prints `kern.hv_support: 1`.
+  {% endcomment %}
+  If your Mac supports the Hypervisor framework, the command prints `kern.hv_support: 1`.
 
 {% comment %}
 - macOS must be version 10.13 or newer. We recommend upgrading to the latest version of macOS.

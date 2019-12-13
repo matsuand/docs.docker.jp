@@ -108,6 +108,7 @@ Compose には、アプリケーションのライフサイクルを管理する
 
 {% comment %}
 - [Installing Compose](install.md)
+- [Getting started with Compose](gettingstarted.md)
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
@@ -116,6 +117,7 @@ Compose には、アプリケーションのライフサイクルを管理する
 - [Compose file reference](compose-file/index.md)
 {% endcomment %}
 - [Compose のインストール](install.md)
+- [Compose を使ってはじめよう](gettingstarted.md)
 - [Django を使ってはじめよう](django.md)
 - [Rails を使ってはじめよう](rails.md)
 - [WordPress を使ってはじめよう](wordpress.md)
