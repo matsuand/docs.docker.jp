@@ -1,7 +1,8 @@
 ---
 description: Get started with Docker Machine and a local VM
-keywords: docker, machine, virtualbox, local
+keywords: machine, virtualbox
 title: Docker Machine をローカル VM で始めるには
+hide_from_sitemap: true
 ---
 
 Let's take a look at using `docker-machine` to create, use and manage a

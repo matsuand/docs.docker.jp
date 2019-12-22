@@ -156,6 +156,8 @@ mountOptions:
   - gid=1000
 parameters:
   skuName: Standard_LRS
+  storageAccount: <existingstorageaccount> # Optional
+  location: <existingstorageaccountlocation> # Optional
 EOF
 ```
 
@@ -171,8 +173,7 @@ azurefile  kubernetes.io/azure-file   1m
 
 After you create a Storage Class, you can use Kubernetes
 Objects to dynamically provision Azure Files Shares. This is done using
-Kubernetes Persistent Volumes Claims
-[PVCs](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#introduction).
+Kubernetes [Persistent Volumes Claims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#introduction).
 Kubernetes uses an existing Azure Storage Account if one exists inside of the
 Azure Resource Group. If an Azure Storage Account does not exist,
 Kubernetes creates one.
@@ -236,6 +237,50 @@ spec:
       persistentVolumeClaim:
        claimName: azure-file-pvc
 EOF
+```
+
+### Troubleshooting
+
+When creating Persistent Volume Claims, the volume may constantly stay in a
+`Pending` state.
+
+```
+$ kubectl get pvc
+NAME             STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+azure-file-pvc   Pending                                      standard       32s
+```
+
+If that is the case, the `persistent-volume-binder` service account does not
+have the relevant Kubernetes RBAC permissions. The storage account creates a
+Kubernetes secret to store the Azure Files Storage Account Key.
+
+```
+$ kubectl describe pvc azure-file-pvc
+...
+Warning    ProvisioningFailed  7s (x3 over 37s)  persistentvolume-controller
+Failed to provision volume with StorageClass "standard": Couldn't create secret
+secrets is forbidden: User "system:serviceaccount:kube-system:persistent-volume-binder"
+cannot create resource "secrets" in API group "" in the namespace "default": access denied
+```
+
+To grant the `persistent-volume-binder` service account the relevant the RBAC
+permissions, create the following RBAC ClusterRole.
+
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    subjectName: kube-system-persistent-volume-binder
+  name: kube-system-persistent-volume-binder:cluster-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: persistent-volume-binder
+  namespace: kube-system
 ```
 
 ## Where to go next

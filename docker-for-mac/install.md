@@ -1,6 +1,6 @@
 ---
 description: Docker Desktop on Mac のインストール方法。
-keywords: mac, beta, alpha, install, download
+keywords: mac, install, download, run, docker, local, machine
 title: Docker Desktop on Mac のインストール
 ---
 

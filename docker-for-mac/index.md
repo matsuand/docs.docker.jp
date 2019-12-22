@@ -1,6 +1,6 @@
 ---
 description: はじめよう。
-keywords: mac, edge, tutorial
+keywords: mac, tutorial, run, docker, local, machine
 redirect_from:
 - /mackit/
 - /mackit/getting-started/
@@ -25,9 +25,9 @@ The _Docker Desktop for Mac_ section contains information about the Docker Deskt
 The _Docker Desktop for Mac_ section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
 
 {% comment %}
-Docker is a full development platform for creating containerized applications. Docker Desktop is the best way to get started with Docker on Mac.
+Docker is a full development platform to build, run, and share containerized applications. Docker Desktop is the best way to get started with Docker on Mac.
 {% endcomment %}
-Docker is a full development platform for creating containerized applications. Docker Desktop is the best way to get started with Docker on Mac.
+Docker is a full development platform to build, run, and share containerized applications. Docker Desktop is the best way to get started with Docker on Mac.
 
 {% comment %}
 See [Install Docker Desktop](install.md){: target="_blank" class="_"} for download information, system requirements, and installation instructions.

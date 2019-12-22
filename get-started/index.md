@@ -58,11 +58,11 @@ redirect_from:
 {% include_relative nav.html selected="1" %}
 
 {% comment %}
-Welcome! We are excited that you want to learn Docker. The _Docker Get Started Tutorial_
+Welcome! We are excited that you want to learn Docker. The _Docker Community QuickStart_
 teaches you how to:
 {% endcomment %}
 ようこそ！  皆さんが Docker の使い方を学ぼうとしていることを喜ばしく思います。
-**Docker をはじめよう** では以下のことを学んでいきます。
+**Docker Community クイックスタート** では以下のことを学んでいきます。
 
 {% comment %}
 1. Set up your Docker environment (on this page)

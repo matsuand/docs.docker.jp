@@ -1,5 +1,5 @@
 ---
-title: Docker Engine - Community について
+title: Docker Engine 概要
 description: インストール方法を一覧列記。
 keywords: docker, installation, install, Docker Engine - Community, Docker Engine - Enterprise, docker editions, stable, edge
 redirect_from:
@@ -43,11 +43,11 @@ Docker Engine - Community  には更新チャネルとして **安定版**（sta
 ## リリース
 
 {% comment %}
-For the Docker Engine - Community engine, the open
+For the Docker Engine - Community, the open
 repositories [Docker Engine](https://github.com/docker/engine) and
 [Docker Client](https://github.com/docker/cli) apply.
 {% endcomment %}
-Docker Engine - Community エンジンには、[Docker Engine](https://github.com/docker/engine) と
+Docker Engine - Community には、[Docker Engine](https://github.com/docker/engine) と
 [Docker Client](https://github.com/docker/cli) を提供するオープンリポジトリがあります。
 
 {% comment %}
@@ -184,27 +184,6 @@ test channel.
 このリリースからビルドされるバイナリは、安定版チャネル `stable-YY.mm` から入手できます。
 たとえば `stable-18.09` となります。
 テストチャネルについても同様です。
-
-{% comment %}
-### Relationship between Docker Engine - Community and Docker Engine - Enterprise code
-{% endcomment %}
-### Docker Engine - Community と Docker Engine - Enterprise のコード関係
-{: #relationship-between-docker-engine-community-and-docker-engine-enterprise-code }
-
-{% comment %}
-For a given year-month release, Docker releases both Docker Engine - Community and Docker Engine - Enterprise variants concurrently. Docker Engine - Enterprise is a superset of the code delivered in Docker Engine - Community. Docker maintains publicly visible repositories for the Docker Engine - Community code
-as well as private repositories for the Docker Engine - Enterprise code. Automation (a bot) is used to keep the branches between Docker Engine - Community and Docker Engine - Enterprise in sync so as features
-and fixes are merged on the various branches in the Docker Engine - Community repositories (upstream), the corresponding Docker Engine - Enterprise repositories and branches are kept
-in sync (downstream). While Docker and its partners make every effort
-to minimize merge conflicts between Docker Engine - Community and Docker Engine - Enterprise, occasionally they will happen, and Docker will work hard to resolve them in a timely fashion.
-{% endcomment %}
-各年月のリリース時には、Docker Engine - Community、Docker Engine - Enterprise の双方が同時にリリースされます。
-Docker Engine - Enterprise は Docker Engine - Community の提供コードの上位セットです。
-Docker では、Engine - Community のコードをどなたもが見ることができる公開リポジトリ上で管理していますが、Engine - Enterprise コードに対してはプライベートリポジトリを管理しています。
-Engine - Community と Engine - Enterprise 間にあるブランチは、自動的に（bot を用いて）同期が取られています。
-いろいろなブランチ上における機能や修正が Engine - Community リポジトリ上でマージされ（アップストリーム）、対応する Engine - Enterprise リポジトリやブランチが同期されます（ダウンストリーム）。
-Docker や開発パートナーは、Engine - Community と Engine - Enterprise 間のマージ時の衝突をできるだけ少なくするように努めています。
-ただし衝突は起きることがあるため、Docker では適宜、解決を図る努力を行っていきます。
 
 {% comment %}
 ## Next release

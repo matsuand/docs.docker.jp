@@ -2,6 +2,7 @@
 description: Using Docker Machine to provision hosts on cloud providers
 keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
 title: Docker Machine 利用によるクラウドプロバイダーへのプロビジョニング
+hide_from_sitemap: true
 ---
 
 {% comment %}
