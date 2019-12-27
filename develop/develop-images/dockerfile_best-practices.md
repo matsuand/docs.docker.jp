@@ -1240,12 +1240,12 @@ auto-magically bump the version of the software in your container.
 {% comment %}
 Each `ENV` line creates a new intermediate layer, just like `RUN` commands. This
 means that even if you unset the environment variable in a future layer, it
-still persists in this layer and its value can be dumped. You can test this by
+still persists in this layer and its value can't be dumped. You can test this by
 creating a Dockerfile like the following, and then building it.
 {% endcomment %}
 それぞれの `ENV` 行からは新たな中間レイヤーが生成されます。
 `RUN` コマンドと同じです。
-ということはつまり、環境変数を先々のレイヤーにおいて無効化したとしても、その中間レイヤーに変数データは残ることになり、データを失うことなく取得することができます。
+ということはつまり、環境変数を先々のレイヤーにおいて無効化したとしても、その中間レイヤーに変数データは残ることになり、この値を消すことはできません。
 このことを確認するには、以下のような Dockerfile を生成してビルドを行ってみればわかります。
 
 ```Dockerfile

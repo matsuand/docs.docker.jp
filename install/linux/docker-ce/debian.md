@@ -64,7 +64,7 @@ Docker Engine - Community は `x86_64`（または `amd64`）、`armhf`、`arm64
 ### 古いバージョンのアンインストール
 
 {% comment %}
-Older versions of Docker were called `docker`, `docker.io `, or `docker-engine`.
+Older versions of Docker were called `docker`, `docker.io`, or `docker-engine`.
 If these are installed, uninstall them:
 {% endcomment %}
 Docker のかつてのバージョンは、`docker`、`docker.io`、`docker-engine` と呼ばれていました。

@@ -17,15 +17,26 @@ redirect_from:
 - /engine/installation/
 - /en/latest/installation/
 - /linux/
+toc_max: 2
 ---
 
+Docker Engine is an open source containerization technology for building and
+containerizing your applications. Docker Engine acts as a client-server
+application with:
+* A server with a long-running daemon process [`dockerd`](/engine/reference/commandline/dockerd/).
+* APIs which specify interfaces that programs can use to talk to and
+  instruct the Docker daemon.
+* A command line interface (CLI) client [`docker`](/engine/reference/commandline/cli/).
+
+The CLI uses Docker APIs to control or interact with the Docker daemon
+through scripting or direct CLI commands. Many other Docker applications use the
+underlying API and CLI. The daemon creates and manage Docker objects, such as
+images, containers, networks, and volumes.
+
 {% comment %}
-Docker Engine - Community is ideal for developers and small
-teams looking to get started with Docker and experimenting with container-based
-apps. Docker Engine - Community has three types of update channels, **stable**, **test**, and **nightly**:
+Docker Engine has three types of update channels, **stable**, **test**, and **nightly**:
 {% endcomment %}
-Docker Engine - Community は個人の開発者や小さな開発チームに向けたものであり、Docker をはじめようとしたり、コンテナーベースのアプリケーションを試そうとしたりする方に適しています。
-Docker Engine - Community  には更新チャネルとして **安定版**（stable）、**テスト版**（test）、**最新版**（nightly）の 3 つがあります。
+Docker Engine には更新チャネルとして **安定版**（stable）、**テスト版**（test）、**最新版**（nightly）の 3 つがあります。
 
 {% comment %}
 * **Stable** gives you latest releases for general availability.
@@ -36,70 +47,78 @@ Docker Engine - Community  には更新チャネルとして **安定版**（sta
 * **テスト版**（test）は、正規安定版に向けてテスト向けとなっているプレリリース版です。
 * **最新版**（nightly）は、次のメジャーリリースに向けての開発途上の最新ビルド版です。
 
-{% comment %}
-## Releases
-{% endcomment %}
-{: #releases }
-## リリース
+For more information, see [Release channels](#release-channels).
+
+## Supported platforms
+
+Docker Engine is available on a variety of Linux platforms, [Mac](/docker-for-mac/install/)
+and [Windows](/docker-for-windows/install/) through Docker Desktop, Windows
+Server, and as a static binary installation. Find your preferred operating
+system below.
+
+#### Desktop
+
+{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+
+| Platform                                                                    |      x86_64       |
+|:----------------------------------------------------------------------------|:-----------------:|
+| [Docker Desktop for Mac (macOS)](/docker-for-mac/install/)                        | {{ green-check }} |
+| [Docker Desktop for Windows (Microsoft Windows 10)](/docker-for-windows/install/) | {{ green-check }} |
+
+#### Server
+
+{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign install-prefix-ce = '/install/linux/docker-ce' %}
+
+| Platform                                    | x86_64 / amd64                                         | ARM                                                    | ARM64 / AARCH64                                        | IBM Power (ppc64le)                                    | IBM Z (s390x)                                          |
+|:--------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|
+| [CentOS]({{ install-prefix-ce }}/centos/) | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        |                                                        |
+| [Debian]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) |                                                        |                                                        |
+| [Fedora]({{ install-prefix-ce }}/fedora/) | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        |                                                        |
+| [Ubuntu]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) |
+
+## Release channels
+
+### Stable
+
+Year-month releases are made from a release branch diverged from the master
+branch. The branch is created with format `<year>.<month>`, for example
+`18.09`. The year-month name indicates the earliest possible calendar
+month to expect the release to be generally available. All further patch
+releases are performed from that branch. For example, once `v18.09.0` is
+released, all subsequent patch releases are built from the `18.09` branch.
+
+### Test
+
+In preparation for a new year-month release, a branch is created from
+the master branch with format `YY.mm` when the milestones desired by
+Docker for the release have achieved feature-complete. Pre-releases
+such as betas and release candidates are conducted from their respective release
+branches. Patch releases and the corresponding pre-releases are performed
+from within the corresponding release branch.
+
+> **Note:**
+> While pre-releases are done to assist in the stabilization process, no
+> guarantees are provided.
+
+Binaries built for pre-releases are available in the test channel for
+the targeted year-month release using the naming format `test-YY.mm`,
+for example `test-18.09`.
 
 {% comment %}
-For the Docker Engine - Community, the open
-repositories [Docker Engine](https://github.com/docker/engine) and
-[Docker Client](https://github.com/docker/cli) apply.
+### Nightly
 {% endcomment %}
-Docker Engine - Community には、[Docker Engine](https://github.com/docker/engine) と
-[Docker Client](https://github.com/docker/cli) を提供するオープンリポジトリがあります。
-
-{% comment %}
-Releases of Docker Engine and Docker Client for general availability
-are versioned using dotted triples. The components of this triple
-are `YY.mm.<patch>` where the `YY.mm` component is referred to as the
-year-month release. The version numbering format is chosen to illustrate
-cadence and does not guarantee SemVer, but the desired date for general
-availability. The version number may have additional information, such as
-beta and release candidate qualifications. Such releases are considered
-"pre-releases".
-{% endcomment %}
-Docker Engine と Docker Client の正規安定版リリースは、3 つの数字をドットで区切ったバージョン番号により管理されています。
-この 3 つの数字は `YY.mm.<patch>` といった形式で、このうち `YY.mm` の部分はリリースされた年月を表わします。
-バージョン番号のフォーマットは順にあがっていくように番号づけされますが、番号に意味づけを行っているわけではなく、安定版リリース予定の年月を示すにすぎません。
-バージョン番号には付加情報がつくことがあります。
-それはベータ版であるとか、リリース候補であるといった識別情報です。
-そのようなリリースは "プレリリース" として扱われます。
-
-{% comment %}
-The cadence of the year-month releases is every 6 months starting with
-the `18.09` release. The patch releases for a year-month release take
-place as needed to address bug fixes during its support cycle.
-{% endcomment %}
-年月によるリリースは `18.09` のリリース以降 6 ヶ月ごとに行われます。
-その年月リリースに対するパッチのリリースは必要に応じて行われ、年月リリースのサイクルの合間のバグフィックスとして提供されます。
-
-{% comment %}
-Docker Engine - Community binaries for a release are available on [download.docker.com](https://download.docker.com/)
-as packages for the supported operating systems. Docker Engine - Enterprise binaries are
-available on the [Docker Hub](https://hub.docker.com/) for the supported operating systems. The
-release channels are available for each of the year-month releases and
-allow users to "pin" on a year-month release of choice. The release
-channel also receives patch releases when they become available.
-{% endcomment %}
-Docker Engine - Community のバイナリリリースは [download.docker.com](https://download.docker.com/) から、サポートするオペレーティングシステム向けのパッケージとして提供されます。
-Docker Engine - Enterprise のバイナリリリースは [Docker Hub](https://hub.docker.com/) から、サポートするオペレーティングシステム向けに提供されます。
-リリースチャネルは、個々の年月リリースを提供するものなので、年月リリースを選びやすくしています。
-リリースチャネルはまた、パッチリリースが提供された際に、そのパッチリリースを得ることもできます。
-
-{% comment %}
-### Nightly builds
-{% endcomment %}
-{: #nightly-builds }
+{: #nightly }
 ### 最新版
 
 {% comment %}
-Nightly builds are created once per day from the master branch. The version
-number for nightly builds take the format:
+Nightly builds give you the latest builds of work in progress for the next major
+release. They are created once per day from the master branch with the version
+format:
 {% endcomment %}
-最新版（nightly）はマスターブランチから 1 日 1 回生成されます。
-最新版のバージョン番号は以下のような書式です。
+Nightly builds give you the latest builds of work in progress for the next major
+release. They are created once per day from the master branch with the version
+format:
 
     0.0.0-YYYYmmddHHMMSS-abcdefabcdef
 
@@ -112,258 +131,58 @@ of the commit hash, for example `0.0.0-20180720214833-f61e0f7`.
 具体的には `0.0.0-20180720214833-f61e0f7` のようになります。
 
 {% comment %}
-These builds allow for testing from the latest code on the master branch. No
-qualifications or guarantees are made for the nightly builds.
+These builds allow for testing from the latest code on the master branch.
 {% endcomment %}
 このビルドは、マスターブランチにある最新コードを使ったテストのためのものです。
-最新版ビルドの品質、動作は保証されません。
 
-{% comment %}
+> **Note:**
+> No qualifications or guarantees are made for the nightly builds.
+
 The release channel for these builds is called `nightly`.
-{% endcomment %}
-このビルドに対するリリースチャネルは `nightly` と呼ばれます。
 
-{% comment %}
-### Pre-releases
-{% endcomment %}
-### プレリリース
-{: #pre-releases }
-
-{% comment %}
-In preparation for a new year-month release, a branch is created from
-the master branch with format `YY.mm` when the milestones desired by
-Docker for the release have achieved feature-complete. Pre-releases
-such as betas and release candidates are conducted from their respective release
-branches. Patch releases and the corresponding pre-releases are performed
-from within the corresponding release branch.
-{% endcomment %}
-次の年月リリースに向けては、マスターブランチから新たなブランチが `YY.mm` の形式で生成されます。
-これは Docker のリリースに向けて設定されたマイルストーンにおいて、機能実現を達成したときに生成されます。
-ベータ版やリリース候補版などのプレリリース版は、対応するリリースブランチに基づいて作業が行われます。
-パッチリリースとそれに対応するプレリリース版は、対応するリリースブランチに基づいて作業が行われます。
-
-{% comment %}
-While pre-releases are done to assist in the stabilization process, no
-guarantees are provided.
-{% endcomment %}
-プレリリース版の作業は安定性を保って行われますが、保証されるものではありません。
-
-{% comment %}
-Binaries built for pre-releases are available in the test channel for
-the targeted year-month release using the naming format `test-YY.mm`,
-for example `test-18.09`.
-{% endcomment %}
-プレリリース版に対応するバイナリリリースを入手することができます。
-これはテストチャネル内の対象となる年月リリースに対応して `test-YY.mm` といった形式、例えば `test-18.09` といった名前で提供されます。
-
-{% comment %}
-### General availability
-{% endcomment %}
-### 正規安定版（general availability; GA）
-{: #general-availability }
-
-{% comment %}
-Year-month releases are made from a release branch diverged from the master
-branch. The branch is created with format `<year>.<month>`, for example
-`18.09`. The year-month name indicates the earliest possible calendar
-month to expect the release to be generally available. All further patch
-releases are performed from that branch. For example, once `v18.09.0` is
-released, all subsequent patch releases are built from the `18.09` branch.
-{% endcomment %}
-年月によるリリースは、マスターブランチから分岐したリリースブランチとして生成されます。
-このブランチの書式は `<年>.<月>`、たとえば `18.09` となります。
-年月による名前は、正規安定版としてリリースが予定される、最も早い年月が定められます。
-これに対してのパッチリリースも、同じブランチから作り出されます。
-たとえば `v18.09.0` がリリースされた場合に、これに続くパッチリリースは `18.09` ブランチから作られます。
-
-{% comment %}
-Binaries built from this releases are available in the stable channel
-`stable-YY.mm`, for example `stable-18.09`, as well as the corresponding
-test channel.
-{% endcomment %}
-このリリースからビルドされるバイナリは、安定版チャネル `stable-YY.mm` から入手できます。
-たとえば `stable-18.09` となります。
-テストチャネルについても同様です。
-
-{% comment %}
-## Next release
-{% endcomment %}
-{: #next-release }
-## 次期リリース
-
-{% comment %}
-The activity for upcoming year-month releases is tracked in the milestones
-of the repository.
-{% endcomment %}
-直近の年月リリースに向けた活動は、リポジトリ内のマイルストーンによって管理されています。
-
-{% comment %}
 ## Support
-{% endcomment %}
-{: #support }
-## サポート
 
-{% comment %}
-Docker Engine - Community releases of a year-month branch are supported with patches
-as needed for 7 months after the first year-month general availability
-release. Docker Engine - Enterprise releases are supported for 24 months after the first
-year-month general availability release.
-{% endcomment %}
-年月で定めたブランチに基づいた Docker Engine - Community のリリースは、関連するパッチも含めて、正規安定版としてリリースした日から、必要に応じて 7ヶ月後までサポートされます。
-Docker Engine - Enterprise のリリースは、正規安定版のリリース日から 24 ヶ月後までサポートされます。
+Docker Engine releases of a year-month branch are supported with patches as needed for 7 months after the first year-month general availability
+release.
 
-{% comment %}
 This means bug reports and backports to release branches are assessed
 until the end-of-life date.
-{% endcomment %}
-これはつまり、リリース後のブランチに対するバグ報告やバックポートが行われるのは、そのサポート期日までということです。
 
-{% comment %}
 After the year-month branch has reached end-of-life, the branch may be
 deleted from the repository.
-{% endcomment %}
-年月で定められたブランチがサポート期日に達した場合、そのブランチはリポジトリから削除されます。
 
-{% comment %}
-### Reporting security issues
-{% endcomment %}
-{: #reporting-security-issues }
-### セキュリティに関する問題の報告
-
-{% comment %}
-The Docker maintainers take security seriously. If you discover a security
-issue, please bring it to their attention right away!
-{% endcomment %}
-Docker の開発者はセキュリティを重視しています。
-セキュリティに関する問題を発見した場合は、開発者へ適切にお伝えください。
-
-{% comment %}
-Please DO NOT file a public issue; instead send your report privately
-to security@docker.com.
-{% endcomment %}
-報告は公開で行わないでください。
-そのかわりに security@docker.com に個別にあげてください。
-
-{% comment %}
-Security reports are greatly appreciated, and Docker will publicly thank you
-for it. Docker also likes to send gifts — if you're into swag, make sure to
-let us know. Docker currently does not offer a paid security bounty program
-but are not ruling it out in the future.
-{% endcomment %}
-セキュリティ報告は大いに歓迎します。
-Docker からは公開で感謝を示します。
-また何かプレゼントでもお送りしたいと思いますが、不要ならお知らせください。
-なお現時点では、セキュリティ報告に対する報償制度は提供していませんが、将来もそのとおりかどうかはわかりません。
-
-{% comment %}
-### Supported platforms
-{% endcomment %}
-{: #supported-platforms }
-### 対応プラットフォーム
-
-{% comment %}
-Docker Engine - Community is available on multiple platforms. Use the following tables
-to choose the best installation path for you.
-{% endcomment %}
-Docker Engine - Community は各種のプラットフォームにて利用可能です。
-以下の表を参考にして、適切なインストールを選んでください。
-
-{% comment %}
-#### Desktop
-{% endcomment %}
-{: #desktop }
-#### デスクトップ
-
-{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
-
-| プラットフォーム                                                            |      x86_64       |
-|:----------------------------------------------------------------------------|:-----------------:|
-| [Docker Desktop for Mac (macOS)](/docker-for-mac/install/)                        | {{ green-check }} |
-| [Docker Desktop for Windows (Microsoft Windows 10)](/docker-for-windows/install/) | {{ green-check }} |
-
-{% comment %}
-#### Server
-{% endcomment %}
-#### サーバー
-{: #server }
-
-{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
-{% assign install-prefix-ce = '/install/linux/docker-ce' %}
-
-| プラットフォーム                            | x86_64 / amd64                                         | ARM                                                    | ARM64 / AARCH64                                        | IBM Power (ppc64le)                                    | IBM Z (s390x)                                          |
-|:--------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|:-------------------------------------------------------|
-| [CentOS]({{ install-prefix-ce }}/centos/) | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/centos/) |                                                        |                                                        |
-| [Debian]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) | [{{ green-check }}]({{ install-prefix-ce }}/debian/) |                                                        |                                                        |
-| [Fedora]({{ install-prefix-ce }}/fedora/) | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        | [{{ green-check }}]({{ install-prefix-ce }}/fedora/) |                                                        |                                                        |
-| [Ubuntu]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) | [{{ green-check }}]({{ install-prefix-ce }}/ubuntu/) |
-
-{% comment %}
 ### Backporting
-{% endcomment %}
-### バックポート
-{: #backporting }
 
-{% comment %}
 Backports to the Docker products are prioritized by the Docker company. A
 Docker employee or repository maintainer will endeavour to ensure sensible
 bugfixes make it into _active_ releases.
-{% endcomment %}
-Docker 製品へのバックポートは Docker 社によるものが優先されます。
-Docker 社の関係者およびリポジトリ管理者は、バグフィックスを慎重にアクティブなリリースに適用するよう努力していきます。
 
-{% comment %}
 If there are important fixes that ought to be considered for backport to
 active release branches, be sure to highlight this in the PR description
 or by adding a comment to the PR.
-{% endcomment %}
-重大なバグフィックスがあって、アクティブなリリースに向けてのバックポートが必要と考えられる場合は、プルリクエストにおいて目立つように説明してください。
-あるいはプルリクエストにそのようなコメントをつけてください。
 
-{% comment %}
 ### Upgrade path
-{% endcomment %}
-### アップグレードの方針
-{: #upgrade-path }
 
-{% comment %}
 Patch releases are always backward compatible with its year-month version.
-{% endcomment %}
-パッチリリースは常に、年月に基づくリリースと後方互換性を保ちます。
 
-{% comment %}
-## Not covered
-{% endcomment %}
-## 対象外
-{: #not-covered }
+### Licensing
 
-{% comment %}
-As a general rule, anything not mentioned in this document may change in any release.
-{% endcomment %}
-一般的な取り決めとして、本ドキュメントに示していない内容は、リリースによらず変更する可能性があります。
+Docker is licensed under the Apache License, Version 2.0. See
+[LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full
+license text.
 
-{% comment %}
-## Exceptions
-{% endcomment %}
-## 例外的事項
-{: #exceptions }
+## Reporting security issues
 
-{% comment %}
-Exceptions are made in the interest of __security patches__. If a break
-in release procedure or product functionality is required, it will
-be communicated clearly, and the solution will be considered against
-total impact.
-{% endcomment %}
-セキュリティパッチを優先し、これを例外的に扱うことがあります。
-リリース手順や製品機能を取りやめにするような事情が発生した場合は、十分な議論を行ない、全体的な影響を考慮した上で結論を導きます。
+The Docker maintainers take security seriously. If you discover a security
+issue, please bring it to their attention right away!
 
-{% comment %}
+Please DO NOT file a public issue; instead send your report privately
+to security@docker.com.
+
+Security reports are greatly appreciated, and Docker will publicly thank you
+for it.
+
 ## Get started
-{% endcomment %}
-## はじめよう
-{: #get-started }
 
-{% comment %}
 After setting up Docker, you can learn the basics with
 [Getting started with Docker](/get-started/).
-{% endcomment %}
-Docker をセットアップしたら [Docker をはじめよう](/get-started/) を読んで基礎を学んでください。
