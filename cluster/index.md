@@ -4,6 +4,8 @@ keywords: documentation, docs, docker, cluster, infrastructure, automation
 title: Docker Cluster 概要
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 {% comment %}
 Docker Cluster is a tool for lifecycle management of Docker clusters.
 With Cluster, you use a YAML file to configure your provider's resources.

@@ -70,7 +70,7 @@ To start the backend, run:
 バックエンドを起動するには以下を実行します。
 
 ```
-~$ docker assemble backend start`
+~$ docker assemble backend start
 Pulling image «…»: Success
 Started backend container "docker-assemble-backend-username" (3e627bb365a4)
 ```

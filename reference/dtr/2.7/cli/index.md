@@ -4,6 +4,8 @@ description: docker/dtr イメージにおいて利用可能なコマンドに�
 keywords: dtr, install, uninstall, configure
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 {% comment %}
 This tool has commands to install, configure, and backup Docker
 Trusted Registry (DTR). It also allows uninstalling DTR.

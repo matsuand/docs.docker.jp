@@ -4,6 +4,8 @@ keywords: documentation, docs, docker, cluster, infrastructure, automation, Azur
 title: Azure 上にて Docker Cluster をはじめよう
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 {% comment %}
 ## Prerequisites
 {% endcomment %}

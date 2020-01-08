@@ -47,8 +47,8 @@ To install Docker, you need the 64-bit version of one of these Fedora versions:
 {% endcomment %}
 Docker CE をインストールするには、以下に示す Fedora の 64 ビットバージョンのいずれかが必要です。
 
-- 28
-- 29
+- 30
+- 31
 
 {% comment %}
 ### Uninstall old versions
@@ -317,20 +317,27 @@ from the repository.
     Docker はインストールされましたが、まだ起動はしていません。
     グループ ``docker`` が追加されていますが、このグループにはまだユーザーが存在していない状態です。
 
+3.  Cgroups Exception
+    For Fedora 31, you'll have to enable the [backwards compatibility for Cgroups](https://fedoraproject.org/wiki/Common_F31_bugs#Other_software_issues).
+
+    ```bash
+    $ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
+    ```
+
 {% comment %}
-3.  Start Docker.
+4.  Start Docker
 {% endcomment %}
-3. Docker を起動します。
+4.  Docker を起動します。
 
     ```bash
     $ sudo systemctl start docker
     ```
 
 {% comment %}
-4.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
+5.  Verify that Docker Engine - Community is installed correctly by running the `hello-world`
     image.
 {% endcomment %}
-4.  Docker Engine - Community が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
+5.  Docker Engine - Community が正しくインストールされているのを確認するため、`hello-world` イメージを実行します。
 
     ```bash
     $ sudo docker run hello-world

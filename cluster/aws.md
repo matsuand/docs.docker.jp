@@ -4,6 +4,8 @@ keywords: documentation, docs, docker, cluster, infrastructure, automation, AWS
 title: AWS 上にて Docker Cluster をはじめよう
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 {% comment %}
 ## Prerequisites
 {% endcomment %}

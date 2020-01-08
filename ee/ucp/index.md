@@ -7,6 +7,8 @@ redirect_from:
   - /ucp/
 ---
 
+>{% include enterprise_label_shortform.md %}
+
 {% comment %}
 Docker Universal Control Plane (UCP) is the enterprise-grade cluster management
 solution from Docker. You install it on-premises or in your virtual private
@@ -17,7 +19,7 @@ Docker Universal Control Plane (UCP) は Docker が提供するエンタープ�
 これを自社サーバーやプライベートな仮想クラウドにインストールすることができます。
 そして Docker クラスターやアプリケーションを、単一のインターフェースを通じて管理することができます。
 
-![](images/overview-1.png){: .with-border}
+![](images/v32dashboard.png){: .with-border}
 
 {% comment %}
 ## Centralized cluster management
@@ -28,20 +30,18 @@ Docker Universal Control Plane (UCP) は Docker が提供するエンタープ�
 {% comment %}
 With Docker, you can join up to thousands of physical or virtual machines
 together to create a container cluster that allows you to deploy your
-applications at scale. Docker Universal Control Plane extends the
-functionality provided by Docker to make it easier to manage your cluster
-from a centralized place.
+applications at scale. UCP extends the functionality provided by Docker to make it easier to manage your cluster from a centralized place.
 {% endcomment %}
 Docker を使えば、物理マシン、仮想マシンを問わず何千ものマシンを集約して、コンテナークラスターを実現することができます。
 これによって相当規模のアプリケーションをデプロイできます。
-Docker Universal Control Plane は Docker が提供する機能を拡張して、クラスターを一元管理する集中型システムを実現します。
+UCP は Docker が提供する機能を拡張して、クラスターを一元管理する集中型システムを実現します。
 
 {% comment %}
 You can manage and monitor your container cluster using a graphical UI.
 {% endcomment %}
 コンテナークラスターの管理や監視は、グラフィック UI から操作することができます。
 
-![](images/overview-2.png){: .with-border}
+![](images/v32nodes.png){: .with-border}
 
 {% comment %}
 ## Deploy, manage, and monitor
@@ -50,10 +50,10 @@ You can manage and monitor your container cluster using a graphical UI.
 ## デプロイ、管理、監視
 
 {% comment %}
-With Docker UCP, you can manage from a centralized place all of the computing
+With UCP, you can manage from a centralized place all of the computing
 resources you have available, like nodes, volumes, and networks.
 {% endcomment %}
-Docker UCP を用いると、ノード、ボリューム、ネットワークといった利用可能なコンピューターリソースを集中して管理することができます。
+UCP を用いると、ノード、ボリューム、ネットワークといった利用可能なコンピューターリソースを集中して管理することができます。
 
 {% comment %}
 You can also deploy and monitor your applications and services.
@@ -67,23 +67,23 @@ You can also deploy and monitor your applications and services.
 ## ビルトインのセキュリティ制御、アクセス制御
 
 {% comment %}
-Docker UCP has its own built-in authentication mechanism and integrates with
+UCP has its own built-in authentication mechanism and integrates with
 LDAP services. It also has role-based access control (RBAC), so that you can
 control who can access and make changes to your cluster and applications.
 [Learn about role-based access control](authorization/index.md).
 {% endcomment %}
-Docker UCP にはビルトインの認証メカニズムがあり、LDAP サービスと統合しています。
+UCP にはビルトインの認証メカニズムがあり、LDAP サービスと統合しています。
 さらにロールベースアクセス制御（role-based access control; RBAC）も含んでいるため、クラスターやアプリケーションへのアクセスや変更を誰が行うことができるかを制御することができます。
 [ロールベースアクセス制御を学ぶ](authorization/index.md) を参照してください。
 
-![](images/overview-3.png){: .with-border}
+![](images/v32users.png){: .with-border}
 
 {% comment %}
-Docker UCP integrates with Docker Trusted Registry so that you can keep the
+UCP integrates with Docker Trusted Registry (DTR) so that you can keep the
 Docker images you use for your applications behind your firewall, where they
 are safe and can't be tampered with.
 {% endcomment %}
-Docker UCP は Docker Trusted Registry と統合することで、アプリケーションを実現している Docker イメージを、ファイアーウォール内に安全に改ざんされることなく運用することができます。
+UCP は Docker Trusted Registry (DTR) と統合することで、アプリケーションを実現している Docker イメージを、ファイアーウォール内に安全に改ざんされることなく運用することができます。
 
 {% comment %}
 You can also enforce security policies and only allow running applications
@@ -115,7 +115,7 @@ docker info
 ```
 
 {% comment %}
-This command produces the output that you expect from the Docker EE Engine:
+This command produces the output that you expect from Docker Enterprise:
 {% endcomment %}
 上のコマンドの実行により、Docker EE Engine からの期待どおりの出力が行われます。
 
@@ -143,7 +143,7 @@ Managers: 1
 
 {% comment %}
 - [Install UCP](admin/install/index.md)
-- [Docker EE Platform 2.0 architecture](/ee/docker-ee-architecture.md)
+- [Docker Enterprise architecture](/ee/docker-ee-architecture.md)
 {% endcomment %}
 - [UCP のインストール](admin/install/index.md)
-- [Docker EE Platform 2.0 アーキテクチャー](/ee/docker-ee-architecture.md)
+- [Docker Enterprise アーキテクチャー](/ee/docker-ee-architecture.md)
