@@ -4,7 +4,12 @@ description: Learn about Docker App
 keywords: Docker App, applications, compose, orchestration
 ---
 
+{% comment %}
 >This is an experimental feature.
+>
+>{% include experimental.md %}
+{% endcomment %}
+>これは試験的な（experimental）機能です。
 >
 >{% include experimental.md %}
 

@@ -15,7 +15,6 @@ title: Docker Engine - Enterprise の入手（CentOS 向け）
 {% assign package-format = "RPM" %}
 {% assign gpg-fingerprint = "77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9" %}
 
-
 >{% include enterprise_label_shortform.md %}
 
 {% comment %}
