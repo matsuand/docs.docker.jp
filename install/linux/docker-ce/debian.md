@@ -23,19 +23,6 @@ Debian 向けに Docker Engine - Community を始めるには、[前提条件を
 {: #prerequisites }
 ## 前提条件
 
-{% comment %}
-### Docker EE customers
-{% endcomment %}
-{: #docker-ee-customers }
-### Docker EE を利用する方は
-
-{% comment %}
-Docker EE is not supported on Debian. For a list of supported operating systems
-and distributions for different Docker editions, see
-[Docker variants](/install/index.md#docker-variants).
-{% endcomment %}
-Docker EE は Debian ではサポートされていません。
-[その他の Docker](/install/index.md#docker-variants) から、他の Docker エディションを確認し、サポートされているオペレーティングシステムやディストリビューションを探してください。
 
 {% comment %}
 ### OS requirements
@@ -394,8 +381,8 @@ Docker Engine - Community をアップグレードするには、まず `sudo ap
 {% comment %}
 ### Install from a package
 {% endcomment %}
-### パッケージからのインストール
 {: #install-from-a-package }
+### パッケージからのインストール
 
 {% comment %}
 If you cannot use Docker's repository to install Docker Engine - Community, you can download the

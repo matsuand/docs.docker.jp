@@ -20,34 +20,14 @@ CentOS 向けに Docker Engine - Community を始めるには、[前提条件を
 {% comment %}
 ## Prerequisites
 {% endcomment %}
-## 前提条件
 {: #prerequisites }
-
-{% comment %}
-### Docker EE customers
-{% endcomment %}
-### Docker EE を利用する方は
-{: #docker-ee-customers }
-
-{% comment %}
-To install Docker Enterprise Edition (Docker EE), go to
-[Get Docker EE for CentOS](/install/linux/docker-ee/centos/)
-**instead of this topic**.
-{% endcomment %}
-Docker Enterprise エディション（Docker Enterprise Edition; EE）をインストールする場合は、
-**このページではなく** [Docer EE の入手（CentOS 向け）](/install/linux/docker-ee/centos/)に進んでください。
-
-{% comment %}
-To learn more about Docker EE, see
-[Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
-{% endcomment %}
-Docker EE の詳細を学ぶには、[Docker Enterprise エディション](https://www.docker.com/enterprise-edition/)をご覧ください。
+## 前提条件
 
 {% comment %}
 ### OS requirements
 {% endcomment %}
-### OS 要件
 {: #os-requirements }
+### OS 要件
 
 {% comment %}
 To install Docker Engine - Community, you need a maintained version of CentOS 7. Archived
@@ -72,8 +52,8 @@ The `overlay2` storage driver is recommended.
 {% comment %}
 ### Uninstall old versions
 {% endcomment %}
-### 古いバージョンのアンインストール
 {: #uninstall-old-versions }
+### 古いバージョンのアンインストール
 
 {% comment %}
 Older versions of Docker were called `docker` or `docker-engine`. If these are
@@ -108,8 +88,8 @@ networks, are preserved. The Docker Engine - Community package is now called `do
 {% comment %}
 ## Install Docker Engine - Community
 {% endcomment %}
-## Docker Engine - Community のインストール
 {: #install-docker-engine-community }
+## Docker Engine - Community のインストール
 
 {% comment %}
 You can install Docker Engine - Community in different ways, depending on your needs:
@@ -147,8 +127,8 @@ Docker Engine - Community のインストール方法はいくつかあります
 {% comment %}
 ### Install using the repository
 {% endcomment %}
-### リポジトリを利用したインストール
 {: #install-using-the-repository }
+### リポジトリを利用したインストール
 
 {% comment %}
 Before you install Docker Engine - Community for the first time on a new host machine, you need
@@ -161,8 +141,8 @@ from the repository.
 {% comment %}
 #### Set up the repository
 {% endcomment %}
-#### リポジトリのセットアップ
 {: #set-up-the-repository }
+#### リポジトリのセットアップ
 
 {% assign download-url-base = "https://download.docker.com/linux/centos" %}
 
@@ -247,8 +227,8 @@ from the repository.
 {% comment %}
 #### Install Docker Engine - Community
 {% endcomment %}
-#### Docker Engine - Community のインストール
 {: #install-docker-engine-community }
+#### Docker Engine - Community のインストール
 
 {% comment %}
 1.  Install the _latest version_ of Docker Engine - Community and containerd, or go to the next step to install a specific version:
@@ -386,8 +366,8 @@ Docker Engine - Community をアップグレードするには、[インスト�
 {% comment %}
 ### Install from a package
 {% endcomment %}
-### パッケージからのインストール
 {: #install-from-a-package }
+### パッケージからのインストール
 
 {% comment %}
 If you cannot use Docker's repository to install Docker, you can download the
@@ -471,8 +451,8 @@ Docker コマンドの実行には ``sudo`` が必要になります。
 {% comment %}
 #### Upgrade Docker Engine - Community
 {% endcomment %}
-#### Docker Engine - Community のアップグレード
 {: #upgrade-docker-engine-community }
+#### Docker Engine - Community のアップグレード
 
 {% comment %}
 To upgrade Docker Engine - Community, download the newer package file and repeat the
@@ -488,8 +468,8 @@ Docker Engine - Community をアップグレードする場合は、新たなパ
 {% comment %}
 ## Uninstall Docker Engine - Community
 {% endcomment %}
-## Docker Engine - Community のアンインストール
 {: #uninstall-docker-engine-community }
+## Docker Engine - Community のアンインストール
 
 {% comment %}
 1.  Uninstall the Docker package:
@@ -520,8 +500,8 @@ You must delete any edited configuration files manually.
 {% comment %}
 ## Next steps
 {% endcomment %}
-## 次のステップ
 {: #next-steps }
+## 次のステップ
 
 {% comment %}
 - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)

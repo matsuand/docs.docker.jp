@@ -22,19 +22,6 @@ Fedora 向けに Docker Engine - Community を始めるには、[前提条件を
 {: #prerequisites }
 ## 前提条件
 
-{% comment %}
-### Docker EE customers
-{% endcomment %}
-### Docker EE を利用する方は
-{: #docker-ee-customers }
-
-{% comment %}
-Docker EE is not supported on Fedora. For a list of supported operating systems
-and distributions for different Docker editions, see
-[Docker variants](/install/index.md#docker-variants).
-{% endcomment %}
-Docker EE は Fedora ではサポートされていません。
-[その他の Docker](/install/index.md#docker-variants) から、他の Docker エディションを確認し、サポートされているオペレーティングシステムやディストリビューションを探してください。
 
 {% comment %}
 ### OS requirements

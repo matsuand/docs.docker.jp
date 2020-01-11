@@ -195,39 +195,6 @@ exist by default, and provide core networking functionality:
   network stacks.
 
 {% comment %}
-## Docker EE networking features
-{% endcomment %}
-{: #docker-ee-networking-features }
-## Docker EE のネットワーク機能
-
-{% comment %}
-The following two features are only possible when using Docker EE and managing
-your Docker services using Universal Control Plane (UCP):
-{% endcomment %}
-The following two features are only possible when using Docker EE and managing
-your Docker services using Universal Control Plane (UCP):
-
-{% comment %}
-- The [HTTP routing mesh](/ee/ucp/interlock)
-  allows you to share the same network IP address and port among multiple
-  services. UCP routes the traffic to the appropriate service using the
-  combination of hostname and port, as requested from the client.
-{% endcomment %}
-- The [HTTP routing mesh](/ee/ucp/interlock)
-  allows you to share the same network IP address and port among multiple
-  services. UCP routes the traffic to the appropriate service using the
-  combination of hostname and port, as requested from the client.
-
-{% comment %}
-- [Session stickiness](/ee/ucp/interlock/usage/sessions/) allows you to specify information in the HTTP header
-  which UCP uses to route subsequent requests to the same service task, for
-  applications which require stateful sessions.
-{% endcomment %}
-- [Session stickiness](/ee/ucp/interlock/usage/sessions/) allows you to specify information in the HTTP header
-  which UCP uses to route subsequent requests to the same service task, for
-  applications which require stateful sessions.
-
-{% comment %}
 ## Networking tutorials
 {% endcomment %}
 {: #networking-tutorials }
