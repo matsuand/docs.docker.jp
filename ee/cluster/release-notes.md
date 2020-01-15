@@ -29,7 +29,7 @@ This page provides information about Docker Cluster versions.
 
 - Fixed an issue where errors in the cluster commands would return exit code of 0 (DCIS-508)
 
-- New error message displayed when a docker login is required: 
+- New error message displayed when a docker login is required:
 ```Checking for licenses on Docker Hub
    Error: no Hub login info found; please run 'docker login' first
 ```
@@ -101,9 +101,6 @@ This page provides information about Docker Cluster versions.
 First major release.
 {% endcomment %}
 メジャーリリース。
-
-
-
 
 
 

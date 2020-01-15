@@ -522,7 +522,7 @@ When the cluster has reached end-of-life, run `docker cluster rm quickstart`
 
 {% comment %}
 - [Explore the full list of Cluster commands](./reference/index.md)
-- [Cluster configuration file reference](./cluster-file/index.md)
+- [Cluster configuration file reference](/ee/cluster-file/index.md)
 {% endcomment %}
 - [Explore the full list of Cluster commands](./reference/index.md)
-- [Cluster configuration file reference](./cluster-file/index.md)
+- [Cluster configuration file reference](/ee/cluster-file/index.md)
