@@ -6,5 +6,8 @@ build
 .jekyll-metadata.upload
 .ruby-version
 .sass-cache
+_config.yml
+_config.yml.publish
+_config.yml.upload
 _site
 docs.docker.jp.onthefly
