@@ -42,8 +42,8 @@ Practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-pr
 {% comment %}
 ## Usage
 {% endcomment %}
-## 利用方法
 {: #usage }
+## 利用方法
 
 {% comment %}
 The [`docker build`](commandline/build.md) command builds an image from
@@ -281,14 +281,17 @@ be UPPERCASE to distinguish them from arguments more easily.
 
 {% comment %}
 Docker runs instructions in a `Dockerfile` in order. A `Dockerfile` **must
-start with a \`FROM\` instruction**. The `FROM` instruction specifies the [*Base
-Image*](glossary.md#base-image) from which you are building. `FROM` may only be
-preceded by one or more `ARG` instructions, which declare arguments that are used
-in `FROM` lines in the `Dockerfile`.
+begin with a \`FROM\` instruction**. This may be after [parser
+directives](#parser-directives), [comments](#format), and globally scoped
+[ARGs](#arg). The `FROM` instruction specifies the [*Parent
+Image*](glossary.md#parent-image) from which you are building. `FROM`
+may only be preceded by one or more `ARG` instructions, which declare arguments
+that are used in `FROM` lines in the `Dockerfile`.
 {% endcomment %}
 Docker は `Dockerfile` 内の命令を記述順に実行します。
 `Dockerfile` は必ず**`FROM`命令**で始めなければなりません。
-`FROM` 命令は、ビルドするイメージに対しての[*ベースイメージ*](glossary.md#base-image)を指定するものです。
+この命令より前に記述できるのは、[パーサーディレクティブ](#parser-directives)、[コメント](#format)、グローバル定義された [ARG](#arg) です。
+`FROM` 命令は、ビルドするイメージに対しての [*親イメージ*](glossary.md#parent-image) を指定するものです。
 `FROM` よりも先に記述できる命令として `ARG` があります。
 これは `FROM` において用いられる引数を宣言するものです。
 
@@ -985,23 +988,23 @@ the first pattern, followed by one or more `!` exception patterns.
 ## FROM
 
     {% comment %}
-    FROM <image> [AS <name>]
+    FROM [--platform=<platform>] <image> [AS <name>]
     {% endcomment %}
-    FROM <image> [AS <name>]
+    FROM [--platform=<platform>] <image> [AS <name>]
 
 {% comment %}
 Or
 {% endcomment %}
 または
 
-    FROM <image>[:<tag>] [AS <name>]
+    FROM [--platform=<platform>] <image>[:<tag>] [AS <name>]
 
 {% comment %}
 Or
 {% endcomment %}
 または
 
-    FROM <image>[@<digest>] [AS <name>]
+    FROM [--platform=<platform>] <image>[@<digest>] [AS <name>]
 
 {% comment %}
 The `FROM` instruction initializes a new build stage and sets the
@@ -1021,7 +1024,6 @@ the [*Public Repositories*](https://docs.docker.com/engine/tutorials/dockerrepos
 {% endcomment %}
 - `Dockerfile` 内にて `ARG` は、`FROM` よりも前に記述できる唯一の命令です。
   [ARG と FROM の関連について](#understand-how-arg-and-from-interact)を参照してください。
-
 {% comment %}
 - `FROM` can appear multiple times within a single `Dockerfile` to
   create multiple images or use one build stage as a dependency for another.
@@ -1033,7 +1035,6 @@ the [*Public Repositories*](https://docs.docker.com/engine/tutorials/dockerrepos
   これは複数のイメージを生成するため、あるいは 1 つのビルドステージを使って依存イメージをビルドするために行います。
   各 `FROM` 命令までのコミットによって出力される最終のイメージ ID は書き留めておいてください。
   個々の `FROM` 命令は、それ以前の命令により作り出された状態を何も変更しません。
-
 {% comment %}
 - Optionally a name can be given to a new build stage by adding `AS name` to the
   `FROM` instruction. The name can be used in subsequent `FROM` and
@@ -1042,7 +1043,6 @@ the [*Public Repositories*](https://docs.docker.com/engine/tutorials/dockerrepos
 - オプションとして、新たなビルドステージに対しては名前をつけることができます。
   これは `FROM` 命令の `AS name` により行います。
   この名前は後続の `FROM` や `COPY --from=<name|index>` 命令において利用することができ、このビルドステージにおいてビルドされたイメージを参照します。
-
 {% comment %}
 - The `tag` or `digest` values are optional. If you omit either of them, the
   builder assumes a `latest` tag by default. The builder returns an error if it
@@ -1051,6 +1051,14 @@ the [*Public Repositories*](https://docs.docker.com/engine/tutorials/dockerrepos
 - `tag` と `digest` の設定はオプションです。
   これを省略した場合、デフォルトである `latest` タグが指定されたものとして扱われます。
   `tag` の値に合致するものがなければ、エラーが返されます。
+
+The optional `--platform` flag can be used to specify the platform of the image
+in case `FROM` references a multi-platform image. For example, `linux/amd64`,
+`linux/arm64`, or `windows/amd64`. By default, the target platform of the build
+request is used. Global build arguments can be used in the value of this flag,
+for example [automatic platform ARGs](#automatic-platform-args-in-the-global-scope)
+allow you to force a stage to native build platform (`--platform=$BUILDPLATFORM`),
+and use it to cross-compile to the target platform inside the stage.
 
 {% comment %}
 ### Understand how ARG and FROM interact
@@ -3055,8 +3063,8 @@ The following `ARG` variables are set automatically:
 * `TARGETVARIANT` - variant component of TARGETPLATFORM
 * `BUILDPLATFORM` - platform of the node performing the build.
 * `BUILDOS` - OS component of BUILDPLATFORM
-* `BUILDARCH` - OS component of BUILDPLATFORM
-* `BUILDVARIANT` - OS component of BUILDPLATFORM
+* `BUILDARCH` - architecture component of BUILDPLATFORM
+* `BUILDVARIANT` - variant component of BUILDPLATFORM
 {% endcomment %}
 * `TARGETPLATFORM` - ビルド結果のプラットフォーム。 `linux/amd64`、 `linux/arm/v7`、 `windows/amd64` など。
 * `TARGETOS` - TARGETPLATFORM の OS 部分。
