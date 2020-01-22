@@ -24,9 +24,9 @@ To locate the disk image file, select the Docker icon and then
 **Preferences** > **Resources** > **Advanced**.
 
 {% comment %}
-![Disk preferences](images/menu/prefs-advanced.png)
+![Disk preferences](images/menu/prefs-advanced.png){:width="750px"}
 {% endcomment %}
-![Disk preferences](images/menu/prefs-advanced.png)
+![Disk preferences](images/menu/prefs-advanced.png){:width="750px"}
 
 {% comment %}
 The **Advanced** tab displays the location of the disk image. It also displays the maximum size of the disk image and the actual space the disk image is consuming. Note that other tools might display space usage of the file in terms of the maximum file size, and not the actual file size.
