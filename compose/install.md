@@ -373,8 +373,8 @@ Compose は 簡易な bash のラッパースクリプトを用いて、コン�
 コンテナーとして Compose をインストールするには、以下のコマンドを実行します。
 
 ```bash
-$ sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
-$ sudo chmod +x /usr/local/bin/docker-compose
+sudo curl -L --fail https://github.com/docker/compose/releases/download/{{site.compose_version}}/run.sh -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 </div>

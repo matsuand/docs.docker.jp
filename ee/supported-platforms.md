@@ -115,19 +115,13 @@ For Docker Enterprise customers, when you license Universal Control Plane
 Docker recommends that Enterprise customers use UCP to manage their license.
 
 {% comment %}
-Standalone Docker Engine - Enterprise users can license engines using `docker engine activate`.
+Docker distributing the CLI as a separate installation package. This gives Docker
+Enterprise users the ability to install as many CLI packages as needed without
+using the Engine node licenses for client-only systems.
 {% endcomment %}
-Standalone Docker Engine - Enterprise users can license engines using `docker engine activate`.
-
-{% comment %}
-Offline activation of standalone enterprise engines can be performed by downloading the license and using the command `docker engine activate --license filename.lic`.
-{% endcomment %}
-Offline activation of standalone enterprise engines can be performed by downloading the license and using the command `docker engine activate --license filename.lic`.
-
-{% comment %}
-Additionally, Docker is now distributing the CLI as a separate installation package. This gives Docker Enterprise users the ability to install as many CLI packages as needed without using the Engine node licenses for client-only systems.
-{% endcomment %}
-Additionally, Docker is now distributing the CLI as a separate installation package. This gives Docker Enterprise users the ability to install as many CLI packages as needed without using the Engine node licenses for client-only systems.
+Docker distributing the CLI as a separate installation package. This gives Docker
+Enterprise users the ability to install as many CLI packages as needed without
+using the Engine node licenses for client-only systems.
 
 {% comment %}
 [Learn more about Docker Enterprise](/ee/index.md).

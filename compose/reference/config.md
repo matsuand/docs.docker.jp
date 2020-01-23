@@ -3,6 +3,8 @@ description: Compose ファイルを検証して表示します。
 keywords: fig, composition, compose, docker, orchestration, cli, config
 title: docker-compose config
 notoc: true
+redirect_from:
+- /compose/reference/bundle/
 ---
 
 {% comment %}
