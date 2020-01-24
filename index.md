@@ -13,6 +13,7 @@ skip_read_time: true
 {% comment %}
 ## Get started with Docker
 {% endcomment %}
+{: #get-started-with-docker }
 ## Docker をはじめよう
 
 {% comment %}
