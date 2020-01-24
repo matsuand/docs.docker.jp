@@ -4,9 +4,9 @@
 したがってリリース時には予告なく変更される場合があり、将来のリリースでは完全に削除されることもあります。
 試験的な機能は本番環境では利用しないでください。
 Docker ではこの試験的機能に対するサポートは行っていません。
-詳しくは [Experimental features](https://success.docker.com/article/experimental-features) を参照してください。
 >
 > Docker CLI において試験的機能を有効にするには、`config.json` ファイルを編集して `experimental` を有効に設定してください。
 >
-> Docker Desktop メニューから試験的機能を有効にするには、**Settings** (macOS の場合は **Preferences**) > **Daemon** をクリックして、チェックボックス **Experimental features** を選択してください。
+> Docker Desktop メニューから試験的機能を有効にするには、**Settings** (macOS の場合は **Preferences**) > **Command Line** をクリックし、**Enable experimental features** チェックを有効にします。
+そして **Apply & Restart** をクリックしてください。
 {: .important }
