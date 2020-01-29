@@ -962,7 +962,7 @@ reference:
     - path: /engine/api/sdks/
       title: SDKs
     - path: /engine/api/latest/
-      title: v{{ site.latest_engine_api_version }} reference (latest)
+      title: v1.40 reference (latest)
     - sectiontitle: API reference by version
       section:
       - path: /engine/api/version-history/
@@ -1692,6 +1692,8 @@ manuals:
           title: Set the user's session timeout
         - path: /ee/ucp/admin/configure/ucp-configuration-file/
           title: UCP configuration file
+        - path: /ee/ucp/admin/configure/kms-plugin/
+          title: KMS plugin support for UCP
         - path: /ee/ucp/admin/configure/use-node-local-network-in-swarm/
           title: Use a local node network in a swarm
         - path: /ee/ucp/admin/configure/use-your-own-tls-certificates/
