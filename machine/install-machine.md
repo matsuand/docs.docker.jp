@@ -6,28 +6,19 @@ hide_from_sitemap: true
 ---
 
 {% comment %}
-On macOS and Windows, Machine is installed along with other Docker products when
-you install the [Docker for Mac](/docker-for-mac/index.md),
-[Docker for Windows](/docker-for-windows/index.md), or
-[Docker Toolbox](/toolbox/overview.md).
-{% endcomment %}
-macOS と Windows の場合、[Docker for Mac](/docker-for-mac/index.md)、[Docker for Windows](/docker-for-windows/index.md)、[Docker Toolbox](/toolbox/overview.md) をインストールしたら、数ある Docker 製品とともに Docker Machine が同時にインストールされます。
-
-{% comment %}
-If you want only Docker Machine, you can install the Machine binaries directly
-by following the instructions in the next section. You can find the latest
+Install Docker Machine binaries by following the instructions in the following section. You can find the latest
 versions of the binaries on the [docker/machine release
 page](https://github.com/docker/machine/releases/){: target="_blank" class="_" }
 on GitHub.
 {% endcomment %}
-Docker Machine だけをインストールしたい場合は、次の節で示す手順に従って Docker Machine のバイナリを直接インストールすることができます。
+Docker Machine のバイナリをインストールしたい場合は、次の節で示す手順に従います。
 GitHub 上の [docker/machine リリースページ](https://github.com/docker/machine/releases/){: target="_blank" class="_" }に、最新のバイナリバージョンがあります。
 
 {% comment %}
-## Install Machine directly
+## Install Docker Machine
 {% endcomment %}
-## Docker Machine の直接インストール
-{: #install-machine-directly }
+## Docker Machine のインストール
+{: #install-docker-machine }
 
 {% comment %}
 1.  Install [Docker](/engine/installation/index.md){: target="_blank" class="_" }.

@@ -43,11 +43,11 @@ See [Install Docker Desktop](install.md){: target="_blank" class="_"} for downlo
 ## バージョンの確認
 
 {% comment %}
-Ensure your versions of `docker`, `docker-compose`, and `docker-machine` are
+Ensure your versions of `docker` and `docker-compose` are
 up-to-date and compatible with `Docker.app`. Your output may differ if you are
 running different versions.
 {% endcomment %}
-利用している `docker`、`docker-compose`、`docker-machine` のバージョンが最新であること、そして `Docker.app` との互換性があることを確認します。
+利用している `docker`、`docker-compose` のバージョンが最新であること、そして `Docker.app` との互換性があることを確認します。
 以下に示すバージョン出力は、利用しているものにより異なるかもしれません。
 
 ```shell
@@ -508,8 +508,7 @@ topics.
 
 ## Install shell completion
 
-Docker Desktop comes with scripts to enable completion for the `docker`,
-`docker-machine`, and `docker-compose` commands. The completion scripts may be
+Docker Desktop comes with scripts to enable completion for the `docker` and `docker-compose` commands. The completion scripts may be
 found inside `Docker.app`, in the `Contents/Resources/etc/` directory and can be
 installed both in Bash and Zsh.
 
@@ -524,12 +523,10 @@ installed bash via [Homebrew](http://brew.sh/):
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc
 ln -s $etc/docker.bash-completion $(brew --prefix)/etc/bash_completion.d/docker
-ln -s $etc/docker-machine.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-machine
 ln -s $etc/docker-compose.bash-completion $(brew --prefix)/etc/bash_completion.d/docker-compose
 ```
 
 Add the following to your `~/.bash_profile`:
-
 
 ```shell
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
@@ -554,7 +551,6 @@ directory. For example, if you installed Zsh via [Homebrew](http://brew.sh/):
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc
 ln -s $etc/docker.zsh-completion /usr/local/share/zsh/site-functions/_docker
-ln -s $etc/docker-machine.zsh-completion /usr/local/share/zsh/site-functions/_docker-machine
 ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_docker-compose
 ```
 
