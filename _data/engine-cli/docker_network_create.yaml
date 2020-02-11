@@ -162,8 +162,7 @@ options:
 - option: ipam-opt
   value_type: map
   default_value: map[]
-  #description: Set IPAM driver specific options
-  description: IPAM ドライバーに固有のオプションを設定します。
+  description: Set IPAM driver specific options
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -172,8 +171,7 @@ options:
 - option: ipv6
   value_type: bool
   default_value: "false"
-  #description: Enable IPv6 networking
-  description: IPv6 ネットワークを有効にします。
+  description: Enable IPv6 networking
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -181,8 +179,7 @@ options:
   swarm: false
 - option: label
   value_type: list
-  #description: Set metadata on a network
-  description: ネットワークにメタデータを設定します。
+  description: Set metadata on a network
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -192,8 +189,7 @@ options:
   shorthand: o
   value_type: map
   default_value: map[]
-  #description: Set driver specific options
-  description: ドライバーに固有のオプションを設定します。
+  description: Set driver specific options
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -201,8 +197,7 @@ options:
   swarm: false
 - option: scope
   value_type: string
-  #description: Control the network's scope
-  description: ネットワークのスコープを制御します。
+  description: Control the network's scope
   deprecated: false
   min_api_version: "1.30"
   experimental: false
@@ -272,12 +267,12 @@ examples: |-
 
   ```bash
   $ docker network create -d overlay \
-    --subnet=192.168.1.0/25 \
-    --subnet=192.170.2.0/25 \
-    --gateway=192.168.1.100 \
-    --gateway=192.170.2.100 \
-    --aux-address="my-router=192.168.1.5" --aux-address="my-switch=192.168.1.6" \
-    --aux-address="my-printer=192.170.1.5" --aux-address="my-nas=192.170.1.6" \
+    --subnet=192.168.10.0/25 \
+    --subnet=192.168.20.0/25 \
+    --gateway=192.168.10.100 \
+    --gateway=192.168.20.100 \
+    --aux-address="my-router=192.168.10.5" --aux-address="my-switch=192.168.10.6" \
+    --aux-address="my-printer=192.168.20.5" --aux-address="my-nas=192.168.20.6" \
     my-multihost-network
   ```
 
