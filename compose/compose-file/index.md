@@ -1602,7 +1602,7 @@ VAR=hello
 
 {% comment %}
 Add environment variables. You can use either an array or a dictionary. Any
-boolean values; true, false, yes no, need to be enclosed in quotes to ensure
+boolean values (true, false, yes, no) need to be enclosed in quotes to ensure
 they are not converted to True or False by the YML parser.
 {% endcomment %}
 環境変数を追加します。

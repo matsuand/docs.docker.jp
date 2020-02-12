@@ -27,8 +27,8 @@ description: Learn how to create a Docker image by writing a Dockerfile, and use
 Now that we've got our orchestrator of choice set up in our development environment thanks to Docker Desktop,
 we can begin to develop containerized applications. In general, the development workflow looks like this:
 {% endcomment %}
-Now that we've got our orchestrator of choice set up in our development environment thanks to Docker Desktop,
-we can begin to develop containerized applications. In general, the development workflow looks like this:
+Docker Desktop というもののおかげで、開発環境内にオーケストレーターを実現するという選択ができるようになったので、コンテナー化されたアプリケーションを作り出していくことにします。
+構築の手順は一般には以下のようになります。
 
 {% comment %}
 1. Create and test individual containers for each component of your application by first creating Docker images.
@@ -121,7 +121,7 @@ In this stage of the tutorial, let's focus on step 1 of this workflow: creating 
 {% comment %}
 ## Build and Test Your Image
 {% endcomment %}
-## Build and Test Your Image
+## イメージビルドとテスト
 
 {% comment %}
 Now that we have some source code and a Dockerfile, it's time to build our first image, and make sure the containers launched from it work as expected.
