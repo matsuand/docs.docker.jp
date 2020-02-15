@@ -5,9 +5,19 @@ keywords: developer, developing, apps, api, sdk
 ---
 
 {% comment %}
-This page lists resources for application developers using Docker.
+This page contains a list of resources for application developers who would like to build new applications using Docker.
 {% endcomment %}
-このページは Docker アプリケーションの開発者に向けた情報を示します。
+This page contains a list of resources for application developers who would like to build new applications using Docker.
+
+{% comment %}
+## Prerequisites
+{% endcomment %}
+## Prerequisites
+
+{% comment %}
+Work through the learning modules in [Get started](/get-started/index.md) to understand how to build an image and run it as a containerized application.
+{% endcomment %}
+Work through the learning modules in [Get started](/get-started/index.md) to understand how to build an image and run it as a containerized application.
 
 {% comment %}
 ## Develop new apps on Docker
@@ -23,19 +33,18 @@ most benefits from Docker.
 Docker を使って新しいアプリを開発しようとしている方は、以下のような情報を確認し、Docker を効率よく利用する開発パターンについて理解してください。
 
 {% comment %}
-- Learn to [build an image from a Dockerfile](/get-started/part2.md){: target="_blank" class="_"}
 - Use [multistage builds](/engine/userguide/eng-image/multistage-build.md){: target="_blank" class="_"} to keep your images lean
 - Manage application data using [volumes](/engine/admin/volumes/volumes.md) and [bind mounts](/engine/admin/volumes/bind-mounts.md){: target="_blank" class="_"}
-- [Scale your app](/get-started/part3.md){: target="_blank" class="_"} with kubernetes
-- [Scale your app](/get-started/part4.md){: target="_blank" class="_"} as a swarm service
-- General application development best practices
+- [Scale your app](/get-started/kube-deploy.md){: target="_blank" class="_"} with kubernetes
+- [Scale your app](/get-started/swarm-deploy.md){: target="_blank" class="_"} as a swarm service
+- [General application development best practices](/develop/dev-best-practices.md){: target="_blank" class="_"}
 {% endcomment %}
 - [Dockerfile からイメージをビルドする](/get-started/part2.md){: target="_blank" class="_"}方法について学ぶ。
 - Use [multistage builds](/engine/userguide/eng-image/multistage-build.md){: target="_blank" class="_"} to keep your images lean
 - Manage application data using [volumes](/engine/admin/volumes/volumes.md) and [bind mounts](/engine/admin/volumes/bind-mounts.md){: target="_blank" class="_"}
-- [Scale your app](/get-started/part3.md){: target="_blank" class="_"} with kubernetes
-- [Scale your app](/get-started/part4.md){: target="_blank" class="_"} as a swarm service
-- General application development best practices
+- [Scale your app](/get-started/kube-deploy.md){: target="_blank" class="_"} with kubernetes
+- [Scale your app](/get-started/swarm-deploy.md){: target="_blank" class="_"} as a swarm service
+- [General application development best practices](/develop/dev-best-practices.md){: target="_blank" class="_"}
 
 {% comment %}
 ## Learn about language-specific app development with Docker

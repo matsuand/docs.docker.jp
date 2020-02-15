@@ -27,14 +27,10 @@ guides:
     section:
     - title: "1部: 概要と準備"
       path: /get-started/
-    - title: "2部: アプリケーションのコンテナー化"
+    - title: "2部: イメージの構築と起動"
       path: /get-started/part2/
-    - title: "3部: Kubernetes へのデプロイ"
+    - title: "3部: Docker Hub によるイメージ共有"
       path: /get-started/part3/
-    - title: "4部: スウォームへのデプロイ"
-      path: /get-started/part4/
-    - title: "5部: Docker Hub でのイメージ共有"
-      path: /get-started/part5/
   - path: /get-started/resources/
     title: "学習のための各種情報"
 - sectiontitle: Docker を用いた開発
@@ -129,6 +125,14 @@ guides:
         title: VFS ストレージドライバーの利用
 - sectiontitle: 本番環境でのアプリ運用
   section:
+  - sectiontitle: オーケストレーション
+    section:
+    - title: "概要"
+      path: /get-started/orchestration/
+    - title: "Kubernetes へのデプロイ"
+      path: /get-started/kube-deploy/
+    - title: "Swarm へのデプロイ"
+      path: /get-started/swarm-deploy/
   - sectiontitle: 全オブジェクトの設定
     section:
     - path: /config/labels-custom-metadata/
@@ -1323,7 +1327,7 @@ manuals:
   title: Docker Template
 - sectiontitle: Open-source projects
   section:
-  - sectiontitle: Docker Notary
+  - sectiontitle: Notary
     section:
     - path: /notary/getting_started/
       title: Get started with Notary

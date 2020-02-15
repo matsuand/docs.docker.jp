@@ -57,8 +57,7 @@ versions:
 {% endcomment %}
 Docker Engine - Community をインストールするには、以下に示す Ubuntu の 64 ビットバージョンのいずれかが必要です。
 
-- Disco 19.04
-- Cosmic 18.10
+- Eoan 19.10
 - Bionic 18.04 (LTS)
 - Xenial 16.04 (LTS)
 

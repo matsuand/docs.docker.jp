@@ -1,12 +1,24 @@
 ---
-title: Configure Docker Assemble
+title: Docker Assemble の設定
 description: Installing Docker Assemble
 keywords: Assemble, Docker Enterprise, plugin, Spring Boot, .NET, c#, F#
 ---
 
+{% comment %}
 Although you don’t need to configure anything to build a project using Docker Assemble, you may wish to  override the defaults, and in some cases, add fields that weren’t automatically detected from the project file. To support this, Docker Assemble allows you to add a file `docker-assemble.yaml` to the root of your project. The settings you provide in the `docker-assemble.yaml` file overrides any auto-detection and can themselves be overridden by command-line arguments
+{% endcomment %}
+Docker Assemble を用いたプロジェクトをビルドする際には、特に設定作業を必要としません。
+しかしデフォルト設定を書き換えたい場合があります。
+またときには、プロジェクトファイルには自動的に検出されない項目を追加したい場合もあります。
+このような状況に対応するため、Docker Assemble では `docker-assemble.yaml` というファイルをプロジェクトのルートディレクトリに追加する方法があります。
+`docker-assemble.yaml` ファイルに設定した内容は、自動検出された設定に上書きされます。
+コマンドライン引数を指定することで、さらに上書き設定することもできます。
 
+{% comment %}
 The `docker-assemble.yaml` file is in YAML syntax and has the following informal schema:
+{% endcomment %}
+`docker-assemble.yaml` ファイルは YAML 文法により記述します。
+そして非公式ながら以下のスキーマを持ちます。
 
 - `version`: (_string_) mandatory, must contain `0.2.0`
 
