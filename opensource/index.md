@@ -1,7 +1,7 @@
 ---
-description: Overview of contributing
+description: 貢献方法の概要
 keywords: open, source, contributing, overview
-title: Contribute to documentation
+title: ドキュメントへの貢献
 redirect_from:
 - /contributing/
 - /contributing/contributing/
@@ -42,7 +42,11 @@ We welcome your participation to help make the documentation better!
 >
 > See [Looking for Moby?](#looking-for-moby) below.
 
+{% comment %}
 ## How to contribute to the docs
+{% endcomment %}
+{: #how-to-contribute-to-the-docs }
+## 本ドキュメントへの貢献方法
 
 The documentation for Docker is published at
 [docs.docker.com](https://docs.docker.com/).

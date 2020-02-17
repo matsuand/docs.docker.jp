@@ -27,9 +27,9 @@ guides:
     section:
     - title: "1部: 概要と準備"
       path: /get-started/
-    - title: "2部: イメージの構築と起動"
+    - title: "2部: イメージの構築と実行"
       path: /get-started/part2/
-    - title: "3部: Docker Hub によるイメージ共有"
+    - title: "3部: Docker Hub におけるイメージ共有"
       path: /get-started/part3/
   - path: /get-started/resources/
     title: "学習のための各種情報"
@@ -317,13 +317,13 @@ guides:
         path: /engine/extend/config/
       - path: /engine/extend/plugin_api/
         title: プラグイン API
-- sectiontitle: Open source at Docker
+- sectiontitle: Docker 上のオープンソース
   section:
   - path: /opensource/
-    title: Contribute to documentation
+    title: ドキュメントへの貢献
   - path: /opensource/ways/
-    title: Other ways to contribute
-- sectiontitle: Documentation archive
+    title: その他の貢献方法
+- sectiontitle: ドキュメントアーカイブ
   section:
   - path: /docsarchive/
     title: View the docs archives
