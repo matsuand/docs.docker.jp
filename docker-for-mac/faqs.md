@@ -10,7 +10,7 @@ title: Frequently asked questions (FAQ)
 
 ### How do I get the Stable or the Edge version of Docker Desktop?
 
-You can download the Stable version of Docker Desktop from [Docker Hub](https://hub.docker.com/?overlay=onboarding). To download the Edge version, see the [Edge release notes](/docker-for-mac/edge-release-notes/).
+You can download the Stable or the Edge version of Docker Desktop from [Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac/).
 
 For installation instructions, see [Install Docker Desktop on Mac](install.md){: target="_blank" class="_"}.
 
@@ -83,7 +83,7 @@ Yes, you can use the host’s SSH agent inside a container. For more information
 ### How do I add custom CA certificates?
 
 Docker Desktop supports all trusted certificate authorities (CAs) (root or intermediate). For more information on adding server and client side certs, see
-[Add TLS certificates](/docker-for-mac/index/#adding-tls-certificates) in the Getting Started topic.
+[Add TLS certificates](/docker-for-mac/#add-tls-certificates) in the Getting Started topic.
 
 ### How do I add client certificates?
 

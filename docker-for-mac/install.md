@@ -4,15 +4,17 @@ keywords: mac, install, download, run, docker, local
 title: Docker Desktop on Mac のインストール
 ---
 
-  {% comment %}
-  To download Docker Desktop, go to Docker Hub and sign in with your Docker ID.
-  {% endcomment %}
-  Docker Desktop のダウンロードには Docker Hub へアクセスし、Docker ID によりサインインします。
+{% comment %}
+Docker Desktop for Mac is the [Community](https://www.docker.com/community-edition) version of Docker for Mac.
+You can download Docker Desktop for Mac from Docker Hub.
+{% endcomment %}
+Docker Desktop for Mac is the [Community](https://www.docker.com/community-edition) version of Docker for Mac.
+Docker Desktop for Mac のダウンロードは Docker Hub からダウンロードすることができます。
 
 {% comment %}
-[Download from Docker Hub](https://hub.docker.com/?overlay=onboarding){: .button .outline-btn}
+[Download from Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac/){: .button .outline-btn}
 {% endcomment %}
-[Docker Hub からのダウンロード](https://hub.docker.com/?overlay=onboarding){: .button .outline-btn}
+[Docker Hub からのダウンロード](https://hub.docker.com/editions/community/docker-ce-desktop-mac/){: .button .outline-btn}
 
 {% comment %}
 By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
@@ -61,9 +63,9 @@ Your Mac must meet the following requirements to successfully install Docker Des
 Docker Desktop を Mac に正常にインストールするには、以下のシステム要件が満たされている必要があります。
 
 {% comment %}
-- Mac hardware must be a 2010 or newer model, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
+- **Mac hardware must be a 2010 or a newer model**, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
 {% endcomment %}
-- Mac hardware must be a 2010 or newer model, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
+- **Mac hardware must be a 2010 or a newer model**, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
 
   {% comment %}
   If your Mac supports the Hypervisor framework, the command prints `kern.hv_support: 1`.
@@ -71,15 +73,18 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
   If your Mac supports the Hypervisor framework, the command prints `kern.hv_support: 1`.
 
 {% comment %}
-- macOS must be version 10.13 or newer. We recommend upgrading to the latest version of macOS.
+- **macOS must be version 10.13 or newer**. That is, Catalina, Mojave, or High Sierra. We recommend upgrading to the latest version of macOS.
 {% endcomment %}
-- macOS must be version 10.13 or newer. We recommend upgrading to the latest version of macOS.
+- **macOS must be version 10.13 or newer**. That is, Catalina, Mojave, or High Sierra. We recommend upgrading to the latest version of macOS.
 
   If you experience any issues after upgrading your macOS to version 10.15, you must install the latest version of Docker Desktop to be compatible with this version of macOS.
 
   {% comment %}
+  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. Docker Desktop currently supports macOS Catalina, macOS Mojave, and macOS High Sierra.
   {% endcomment %}
-  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker will stop supporting the oldest version and support the newest version of macOS (in addition to the previous two releases).
+  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. Docker Desktop currently supports macOS Catalina, macOS Mojave, and macOS High Sierra.
+
+    As new major versions of macOS are made generally available, Docker stops supporting the oldest version and support the newest version of macOS (in addition to the previous two releases).
 
 {% comment %}
 - At least 4 GB of RAM.
@@ -91,12 +96,6 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 {% endcomment %}
 - VirtualBox バージョン 4.3.30 以前はインストールしないでください。
   Docker Desktop との互換性がありません。
-
-{% comment %}
-**Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle VirtualBox instead of HyperKit.
-{% endcomment %}
-**メモ**: 利用しているシステムが上の要件を満たしていない場合は、[Docker Toolbox](/toolbox/overview.md) をインストールすることができます。
-その場合は HyperKit のかわりに Oracle VirtualBox を利用することになります。
 
 {% comment %}
 ## What's included in the installer
