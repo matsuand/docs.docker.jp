@@ -91,8 +91,6 @@ guides:
       section:
       - path: /network/links/
         title: コンテナーリンク（古い機能）
-      - path: /network/overlay-standalone.swarm/
-        title: Overlay networks for Swarm Classic
 - sectiontitle: アプリデータの管理
   section:
     - path: /storage/
@@ -1521,6 +1519,8 @@ manuals:
       title: High availability in Swarm
     - path: /swarm/networking/
       title: Swarm and container networks
+    - path: /swarm/multi-host-networking/
+      title: Multi-host networking
     - path: /swarm/discovery/
       title: Discovery
     - path: /swarm/provision-with-machine/
