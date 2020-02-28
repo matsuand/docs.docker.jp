@@ -87,7 +87,6 @@ Replace `{{ page.ucp_version }}` with the version you are currently running.
 ```bash
 $ docker container run \
     --rm \
-    --interactive \
     --log-driver none \
     --name ucp \
     --volume /var/run/docker.sock:/var/run/docker.sock \
@@ -108,7 +107,6 @@ $ docker container run \
 ```bash
 $ docker container run \
     --rm \
-    --interactive \
     --log-driver none \
     --security-opt label=disable \
     --name ucp \
@@ -262,3 +260,4 @@ The following table describes the backup schema returned by the `GET` and `LIST`
 ### Where to go next
 
 - [Back up the Docker Trusted Registry](./back-up-dtr/)
+
