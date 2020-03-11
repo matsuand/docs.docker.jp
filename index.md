@@ -21,16 +21,19 @@ Try our multi-part walkthrough that covers writing your first app,
 data storage, networking, and swarms, and ends with your app running on
 production servers in the cloud. Total reading time is less than an hour.
 {% endcomment %}
-Try our multi-part walkthrough that covers writing your first app,
-data storage, networking, and swarms, and ends with your app running on
-production servers in the cloud. Total reading time is less than an hour.
+「Docker をはじめよう」の各パートをお試しください。
+ここではアプリケーションの初歩、データストレージ、ネットワーク、スウォームについて学び、最後はクラウド上の本番サーバーにてアプリケーションを動作させるところまで行います。
+お読みいただくのに 1 時間もかかりません。
 
 {% comment %}
 [Get started with Docker](/get-started/){: class="button outline-btn"}
 {% endcomment %}
 [Docker をはじめよう](/get-started/){: class="button outline-btn"}
 
+{% comment %}
 ## Docker products
+{% endcomment %}
+## Docker 製品
 
 <div class="component-container">
     <!--start row-->

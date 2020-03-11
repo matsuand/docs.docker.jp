@@ -1251,16 +1251,16 @@ manuals:
       title: Troubleshoot DDE issues on Mac
     - path: /ee/desktop/troubleshoot/windows-issues/
       title: Troubleshoot DDE issues on Windows
-- title: Docker ID accounts
+- title: Docker ID アカウント
   path: /docker-id/
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
-    title: Quickstart
+    title: クイックスタート
   - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/
-        title: Manage access tokens
+        title: アクセストークンの管理
       - sectiontitle: Two-factor authentication
         section:
           - path: /docker-hub/2fa/
@@ -1272,35 +1272,35 @@ manuals:
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
   - path: /docker-hub/release-notes/
-    title: Release notes
+    title: リリースノート
   - path: /docker-hub/repos/
-    title: Repositories
+    title: リポジトリ
   - path: /docker-hub/official_images/
-    title: Official images
+    title: 公式イメージ
   - path: /docker-hub/orgs/
-    title: Teams & organizations
+    title: チームと組織
   - sectiontitle: Administration
     section:
      - path: /docker-hub/upgrade/
-       title: Upgrade your plan
+       title: プランのアップグレード
      - path: /docker-hub/cancel-downgrade/
-       title: Cancel or downgrade your plan
+       title: プランのキャンセル、ダウングレード
      - path: /docker-hub/convert-account/
-       title: Convert an account into an organization
+       title: アカウントから組織への移行
      - path: /docker-hub/deactivate-account/
        title: Deactivate an account or an organization
   - path: /docker-hub/webhooks/
-    title: Webhooks
+    title: ウェブフック
   - path: /docker-hub/slack_integration/
     title: Slack integration
-  - sectiontitle: Automated builds
+  - sectiontitle: 自動ビルド
     section:
       - path: /docker-hub/builds/
-        title: Set up automated builds
+        title: 自動ビルドの設定
       - path: /docker-hub/builds/automated-testing/
-        title: Testing in automated builds
+        title: 自動ビルドのテスト
       - path: /docker-hub/builds/advanced/
-        title: Advanced automated builds
+        title: 自動ビルドの応用
       - path: /docker-hub/builds/link-source/
         title: Link to GitHub and BitBucket
   - sectiontitle: Publisher & certified content

@@ -27,18 +27,19 @@ Work through the orientation and setup in [Part 1](index.md).
 Now that you've set up your development environment, thanks to Docker Desktop,
 you can begin to develop containerized applications. In general, the development workflow looks like this:
 {% endcomment %}
-Docker Desktop というもののおかげで、開発環境を設定することができました。
+Docker Desktop というもののおかげで、開発環境を整えることができました。
 ここからはコンテナー化されたアプリケーションを作り出していくことにします。
-構築の手順は一般には以下のようになります。
+構築の手順は一般に以下のようになります。
 
 {% comment %}
 1. Create and test individual containers for each component of your application by first creating Docker images.
 2. Assemble your containers and supporting infrastructure into a complete application.
 3. Test, share, and deploy your complete containerized application.
 {% endcomment %}
-1. Create and test individual containers for each component of your application by first creating Docker images.
-2. Assemble your containers and supporting infrastructure into a complete application.
-3. Test, share, and deploy your complete containerized application.
+1. アプリケーションの各コンポーネントに対応するコンテナーを生成しテストします。
+   その前にまずは Docker イメージを生成します。
+2. コンテナーとこれを支えるインフラストラクチャーを整えて、一体となったアプリケーションとします。
+3. 完全にコンテナー化されたアプリケーションをテスト、共有しデプロイを行います。
 
 {% comment %}
 In this stage of the tutorial, let's focus on step 1 of this workflow: creating the images that your containers will be based on. Remember, a Docker image captures the private filesystem that your containerized processes will run in; you need to create an image that contains just what your application needs to run.
@@ -59,7 +60,7 @@ In this stage of the tutorial, let's focus on step 1 of this workflow: creating 
 {% comment %}
 Let us download an example project from the [Docker Samples](https://github.com/dockersamples/node-bulletin-board) page.
 {% endcomment %}
-Let us download an example project from the [Docker Samples](https://github.com/dockersamples/node-bulletin-board) page.
+[Docker サンプル](https://github.com/dockersamples/node-bulletin-board) のページから、サンプルプロジェクトをダウンロードすることにします。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#clonegit">Git</a></li>
@@ -91,7 +92,10 @@ cd node-bulletin-board/bulletin-board-app
 
 ### Windows (Git がない場合)
 
+{% comment %}
 If you are using a Windows machine and prefer to download the example project without installing Git, run the following commands in PowerShell:
+{% endcomment %}
+Windows ユーザーであって Git をインストールせずにサンプルプロジェクトをダウンロードしたい場合は、PowerShell から以下のコマンドを実行します。
 
 ```shell
 curl.exe -LO https://github.com/dockersamples/node-bulletin-board/archive/master.zip
@@ -108,7 +112,10 @@ cd node-bulletin-board-master\bulletin-board-app
 
 ### Mac または Linux (Git がない場合)
 
+{% comment %}
 If you are using a Mac or a Linux machine and prefer to download the example project without installing Git, run the following commands in a terminal:
+{% endcomment %}
+Mac ユーザーあるいは Linux ユーザーであって Git をインストールせずにサンプルプロジェクトをダウンロードしたい場合は、端末画面から以下のコマンドを実行します。
 
 ```shell
 curl -LO https://github.com/dockersamples/node-bulletin-board/archive/master.zip
@@ -122,53 +129,98 @@ cd node-bulletin-board-master/bulletin-board-app
 <hr>
 </div>
 
+{% comment %}
 The `node-bulletin-board` project is a simple bulletin board application, written in Node.js. In this example, let's imagine you wrote this app, and are now trying to containerize it.
+{% endcomment %}
+`node-bulletin-board` プロジェクトは簡易な掲示板（bulletin board）アプリケーションであり、Node.js を用いて開発されているものです。
+この例では、すでに作り上げているアプリケーションを、これからコンテナー化していく状況にあると考えてください。
 
+{% comment %}
 ## Define a container with Dockerfile
+{% endcomment %}
+## Dockerfile におけるコンテナーの定義
 
+{% comment %}
 Take a look at the file called `Dockerfile` in the bulletin board application. Dockerfiles describe how to assemble a private filesystem for a container, and can also contain some metadata describing how to run a container based on this image. The bulletin board app Dockerfile looks like this:
+{% endcomment %}
+掲示板アプリケーションに対応する `Dockerfile` というファイルを見てみます。
+Dockerfile というものには、コンテナーにはどのようなプライベートファイルシステムを用いるのかが記述されます。
+あるいはそのイメージに基づくコンテナーをどのように起動させるかを表わすメタデータを含ませることもあります。
+掲示板アプリケーションの Dockerfile はたとえば以下のようになります。
 
 ```dockerfile
-# Use the official image as a parent image
+# 親イメージとして公式イメージを利用
 FROM node:current-slim
 
-# Set the working directory
+# ワーキングディレクトリの設定
 WORKDIR /usr/src/app
 
-# Copy the file from your host to your current location
+# ホストシステム内からカレントディレクトリにファイルをコピー
 COPY package.json .
 
-# Run the command inside your image filesystem
+# イメージのファイルシステム内からコマンドを実行
 RUN npm install
 
-# Inform Docker that the container is listening on the specified port at runtime.
+# コンテナーが実行中に利用するポート番号を指定
 EXPOSE 8080
 
-# Run the specified command within the container.
+# コンテナー内から所定のコマンドを実行
 CMD [ "npm", "start" ]
 
-# Copy the rest of your app's source code from your host to your image filesystem.
+# アプリソースの残りすべてを、ホストからイメージ内ファイルシステムへコピー
 COPY . .
 ```
 
+{% comment %}
 Writing a Dockerfile is the first step to containerizing an application. You can think of these Dockerfile commands as a step-by-step recipe on how to build up your image. This one takes the following steps:
+{% endcomment %}
+Dockerfile を記述することが、アプリケーションコンテナー化の第一歩です。
+この Dockerfile に記述するコマンドは、いってみればイメージの構築方法を順に示すレシピのようなものです。
+このファイルでは以下の手順を行います。
 
+{% comment %}
+- `FROM` により既存の `node:current-slim` というイメージからはじめます。
+  This is an *official image*, built by the node.js vendors and validated by Docker to be a high-quality image containing the Node.js Long Term Support (LTS) interpreter and basic dependencies.
+- Use `WORKDIR` to specify that all subsequent actions should be taken from the directory `/usr/src/app` *in your image filesystem* (never the host's filesystem).
+- `COPY` the file `package.json` from your host to the present location (`.`) in your image (so in this case, to `/usr/src/app/package.json`)
+- `RUN` the command `npm install` inside your image filesystem (which will read `package.json` to determine your app's node dependencies, and install them)
+- `COPY` in the rest of your app's source code from your host to your image filesystem.
+{% endcomment %}
 - Start `FROM` the pre-existing `node:current-slim` image. This is an *official image*, built by the node.js vendors and validated by Docker to be a high-quality image containing the Node.js Long Term Support (LTS) interpreter and basic dependencies.
 - Use `WORKDIR` to specify that all subsequent actions should be taken from the directory `/usr/src/app` *in your image filesystem* (never the host's filesystem).
 - `COPY` the file `package.json` from your host to the present location (`.`) in your image (so in this case, to `/usr/src/app/package.json`)
 - `RUN` the command `npm install` inside your image filesystem (which will read `package.json` to determine your app's node dependencies, and install them)
 - `COPY` in the rest of your app's source code from your host to your image filesystem.
 
+{% comment %}
+You can see that these are much the same steps you might have taken to set up and install your app on your host. However, capturing these as a Dockerfile allows you to do the same thing inside a portable, isolated Docker image.
+{% endcomment %}
 You can see that these are much the same steps you might have taken to set up and install your app on your host. However, capturing these as a Dockerfile allows you to do the same thing inside a portable, isolated Docker image.
 
+{% comment %}
+The steps above built up the filesystem of our image, but there are other lines in your Dockerfile.
+{% endcomment %}
 The steps above built up the filesystem of our image, but there are other lines in your Dockerfile.
 
+{% comment %}
+The `CMD` directive is the first example of specifying some metadata in your image that describes how to run a container based on this image. In this case, it's saying that the containerized process that this image is meant to support is `npm start`.
+{% endcomment %}
 The `CMD` directive is the first example of specifying some metadata in your image that describes how to run a container based on this image. In this case, it's saying that the containerized process that this image is meant to support is `npm start`.
 
+{% comment %}
+The `EXPOSE 8080` informs Docker that the container is listening on port 8080 at runtime.
+{% endcomment %}
 The `EXPOSE 8080` informs Docker that the container is listening on port 8080 at runtime.
 
+{% comment %}
+What you see above is a good way to organize a simple Dockerfile; always start with a `FROM` command, follow it with the steps to build up your private filesystem, and conclude with any metadata specifications. There are many more Dockerfile directives than just the few you see above. For a complete list, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
+{% endcomment %}
 What you see above is a good way to organize a simple Dockerfile; always start with a `FROM` command, follow it with the steps to build up your private filesystem, and conclude with any metadata specifications. There are many more Dockerfile directives than just the few you see above. For a complete list, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
 
+{% comment %}
+## Build and test your image
+{% endcomment %}
+{: #build-and-test-your-image }
 ## Build and test your image
 
 {% comment %}
@@ -200,6 +252,10 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
 {% endcomment %}
 > **Windows users:** you may receive a message titled 'SECURITY WARNING' at this step, noting the read, write, and execute permissions being set for files added to your image. We aren't handling any sensitive information in this example, so feel free to disregard the warning in this example.
 
+{% comment %}
+## Run your image as a container
+{% endcomment %}
+{: #run-your-image-as-a-container }
 ## Run your image as a container
 
 {% comment %}

@@ -60,7 +60,8 @@ redirect_from:
 {% comment %}
 Welcome! We are excited that you want to learn Docker. The Docker Quickstart training module teaches you how to:
 {% endcomment %}
-ようこそ！  皆さんが Docker の使い方を学ぼうとしていることを喜ばしく思います。
+ようこそ！
+みなさんが Docker の使い方を学ぼうとしているのはすばらしいことです。
 Docker クイックスタートトレーニングモジュールでは、以下のことを学んでいきます。
 
 {% comment %}
@@ -76,7 +77,7 @@ Docker クイックスタートトレーニングモジュールでは、以下�
 {% comment %}
 3.  [Share images on Docker Hub](part3.md)
 {% endcomment %}
-3.  [Docker Hub でのイメージ共有](part3.md)
+3.  [Docker Hub におけるイメージ共有](part3.md)
 
 {% comment %}
 ## Docker concepts
@@ -112,10 +113,10 @@ Containerization is increasingly popular because containers are:
 - **軽量**: コンテナーはホストシステムのカーネルを活用し共有します。
   システムリソースを活用する観点からは、仮想環境よりもさらに効率性が増します。
 - **可搬性**: ローカルでビルド、クラウドにデプロイ、どこでも動きます。
-- **Loosely coupled**: Containers are highly self sufficient and encapsulated,
-  allowing you to replace or upgrade one without disrupting others.
+- **疎結合**: コンテナーは自己完結度が高くカプセル化されています。
+  したがってコンテナーの入れ替えや更新は、他のものに影響を与えることなく行うことができます。
 - **スケーラブル**: データセンター内において、コンテナーのレプリカを増やしたり自動的に提供することができます。
-- **セキュア**: Containers apply aggressive constraints and isolations to processes without any configuration required on the part of the user.
+- **セキュア**: コンテナーはプロセスに対して強力な制約と分離を実現するため、ユーザー自身による制御を必要としません。
 
 {% comment %}
 ### Images and containers
@@ -156,8 +157,9 @@ By contrast, a **virtual machine** (VM) runs a full-blown "guest" operating
 system with _virtual_ access to host resources through a hypervisor. In general,
 VMs incur a lot of overhead beyond what is being consumed by your application logic.
 {% endcomment %}
-これとは対照的に**仮想マシン（virtual machine; VM）**は、本格的な"ゲスト"オペレーティングシステムを稼動させ、仮想的なアクセスはハイパーバイザーを通じてホストリソースを操作します。
-VMs incur a lot of overhead beyond what is being consumed by your application logic.
+これとは対照的に**仮想マシン（virtual machine; VM）**は、本格的な「ゲスト」オペレーティングシステムを稼動させ、仮想的なアクセスはハイパーバイザーを通じてホストリソースを操作します。
+VM ではより多くのオーバーヘッドが発生します。
+それはアプリケーションロジックにより生成される以上のものとなりまう。
 一般に仮想マシンが提供する環境は、通常のアプリケーションに比べて多くのリソースを必要とします。
 
 {% comment %}
@@ -165,36 +167,60 @@ VMs incur a lot of overhead beyond what is being consumed by your application lo
 {% endcomment %}
 ![コンテナースタックの例](/images/Container%402x.png){:width="300px"} | ![仮想マシンスタックの例](/images/VM%402x.png){:width="300px"}
 
+{% comment %}
 ## Set up your Docker environment
+{% endcomment %}
+{: #set-up-your-docker-environment }
+## Docker 環境の構築
 
 {% comment %}
 ### Download and install Docker Desktop
 {% endcomment %}
 {: #download-and-install-docker-desktop }
-### Download and install Docker Desktop
+### Docker Desktop のダウンロードとインストール
 
 {% comment %}
 Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to start coding and containerizing in minutes. Docker Desktop includes everything you need to build, run, and share containerized applications right from your machine.
 {% endcomment %}
-Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to start coding and containerizing in minutes. Docker Desktop includes everything you need to build, run, and share containerized applications right from your machine.
+Docker Desktop は Mac や Windows 環境に簡単にインストールできるアプリケーションです。
+これを使えば、すぐにコーディングとコンテナー化を行うことができます。
+Docker Desktop には、コンテナー化するアプリケーションを自マシン上からビルド、実行するためのツールがすべて含まれています。
 
+{% comment %}
 Follow the instructions appropriate for your operating system to download and install Docker Desktop:
+{% endcomment %}
+利用しているオペレーティングシステムに対応する以下の手順に従って、Docker Desktop のダウンロードとインストールを行ってください。
 
  - [Docker Desktop for Mac](/docker-for-mac/install/){: target="_blank" class="_"}
  - [Docker Desktop for Windows](/docker-for-windows/install/){: target="_blank" class="_"}
 
+{% comment %}
 ### Test Docker version
+{% endcomment %}
+{: #test-docker-version }
+### Docker バージョンの確認
 
+{% comment %}
 After you've successfully installed Docker Desktop, open a terminal and run `docker --version` to check the version of Docker installed on your machine.
+{% endcomment %}
+Docker Desktop のインストールを正常に終えたら、端末画面を開いて `docker --version` を実行してください。
+自マシンにインストールされている Docker のバージョンを確認することができます。
 
 ```shell
 $ docker --version
 Docker version 19.03.5, build 633a0ea
 ```
 
+{% comment %}
 ### Test Docker installation
+{% endcomment %}
+{: #test-docker-installation }
+### Docker のインストール状況の確認
 
+{% comment %}
 1.  Test that your installation works by running the [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"} Docker image:
+{% endcomment %}
+1.  インストールが正常に行われているかを確認するために Docker イメージである [hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"} を実行します。
 
     ```shell
         $ docker run hello-world
@@ -210,9 +236,18 @@ Docker version 19.03.5, build 633a0ea
         ...
     ```
 
+{% comment %}
 2.  Run `docker image ls` to list the `hello-world` image that you downloaded to your machine.
+{% endcomment %}
+2.  `docker image ls` を実行します。
+    これにより自マシンにダウンロードされた `hello-world` イメージを確認します。
 
+{% comment %}
 3.  List the `hello-world` container (spawned by the image) which exits after displaying its message. If it is still running, you do not need the `--all` option:
+{% endcomment %}
+3.  （イメージから実行される）`hello-world` コンテナーを一覧表示します。
+    メッセージが表示された後は終了します。
+    実行中であれば `--all` オプションをつける必要はありません。
 
     ```shell
         $ docker container ls --all
@@ -246,7 +281,7 @@ At this point, you've installed Docker Desktop on your development machine, and 
 {% comment %}
 Refer to the following topics for further documentation on all CLI commands used in this article:
 {% endcomment %}
-本節において用いた CLI コマンドの詳細は、以下により確認することができます。
+本節において用いた CLI コマンドの詳細は、以下から確認することができます。
 
 - [docker version](https://docs.docker.com/engine/reference/commandline/version/)
 - [docker run](https://docs.docker.com/engine/reference/commandline/run/)
