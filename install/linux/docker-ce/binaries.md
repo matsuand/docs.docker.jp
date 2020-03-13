@@ -320,14 +320,12 @@ Docker Engine - Community を手動によりインストールしていて、こ
 {: #next-steps }
 
 {% comment %}
-- On Linux:
-    - Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md)
-    - Continue with the [User Guide](/engine/userguide/index.md).
-- On macOS:
-    - Continue with the [User Guide](/get-started/index.md).
+- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md).
+- Take a look at the [Get started](/get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
+- Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.
 {% endcomment %}
-- Linux の場合
-    - [Linux インストール後の作業](/install/linux/linux-postinstall.md)へ進む
-    - [ユーザーガイド](/engine/userguide/index.md)へ進む
-- macOS の場合
-    - [ユーザーガイド](/get-started/index.md)へ進む
+- [Linux インストール後の作業](/install/linux/linux-postinstall.md)へ進む
+- [Docker をはじめよう](/get-started/index.md) に示すトレーニングを見てください。
+  イメージのビルド方法や、イメージをコンテナー化アプリケーションとして起動する方法を学んでいきます。
+- [Docker を用いた開発](/develop/index.md) における各項目を参照してください。
+  Docker を使ったアプリケーションの構築方法を学びます。

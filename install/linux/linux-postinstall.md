@@ -898,6 +898,10 @@ Ubuntu や Debian においてこの機能を有効にするには以下の手�
 ## 次のステップ
 
 {% comment %}
-- Continue with the [User Guide](/get-started/index.md).
+- Take a look at the [Get started](/get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
+- Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.
 {% endcomment %}
-- [ユーザーガイド](/get-started/index.md)へ進む
+- [Docker をはじめよう](/get-started/index.md) に示すトレーニングを見てください。
+  イメージのビルド方法や、イメージをコンテナー化アプリケーションとして起動する方法を学んでいきます。
+- [Docker を用いた開発](/develop/index.md) における各項目を参照してください。
+  Docker を使ったアプリケーションの構築方法を学びます。

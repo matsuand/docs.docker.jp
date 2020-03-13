@@ -1,11 +1,20 @@
 ---
 description: Pruning unused objects
 keywords: pruning, prune, images, volumes, containers, networks, disk, administration, garbage collection
-title: Prune unused Docker objects
+title: 未使用 Docker オブジェクトの取り除き (prune)
 redirect_from:
 - /engine/admin/pruning/
 ---
 
+{% comment %}
+Docker takes a conservative approach to cleaning up unused objects (often
+referred to as "garbage collection"), such as images, containers, volumes, and
+networks: these objects are generally not removed unless you explicitly ask
+Docker to do so. This can cause Docker to use extra disk space. For each type of
+object, Docker provides a `prune` command. In addition, you can use `docker
+system prune` to clean up multiple types of objects at once. This topic shows
+how to use these `prune` commands.
+{% endcomment %}
 Docker takes a conservative approach to cleaning up unused objects (often
 referred to as "garbage collection"), such as images, containers, volumes, and
 networks: these objects are generally not removed unless you explicitly ask
@@ -14,7 +23,11 @@ object, Docker provides a `prune` command. In addition, you can use `docker
 system prune` to clean up multiple types of objects at once. This topic shows
 how to use these `prune` commands.
 
+{% comment %}
 ## Prune images
+{% endcomment %}
+{: #prune-images }
+## イメージの取り除き
 
 The `docker image prune` command allows you to clean up unused images. By
 default, `docker image prune` only cleans up _dangling_ images. A dangling image

@@ -62,7 +62,7 @@ A `docker-compose.yml` looks like this:
 {% endcomment %}
 `docker-compose.yml` は次のように記述します。
 
-    version: '3'
+    version: '2.0'
     services:
       web:
         build: .
