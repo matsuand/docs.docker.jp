@@ -50,14 +50,9 @@ Docker Hub.
 2. **Create Organization** をクリックします。
 
 {% comment %}
-3. Provide information about your organization:
+3. Provide information about your organization.
 {% endcomment %}
 3. 組織に関する情報を入力します。
-
-      {% comment %}
-      ![Create organization](images/orgs-create2019.png)
-      {% endcomment %}
-      ![組織の生成](images/orgs-create.png)
 
 {% comment %}
 You've created an organization. You'll see you have a team, the **owners** team

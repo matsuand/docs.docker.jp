@@ -174,7 +174,7 @@ menu bar and configure the runtime options described below.
 ### General
 {% endcomment %}
 {: #general }
-### General
+### 一般 (General) タブ
 
 {% comment %}
 ![Preferences](images/menu/prefs-general.png){:width="750px"}
@@ -184,7 +184,7 @@ menu bar and configure the runtime options described below.
 {% comment %}
 On the **General** tab, you can configure when to start and update Docker:
 {% endcomment %}
-On the **General** tab, you can configure when to start and update Docker:
+「一般」(General) タブにおいて Docker の起動や更新をいつ行うのか定めます。
 
 {% comment %}
 - **Start Docker Desktop when you log in**: Automatically starts Docker Desktop when you open your session.
@@ -194,7 +194,8 @@ On the **General** tab, you can configure when to start and update Docker:
 {% comment %}
 - **Automatically check for updates**: By default, Docker Desktop automatically checks for updates and notifies you when an update is available. You can manually check for updates anytime by choosing **Check for Updates** from the main Docker menu.
 {% endcomment %}
-- **Automatically check for updates**: By default, Docker Desktop automatically checks for updates and notifies you when an update is available. You can manually check for updates anytime by choosing **Check for Updates** from the main Docker menu.
+- **Automatically check for updates**: デフォルトでは、Docker Desktop の更新チェックは自動的に行われ、利用可能な更新がある場合は通知されます。
+  Docker のメインメニューにある **Check for Updates** を実行すれば、いつでも手動による更新ができます。
 
 {% comment %}
 - **Include VM in Time Machine backups**: Select this option to back up the Docker Desktop virtual machine. This option is disabled by default.
@@ -211,9 +212,16 @@ On the **General** tab, you can configure when to start and update Docker:
 {% endcomment %}
 - **Send usage statistics**: Docker Desktop sends diagnostics, crash reports, and usage data. This information helps Docker improve and troubleshoot the application. Clear the check box to opt out.
 
+{% comment %}
 ### Resources
+{% endcomment %}
+{: #resources }
+### リソース (Resources) タブ
 
+{% comment %}
 The **Resources** tab allows you to configure CPU, memory, disk, proxies, network, and other resources.
+{% endcomment %}
+「リソース」(**Resources**) タブは、CPU、メモリ、ディスク、プロキシー、ネットワークといったリソースを設定します。
 
 #### Advanced
 
