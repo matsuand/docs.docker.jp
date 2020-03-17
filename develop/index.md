@@ -7,17 +7,18 @@ keywords: developer, developing, apps, api, sdk
 {% comment %}
 This page contains a list of resources for application developers who would like to build new applications using Docker.
 {% endcomment %}
-This page contains a list of resources for application developers who would like to build new applications using Docker.
+このページでは、Docker を利用するアプリケーションを新規に開発しようとする開発者向けの情報を示します。
 
 {% comment %}
 ## Prerequisites
 {% endcomment %}
-## Prerequisites
+{: #prerequisites }
+## 前提条件
 
 {% comment %}
 Work through the learning modules in [Get started](/get-started/index.md) to understand how to build an image and run it as a containerized application.
 {% endcomment %}
-Work through the learning modules in [Get started](/get-started/index.md) to understand how to build an image and run it as a containerized application.
+[Docker をはじめよう](/get-started/index.md) の各パートを学習し、イメージのビルド方法やコンテナー化アプリケーションの実行方法について理解してください。
 
 {% comment %}
 ## Develop new apps on Docker
@@ -39,9 +40,8 @@ Docker を使って新しいアプリを開発しようとしている方は、�
 - [Scale your app](/get-started/swarm-deploy.md){: target="_blank" class="_"} as a swarm service
 - [General application development best practices](/develop/dev-best-practices.md){: target="_blank" class="_"}
 {% endcomment %}
-- [Dockerfile からイメージをビルドする](/get-started/part2.md){: target="_blank" class="_"}方法について学ぶ。
-- Use [multistage builds](/engine/userguide/eng-image/multistage-build.md){: target="_blank" class="_"} to keep your images lean
-- Manage application data using [volumes](/engine/admin/volumes/volumes.md) and [bind mounts](/engine/admin/volumes/bind-mounts.md){: target="_blank" class="_"}
+- [マルチステージビルド](/engine/userguide/eng-image/multistage-build.md){: target="_blank" class="_"} を利用して、イメージをスリムなものにしてください。
+- アプリケーションデータは [ボリューム](/engine/admin/volumes/volumes.md) や [バインドマウント](/engine/admin/volumes/bind-mounts.md){: target="_blank" class="_"} を利用して管理してください。
 - [Scale your app](/get-started/kube-deploy.md){: target="_blank" class="_"} with kubernetes
 - [Scale your app](/get-started/swarm-deploy.md){: target="_blank" class="_"} as a swarm service
 - [General application development best practices](/develop/dev-best-practices.md){: target="_blank" class="_"}
@@ -50,7 +50,7 @@ Docker を使って新しいアプリを開発しようとしている方は、�
 ## Learn about language-specific app development with Docker
 {% endcomment %}
 {: #learn-about-language-specific-app-development-with-docker }
-## 特定言語でのDocker アプリ開発について学ぶ
+## 特定言語での Docker アプリ開発について学ぶ
 
 {% comment %}
 - [Docker for Java developers](https://github.com/docker/labs/tree/master/developer-tools/java/){: target="_blank" class="_"} lab
@@ -69,7 +69,7 @@ Docker を使って新しいアプリを開発しようとしている方は、�
 ## Advanced development with the SDK or API
 {% endcomment %}
 {: #advanced-development-with-the-sdk-or-api }
-## Advanced development with the SDK or API
+## SDK や API を用いた応用的な開発
 
 {% comment %}
 After you can write Dockerfiles or Compose files and use Docker CLI, take it to the next level by using Docker Engine SDK for Go/Python or use the HTTP API directly.

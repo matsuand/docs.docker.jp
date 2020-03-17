@@ -6,9 +6,6 @@ horizontalnav:
 - title: 製品マニュアル
   path: /install/
   node: manuals
-- title: 用語
-  path: /glossary/
-  node: glossary
 - title: リファレンス
   path: /reference/
   node: reference
@@ -142,7 +139,7 @@ guides:
   - sectiontitle: デーモンの設定
     section:
     - path: /config/daemon/
-      title: Configure and run Docker
+      title: デーモンの設定と起動
     - path: /config/daemon/systemd/
       title: systemd を用いた Docker の管理
   - sectiontitle: Work with external tools
@@ -327,23 +324,7 @@ guides:
     title: View the docs archives
 
 reference:
-- sectiontitle: ファイルフォーマット
-  section:
-  - title: Dockerfile リファレンス
-    path: /engine/reference/builder/
-  - sectiontitle: Compose ファイルリファレンス
-    section:
-    - path: /compose/compose-file/
-      title: バージョン 3
-    - path: /compose/compose-file/compose-file-v2/
-      title: バージョン 2
-    - path: /compose/compose-file/compose-file-v1/
-      title: バージョン 1
-    - path: /compose/compose-file/compose-versioning/
-      title: About versions and upgrading
-    - path: /compose/faq/
-      title: Frequently asked questions
-- sectiontitle: コマンドラインインターフェイス (CLI)
+- sectiontitle: コマンドラインインターフェイス
   section:
   - sectiontitle: Docker CLI (docker)
     section:
@@ -953,7 +934,7 @@ reference:
       title: up
   - title: Daemon CLI (dockerd)
     path: /engine/reference/commandline/dockerd/
-- sectiontitle: Application Programming Interfaces (APIs)
+- sectiontitle: API reference
   section:
   - sectiontitle: Docker Engine API
     section:
@@ -1019,6 +1000,20 @@ reference:
     path: /registry/spec/api/
   - title: Template API
     path: /app-template/api-reference/
+- title: Dockerfile リファレンス
+  path: /engine/reference/builder/
+- sectiontitle: Compose ファイルリファレンス
+  section:
+    - path: /compose/compose-file/
+      title: バージョン 3
+    - path: /compose/compose-file/compose-file-v2/
+      title: バージョン 2
+    - path: /compose/compose-file/compose-file-v1/
+      title: バージョン 1
+    - path: /compose/compose-file/compose-versioning/
+      title: About versions and upgrading
+    - path: /compose/faq/
+      title: よく尋ねられる質問
 - sectiontitle: Drivers and specifications
   section:
   - sectiontitle: Registry image manifests
@@ -1059,6 +1054,8 @@ reference:
       title: S3 storage driver
     - path: /registry/storage-drivers/swift/
       title: Swift storage driver
+- path: /glossary/
+  title: Glossary
 
 
 

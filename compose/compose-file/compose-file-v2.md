@@ -59,12 +59,12 @@ Compose ファイルのデフォルトパスは `./docker-compose.yml` です。
 いずれでも動作します。
 
 {% comment %}
-A [container](/../../glossary.md#container) definition contains configuration which are applied to each
+A [container](/glossary.md#container) definition contains configuration which are applied to each
 container started for that service, much like passing command-line parameters to
 `docker run`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
 {% endcomment %}
-[コンテナー](/../../glossary.md#container) の定義とは、対応するサービスを起動する各コンテナーに適用される設定を行うことです。
+[コンテナー](/glossary.md#container) の定義とは、対応するサービスを起動する各コンテナーに適用される設定を行うことです。
 コマンドラインから `docker run` のパラメーターを受け渡すことと、非常によく似ています。
 同様に、ネットワークの定義、ボリュームの定義は、それぞれ `docker network create` と `docker volume create` のコマンドに対応づくものです。
 
