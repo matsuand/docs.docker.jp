@@ -37,7 +37,7 @@ Docker イメージは読み取り専用のレイヤーにより構成されま�
 レイヤーは順に積み上げられ、それぞれは直前のレイヤーからの差分を表わします。
 以下のような `Dockerfile` を見てみます。
 
-```Dockerfile
+```dockerfile
 FROM ubuntu:18.04
 COPY . /app
 RUN make /app
@@ -520,7 +520,7 @@ A Dockerfile for a Go application could look like:
 たとえば Go 言語アプリケーションの Dockerfile は以下のようになります。
 
 {% comment %}
-```Dockerfile
+```dockerfile
 FROM golang:1.11-alpine AS build
 
 # Install tools required for project
@@ -547,7 +547,7 @@ ENTRYPOINT ["/bin/project"]
 CMD ["--help"]
 ```
 {% endcomment %}
-```Dockerfile
+```dockerfile
 FROM golang:1.11-alpine AS build
 
 # 本プロジェクトに必要なツールをインストール。
@@ -681,7 +681,7 @@ Here’s an example from the [`buildpack-deps` image](https://github.com/docker-
 {% endcomment %}
 以下は [`buildpack-deps` イメージ](https://github.com/docker-library/buildpack-deps) の記述例です。
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y \
   bzr \
   cvs \
@@ -820,7 +820,7 @@ The following examples show the different acceptable formats. Explanatory commen
 
 
 {% comment %}
-```Dockerfile
+```dockerfile
 # Set one or more individual labels
 LABEL com.example.version="0.0.1-beta"
 LABEL vendor1="ACME Incorporated"
@@ -829,7 +829,7 @@ LABEL com.example.release-date="2015-02-12"
 LABEL com.example.version.is-production=""
 ```
 {% endcomment %}
-```Dockerfile
+```dockerfile
 # 個々にラベルを設定
 LABEL com.example.version="0.0.1-beta"
 LABEL vendor1="ACME Incorporated"
@@ -851,12 +851,12 @@ Docker 1.10 以前のバージョンでは、ラベルをすべてまとめて 1
 ただしラベルをまとめる機能は今もサポートされています。
 
 {% comment %}
-```Dockerfile
+```dockerfile
 # Set multiple labels on one line
 LABEL com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"
 ```
 {% endcomment %}
-```Dockerfile
+```dockerfile
 # 1 行でラベルを設定
 LABEL com.example.version="0.0.1-beta" com.example.release-date="2015-02-12"
 ```
@@ -867,7 +867,7 @@ The above can also be written as:
 上は以下のように書くこともできます。
 
 {% comment %}
-```Dockerfile
+```dockerfile
 # Set multiple labels at once, using line-continuation characters to break long lines
 LABEL vendor=ACME\ Incorporated \
       com.example.is-beta= \
@@ -876,7 +876,7 @@ LABEL vendor=ACME\ Incorporated \
       com.example.release-date="2015-02-12"
 ```
 {% endcomment %}
-```Dockerfile
+```dockerfile
 # 複数のラベルを一度に設定、ただし行継続の文字を使い、長い文字列を改行する
 LABEL vendor=ACME\ Incorporated \
       com.example.is-beta= \
@@ -942,7 +942,7 @@ statement. For example:
 `RUN apt-get update` と ``apt-get install`` は、同一の `RUN` コマンド内にて同時実行するようにしてください。
 たとえば以下のようにします。
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y \
     package-bar \
     package-baz \
@@ -957,7 +957,7 @@ Dockerfile:
 １つの `RUN` コマンド内で `apt-get update` だけを使うとキャッシュに問題が発生し、その後の `apt-get install` コマンドが失敗します。
 たとえば Dockerfile を以下のように記述したとします。
 
-```Dockerfile
+```dockerfile
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl
@@ -970,7 +970,7 @@ modify `apt-get install` by adding extra package:
 イメージが構築されると、レイヤーがすべて Docker のキャッシュに入ります。
 この次に `apt-get install` を編集して別のパッケージを追加したとします。
 
-```Dockerfile
+```dockerfile
 FROM ubuntu:18.04
 RUN apt-get update
 RUN apt-get install -y curl nginx
@@ -1000,7 +1000,7 @@ for example:
 これはバージョンピニング（version pinning）というものです。
 以下に例を示します。
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y \
     package-bar \
     package-baz \
@@ -1021,7 +1021,7 @@ recommendations.
 {% endcomment %}
 以下の `RUN` コマンドはきれいに整えられていて `apt-get` の推奨する利用方法を示しています。
 
-```Dockerfile
+```dockerfile
 RUN apt-get update && apt-get install -y \
     aufs-tools \
     automake \
@@ -1076,7 +1076,7 @@ Some `RUN` commands depend on the ability to pipe the output of one command into
 そのときにはパイプを行う文字（ ``|`` ）を使います。
 たとえば以下のような例があります。
 
-```Dockerfile
+```dockerfile
 RUN wget -O - https://some.site | wc -l > /number
 ```
 
@@ -1100,7 +1100,7 @@ build from inadvertently succeeding. For example:
 こうしておくと、予期しないエラーが発生して、それに気づかずにビルドされてしまう、といったことはなくなります。
 たとえば以下です。
 
-```Dockerfile
+```dockerfile
 RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 ```
 {% comment %}
@@ -1110,7 +1110,7 @@ RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 > Debian-based images, consider using the _exec_ form of `RUN` to explicitly
 > choose a shell that does support the `pipefail` option. For example:
 >
-> ```Dockerfile
+> ```dockerfile
 > RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://some.site | wc -l > /number"]
 > ```
 {% endcomment %}
@@ -1119,7 +1119,7 @@ RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 > これは ``pipefail`` オプションをサポートしているシェルを明示的に指示するものです。
 > たとえば以下です。
 >
-> ```Dockerfile
+> ```dockerfile
 > RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://some.site | wc -l > /number"]
 > ```
 
@@ -1222,7 +1222,7 @@ version bumps are easier to maintain, as seen in the following example:
 これによってバージョンを混同することなく、管理が容易になります。
 たとえば以下がその例です。
 
-```Dockerfile
+```dockerfile
 ENV PG_MAJOR 9.3
 ENV PG_VERSION 9.3.4
 RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
@@ -1248,7 +1248,7 @@ creating a Dockerfile like the following, and then building it.
 ということはつまり、環境変数を先々のレイヤーにおいて無効化したとしても、その中間レイヤーに変数データは残ることになり、この値を消すことはできません。
 このことを確認するには、以下のような Dockerfile を生成してビルドを行ってみればわかります。
 
-```Dockerfile
+```dockerfile
 FROM alpine
 ENV ADMIN_USER="mark"
 RUN echo $ADMIN_USER > ./mark
@@ -1278,7 +1278,7 @@ and have the `RUN` command just run that shell script.
 Linux における Dockerfile では行継続文字を表わす `\` を用いると、読みやすくなります。
 あるいは実行する命令をすべてシェルスクリプトに書き入れて、`RUN` コマンドによってそのシェルスクリプトを実行するようなこともできます。
 
-```Dockerfile
+```dockerfile
 FROM alpine
 RUN export ADMIN_USER="mark" \
     && echo $ADMIN_USER > ./mark \
@@ -1335,7 +1335,7 @@ For example:
 {% endcomment %}
 例
 
-```Dockerfile
+```dockerfile
 COPY requirements.txt /tmp/
 RUN pip install --requirement /tmp/requirements.txt
 COPY . /tmp/
@@ -1359,7 +1359,7 @@ things like:
 こうしておくことで、ファイルを取得し展開した後や、イメージ内の他のレイヤーにファイルを加える必要がないのであれば、その後にファイルを削除することができます。
 たとえば以下に示すのは、やってはいけない例です。
 
-```Dockerfile
+```dockerfile
 ADD http://example.com/big.tar.xz /usr/src/things/
 RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
 RUN make -C /usr/src/things all
@@ -1370,7 +1370,7 @@ And instead, do something like:
 {% endcomment %}
 そのかわり、次のように記述します。
 
-```Dockerfile
+```dockerfile
 RUN mkdir -p /usr/src/things \
     && curl -SL http://example.com/big.tar.xz \
     | tar -xJC /usr/src/things \
@@ -1403,7 +1403,7 @@ Let's start with an example of an image for the command line tool `s3cmd`:
 {% endcomment %}
 コマンドラインツール `s3cmd` のイメージ例から始めます。
 
-```Dockerfile
+```dockerfile
 ENTRYPOINT ["s3cmd"]
 CMD ["--help"]
 ```
@@ -1485,7 +1485,7 @@ container start:
 {% endcomment %}
 ヘルパースクリプトはコンテナーの中にコピーされ、コンテナー開始時に `ENTRYPOINT` から実行されます。
 
-```Dockerfile
+```dockerfile
 COPY ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["postgres"]

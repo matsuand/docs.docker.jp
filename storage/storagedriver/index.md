@@ -55,7 +55,7 @@ Docker イメージは一連のレイヤーから構成されます。
 一番最後にあるレイヤーを除き、これ以外はすべて読み込み専用のレイヤーです。
 たとえば以下のような Dockerfile を考えてみます。
 
-```conf
+```dockerfile
 FROM ubuntu:18.04
 COPY . /app
 RUN make /app
@@ -307,7 +307,7 @@ create an image called `acme/my-base-image:1.0`.
 ここで 2 つの異なる Dockerfile を利用している状況を考えます。
 1 つめの Dockerfile からは `acme/my-base-image:1.0` というイメージが作られるものとします。
 
-```conf
+```dockerfile
 FROM ubuntu:18.04
 COPY . /app
 ```
@@ -318,7 +318,7 @@ layers:
 {% endcomment %}
 2 つめの Dockerfile は `acme/my-base-image:1.0` をベースとして、さらにレイヤーを追加するものとします。
 
-```conf
+```dockerfile
 FROM acme/my-base-image:1.0
 CMD /app/hello.sh
 ```

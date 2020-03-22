@@ -44,7 +44,7 @@ quick access to a test container. Make the following substitutions:
 - `RUN echo 'root:THEPASSWORDYOUCREATED' | chpasswd` においては、"THEPASSWORDYOUCREATED" の部分は、事前に生成しておいたパスワードに書き換えてください。
 - `RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config` は、Ubuntu 14.04 においては `prohibit-password` ではなく `without-password` を指定してください。
 
-```Dockerfile
+```dockerfile
 FROM ubuntu:16.04
 
 RUN apt-get update && apt-get install -y openssh-server

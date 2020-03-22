@@ -1,34 +1,17 @@
 ---
 description: Release notes for Docker
 keywords: docker, documentation, about, technology, understanding,  release
-title: Docker リリースノート
+title: Docker release notes
 ---
 
-{% comment %}
-Find out what's new in Docker! Release notes also contain detailed information about known issues and fixes for each component.
-{% endcomment %}
-Docker の最新情報をここから探してください。
-これ以外でもリリースノートには、各コンポーネントにおける既知の問題や修正に関する詳細な情報を提供しています。
+Find out what's new in Docker! Release notes contain information about new
+features, improvements, known issues, and bug fixes in each release. You can
+find release notes for each component in the product manuals section. We suggest
+that you regularly visit the release notes to learn about updates.
 
-{% comment %}
-- [Docker Engine](/engine/release-notes)
-- [Docker Desktop Enterprise](/ee/desktop/release-notes/)
-- [Docker Desktop for Mac](/docker-for-mac/release-notes.md)
-- [Docker Desktop for Mac Edge Releases](/docker-for-mac/edge-release-notes.md)
-- [Docker Desktop for Windows](/docker-for-windows/release-notes.md)
-- [Docker Desktop for Windows Edge Releases](/docker-for-windows/edge-release-notes.md)
-- [Docker for AWS](/docker-for-aws/release-notes.md)
-- [Docker Compose](docker-compose.md)
-- [Docker Machine](docker-machine.md)
-- [Docker Swarm (standalone)](docker-swarm.md)
-{% endcomment %}
-- [Docker Engine](/engine/release-notes)
-- [Docker Desktop Enterprise](/ee/desktop/release-notes/)
-- [Docker Desktop for Mac](/docker-for-mac/release-notes.md)
-- [Docker Desktop for Mac 最新版リリース](/docker-for-mac/edge-release-notes.md)
-- [Docker Desktop for Windows](/docker-for-windows/release-notes.md)
-- [Docker Desktop for Windows 最新版リリース](/docker-for-windows/edge-release-notes.md)
-- [Docker for AWS](/docker-for-aws/release-notes.md)
-- [Docker Compose](docker-compose.md)
-- [Docker Machine](docker-machine.md)
-- [Docker Swarm (スタンドアロン)](docker-swarm.md)
+- [Docker Engine](/engine/release-notes/)
+- [Docker Desktop for Mac](/docker-for-mac/)
+- [Docker Desktop for Windows](/docker-for-windows/)
+- [Docker Desktop Enterprise](/ee/desktop/)
+- [Docker Compose](/compose/)
+- [Docker Hub](/docker-hub/)

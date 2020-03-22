@@ -67,12 +67,12 @@ keep image size small:
     たとえば以下のような 2 つのコマンド実行例があったとします。
     1 つめのコマンドは、イメージ内に 2 つのレイヤーを生成しますが、2 つめのコマンドはレイヤーが 1 つで済みます。
 
-    ```conf
+    ```dockerfile
     RUN apt-get -y update
     RUN apt-get install -y python
     ```
 
-    ```conf
+    ```dockerfile
     RUN apt-get -y update && apt-get install -y python
     ```
 

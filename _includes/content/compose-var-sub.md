@@ -40,11 +40,13 @@ Compose はこのファイルを自動的に探しにいきます。
 `.env` ファイルで定義されたものよりも、シェル環境で設定された値が優先されます。
 
 {% comment %}
-> **Important**: The `.env file` feature only works when you use the
-> `docker-compose up` command and does not work with `docker stack deploy`.
+> Note when using docker stack deploy
+>
+> The `.env file` feature only works when you use the `docker-compose up` command
+> and does not work with `docker stack deploy`.
 {: .important }
 {% endcomment %}
-> **重要**： `.env` ファイルによる機能は `docker-compose up` コマンドを使うときだけ動作します。
+> `.env` ファイルによる機能は `docker-compose up` コマンドを使うときだけ動作します。
 > `docker stack deploy` コマンドでは動作しません。
 {: .important }
 

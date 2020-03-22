@@ -26,7 +26,7 @@ These topics describe version 2 of the Compose file format.
 ## Compose と Docker の互換マトリックス
 
 {% comment %}
-There are several versions of the Compose file format – 1, 2, 2.x, and 3.x The
+There are several versions of the Compose file format – 1, 2, 2.x, and 3.x. The
 table below is a quick look. For full details on what each version includes and
 how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 {% endcomment %}
@@ -53,18 +53,19 @@ Compose ファイルは [YAML](http://yaml.org/) 形式のファイルであり�
 Compose ファイルのデフォルトパスは `./docker-compose.yml` です。
 
 {% comment %}
->**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
+> **Tip**: You can use either a `.yml` or `.yaml` extension for this file.
+> They both work.
 {% endcomment %}
->**ヒント**: このファイルの拡張子は `.yml` と `.yaml` のどちらでも構いません。
-いずれでも動作します。
+> **ヒント**: このファイルの拡張子は `.yml` と `.yaml` のどちらでも構いません。
+> いずれでも動作します。
 
 {% comment %}
-A [container](/glossary.md#container) definition contains configuration which are applied to each
+A service definition contains configuration that is applied to each
 container started for that service, much like passing command-line parameters to
 `docker run`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
 {% endcomment %}
-[コンテナー](/glossary.md#container) の定義とは、対応するサービスを起動する各コンテナーに適用される設定を行うことです。
+サービスの定義には、対応するサービスを起動する各コンテナーに適用される設定を行ないます。
 コマンドラインから `docker run` のパラメーターを受け渡すことと、非常によく似ています。
 同様に、ネットワークの定義、ボリュームの定義は、それぞれ `docker network create` と `docker volume create` のコマンドに対応づくものです。
 
@@ -188,19 +189,33 @@ Configuration options that are applied at build time.
 
 {% comment %}
 `build` can be specified either as a string containing a path to the build
-context, or an object with the path specified under [context](#context) and
-optionally [dockerfile](#dockerfile) and [args](#args).
+context:
 {% endcomment %}
 `build` の指定は 1 つには、ビルドコンテキストへのパスを表わす文字列を指定します。
-あるいは [context](#context) の指定のもとにパスを指定し、オプションとして [Dockerfile](#dockerfile) や [args](#args) を記述する方法をとります。
 
+```yaml
+version: "{{ site.compose_file_v2 }}"
+services:
+  webapp:
     build: ./dir
+```
 
+{% comment %}
+Or, as an object with the path specified under [context](#context) and
+optionally [Dockerfile](#dockerfile) and [args](#args):
+{% endcomment %}
+あるいは [コンテキスト](#context) 内にあるパスを指定したオブジェクトとし、必要に応じて [Dockerfile](#dockerfile) や [引数](#args) を指定します。
+
+```yaml
+version: "{{ site.compose_file_v2 }}"
+services:
+  webapp:
     build:
       context: ./dir
       dockerfile: Dockerfile-alternate
       args:
         buildno: 1
+```
 
 {% comment %}
 If you specify `image` as well as `build`, then Compose names the built image
@@ -209,8 +224,10 @@ with the `webapp` and optional `tag` specified in `image`:
 `build` に加えて `image` も指定した場合、Compose はビルドイメージに名前をつけます。
 たとえば以下のように `image` を指定すると、イメージ名を `webapp`、オプションのタグを `tag` という名前にします。
 
-    build: ./dir
-    image: webapp:tag
+```yaml
+build: ./dir
+image: webapp:tag
+```
 
 {% comment %}
 This results in an image named `webapp` and tagged `tag`, built from `./dir`.
@@ -218,32 +235,12 @@ This results in an image named `webapp` and tagged `tag`, built from `./dir`.
 結果としてイメージ名は `webapp` であり `tag` というタグづけが行われます。
 そしてこのイメージは `./dir` から作り出されます。
 
-#### cache_from
-
-{% comment %}
-> Added in [version 2.2](compose-versioning.md#version-22) file format
-{% endcomment %}
-> ファイルフォーマット[バージョン 2.2](compose-versioning.md#version-22) において追加されました。
-
-{% comment %}
-A list of images that the engine uses for cache resolution.
-{% endcomment %}
-エンジンがキャッシュ解決のために利用するイメージを設定します。
-
-    build:
-      context: .
-      cache_from:
-        - alpine:latest
-        - corp/web_app:3.14
-
 #### context
 
 {% comment %}
-> [Version 2 file format](compose-versioning.md#version-2) and up. In version 1, just use
-> [build](#build).
+> Added in [version 2.0](compose-versioning.md#version-2) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) またはそれ以降。
-> バージョン 1 の場合は [build](#build) を用いてください。
+> ファイルフォーマット[バージョン 2.0](compose-versioning.md#version-2) において追加されました。
 
 {% comment %}
 Either a path to a directory containing a Dockerfile, or a url to a git repository.
@@ -259,12 +256,15 @@ sent to the Docker daemon.
 このディレクトリはビルドコンテキストでもあり、Docker デーモンへ送信されるディレクトリです。
 
 {% comment %}
-Compose builds and tags it with a generated name, and use that image thereafter.
+Compose builds and tags it with a generated name, and uses that image
+thereafter.
 {% endcomment %}
 Compose は指定された名前により、イメージのビルドとタグづけを行い、後々これを利用します。
 
-    build:
-      context: ./dir
+```yaml
+build:
+  context: ./dir
+```
 
 #### dockerfile
 
@@ -280,16 +280,18 @@ specified.
 Compose は指定された別の Dockerfile を使ってビルドを行います。
 このときは、ビルドパスを同時に指定しなければなりません。
 
-    build:
-      context: .
-      dockerfile: Dockerfile-alternate
+```yaml
+build:
+  context: .
+  dockerfile: Dockerfile-alternate
+```
 
 #### args
 
 {% comment %}
-> [Version 2 file format](compose-versioning.md#version-2) and up.
+> Added in [version 2.0](compose-versioning.md#version-2) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) またはそれ以降。
+> ファイルフォーマット[バージョン 2.0](compose-versioning.md#version-2) において追加されました。
 
 {% comment %}
 Add build arguments, which are environment variables accessible only during the
@@ -303,11 +305,13 @@ First, specify the arguments in your Dockerfile:
 {% endcomment %}
 Dockerfile 内にてはじめにビルド引数を指定します。
 
-    ARG buildno
-    ARG gitcommithash
+```dockerfile
+ARG buildno
+ARG gitcommithash
 
-    RUN echo "Build number: $buildno"
-    RUN echo "Based on commit: $gitcommithash"
+RUN echo "Build number: $buildno"
+RUN echo "Based on commit: $gitcommithash"
+```
 
 {% comment %}
 Then specify the arguments under the `build` key. You can pass a mapping
@@ -316,25 +320,35 @@ or a list:
 そして `build` キーのもとにその引数を指定します。
 指定は個々をマッピングする形式か、リストとする形式が可能です。
 
-    build:
-      context: .
-      args:
-        buildno: 1
-        gitcommithash: cdc3b19
+```yaml
+build:
+  context: .
+  args:
+    buildno: 1
+    gitcommithash: cdc3b19
+```
 
-    build:
-      context: .
-      args:
-        - buildno=1
-        - gitcommithash=cdc3b19
+```yaml
+build:
+  context: .
+  args:
+    - buildno=1
+    - gitcommithash=cdc3b19
+```
 
 {% comment %}
-> **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
-> If you need an argument to be available in both places, also specify it under the `FROM` instruction.
-> See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
+> Scope of build-args
+>
+> In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
+> `ARG` is not available in the build instructions under `FROM`.
+> If you need an argument to be available in both places, also specify it under
+> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact)
+> section in the documentation for usage details.
 {% endcomment %}
-> **メモ**: Dockerfile にて `FROM` 命令の前に `ARG` 命令を指定した場合、`FROM` 以降のビルド命令において `ARG` の値は利用することができません。
-> `FROM` の前後どこでも、そして特に `FROM` 命令の後でもその値を利用したい場合は、[ARG と FROM の関連について](/engine/reference/builder/#understand-how-arg-and-from-interact)を参照してください。
+> ビルド引数のスコープ
+>
+> Dockerfile にて `FROM` 命令の前に `ARG` 命令を指定した場合、`FROM` 以降のビルド命令において `ARG` の値は利用することができません。
+> `FROM` の前後どこでも、そして特に `FROM` 命令の後でもその値を利用したい場合は、[ARG と FROM の関連について](/engine/reference/builder/#understand-how-arg-and-from-interact) を参照してください。
 
 {% comment %}
 You can omit the value when specifying a build argument, in which case its value
@@ -343,16 +357,43 @@ at build time is the value in the environment where Compose is running.
 ビルド引数の指定にあたって、その値設定を省略することができます。
 この場合、ビルド時におけるその値は、Compose を起動している環境での値になります。
 
-    args:
-      - buildno
-      - gitcommithash
+```yaml
+args:
+  - buildno
+  - gitcommithash
+```
 
 {% comment %}
-> **Note**: YAML boolean values (`true`, `false`, `yes`, `no`, `on`, `off`) must
-> be enclosed in quotes, so that the parser interprets them as strings.
+> Tip when using boolean values
+>
+> YAML boolean values (`"true"`, `"false"`, `"yes"`, `"no"`, `"on"`,
+> `"off"`) must be enclosed in quotes, so that the parser interprets them as
+> strings.
 {% endcomment %}
-> **メモ**: YAML のブール値 (`true`, `false`, `yes`, `no`, `on`, `off`) を用いる場合は、クォートで囲む必要があります。
+> ブール値利用時のメモ
+>
+> YAML のブール値 (`true`, `false`, `yes`, `no`, `on`, `off`) を用いる場合は、クォートで囲む必要があります。
 > そうすることで、これらの値は文字列として解釈されます。
+
+#### cache_from
+
+{% comment %}
+> Added in [version 2.2](compose-versioning.md#version-22) file format
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.2](compose-versioning.md#version-22) において追加されました。
+
+{% comment %}
+A list of images that the engine uses for cache resolution.
+{% endcomment %}
+エンジンがキャッシュ解決のために利用するイメージを設定します。
+
+```yaml
+build:
+  context: .
+  cache_from:
+    - alpine:latest
+    - corp/web_app:3.14
+```
 
 #### extra_hosts
 
@@ -362,9 +403,11 @@ Add hostname mappings at build-time. Use the same values as the docker client `-
 ビルド時におけるホスト名のマッピングを追加します。
 Docker Client の `--add-host` パラメーターと同じ値を設定してください。
 
-    extra_hosts:
-     - "somehost:162.242.195.82"
-     - "otherhost:50.31.209.229"
+```yaml
+extra_hosts:
+  - "somehost:162.242.195.82"
+  - "otherhost:50.31.209.229"
+```
 
 {% comment %}
 An entry with the ip address and hostname is created in `/etc/hosts` inside containers for this build, e.g:
@@ -372,13 +415,15 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 ホスト名と IP アドレスによるこの設定内容は、サービスコンテナー内の `/etc/hosts` に追加されます。
 たとえば以下のとおりです。
 
-    162.242.195.82  somehost
-    50.31.209.229   otherhost
+```console
+162.242.195.82  somehost
+50.31.209.229   otherhost
+```
 
 #### isolation
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
 > [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
@@ -415,25 +460,28 @@ You can use either an array or a dictionary.
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
-It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with
-those used by other software.
+It's recommended that you use reverse-DNS notation to prevent your labels from
+conflicting with those used by other software.
 {% endcomment %}
 他のソフトウェアが用いるラベルとの競合を避けるため、逆 DNS 記法とすることをお勧めします。
 
-    build:
-      context: .
-      labels:
-        com.example.description: "Accounting webapp"
-        com.example.department: "Finance"
-        com.example.label-with-empty-value: ""
+```yaml
+build:
+  context: .
+  labels:
+    com.example.description: "Accounting webapp"
+    com.example.department: "Finance"
+    com.example.label-with-empty-value: ""
+```
 
-
-    build:
-      context: .
-      labels:
-        - "com.example.description=Accounting webapp"
-        - "com.example.department=Finance"
-        - "com.example.label-with-empty-value"
+```yaml
+build:
+  context: .
+  labels:
+    - "com.example.description=Accounting webapp"
+    - "com.example.department=Finance"
+    - "com.example.label-with-empty-value"
+```
 
 #### network
 
@@ -448,14 +496,17 @@ build.
 {% endcomment %}
 ビルド時の `RUN` 命令において接続するネットワークコンテナーを設定します。
 
-    build:
-      context: .
-      network: host
+```yaml
+build:
+  context: .
+  network: host
+```
 
-
-    build:
-      context: .
-      network: custom_network_1
+```yaml
+build:
+  context: .
+  network: custom_network_1
+```
 
 #### shm_size
 
@@ -472,14 +523,17 @@ a [byte value](#specifying-byte-values).
 このビルドコンテナーにおける `/dev/shm` パーティションのサイズを設定します。
 指定する値は、バイト数を表わす整数値か、あるいは[バイト表現](#specifying-byte-values)によって表わされる文字列とします。
 
-    build:
-      context: .
-      shm_size: '2gb'
+```yaml
+build:
+  context: .
+  shm_size: '2gb'
+```
 
-
-    build:
-      context: .
-      shm_size: 10000000
+```yaml
+build:
+  context: .
+  shm_size: 10000000
+```
 
 #### target
 
@@ -495,9 +549,11 @@ details.
 {% endcomment %}
 `Dockerfile` 内部に定義されている特定のステージをビルドする方法は、[マルチステージビルド](/engine/userguide/eng-image/multistage-build.md)を参照してください。
 
-      build:
-        context: .
-        target: prod
+```yaml
+build:
+  context: .
+  target: prod
+```
 
 ### cap_add, cap_drop
 
@@ -508,29 +564,14 @@ See `man 7 capabilities` for a full list.
 コンテナーケーパビリティーの機能を追加または削除します。
 詳細な一覧は `man 7 capabilities` を参照してください。
 
-    cap_add:
-      - ALL
+```yaml
+cap_add:
+  - ALL
 
-    cap_drop:
-      - NET_ADMIN
-      - SYS_ADMIN
-
-### command
-
-{% comment %}
-Override the default command.
-{% endcomment %}
-デフォルトコマンドを上書きします。
-
-    command: bundle exec thin -p 3000
-
-{% comment %}
-The command can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#cmd):
-{% endcomment %}
-このコマンドは [dockerfile](/engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
-
-    command: ["bundle", "exec", "thin", "-p", "3000"]
+cap_drop:
+  - NET_ADMIN
+  - SYS_ADMIN
+```
 
 ### cgroup_parent
 
@@ -539,7 +580,30 @@ Specify an optional parent cgroup for the container.
 {% endcomment %}
 コンテナーに対して、オプションで指定する親の cgroup を指定します。
 
-    cgroup_parent: m-executor-abcd
+```yaml
+cgroup_parent: m-executor-abcd
+```
+
+### command
+
+{% comment %}
+Override the default command.
+{% endcomment %}
+デフォルトコマンドを上書きします。
+
+```yaml
+command: bundle exec thin -p 3000
+```
+
+{% comment %}
+The command can also be a list, in a manner similar to
+[dockerfile](/engine/reference/builder.md#cmd):
+{% endcomment %}
+このコマンドは [dockerfile](/engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
+
+```yaml
+command: ["bundle", "exec", "thin", "-p", "3000"]
+```
 
 ### container_name
 
@@ -548,12 +612,14 @@ Specify a custom container name, rather than a generated default name.
 {% endcomment %}
 デフォルトのコンテナー名ではない、独自のコンテナー名を設定します。
 
-    container_name: my-web-container
+```yaml
+container_name: my-web-container
+```
 
 {% comment %}
-Because Docker container names must be unique, you cannot scale a service
-beyond 1 container if you have specified a custom name. Attempting to do so
-results in an error.
+Because Docker container names must be unique, you cannot scale a service beyond
+1 container if you have specified a custom name. Attempting to do so results in
+an error.
 {% endcomment %}
 Docker コンテナー名はユニークである必要があります。
 そこで独自のコンテナー名を設定したときは、サービスをスケールアップして複数コンテナーとすることはできません。
@@ -571,26 +637,25 @@ Configure CPU allocation parameters using the Docker daemon realtime scheduler.
 {% endcomment %}
 Docker デーモンのリアルタイムスケジューラーが利用する CPU 割り当てパラメーターを設定します。
 
-    {% comment %}
-    cpu_rt_runtime: '400ms'
-    cpu_rt_period: '1400us'
+```yaml
+cpu_rt_runtime: '400ms'
+cpu_rt_period: '1400us'
+```
 
-    # Integer values will use microseconds as units
-    cpu_rt_runtime: 95000
-    cpu_rt_period: 11000
-    {% endcomment %}
-    cpu_rt_runtime: '400ms'
-    cpu_rt_period: '1400us'
+{% comment %}
+Integer values will use microseconds as units:
+{% endcomment %}
+マイクロ秒単位で整数値を指定します。
 
-    # マイクロ秒単位で整数値を指定します。
-    cpu_rt_runtime: 95000
-    cpu_rt_period: 11000
-
+```yaml
+cpu_rt_runtime: 95000
+cpu_rt_period: 11000
+```
 
 ### device_cgroup_rules
 
 {% comment %}
-> [Added in version 2.3 file format](compose-versioning.md#version-23).
+> Added in [version 2.3](compose-versioning.md#version-23) file format.
 {% endcomment %}
 > ファイルフォーマット[バージョン 2.3](compose-versioning.md#version-23) において追加されました。
 
@@ -599,9 +664,11 @@ Add rules to the cgroup allowed devices list.
 {% endcomment %}
 cgroup としてアクセス許可されているデバイスリストにルールを追加します。
 
-    device_cgroup_rules:
-      - 'c 1:3 mr'
-      - 'a 7:* rmw'
+```yaml
+device_cgroup_rules:
+  - 'c 1:3 mr'
+  - 'a 7:* rmw'
+```
 
 ### devices
 
@@ -612,18 +679,21 @@ client create option.
 デバイスのマッピングをリスト形式で設定します。
 Docker クライアントの create オプションの `--device` と同じ書式にします。
 
-    devices:
-      - "/dev/ttyUSB0:/dev/ttyUSB0"
+```yaml
+devices:
+  - "/dev/ttyUSB0:/dev/ttyUSB0"
+```
 
 ### depends_on
 
 {% comment %}
-> [Version 2 file format](compose-versioning.md#version-2) and up.
+> Added in [version 2.0](compose-versioning.md#version-2) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) またはそれ以降。
+> ファイルフォーマット[バージョン 2.0](compose-versioning.md#version-23) において追加されました。
 
 {% comment %}
-Express dependency between services, which has two effects:
+Express dependency between services. Service dependencies cause the following
+behaviors:
 {% endcomment %}
 サービス間の依存関係を表わします。
 これにより以下の 2 つの効果が表れます。
@@ -634,47 +704,51 @@ Express dependency between services, which has two effects:
 {% endcomment %}
 - `docker-compose up` は依存関係の順にサービスを起動します。
   以下の例において `db` と `redis` は `web` の後に起動します。
-
 {% comment %}
-- `docker-compose up SERVICE` automatically include `SERVICE`'s
-  dependencies. In the following example, `docker-compose up web` also
-  create and start `db` and `redis`.
+- `docker-compose up SERVICE` automatically includes `SERVICE`'s
+  dependencies. In the example below, `docker-compose up web` also
+  creates and starts `db` and `redis`.
 {% endcomment %}
 - `docker-compose up SERVICE` を実行すると `SERVICE` における依存関係をもとに動作します。
   以下の例において `docker-compose up web` を実行すると `db` と `redis` を生成して起動します。
+- `docker-compose stop` stops services in dependency order. In the following
+  example, `web` is stopped before `db` and `redis`.
 
 {% comment %}
 Simple example:
 {% endcomment %}
 以下がその簡単な例です。
 
-    version: "{{ site.compose_file_v2 }}"
-    services:
-      web:
-        build: .
-        depends_on:
-          - db
-          - redis
-      redis:
-        image: redis
-      db:
-        image: postgres
+```yaml
+version: "{{ site.compose_file_v2 }}"
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: redis
+  db:
+    image: postgres
+```
 
 {% comment %}
-> **Note**: `depends_on` does not wait for `db` and `redis` to be "ready" before
+> **Note**
+>
+> `depends_on` does not wait for `db` and `redis` to be "ready" before
 > starting `web` - only until they have been started. If you need to wait
 > for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 > for more on this problem and strategies for solving it.
 {% endcomment %}
-> **メモ**: `depends_on` では `db` や `redis` が「準備」状態になるのを待たずに、つまりそれらを開始したらすぐに `web` を起動します。
->   準備状態になるのを待ってから次のサービスを起動することが必要な場合は、[Compose における起動順の制御](/compose/startup-order.md)にて示す内容と解決方法を確認してください。
-
+> **メモ**
+>
+> `depends_on` では `db` や `redis` が「準備」状態になるのを待たずに、つまりそれらを開始したらすぐに `web` を起動します。
+> 準備状態になるのを待ってから次のサービスを起動することが必要な場合は、[Compose における起動順の制御](/compose/startup-order.md)にて示す内容と解決方法を確認してください。
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
-### healthcheck
-
 > ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
 {% comment %}
@@ -690,21 +764,23 @@ Example:
 {% endcomment %}
 以下がその例です。
 
-    version: "{{ site.compose_file_v2 }}"
-    services:
-      web:
-        build: .
-        depends_on:
-          db:
-            condition: service_healthy
-          redis:
-            condition: service_started
-      redis:
-        image: redis
+```yaml
+version: "{{ site.compose_file_v2 }}"
+services:
+  web:
+    build: .
+    depends_on:
       db:
-        image: redis
-        healthcheck:
-          test: "exit 0"
+        condition: service_healthy
+      redis:
+        condition: service_started
+  redis:
+    image: redis
+  db:
+    image: redis
+    healthcheck:
+      test: "exit 0"
+```
 
 {% comment %}
 In the above example, Compose waits for the `redis` service to be started
@@ -727,10 +803,15 @@ Custom DNS servers. Can be a single value or a list.
 DNS サーバーを設定します。
 設定は 1 つだけとするか、リストにすることができます。
 
-    dns: 8.8.8.8
-    dns:
-      - 8.8.8.8
-      - 9.9.9.9
+```yaml
+dns: 8.8.8.8
+```
+
+```yaml
+dns:
+  - 8.8.8.8
+  - 9.9.9.9
+```
 
 ### dns_opt
 
@@ -739,9 +820,11 @@ List of custom DNS options to be added to the container's `resolv.conf` file.
 {% endcomment %}
 コンテナーの `resolv.conf` ファイルに追加する独自の DNS オプションを、リスト形式で設定します。
 
-    dns_opt:
-      - use-vc
-      - no-tld-query
+```yaml
+dns_opt:
+  - use-vc
+  - no-tld-query
+```
 
 ### dns_search
 
@@ -751,23 +834,15 @@ Custom DNS search domains. Can be a single value or a list.
 DNS 検索ドメインを設定します。
 設定は 1 つだけとするか、リストにすることができます。
 
-    dns_search: example.com
-    dns_search:
-      - dc1.example.com
-      - dc2.example.com
+```yaml
+dns_search: example.com
+```
 
-### tmpfs
-
-{% comment %}
-Mount a temporary file system inside the container. Can be a single value or a list.
-{% endcomment %}
-コンテナー内においてテンポラリファイルシステムをマウントします。
-設定は 1 つだけとするか、リストにすることができます。
-
-    tmpfs: /run
-    tmpfs:
-      - /run
-      - /tmp
+```yaml
+dns_search:
+  - dc1.example.com
+  - dc2.example.com
+```
 
 ### entrypoint
 
@@ -776,7 +851,9 @@ Override the default entrypoint.
 {% endcomment %}
 デフォルトのエントリーポイントを上書きします。
 
-    entrypoint: /code/entrypoint.sh
+```yaml
+entrypoint: /code/entrypoint.sh
+```
 
 {% comment %}
 The entrypoint can also be a list, in a manner similar to
@@ -785,21 +862,21 @@ The entrypoint can also be a list, in a manner similar to
 エントリーポイントはリスト形式で設定することができます。
 その指定方法は [Dockerfile](/engine/reference/builder.md#entrypoint) と同様です。
 
-    entrypoint:
-        - php
-        - -d
-        - zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so
-        - -d
-        - memory_limit=-1
-        - vendor/bin/phpunit
+```yaml
+entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
+```
 
 {% comment %}
-> **Note**: Setting `entrypoint` both overrides any default entrypoint set
-> on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
-> clears out any default command on the image - meaning that if there's a `CMD`
-> instruction in the Dockerfile, it is ignored.
+> **Note**
+>
+> Setting `entrypoint` both overrides any default entrypoint set on the service's
+> image with the `ENTRYPOINT` Dockerfile instruction, *and* clears out any default
+> command on the image - meaning that if there's a `CMD` instruction in the
+> Dockerfile, it is ignored.
 {% endcomment %}
-> **メモ**: `entrypoint` を設定すると、サービスイメージ内に Dockerfile 命令の `ENTRYPOINT` によって設定されているデフォルトのエントリーポイントは上書きされ、**さらに**イメージ内のあらゆるデフォルトコマンドもクリアされます。
+> **メモ**
+>
+> `entrypoint` を設定すると、サービスイメージ内に Dockerfile 命令の `ENTRYPOINT` によって設定されているデフォルトのエントリーポイントは上書きされ、**さらに**イメージ内のあらゆるデフォルトコマンドもクリアされます。
 > これはつまり、Dockerfile に `CMD` 命令があったとしたら無視されるということです。
 
 ### env_file
@@ -824,32 +901,42 @@ empty or undefined.
 環境変数が [environment](#environment) の項に宣言されていれば、ここでの設定を**オーバーライド**します。
 たとえ設定値が空や未定義であっても、これは変わりません。
 
-    env_file: .env
+```yaml
+env_file: .env
+```
 
-    env_file:
-      - ./common.env
-      - ./apps/web.env
-      - /opt/secrets.env
+```yaml
+env_file:
+  - ./common.env
+  - ./apps/web.env
+  - /opt/runtime_opts.env
+```
 
 {% comment %}
 Compose expects each line in an env file to be in `VAR=VAL` format. Lines
-beginning with `#` are processed as comments and are ignored. Blank lines are
+beginning with `#` are treated as comments and are ignored. Blank lines are
 also ignored.
 {% endcomment %}
 env ファイルの各行は `VAR=VAL` の書式とします。
 行先頭に `#` があると、コメント行となり無視されます。
 空行も無視されます。
 
-    # Set Rails/Rack environment
-    RACK_ENV=development
+```console
+# Set Rails/Rack environment
+RACK_ENV=development
+```
 
 {% comment %}
-> **Note**: If your service specifies a [build](#build) option, variables
-> defined in environment files are _not_ automatically visible during the
-> build. Use the [args](#args) sub-option of `build` to define build-time
-> environment variables.
+> **Note**
+>
+> If your service specifies a [build](#build) option, variables defined in
+> environment files are _not_ automatically visible during the build. Use
+> the [args](#args) sub-option of `build` to define build-time environment
+> variables.
 {% endcomment %}
-> **メモ**: サービスに [build](#build) オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
+> **メモ**
+>
+> サービスに [build](#build) オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
 > その場合は `build` のサブオプション [args](#args) を利用して、ビルド時の環境変数を設定してください。
 
 {% comment %}
@@ -889,7 +976,7 @@ And the following files:
 {% endcomment %}
 ファイルの内容は以下であるとします。
 
-```none
+```console
 # a.env
 VAR=1
 ```
@@ -898,13 +985,13 @@ VAR=1
 and
 {% endcomment %}
 
-```none
+```console
 # b.env
 VAR=hello
 ```
 
 {% comment %}
-$VAR is `hello`.
+`$VAR` is `hello`.
 {% endcomment %}
 この結果 `$VAR` は `hello` になります。
 
@@ -912,12 +999,12 @@ $VAR is `hello`.
 
 {% comment %}
 Add environment variables. You can use either an array or a dictionary. Any
-boolean values; true, false, yes no, need to be enclosed in quotes to ensure
+boolean values (true, false, yes, no) need to be enclosed in quotes to ensure
 they are not converted to True or False by the YML parser.
 {% endcomment %}
 環境変数を追加します。
 配列形式または辞書形式での指定が可能です。
-ブール値 `true`, `false`, `yes`, `no` を用いる場合は、クォートで囲むことで YML パーサーによって True や False に変換されてしまうのを防ぐ必要があります。
+ブール値（`true`, `false`, `yes`, `no`）を用いる場合は、クォートで囲むことで YML パーサーによって True や False に変換されてしまうのを防ぐ必要があります。
 
 {% comment %}
 Environment variables with only a key are resolved to their values on the
@@ -926,23 +1013,31 @@ machine Compose is running on, which can be helpful for secret or host-specific 
 環境変数だけが記述されている場合は、Compose が起動しているマシン上にて定義されている値が設定されます。
 これは機密情報やホスト固有の値を設定する場合に利用できます。
 
-    environment:
-      RACK_ENV: development
-      SHOW: 'true'
-      SESSION_SECRET:
+```yaml
+environment:
+  RACK_ENV: development
+  SHOW: 'true'
+  SESSION_SECRET:
+```
 
-    environment:
-      - RACK_ENV=development
-      - SHOW=true
-      - SESSION_SECRET
+```yaml
+environment:
+  - RACK_ENV=development
+  - SHOW=true
+  - SESSION_SECRET
+```
 
 {% comment %}
-> **Note**: If your service specifies a [build](#build) option, variables
-> defined in `environment` are _not_ automatically visible during the
-> build. Use the [args](#args) sub-option of `build` to define build-time
-> environment variables.
+> **Note**
+>
+> If your service specifies a [build](#build) option, variables defined in
+> `environment` are _not_ automatically visible during the build. Use the
+> [args](#args) sub-option of `build` to define build-time environment
+> variables.
 {% endcomment %}
-> **メモ**: サービスに [build](#build) オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
+> **メモ**
+>
+> サービスに [build](#build) オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
 > その場合は `build` のサブオプション [args](#args) を利用して、ビルド時の環境変数を設定してください。
 
 ### expose
@@ -955,9 +1050,11 @@ accessible to linked services. Only the internal port can be specified.
 これはリンクされたサービスのみアクセスが可能になります。
 内部ポートのみが指定できます。
 
-    expose:
-     - "3000"
-     - "8000"
+```yaml
+expose:
+  - "3000"
+  - "8000"
+```
 
 ### extends
 
@@ -977,9 +1074,11 @@ and an optional `file` key.
 `extends` に設定する値は辞書形式であり、`service` キーが必須です。
 また必要に応じて指定する `file` キーがあります。
 
-    extends:
-      file: common.yml
-      service: webapp
+```yaml
+extends:
+  file: common.yml
+  service: webapp
+```
 
 {% comment %}
 The `service` the name of the service being extended, for example
@@ -1018,27 +1117,35 @@ For more on `extends`, see the
 ### external_links
 
 {% comment %}
-Link to containers started outside this `docker-compose.yml` or even outside
-of Compose, especially for containers that provide shared or common services.
-`external_links` follow semantics similar to `links` when specifying both the
-container name and the link alias (`CONTAINER:ALIAS`).
+Link to containers started outside this `docker-compose.yml` or even outside of
+Compose, especially for containers that provide shared or common services.
+`external_links` follow semantics similar to the legacy option `links` when
+specifying both the container name and the link alias (`CONTAINER:ALIAS`).
 {% endcomment %}
 今の `docker-compose.yml` からではない別のところから起動されたコンテナーをリンクします。
 あるいは Compose の外から、特に共有サービスや汎用サービスとして提供されるコンテナーをリンクします。
-`external_links` の文法は、オプション `links` と同様です。
+`external_links` の文法は、古いオプション `links` と同様です。
 つまりコンテナー名とリンクのエイリアス名（`CONTAINER:ALIAS`）を同時に指定します。
 
-    external_links:
-     - redis_1
-     - project_db_1:mysql
-     - project_db_1:postgresql
+```yaml
+external_links:
+  - redis_1
+  - project_db_1:mysql
+  - project_db_1:postgresql
+```
 
 {% comment %}
-> **Note**: For version 2 file format, the
-> externally-created containers must be connected to at least one of the same
-> networks as the service which is linking to them.
+> **Note**
+>
+> If you're using the [version 2 or above file format](compose-versioning.md#version-2),
+> the externally-created  containers must be connected to at least one of the same
+> networks as the service that is linking to them. [Links](compose-file-v2#links)
+> are a legacy option. We recommend using [networks](#networks) instead.
 {% endcomment %}
-> **メモ**: ファイルフォーマットバージョン 2 を利用しているときに、外部にて生成されたコンテナーをネットワークに接続する場合は、そのコンテナーがサービスとしてリンクしているネットワークのうちの 1 つでなければなりません。
+> **メモ**
+>
+> ファイルフォーマット [バージョン 2](compose-versioning.md#version-2) 以降を利用しているときに、外部にて生成されたコンテナーをネットワークに接続する場合は、そのコンテナーがサービスとしてリンクしているネットワークのうちの 1 つでなければなりません。
+> [Links](compose-file-v2#links) オプションは古いものなので、[networks](#networks) オプションを用いてください。
 
 ### extra_hosts
 
@@ -1048,9 +1155,11 @@ Add hostname mappings. Use the same values as the docker client `--add-host` par
 ホスト名のマッピングを追加します。
 Docker Client の `--add-host` パラメーターと同じ値を設定してください。
 
-    extra_hosts:
-     - "somehost:162.242.195.82"
-     - "otherhost:50.31.209.229"
+```yaml
+extra_hosts:
+  - "somehost:162.242.195.82"
+  - "otherhost:50.31.209.229"
+```
 
 {% comment %}
 An entry with the ip address and hostname is created in `/etc/hosts` inside containers for this service, e.g:
@@ -1058,8 +1167,10 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 ホスト名と IP アドレスによるこの設定内容は、サービスコンテナー内の `/etc/hosts` に追加されます。
 たとえば以下のとおりです。
 
-    162.242.195.82  somehost
-    50.31.209.229   otherhost
+```console
+162.242.195.82  somehost
+50.31.209.229   otherhost
+```
 
 ### group_add
 
@@ -1084,7 +1195,7 @@ A full example:
 {% endcomment %}
 全体的な例として以下です。
 
-```
+```yaml
 version: "{{ site.compose_file_v2 }}"
 services:
   myservice:
@@ -1104,9 +1215,9 @@ used.
 ### healthcheck
 
 {% comment %}
-> [Version 2.1 file format](compose-versioning.md#version-21) and up.
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) またはそれ以降。
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
 {% comment %}
 Configure a check that's run to determine whether or not containers for this
@@ -1117,18 +1228,29 @@ for details on how healthchecks work.
 このサービスを起動させているコンテナーが「健康」（healthy）かどうかを確認する処理を設定します。
 ヘルスチェックがどのように動作するのかの詳細は [Dockerfile の HEALTHCHECK 命令](/engine/reference/builder.md#healthcheck) を参照してください。
 
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+```yaml
+healthcheck:
+  test: ["CMD", "curl", "-f", "http://localhost"]
+  interval: 1m30s
+  timeout: 10s
+  retries: 3
+  start_period: 40s
+```
 
 {% comment %}
 `interval`, `timeout` and `start_period` are specified as
 [durations](#specifying-durations).
 {% endcomment %}
 `interval`, `timeout`, `start_period` は [時間](#specifying-durations) を設定します。
+
+{% comment %}
+> Added in [version 2.3](compose-versioning.md#version-23) file format.
+>
+> The `start_period` option was added in file format 2.3.
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.3](compose-versioning.md#version-23) において追加されました。
+>
+> `start_period` オプションはファイルフォーマット 2.3 において加えられたものです。
 
 {% comment %}
 `test` must be either a string or a list. If it's a list, the first item must be
@@ -1139,36 +1261,47 @@ specifying `CMD-SHELL` followed by that string.
 リスト形式の場合、第 1 要素は必ず `NONE`, `CMD`, `CMD-SHELL` のいずれかとします。
 文字列の場合は、`CMD-SHELL` に続けてその文字列を指定することと同じになります。
 
-    {% comment %}
-    # Hit the local web app
-    test: ["CMD", "curl", "-f", "http://localhost"]
-
-    # As above, but wrapped in /bin/sh. Both forms below are equivalent.
-    test: ["CMD-SHELL", "curl -f http://localhost && echo 'cool, it works'"]
-    test: curl -f https://localhost && echo 'cool, it works'
-    {% endcomment %}
-    # ローカルのウェブアプリにアクセスします。
-    test: ["CMD", "curl", "-f", "http://localhost"]
-
-    # 上と同様。ただし /bin/sh によりラップ。両書式は同等。
-    test: ["CMD-SHELL", "curl -f http://localhost && echo 'cool, it works'"]
-    test: curl -f https://localhost && echo 'cool, it works'
+{% comment %}
+```yaml
+# Hit the local web app
+test: ["CMD", "curl", "-f", "http://localhost"]
+```
+{% endcomment %}
+```yaml
+# ローカルのウェブアプリにアクセスします。
+test: ["CMD", "curl", "-f", "http://localhost"]
+```
 
 {% comment %}
-To disable any default healthcheck set by the image, you can use `disable:
-true`. This is equivalent to specifying `test: ["NONE"]`.
+As above, but wrapped in `/bin/sh`. Both forms below are equivalent.
+{% endcomment %}
+上と同様ですが `/bin/sh` によりラップします。
+両書式は同等になります。
+
+{% comment %}
+```yaml
+test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
+```
+{% endcomment %}
+```yaml
+test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
+```
+
+```yaml
+test: curl -f https://localhost || exit 1
+```
+
+{% comment %}
+To disable any default healthcheck set by the image, you can use `disable: true`.
+This is equivalent to specifying `test: ["NONE"]`.
 {% endcomment %}
 イメージが設定するデフォルトのヘルスチェックを無効にするには、`disable: true` を指定します。
 これは `test: ["NONE"]` と指定することと同じです。
 
-    healthcheck:
-      disable: true
-
-{% comment %}
-> **Note**: The `start_period` option is a more recent feature and is only
-> available with the [2.3 file format](compose-versioning.md#version-23).
-{% endcomment %}
-> **メモ**: `start_period` オプションは最新の機能であり、[ファイルフォーマット 2.3](compose-versioning.md#version-23) においてのみ利用可能です。
+```yaml
+healthcheck:
+  disable: true
+```
 
 ### image
 
@@ -1179,11 +1312,21 @@ a partial image ID.
 コンテナーを起動させるイメージを設定します。
 リポジトリ/タグの形式か、あるいは部分イメージ ID により指定します。
 
-    image: redis
-    image: ubuntu:14.04
-    image: tutum/influxdb
-    image: example-registry.com:4000/postgresql
-    image: a4bc65fd
+```yaml
+image: redis
+```
+```yaml
+image: ubuntu:18.04
+```
+```yaml
+image: tutum/influxdb
+```
+```yaml
+image: example-registry.com:4000/postgresql
+```
+```yaml
+image: a4bc65fd
+```
 
 {% comment %}
 If the image does not exist, Compose attempts to pull it, unless you have also
@@ -1196,9 +1339,9 @@ options and tags it with the specified tag.
 ### init
 
 {% comment %}
-> [Added in version 2.2 file format](compose-versioning.md#version-22).
+> Added in [version 2.2](compose-versioning.md#version-22) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2.2](compose-versioning.md#version-22) において追加。
+> ファイルフォーマット[バージョン 2.2](compose-versioning.md#version-22) において追加されました。
 
 {% comment %}
 Run an init inside the container that forwards signals and reaps processes.
@@ -1207,11 +1350,13 @@ Set this option to `true` to enable this feature for the service.
 コンテナー内にて init を実行し、シグナルを送信してプロセスを停止させます。
 このオプションに `true` を設定することで、サービスに対するこの機能を有効にします。
 
-    version: "{{ site.compose_file_v2 }}"
-    services:
-      web:
-        image: alpine:latest
-        init: true
+```yaml
+version: "{{ site.compose_file_v2 }}"
+services:
+  web:
+    image: alpine:latest
+    init: true
+```
 
 {% comment %}
 > The default init binary that is used is [Tini](https://github.com/krallin/tini),
@@ -1222,13 +1367,12 @@ Set this option to `true` to enable this feature for the service.
 > 利用されるデフォルトの init の実行モジュールは [Tini](https://github.com/krallin/tini) であり、デーモンホストの `/usr/libexec/docker-init` にインストールされています。
 > デーモンに対して独自の init 実行モジュールを設定するには、[`init-path` 設定オプション](/engine/reference/commandline/dockerd/#daemon-configuration-file) を利用します。
 
-
 ### isolation
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加。
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
 {% comment %}
 Specify a container’s isolation technology. On Linux, the only supported value
@@ -1255,15 +1399,19 @@ It's recommended that you use reverse-DNS notation to prevent your labels from c
 {% endcomment %}
 他のソフトウェアが用いるラベルとの競合を避けるため、逆 DNS 記法とすることをお勧めします。
 
-    labels:
-      com.example.description: "Accounting webapp"
-      com.example.department: "Finance"
-      com.example.label-with-empty-value: ""
+```yaml
+labels:
+  com.example.description: "Accounting webapp"
+  com.example.department: "Finance"
+  com.example.label-with-empty-value: ""
+```
 
-    labels:
-      - "com.example.description=Accounting webapp"
-      - "com.example.department=Finance"
-      - "com.example.label-with-empty-value"
+```yaml
+labels:
+  - "com.example.description=Accounting webapp"
+  - "com.example.department=Finance"
+  - "com.example.label-with-empty-value"
+```
 
 ### links
 
@@ -1281,11 +1429,13 @@ a link alias (`"SERVICE:ALIAS"`), or just the service name.
 > links は古いオプションです。
 > この代わりに [networks](#networks) オプションを用いることをお勧めします。
 
-    web:
-      links:
-       - "db"
-       - "db:database"
-       - "redis"
+```yaml
+web:
+  links:
+    - "db"
+    - "db:database"
+    - "redis"
+```
 
 {% comment %}
 Containers for the linked service are reachable at a hostname identical to
@@ -1293,6 +1443,10 @@ the alias, or the service name if no alias was specified.
 {% endcomment %}
 リンクされたサービスのコンテナーは、エイリアスと同等のホスト名により到達可能になります。
 エイリアスが設定されていない場合はサービス名により到達可能です。
+
+Links are not required to enable services to communicate - by default,
+any service can reach any other service at that service’s name. (See also, the
+[Links topic in Networking in Compose](/compose/networking.md#links).)
 
 {% comment %}
 Links also express dependency between services in the same way as
@@ -1302,25 +1456,30 @@ Links は [depends_on](#depends_on) と同様にサービス間の依存関係�
 したがってサービスの起動順を設定するものになります。
 
 {% comment %}
-> **Note**: If you define both links and [networks](#networks), services with
-> links between them must share at least one network in common in order to
+> **Note**
+>
+> If you define both links and [networks](#networks), services with
+> links between them must share at least one network in common to
 > communicate. We recommend using networks instead.
 {% endcomment %}
-> **メモ**： links と [networks](#networks) をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。
+> **メモ**
+>
+> links と [networks](#networks) をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。
 > このオプションではなく networks オプションを用いることをお勧めします。
 
 ### logging
-
 
 {% comment %}
 Logging configuration for the service.
 {% endcomment %}
 サービスに対するログ記録の設定をします。
 
-    logging:
-      driver: syslog
-      options:
-        syslog-address: "tcp://192.168.0.42:123"
+```yaml
+logging:
+  driver: syslog
+  options:
+    syslog-address: "tcp://192.168.0.42:123"
+```
 
 {% comment %}
 The `driver`  name specifies a logging driver for the service's
@@ -1336,17 +1495,27 @@ The default value is json-file.
 {% endcomment %}
 デフォルトは json-file です。
 
-    driver: "json-file"
-    driver: "syslog"
-    driver: "none"
+```yaml
+driver: "json-file"
+```
+```yaml
+driver: "syslog"
+```
+```yaml
+driver: "none"
+```
 
 {% comment %}
-> **Note**: Only the `json-file` and `journald` drivers make the logs available directly from
-> `docker-compose up` and `docker-compose logs`. Using any other driver does not
-> print any logs.
+> **Note**
+>
+> Only the `json-file` and `journald` drivers make the logs available directly
+> from `docker-compose up` and `docker-compose logs`. Using any other driver
+> does not print any logs.
 {% endcomment %}
-> **メモ**: ドライバーのうち `json-file` と `journald` だけが、`docker-compose up` と `docker-compose logs` によって直接ログ参照ができます。
-その他のドライバーではログ表示は行われません。
+> **メモ**
+>
+> ドライバーのうち `json-file` と `journald` だけが、`docker-compose up` と `docker-compose logs` によって直接ログ参照ができます。
+> その他のドライバーではログ表示は行われません。
 
 {% comment %}
 Specify logging options for the logging driver with the ``options`` key, as with the ``--log-opt`` option for `docker run`.
@@ -1360,39 +1529,57 @@ Logging options are key-value pairs. An example of `syslog` options:
 ロギングオプションはキーバリューのペアで設定します。
 たとえば `syslog` オプションは以下のようになります。
 
-    driver: "syslog"
-    options:
-      syslog-address: "tcp://192.168.0.42:123"
+```yaml
+driver: "syslog"
+options:
+  syslog-address: "tcp://192.168.0.42:123"
+```
 
 ### network_mode
 
 {% comment %}
-> [Version 2 file format](compose-versioning.md#version-2) and up. Replaces the version 1 [net](compose-file-v1.md#net) option.
+> Changed in [version 2](compose-versioning.md#version-2) file format.
+>
+> The `network_mode` option replaces the version 1 [net](compose-file-v1.md#net) option.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) またはそれ以降。
-> バージョン 1 の [net](compose-file-v1.md#net) オプションに置き換わるものです。
+> ファイルフォーマット[バージョン 2](compose-versioning.md#version-2) において変更されました。
+>
+> `network_mode` オプションは、バージョン 1 の [net](compose-file-v1.md#net) オプションに置き換わるものです。
 
 {% comment %}
-Network mode. Use the same values as the docker client `--net` parameter, plus
+Network mode. Use the same values as the docker client `--network` parameter, plus
 the special form `service:[service name]`.
 {% endcomment %}
 ネットワークモードを設定します。
-Docker クライアントの `--net` パラメーターと同じ値を設定します。
+Docker クライアントの `--network` パラメーターと同じ値を設定します。
 これに加えて `service:[service name]` という特別な書式も指定可能です。
 
-    network_mode: "bridge"
-    network_mode: "host"
-    network_mode: "none"
-    network_mode: "service:[service name]"
-    network_mode: "container:[container name/id]"
+```yaml
+net: "bridge"
+```
+```yaml
+net: "host"
+```
+```yaml
+net: "none"
+```
+```yaml
+net: "service:[service name]"
+```
+```yaml
+net: "container:[container name/id]"
+```
 
 ### networks
 
 {% comment %}
-> [Version 2 file format](compose-versioning.md#version-2) and up. Replaces the version 1 [net](compose-file-v1.md#net) option.
+> Changed in [version 2](compose-versioning.md#version-2) file format.
+>
+> The `networks` option replaces the version 1 [net](compose-file-v1.md#net) option.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) またはそれ以降。
-> バージョン 1 の [net](compose-file-v1.md#net) オプションに置き換わるものです。
+> ファイルフォーマット[バージョン 2](compose-versioning.md#version-2) において変更されました。
+>
+> `networks` オプションは、バージョン 1 の [net](compose-file-v1.md#net) オプションに置き換わるものです。
 
 {% comment %}
 Networks to join, referencing entries under the
@@ -1401,11 +1588,13 @@ Networks to join, referencing entries under the
 ネットワークへの参加を設定します。
 設定には [最上位の `networks` キー](#network-configuration-reference) に設定された値を用います。
 
-    services:
-      some-service:
-        networks:
-         - some-network
-         - other-network
+```yaml
+services:
+  some-service:
+    networks:
+     - some-network
+     - other-network
+```
 
 #### aliases
 
@@ -1422,9 +1611,15 @@ Since `aliases` is network-scoped, the same service can have different aliases o
 ネットワークが異なれば、同一サービスに違うエイリアスを持たせることができます。
 
 {% comment %}
-> **Note**: A network-wide alias can be shared by multiple containers, and even by multiple services. If it is, then exactly which container the name resolves to is not guaranteed.
+> **Note**
+>
+> A network-wide alias can be shared by multiple containers, and even by multiple
+> services. If it is, then exactly which container the name resolves to is not
+> guaranteed.
 {% endcomment %}
-> **メモ**: ネットワーク全体にわたってのエイリアスを複数コンテナー間で共有することができます。
+> **メモ**
+>
+> ネットワーク全体にわたってのエイリアスを複数コンテナー間で共有することができます。
 > それは複数サービス間でも可能です。
 > ただしこの場合、名前解決がどのコンテナーに対して行われるかは保証されません。
 
@@ -1433,50 +1628,57 @@ The general format is shown here.
 {% endcomment %}
 一般的な書式は以下のとおりです。
 
-    services:
-      some-service:
-        networks:
-          some-network:
-            aliases:
-             - alias1
-             - alias3
-          other-network:
-            aliases:
-             - alias2
+```yaml
+services:
+  some-service:
+    networks:
+      some-network:
+        aliases:
+          - alias1
+          - alias3
+      other-network:
+        aliases:
+          - alias2
+```
 
 {% comment %}
-In the example below, three services are provided (`web`, `worker`, and `db`), along with two networks (`new` and `legacy`). The `db` service is reachable at the hostname `db` or `database` on the `new` network, and at `db` or `mysql` on the `legacy` network.
+In the example below, three services are provided (`web`, `worker`, and `db`),
+along with two networks (`new` and `legacy`). The `db` service is reachable at
+the hostname `db` or `database` on the `new` network, and at `db` or `mysql` on
+the `legacy` network.
 {% endcomment %}
 以下の例では 3 つのサービス（`web`, `worker`, `db`）と 2 つのネットワーク（`new` と `legacy`）を提供します。
 `db` サービスは `new` ネットワーク上では、ホスト名 `db` あるいは `database` としてアクセスできます。
 一方 `legacy` ネットワーク上では `db` あるいは `mysql` としてアクセスできます。
 
-    version: "{{ site.compose_file_v2 }}"
+```yaml
+version: "{{ site.compose_file_v2 }}"
 
-    services:
-      web:
-        build: ./web
-        networks:
-          - new
+services:
+  web:
+    image: "nginx:alpine"
+    networks:
+      - new
 
-      worker:
-        build: ./worker
-        networks:
-          - legacy
+  worker:
+    image: "my-worker-image:latest"
+    networks:
+      - legacy
 
-      db:
-        image: mysql
-        networks:
-          new:
-            aliases:
-              - database
-          legacy:
-            aliases:
-              - mysql
-
+  db:
+    image: mysql
     networks:
       new:
+        aliases:
+          - database
       legacy:
+        aliases:
+          - mysql
+
+networks:
+  new:
+  legacy:
+```
 
 #### ipv4_address, ipv6_address
 
@@ -1486,46 +1688,54 @@ Specify a static IP address for containers for this service when joining the net
 サービスをネットワークに参加させる際、そのコンテナーに対してスタティック IP アドレスを設定します。
 
 {% comment %}
-The corresponding network configuration in the [top-level networks section](#network-configuration-reference) must have an `ipam` block with subnet and gateway configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set.
+The corresponding network configuration in the
+[top-level networks section](#network-configuration-reference) must have an
+`ipam` block with subnet and gateway configurations covering each static address.
 {% endcomment %}
 [最上位の networks セクション](#network-configuration-reference) の対応するネットワーク設定においては、`ipam` ブロックが必要です。
 そこでは各スタティックアドレスに応じたサブネットの設定が必要になります。
-IPv6 アドレスが必要である場合は、[`enable_ipv6`](#enableipv6) オプションの設定が必要になります。
+
+{% comment %}
+> If IPv6 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set.
+{% endcomment %}
+> IPv6 アドレスが必要である場合は、[`enable_ipv6`](#enableipv6) オプションの設定が必要になります。
 
 {% comment %}
 An example:
 {% endcomment %}
 以下に例を示します。
 
-    version: "{{ site.compose_file_v2 }}"
+```yaml
+version: "{{ site.compose_file_v2 }}"
 
-    services:
-      app:
-        image: busybox
-        command: ifconfig
-        networks:
-          app_net:
-            ipv4_address: 172.16.238.10
-            ipv6_address: 2001:3984:3989::10
-
+services:
+  app:
+    image: busybox
+    command: ifconfig
     networks:
       app_net:
-        driver: bridge
-        enable_ipv6: true
-        ipam:
-          driver: default
-          config:
-          - subnet: 172.16.238.0/24
-            gateway: 172.16.238.1
-          - subnet: 2001:3984:3989::/64
-            gateway: 2001:3984:3989::1
+        ipv4_address: 172.16.238.10
+        ipv6_address: 2001:3984:3989::10
+
+networks:
+  app_net:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1
+        - subnet: 2001:3984:3989::/64
+          gateway: 2001:3984:3989::1
+```
 
 #### link_local_ips
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
 {% comment %}
 Specify a list of link-local IPs. Link-local IPs are special IPs which belong
@@ -1543,19 +1753,21 @@ Example usage:
 {% endcomment %}
 利用例を以下に示します。
 
-    version: "{{ site.compose_file_v2 }}"
-    services:
-      app:
-        image: busybox
-        command: top
-        networks:
-          app_net:
-            link_local_ips:
-              - 57.123.22.11
-              - 57.123.22.13
+```yaml
+version: "{{ site.compose_file_v2 }}"
+services:
+  app:
+    image: busybox
+    command: top
     networks:
       app_net:
-        driver: bridge
+        link_local_ips:
+          - 57.123.22.11
+          - 57.123.22.13
+networks:
+  app_net:
+    driver: bridge
+```
 
 #### priority
 
@@ -1576,34 +1788,45 @@ as it has the highest priority. It then connects to `app_net_3`, then
 次に接続されるのは `app_net_3` です。
 最後に、デフォルトの優先順位である `0` が用いられている `app_net_2` に接続します。
 
-    version: "{{ site.compose_file_v2 }}"
-    services:
-      app:
-        image: busybox
-        command: top
-        networks:
-          app_net_1:
-            priority: 1000
-          app_net_2:
-
-          app_net_3:
-            priority: 100
+```yaml
+version: "{{ site.compose_file_v2 }}"
+services:
+  app:
+    image: busybox
+    command: top
     networks:
       app_net_1:
+        priority: 1000
       app_net_2:
+
       app_net_3:
+        priority: 100
+networks:
+  app_net_1:
+  app_net_2:
+  app_net_3:
+```
 
 {% comment %}
-> **Note**: If multiple networks have the same priority, the connection order
-> is undefined.
+> **Note**
+>
+> If multiple networks have the same priority, the connection order is undefined.
 {% endcomment %}
-> **メモ**: 複数のネットワークに同一の優先順位が設定された場合、接続順は定義されません。
+> **メモ**
+>
+> 複数のネットワークに同一の優先順位が設定された場合、接続順は定義されません。
 
 ### pid
 
-    pid: "host"
-    pid: "container:custom_container_1"
-    pid: "service:foobar"
+```yaml
+pid: "host"
+```
+```yaml
+pid: "container:custom_container_1"
+```
+```yaml
+pid: "service:foobar"
+```
 
 {% comment %}
 If set to one of the following forms: `container:<container_name>`,
@@ -1624,17 +1847,20 @@ other containers in the bare-metal machine's namespace and vice versa.
 逆もまた可能です。
 
 {% comment %}
-> **Note**: the `service:` and `container:` forms require
-> [version 2.1](compose-versioning.md#version-21) or above
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
+>
+> The `service:` and `container:` forms require [version 2.1](compose-versioning.md#version-21) or above
 {% endcomment %}
-> **メモ**: `service:` と `container:` の書式を利用するには [バージョン 2.1](compose-versioning.md#version-21) またはそれ以降である必要があります。
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
+>
+> `service:` と `container:` の書式を利用するには [バージョン 2.1](compose-versioning.md#version-21) またはそれ以降である必要があります。
 
 ### pids_limit
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
 {% comment %}
 Tunes a container's PIDs limit. Set to `-1` for unlimited PIDs.
@@ -1642,15 +1868,16 @@ Tunes a container's PIDs limit. Set to `-1` for unlimited PIDs.
 コンテナーの PID 上限を設定します。
 `-1` に設定すると無制限になります。
 
-    pids_limit: 10
-
+```yaml
+pids_limit: 10
+```
 
 ### platform
 
 {% comment %}
-> [Added in version 2.4 file format](compose-versioning.md#version-24).
+> Added in [version 2.4](compose-versioning.md#version-24) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2.4](compose-versioning.md#version-24) において追加されました。
+> ファイルフォーマット[バージョン 2.4](compose-versioning.md#version-24) において追加されました。
 
 {% comment %}
 Target platform containers for this service will run on, using the
@@ -1659,9 +1886,15 @@ Target platform containers for this service will run on, using the
 サービスのコンテナーが稼動することになるプラットフォームを設定します。
 その記述は `os[/arch[/variant]]` といった書式で行います。
 
-    platform: osx
-    platform: windows/amd64
-    platform: linux/arm64/v8
+```yaml
+platform: osx
+```
+```yaml
+platform: windows/amd64
+```
+```yaml
+platform: linux/arm64/v8
+```
 
 {% comment %}
 This parameter determines which version of the image will be pulled and/or
@@ -1679,30 +1912,36 @@ port (an ephemeral host port is chosen).
 設定は両側のポートを指定するか（`HOST:CONTAINER`）、あるいはコンテナー側のポートのみを指定します（その場合、ホスト側はエフェメラルポートが採用されます）。
 
 {% comment %}
-> **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
+> **Note**
+>
+> When mapping ports in the `HOST:CONTAINER` format, you may experience
 > erroneous results when using a container port lower than 60, because YAML
 > parses numbers in the format `xx:yy` as a base-60 value. For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
 {% endcomment %}
-> **メモ**: `HOST:CONTAINER` の書式によってポートをマッピングした場合に、コンテナー側のポートが 60 番未満であるとエラーになることがあります。
+> **メモ**
+>
+> `HOST:CONTAINER` の書式によってポートをマッピングした場合に、コンテナー側のポートが 60 番未満であるとエラーになることがあります。
 > これは YAML パーサーが `xx:yy` の書式内にある数値を 60 進数値として解釈するからです。
 > このことからポートマッピングを指定する際には、常に文字列として設定することをお勧めします。
 
-    ports:
-     - "3000"
-     - "3000-3005"
-     - "8000:8000"
-     - "9090-9091:8080-8081"
-     - "49100:22"
-     - "127.0.0.1:8001:8001"
-     - "127.0.0.1:5000-5010:5000-5010"
-     - "6060:6060/udp"
-     - "12400-12500:1240"
+```yaml
+ports:
+  - "3000"
+  - "3000-3005"
+  - "8000:8000"
+  - "9090-9091:8080-8081"
+  - "49100:22"
+  - "127.0.0.1:8001:8001"
+  - "127.0.0.1:5000-5010:5000-5010"
+  - "6060:6060/udp"
+  - "12400-12500:1240"
+```
 
 ### runtime
 
 {% comment %}
-> [Added in version 2.3 file format](compose-versioning.md#version-23)
+> Added in [version 2.3](compose-versioning.md#version-23) file format.
 {% endcomment %}
 > ファイルフォーマット[バージョン 2.3](compose-versioning.md#version-23) において追加されました。
 
@@ -1713,16 +1952,17 @@ and available runtimes are listed in the output of `docker info`.
 サービスのコンテナーにおいてどのランタイム（runtime）を用いるかを設定します。
 デフォルトのランタイムおよび利用可能なランタイムは、`docker info` 出力から確認できます。
 
-    web:
-      image: busybox:latest
-      command: true
-      runtime: runc
-
+```yaml
+web:
+  image: busybox:latest
+  command: true
+  runtime: runc
+```
 
 ### scale
 
 {% comment %}
-> [Added in version 2.2 file format](compose-versioning.md#version-22)
+> Added in [version 2.2](compose-versioning.md#version-22) file format.
 {% endcomment %}
 > ファイルフォーマット[バージョン 2.2](compose-versioning.md#version-22) において追加されました。
 
@@ -1736,10 +1976,12 @@ the specified number. This value can be overridden using the
 `docker-compose up` を実行したとき、Compose はこの設定数に従ってコンテナーの生成や削除を行います。
 この値は [`--scale`](/compose/reference/up.md) フラグを使って上書きすることができます。
 
-    web:
-      image: busybox:latest
-      command: echo 'scaled'
-      scale: 3
+```yaml
+web:
+  image: busybox:latest
+  command: echo 'scaled'
+  scale: 3
+```
 
 ### security_opt
 
@@ -1748,9 +1990,11 @@ Override the default labeling scheme for each container.
 {% endcomment %}
 各コンテナーにおけるデフォルトのラベリングスキーム（labeling scheme）を上書きします。
 
-    security_opt:
-      - label:user:USER
-      - label:role:ROLE
+```yaml
+security_opt:
+  - label:user:USER
+  - label:role:ROLE
+```
 
 ### stop_grace_period
 
@@ -1763,8 +2007,13 @@ as a [duration](#specifying-durations).
 コンテナーが SIGKILL を送信するまでに、SIGTERM（あるいは [`stop_signal`](#stopsignal) によって設定されたストップシグナル）をどれだけ待つかを設定します。
 指定には [時間](#specifying-durations) を用います。
 
-    stop_grace_period: 1s
-    stop_grace_period: 1m30s
+```yaml
+stop_grace_period: 1s
+```
+
+```yaml
+stop_grace_period: 1m30s
+```
 
 {% comment %}
 By default, `stop` waits 10 seconds for the container to exit before sending
@@ -1783,12 +2032,14 @@ SIGTERM. Setting an alternative signal using `stop_signal` causes
 デフォルトにおいて `stop` は SIGTERM を用います。
 `stop_signal` を使って別のシグナルを設定すると `stop` にはそのシグナルが代わりに送信されます。
 
-    stop_signal: SIGUSR1
+```yaml
+stop_signal: SIGUSR1
+```
 
 ### storage_opt
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
 > ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
@@ -1797,13 +2048,15 @@ Set storage driver options for this service.
 {% endcomment %}
 本サービスに対するストレージドライバーのオプションを設定します。
 
-    storage_opt:
-      size: '1G'
+```yaml
+storage_opt:
+  size: '1G'
+```
 
 ### sysctls
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
 > ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
@@ -1814,13 +2067,35 @@ dictionary.
 コンテナーに設定するカーネルパラメーターを設定します。
 配列または辞書形式での指定ができます。
 
-    sysctls:
-      net.core.somaxconn: 1024
-      net.ipv4.tcp_syncookies: 0
+```yaml
+sysctls:
+  net.core.somaxconn: 1024
+  net.ipv4.tcp_syncookies: 0
+```
 
-    sysctls:
-      - net.core.somaxconn=1024
-      - net.ipv4.tcp_syncookies=0
+```yaml
+sysctls:
+  - net.core.somaxconn=1024
+  - net.ipv4.tcp_syncookies=0
+```
+
+### tmpfs
+
+{% comment %}
+Mount a temporary file system inside the container. Can be a single value or a list.
+{% endcomment %}
+コンテナー内においてテンポラリファイルシステムをマウントします。
+設定は 1 つだけとするか、リストにすることができます。
+
+```yaml
+tmpfs: /run
+```
+
+```yaml
+tmpfs:
+  - /run
+  - /tmp
+```
 
 ### ulimits
 
@@ -1831,21 +2106,24 @@ limit as an integer or soft/hard limits as a mapping.
 コンテナーにおけるデフォルトの ulimits を上書きします。
 1 つの limit を整数値として指定するか、ソフト、ハードの limit をマッピングとして指定することができます。
 
-
-    ulimits:
-      nproc: 65535
-      nofile:
-        soft: 20000
-        hard: 40000
+```yaml
+ulimits:
+  nproc: 65535
+  nofile:
+    soft: 20000
+    hard: 40000
+```
 
 ### userns_mode
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
 > ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
-    userns_mode: "host"
+```yaml
+userns_mode: "host"
+```
 
 {% comment %}
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
@@ -1858,20 +2136,11 @@ Docker デーモンにおいてユーザー名前空間が設定されていて�
 ### volumes
 
 {% comment %}
-Mount host folders or named volumes. Named volumes need to be specified with the
+Mount host paths or named volumes. Named volumes need to be specified with the
 [top-level `volumes` key](#volume-configuration-reference).
 {% endcomment %}
-マウントホストフォルダーや名前つきボリュームをマウントします。
+マウントホストパスや名前つきボリュームをマウントします。
 名前つきボリュームは [最上位の `volumes` キー](#volume-configuration-reference) として設定する必要があります。
-
-{% comment %}
-You can mount a relative path on the host, which expands relative to
-the directory of the Compose configuration file being used. Relative paths
-should always begin with `.` or `..`.
-{% endcomment %}
-ホスト上の相対パスをマウントすることができます。
-これは、用いられている Compose 設定ファイルのディレクトリからの相対パスとして展開されます。
-相対パスは `.` または `..` で書き始める必要があります。
 
 {% comment %}
 #### Short syntax
@@ -1890,38 +2159,44 @@ and `rw` for read-write (default).
 `TARGET` はボリュームがマウントされるコンテナーパスです。
 標準的なモードは、読み込み専用の場合 `ro`、読み書き可能の場合 `rw`（デフォルト）です。
 
-    {% comment %}
-    volumes:
-      # Just specify a path and let the Engine create a volume
-      - /var/lib/mysql
+You can mount a relative path on the host, which expands relative to
+the directory of the Compose configuration file being used. Relative paths
+should always begin with `.` or `..`.
 
-      # Specify an absolute path mapping
-      - /opt/data:/var/lib/mysql
+{% comment %}
+```yaml
+volumes:
+  # Just specify a path and let the Engine create a volume
+  - /var/lib/mysql
 
-      # Path on the host, relative to the Compose file
-      - ./cache:/tmp/cache
+  # Specify an absolute path mapping
+  - /opt/data:/var/lib/mysql
 
-      # User-relative path
-      - ~/configs:/etc/configs/:ro
+  # Path on the host, relative to the Compose file
+  - ./cache:/tmp/cache
 
-      # Named volume
-      - datavolume:/var/lib/mysql
-    {% endcomment %}
-    volumes:
-      # パス指定のみ。Engine にボリュームを生成させます。
-      - /var/lib/mysql
+  # User-relative path
+  - ~/configs:/etc/configs/:ro
 
-      # 絶対パスのマッピングを指定。
-      - /opt/data:/var/lib/mysql
+  # Named volume
+  - datavolume:/var/lib/mysql
+```
+{% endcomment %}
+volumes:
+  # パス指定のみ。Engine にボリュームを生成させます。
+  - /var/lib/mysql
 
-      # ホストからのパス指定。Compose ファイルからの相対パス。
-      - ./cache:/tmp/cache
+  # 絶対パスのマッピングを指定。
+  - /opt/data:/var/lib/mysql
 
-      # ユーザーディレクトリからの相対パス。
-      - ~/configs:/etc/configs/:ro
+  # ホストからのパス指定。Compose ファイルからの相対パス。
+  - ./cache:/tmp/cache
 
-      # 名前つきボリューム。
-      - datavolume:/var/lib/mysql
+  # ユーザーディレクトリからの相対パス。
+  - ~/configs:/etc/configs/:ro
+
+  # 名前つきボリューム。
+  - datavolume:/var/lib/mysql
 
 {% comment %}
 #### Long syntax
@@ -1930,7 +2205,7 @@ and `rw` for read-write (default).
 #### 長い文法
 
 {% comment %}
-> [Added in version 2.3 file format](compose-versioning.md#version-23).
+> Added in [version 2.3](compose-versioning.md#version-23) file format.
 {% endcomment %}
 > ファイルフォーマット[バージョン 2.3](compose-versioning.md#version-23) において追加されました。
 
@@ -1969,7 +2244,7 @@ expressed in the short form.
   - `size`: tmpfs マウントのサイズをバイト数で指定します。
 
 
-```none
+```yaml
 version: "{{ site.compose_file_v2 }}"
 services:
   web:
@@ -1994,13 +2269,17 @@ volumes:
 ```
 
 {% comment %}
-> **Note**: When creating bind mounts, using the long syntax requires the
+> **Note**
+>
+> When creating bind mounts, using the long syntax requires the
 > referenced folder to be created beforehand. Using the short syntax
 > creates the folder on the fly if it doesn't exist.
 > See the [bind mounts documentation](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior)
 > for more information.
 {% endcomment %}
-> **Note**: 長い文法を使ってバインドマウントを生成する際には、参照されるフォルダーをあらかじめ生成しておく必要があります。
+> **Note**
+>
+> 長い文法を使ってバインドマウントを生成する際には、参照されるフォルダーをあらかじめ生成しておく必要があります。
 > 短い文法を利用する場合、そのフォルダーが存在しなければ生成されます。
 > 詳しくは [バインドマウントのドキュメント](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior) を参照してください。
 
@@ -2012,16 +2291,22 @@ service.
 {% endcomment %}
 本サービス上に宣言されているボリュームすべてに対して、利用するデフォルトのボリュームドライバーを設定します。
 
-    volume_driver: mydriver
+```yaml
+volume_driver: mydriver
+```
 
 {% comment %}
-> **Note**: In [version 2 files](compose-versioning.md#version-2), this
+> **Note**
+>
+> In [version 2 files](compose-versioning.md#version-2), this
 > option only applies to anonymous volumes (those specified in the image,
 > or specified under `volumes` without an explicit named volume or host path).
 > To configure the driver for a named volume, use the `driver` key under the
 > entry in the [top-level `volumes` option](#volume-configuration-reference).
 {% endcomment %}
-> **メモ**: [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) においてこのオプションは、無名ボリューム（anonymous volume）に対してのみ適用されます。
+> **メモ**
+>
+> [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) においてこのオプションは、無名ボリューム（anonymous volume）に対してのみ適用されます。
 > （これはイメージ内で無名として設定されるか、あるいは `volumes` キー配下において明示的な名前やホストパスが指定されずに設定されるものです。）
 > 名前つきボリュームに対してドライバーを設定するには、[最上位の `volumes` オプション](#volume-configuration-reference) の配下にて `driver` キーを使ってください。
 
@@ -2036,38 +2321,37 @@ See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 
 {% comment %}
 Mount all of the volumes from another service or container, optionally
-specifying read-only access (``ro``) or read-write (``rw``). If no access level is specified,
-then read-write is used.
+specifying read-only access (``ro``) or read-write (``rw``). If no access level
+is specified, then read-write is used.
 {% endcomment %}
 別のサービスやコンテナーのボリュームをすべてマウントします。
 任意の設定として、アクセスを読み込み専用（`ro`）とするか、読み書き可能（`rw`）とするかを指定できます。
 アクセスレベルが何も設定されていないときは、読み書き可能として設定されます。
 
-    volumes_from:
-     - service_name
-     - service_name:ro
-     - container:container_name
-     - container:container_name:rw
+```yaml
+volumes_from:
+  - service_name
+  - service_name:ro
+  - container:container_name
+  - container:container_name:rw
+```
 
 {% comment %}
-> **Notes**
+> Changed in [version 2](compose-versioning.md#version-2) file format.
 >
->* The `container:...` formats are only supported in the
-> [version 2 file format](compose-versioning.md#version-2).
->
->* In [version 1](compose-versioning.md#version-1), you can use
-> container names without marking them as such:
+> The `container:...` formats are only supported in the [version 2](compose-versioning.md#version-2)
+> file format. In [version 1](compose-versioning.md#version-1), you can use container
+> names without marking them as such:
 >
 >     - `service_name`
 >     - `service_name:ro`
 >     - `container_name`
 >     - `container_name:rw`
 {% endcomment %}
-> **メモ**
+> ファイルフォーマット[バージョン 2](compose-versioning.md#version-2) において変更されました。
 >
->* `container:...` という書式は [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) においてのみサポートされます。
->
->* [バージョン 1](compose-versioning.md#version-1) の場合、コンテナー名は以下のように `container:` をつけずに設定することができます。
+> `container:...` という書式は [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) においてのみサポートされます。
+> [バージョン 1](compose-versioning.md#version-1) の場合、コンテナー名は以下のように `container:` をつけずに設定することができます。
 >
 >     - `service_name`
 >     - `service_name:ro`
@@ -2084,10 +2368,18 @@ then read-write is used.
 `always` を指定した場合、コンテナーは常に再起動することになります。
 また `on-failure` ポリシーでは、終了コードが on-failure エラーを表わしている場合にコンテナーが再起動します。
 
-      - restart: no
-      - restart: always
-      - restart: on-failure
-      - restart: unless-stopped
+```yaml
+restart: no
+```
+```yaml
+restart: always
+```
+```yaml
+restart: on-failure
+```
+```yaml
+restart: unless-stopped
+```
 
 {: id="cpu-and-other-resources"}
 
@@ -2103,42 +2395,53 @@ Each of these is a single value, analogous to its
 ここに示すオプションはいずれも、値 1 つを設定するものであり、[docker run](/engine/reference/run.md#runtime-constraints-on-resources) のオプションに対応づいています。
 
 {% comment %}
-> **Note**: The following options were added in [version 2.2](compose-versioning.md#version-22):
-> `cpu_count`, `cpu_percent`, `cpus`.
-> The following options were added in [version 2.1](compose-versioning.md#version-21):
-> `oom_kill_disable`, `cpu_period`
+> Added in [version 2.2](compose-versioning.md#version-22) file format.
+>
+> The `cpu_count`, `cpu_percent`, and `cpus` options were added in [version 2.2](compose-versioning.md#version-22).
 {% endcomment %}
-> **Note**: `cpu_count`, `cpu_percent`, `cpus` の各オプションは [バージョン 2.2](compose-versioning.md#version-22) において追加されました。
-> また `oom_kill_disable`, `cpu_period` のオプションは [バージョン 2.1](compose-versioning.md#version-21) において追加されました。
+> ファイルフォーマット[バージョン 2.2](compose-versioning.md#version-22) における追加
+>
+> `cpu_count`, `cpu_percent`, `cpus` の各オプションは [バージョン 2.2](compose-versioning.md#version-22) において追加されました。
 
-    cpu_count: 2
-    cpu_percent: 50
-    cpus: 0.5
-    cpu_shares: 73
-    cpu_quota: 50000
-    cpu_period: 20ms
-    cpuset: 0,1
+{% comment %}
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
+>
+> The `oom_kill_disable` and `cpu_period` options were added in [version 2.1](compose-versioning.md#version-21).
+{% endcomment %}
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) における追加
+>
+> `oom_kill_disable`, `cpu_period` のオプションは [バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
-    user: postgresql
-    working_dir: /code
+```yaml
+cpu_count: 2
+cpu_percent: 50
+cpus: 0.5
+cpu_shares: 73
+cpu_quota: 50000
+cpu_period: 20ms
+cpuset: 0,1
 
-    domainname: foo.com
-    hostname: foo
-    ipc: host
-    mac_address: 02:42:ac:11:65:43
+user: postgresql
+working_dir: /code
 
-    mem_limit: 1000000000
-    memswap_limit: 2000000000
-    mem_reservation: 512m
-    privileged: true
+domainname: foo.com
+hostname: foo
+ipc: host
+mac_address: 02:42:ac:11:65:43
 
-    oom_score_adj: 500
-    oom_kill_disable: true
+mem_limit: 1000000000
+memswap_limit: 2000000000
+mem_reservation: 512m
+privileged: true
 
-    read_only: true
-    shm_size: 64M
-    stdin_open: true
-    tty: true
+oom_score_adj: 500
+oom_kill_disable: true
+
+read_only: true
+shm_size: 64M
+stdin_open: true
+tty: true
+```
 
 {: id="orig-resources" }
 
@@ -2201,8 +2504,8 @@ The supported units are `b`, `k`, `m` and `g`, and their alternative notation `k
 ## ボリューム設定リファレンス
 
 {% comment %}
-While it is possible to declare volumes on the fly as part of the service
-declaration, this section allows you to create named volumes that can be
+While it is possible to declare [volumes](#volumes) on the fly as part of the
+service declaration, this section allows you to create named volumes that can be
 reused across multiple services (without relying on `volumes_from`), and are
 easily retrieved and inspected using the docker command line or API.
 See the [docker volume](/engine/reference/commandline/volume_create.md)
@@ -2211,6 +2514,9 @@ subcommand documentation for more information.
 サービスの宣言の一部として、ファイル上に [ボリューム](#volumes) を宣言することが可能ですが、このセクションでは（`volumes_from` を利用せずに）名前つきボリュームを生成する方法を説明します。
 このボリュームは、複数のサービスにわたっての再利用が可能であり、docker コマンドラインや API を使って簡単に抽出したり確認したりすることができます。
 詳しくは [docker volume](/engine/reference/commandline/volume_create.md) のサブコマンドを確認してください。
+
+See [use volumes](/engine/admin/volumes/volumes.md) and [volume
+plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 
 {% comment %}
 Here's an example of a two-service setup where a database's data directory is
@@ -2221,20 +2527,22 @@ up:
 データベースのデータディレクトリは、もう一方のサービスに対してボリュームとして共有させます。
 これによりデータが定期的に反映されます。
 
-    version: "{{ site.compose_file_v2 }}"
+```yaml
+version: "{{ site.compose_file_v2 }}"
 
-    services:
-      db:
-        image: db
-        volumes:
-          - data-volume:/var/lib/db
-      backup:
-        image: backup-service
-        volumes:
-          - data-volume:/var/lib/backup/data
-
+services:
+  db:
+    image: db
     volumes:
-      data-volume:
+      - data-volume:/var/lib/db
+  backup:
+    image: backup-service
+    volumes:
+      - data-volume:/var/lib/backup/data
+
+volumes:
+  data-volume:
+```
 
 {% comment %}
 An entry under the top-level `volumes` key can be empty, in which case it
@@ -2259,7 +2567,9 @@ driver the Docker Engine has been configured to use, which in most cases is
 たいていは `local` です。
 ドライバーが利用できない場合、`docker-compose up` によってボリューム生成が行われる際に Engine がエラーを返します。
 
-     driver: foobar
+```yaml
+driver: foobar
+```
 
 ### driver_opts
 
@@ -2273,9 +2583,14 @@ documentation for more information. Optional.
 詳しくは各ドライバーのドキュメントを参照してください。
 設定は任意です。
 
-     driver_opts:
-       foo: "bar"
-       baz: 1
+```yaml
+volumes:
+  example:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.40.0.199,nolock,soft,rw"
+      device: ":/docker/example"
+```
 
 ### external
 
@@ -2304,17 +2619,19 @@ called `data` and mount it into the `db` service's containers.
 以下の例では `[projectname]_data` というボリュームは生成されることはなく、Compose はすでに存在している `data` という単純な名前のボリュームを探しにいきます。
 そしてこれを `db` サービスコンテナー内にマウントします。
 
-    version: "{{ site.compose_file_v2 }}"
+```yaml
+version: "{{ site.compose_file_v2 }}"
 
-    services:
-      db:
-        image: postgres
-        volumes:
-          - data:/var/lib/postgresql/data
-
+services:
+  db:
+    image: postgres
     volumes:
-      data:
-        external: true
+      - data:/var/lib/postgresql/data
+
+volumes:
+  data:
+    external: true
+```
 
 {% comment %}
 You can also specify the name of the volume separately from the name used to
@@ -2322,23 +2639,30 @@ refer to it within the Compose file:
 {% endcomment %}
 ボリューム名として指定する名前は、Compose ファイル内で参照されている名前以外でも指定することができます。
 
-    volumes:
-      data:
-        external:
-          name: actual-name-of-volume
+```yaml
+volumes:
+  data:
+    external:
+      name: actual-name-of-volume
+```
 
 {% comment %}
-> **メモ**: In newer versions of Compose, the `external.name` property is
-> deprecated in favor of simply using the `name` property.
+> Deprecated in [version 2.1](compose-versioning.md#version-21) file format.
+>
+> external.name was deprecated in version 2.1 file format use `name` instead.
+{: .important }
 {% endcomment %}
-> **Note**: 最近の Compose バージョンでは、`external.name` プロパティは廃止予定となり、単純に `name` プロパティを用いるものになっています。
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において廃止予定
+>
+> ファイルフォーマットバージョン 2.1 において `external.name` プロパティは廃止予定となったため `name` プロパティを用いてください。
+{: .important }
 
 ### labels
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) における追加
 
 {% comment %}
 Add metadata to containers using
@@ -2355,44 +2679,55 @@ conflicting with those used by other software.
 ここでは逆 DNS 記法とすることをお勧めします。
 この記法にしておけば、他のソフトウェアが用いるラベルとの競合が避けられるからです。
 
-    labels:
-      com.example.description: "Database volume"
-      com.example.department: "IT/Ops"
-      com.example.label-with-empty-value: ""
+```yaml
+labels:
+  com.example.description: "Database volume"
+  com.example.department: "IT/Ops"
+  com.example.label-with-empty-value: ""
+```
 
-    labels:
-      - "com.example.description=Database volume"
-      - "com.example.department=IT/Ops"
-      - "com.example.label-with-empty-value"
-
+```yaml
+labels:
+  - "com.example.description=Database volume"
+  - "com.example.department=IT/Ops"
+  - "com.example.label-with-empty-value"
+```
 
 ### name
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21)
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) における追加
 
 {% comment %}
-Set a custom name for this volume.
+Set a custom name for this volume. The name field can be used to reference
+volumes that contain special characters. The name is used as is
+and will **not** be scoped with the stack name.
 {% endcomment %}
 ボリュームに対して独自の名前を設定します。
+name は特殊な文字を含んだボリューム名を参照するために利用できます。
+name は記述されたとおりに扱われ、スタック名によってスコープされません。
 
-    version: "{{ site.compose_file_v2 }}"
-    volumes:
-      data:
-        name: my-app-data
+```yaml
+version: "{{ site.compose_file_v2 }}"
+volumes:
+  data:
+    name: my-app-data
+```
 
 {% comment %}
 It can also be used in conjunction with the `external` property:
 {% endcomment %}
 これは `external` プロパティと同時に利用することができます。
 
-    version: "{{ site.compose_file_v2 }}"
-    volumes:
-      data:
-        external: true
-        name: my-app-data
+```yaml
+version: "{{ site.compose_file_v2 }}"
+volumes:
+  data:
+    external: true
+    name: my-app-data
+```
 
 {% comment %}
 ## Network configuration reference
@@ -2428,15 +2763,21 @@ The Docker Engine returns an error if the driver is not available.
 {% endcomment %}
 ドライバーが利用できない場合、Docker Engine はエラーを返します。
 
-    driver: overlay
+```yaml
+driver: overlay
+```
 
 {% comment %}
-Starting in Compose file format 2.1, overlay networks are always created as
-`attachable`, and this is not configurable. This means that standalone
-containers can connect to overlay networks.
+> Changed in [version 2.1](compose-versioning.md#version-21) file format.
+>
+> Starting in Compose file format 2.1, overlay networks are always created as
+> `attachable`, and this is not configurable. This means that standalone
+> containers can connect to overlay networks.
 {% endcomment %}
-Compose ファイルフォーマット 2.1 から、オーバーレイネットワークは、必ず「アタッチ可能」（attachable）として生成されますが、ただし変更できません。
-スタンドアロンコンテナーであれば、オーバーレイネットワークに接続することができます。
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) における変更
+>
+> Compose ファイルフォーマット 2.1 から、オーバーレイネットワークは、必ず「アタッチ可能」（attachable）として生成されますが、ただし変更できません。
+> スタンドアロンコンテナーであれば、オーバーレイネットワークに接続することができます。
 
 ### driver_opts
 
@@ -2450,16 +2791,18 @@ documentation for more information. Optional.
 詳しくは各ドライバーのドキュメントを参照してください。
 設定は任意です。
 
-      driver_opts:
-        foo: "bar"
-        baz: 1
+```yaml
+driver_opts:
+  foo: "bar"
+  baz: 1
+```
 
 ### enable_ipv6
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) における追加
 
 {% comment %}
 Enable IPv6 networking on this network.
@@ -2501,19 +2844,21 @@ A full example:
 {% endcomment %}
 すべてを利用した例が以下です。
 
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.28.0.0/16
-          ip_range: 172.28.5.0/24
-          gateway: 172.28.5.254
-          aux_addresses:
-            host1: 172.28.1.5
-            host2: 172.28.1.6
-            host3: 172.28.1.7
-      options:
-        foo: bar
-        baz: "0"
+```yaml
+ipam:
+  driver: default
+  config:
+    - subnet: 172.28.0.0/16
+      ip_range: 172.28.5.0/24
+      gateway: 172.28.5.254
+      aux_addresses:
+        host1: 172.28.1.5
+        host2: 172.28.1.6
+        host3: 172.28.1.7
+  options:
+    foo: bar
+    baz: "0"
+```
 
 ### internal
 
@@ -2528,9 +2873,9 @@ you can set this option to `true`.
 ### labels
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
+> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) における追加
 
 {% comment %}
 Add metadata to containers using
@@ -2547,15 +2892,19 @@ conflicting with those used by other software.
 ここでは逆 DNS 記法とすることをお勧めします。
 この記法にしておけば、他のソフトウェアが用いるラベルとの競合が避けられるからです。
 
-    labels:
-      com.example.description: "Financial transaction network"
-      com.example.department: "Finance"
-      com.example.label-with-empty-value: ""
+```yaml
+labels:
+  com.example.description: "Financial transaction network"
+  com.example.department: "Finance"
+  com.example.label-with-empty-value: ""
+```
 
-    labels:
-      - "com.example.description=Financial transaction network"
-      - "com.example.department=Finance"
-      - "com.example.label-with-empty-value"
+```yaml
+labels:
+  - "com.example.description=Financial transaction network"
+  - "com.example.department=Finance"
+  - "com.example.label-with-empty-value"
+```
 
 ### external
 
@@ -2585,22 +2934,24 @@ service's containers to it.
 以下の例において `proxy` は外部ネットワークとの間のゲートウェイです。
 `[projectname]_outside` というネットワークは生成されることはなく、Compose はすでに存在している `outside` という単純な名前のネットワークを探しにいって、`proxy` サービスのコンテナーに接続します。
 
-    version: "{{ site.compose_file_v2 }}"
+```yaml
+version: "{{ site.compose_file_v2 }}"
 
-    services:
-      proxy:
-        build: ./proxy
-        networks:
-          - outside
-          - default
-      app:
-        build: ./app
-        networks:
-          - default
-
+services:
+  proxy:
+    build: ./proxy
     networks:
-      outside:
-        external: true
+      - outside
+      - default
+  app:
+    build: ./app
+    networks:
+      - default
+
+networks:
+  outside:
+    external: true
+```
 
 {% comment %}
 You can also specify the name of the network separately from the name used to
@@ -2608,11 +2959,13 @@ refer to it within the Compose file:
 {% endcomment %}
 ネットワーク名として指定する名前は、Compose ファイル内で参照されている名前以外でも指定することができます。
 
-    networks:
-      outside:
-        external:
-          name: actual-name-of-network
-
+```yaml
+version: "{{ site.compose_file_v2 }}"
+networks:
+  outside:
+    external:
+      name: actual-name-of-network
+```
 
 {% comment %}
 Not supported for version 2 `docker-compose` files. Use
@@ -2624,30 +2977,38 @@ Not supported for version 2 `docker-compose` files. Use
 ### name
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21)
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) における追加
 
 {% comment %}
-Set a custom name for this network.
+Set a custom name for this network. The name field can be used to reference
+networks which contain special characters. The name is used as is
+and will **not** be scoped with the stack name.
 {% endcomment %}
 ネットワークに対して独自の名前を設定します。
+name は特殊な文字を含んだネットワーク名を参照するために利用できます。
+name は記述されたとおりに扱われ、スタック名によってスコープされません。
 
-    version: "{{ site.compose_file_v2 }}"
-    networks:
-      network1:
-        name: my-app-net
+```yaml
+version: "{{ site.compose_file_v2 }}"
+networks:
+  network1:
+    name: my-app-net
+```
 
 {% comment %}
 It can also be used in conjunction with the `external` property:
 {% endcomment %}
 これは `external` プロパティと同時に利用することができます。
 
-    version: "{{ site.compose_file_v2 }}"
-    networks:
-      network1:
-        external: true
-        name: my-app-net
+```yaml
+version: "{{ site.compose_file_v2 }}"
+networks:
+  network1:
+    external: true
+    name: my-app-net
+```
 
 {% comment %}
 ## Variable substitution
@@ -2664,9 +3025,9 @@ It can also be used in conjunction with the `external` property:
 ## 拡張項目
 
 {% comment %}
-> [Added in version 2.1 file format](compose-versioning.md#version-21).
+> Added in [version 2.1](compose-versioning.md#version-21) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) において追加されました。
+> ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) における追加
 
 {% include content/compose-extfields-sub.md %}
 
@@ -2680,15 +3041,11 @@ It can also be used in conjunction with the `external` property:
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Get started with Django](/compose/django.md)
-- [Get started with Rails](/compose/rails.md)
-- [Get started with WordPress](/compose/wordpress.md)
+- [Samples](/samples/)
 - [Command line reference](/compose/reference/)
 {% endcomment %}
 - [ユーザーガイド](/compose/index.md)
 - [Compose のインストール](/compose/install.md)
 - [Compose ファイルのバージョンとアップグレード](compose-versioning.md)
-- [Django を使ってはじめよう](/compose/django.md)
-- [Rails を使ってはじめよう](/compose/rails.md)
-- [WordPress を使ってはじめよう](/compose/wordpress.md)
+- [サンプル](/samples/)
 - [コマンドラインリファレンス](/compose/reference/)

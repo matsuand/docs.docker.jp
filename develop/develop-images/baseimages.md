@@ -123,7 +123,7 @@ Docker Hub 上の Docker リポジトリとして `scratch` が登場したこ�
 そのかわり`Dockerfile` 内での参照のみが可能です。
 たとえば `scratch` を利用した最小コンテナーの生成は以下のようになります。
 
-```Dockerfile
+```dockerfile
 FROM scratch
 ADD hello /
 CMD ["/hello"]

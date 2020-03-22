@@ -142,12 +142,8 @@ guides:
       title: デーモンの設定と起動
     - path: /config/daemon/systemd/
       title: systemd を用いた Docker の管理
-  - sectiontitle: Work with external tools
-    section:
-    - path: /config/thirdparty/
-      title: Third-party monitoring tools
-    - path: /config/thirdparty/prometheus/
-      title: Collect Docker metrics with Prometheus
+  - path: /config/daemon/prometheus/
+    title: Collect metrics with Prometheus
   - sectiontitle: Configure containers
     section:
     - path: /config/containers/start-containers-automatically/
@@ -196,16 +192,6 @@ guides:
           title: Journald logging driver
         - path: /config/containers/logging/splunk/
           title: Splunk logging driver
-    - sectiontitle: Work with external tools
-      section:
-      - path: /config/thirdparty/dsc/
-        title: PowerShell DSC usage
-      - path: /config/thirdparty/ansible/
-        title: Ansible
-      - path: /config/thirdparty/chef/
-        title: Chef
-      - path: /config/thirdparty/puppet/
-        title: Puppet
     - sectiontitle: Security
       section:
       - path: /engine/security/security/
@@ -1108,6 +1094,43 @@ manuals:
       title: Linux インストール後の作業
   - path: /engine/release-notes/
     title: リリースノート
+  - sectiontitle: 以前のバージョン
+    section:
+    - path: /engine/release-notes/18.09/
+      title: Engine 18.09 release notes
+    - path: /engine/release-notes/18.06/
+      title: Engine 18.06 release notes
+    - path: /engine/release-notes/18.05/
+      title: Engine 18.05 release notes
+    - path: /engine/release-notes/18.04/
+      title: Engine 18.04 release notes
+    - path: /engine/release-notes/18.03/
+      title: Engine 18.03 release notes
+    - path: /engine/release-notes/18.02/
+      title: Engine 18.02 release notes
+    - path: /engine/release-notes/18.01/
+      title: Engine 18.01 release notes
+    - path: /engine/release-notes/17.12/
+      title: Engine 17.12 release notes
+    - path: /engine/release-notes/17.11/
+      title: Engine 17.11 release notes
+    - path: /engine/release-notes/17.10/
+      title: Engine 17.10 release notes
+    - path: /engine/release-notes/17.09/
+      title: Engine 17.09 release notes
+    - path: /engine/release-notes/17.07/
+      title: Engine 17.07 release notes
+    - path: /engine/release-notes/17.06/
+      title: Engine 17.06 release notes
+    - path: /engine/release-notes/17.05/
+      title: Engine 17.05 release notes
+    - path: /engine/release-notes/17.04/
+      title: Engine 17.04 release notes
+    - path: /engine/release-notes/17.03/
+      title: Engine 17.03 release notes
+    - path: /engine/release-notes/prior-releases/
+      title: Engine 1.13 and earlier
+
 - sectiontitle: Docker Assemble
   section:
   - path: /assemble/install/
@@ -1132,6 +1155,8 @@ manuals:
     title: Docker Compose 概要
   - path: /compose/install/
     title: Compose のインストール
+  - path: /compose/release-notes/
+    title: リリースノート
   - path: /compose/gettingstarted/
     title: はじめよう
   - path: /compose/bundles/
@@ -1382,16 +1407,14 @@ manuals:
   title: Release notes
 - sectiontitle: Superseded products and tools
   section:
-  - path: /cs-engine/1.13/release-notes/
-    title: CS Docker Engine
-  - path: /release-notes/docker-engine/
-    title: Docker (1.13 and earlier)
   - sectiontitle: Docker Machine
     section:
     - path: /machine/overview/
       title: Machine overview
     - path: /machine/install-machine/
       title: Install Machine
+    - path: /machine/release-notes/
+      title: リリースノート
     - path: /machine/get-started/
       title: Get started with a local VM
     - path: /machine/get-started-cloud/
@@ -1488,14 +1511,14 @@ manuals:
           title: VMware vSphere
       - path: /machine/migrate-to-machine/
         title: Migrate from Boot2Docker to Machine
-      - path: /release-notes/docker-machine/
-        title: Docker Machine release notes
   - sectiontitle: Docker Swarm (standalone)
     section:
     - path: /swarm/overview/
       title: Swarm overview
     - path: /swarm/get-swarm/
       title: How to get Swarm
+    - path: /swarm/release-notes/
+      title: リリースノート
     - path: /swarm/install-w-machine/
       title: Evaluate Swarm in a sandbox
     - path: /swarm/plan-for-production/
@@ -1552,8 +1575,6 @@ manuals:
       title: API response codes
     - path: /swarm/swarm-api/
       title: Docker Swarm API
-    - path: /release-notes/docker-swarm/
-      title: Docker Swarm release notes
   - sectiontitle: Docker Toolbox (legacy)
     section:
     - path: /toolbox/overview/

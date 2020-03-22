@@ -3,7 +3,7 @@ description: Compose ファイルリファレンス
 keywords: fig, composition, compose, docker
 redirect_from:
 - /compose/yml
-- /compose/compose-file-v3.md
+- /compose/compose-file-v3/
 title: Compose ファイル バージョン 3 リファレンス
 toc_max: 4
 toc_min: 1
@@ -87,7 +87,8 @@ services:
       - backend
     deploy:
       placement:
-        constraints: [node.role == manager]
+        constraints:
+          - "node.role==manager"
 
   vote:
     image: dockersamples/examplevotingapp_vote:before
@@ -135,7 +136,8 @@ services:
         max_attempts: 3
         window: 120s
       placement:
-        constraints: [node.role == manager]
+        constraints:
+          - "node.role==manager"
 
   visualizer:
     image: dockersamples/visualizer:stable
@@ -146,7 +148,8 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       placement:
-        constraints: [node.role == manager]
+        constraints:
+          - "node.role==manager"
 
 networks:
   frontend:
@@ -188,33 +191,33 @@ Compose ファイルは [YAML](http://yaml.org/) 形式のファイルであり�
 Compose ファイルのデフォルトパスは `./docker-compose.yml` です。
 
 {% comment %}
->**Tip**: You can use either a `.yml` or `.yaml` extension for this file.
-They both work.
+> **Tip**: You can use either a `.yml` or `.yaml` extension for this file.
+> They both work.
 {% endcomment %}
->**ヒント**: このファイルの拡張子は `.yml` と `.yaml` のどちらでも構いません。
-いずれでも動作します。
+> **ヒント**: このファイルの拡張子は `.yml` と `.yaml` のどちらでも構いません。
+> いずれでも動作します。
 
 {% comment %}
 A service definition contains configuration that is applied to each
 container started for that service, much like passing command-line parameters to
-`docker container create`. Likewise, network and volume definitions are analogous to
+`docker run`. Likewise, network and volume definitions are analogous to
 `docker network create` and `docker volume create`.
 {% endcomment %}
 サービスの定義とは、そのサービスを起動する各コンテナーに適用される設定を行うことです。
-コマンドラインから `docker container create` のパラメーターを受け渡すことと、非常によく似ています。
+コマンドラインから `docker run` のパラメーターを受け渡すことと、非常によく似ています。
 同様に、ネットワークの定義、ボリュームの定義は、それぞれ `docker network create` と `docker volume create` のコマンドに対応づくものです。
 
 {% comment %}
-As with `docker container create`, options specified in the Dockerfile, such as `CMD`,
+As with `docker run`, options specified in the Dockerfile, such as `CMD`,
 `EXPOSE`, `VOLUME`, `ENV`, are respected by default - you don't need to
 specify them again in `docker-compose.yml`.
 {% endcomment %}
-`docker container create` に関しても同じことが言えますが、Dockerfile にて指定された `CMD`、`EXPOSE`、`VOLUME`、`ENV` のようなオプションはデフォルトでは維持されます。したがって `docker-compose.yml` の中で再度設定する必要はありません。
+`docker run` に関しても同じことが言えますが、Dockerfile にて指定された `CMD`、`EXPOSE`、`VOLUME`、`ENV` のようなオプションはデフォルトでは維持されます。したがって `docker-compose.yml` の中で再度設定する必要はありません。
 
 {% comment %}
 You can use environment variables in configuration values with a Bash-like
-`${VARIABLE}` syntax - see
-[variable substitution](#variable-substitution) for full details.
+`${VARIABLE}` syntax - see [variable substitution](#variable-substitution) for
+full details.
 {% endcomment %}
 設定を記述する際には環境変数を用いることができます。
 環境変数は Bash 風に `${VARIABLE}` のように記述します。
@@ -282,12 +285,18 @@ This results in an image named `webapp` and tagged `tag`, built from `./dir`.
 そしてこのイメージは `./dir` から作り出されます。
 
 {% comment %}
-> **Note**: This option is ignored when
+> Note when using docker stack deploy
+>
+> The `build` option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file. The `docker stack` command accepts only pre-built images.
+> The `docker stack` command does not build images before deploying.
+{: .important }
 {% endcomment %}
-> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
-> `docker stack` コマンドは、ビルド済のイメージのみを受け付けるためです。
+> docker のスタックデプロイ時のメモ
+>
+> `build `オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
+> `docker stack` コマンドは、デプロイするまではイメージをビルドしません。
+{: .important }
 
 #### context
 
@@ -349,7 +358,7 @@ First, specify the arguments in your Dockerfile:
 {% endcomment %}
 Dockerfile 内にてはじめにビルド引数を指定します。
 
-```Dockerfile
+```dockerfile
 ARG buildno
 ARG gitcommithash
 
@@ -381,12 +390,17 @@ build:
 ```
 
 {% comment %}
-> **Note**: In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
+> Scope of build-args
+>
+> In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
-> If you need an argument to be available in both places, also specify it under the `FROM` instruction.
-> See [Understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact) for usage details.
+> If you need an argument to be available in both places, also specify it under
+> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact)
+> section in the documentation for usage details.
 {% endcomment %}
-> **メモ**: Dockerfile にて `FROM` 命令の前に `ARG` 命令を指定した場合、`FROM` 以降のビルド命令において `ARG` の値は利用することができません。
+> build 引数の適用範囲
+>
+> Dockerfile にて `FROM` 命令の前に `ARG` 命令を指定した場合、`FROM` 以降のビルド命令において `ARG` の値は利用することができません。
 > `FROM` の前後どこでも、そして特に `FROM` 命令の後でもその値を利用したい場合は、[ARG と FROM の関連について](/engine/reference/builder/#understand-how-arg-and-from-interact)を参照してください。
 
 {% comment %}
@@ -403,18 +417,23 @@ args:
 ```
 
 {% comment %}
-> **Note**: YAML boolean values (`true`, `false`, `yes`, `no`, `on`, `off`) must
-> be enclosed in quotes, so that the parser interprets them as strings.
+> Tip when using boolean values
+>
+> YAML boolean values (`"true"`, `"false"`, `"yes"`, `"no"`, `"on"`,
+> `"off"`) must be enclosed in quotes, so that the parser interprets them as
+> strings.
 {% endcomment %}
-> **メモ**: YAML のブール値 (`true`, `false`, `yes`, `no`, `on`, `off`) を用いる場合は、クォートで囲む必要があります。
+> ブール値利用時のメモ
+>
+> YAML のブール値 (`"true"`, `"false"`, `"yes"`, `"no"`, `"on"`, `"off"`) を用いる場合は、クォートで囲む必要があります。
 > そうすることで、これらの値は文字列として解釈されます。
 
 #### cache_from
 
 {% comment %}
-> **Note**: This option is new in v3.2
+> Added in [version 3.2](compose-versioning.md#version-32) file format
 {% endcomment %}
-> **メモ**: このオプションはバージョン 3.2 において新たに追加されました。
+> ファイルフォーマット[バージョン 3.2](compose-versioning.md#version-32) における追加
 
 {% comment %}
 A list of images that the engine uses for cache resolution.
@@ -432,9 +451,9 @@ build:
 #### labels
 
 {% comment %}
-> **Note**: This option is new in v3.3
+> Added in [version 3.3](compose-versioning.md#version-33) file format
 {% endcomment %}
-> **メモ**: このオプションはバージョン 3.3 において新たに追加されました。
+> ファイルフォーマット[バージョン 3.3](compose-versioning.md#version-33) における追加
 
 {% comment %}
 Add metadata to the resulting image using [Docker labels](/engine/userguide/labels-custom-metadata.md).
@@ -444,10 +463,10 @@ You can use either an array or a dictionary.
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
-We recommend that you use reverse-DNS notation to prevent your labels from conflicting with
-those used by other software.
+It's recommended that you use reverse-DNS notation to prevent your labels from
+conflicting with those used by other software.
 {% endcomment %}
-ここでは逆 DNS 記法とすることをお勧めします。
+ここでは逆 DNS 記法とすることが推奨されます。
 この記法にしておけば、他のソフトウェアが用いるラベルとの競合が避けられるからです。
 
 ```yaml
@@ -534,11 +553,16 @@ cap_drop:
 ```
 
 {% comment %}
-> **Note**: These options are ignored when
+> Note when using docker stack deploy
+>
+> The `cap_add` and `cap_drop` options are ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+{: .important }
 {% endcomment %}
-> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> docker のスタックデプロイ時のメモ
+>
+> `cap_add` オプションと `cap_drop` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+{: .important }
 
 ### cgroup_parent
 
@@ -552,11 +576,16 @@ cgroup_parent: m-executor-abcd
 ```
 
 {% comment %}
-> **Note**: This option is ignored when
+> Note when using docker stack deploy
+>
+> The `cgroup_parent` option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+{: .important }
 {% endcomment %}
-> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> docker のスタックデプロイ時のメモ
+>
+> `cgroup_parent` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+{: .important }
 
 ### command
 
@@ -634,10 +663,14 @@ the stack deployment fails with a `config not found` error.
 外部 config が存在していない場合は、スタックデプロイメントは失敗し `config not found` というエラーになります。
 
 {% comment %}
-> **Note**: `config` definitions are only supported in version 3.3 and higher
->  of the compose file format.
+> Added in [version 3.3](compose-versioning.md#version-33) file format.
+>
+> `config` definitions are only supported in version 3.3 and higher  of the
+> compose file format.
 {% endcomment %}
-> **メモ**: `config` 定義は、Compose ファイルフォーマットのバージョン 3.3 またはそれ以上においてサポートされています。
+> ファイルフォーマット[バージョン 3.3](compose-versioning.md#version-33) における追加
+>
+> `config` 定義は、Compose ファイルフォーマットのバージョン 3.3 またはそれ以上においてサポートされています。
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -758,18 +791,29 @@ Docker コンテナー名はユニークである必要があります。
 これを行うとエラーが発生します。
 
 {% comment %}
-> **Note**: This option is ignored when
+> Note when using docker stack deploy
+>
+> The `container_name` option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+{: .important }
 {% endcomment %}
-> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> docker のスタックデプロイ時のメモ
+>
+> `container_name` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+{: .important }
 
 ### credential_spec
 
 {% comment %}
-> **Note**: This option was added in v3.3. Using group Managed Service Account (gMSA) configurations with compose files is supported in Compose version 3.8.
+> Added in [version 3.3](compose-versioning.md#version-33) file format.
+>
+> The `credential_spec` option was added in v3.3. Using group Managed Service
+> Account (gMSA) configurations with compose files is supported in file format
+> version 3.8 or up.
 {% endcomment %}
-> **メモ**: このオプションは v3.3 で追加されました。
+> ファイルフォーマット[バージョン 3.3](compose-versioning.md#version-33) における追加
+>
+> `credential_spec` オプションは v3.3 で追加されました。
 > Compopse ファイルにおける group Managed Service Account (gMSA) の設定は Compose バージョン 3.8 においてサポートされています。
 
 {% comment %}
@@ -827,8 +871,9 @@ to specify a credential spec with `config`, as shown in the following example:
 {% endcomment %}
 サービスに対して credential spec における gMSA を設定する場合、credential spec の `config` を設定するだけです。
 その例を以下に示します。
-```
-version: "3.8"
+
+```yaml
+version: "{{ site.compose_file_v3 }}"
 services:
   myservice:
     image: myimage:latest
@@ -843,7 +888,7 @@ configs:
 ### depends_on
 
 {% comment %}
-Express dependency between services, Service dependencies cause the following
+Express dependency between services. Service dependencies cause the following
 behaviors:
 {% endcomment %}
 サービス間の依存関係を表わします。
@@ -855,15 +900,13 @@ behaviors:
 {% endcomment %}
 - `docker-compose up` は依存関係の順にサービスを起動します。
   以下の例において `db` と `redis` は `web` の後に起動します。
-
 {% comment %}
 - `docker-compose up SERVICE` automatically includes `SERVICE`'s
-  dependencies. In the following example, `docker-compose up web` also
+  dependencies. In the example below, `docker-compose up web` also
   creates and starts `db` and `redis`.
 {% endcomment %}
 - `docker-compose up SERVICE` を実行すると `SERVICE` における依存関係をもとに動作します。
-  以下の例において `docker-compose up web` を実行すると `db` と `redis` を生成して起動します。
-
+  後述の例において `docker-compose up web` を実行すると `db` と `redis` を生成して起動します。
 {% comment %}
 - `docker-compose stop` stops services in dependency order. In the following
   example, `web` is stopped before `db` and `redis`.
@@ -897,9 +940,7 @@ services:
 >   starting `web` - only until they have been started. If you need to wait
 >   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 >   for more on this problem and strategies for solving it.
->
 > - Version 3 no longer supports the `condition` form of `depends_on`.
->
 > - The `depends_on` option is ignored when
 >   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 >   with a version 3 Compose file.
@@ -908,17 +949,15 @@ services:
 >
 > - `depends_on` では `db` や `redis` が「準備」状態になるのを待たずに、つまりそれらを開始したらすぐに `web` を起動します。
 >   準備状態になるのを待ってから次のサービスを起動することが必要な場合は、[Compose における起動順の制御](/compose/startup-order.md)にて示す内容と解決方法を確認してください。
->
 > - バージョン 3 では `depends_on` の `condition` 形式はサポートされなくなりました。
->
 > - Compose ファイルバージョン 3 において `depends_on` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
 
 ### deploy
 
 {% comment %}
-> **[Version 3](compose-versioning.md#version-3) only.**
+> Added in [version 3](compose-versioning.md#version-3) file format.
 {% endcomment %}
-> **[バージョン 3](compose-versioning.md#version-3) のみ。**
+> ファイルフォーマット[バージョン 3](compose-versioning.md#version-3) における追加
 
 {% comment %}
 Specify configuration related to the deployment and running of services. This
@@ -951,14 +990,14 @@ Several sub-options are available:
 #### endpoint_mode
 
 {% comment %}
+> Added in [version 3.3](compose-versioning.md#version-33) file format.
+{% endcomment %}
+> ファイルフォーマット[バージョン 3](compose-versioning.md#version-3) における追加
+
+{% comment %}
 Specify a service discovery method for external clients connecting to a swarm.
 {% endcomment %}
 スウォームに接続する外部クライアントのサービスディスカバリー方法を指定します。
-
-{% comment %}
-> **[Version 3.3](compose-versioning.md#version-3) only.**
-{% endcomment %}
-> **[バージョン 3.3](compose-versioning.md#version-3) でのみ利用可能です。**
 
 {% comment %}
 * `endpoint_mode: vip` - Docker assigns the service a virtual IP (VIP)
@@ -1109,8 +1148,8 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
-          - engine.labels.operatingsystem == ubuntu 14.04
+          - "node.role==manager"
+          - "engine.labels.operatingsystem==ubuntu 18.04"
         preferences:
           - spread: node.labels.zone
 ```
@@ -1144,15 +1183,18 @@ Configures resource constraints.
 リソースの制約を設定します。
 
 {% comment %}
-> **Note**: This replaces the [older resource constraint options](compose-file-v2.md#cpu-and-other-resources) for non swarm mode in
-Compose files prior to version 3 (`cpu_shares`, `cpu_quota`, `cpuset`,
-`mem_limit`, `memswap_limit`, `mem_swappiness`), as described in [Upgrading
-version 2.x to 3.x](/compose/compose-file/compose-versioning.md#upgrading).
+> Changed in compose-file version 3
+>
+> The `resources` section replaces  the [older resource constraint options](compose-file-v2.md#cpu-and-other-resources)
+> in Compose files prior to version 3 (`cpu_shares`, `cpu_quota`, `cpuset`,
+> `mem_limit`, `memswap_limit`, `mem_swappiness`).
+> Refer to [Upgrading version 2.x to 3.x](/compose/compose-file/compose-versioning.md#upgrading)
+> to learn about differences between version 2 and 3 of the compose-file format.
 {% endcomment %}
-> **メモ**: Compose ファイルバージョン 3 より前には、[リソースに対する古い制約オプション](compose-file-v2.md#cpu-and-other-resources) があって、非スウォームモードで用いられていました。
-（`cpu_shares`, `cpu_quota`, `cpuset`, `mem_limit`, `memswap_limit`, `mem_swappiness`）
-> ここに示すオプションはそれに替わるものです。
-> このことは [バージョン 2.x から 3.x へのアップグレード](/compose/compose-file/compose-versioning.md#upgrading) にて説明しています。
+> compose ファイルバージョン 3 における変更
+>
+> `resources` のセクションは Compose ファイルバージョン 3 以前の [リソースに対する古い制約オプション](compose-file-v2.md#cpu-and-other-resources) （`cpu_shares`, `cpu_quota`, `cpuset`, `mem_limit`, `memswap_limit`, `mem_swappiness`）に置き換わるものです。
+> compose ファイルのバージョン 2 と 3 の違いについては [バージョン 2.x から 3.x へのアップグレード](/compose/compose-file/compose-versioning.md#upgrading) を参照してください。
 
 {% comment %}
 Each of these is a single value, analogous to its [docker service
@@ -1275,9 +1317,9 @@ services:
 #### rollback_config
 
 {% comment %}
-> [Version 3.7 file format](compose-versioning.md#version-37) and up
+> Added in [version 3.7](compose-versioning.md#version-37) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 3.7](compose-versioning.md#version-37) とそれ以上において利用可能です。
+> ファイルフォーマット[バージョン 3.7](compose-versioning.md#version-37) における追加
 
 {% comment %}
 Configures how the service should be rollbacked in case of a failing
@@ -1337,10 +1379,14 @@ Rolling update を設定する際に有効です。
    **メモ**: v3.4 またはそれ以上においてのみサポートされます。
 
 {% comment %}
-> **Note**: `order` is only supported for v3.4 and higher of the compose
-file format.
+> Added in [version 3.4](compose-versioning.md#version-34) file format.
+>
+> The `order` option is only supported by v3.4 and higher of the compose
+> file format.
 {% endcomment %}
-> **メモ**: `order` は Compose ファイルフォーマット v3.4 およびそれ以上においてのみサポートされます。
+> ファイルフォーマット[バージョン 3.4](compose-versioning.md#version-34) における追加
+>
+> `order` オプションは Compose ファイルフォーマット v3.4 およびそれ以上においてのみサポートされます。
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -1381,14 +1427,17 @@ The following sub-options (supported for `docker-compose up` and `docker-compose
 - [userns_mode](#userns_mode)
 
 {% comment %}
->**Tip:** See the section on [how to configure volumes
-for services, swarms, and docker-stack.yml
-files](#volumes-for-services-swarms-and-stack-files). Volumes _are_ supported
-but to work with swarms and services, they must be configured
-as named volumes or associated with services that are constrained to nodes with
-access to the requisite volumes.
+> Tip
+>
+> See the section on [how to configure volumes for services, swarms, and docker-stack.yml
+> files](#volumes-for-services-swarms-and-stack-files). Volumes _are_ supported
+> but to work with swarms and services, they must be configured as named volumes
+> or associated with services that are constrained to nodes with access to the
+> requisite volumes.
 {% endcomment %}
->**ヒント:** [サービス、スウォーム、docker-stack.yml ファイルにおけるボリューム設定方法](#volumes-for-services-swarms-and-stack-files) にある説明を確認してください。
+> ヒント
+>
+> [サービス、スウォーム、docker-stack.yml ファイルにおけるボリューム設定方法](#volumes-for-services-swarms-and-stack-files) にある説明を確認してください。
 > ボリュームはサポートされますが、これはスウォームとサービスに対してです。
 > ボリュームは名前つきとして設定されるか、あるいは必要なボリュームにアクセスするノードのみから構成されるサービスに関連づけられている必要があります。
 
@@ -1407,11 +1456,16 @@ devices:
 ```
 
 {% comment %}
-> **Note**: This option is ignored when
+> Note when using docker stack deploy
+>
+> The `devices` option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+{: .important }
 {% endcomment %}
-> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> docker のスタックデプロイ時のメモ
+>
+> `devices` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+{: .important }
 
 ### dns
 
@@ -1468,22 +1522,20 @@ The entrypoint can also be a list, in a manner similar to
 その指定方法は [Dockerfile](/engine/reference/builder.md#entrypoint) と同様です。
 
 ```yaml
-entrypoint:
-    - php
-    - -d
-    - zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so
-    - -d
-    - memory_limit=-1
-    - vendor/bin/phpunit
+entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
 ```
 
 {% comment %}
-> **Note**: Setting `entrypoint` both overrides any default entrypoint set
-> on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
-> clears out any default command on the image - meaning that if there's a `CMD`
-> instruction in the Dockerfile, it is ignored.
+> **Note**
+>
+> Setting `entrypoint` both overrides any default entrypoint set on the service's
+> image with the `ENTRYPOINT` Dockerfile instruction, *and* clears out any default
+> command on the image - meaning that if there's a `CMD` instruction in the
+> Dockerfile, it is ignored.
 {% endcomment %}
-> **メモ**: `entrypoint` を設定すると、サービスイメージ内に Dockerfile 命令の `ENTRYPOINT` によって設定されているデフォルトのエントリーポイントは上書きされ、**さらに**イメージ内のあらゆるデフォルトコマンドもクリアされます。
+> **メモ**
+>
+> `entrypoint` を設定すると、サービスイメージ内に Dockerfile 命令の `ENTRYPOINT` によって設定されているデフォルトのエントリーポイントは上書きされ、**さらに**イメージ内のあらゆるデフォルトコマンドもクリアされます。
 > これはつまり、Dockerfile に `CMD` 命令があったとしたら無視されるということです。
 
 ### env_file
@@ -1516,7 +1568,7 @@ env_file: .env
 env_file:
   - ./common.env
   - ./apps/web.env
-  - /opt/secrets.env
+  - /opt/runtime_opts.env
 ```
 
 {% comment %}
@@ -1528,18 +1580,22 @@ env ファイルの各行は `VAR=VAL` の書式とします。
 行先頭に `#` があると、コメント行となり無視されます。
 空行も無視されます。
 
-```bash
+```console
 # Set Rails/Rack environment
 RACK_ENV=development
 ```
 
 {% comment %}
-> **Note**: If your service specifies a [build](#build) option, variables
-> defined in environment files are _not_ automatically visible during the
-> build. Use the [args](#args) sub-option of `build` to define build-time
-> environment variables.
+> **Note**
+>
+> If your service specifies a [build](#build) option, variables defined in
+> environment files are _not_ automatically visible during the build. Use
+> the [args](#args) sub-option of `build` to define build-time environment
+> variables.
 {% endcomment %}
-> **メモ**: サービスに [build](#build) オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
+> **メモ**
+>
+> サービスに [build](#build) オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
 > その場合は `build` のサブオプション [args](#args) を利用して、ビルド時の環境変数を設定してください。
 
 {% comment %}
@@ -1579,7 +1635,7 @@ And the following files:
 {% endcomment %}
 ファイルの内容は以下であるとします。
 
-```bash
+```console
 # a.env
 VAR=1
 ```
@@ -1588,7 +1644,7 @@ VAR=1
 and
 {% endcomment %}
 
-```bash
+```console
 # b.env
 VAR=hello
 ```
@@ -1631,12 +1687,16 @@ environment:
 ```
 
 {% comment %}
-> **Note**: If your service specifies a [build](#build) option, variables
-> defined in `environment` are _not_ automatically visible during the
-> build. Use the [args](#args) sub-option of `build` to define build-time
-> environment variables.
+> **Note**
+>
+> If your service specifies a [build](#build) option, variables defined in
+> `environment` are _not_ automatically visible during the build. Use the
+> [args](#args) sub-option of `build` to define build-time environment
+> variables.
 {% endcomment %}
-> **メモ**: サービスに [build](#build) オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
+> **メモ**
+>
+> サービスに [build](#build) オプションを指定している場合、env ファイル内に定義された変数は、ビルド時にこのままでは自動的に参照されません。
 > その場合は `build` のサブオプション [args](#args) を利用して、ビルド時の環境変数を設定してください。
 
 ### expose
@@ -1651,8 +1711,8 @@ accessible to linked services. Only the internal port can be specified.
 
 ```yaml
 expose:
- - "3000"
- - "8000"
+  - "3000"
+  - "8000"
 ```
 
 ### external_links
@@ -1670,29 +1730,33 @@ specifying both the container name and the link alias (`CONTAINER:ALIAS`).
 
 ```yaml
 external_links:
- - redis_1
- - project_db_1:mysql
- - project_db_1:postgresql
+  - redis_1
+  - project_db_1:mysql
+  - project_db_1:postgresql
 ```
 
 {% comment %}
-> **Notes:**
+> **Note**
 >
-> If you're using the [version 2 or above file format](compose-versioning.md#version-2), the externally-created  containers
-must be connected to at least one of the same networks as the service that is
-linking to them. [Links](compose-file-v2#links) are a
-legacy option. We recommend using [networks](#networks) instead.
+> The externally-created  containers must be connected to at least one of the same
+> networks as the service that is linking to them. [Links](compose-file-v2#links)
+> are a legacy option. We recommend using [networks](#networks) instead.
+
+> Note when using docker stack deploy
 >
-> This option is ignored when [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-with a (version 3) Compose file.
+> The `external_links` option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+{: .important }
 {% endcomment %}
-> **メモ:**
+> **メモ**
 >
-> [バージョン 2 またはそれ以上のファイルフォーマット](compose-versioning.md#version-2)を利用しているときに、外部にて生成されたコンテナーをネットワークに接続する場合は、そのコンテナーがサービスとしてリンクしているネットワークのうちの 1 つでなければなりません。
-[Links](compose-file-v2#links) は古いオプションです。
-これではなく [networks](#networks) を用いるようにしてください。
+> 外部にて生成されたコンテナーをネットワークに接続する場合は、そのコンテナーがサービスとしてリンクしているネットワークのうちの 1 つでなければなりません。
+> [Links](compose-file-v2#links) は古いオプションです。
+> これではなく [networks](#networks) を用いるようにしてください。
+
+> docker のスタックデプロイ時のメモ
 >
-> Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> `external_links` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
 
 ### extra_hosts
 
@@ -1704,8 +1768,8 @@ Docker Client の `--add-host` パラメーターと同じ値を設定してく�
 
 ```yaml
 extra_hosts:
- - "somehost:162.242.195.82"
- - "otherhost:50.31.209.229"
+  - "somehost:162.242.195.82"
+  - "otherhost:50.31.209.229"
 ```
 
 {% comment %}
@@ -1714,17 +1778,12 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 ホスト名と IP アドレスによるこの設定内容は、サービスコンテナー内の `/etc/hosts` に追加されます。
 たとえば以下のとおりです。
 
-```none
+```console
 162.242.195.82  somehost
 50.31.209.229   otherhost
 ```
 
 ### healthcheck
-
-{% comment %}
-> [Version 2.1 file format](compose-versioning.md#version-21) and up.
-{% endcomment %}
-> [ファイルフォーマットバージョン 2.1](compose-versioning.md#version-21) またはそれ以上。
 
 {% comment %}
 Configure a check that's run to determine whether or not containers for this
@@ -1745,15 +1804,20 @@ healthcheck:
 ```
 
 {% comment %}
-`interval`, `timeout` and `start_period` are specified as [durations](#specifying-durations).
+`interval`, `timeout` and `start_period` are specified as
+[durations](#specifying-durations).
 {% endcomment %}
 `interval`, `timeout`, `start_period` は [時間](#specifying-durations) を設定します。
 
 {% comment %}
-> **Note**: `start_period` is only supported for v3.4 and higher of the compose
+> Added in [version 3.4](compose-versioning.md#version-34) file format.
+>
+> The `start_period` option was added in file format 3.4.
 file format.
 {% endcomment %}
-> **メモ**: `start_period` は Compose ファイルフォーマットバージョン 3.4 またはそれ以上においてのみサポートされます。
+> ファイルフォーマット[バージョン 3.4](compose-versioning.md#version-34) における追加
+>
+> `start_period` オプションはファイルフォーマットバージョン 3.4 またはそれ以上においてのみサポートされます。
 
 {% comment %}
 `test` must be either a string or a list. If it's a list, the first item must be
@@ -1790,8 +1854,8 @@ test: curl -f https://localhost || exit 1
 ```
 
 {% comment %}
-To disable any default healthcheck set by the image, you can use `disable:
-true`. This is equivalent to specifying `test: ["NONE"]`.
+To disable any default healthcheck set by the image, you can use `disable: true`.
+This is equivalent to specifying `test: ["NONE"]`.
 {% endcomment %}
 イメージが設定するデフォルトのヘルスチェックを無効にするには、`disable: true` を指定します。
 これは `test: ["NONE"]` と指定することと同じです。
@@ -1810,11 +1874,21 @@ a partial image ID.
 コンテナーを起動させるイメージを設定します。
 リポジトリ/タグの形式か、あるいは部分イメージ ID により指定します。
 
-    image: redis
-    image: ubuntu:14.04
-    image: tutum/influxdb
-    image: example-registry.com:4000/postgresql
-    image: a4bc65fd
+```yaml
+image: redis
+```
+```yaml
+image: ubuntu:18.04
+```
+```yaml
+image: tutum/influxdb
+```
+```yaml
+image: example-registry.com:4000/postgresql
+```
+```yaml
+image: a4bc65fd
+```
 
 {% comment %}
 If the image does not exist, Compose attempts to pull it, unless you have also
@@ -1827,9 +1901,9 @@ options and tags it with the specified tag.
 ### init
 
 {% comment %}
-> [Added in version 3.7 file format](compose-versioning.md#version-37).
+> Added in [version 3.7](compose-versioning.md#version-37) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 3.7](compose-versioning.md#version-37) において追加。
+> ファイルフォーマット[バージョン 3.7](compose-versioning.md#version-37) における追加
 
 {% comment %}
 Run an init inside the container that forwards signals and reaps processes.
@@ -1899,37 +1973,43 @@ labels:
 ### links
 
 {% comment %}
->**Warning**: The `--link` flag is a legacy feature of Docker. It
-may eventually be removed. Unless you absolutely need to continue using it, we
-recommend that you use [user-defined networks](/engine/userguide/networking//#user-defined-networks)
-to facilitate communication between two containers instead of using `--link`.
-One feature that user-defined networks do not support that you can do with
-`--link` is sharing environmental variables between containers. However, you can
-use other mechanisms such as volumes to share environment variables between
-containers in a more controlled way.
+>**Warning**
+>
+> The `--link` flag is a legacy feature of Docker. It may eventually be removed.
+> Unless you absolutely need to continue using it, we recommend that you use
+> [user-defined networks](/engine/userguide/networking//#user-defined-networks)
+> to facilitate communication between two containers instead of using `--link`.
+>
+> One feature that user-defined networks do not support that you can do with
+> `--link` is sharing environmental variables between containers. However, you
+> can use other mechanisms such as volumes to share environment variables between
+> containers in a more controlled way.
 {:.warning}
 {% endcomment %}
->**警告**: `--link` フラグはすでに古い機能であり、そのうち削除されるかもしれません。
+>**警告**
+>
+> `--link` フラグはすでに古い機能であり、そのうち削除されるかもしれません。
 > このフラグを利用し続ける必要が明確にないのであれば、[ユーザー定義のネットワーク](/engine/userguide/networking//#user-defined-networks) を利用することをお勧めします。
 > そうすれば `--link` を用いなくても、2 つのコンテナー間での通信を実現できます。
+>
 > ただしユーザー定義のネットワークではサポートされない機能が 1 つあります。
 > それは `--link` であれば、コンテナー間で環境変数を共有できるという点です。
-> もっともボリュームなどの他のメカニズムを利用すれば、コンテナー間での環境変数の共有は可能であり、その方が、より制御のしやすい方法になります。
+> もっともボリュームなどの他のメカニズムを利用すれば、コンテナー間での環境変数の共有は可能であり、その方がより制御しやすい方法になります。
 {:.warning}
 
 {% comment %}
 Link to containers in another service. Either specify both the service name and
-a link alias (`SERVICE:ALIAS`), or just the service name.
+a link alias (`"SERVICE:ALIAS"`), or just the service name.
 {% endcomment %}
 他サービスのコンテナーをリンクします。
-サービス名とリンクのエイリアス名（`SERVICE:ALIAS`）を指定するか、直接サービス名を指定します。
+サービス名とリンクのエイリアス名（`"SERVICE:ALIAS"`）を指定するか、直接サービス名を指定します。
 
 ```yaml
 web:
   links:
-   - db
-   - db:database
-   - redis
+    - "db"
+    - "db:database"
+    - "redis"
 ```
 
 {% comment %}
@@ -1956,21 +2036,26 @@ Links は [depends_on](#depends_on) と同様にサービス間の依存関係�
 したがってサービスの起動順を設定するものになります。
 
 {% comment %}
-> **Notes**
+> **Note**
 >
-> * If you define both links and [networks](#networks), services with
+> If you define both links and [networks](#networks), services with
 > links between them must share at least one network in common to
 > communicate.
+
+> Note when using docker stack deploy
 >
-> *  This option is ignored when
+> The `links` option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+{: .important }
 {% endcomment %}
 > **メモ**
 >
-> * links と [networks](#networks) をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。
+> links と [networks](#networks) をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。
+
+> docker のスタックデプロイ時のメモ
 >
-> * Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+{: .important }
 
 ### logging
 
@@ -2000,17 +2085,27 @@ The default value is json-file.
 {% endcomment %}
 デフォルトは json-file です。
 
-    driver: "json-file"
-    driver: "syslog"
-    driver: "none"
+```yaml
+driver: "json-file"
+```
+```yaml
+driver: "syslog"
+```
+```yaml
+driver: "none"
+```
 
 {% comment %}
-> **Note**: Only the `json-file` and `journald` drivers make the logs
-available directly from `docker-compose up` and `docker-compose logs`.
-Using any other driver does not print any logs.
+> **Note**
+>
+> Only the `json-file` and `journald` drivers make the logs available directly
+> from `docker-compose up` and `docker-compose logs`. Using any other driver
+> does not print any logs.
 {% endcomment %}
-> **メモ**: ドライバーのうち `json-file` と `journald` だけが、`docker-compose up` と `docker-compose logs` によって直接ログ参照ができます。
-その他のドライバーではログ表示は行われません。
+> **メモ**
+>
+> ドライバーのうち `json-file` と `journald` だけが、`docker-compose up` と `docker-compose logs` によって直接ログ参照ができます。
+> その他のドライバーではログ表示は行われません。
 
 {% comment %}
 Specify logging options for the logging driver with the ``options`` key, as with the ``--log-opt`` option for `docker run`.
@@ -2074,16 +2169,16 @@ services:
 > Logging options available depend on which logging driver you use
 >
 > The above example for controlling log files and sizes uses options
-specific to the [json-file driver](/engine/admin/logging/overview.md#json-file).
-These particular options are not available on other logging drivers.
-For a full list of supported logging drivers and their options, see
-[logging drivers](/engine/admin/logging/overview.md).
+> specific to the [json-file driver](/engine/admin/logging/overview.md#json-file).
+> These particular options are not available on other logging drivers.
+> For a full list of supported logging drivers and their options, refer to the
+> [logging drivers](/engine/admin/logging/overview.md) documentation.
 {% endcomment %}
-> 利用可能なロギングオプションは、利用しているロギングドライバーによって変わります。
+> 利用可能なロギングオプションはロギングドライバーに依存
 >
 > 上で示した例においては、ログファイルや容量を制御するために [json-file ドライバー](/engine/admin/logging/overview.md#json-file) に固有のオプションを利用しました。
-このようなオプションはその他のロギングドライバーでは利用できません。
-サポートされるロギングドライバーと個々のオプションについては [ロギングドライバー](/engine/admin/logging/overview.md) を参照してください。
+> このようなオプションはその他のロギングドライバーでは利用できません。
+> サポートされるロギングドライバーと個々のオプションについては [ロギングドライバー](/engine/admin/logging/overview.md) を参照してください。
 
 ### network_mode
 
@@ -2095,27 +2190,35 @@ the special form `service:[service name]`.
 Docker クライアントの `--network` パラメーターと同じ値を設定します。
 これに加えて `service:[service name]` という特別な書式も指定可能です。
 
-    network_mode: "bridge"
-    network_mode: "host"
-    network_mode: "none"
-    network_mode: "service:[service name]"
-    network_mode: "container:[container name/id]"
+```yaml
+network_mode: "bridge"
+```
+```yaml
+network_mode: "host"
+```
+```yaml
+network_mode: "none"
+```
+```yaml
+network_mode: "service:[service name]"
+```
+```yaml
+network_mode: "container:[container name/id]"
+```
 
 {% comment %}
-> **Notes**
+> **Note**
 >
->* This option is ignored when
-[deploying a stack in swarm
- mode](/engine/reference/commandline/stack_deploy.md) with a (version 3) Compose
- file.
->
->* `network_mode: "host"` cannot be mixed with [links](#links).
+> * This option is ignored when
+>   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+> * `network_mode: "host"` cannot be mixed with [links](#links).
+{: .important }
 {% endcomment %}
 > **メモ**
 >
->* Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
->
->* `network_mode: "host"` とした場合、[links](#links) を同時に指定することはできません。
+> * このオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> * `network_mode: "host"` とした場合、[links](#links) を同時に指定することはできません。
+{: .important }
 
 ### networks
 
@@ -2149,9 +2252,15 @@ Since `aliases` is network-scoped, the same service can have different aliases o
 ネットワークが異なれば、同一サービスに違うエイリアスを持たせることができます。
 
 {% comment %}
-> **Note**: A network-wide alias can be shared by multiple containers, and even by multiple services. If it is, then exactly which container the name resolves to is not guaranteed.
+> **Note**
+>
+> A network-wide alias can be shared by multiple containers, and even by multiple
+> services. If it is, then exactly which container the name resolves to is not
+> guaranteed.
 {% endcomment %}
-> **メモ**: ネットワーク全体にわたってのエイリアスを複数コンテナー間で共有することができます。
+> **メモ**
+>
+> ネットワーク全体にわたってのエイリアスを複数コンテナー間で共有することができます。
 > それは複数サービス間でも可能です。
 > ただしこの場合、名前解決がどのコンテナーに対して行われるかは保証されません。
 
@@ -2166,11 +2275,11 @@ services:
     networks:
       some-network:
         aliases:
-         - alias1
-         - alias3
+          - alias1
+          - alias3
       other-network:
         aliases:
-         - alias2
+          - alias2
 ```
 
 {% comment %}
@@ -2263,7 +2372,9 @@ networks:
 
 ### pid
 
-    pid: "host"
+```yaml
+pid: "host"
+```
 
 {% comment %}
 Sets the PID mode to the host PID mode.  This turns on sharing between
@@ -2284,9 +2395,13 @@ Expose ports.
 公開用ポートを設定します。
 
 {% comment %}
-> **Note**: Port mapping is incompatible with `network_mode: host`
+> **Note**
+>
+> Port mapping is incompatible with `network_mode: host`
 {% endcomment %}
-> **メモ**: ポートマッピングは `network_mode: host` とは互換性がありません。
+> **メモ**
+>
+> ポートマッピングは `network_mode: host` とは互換性がありません。
 
 {% comment %}
 #### Short syntax
@@ -2301,25 +2416,30 @@ port (an ephemeral host port is chosen).
 ホスト側とコンテナー側の両方のポートを指定する（`HOST:CONTAINER`）か、あるいはコンテナー側のポートを指定します（ホストポートはエフェメラルに設定されます）。
 
 {% comment %}
-> **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
+> **Note**
+>
+> When mapping ports in the `HOST:CONTAINER` format, you may experience
 > erroneous results when using a container port lower than 60, because YAML
 > parses numbers in the format `xx:yy` as a base-60 value. For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
 {% endcomment %}
-> **メモ**: `HOST:CONTAINER` の書式によってポートをマッピングした場合に、コンテナー側のポートが 60 番未満であるとエラーになることがあります。
+> **メモ**
+>
+> `HOST:CONTAINER` の書式によってポートをマッピングした場合に、コンテナー側のポートが 60 番未満であるとエラーになることがあります。
 > これは YAML パーサーが `xx:yy` の書式内にある数値を 60 進数値として解釈するからです。
 > このことからポートマッピングを指定する際には、常に文字列として設定することをお勧めします。
 
 ```yaml
 ports:
- - "3000"
- - "3000-3005"
- - "8000:8000"
- - "9090-9091:8080-8081"
- - "49100:22"
- - "127.0.0.1:8001:8001"
- - "127.0.0.1:5000-5010:5000-5010"
- - "6060:6060/udp"
+  - "3000"
+  - "3000-3005"
+  - "8000:8000"
+  - "9090-9091:8080-8081"
+  - "49100:22"
+  - "127.0.0.1:8001:8001"
+  - "127.0.0.1:5000-5010:5000-5010"
+  - "6060:6060/udp"
+  - "12400-12500:1240"
 ```
 
 {% comment %}
@@ -2355,9 +2475,13 @@ ports:
 ```
 
 {% comment %}
-> **Note**: The long syntax is new in v3.2
+> Added in [version 3.2](compose-versioning.md#version-32) file format.
+>
+> The long syntax is new in the v3.2 file format.
 {% endcomment %}
-> **メモ**: 長い文法は v3.2 から導入されました。
+> ファイルフォーマット[バージョン 3.2](compose-versioning.md#version-32) における追加
+>
+> 長い文法は v3.2 から導入されました。
 
 ### restart
 
@@ -2378,12 +2502,16 @@ on-failure error.
     restart: unless-stopped
 
 {% comment %}
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file. Use [restart_policy](#restart_policy) instead.
+> Note when using docker stack deploy
+>
+> The `restart` option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+{: .important }
 {% endcomment %}
-> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
-> 代わりに [restart_policy](#restart_policy) を利用してください。
+> docker のスタックデプロイ時のメモ
+>
+>Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+{: .important }
 
 ### secrets
 
@@ -2395,12 +2523,18 @@ configuration. Two different syntax variants are supported.
 2 つの異なる文法がサポートされています。
 
 {% comment %}
-> **Note**: The secret must already exist or be
+> Note when using docker stack deploy
+>
+> The secret must already exist or be
 > [defined in the top-level `secrets` configuration](#secrets-configuration-reference)
-> of this stack file, or stack deployment fails.
+> of the compose file, or stack deployment fails.
+{: .important }
 {% endcomment %}
-> **メモ**: secrets は既に定義済であるか、あるいは [最上位の `secrets` が定義済](#configs-configuration-reference) である必要があります。
+> docker のスタックデプロイ時のメモ
+>
+> secrets は既に定義済であるか、あるいは [最上位の `secrets` が定義済](#configs-configuration-reference) である必要があります。
 > そうでない場合、このファイルによるデプロイが失敗します。
+{: .important }
 
 {% comment %}
 For more information on secrets, see [secrets](/engine/swarm/secrets.md).
@@ -2551,11 +2685,16 @@ security_opt:
 ```
 
 {% comment %}
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+> Note when using docker stack deploy
+>
+> The `security_opt` option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+{: .important }
 {% endcomment %}
-> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> docker のスタックデプロイ時のメモ
+>
+> `security_opt` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+{: .important }
 
 ### stop_grace_period
 
@@ -2568,8 +2707,13 @@ as a [duration](#specifying-durations).
 コンテナーが SIGKILL を送信するまでに、SIGTERM（あるいは [`stop_signal`](#stopsignal) によって設定されたストップシグナル）をどれだけ待つかを設定します。
 指定には [時間](#specifying-durations) を用います。
 
-    stop_grace_period: 1s
-    stop_grace_period: 1m30s
+```yaml
+stop_grace_period: 1s
+```
+
+```yaml
+stop_grace_period: 1m30s
+```
 
 {% comment %}
 By default, `stop` waits 10 seconds for the container to exit before sending
@@ -2625,18 +2769,21 @@ For an overview of supported sysctls, refer to [configure namespaced kernel
 parameters (sysctls) at runtime](/engine/reference/commandline/run/#configure-namespaced-kernel-parameters-sysctls-at-runtime).
 
 {% comment %}
+> Note when using docker stack deploy
+>
 > This option requires Docker Engine 19.03 or up when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
 {% endcomment %}
-> Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> docker のスタックデプロイ時のメモ
+>
+> このオプションを [スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md) において用いるには Docker Engine 19.03 以降が必要です。
 
 ### tmpfs
 
 {% comment %}
-> [Version 2 file format](compose-versioning.md#version-2) and up.
+> Added in [version 3.6](compose-versioning.md#version-36) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 2](compose-versioning.md#version-2) またはそれ以上。
+> ファイルフォーマット[バージョン 3.6](compose-versioning.md#version-36) における追加
 
 {% comment %}
 Mount a temporary file system inside the container. Can be a single value or a list.
@@ -2655,16 +2802,15 @@ tmpfs:
 ```
 
 {% comment %}
-> **Note**: This option is ignored when
+> Note when using docker stack deploy
+>
+> This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3-3.5) Compose file.
 {% endcomment %}
-> **メモ**: Compose ファイルバージョン 3 ～ 3.5 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
-
-{% comment %}
-> [Version 3.6 file format](compose-versioning.md#version-3) and up.
-{% endcomment %}
-> [ファイルフォーマットバージョン 3.6 ](compose-versioning.md#version-3) またはそれ以上。
+> docker のスタックデプロイ時のメモ
+>
+> Compose ファイルバージョン 3 ～ 3.5 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
 
 {% comment %}
 Mount a temporary file system inside the container. Size parameter specifies the size
@@ -2690,7 +2836,6 @@ limit as an integer or soft/hard limits as a mapping.
 コンテナーにおけるデフォルトの ulimits を上書きします。
 1 つの limit を整数値として指定するか、ソフト、ハードの limit をマッピングとして指定することができます。
 
-
 ```yaml
 ulimits:
   nproc: 65535
@@ -2714,11 +2859,16 @@ Docker デーモンにおいてユーザー名前空間が設定されていて�
 詳しくは [dockerd](/engine/reference/commandline/dockerd.md#disable-user-namespace-for-a-container) を参照してください。
 
 {% comment %}
-> **Note**: This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+> Note when using docker stack deploy
+>
+> The `userns_mode` option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+{: .important }
 {% endcomment %}
-> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> docker のスタックデプロイ時のメモ
+>
+> `userns_mode` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+{: .important }
 
 ### volumes
 
@@ -2744,14 +2894,16 @@ files](#volumes-for-services-swarms-and-stack-files).
 名前つきボリュームは [サービス、スウォーム、スタックファイル](#volumes-for-services-swarms-and-stack-files) において用いられます。
 
 {% comment %}
-> **Note**: The top-level
-> [volumes](#volume-configuration-reference) key defines
-> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format. See [Use volumes](/engine/admin/volumes/volumes.md) and [Volume
-Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
+> Changed in [version 3](compose-versioning.md#version-3) file format.
+>
+> The top-level [volumes](#volume-configuration-reference) key defines
+> a named volume and references it from each service's `volumes` list. This
+> replaces `volumes_from` in earlier versions of the Compose file format.
 {% endcomment %}
-> **メモ**: 最上位の [volumes](#volume-configuration-reference) キーは名前つきボリュームを定義し、各サービスの `volumes` リストからこれを参照します。
+> ファイルフォーマット[バージョン 3](compose-versioning.md#version-3) における変更
+>
+> 最上位の [volumes](#volume-configuration-reference) キーは名前つきボリュームを定義し、各サービスの `volumes` リストからこれを参照します。
 > これは Compose ファイルフォーマットのかつてのバージョンにおける `volumes_from` に置き換わるものです。
-> ボリュームに関する一般的な情報については [ボリュームの利用](/engine/admin/volumes/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume.md) を参照してください。
 
 {% comment %}
 This example shows a named volume (`mydata`) being used by the `web` service,
@@ -2793,10 +2945,14 @@ volumes:
 ```
 
 {% comment %}
-> **Note**: See [Use volumes](/engine/admin/volumes/volumes.md) and [Volume
-> Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
+> **Note**
+>
+> For general information on volumes, refer to the [use volumes](/engine/admin/volumes/volumes.md)
+> and [volume plugins](/engine/extend/plugins_volume.md) sections in the documentation.
 {% endcomment %}
-> **メモ**: ボリュームに関する一般的な情報については [ボリュームの利用](/engine/admin/volumes/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume.md) を参照してください。
+> **メモ**
+>
+> ボリュームに関する一般的な情報については [ボリュームの利用](/engine/admin/volumes/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume.md) を参照してください。
 
 
 {% comment %}
@@ -2806,13 +2962,18 @@ volumes:
 #### 短い文法
 
 {% comment %}
-Optionally specify a path on the host machine
-(`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
+The short syntax uses the generic `[SOURCE:]TARGET[:MODE]` format, where
+`SOURCE` can be either a host path or volume name. `TARGET` is the container
+path where the volume is mounted. Standard modes are `ro` for read-only
+and `rw` for read-write (default).
 {% endcomment %}
-設定方法として、ホストマシンのパスを指定する方法（`HOST:CONTAINER`）や、さらにアクセスモードを指定する方法（`HOST:CONTAINER:ro`）があります。
+短い文法は一般に `[SOURCE:]TARGET[:MODE]` という書式になります。
+ここで `SOURCE` はホストパスまたはボリューム名を指定します。
+`TARGET` はボリュームがマウントされているコンテナーのパスです。
+標準モードには 読み込み専用 `ro` と 読み書き可能 `rw`（デフォルト）があります。
 
 {% comment %}
-You can mount a relative path on the host, that expands relative to
+You can mount a relative path on the host, which expands relative to
 the directory of the Compose configuration file being used. Relative paths
 should always begin with `.` or `..`.
 {% endcomment %}
@@ -2863,6 +3024,8 @@ volumes:
 {: id="volumes-long-syntax" }
 #### 長い文法
 
+> Added in [version 3.2](compose-versioning.md#version-32) file format.
+
 {% comment %}
 The long form syntax allows the configuration of additional fields that can't be
 expressed in the short form.
@@ -2883,7 +3046,9 @@ expressed in the short form.
     created
 - `tmpfs`: configure additional tmpfs options
   - `size`: the size for the tmpfs mount in bytes
-- `consistency`: the consistency requirements of the mount, one of `consistent` (host and container have identical view), `cached` (read cache, host view is authoritative) or `delegated` (read-write cache, container's view is authoritative)
+- `consistency`: the consistency requirements of the mount, one of `consistent`
+  (host and container have identical view), `cached` (read cache, host view is
+  authoritative) or `delegated` (read-write cache, container's view is authoritative)
 {% endcomment %}
 - `type`: マウントタイプを表わす `volume`, `bind`, `tmpfs`, `npipe` のいずれかを指定します。
 - `source`: マウント元。バインドマウントにおいてはホスト上のパスを指定します。
@@ -2924,10 +3089,19 @@ volumes:
 ```
 
 {% comment %}
-> **Note**: The long syntax is new in v3.2
+> **Note**
+>
+> When creating bind mounts, using the long syntax requires the
+> referenced folder to be created beforehand. Using the short syntax
+> creates the folder on the fly if it doesn't exist.
+> See the [bind mounts documentation](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior)
+> for more information.
 {% endcomment %}
-> **メモ**: 長い文法は v3.2 から導入されました。
-
+> **メモ**
+>
+> バインドマウントを生成するにあたって長い文法を用いるのであれば、参照するパスはあらかじめ生成しておく必要があります。
+> 短い文法であれば、そのパスが存在いていなかった場合には生成されます。
+> 詳しくは [バインドマウント](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior) を参照してください。
 
 {% comment %}
 #### Volumes for services, swarms, and stack files
@@ -2936,13 +3110,17 @@ volumes:
 #### サービス、スウォーム、スタックファイルに対するボリューム設定
 
 {% comment %}
-When working with services, swarms, and `docker-stack.yml` files, keep in mind
-that the tasks (containers) backing a service can be deployed on any node in a
-swarm, and this may be a different node each time the service is updated.
+> Note when using docker stack deploy
+>
+> When working with services, swarms, and `docker-stack.yml` files, keep in mind
+> that the tasks (containers) backing a service can be deployed on any node in a
+> swarm, and this may be a different node each time the service is updated.
 {% endcomment %}
-サービス、スウォーム、`docker-stack.yml` ファイルを扱っている際には気をつけておくべきことがあります。
-サービスのもとにあるタスク（コンテナー）はスォーム内のどのノードにでもデプロイされます。
-サービスは毎回、異なるノードとなり得るということです。
+> docker のスタックデプロイ時のメモ
+>
+> サービス、スウォーム、`docker-stack.yml` ファイルを扱っている際には気をつけておくべきことがあります。
+> サービスのもとにあるタスク（コンテナー）はスォーム内のどのノードにでもデプロイされます。
+> サービスは毎回、異なるノードとなり得るということです。
 
 {% comment %}
 In the absence of having named volumes with specified sources, Docker creates an
@@ -3001,7 +3179,7 @@ directories in Compose files to allow for better performance on read/write of
 volume mounts. These options address issues specific to `osxfs` file sharing,
 and therefore are only applicable on Docker Desktop for Mac.
 {% endcomment %}
-Docker 17.04 CE Edge とそれ以上の 17.06 CE Edge や Stable においては、Compose ファイル内にてバインドマウントするディレクトリの、コンテナーホスト間の一貫性を設定することができます。
+Compose ファイル内にてバインドマウントするディレクトリは、コンテナーホスト間の一貫性を設定することができます。
 これによってボリュームの読み書き性能を向上させることができます。
 これを実現するオプションは `osxfs` ファイル共有に対する問題に対処しているため、Docker Desktop for Mac においてのみ利用可能です。
 
@@ -3011,24 +3189,21 @@ The flags are:
 フラグとして以下があります。
 
 {% comment %}
-* `consistent`: Full consistency. The container runtime and the
-host maintain an identical view of the mount at all times.  This is the default.
+* `consistent`: Full consistency. The container runtime and the host maintain an
+  identical view of the mount at all times.  This is the default.
 {% endcomment %}
 * `consistent`: 完全な一貫性を持ちます。
   起動しているコンテナーとホストは、常にマウント上を同一に見ることができます。
   これがデフォルトです。
-
 {% comment %}
-* `cached`: The host's view of the mount is authoritative. There may be
-delays before updates made on the host are visible within a container.
+* `cached`: The host's view of the mount is authoritative. There may be delays
+  before updates made on the host are visible within a container.
 {% endcomment %}
 * `cached`: ホスト側マウントが優先されます。
   ホスト上の更新が、コンテナー内で確認できるまでには遅延が起こりえます。
-
 {% comment %}
-* `delegated`: The container runtime's view of the mount is
-authoritative. There may be delays before updates made in a container
-are visible on the host.
+* `delegated`: The container runtime's view of the mount is authoritative. There
+  may be delays before updates made in a container are visible on the host.
 {% endcomment %}
 * `delegated`: コンテナー実行時のコンテナー側マウントが優先されます。
   コンテナー内での更新が、ホスト上で確認できるまでには遅延が起こりえます。
@@ -3108,7 +3283,6 @@ The supported units are `us`, `ms`, `s`, `m` and `h`.
 {% endcomment %}
 サポートされる単位は `us`, `ms`, `s`, `m`, `h` です。
 
-
 {% comment %}
 ## Specifying byte values
 {% endcomment %}
@@ -3136,7 +3310,6 @@ The supported units are `b`, `k`, `m` and `g`, and their alternative notation `k
 サポートされる単位は `b`, `k`, `m`, `g` とそれに応じた `kb`, `mb`, `gb` です。
 現時点にて 10 進数値の指定はサポートされていません。
 
-
 {% comment %}
 ## Volume configuration reference
 {% endcomment %}
@@ -3144,20 +3317,20 @@ The supported units are `b`, `k`, `m` and `g`, and their alternative notation `k
 ## ボリューム設定リファレンス
 
 {% comment %}
-While it is possible to declare [volumes](#volumes) on the file as part of the
-service declaration, this section allows you to create named volumes (without
-relying on `volumes_from`) that can be reused across multiple services, and are
-easily retrieved and inspected using the docker command line or API. See the
-[docker volume](/engine/reference/commandline/volume_create.md) subcommand
-documentation for more information.
+While it is possible to declare [volumes](#volumes) on the fly as part of the
+service declaration, this section allows you to create named volumes that can be
+reused across multiple services (without relying on `volumes_from`), and are
+easily retrieved and inspected using the docker command line or API.
+See the [docker volume](/engine/reference/commandline/volume_create.md)
+subcommand documentation for more information.
 {% endcomment %}
-サービスの宣言の一部として、ファイル上に [ボリューム](#volumes) を宣言することが可能ですが、このセクションでは（`volumes_from` を利用せずに）名前つきボリュームを生成する方法を説明します。
-このボリュームは、複数のサービスにわたっての再利用が可能であり、docker コマンドラインや API を使って簡単に抽出したり確認したりすることができます。
+サービスの宣言の一部として、一時的に [ボリューム](#volumes) を宣言することが可能ですが、このセクションでは（`volumes_from` を利用せずに）マルチサービスにわたって再利用可能な名前つきボリュームの生成方法を説明します。
+またこのボリュームは docker コマンドラインや API を使って簡単に抽出したり確認したりすることができます。
 詳しくは [docker volume](/engine/reference/commandline/volume_create.md) のサブコマンドを確認してください。
 
 {% comment %}
-See [Use volumes](/engine/admin/volumes/volumes.md) and [Volume
-Plugins](/engine/extend/plugins_volume.md) for general information on volumes.
+See [use volumes](/engine/admin/volumes/volumes.md) and [volume
+plugins](/engine/extend/plugins_volume.md) for general information on volumes.
 {% endcomment %}
 ボリュームに関する一般的な情報については [ボリュームの利用](/engine/admin/volumes/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume.md) を参照してください。
 
@@ -3277,11 +3450,16 @@ volumes:
 ```
 
 {% comment %}
-> [external.name was deprecated in version 3.4 file format](compose-versioning.md#version-34)
-> use `name` instead.
+> Deprecated in [version 3.4](compose-versioning.md#version-34) file format.
+>
+> external.name was deprecated in version 3.4 file format use `name` instead.
+{: .important }
 {% endcomment %}
-> [ファイルフォーマットバージョン 3.4 において external.name は廃止予定となりました](compose-versioning.md#version-34)。
+> ファイルフォーマット[バージョン 3.4](compose-versioning.md#version-34) において非推奨
+>
+> ファイルフォーマットバージョン 3.4 において external.name は廃止予定となりました。
 > 代わりに `name` を用いてください。
+{: .important }
 
 {% comment %}
 You can also specify the name of the volume separately from the name used to
@@ -3297,24 +3475,23 @@ volumes:
 ```
 
 {% comment %}
-> External volumes are always created with docker stack deploy
+> Note when using docker stack deploy
 >
-External volumes that do not exist _are created_ if you use [docker stack
-deploy](#deploy) to launch the app in [swarm mode](/engine/swarm/index.md)
-(instead of [docker compose up](/compose/reference/up.md)). In swarm mode, a
-volume is automatically created when it is defined by a service. As service
-tasks are scheduled on new nodes,
-[swarmkit](https://github.com/docker/swarmkit/blob/master/README.md) creates the
-volume on the local node. To learn more, see
-[moby/moby#29976](https://github.com/moby/moby/issues/29976).
+> External volumes that do not exist _are created_ if you use [docker stack
+> deploy](#deploy) to launch the app in [swarm mode](/engine/swarm/index.md)
+> (instead of [docker compose up](/compose/reference/up.md)). In swarm mode, a
+> volume is automatically created when it is defined by a service. As service
+> tasks are scheduled on new nodes, [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md)
+> creates the volume on the local node. To learn more, see [moby/moby#29976](https://github.com/moby/moby/issues/29976).
+{: .important }
 {% endcomment %}
-> external ボリュームは docker stack deploy により常に生成されます。
+> docker のスタックデプロイ時のメモ
 >
-external ボリュームが存在しない場合に、[docker stack deploy](#deploy) を実行してアプリを [スウォームモード](/engine/swarm/index.md) 内に導入すると、ボリュームが**生成されます**。
-（[docker compose up](/compose/reference/up.md) とは異なります。）
-スウォームモードにおいて、サービスとして定義されているボリュームは自動生成されます。
-サービスタスクは新たなノード上においてスケジューリングされるので、[swarmkit](https://github.com/docker/swarmkit/blob/master/README.md) がローカルノード上にボリュームを生成します。
-詳しくは [moby/moby#29976](https://github.com/moby/moby/issues/29976) を参照してください。
+> external ボリュームが存在しない場合に、[docker stack deploy](#deploy) を実行してアプリを [スウォームモード](/engine/swarm/index.md) 内に導入すると、ボリュームが**生成されます**。
+> （[docker compose up](/compose/reference/up.md) とは異なります。）
+> スウォームモードにおいて、サービスとして定義されているボリュームは自動生成されます。
+> サービスタスクは新たなノード上においてスケジューリングされるので、[swarmkit](https://github.com/docker/swarmkit/blob/master/README.md) がローカルノード上にボリュームを生成します。
+> 詳しくは [moby/moby#29976](https://github.com/moby/moby/issues/29976) を参照してください。
 
 ### labels
 
@@ -3350,9 +3527,9 @@ labels:
 ### name
 
 {% comment %}
-> [Added in version 3.4 file format](compose-versioning.md#version-34)
+> Added in [version 3.4](compose-versioning.md#version-34) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 3.4](compose-versioning.md#version-34) において追加。
+> ファイルフォーマット[バージョン 3.4](compose-versioning.md#version-34) における追加
 
 {% comment %}
 Set a custom name for this volume. The name field can be used to reference
@@ -3396,15 +3573,13 @@ The top-level `networks` key lets you specify networks to be created.
 
 {% comment %}
 * For a full explanation of Compose's use of Docker networking features and all
-network driver options, see the [Networking guide](../networking.md).
+  network driver options, see the [Networking guide](/compose/networking.md).
 {% endcomment %}
-* Compose が利用する Docker ネットワーク機能やネットワークドライバーのオプションに関して、詳細は [ネットワークガイド](../networking.md) を参照してください。
-
+* Compose が利用する Docker ネットワーク機能やネットワークドライバーのオプションに関して、詳細は [ネットワークガイド](/compose/networking.md) を参照してください。
 {% comment %}
 * For [Docker Labs](https://github.com/docker/labs/blob/master/README.md)
-tutorials on networking, start with [Designing Scalable, Portable Docker
-Container
-Networks](https://github.com/docker/labs/blob/master/networking/README.md)
+  tutorials on networking, start with [Designing Scalable, Portable Docker
+  Container Networks](https://github.com/docker/labs/blob/master/networking/README.md)
 {% endcomment %}
 * [Docker Labs](https://github.com/docker/labs/blob/master/README.md) にあるネットワークのチュートリアルとして、[Designing Scalable, Portable Docker Container Networks](https://github.com/docker/labs/blob/master/networking/README.md) を試してみてください。
 
@@ -3558,9 +3733,9 @@ driver_opts:
 ### attachable
 
 {% comment %}
-> **Note**: Only supported for v3.2 and higher.
+> Added in [version 3.2](compose-versioning.md#version-32) file format.
 {% endcomment %}
-> **メモ**: v3.2 またはそれ以上においてのみサポートされています。
+> ファイルフォーマット[バージョン 3.2](compose-versioning.md#version-32) における追加
 
 {% comment %}
 Only used when the `driver` is set to `overlay`. If set to `true`, then
@@ -3634,9 +3809,13 @@ ipam:
 ```
 
 {% comment %}
-> **Note**: Additional IPAM configurations, such as `gateway`, are only honored for version 2 at the moment.
+> **Note**
+>
+> Additional IPAM configurations, such as `gateway`, are only honored for version 2 at the moment.
 {% endcomment %}
-> **メモ**: `gateway` のような設定キーは、, 現時点ではバージョン 2 においてのみ利用できます。
+> **メモ**
+>
+> `gateway` のような設定キーは、現時点ではバージョン 2 においてのみ利用できます。
 
 ### internal
 
@@ -3727,11 +3906,16 @@ networks:
 ```
 
 {% comment %}
-> [external.name was deprecated in version 3.5 file format](compose-versioning.md#version-35)
-> use `name` instead.
+> Deprecated in [version 3.5](compose-versioning.md#version-35) file format.
+>
+> external.name was deprecated in version 3.5 file format use `name` instead.
+{: .important }
 {% endcomment %}
-> [ファイルフォーマットバージョン 3.5 において external.name は廃止予定となりました](compose-versioning.md#version-35)。
+> ファイルフォーマット[バージョン 3.5](compose-versioning.md#version-35) において非推奨
+>
+> バージョン 3.5 において external.name は廃止予定となりました。
 > 代わりに `name` を用いてください。
+{: .important }
 
 {% comment %}
 You can also specify the name of the network separately from the name used to
@@ -3750,9 +3934,9 @@ networks:
 ### name
 
 {% comment %}
-> [Added in version 3.5 file format](compose-versioning.md#version-35)
+> Added in [version 3.5](compose-versioning.md#version-35) file format.
 {% endcomment %}
-> [Added in version 3.5 file format](compose-versioning.md#version-35)
+> ファイルフォーマット[バージョン 3.5](compose-versioning.md#version-35) における追加
 
 {% comment %}
 Set a custom name for this network. The name field can be used to reference
@@ -3964,9 +4148,9 @@ stack.
 ## 拡張項目
 
 {% comment %}
-> [Added in version 3.4 file format](compose-versioning.md#version-34).
+> Added in [version 3.4](compose-versioning.md#version-34) file format.
 {% endcomment %}
-> [ファイルフォーマットバージョン 3.4](compose-versioning.md#version-34) において追加されました。
+> ファイルフォーマット[バージョン 3.4](compose-versioning.md#version-34) における追加
 
 {% include content/compose-extfields-sub.md %}
 
@@ -3978,15 +4162,13 @@ stack.
 
 {% comment %}
 - [User guide](/compose/index.md)
-- [Installing Compose](/compose/install/)
+- [Installing Compose](/compose/install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Get started with Docker](/get-started/)
 - [Samples](/samples/)
 - [Command line reference](/compose/reference/)
 {% endcomment %}
 - [ユーザーガイド](/compose/index.md)
-- [Compose のインストール](/compose/install/)
+- [Compose のインストール](/compose/install.md)
 - [Compose ファイルのバージョンとアップグレード](compose-versioning.md)
-- [Docker をはじめよう](/get-started/)
 - [サンプル](/samples/)
 - [コマンドラインリファレンス](/compose/reference/)

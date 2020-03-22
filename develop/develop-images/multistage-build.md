@@ -66,7 +66,7 @@ builder pattern above:
 
 **`Dockerfile.build`**:
 
-```conf
+```dockerfile
 FROM golang:1.7.3
 WORKDIR /go/src/github.com/alexellis/href-counter/
 COPY app.go .
@@ -87,7 +87,7 @@ and forget to continue the line using the `\` character, for example.
 
 **`Dockerfile`**:
 
-```conf
+```dockerfile
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
@@ -151,7 +151,7 @@ multi-stage builds.
 
 **`Dockerfile`**:
 
-```conf
+```dockerfile
 FROM golang:1.7.3
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html
@@ -219,7 +219,7 @@ Dockerfile are re-ordered later, the `COPY` doesn't break.
 以下の例はこれまでのものをさらに充実させて、ステージに名前をつけ、`COPY` 命令においてその名前を利用します。
 これはつまり、Dockerfile 内の命令の記述順が、後々変更になったとしても、`COPY` は確実に動作するということです。
 
-```conf
+```dockerfile
 FROM golang:1.7.3 AS builder
 WORKDIR /go/src/github.com/alexellis/href-counter/
 RUN go get -d -v golang.org/x/net/html
@@ -289,7 +289,7 @@ Docker クライアントは必要なときにはイメージを取得します�
 そしてそこから構築内容をコピーします。
 コマンド構文は以下のようになります。
 
-```Dockerfile
+```dockerfile
 COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 ```
 
@@ -297,7 +297,7 @@ COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 
 You can pick up where a previous stage left off by referring to it when using the `FROM` directive. For example:
 
-```Dockerfile
+```dockerfile
 FROM alpine:latest as builder
 RUN apk --no-cache add build-base
 
