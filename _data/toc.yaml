@@ -32,24 +32,22 @@ guides:
     title: "学習のための各種情報"
 - sectiontitle: Docker を用いた開発
   section:
-    - sectiontitle: Docker 上でのアプリ開発
-      section:
-        - path: /develop/
-          title: アプリ開発概要
-        - path: /develop/dev-best-practices/
-          title: アプリ開発のベストプラクティス
-        - sectiontitle: 開発イメージ
-          section:
-          - path: /develop/develop-images/dockerfile_best-practices/
-            title: Dockerfile 記述のベストプラクティス
-          - path: /develop/develop-images/baseimages/
-            title: ベースイメージの生成
-          - path: /develop/develop-images/build_enhancements/
-            title: 18.09 での Docker ビルドの拡張
-          - path: /develop/develop-images/multistage-build/
-            title: マルチステージビルドの利用
-          - path: /develop/develop-images/image_management/
-            title: イメージの管理
+  - path: /develop/
+    title: 概要
+  - path: /develop/dev-best-practices/
+    title: ベストプラクティス
+  - sectiontitle: Build images
+    section:
+    - path: /develop/develop-images/dockerfile_best-practices/
+      title: Dockerfile ベストプラクティス
+    - path: /develop/develop-images/build_enhancements/
+      title: Build images with BuildKit
+    - path: /develop/develop-images/multistage-build/
+      title: マルチステージビルドの利用
+    - path: /develop/develop-images/image_management/
+      title: イメージの管理
+    - path: /develop/develop-images/baseimages/
+      title: 独自イメージの構築（応用）
 - sectiontitle: ネットワーク設定
   section:
     - path: /network/
@@ -304,11 +302,8 @@ guides:
     title: ドキュメントへの貢献
   - path: /opensource/ways/
     title: その他の貢献方法
-- sectiontitle: ドキュメントアーカイブ
-  section:
-  - path: /docsarchive/
-    title: View the docs archives
-
+- path: /docsarchive/
+  title: ドキュメントアーカイブ
 reference:
 - sectiontitle: コマンドラインインターフェイス
   section:
@@ -1239,40 +1234,6 @@ manuals:
     title: Edge release notes
   - path: /docker-for-windows/wsl-tech-preview/
     title: Docker Desktop WSL 2 backend
-- sectiontitle: Docker Desktop Enterprise
-  section:
-  - path: /ee/desktop/
-    title: Overview
-  - path: /ee/desktop/release-notes/
-    title: Release notes
-  - sectiontitle: Admin
-    section:
-    - sectiontitle: Install
-      section:
-      - path: /ee/desktop/admin/install/mac/
-        title: Install DDE on Mac
-      - path: /ee/desktop/admin/install/windows/
-        title: Install DDE on Windows
-    - sectiontitle: Configure
-      section:
-      - path: /ee/desktop/admin/configure/mac-admin/
-        title: Configure DDE on Mac
-      - path: /ee/desktop/admin/configure/windows-admin/
-        title: Configure DDE on Windows
-  - sectiontitle: User
-    section:
-    - path: /ee/desktop/user/mac-user/
-      title: Use DDE on Mac
-    - path: /ee/desktop/user/windows-user/
-      title: Use DDE on Windows
-  - path: /ee/desktop/app-designer/
-    title: Application designer
-  - sectiontitle: Troubleshoot
-    section:
-    - path: /ee/desktop/troubleshoot/mac-issues/
-      title: Troubleshoot DDE issues on Mac
-    - path: /ee/desktop/troubleshoot/windows-issues/
-      title: Troubleshoot DDE issues on Windows
 - title: Docker ID アカウント
   path: /docker-id/
 - sectiontitle: Docker Hub
@@ -1600,6 +1561,40 @@ manuals:
     - path: /toolbox/faqs/troubleshoot/
       title: Troubleshooting
       nosync: true
+- sectiontitle: Docker Desktop Enterprise
+  section:
+  - path: /ee/desktop/
+    title: Overview
+  - path: /ee/desktop/release-notes/
+    title: Release notes
+  - sectiontitle: Admin
+    section:
+    - sectiontitle: Install
+      section:
+      - path: /ee/desktop/admin/install/mac/
+        title: Install DDE on Mac
+      - path: /ee/desktop/admin/install/windows/
+        title: Install DDE on Windows
+    - sectiontitle: Configure
+      section:
+      - path: /ee/desktop/admin/configure/mac-admin/
+        title: Configure DDE on Mac
+      - path: /ee/desktop/admin/configure/windows-admin/
+        title: Configure DDE on Windows
+  - sectiontitle: User
+    section:
+    - path: /ee/desktop/user/mac-user/
+      title: Use DDE on Mac
+    - path: /ee/desktop/user/windows-user/
+      title: Use DDE on Windows
+  - path: /ee/desktop/app-designer/
+    title: Application designer
+  - sectiontitle: Troubleshoot
+    section:
+    - path: /ee/desktop/troubleshoot/mac-issues/
+      title: Troubleshoot DDE issues on Mac
+    - path: /ee/desktop/troubleshoot/windows-issues/
+      title: Troubleshoot DDE issues on Windows
 - sectiontitle: Docker Enterprise
   section:
   - path: /ee/
