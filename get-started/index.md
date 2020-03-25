@@ -250,7 +250,7 @@ Docker version 19.03.5, build 633a0ea
     実行中であれば `--all` オプションをつける必要はありません。
 
     ```shell
-        $ docker container ls --all
+        $ docker ps --all
 
         CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
         54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
