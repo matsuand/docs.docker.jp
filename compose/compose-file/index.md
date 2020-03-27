@@ -1977,7 +1977,7 @@ labels:
 >
 > The `--link` flag is a legacy feature of Docker. It may eventually be removed.
 > Unless you absolutely need to continue using it, we recommend that you use
-> [user-defined networks](/engine/userguide/networking//#user-defined-networks)
+> [user-defined networks](/engine/userguide/networking/#user-defined-networks)
 > to facilitate communication between two containers instead of using `--link`.
 >
 > One feature that user-defined networks do not support that you can do with
@@ -1989,7 +1989,7 @@ labels:
 >**警告**
 >
 > `--link` フラグはすでに古い機能であり、そのうち削除されるかもしれません。
-> このフラグを利用し続ける必要が明確にないのであれば、[ユーザー定義のネットワーク](/engine/userguide/networking//#user-defined-networks) を利用することをお勧めします。
+> このフラグを利用し続ける必要が明確にないのであれば、[ユーザー定義のネットワーク](/engine/userguide/networking/#user-defined-networks) を利用することをお勧めします。
 > そうすれば `--link` を用いなくても、2 つのコンテナー間での通信を実現できます。
 >
 > ただしユーザー定義のネットワークではサポートされない機能が 1 つあります。

@@ -141,15 +141,15 @@ guides:
     - path: /config/daemon/systemd/
       title: systemd を用いた Docker の管理
   - path: /config/daemon/prometheus/
-    title: Collect metrics with Prometheus
-  - sectiontitle: Configure containers
+    title: Prometheus を用いたメトリックスの収集
+  - sectiontitle: コンテナーの設定
     section:
     - path: /config/containers/start-containers-automatically/
-      title: Start containers automatically
+      title: コンテナーの自動起動
     - path: /config/containers/live-restore/
       title: Keep containers alive during daemon downtime
     - path: /config/containers/multi-service_container/
-      title: Run multiple services in a container
+      title: コンテナー内での複数サービス起動
     - path: /config/containers/runmetrics/
       title: Container runtime metrics
     - path: /config/containers/resource_constraints/

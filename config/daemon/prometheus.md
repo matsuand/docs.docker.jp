@@ -1,38 +1,69 @@
 ---
-description: Collecting Docker metrics with Prometheus
+description: Prometheus を用いた Docker メトリックスの収集。
 keywords: prometheus, metrics
-title: Collect Docker metrics with Prometheus
+title: Prometheus を用いた Docker メトリックスの収集
 redirect_from:
 - /engine/admin/prometheus/
 - /config/thirdparty/monitoring/
 - /config/thirdparty/prometheus/
 ---
 
+{% comment %}
 [Prometheus](https://prometheus.io/) is an open-source systems monitoring and
 alerting toolkit. You can configure Docker as a Prometheus target. This topic
 shows you how to configure Docker, set up Prometheus to run as a Docker
 container, and monitor your Docker instance using Prometheus.
+{% endcomment %}
+[Prometheus](https://prometheus.io/) はシステム監視や警告を行うオープンソースのツールキットです。
+この Prometheus の対象として Docker を設定することができます。
+ここでは Docker の設定、Docker コンテナーとしての Prometheus の設定、Prometheus を使った Docker インスタンスの監視について示します。
 
+{% comment %}
 > **Warning**: The available metrics and the names of those metrics are in
 > active development and may change at any time.
+{% endcomment %}
+> **警告**: 利用可能なメトリックスおよびその名称は、現在開発中のものであるため、随時変更されます。
 
+{% comment %}
 Currently, you can only monitor Docker itself. You cannot currently monitor your
 application using the Docker target.
+{% endcomment %}
+現時点において監視できる対象は Docker そのものです。
+Docker ターゲットとしてアプリケーションを監視することは、今のところできません。
 
 
+{% comment %}
 ## Configure Docker
+{% endcomment %}
+{: #configure-docker }
+## Docker の設定
 
+{% comment %}
 To configure the Docker daemon as a Prometheus target, you need to specify the
 `metrics-address`. The best way to do this is via the `daemon.json`, which is
 located at one of the following locations by default. If the file does not
 exist, create it.
+{% endcomment %}
+Docker デーモンを Prometheus のターゲットとして設定するには、`metrics-address` を指定する必要があります。
+これを行う一番良い方法は `daemon.json` に記述することです。
+デフォルトにおいて `daemon.json` は以下に示すいずれかのディレクトリにあります。
+もしこのファイルが存在していない場合は、新規に生成します。
 
+{% comment %}
 - **Linux**: `/etc/docker/daemon.json`
 - **Windows Server**: `C:\ProgramData\docker\config\daemon.json`
 - **Docker Desktop for Mac / Docker Desktop for Windows**: Click the Docker icon in the toolbar,
   select **Preferences**, then select **Daemon**. Click **Advanced**.
+{% endcomment %}
+- **Linux**: `/etc/docker/daemon.json`
+- **Windows Server**: `C:\ProgramData\docker\config\daemon.json`
+- **Docker Desktop for Mac / Docker Desktop for Windows**:
+  ツールバーの Docker アイコンをクリック、**Preferences**、**Daemon** を選択。**Advanced** をクリック。
 
+{% comment %}
 If the file is currently empty, paste the following:
+{% endcomment %}
+このファイルが空であった場合は、以下の内容を貼り付けます。
 
 ```json
 {
@@ -41,20 +72,48 @@ If the file is currently empty, paste the following:
 }
 ```
 
+{% comment %}
 If the file is not empty, add those two keys, making sure that the resulting
 file is valid JSON. Be careful that every line ends with a comma (`,`) except
 for the last line.
+{% endcomment %}
+このファイルが空でなかった場合は、上の 2 つのキーを追加します。
+書き加えた結果は正しい JSON フォーマットでなければなりません。
+最終行を除き、各行の終わりはカンマ（`,`）が必要です。
 
+{% comment %}
 Save the file, or in the case of Docker Desktop for Mac or Docker Desktop for Windows, save the
 configuration. Restart Docker.
+{% endcomment %}
+ファイルを保存します。
+また Docker Desktop for Mac や Docker Desktop for Windows を利用している場合は、設定を保存します。
+そして Docker を再起動します。
 
+{% comment %}
 Docker now exposes Prometheus-compatible metrics on port 9323.
+{% endcomment %}
+これにより Docker は、Prometheus 互換メトリックスをポート 9323 番にて公開することになります。
 
+{% comment %}
 ## Configure and run Prometheus
+{% endcomment %}
+{: #configure-and-run-prometheus }
+## Prometheus の設定と実行
 
+{% comment %}
 Prometheus runs as a Docker service on a Docker swarm.
+{% endcomment %}
+Docker swarm 上の Docker サービスとして Prometheus を実行します。
 
+{% comment %}
 > **Prerequisites**
+>
+> 1.  One or more Docker engines are joined into a Docker swarm, using `docker swarm init`
+>     on one manager and `docker swarm join` on other managers and worker nodes.
+>
+> 2.  You need an internet connection to pull the Prometheus image.
+{% endcomment %}
+> **前提条件**
 >
 > 1.  One or more Docker engines are joined into a Docker swarm, using `docker swarm init`
 >     on one manager and `docker swarm join` on other managers and worker nodes.
@@ -62,6 +121,13 @@ Prometheus runs as a Docker service on a Docker swarm.
 > 2.  You need an internet connection to pull the Prometheus image.
 
 
+{% comment %}
+Copy one of the following configuration files and save it to
+`/tmp/prometheus.yml` (Linux or Mac) or `C:\tmp\prometheus.yml` (Windows). This
+is a stock Prometheus configuration file, except for the addition of the Docker
+job definition at the bottom of the file. Docker Desktop for Mac and Docker Desktop for Windows
+need a slightly different configuration.
+{% endcomment %}
 Copy one of the following configuration files and save it to
 `/tmp/prometheus.yml` (Linux or Mac) or `C:\tmp\prometheus.yml` (Windows). This
 is a stock Prometheus configuration file, except for the addition of the Docker
@@ -198,6 +264,9 @@ scrape_configs:
 </div><!-- tabs -->
 
 
+{% comment %}
+Next, start a single-replica Prometheus service using this configuration.
+{% endcomment %}
 Next, start a single-replica Prometheus service using this configuration.
 
 <ul class="nav nav-tabs">
@@ -240,25 +309,57 @@ PS C:\> docker service create --replicas 1 --name my-prometheus
 </div><!-- windows -->
 </div><!-- tabs -->
 
+{% comment %}
 Verify that the Docker target is listed at http://localhost:9090/targets/.
+{% endcomment %}
+http://localhost:9090/targets/ において Docker ターゲットが一覧表示されていることを確認します。
 
+{% comment %}
 ![Prometheus targets page](images/prometheus-targets.png)
+{% endcomment %}
+![Prometheus ターゲットページ](images/prometheus-targets.png)
 
+{% comment %}
+You can't access the endpoint URLs directly if you use Docker Desktop
+for Mac or Docker Desktop for Windows.
+{% endcomment %}
 You can't access the endpoint URLs directly if you use Docker Desktop
 for Mac or Docker Desktop for Windows.
 
+{% comment %}
 ## Use Prometheus
+{% endcomment %}
+{: #use-prometheus }
+## Prometheus の利用
 
+{% comment %}
 Create a graph. Click the **Graphs** link in the Prometheus UI. Choose a metric
 from the combo box to the right of the **Execute** button, and click
 **Execute**. The screenshot below shows the graph for
 `engine_daemon_network_actions_seconds_count`.
+{% endcomment %}
+グラフを生成します。
+Prometheus UI 画面の **Graphs** リンクをクリックします。
+そして **Execute** ボタンの右にあるコンボボックスからメトリックを選び **Execute** をクリックします。
+以下に示すスクリーンショットは `engine_daemon_network_actions_seconds_count` に対するグラフを示しています。
 
+{% comment %}
+![Prometheus engine_daemon_network_actions_seconds_count report](images/prometheus-graph_idle.png)
+{% endcomment %}
 ![Prometheus engine_daemon_network_actions_seconds_count report](images/prometheus-graph_idle.png)
 
+{% comment %}
+The above graph shows a pretty idle Docker instance. Your graph might look
+different if you are running active workloads.
+{% endcomment %}
 The above graph shows a pretty idle Docker instance. Your graph might look
 different if you are running active workloads.
 
+{% comment %}
+To make the graph more interesting, create some network actions by starting
+a service with 10 tasks that just ping Docker non-stop (you can change the
+ping target to anything you like):
+{% endcomment %}
 To make the graph more interesting, create some network actions by starting
 a service with 10 tasks that just ping Docker non-stop (you can change the
 ping target to anything you like):
@@ -270,11 +371,22 @@ $ docker service create \
   alpine ping docker.com
 ```
 
+{% comment %}
+Wait a few minutes (the default scrape interval is 15 seconds) and reload
+your graph.
+{% endcomment %}
 Wait a few minutes (the default scrape interval is 15 seconds) and reload
 your graph.
 
+{% comment %}
+![Prometheus engine_daemon_network_actions_seconds_count report](images/prometheus-graph_load.png)
+{% endcomment %}
 ![Prometheus engine_daemon_network_actions_seconds_count report](images/prometheus-graph_load.png)
 
+{% comment %}
+When you are ready, stop and remove the `ping_service` service, so that you
+are not flooding a host with pings for no reason.
+{% endcomment %}
 When you are ready, stop and remove the `ping_service` service, so that you
 are not flooding a host with pings for no reason.
 
@@ -282,11 +394,21 @@ are not flooding a host with pings for no reason.
 $ docker service remove ping_service
 ```
 
+{% comment %}
+Wait a few minutes and you should see that the graph falls back to the idle
+level.
+{% endcomment %}
 Wait a few minutes and you should see that the graph falls back to the idle
 level.
 
 
+{% comment %}
 ## Next steps
+{% endcomment %}
+{: #next-steps }
+## 次のステップ
 
-- Read the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/){: target="_blank" class="_" }
-- Set up some [alerts](https://prometheus.io/docs/alerting/overview/){: target="_blank" class="_" }
+{% comment %}
+{% endcomment %}
+- [Prometheus のドキュメント](https://prometheus.io/docs/introduction/overview/){: target="_blank" class="_" } を読む。
+- [警告](https://prometheus.io/docs/alerting/overview/){: target="_blank" class="_" } を設定してみる。
