@@ -54,16 +54,15 @@ any of the following:
 | フラグ           | 内容説明                                                                                        |
 |:-----------------|:------------------------------------------------------------------------------------------------|
 | `no`             | コンテナーを自動では再起動しません。（デフォルト）                                              |
-| `on-failure`     | Restart the container if it exits due to an error, which manifests as a non-zero exit code.     |
-| `always`         | Always restart the container if it stops. If it is manually stopped, it is restarted only when Docker daemon restarts or the container itself is manually restarted. (See the second bullet listed in [restart policy details](#restart-policy-details)) |
-| `unless-stopped` | Similar to `always`, except that when the container is stopped (manually or otherwise), it is not restarted even after Docker daemon restarts. |
+| `on-failure`     | エラー発生により停止したコンテナーを再起動します。非ゼロの終了コードが返ります。                |
+| `always`         | コンテナー停止時に常に再起動します。手動で停止させた場合は、Docker デーモン再起動時、あるいはコンテナーそのものが手動で再起動された場合のみ再起動します。 ([再起動ポリシーの詳細](#restart-policy-details) における 2 項めを参照してください。) |
+| `unless-stopped` | `always` と同様。ただしコンテナーが（手動またはその他によって）停止した場合は除きます。Docker デーモンが再起動した場合には再起動しません。|
 
 {% comment %}
 The following example starts a Redis container and configures it to always
 restart unless it is explicitly stopped or Docker is restarted.
 {% endcomment %}
-The following example starts a Redis container and configures it to always
-restart unless it is explicitly stopped or Docker is restarted.
+以下の例は Redis コンテナーを起動する際に、常に (always) 再起動するように設定していますが、ただし明示的に停止した場合や Docker が再起動された場合には再起動しないという設定です。
 
 ```bash
 $ docker run -dit --restart unless-stopped redis
@@ -86,28 +85,26 @@ Keep the following in mind when using restart policies:
   10 seconds and Docker has started monitoring it. This prevents a container
   which does not start at all from going into a restart loop.
 {% endcomment %}
-- A restart policy only takes effect after a container starts successfully. In
-  this case, starting successfully means that the container is up for at least
-  10 seconds and Docker has started monitoring it. This prevents a container
-  which does not start at all from going into a restart loop.
+- 再起動ポリシーが処理適用されるのは、コンテナーが正常に起動した後です。
+  この正常に起動というのは、コンテナーの起動から 10 秒以上が経過し Docker がこれを監視し始めたときです。
+  このようになっているのは、コンテナーが全く起動していないまま再起動ループに陥ることがないようにするためです。
 
 {% comment %}
 - If you manually stop a container, its restart policy is ignored until the
   Docker daemon restarts or the container is manually restarted. This is another
   attempt to prevent a restart loop.
 {% endcomment %}
-- If you manually stop a container, its restart policy is ignored until the
-  Docker daemon restarts or the container is manually restarted. This is another
-  attempt to prevent a restart loop.
+- コンテナーを手動で停止した場合は、Docker デーモンの再起動、あるいはコンテナーの手動再起動を行わない限り、再起動ポリシーは無視されます。
+  これも再起動ループを避けるための動作です。
 
 {% comment %}
 - Restart policies only apply to _containers_. Restart policies for swarm
   services are configured differently. See the
   [flags related to service restart](/engine/reference/commandline/service_create/).
 {% endcomment %}
-- Restart policies only apply to _containers_. Restart policies for swarm
-  services are configured differently. See the
-  [flags related to service restart](/engine/reference/commandline/service_create/).
+- 再起動ポリシーが適用されるのは **コンテナー** に対してのみです。
+  Swarm サービスに対する再起動ポリシーは、別の方法により設定します。
+  [service restart に対するフラグ](/engine/reference/commandline/service_create/) を参照してください。
 
 
 {% comment %}
@@ -123,11 +120,8 @@ Docker depend on Docker containers, you can use a process manager such as
 [systemd](http://freedesktop.org/wiki/Software/systemd/), or
 [supervisor](http://supervisord.org/) instead.
 {% endcomment %}
-If restart policies don't suit your needs, such as when processes outside
-Docker depend on Docker containers, you can use a process manager such as
-[upstart](http://upstart.ubuntu.com/),
-[systemd](http://freedesktop.org/wiki/Software/systemd/), or
-[supervisor](http://supervisord.org/) instead.
+Docker 外部にあるプロセスが Docker コンテナーに依存するような場合、再起動ポリシーの利用は適当ではありません。
+この場合は [upstart](http://upstart.ubuntu.com/)、[systemd](http://freedesktop.org/wiki/Software/systemd/)、[supervisor](http://supervisord.org/) といったプロセスマネージャーを利用します。
 
 {% comment %}
 > **Warning**: Do not try to combine Docker restart policies with host-level
@@ -142,10 +136,9 @@ the same `docker start` or `docker service` command you would normally use to
 start the container manually. Consult the documentation for the specific
 process manager for more details.
 {% endcomment %}
-To use a process manager, configure it to start your container or service using
-the same `docker start` or `docker service` command you would normally use to
-start the container manually. Consult the documentation for the specific
-process manager for more details.
+プロセスマネージャーを利用する場合は、普段コンテナー起動を手動で行っているときと同じコマンド
+`docker start` または `docker service` を使って、コンテナーを起動するように設定してください。
+詳しくは個々のプロセスマネージャーのドキュメントを参照してください。
 
 {% comment %}
 ### Using a process manager inside containers
@@ -165,7 +158,8 @@ running and starts/restart it if not.
 >
 > Docker does not recommend this approach, because it is platform-dependent and even differs within different versions of a given Linux distribution.
 {% endcomment %}
-> **警告**: These are not Docker-aware and just monitor operating system processes within the container.
+> **警告**: この場合は Docker が察知できる状況ではなくなり、コンテナー内のオペレーティングシステムのプロセスをただ監視するだけになります。
 >
-> Docker does not recommend this approach, because it is platform-dependent and even differs within different versions of a given Linux distribution.
+> Docker ではこの方法を推奨しません。
+> これはプラットフォームに依存する話であり、利用する Linux ディストリビューションの各バージョンによって異なるからです。
 
