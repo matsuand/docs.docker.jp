@@ -48,74 +48,6 @@ guides:
       title: イメージの管理
     - path: /develop/develop-images/baseimages/
       title: 独自イメージの構築（応用）
-- sectiontitle: ネットワーク設定
-  section:
-    - path: /network/
-      title: ネットワーク概要
-    - path: /network/bridge/
-      title: ブリッジネットワークの利用
-    - path: /network/overlay/
-      title: オーバーレイネットワークの利用
-    - path: /network/host/
-      title: ホストネットワークの利用
-    - path: /network/macvlan/
-      title: Macvlan ネットワークの利用
-    - path: /network/none/
-      title: コンテナーのネットワーク無効化
-    - sectiontitle: ネットワークチュートリアル
-      section:
-      - path: /network/network-tutorial-standalone/
-        title: ブリッジネットワークのチュートリアル
-      - path: /network/network-tutorial-host/
-        title: ホストネットワークのチュートリアル
-      - path: /network/network-tutorial-overlay/
-        title: オーバーレイネットワークのチュートリアル
-      - path: /network/network-tutorial-macvlan/
-        title: Macvlan ネットワークのチュートリアル
-    - sectiontitle: Configure the daemon and containers
-      section:
-      - path: /config/daemon/ipv6/
-        title: Configure the daemon for IPv6
-      - path: /network/iptables/
-        title: Docker and iptables
-      - path: /config/containers/container-networking/
-        title: Container networking
-      - path: /network/proxy/
-        title: Configure Docker to use a proxy server
-    - sectiontitle: Legacy networking content
-      section:
-      - path: /network/links/
-        title: コンテナーリンク（古い機能）
-- sectiontitle: アプリデータの管理
-  section:
-    - path: /storage/
-      title: ストレージ概要
-    - path: /storage/volumes/
-      title: ボリューム
-    - path: /storage/bind-mounts/
-      title: バインドマウント
-    - path: /storage/tmpfs/
-      title: tmpfs マウント
-    - path: /storage/troubleshooting_volume_errors/
-      title: ボリュームに関するトラブルシューティング
-    - sectiontitle: コンテナー内へのデータ保存
-      section:
-      - path: /storage/storagedriver/
-        title: ストレージドライバーについて
-      - path: /storage/storagedriver/select-storage-driver/
-        title: ストレージドライバーの選択
-      - path: /storage/storagedriver/aufs-driver/
-        title: AUFS ストレージドライバーの利用
-      - path: /storage/storagedriver/btrfs-driver/
-        title: Btrfs ストレージドライバーの利用
-      - path: /storage/storagedriver/device-mapper-driver/
-        title: Device mapper ストレージドライバーの利用
-      - path: /storage/storagedriver/overlayfs-driver/
-        title: OverlayFS ストレージドライバーの利用
-      - path: /storage/storagedriver/zfs-driver/
-        title: ZFS ストレージドライバーの利用
-      - path: /storage/storagedriver/vfs-driver/
-        title: VFS ストレージドライバーの利用
 - sectiontitle: 本番環境でのアプリ運用
   section:
   - sectiontitle: オーケストレーション
@@ -295,7 +227,75 @@ guides:
       - title: プラグイン設定
         path: /engine/extend/config/
       - path: /engine/extend/plugin_api/
-        title: プラグイン API
+        title: プラグイン
+  - sectiontitle: ネットワーク設定
+    section:
+    - path: /network/
+      title: ネットワーク概要
+    - path: /network/bridge/
+      title: ブリッジネットワークの利用
+    - path: /network/overlay/
+      title: オーバーレイネットワークの利用
+    - path: /network/host/
+      title: ホストネットワークの利用
+    - path: /network/macvlan/
+      title: Macvlan ネットワークの利用
+    - path: /network/none/
+      title: コンテナーのネットワーク無効化
+    - sectiontitle: ネットワークチュートリアル
+      section:
+      - path: /network/network-tutorial-standalone/
+        title: ブリッジネットワークのチュートリアル
+      - path: /network/network-tutorial-host/
+        title: ホストネットワークのチュートリアル
+      - path: /network/network-tutorial-overlay/
+        title: オーバーレイネットワークのチュートリアル
+      - path: /network/network-tutorial-macvlan/
+        title: Macvlan ネットワークのチュートリアル
+    - sectiontitle: Configure the daemon and containers
+      section:
+      - path: /config/daemon/ipv6/
+        title: Configure the daemon for IPv6
+      - path: /network/iptables/
+        title: Docker and iptables
+      - path: /config/containers/container-networking/
+        title: Container networking
+      - path: /network/proxy/
+        title: Configure Docker to use a proxy server
+    - sectiontitle: Legacy networking content
+      section:
+      - path: /network/links/
+        title: （古い機能）コンテナーリンク
+  - sectiontitle: アプリデータの管理
+    section:
+    - path: /storage/
+      title: ストレージ概要
+    - path: /storage/volumes/
+      title: ボリューム
+    - path: /storage/bind-mounts/
+      title: バインドマウント
+    - path: /storage/tmpfs/
+      title: tmpfs マウント
+    - path: /storage/troubleshooting_volume_errors/
+      title: ボリュームに関するトラブルシューティング
+    - sectiontitle: コンテナー内へのデータ保存
+      section:
+      - path: /storage/storagedriver/
+        title: ストレージドライバーについて
+      - path: /storage/storagedriver/select-storage-driver/
+        title: ストレージドライバーの選択
+      - path: /storage/storagedriver/aufs-driver/
+        title: AUFS ストレージドライバーの利用
+      - path: /storage/storagedriver/btrfs-driver/
+        title: Btrfs ストレージドライバーの利用
+      - path: /storage/storagedriver/device-mapper-driver/
+        title: Device mapper ストレージドライバーの利用
+      - path: /storage/storagedriver/overlayfs-driver/
+        title: OverlayFS ストレージドライバーの利用
+      - path: /storage/storagedriver/zfs-driver/
+        title: ZFS ストレージドライバーの利用
+      - path: /storage/storagedriver/vfs-driver/
+        title: VFS ストレージドライバーの利用
 - sectiontitle: Docker 上のオープンソース
   section:
   - path: /opensource/

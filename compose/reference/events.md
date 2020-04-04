@@ -47,6 +47,6 @@ format:
 ```
 
 {% comment %}
-The events that can be received using this can be seen [here](/engine/reference/commandline/events/#object-types).
+The events that can be received using this can be seen [here](/engine/reference/commandline/events.md#object-types).
 {% endcomment %}
-The events that can be received using this can be seen [here](/engine/reference/commandline/events/#object-types).
+The events that can be received using this can be seen [here](/engine/reference/commandline/events.md#object-types).

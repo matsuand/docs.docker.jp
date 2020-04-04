@@ -342,13 +342,13 @@ build:
 > In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
 > If you need an argument to be available in both places, also specify it under
-> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder/#understand-how-arg-and-from-interact)
+> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder.md#understand-how-arg-and-from-interact)
 > section in the documentation for usage details.
 {% endcomment %}
 > ビルド引数のスコープ
 >
 > Dockerfile にて `FROM` 命令の前に `ARG` 命令を指定した場合、`FROM` 以降のビルド命令において `ARG` の値は利用することができません。
-> `FROM` の前後どこでも、そして特に `FROM` 命令の後でもその値を利用したい場合は、[ARG と FROM の関連について](/engine/reference/builder/#understand-how-arg-and-from-interact) を参照してください。
+> `FROM` の前後どこでも、そして特に `FROM` 命令の後でもその値を利用したい場合は、[ARG と FROM の関連について](/engine/reference/builder.md#understand-how-arg-and-from-interact) を参照してください。
 
 {% comment %}
 You can omit the value when specifying a build argument, in which case its value
@@ -453,10 +453,10 @@ to determine the value to use for builds.
 > ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
 {% comment %}
-Add metadata to the resulting image using [Docker labels](/engine/userguide/labels-custom-metadata.md).
+Add metadata to the resulting image using [Docker labels](/config/labels-custom-metadata.md).
 You can use either an array or a dictionary.
 {% endcomment %}
-[Docker labels](/engine/userguide/labels-custom-metadata.md) を使ってビルドされるイメージにメタデータを追加します。
+[Docker labels](/config/labels-custom-metadata.md) を使ってビルドされるイメージにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -544,10 +544,10 @@ build:
 
 {% comment %}
 Build the specified stage as defined inside the `Dockerfile`. See the
-[multi-stage build docs](/engine/userguide/eng-image/multistage-build.md) for
+[multi-stage build docs](/develop/develop-images/multistage-build.md) for
 details.
 {% endcomment %}
-`Dockerfile` 内部に定義されている特定のステージをビルドする方法は、[マルチステージビルド](/engine/userguide/eng-image/multistage-build.md)を参照してください。
+`Dockerfile` 内部に定義されている特定のステージをビルドする方法は、[マルチステージビルド](/develop/develop-images/multistage-build.md) を参照してください。
 
 ```yaml
 build:
@@ -1139,13 +1139,13 @@ external_links:
 >
 > If you're using the [version 2 or above file format](compose-versioning.md#version-2),
 > the externally-created  containers must be connected to at least one of the same
-> networks as the service that is linking to them. [Links](compose-file-v2#links)
+> networks as the service that is linking to them. [Links](compose-file-v2.md#links)
 > are a legacy option. We recommend using [networks](#networks) instead.
 {% endcomment %}
 > **メモ**
 >
 > ファイルフォーマット [バージョン 2](compose-versioning.md#version-2) 以降を利用しているときに、外部にて生成されたコンテナーをネットワークに接続する場合は、そのコンテナーがサービスとしてリンクしているネットワークのうちの 1 つでなければなりません。
-> [Links](compose-file-v2#links) オプションは古いものなので、[networks](#networks) オプションを用いてください。
+> [Links](compose-file-v2.md#links) オプションは古いものなので、[networks](#networks) オプションを用いてください。
 
 ### extra_hosts
 
@@ -1362,10 +1362,10 @@ services:
 > The default init binary that is used is [Tini](https://github.com/krallin/tini),
 > and is installed in `/usr/libexec/docker-init` on the daemon host. You can
 > configure the daemon to use a custom init binary through the
-> [`init-path` configuration option](/engine/reference/commandline/dockerd/#daemon-configuration-file).
+> [`init-path` configuration option](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 {% endcomment %}
 > 利用されるデフォルトの init の実行モジュールは [Tini](https://github.com/krallin/tini) であり、デーモンホストの `/usr/libexec/docker-init` にインストールされています。
-> デーモンに対して独自の init 実行モジュールを設定するには、[`init-path` 設定オプション](/engine/reference/commandline/dockerd/#daemon-configuration-file) を利用します。
+> デーモンに対して独自の init 実行モジュールを設定するには、[`init-path` 設定オプション](/engine/reference/commandline/dockerd.md#daemon-configuration-file) を利用します。
 
 ### isolation
 
@@ -1389,9 +1389,9 @@ Windows では `default`, `process`, `hyperv` の設定が可能です。
 ### labels
 
 {% comment %}
-Add metadata to containers using [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either an array or a dictionary.
+Add metadata to containers using [Docker labels](/config/labels-custom-metadata.md). You can use either an array or a dictionary.
 {% endcomment %}
-[Docker labels](/engine/userguide/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+[Docker labels](/config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -1484,11 +1484,11 @@ logging:
 {% comment %}
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
-([documented here](/engine/admin/logging/overview.md)).
+([documented here](/config/containers/logging/configure.md)).
 {% endcomment %}
 `driver` 名にはサービスコンテナーにおけるロギングドライバーを指定します。
 これは docker run コマンドに対する `--log-driver` オプションと同じです。
-（[ドキュメントはこちら](/engine/admin/logging/overview.md)）
+（[ドキュメントはこちら](/config/containers/logging/configure.md)）
 
 {% comment %}
 The default value is json-file.
@@ -2001,7 +2001,7 @@ security_opt:
 {% comment %}
 Specify how long to wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whatever stop signal has been specified with
-[`stop_signal`](#stopsignal)), before sending SIGKILL. Specified
+[`stop_signal`](#stop_signal)), before sending SIGKILL. Specified
 as a [duration](#specifying-durations).
 {% endcomment %}
 コンテナーが SIGKILL を送信するまでに、SIGTERM（あるいは [`stop_signal`](#stopsignal) によって設定されたストップシグナル）をどれだけ待つかを設定します。
@@ -2127,11 +2127,11 @@ userns_mode: "host"
 
 {% comment %}
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
-See [dockerd](/engine/reference/commandline/dockerd.md#disable-user-namespace-for-a-container) for
+See [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) for
 more information.
 {% endcomment %}
 Docker デーモンにおいてユーザー名前空間が設定されていても、サービスに対してユーザー名前空間を無効にします。
-詳しくは [dockerd](/engine/reference/commandline/dockerd.md#disable-user-namespace-for-a-container) を参照してください。
+詳しくは [dockerd](/engine/reference/commandline/dockerd/#disable-user-namespace-for-a-container) を参照してください。
 
 ### volumes
 
@@ -2274,14 +2274,14 @@ volumes:
 > When creating bind mounts, using the long syntax requires the
 > referenced folder to be created beforehand. Using the short syntax
 > creates the folder on the fly if it doesn't exist.
-> See the [bind mounts documentation](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior)
+> See the [bind mounts documentation](/storage/bind-mounts.md#differences-between--v-and---mount-behavior)
 > for more information.
 {% endcomment %}
 > **Note**
 >
 > 長い文法を使ってバインドマウントを生成する際には、参照されるフォルダーをあらかじめ生成しておく必要があります。
 > 短い文法を利用する場合、そのフォルダーが存在しなければ生成されます。
-> 詳しくは [バインドマウントのドキュメント](/engine/admin/volumes/bind-mounts.md/#differences-between--v-and---mount-behavior) を参照してください。
+> 詳しくは [バインドマウントのドキュメント](/storage/bind-mounts.md#differences-between--v-and---mount-behavior) を参照してください。
 
 ### volume\_driver
 
@@ -2312,10 +2312,10 @@ volume_driver: mydriver
 
 
 {% comment %}
-See [Docker Volumes](/engine/userguide/dockervolumes.md) and
-[Volume Plugins](/engine/extend/plugins_volume.md) for more information.
+See [Docker Volumes](/storage/volumes.md) and
+[Volume Plugins](/engine/extend/plugins_volume/) for more information.
 {% endcomment %}
-詳しくは [Docker ボリューム](/engine/userguide/dockervolumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume.md) を参照してください。
+詳しくは [Docker ボリューム](/storage/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
 
 ### volumes_from
 
@@ -2515,8 +2515,11 @@ subcommand documentation for more information.
 このボリュームは、複数のサービスにわたっての再利用が可能であり、docker コマンドラインや API を使って簡単に抽出したり確認したりすることができます。
 詳しくは [docker volume](/engine/reference/commandline/volume_create.md) のサブコマンドを確認してください。
 
-See [use volumes](/engine/admin/volumes/volumes.md) and [volume
-plugins](/engine/extend/plugins_volume.md) for general information on volumes.
+{% comment %}
+See [use volumes](/storage/volumes.md) and [volume plugins](/engine/extend/plugins_volume/)
+for general information on volumes.
+{% endcomment %}
+詳しくは [Docker ボリューム](/storage/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
 
 {% comment %}
 Here's an example of a two-service setup where a database's data directory is
@@ -2666,10 +2669,10 @@ volumes:
 
 {% comment %}
 Add metadata to containers using
-[Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
+[Docker labels](/config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 {% endcomment %}
-[Docker labels](/engine/userguide/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+[Docker labels](/config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -2879,10 +2882,10 @@ you can set this option to `true`.
 
 {% comment %}
 Add metadata to containers using
-[Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
+[Docker labels](/config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 {% endcomment %}
-[Docker labels](/engine/userguide/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+[Docker labels](/config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -3041,11 +3044,11 @@ networks:
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Samples](/samples/)
-- [Command line reference](/compose/reference/)
+- [Samples](/samples/index.md)
+- [Command line reference](/compose/reference/index.md)
 {% endcomment %}
 - [ユーザーガイド](/compose/index.md)
 - [Compose のインストール](/compose/install.md)
 - [Compose ファイルのバージョンとアップグレード](compose-versioning.md)
-- [サンプル](/samples/)
-- [コマンドラインリファレンス](/compose/reference/)
+- [サンプル](/samples/index.md)
+- [コマンドラインリファレンス](/compose/reference/index.md)

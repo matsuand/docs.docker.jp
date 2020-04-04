@@ -259,8 +259,8 @@ For information on how to back up and restore data volumes, see [Backup, restore
   to run and submit diagnostics, and submit issues.
 - [FAQs](faqs.md) provide answers to frequently asked questions.
 - [Release notes](release-notes.md) lists component updates, new features, and
-  improvements associated with Stable releases. For information about Edge releases, see [Edge release
-  notes](edge-release-notes.md).
+  improvements associated with Stable releases. For information about Edge releases, see
+  [Edge release notes](edge-release-notes.md).
 - [Get started with Docker](/get-started/) provides a general Docker tutorial.
 {% endcomment %}
 * [はじめよう](index.md)では Docker Desktop on Mac の概要、基本的な Docker コマンド例、how to get help or give feedback, and links to other topics about Docker Desktop on Mac.

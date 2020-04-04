@@ -155,9 +155,9 @@ Compose と Swarm の統合に関しては、[統合に関する説明](swarm.md
 
 {% comment %}
 - [Installing Compose](install.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Command line reference](/compose/reference/index.md)
+- [Compose file reference](/compose/compose-file/index.md)
 {% endcomment %}
 - [Compose のインストール](install.md)
-- [コマンドラインリファレンス](./reference/index.md)
-- [Compose ファイルリファレンス](compose-file.md)
+- [コマンドラインリファレンス](/compose/reference/index.md)
+- [Compose ファイルリファレンス](/compose/compose-file/index.md)

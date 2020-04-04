@@ -39,14 +39,14 @@ keep image size small:
   逆に、汎用的な `ubuntu` イメージから始めて、Dockerfile 内に `openjdk` をインストールするような方法は取らないようにします。
 
 {% comment %}
-- [Use multistage builds](/engine/userguide/eng-image/multistage-build.md). For
+- [Use multistage builds](/develop/develop-images/multistage-build.md). For
   instance, you can use the `maven` image to build your Java application, then
   reset to the `tomcat` image and copy the Java artifacts into the correct
   location to deploy your app, all in the same Dockerfile. This means that your
   final image doesn't include all of the libraries and dependencies pulled in by
   the build, but only the artifacts and the environment needed to run them.
 {% endcomment %}
-- [マルチステージビルド](/engine/userguide/eng-image/multistage-build.md) を利用します。
+- [マルチステージビルド](/develop/develop-images/multistage-build.md) を利用します。
   たとえば `maven` イメージを使うと Java アプリケーションを構築することができます。
   これを `tomcat` イメージとして作り直して、Java アプリのコード類を適切な場所に配置してデプロイできるようにします。
   これをすべて同一の Dockerfile 内で行います。
@@ -78,13 +78,13 @@ keep image size small:
 
 {% comment %}
 - If you have multiple images with a lot in common, consider creating your own
-  [base image](/engine/userguide/eng-image/baseimages.md) with the shared
+  [base image](/develop/develop-images/baseimages.md) with the shared
   components, and basing your unique images on that. Docker only needs to load
   the common layers once, and they are cached. This means that your
   derivative images use memory on the Docker host more efficiently and load more
   quickly.
 {% endcomment %}
-- 共有するイメージがたくさんある場合は、[ベースイメージ](/engine/userguide/eng-image/baseimages.md) を作ることを考えてみてください。
+- 共有するイメージがたくさんある場合は、[ベースイメージ](/develop/develop-images/baseimages.md) を作ることを考えてみてください。
   これを用いてコンポーネントを共有し、これをベースとした独自のイメージを作っていくことができます。
   Docker は共通するレイヤーであれば 1 度しかロードする必要がなく、ロードした内容はキャッシュされます。
   つまりベースイメージから派生させたイメージは、Docker ホスト上でのメモリ利用が効率よく行われ、ロードもすばやく行われることになります。
@@ -116,12 +116,12 @@ keep image size small:
 
 {% comment %}
 - **Avoid** storing application data in your container's writable layer using
-  [storage drivers](/engine/userguide/storagedriver.md). This increases the
+  [storage drivers](/storage/storagedriver/select-storage-driver.md). This increases the
   size of your container and is less efficient from an I/O perspective than
   using volumes or bind mounts.
-- Instead, store data using [volumes](/engine/admin/volumes/volumes.md).
+- Instead, store data using [volumes](/storage/volumes.md).
 - One case where it is appropriate to use
-  [bind mounts](/engine/admin/volumes/bind-mounts.md) is during development,
+  [bind mounts](/storage/bind-mounts.md) is during development,
   when you may want to mount your source directory or a binary you just built
   into your container. For production, use a volume instead, mounting it into
   the same location as you mounted a bind mount during development.
@@ -131,10 +131,10 @@ keep image size small:
   standalone containers, consider migrating to use single-replica services, so
   that you can take advantage of these service-only features.
 {% endcomment %}
-- [ストレージドライバー](/engine/userguide/storagedriver.md) によって、コンテナーの書き込み可能レイヤーへデータ保存を行うことができますが、アプリケーションデータの保存を行うことは**避けます**。
+- [ストレージドライバー](/storage/storagedriver/select-storage-driver.md) によって、コンテナーの書き込み可能レイヤーへデータ保存を行うことができますが、アプリケーションデータの保存を行うことは**避けます**。
   これを行ってしまうと、コンテナーのサイズが増えることになり、I/O 観点で言えば、ボリュームやバインドマウントを用いることに比べて非効率なものになります。
-- そのかわりに、データ保存は [ボリューム](/engine/admin/volumes/volumes.md) を利用します。
-- [バインドマウント](/engine/admin/volumes/bind-mounts.md) を用いるのが適当な例として、開発時での利用が考えられます。
+- そのかわりに、データ保存は [ボリューム](/storage/volumes.md) を利用します。
+- [バインドマウント](/storage/bind-mounts.md) を用いるのが適当な例として、開発時での利用が考えられます。
   開発時には、ソースディレクトリや生成したばかりのバイナリを、コンテナー内にマウントしたくなります。
   本番環境ではボリュームを利用しますが、本番環境がマウントする同じ場所を、開発環境時はバインドマウントによりマウントします。
 - 本番環境において、サービスが機密情報を利用している場合、その保存には [secrets](/engine/swarm/secrets.md) を利用します。そして機密情報ではない設定ファイルなどの情報は [configs](/engine/swarm/configs.md) を利用します。
@@ -150,11 +150,11 @@ keep image size small:
 
 {% comment %}
 - When you check a change into source control or create a pull request, use
-  [Docker Hub](/docker-hub/builds/automated-build.md) or
+  [Docker Hub](/docker-hub/builds/index.md) or
   another CI/CD pipeline to automatically build and tag a Docker image and test
   it.
 {% endcomment %}
-- ソース管理上の変更を確認したりプルリクエストを生成したりする場合には、[Docker Hub](/docker-hub/builds/automated-build.md) やこれに似た別の CI/CD を利用し、自動的なイメージビルド、タグづけ、テストを行うようにしてください。
+- ソース管理上の変更を確認したりプルリクエストを生成したりする場合には、[Docker Hub](/docker-hub/builds/index.md) やこれに似た別の CI/CD を利用し、自動的なイメージビルド、タグづけ、テストを行うようにしてください。
 
 {% comment %}
 - Take this even further with [Docker Engine - Enterprise](/ee/index.md) by requiring

@@ -62,9 +62,9 @@ Docker をインストールしたら Docker デーモンを起動する必要�
 
 {% comment %}
 If you want Docker to start at boot, see
-[Configure Docker to start on boot](/install/linux/linux-postinstall.md/#configure-docker-to-start-on-boot).
+[Configure Docker to start on boot](/install/linux/linux-postinstall.md#configure-docker-to-start-on-boot).
 {% endcomment %}
-Docker をシステムブート時に起動したい場合は [システムブート時の Docker 起動設定](/install/linux/linux-postinstall.md/#configure-docker-to-start-on-boot) を参照してください。
+Docker をシステムブート時に起動したい場合は [システムブート時の Docker 起動設定](/install/linux/linux-postinstall.md#configure-docker-to-start-on-boot) を参照してください。
 
 {% comment %}
 ## Custom Docker daemon options
@@ -76,12 +76,12 @@ Docker をシステムブート時に起動したい場合は [システムブ�
 There are a number of ways to configure the daemon flags and environment variables
 for your Docker daemon. The recommended way is to use the platform-independent
 `daemon.json` file, which is located in `/etc/docker/` on Linux by default. See
-[Daemon configuration file](/engine/reference/commandline/dockerd.md/#daemon-configuration-file).
+[Daemon configuration file](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
 {% endcomment %}
 Docker デーモンに対してのデーモンフラグや環境変数を設定する方法はいろいろあります。
 推奨されるのは、プラットフォームに依存しない `daemon.json` ファイルを用いる方法です。
 この `daemon.json` ファイルは Linux においてはデフォルトで `/etc/docker/` に置かれます。
-詳しくは [デーモン設定ファイル](/engine/reference/commandline/dockerd.md/#daemon-configuration-file) を参照してください。
+詳しくは [デーモン設定ファイル](/engine/reference/commandline/dockerd.md#daemon-configuration-file) を参照してください。
 
 {% comment %}
 You can configure nearly all daemon configuration options using `daemon.json`. The following
@@ -286,8 +286,7 @@ See
 {% comment %}
 When installing the binary without a package, you may want
 to integrate Docker with systemd. For this, install the two unit files
-(`service` and `socket`) from [the github
-repository](https://github.com/moby/moby/tree/master/contrib/init/systemd)
+(`service` and `socket`) from [the github repository](https://github.com/moby/moby/tree/master/contrib/init/systemd)
 to `/etc/systemd/system`.
 {% endcomment %}
 パッケージを利用せずにインストールを行った場合は、systemd を用いた Docker の設定が必要になるはずです。

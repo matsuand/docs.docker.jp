@@ -198,15 +198,15 @@ in an environment file.
 
 {% comment %}
 For an example of using the `-f` option at the command line, suppose you are
-running the [Compose Rails sample](/compose/rails/), and
+running the [Compose Rails sample](/compose/rails.md), and
 have a `docker-compose.yml` file in a directory called `sandbox/rails`. You can
-use a command like [docker-compose pull](/compose/reference/pull.md) to get the
+use a command like [docker-compose pull](pull.md) to get the
 postgres image for the `db` service from anywhere by using the `-f` flag as
 follows: `docker-compose -f ~/sandbox/rails/docker-compose.yml pull db`
 {% endcomment %}
-コマンドラインから `-f` オプションを利用する例として、[Compose Rails サンプル](/compose/rails/)を利用しているとします。
+コマンドラインから `-f` オプションを利用する例として、[Compose Rails サンプル](/compose/rails.md) を利用しているとします。
 そして `sandbox/rails` というディレクトリに `docker-compose.yml` があるとします。
-[docker-compose pull](/compose/reference/pull.md) のようなコマンドを使って、`db` サービスにおける postgres イメージをどこからでも取得できるようにするには、`-f` フラグを使って以下のようにします。
+[docker-compose pull](pull.md) のようなコマンドを使って、`db` サービスにおける postgres イメージをどこからでも取得できるようにするには、`-f` フラグを使って以下のようにします。
 `docker-compose -f ~/sandbox/rails/docker-compose.yml pull db`
 
 {% comment %}
@@ -244,8 +244,7 @@ Status: Downloaded newer image for postgres:latest
 {% comment %}
 Each configuration has a project name. If you supply a `-p` flag, you can
 specify a project name. If you don't specify the flag, Compose uses the current
-directory name. See also the [COMPOSE_PROJECT_NAME environment variable](
-envvars.md#compose_project_name).
+directory name. See also the [COMPOSE_PROJECT_NAME environment variable](envvars.md#compose_project_name).
 {% endcomment %}
 個々の設定ファイルにはプロジェクト名があります。
 `-p` フラグを用いると、プロジェクト名を指定することができます。
@@ -266,15 +265,14 @@ You can set [environment variables](envvars.md) for various
 
 {% comment %}
 For example, the [COMPOSE_FILE environment variable](envvars.md#compose_file)
-relates to the `-f` flag, and [COMPOSE_PROJECT_NAME environment
-variable](envvars.md#compose_project_name) relates to the `-p` flag.
+relates to the `-f` flag, and `COMPOSE_PROJECT_NAME`
+[environment variable](envvars.md#compose_project_name) relates to the `-p` flag.
 {% endcomment %}
 たとえば[環境変数 COMPOSE_FILE](envvars.md#compose_file) は `-f` フラグに関連づいています。
 また[環境変数 COMPOSE_PROJECT_NAME](envvars.md#compose_project_name) は `-p` フラグに関連づいています。
 
 {% comment %}
-Also, you can set some of these variables in an [environment
-file](/compose/env-file.md).
+Also, you can set some of these variables in an [environment file](/compose/env-file.md).
 {% endcomment %}
 また環境変数の中には[環境ファイル](/compose/env-file.md)において設定できるものもあります。
 

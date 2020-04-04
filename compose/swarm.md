@@ -15,10 +15,10 @@ Docker Compose と [Docker Swarm](/swarm/overview.md) は完全な統合を目�
 このことは Compose アプリといえば Swarm クラスターのことを指すものであって、これらすべてが一つになり、まるで単一の Docker ホストを使っているかのように動作することを意味します。
 
 {% comment %}
-The actual extent of integration depends on which version of the [Compose file
-format](compose-file.md#versioning) you are using:
+The actual extent of integration depends on which version of the
+[Compose file format](/compose/compose-file/compose-versioning.md) you are using:
 {% endcomment %}
-実際の統合の程度に関しては [Compose ファイルフォーマット](compose-file.md#versioning)のどのバージョンを用いるかによって変わります。
+実際の統合の程度に関しては [Compose ファイルフォーマット](/compose/compose-file/compose-versioning.md) のどのバージョンを用いるかによって変わります。
 
 {% comment %}
 1.  If you're using version 1 along with `links`, your app works, but Swarm
@@ -39,16 +39,16 @@ format](compose-file.md#versioning) you are using:
     - [制約](swarm.md#limitations)に関しては後述しています。
 
     {% comment %}
-    - as long as the Swarm cluster is configured to use the [overlay driver](/engine/userguide/networking/#an-overlay-network-with-docker-engine-swarm-mode),
+    - as long as the Swarm cluster is configured to use the [overlay driver](/network/overlay.md),
       or a custom driver which supports multi-host networking.
     {% endcomment %}
-    - スウォームクラスターの設定において[オーバーレイドライバー](/engine/userguide/networking/#an-overlay-network-with-docker-engine-swarm-mode)を利用するか、あるいはマルチホストネットワーキングをサポートするカスタムドライバーを利用することが前提です。
+    - スウォームクラスターの設定において[オーバーレイドライバー](/network/overlay.md) を利用するか、あるいはマルチホストネットワーキングをサポートするカスタムドライバーを利用することが前提です。
 
 {% comment %}
-Read [Get started with multi-host networking](/engine/userguide/networking/get-started-overlay/) to see how to
+Read [Get started with multi-host networking](/network/network-tutorial-overlay.md) to see how to
 set up a Swarm cluster with [Docker Machine](/machine/overview.md) and the overlay driver. Once you've got it running, deploying your app to it should be as simple as:
 {% endcomment %}
-[マルチホストネットワーキングをはじめよう](/engine/userguide/networking/get-started-overlay/)を読むと、[Docker Machine](/machine/overview.md) を使ったスウォームクラスターやオーバーレイドライバーの設定方法がわかります。
+[マルチホストネットワーキングをはじめよう](/network/network-tutorial-overlay.md) を読むと、[Docker Machine](/machine/overview.md) を使ったスウォームクラスターやオーバーレイドライバーの設定方法がわかります。
 稼動させてしまえば、アプリをデプロイすることは以下のように簡単にできます。
 
     $ eval "$(docker-machine env --swarm <name of swarm master machine>)"
@@ -100,12 +100,12 @@ Compose を使ってサービスを複数ノードにスケーリングしたい
 
 {% comment %}
 If a service has multiple dependencies of the type which force co-scheduling
-(see [Automatic scheduling](swarm.md#automatic-scheduling) below), it's possible that
+(see [Automatic scheduling](#automatic-scheduling) below), it's possible that
 Swarm schedules the dependencies on different nodes, making the dependent
 service impossible to schedule. For example, here `foo` needs to be co-scheduled
 with `bar` and `baz`:
 {% endcomment %}
-同期スケジュール（後述の[自動スケジューリング](swarm.md#automatic-scheduling)参照）を必要とする依存パッケージがサービス内に複数ある場合、スウォームではサービスを異なるノード上で稼動させることにして、依存する他サービスのスケジューリングを行わないようにすることで、全体のスケジューリングを実現することが可能です。
+同期スケジュール（後述の[自動スケジューリング](#automatic-scheduling) 参照）を必要とする依存パッケージがサービス内に複数ある場合、スウォームではサービスを異なるノード上で稼動させることにして、依存する他サービスのスケジューリングを行わないようにすることで、全体のスケジューリングを実現することが可能です。
 たとえば `foo` というサービスが `bar` と `baz` と同期スケジューリングする必要がある場合には、以下のようにします。
 
     version: "2"
@@ -128,10 +128,10 @@ pick an appropriate node for `foo`.
 このときには `foo` に割り当てるべき適切なノードが存在しない状態となってしまいます。
 
 {% comment %}
-To work around this, use [manual scheduling](swarm.md#manual-scheduling) to ensure that
+To work around this, use [manual scheduling](#manual-scheduling) to ensure that
 all three services end up on the same node:
 {% endcomment %}
-これを解決するには[手動スケジューリング](swarm.md#manual-scheduling)を用いて、3 つのサービスがすべて同一ノード上で稼動するようにします。
+これを解決するには[手動スケジューリング](#manual-scheduling) を用いて、3 つのサービスがすべて同一ノード上で稼動するようにします。
 
     version: "2"
     services:
@@ -279,7 +279,7 @@ Swarm では豊富なスケジュール機能や affinity フィルターを提�
       - "affinity:image==redis"
 
 {% comment %}
-For the full set of available filters and expressions, see the [Swarm
-documentation](/swarm/scheduler/filter.md).
+For the full set of available filters and expressions, see the
+[Swarm documentation](/swarm/scheduler/filter.md).
 {% endcomment %}
-利用可能なフィルターや記述書式については [Swarm ドキュメント](/swarm/scheduler/filter.md)を参照してください。
+利用可能なフィルターや記述書式については [Swarm ドキュメント](/swarm/scheduler/filter.md) を参照してください。

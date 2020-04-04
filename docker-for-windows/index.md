@@ -307,8 +307,8 @@ Updating these settings requires a reconfiguration and reboot of the Linux VM.
 
 The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.
 
-Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine [dockerd commandline
-reference](/engine/reference/commandline/dockerd.md){:target="_blank"
+Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
+[dockerd commandline reference](/engine/reference/commandline/dockerd.md){:target="_blank"
 class="_"}.
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
@@ -371,11 +371,11 @@ Docker Desktop includes a standalone Kubernetes server that runs on your Windows
 The Kubernetes client command, `kubectl`, is included and configured to connect
 to the local Kubernetes server. If you have `kubectl` already installed and
 pointing to some other environment, such as `minikube` or a GKE cluster, be sure
-to change context so that `kubectl` is pointing to `docker-for-desktop`:
+to change context so that `kubectl` is pointing to `docker-desktop`:
 
 ```bash
 > kubectl config get-contexts
-> kubectl config use-context docker-for-desktop
+> kubectl config use-context docker-desktop
 ```
 
  To enable Kubernetes support and install a standalone instance of Kubernetes

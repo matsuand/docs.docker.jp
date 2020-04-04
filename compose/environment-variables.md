@@ -31,10 +31,10 @@ web:
 
 {% comment %}
 For more information, see the
-[Variable substitution](compose-file.md#variable-substitution) section in the
+[Variable substitution](/compose/compose-file/index.md#variable-substitution) section in the
 Compose file reference.
 {% endcomment %}
-詳しくは Compose ファイルリファレンスの[変数の置換](compose-file.md#variable-substitution)の項を参照してください。
+詳しくは Compose ファイルリファレンスの[変数の置換](/compose/compose-file/index.md#variable-substitution) の項を参照してください。
 
 
 {% comment %}
@@ -45,10 +45,10 @@ Compose file reference.
 
 {% comment %}
 You can set environment variables in a service's containers with the
-['environment' key](compose-file.md#environment), just like with
+['environment' key](/compose/compose-file/index.md#environment), just like with
 `docker run -e VARIABLE=VALUE ...`:
 {% endcomment %}
-サービスコンテナーにおいて、たとえば`docker run -e VARIABLE=VALUE ...`のように[`environment`キー](compose-file.md#environment)を使って、環境変数を設定することができます。
+サービスコンテナーにおいて、たとえば`docker run -e VARIABLE=VALUE ...`のように[`environment`キー](/compose/compose-file/index.md#environment) を使って、環境変数を設定することができます。
 
 ```yaml
 web:
@@ -64,10 +64,10 @@ web:
 
 {% comment %}
 You can pass environment variables from your shell straight through to a
-service's containers with the ['environment' key](compose-file.md#environment)
+service's containers with the ['environment' key](/compose/compose-file/index.md#environment)
 by not giving them a value, just like with `docker run -e VARIABLE ...`:
 {% endcomment %}
-シェル内の環境変数を[`environment`キー](compose-file.md#environment)を使って、直接サービスコンテナーに受け渡すことができます。この場合には値を渡すのではなく`docker run -e 変数名 ...`のようにできます。
+シェル内の環境変数を[`environment`キー](/compose/compose-file/index.md#environment) を使って、直接サービスコンテナーに受け渡すことができます。この場合には値を渡すのではなく`docker run -e 変数名 ...`のようにできます。
 
 ```yaml
 web:
@@ -90,10 +90,10 @@ the same variable in the shell in which Compose is run.
 
 {% comment %}
 You can pass multiple environment variables from an external file through to
-a service's containers with the ['env_file' option](compose-file.md#env_file),
+a service's containers with the ['env_file' option](/compose/compose-file/index.md#env_file),
 just like with `docker run --env-file=FILE ...`:
 {% endcomment %}
-外部ファイルから複数の環境変数をサービスコンテナーに受け渡すには [``env_file``オプション](compose-file.md#env_file)を利用することができます。
+外部ファイルから複数の環境変数をサービスコンテナーに受け渡すには [``env_file``オプション](/compose/compose-file/index.md#env_file) を利用することができます。
 `docker run --env-file=FILE ...`のようにすることもできます。
 
 ```yaml
@@ -288,13 +288,13 @@ Docker Compose のコマンドラインからの処理設定を行うことが�
 {: #environment-variables-created-by-links }
 
 {% comment %}
-When using the ['links' option](compose-file.md#links) in a
-[v1 Compose file](compose-file.md#version-1), environment variables are created
+When using the ['links' option](/compose/compose-file/index.md#links) in a
+[v1 Compose file](/compose/compose-file/index.md#version-1), environment variables are created
 for each link. They are documented in
 the [Link environment variables reference](link-env-deprecated.md).
 {% endcomment %}
-[Compose ファイルバージョン 1](compose-file.md#version-1) における[`links`オプション](compose-file.md#links)を用いると、各リンクに対する環境変数が生成されます。
-このことは[リンク環境変数リファレンス](link-env-deprecated.md)において説明しています。
+[Compose ファイルバージョン 1](/compose/compose-file/index.md#version-1) における[`links`オプション](/compose/compose-file/index.md#links) を用いると、各リンクに対する環境変数が生成されます。
+このことは [リンク環境変数リファレンス](link-env-deprecated.md) において説明しています。
 
 {% comment %}
 However, these variables are deprecated. Use the link alias as a hostname instead.

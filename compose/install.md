@@ -149,10 +149,10 @@ Docker デーモンや Docker クライアントを Windows Server 上で直接�
 
 {% comment %}
 Follow these instructions if you are running the Docker daemon and client directly
-on Microsoft Windows Server with [Docker Engine - Enterprise](/install/windows/docker-ee.md),
+on Microsoft Windows Server with [Docker Engine - Enterprise](/ee/docker-ee/windows/docker-ee.md),
 and want to install Docker Compose.
 {% endcomment %}
-Docker デーモンや Docker クライアントを Windows Server 上で [Docker Engine - Enterprise](/install/windows/docker-ee.md) を使って直接起動している場合、および Docker Compose をインストールしたい場合は、以下の手順に従ってください。
+Docker デーモンや Docker クライアントを Windows Server 上で [Docker Engine - Enterprise](/ee/docker-ee/windows/docker-ee.md) を使って直接起動している場合、および Docker Compose をインストールしたい場合は、以下の手順に従ってください。
 
 
 {% comment %}
@@ -217,10 +217,11 @@ Docker デーモンや Docker クライアントを Windows Server 上で [Docke
 {: #install-compose-on-linux-systems }
 
 {% comment %}
-On Linux, you can download the Docker Compose binary from the [Compose
-repository release page on GitHub](https://github.com/docker/compose/releases){:
-target="_blank" class="_"}. Follow the instructions from the link, which involve
-running the `curl` command in your terminal to download the binaries. These step-by-step instructions are also included below.
+On Linux, you can download the Docker Compose binary from the
+[Compose repository release page on GitHub](https://github.com/docker/compose/releases){:target="_blank" class="_"}.
+Follow the instructions from the link, which involve running the `curl` command
+in your terminal to download the binaries. These step-by-step instructions are
+also included below.
 {% endcomment %}
 Linux の場合は、[GitHub 上の Compose リポジトリのリリースページ](https://github.com/docker/compose/releases){:target="_blank" class="_"} から Docker Compose の実行バイナリをダウンロードします。
 リンク先の手順では、端末画面上から `curl` コマンドを使ってダウンロードを行います。
@@ -506,7 +507,7 @@ pip uninstall docker-compose
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
 - [Command line reference](/compose/reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Compose file reference](/compose/compose-file/index.md)
 {% endcomment %}
 - [ユーザーガイド](index.md)
 - [Compose をはじめよう](gettingstarted.md)
@@ -514,4 +515,4 @@ pip uninstall docker-compose
 - [Rails を使ってはじめよう](rails.md)
 - [WordPress を使ってはじめよう](wordpress.md)
 - [コマンドラインリファレンス](/compose/reference/index.md)
-- [Compose ファイルリファレンス](compose-file.md)
+- [Compose ファイルリファレンス](/compose/compose-file/index.md)

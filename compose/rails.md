@@ -48,13 +48,12 @@ Dockerfile consists of:
 {% comment %}
 That'll put your application code inside an image that builds a container
 with Ruby, Bundler and all your dependencies inside it. For more information on
-how to write Dockerfiles, see the [Docker user
-guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
-and the [Dockerfile reference](/engine/reference/builder.md).
+how to write Dockerfiles, see the [Docker user guide](/get-started/index.md)
+and the [Dockerfile reference](/engine/reference/builder/).
 {% endcomment %}
 上の設定はイメージ内部にアプリケーションコードを置きます。
 このイメージは Ruby、Bundler などの依存パッケージすべてをコンテナー内部に含めてビルドされます。
-Dockerfile の記述方法の詳細は [Docker ユーザーガイド](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile) や [Dockerfile リファレンス](/engine/reference/builder.md) を参照してください。
+Dockerfile の記述方法の詳細は [Docker ユーザーガイド](/get-started/index.md) や [Dockerfile リファレンス](/engine/reference/builder/) を参照してください。
 
 {% comment %}
 Next, create a bootstrap `Gemfile` which just loads Rails. It'll be overwritten
@@ -149,9 +148,9 @@ to link them together and expose the web app's port.
 
 {% comment %}
 With those files in place, you can now generate the Rails skeleton app
-using [docker-compose run](/compose/reference/run/):
+using [docker-compose run](/compose/reference/run.md):
 {% endcomment %}
-ここまでのファイルを使って [docker-compose run](/compose/reference/run/) を実行し、Rails アプリのひながたを生成します。
+ここまでのファイルを使って [docker-compose run](/compose/reference/run.md) を実行し、Rails アプリのひながたを生成します。
 
     docker-compose run web rails new . --force --no-deps --database=postgresql
 
@@ -265,9 +264,9 @@ test:
 ```
 
 {% comment %}
-You can now boot the app with [docker-compose up](/compose/reference/up/):
+You can now boot the app with [docker-compose up](/compose/reference/up.md):
 {% endcomment %}
-[docker-compose up](/compose/reference/up/) によりアプリを起動します。
+[docker-compose up](/compose/reference/up.md) によりアプリを起動します。
 
     docker-compose up
 
@@ -349,12 +348,12 @@ MACHINE_VM` returns the Docker host IP address, to which you can append the port
 {: #stop-the-application }
 
 {% comment %}
-To stop the application, run [docker-compose down](/compose/reference/down/) in
+To stop the application, run [docker-compose down](/compose/reference/down.md) in
 your project directory. You can use the same terminal window in which you
 started the database, or another one where you have access to a command prompt.
 This is a clean way to stop the application.
 {% endcomment %}
-アプリケーションを停止するには、プロジェクトディレクトリにおいて [docker-compose down](/compose/reference/down/) を実行します。
+アプリケーションを停止するには、プロジェクトディレクトリにおいて [docker-compose down](/compose/reference/down.md) を実行します。
 この場合に用いる端末画面は、データベースを起動したときと同じものを用いるか、あるいはコマンドプロンプトにアクセスできる別画面であっても構いません。
 これがアプリケーションを適切に停止する方法です。
 
@@ -439,13 +438,13 @@ host.
 - [Getting Started](gettingstarted.md)
 - [Get started with Django](django.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Command line reference](/compose/reference/index.md)
+- [Compose file reference](/compose/compose-file/index.md)
 {% endcomment %}
 - [ユーザーガイド](index.md)
 - [Compose のインストール](install.md)
 - [はじめよう](gettingstarted.md)
 - [Django を使ってはじめよう](django.md)
 - [WordPress を使ってはじめよう](wordpress.md)
-- [コマンドラインリファレンス](./reference/index.md)
-- [Compose ファイルリファレンス](compose-file.md)
+- [コマンドラインリファレンス](/compose/reference/index.md)
+- [Compose ファイルリファレンス](/compose/compose-file/index.md)

@@ -21,9 +21,9 @@ understandable even if you're not familiar with it.
 ## 前提条件
 
 {% comment %}
-Make sure you have already installed both [Docker Engine](/install/index.md) and [Docker
-Compose](install.md). You don't need to install Python or Redis, as both are
-provided by Docker images.
+Make sure you have already installed both [Docker Engine](/install/index.md)
+and [Docker Compose](install.md). You don't need to install Python or Redis, as
+both are provided by Docker images.
 {% endcomment %}
 [Docker Engine](/install/index.md) と [Docker Compose](install.md) をインストールしておいてください。
 Python や Redis はインストールする必要はありません。
@@ -168,11 +168,11 @@ This tells Docker to:
 * コンテナーに対するデフォルトのコマンドを `flask run` にする
 
 {% comment %}
-For more information on how to write Dockerfiles, see the [Docker user
-guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
-and the [Dockerfile reference](/engine/reference/builder.md).
+For more information on how to write Dockerfiles, see the
+[Docker user guide](/develop/index.md)
+and the [Dockerfile reference](/engine/reference/builder/).
 {% endcomment %}
-Dockerfile の書き方の詳細については、 [Docker ユーザーガイド](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile>)や [Dockerfile リファレンス](/engine/reference/builder.md)をご覧ください。
+Dockerfile の書き方の詳細については、[Docker ユーザーガイド](/develop/index.md)や [Dockerfile リファレンス](/engine/reference/builder/) をご覧ください。
 
 
 {% comment %}
@@ -365,9 +365,10 @@ hitting CTRL+C in the original terminal where you started the app.
 ## ステップ 5: Compose ファイルにバインドマウントを追加
 
 {% comment %}
-Edit `docker-compose.yml` in your project directory to add a [bind mount](/engine/admin/volumes/bind-mounts.md) for the `web` service:
+Edit `docker-compose.yml` in your project directory to add a
+[bind mount](/storage/bind-mounts.md) for the `web` service:
 {% endcomment %}
-プロジェクトディレクトリ内にある `docker-compose.yml` を編集して、`web` サービスへの[バインドマウント](/engine/admin/volumes/bind-mounts.md)を追加します。
+プロジェクトディレクトリ内にある `docker-compose.yml` を編集して、`web` サービスへの [バインドマウント](/storage/bind-mounts.md) を追加します。
 
     version: '3'
     services:
@@ -434,11 +435,10 @@ If you get runtime errors indicating an application file is not found, a volume
 mount is denied, or a service cannot start, try enabling file or drive sharing.
 Volume mounting requires shared drives for projects that live outside of
 `C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
-Docker Desktop for Windows that uses [Linux
-containers](/docker-for-windows/#switch-between-windows-and-linux-containers-beta-feature). For more information, see [Shared Drives](../docker-for-windows/#shared-drives)
-on Docker Desktop for Windows, [File sharing](../docker-for-mac/#file-sharing) on Docker
-for Mac, and the general examples on how to [Manage data in
-containers](../engine/tutorials/dockervolumes.md).
+Docker Desktop for Windows that uses [Linux containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers).
+For more information, see [File sharing](/docker-for-mac/index.md#file-sharing) on Docker
+for Mac, and the general examples on how to
+> [Manage data in containers](/storage/volumes.md).
 >
 > * If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
 ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
@@ -451,9 +451,9 @@ need VirtualBox.
 > * プロジェクトを `Users` ディレクトリ（`cd ~`）以外に置いている場合、利用している Dockerfile やボリュームのドライブ、ディレクトリは、共有できるようにしておく必要があります。
 >   実行時に、アプリケーションファイルが見つからない、ボリュームマウントが拒否される、サービスが起動できない、といったランタイムエラーが発生した場合は、ファイルやドライブを共有にすることを試してください。
 >   `C:\Users`（Windows の場合）または `/Users`（Mac の場合）ではないディレクトリにあるプロジェクトがある場合は、ボリュームマウントを共有ドライブにする必要があります。
->   これはまた、[Linux コンテナー](/docker-for-windows/#switch-between-windows-and-linux-containers-beta-feature)を利用する Docker Desktop  for Windows のプロジェクトでも同様です。
->   詳しくは Docker Desktop for Windows における[共有ドライブ](../docker-for-windows/#shared-drives)や Docker for Mac における[ファイル共有](../docker-for-mac/#file-sharing)を参照してください。
->   また一般的な利用例に関しては[コンテナーでデータ管理](../engine/tutorials/dockervolumes)を参照してください。
+>   これはまた、[Linux コンテナー](/docker-for-windows/index.md#switch-between-windows-and-linux-containers) を利用する Docker Desktop  for Windows のプロジェクトでも同様です。
+>   詳しくは Docker for Mac における [ファイル共有](/docker-for-mac/index.md#file-sharing) を参照してください。
+>   また一般的な利用例に関しては [コンテナーでデータ管理](/storage/volumes.md) を参照してください。
 >
 > * 比較的古い Windows OS 上において Oracle VirtualBox を利用している場合は、[VB trouble ticket](https://www.virtualbox.org/ticket/14920) に示されている共有フォルダに関する問題が起こるかもしれません。
 >   より新しい Windows システムであれば、[Docker Desktop for Windows](/docker-for-windows/install.md) の要件を満たすため、VirtualBox は必要としません。
@@ -567,12 +567,12 @@ At this point, you have seen the basics of how Compose works.
 
 {% comment %}
 - Next, try the quick start guide for [Django](django.md),
-  [Rails](rails.md), or [WordPress](/samples/library/wordpress/)
-- [Explore the full list of Compose commands](./reference/)
-- [Compose configuration file reference](compose-file/)
-- To learn more about volumes and bind mounts, see [Manage data in Docker](/engine/admin/volumes/index.md)
+  [Rails](rails.md), or [WordPress](wordpress.md)
+- [Explore the full list of Compose commands](/compose/reference/index.md)
+- [Compose configuration file reference](/compose/compose-file/index.md)
+- To learn more about volumes and bind mounts, see [Manage data in Docker](/storage/index.md)
 {% endcomment %}
-- 次は [Django](django.md)、[Rails](rails.md)、[WordPress](/samples/library/wordpress/) のクイックスタートを試してみましょう。
-- [Compose コマンドの全一覧](./reference/)
-- [Compose ファイルリファレンス](compose-file/)
-- ボリュームやバインドマウントについての詳細は、[Docker でのデータ管理](/engine/admin/volumes/index.md)を参照してください。
+- 次は [Django](django.md)、[Rails](rails.md)、[WordPress](wordpress.md) のクイックスタートを試してみましょう。
+- [Compose コマンドの全一覧](/compose/reference/index.md)
+- [Compose ファイルリファレンス](/compose/compose-file/index.md)
+- ボリュームやバインドマウントについての詳細は、[Docker でのデータ管理](/storage/index.md) を参照してください。

@@ -8,7 +8,7 @@ title: "クィックスタート: Compose と WordPress"
 You can use Docker Compose to easily run WordPress in an isolated environment
 built with Docker containers. This quick-start guide demonstrates how to use
 Compose to set up and run WordPress. Before starting, make sure you have
-[Compose installed](/compose/install.md).
+[Compose installed](install.md).
 {% endcomment %}
 Docker Compose を使うと、Docker コンテナーとして生成される独立した環境内にて WordPress を簡単に実現することができます。
 このクイックスタートガイドは、Docker Compose を使った WordPress の設定と実行方法を示すものです。
@@ -104,7 +104,7 @@ Docker Compose を使うと、Docker コンテナーとして生成される独�
    > **Notes**:
    >
    * The docker volume `db_data` persists any updates made by WordPress
-   to the database. [Learn more about docker volumes](/engine/admin/volumes/volumes/)
+   to the database. [Learn more about docker volumes](/storage/volumes.md)
    >
    * WordPress Multisite works only on ports `80` and `443`.
    {: .note-vanilla}
@@ -112,7 +112,7 @@ Docker Compose を使うと、Docker コンテナーとして生成される独�
    > **メモ**:
    >
    * Docker ボリューム `db_data` は、WordPress 上から実行されるデータ更新をデータベースに保存します。
-   > 詳細は [Docker ボリューム](/engine/admin/volumes/volumes/) を参照してください。
+   > 詳細は [Docker ボリューム](/storage/volumes.md) を参照してください。
    >
    * WordPress のマルチサイトは、ポート `80` と `443` 上においてのみ動作します。
    {: .note-vanilla}
@@ -129,11 +129,11 @@ Now, run `docker-compose up -d` from your project directory.
 プロジェクトディレクトリ上にて `docker-compose up -d` を実行します。
 
 {% comment %}
-This runs [`docker-compose up`](/compose/reference/up/) in detached mode, pulls
+This runs [`docker-compose up`](/compose/reference/up.md) in detached mode, pulls
 the needed Docker images, and starts the wordpress and database containers, as shown in
 the example below.
 {% endcomment %}
-これはデタッチモードにより [`docker-compose up`](/compose/reference/up/) を実行し、必要な Docker イメージがあれば取得します。
+これはデタッチモードにより [`docker-compose up`](/compose/reference/up.md) を実行し、必要な Docker イメージがあれば取得します。
 そして WordPress と データベースの両コンテナーを起動します。
 たとえば以下のようになります。
 

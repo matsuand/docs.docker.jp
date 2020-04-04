@@ -80,9 +80,9 @@ A `docker-compose.yml` looks like this:
 
 {% comment %}
 For more information about the Compose file, see the
-[Compose file reference](compose-file/index.md).
+[Compose file reference](/compose/compose-file/index.md).
 {% endcomment %}
-Compose ファイルに関するさらに詳しい情報は、[Compose ファイルリファレンス](compose-file/index.md)をご覧ください。
+Compose ファイルに関するさらに詳しい情報は、[Compose ファイルリファレンス](/compose/compose-file/index.md) をご覧ください。
 
 {% comment %}
 Compose has commands for managing the whole lifecycle of your application:
@@ -113,8 +113,8 @@ Compose には、アプリケーションのライフサイクルを管理する
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
 - [Frequently asked questions](faq.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file/index.md)
+- [Command line reference](/compose/reference/index.md)
+- [Compose file reference](/compose/compose-file/index.md)
 {% endcomment %}
 - [Compose のインストール](install.md)
 - [Compose を使ってはじめよう](gettingstarted.md)
@@ -122,7 +122,7 @@ Compose には、アプリケーションのライフサイクルを管理する
 - [Rails を使ってはじめよう](rails.md)
 - [WordPress を使ってはじめよう](wordpress.md)
 - [よくたずねられる質問](faq.md)
-- [コマンドラインリファレンス](./reference/index.md)
+- [コマンドラインリファレンス](/compose/reference/index.md)
 - [Compose ファイルリファレンス](/compose/compose-file/index.md)
 
 {% comment %}
@@ -173,11 +173,11 @@ Compose はプロジェクト名というものを用いて各環境を分離し
 {% comment %}
 The default project name is the basename of the project directory. You can set
 a custom project name by using the
-[`-p` command line option](./reference/overview.md) or the
-[`COMPOSE_PROJECT_NAME` environment variable](./reference/envvars.md#compose-project-name).
+[`-p` command line option](/compose/reference/overview.md) or the
+[`COMPOSE_PROJECT_NAME` environment variable](/compose/reference/envvars.md#compose_project_name).
 {% endcomment %}
 プロジェクト名はデフォルトでは、プロジェクトが存在するディレクトリ名となります。
-プロジェクト名を指定するには、[コマンドラインオプション](./reference/overview.md)の `-p` を指定するか、[環境変数 `COMPOSE_PROJECT_NAME`](./reference/envvars.md#compose-project-name) を使って指定します。
+プロジェクト名を指定するには、[コマンドラインオプション](/compose/reference/overview.md) の `-p` を指定するか、[環境変数 `COMPOSE_PROJECT_NAME`](/compose/reference/envvars.md#compose_project_name) を使って指定します。
 
 {% comment %}
 ### Preserve volume data when containers are created
@@ -197,10 +197,10 @@ Compose は、サービスによって利用されているボリュームをす
 
 {% comment %}
 If you use `docker-compose` on a Windows machine, see
-[Environment variables](reference/envvars.md) and adjust the necessary environment
+[Environment variables](/compose/reference/envvars.md) and adjust the necessary environment
 variables for your specific needs.
 {% endcomment %}
-Windows 上において `docker-compose` を利用している場合には、[環境変数のページ](reference/envvars.md)を参考にし、状況に応じて必要となる環境変数を定めてください。
+Windows 上において `docker-compose` を利用している場合には、[環境変数のページ](/compose/reference/envvars.md)を参考にし、状況に応じて必要となる環境変数を定めてください。
 
 
 {% comment %}
@@ -229,12 +229,12 @@ Compose はコンテナーが生成されたときの設定情報をキャッシ
 {% comment %}
 Compose supports variables in the Compose file. You can use these variables
 to customize your composition for different environments, or different users.
-See [Variable substitution](compose-file.md#variable-substitution) for more
+See [Variable substitution](/compose/compose-file/index.md#variable-substitution) for more
 details.
 {% endcomment %}
 Compose は Compose ファイル内での変数の利用をサポートしています。
 環境変数を使い、さまざまな環境、さまざまなユーザー向けに構成をカスタマイズできます。
-詳細は[環境変数のページ](compose-file.md#variable-substitution)をご覧ください。
+詳細は [環境変数のページ](/compose/compose-file/index.md#variable-substitution) をご覧ください。
 
 {% comment %}
 You can extend a Compose file using the `extends` field or by creating multiple
@@ -272,13 +272,13 @@ line tool can be used to create the environment and interact with it.
 Compose のコマンドラインツールを用いることで、環境生成と環境へのアクセスを行うことができます。
 
 {% comment %}
-The [Compose file](compose-file.md) provides a way to document and configure
+The [Compose file](/compose/compose-file/index.md) provides a way to document and configure
 all of the application's service dependencies (databases, queues, caches,
 web service APIs, etc). Using the Compose command line tool you can create
 and start one or more containers for each dependency with a single command
 (`docker-compose up`).
 {% endcomment %}
-[Compose ファイル](compose-file.md)は、アプリケーションにおけるサービスの依存関係（データベース、キュー、キャッシュ、ウェブ・サービス API など）を設定するものです。
+[Compose ファイル](/compose/compose-file/index.md) は、アプリケーションにおけるサービスの依存関係（データベース、キュー、キャッシュ、ウェブ・サービス API など）を設定するものです。
 Compose コマンドラインツールを使うと、いくつでもコンテナーを生成、起動でき、しかもコマンド（`docker-compose up`）を１つ実行するだけで、依存関係も正しく考慮してくれます。
 
 {% comment %}
@@ -299,12 +299,12 @@ Compose は、分厚く仕上がっている「開発者向け導入手順書」
 An important part of any Continuous Deployment or Continuous Integration process
 is the automated test suite. Automated end-to-end testing requires an
 environment in which to run tests. Compose provides a convenient way to create
-and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file.md), you can create and destroy these environments in just a few commands:
+and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](/compose/compose-file/index.md), you can create and destroy these environments in just a few commands:
 {% endcomment %}
 継続的デプロイや継続的インテグレーションのプロセスにおいて、自動テストスイートは極めて重要です。
 もれることなくテストを自動化させるためには、そのためのテスト環境が必要になるものです。
 Compose ではテストスイートに対応して、分離されたテスト環境の生成とデプロイを便利に行う機能を提供しています。
-[Compose ファイル](compose-file.md)内に必要な環境定義を行っておけば、テスト環境の生成と削除は、ごく簡単なコマンドだけで実現できます。
+[Compose ファイル](/compose/compose-file/index.md) 内に必要な環境定義を行っておけば、テスト環境の生成と削除は、ごく簡単なコマンドだけで実現できます。
 
     $ docker-compose up -d
     $ ./run_tests
@@ -368,16 +368,11 @@ Docker Compose は活発に開発中です。
 
 {% comment %}
 * To talk about the project with people in real time: join the
-  `#docker-compose` channel on freenode IRC.
+  `#docker-compose` channel on the Docker Community Slack.
 {% endcomment %}
-* プロジェクトのメンバーとリアルタイムに会話したければ、IRC の `#docker-compose` チャネルに参加してください。
+* プロジェクトのメンバーとリアルタイムに会話したければ、Docker Community Slack の `#docker-compose` チャネルに参加してください。
 
 {% comment %}
 * To contribute code or documentation changes: submit a [pull request on Github](https://github.com/docker/compose/pulls).
 {% endcomment %}
 * コードやドキュメントの変更に貢献したい場合は、[GitHub にプルリクエスト](https://github.com/docker/compose/pulls)を送ってください。
-
-{% comment %}
-For more information and resources, visit the [Getting Help project page](/opensource/get-help/).
-{% endcomment %}
-より詳細な情報やリソースについては、[ヘルプ用ページ](https://docs.docker.com/project/get-help/) を参照してください。

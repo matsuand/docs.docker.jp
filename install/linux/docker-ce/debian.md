@@ -36,8 +36,8 @@ Raspbian versions:
 {% endcomment %}
 Docker Engine - Community をインストールするには、Debian か Raspbian の 64 ビットバージョンが必要です。
 
-- Buster 10
-- Stretch 9 (安定版) / Raspbian Stretch
+- Buster 10 (安定版)
+- Stretch 9 / Raspbian Stretch
 
 {% comment %}
 Docker Engine - Community is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
@@ -166,7 +166,7 @@ from the repository.
         apt-transport-https \
         ca-certificates \
         curl \
-        gnupg2 \
+        gnupg-agent \
         software-properties-common
     ```
 

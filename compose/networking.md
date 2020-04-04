@@ -5,32 +5,31 @@ title: Compose におけるネットワーク機能
 ---
 
 {% comment %}
-> This page applies to Compose file formats [version 2](compose-file/compose-file-v2.md) and [higher](compose-file/). Networking features are not supported for Compose file [version 1 (legacy)](compose-file/compose-file-v1.md).
+> This page applies to Compose file formats [version 2](/compose/compose-file/compose-file-v2.md) and [higher](/compose/compose-file/index.md). Networking features are not supported for Compose file [version 1 (legacy)](/compose/compose-file/compose-file-v1.md).
 {% endcomment %}
-> このページに示す内容は Compose ファイルフォーマットの [バージョン 2](compose-file/compose-file-v2.md) と [それ以降](compose-file/) に適用されます。
-ネットワーク機能は[（古い）バージョン 1](compose-file/compose-file-v1.md) ではサポートされません。
+> このページに示す内容は Compose ファイルフォーマットの [バージョン 2](/compose/compose-file/compose-file-v2.md) と [それ以降](/compose/compose-file/index.md) に適用されます。
+ネットワーク機能は[（古い）バージョン 1](/compose/compose-file/compose-file-v1.md) ではサポートされません。
 
 {% comment %}
 By default Compose sets up a single
-[network](/engine/reference/commandline/network_create/) for your app. Each
+[network](/engine/reference/commandline/network_create.md) for your app. Each
 container for a service joins the default network and is both *reachable* by
 other containers on that network, and *discoverable* by them at a hostname
 identical to the container name.
 {% endcomment %}
-デフォルトで Compose は、アプリ向けに単一の [ネットワーク](/engine/reference/commandline/network_create/) を設定します。
+デフォルトで Compose は、アプリ向けに単一の [ネットワーク](/engine/reference/commandline/network_create.md) を設定します。
 1 つのサービスを構成する各コンテナーは、そのデフォルトのネットワークに参加するので、ネットワーク上の他のコンテナーからのアクセスが可能です。
 さらにコンテナー名と同等のホスト名を用いてコンテナーの識別が可能となります。
 
 {% comment %}
 > **Note**: Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
-> project name with either the [`--project-name`
-> flag](reference/overview.md) or the [`COMPOSE_PROJECT_NAME` environment
-> variable](reference/envvars.md#compose-project-name).
+> project name with either the [`--project-name` flag](/compose/reference/overview.md)
+> or the [`COMPOSE_PROJECT_NAME` environment variable](/compose/reference/envvars.md#compose_project_name).
 {% endcomment %}
 > **メモ**: アプリのネットワークには「プロジェクト名」に基づいた名前がつけられます。
 > そしてプロジェクト名はこれが稼動しているディレクトリ名に基づいて定まります。
-> プロジェクト名は [`--project-name` フラグ](reference/overview.md) あるいは [`COMPOSE_PROJECT_NAME` 環境変数](reference/envvars.md#compose-project-name) を使って上書きすることができます。
+> プロジェクト名は [`--project-name` フラグ](/compose/reference/overview.md) あるいは [`COMPOSE_PROJECT_NAME` 環境変数](/compose/reference/envvars.md#compose_project_name) を使って上書きすることができます。
 
 {% comment %}
 For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:
@@ -152,9 +151,9 @@ links は自サービスが他のサービスからアクセスできるよう�
         image: postgres
 
 {% comment %}
-See the [links reference](compose-file/compose-file-v2.md#links) for more information.
+See the [links reference](/compose/compose-file/compose-file-v2.md#links) for more information.
 {% endcomment %}
-詳細は [links リファレンス](compose-file/compose-file-v2.md#links) を参照してください。
+詳細は [links リファレンス](/compose/compose-file/compose-file-v2.md#links) を参照してください。
 
 {% comment %}
 ## Multi-host networking
@@ -163,11 +162,11 @@ See the [links reference](compose-file/compose-file-v2.md#links) for more inform
 {: #Multi-host networking }
 
 {% comment %}
-> **Note**: The instructions in this section refer to [legacy Docker Swarm](/compose/swarm.md) operations, and only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode, consult the [Docker Stacks](/compose/bundles.md) documentation.
+> **Note**: The instructions in this section refer to [legacy Docker Swarm](swarm.md) operations, and only work when targeting a legacy Swarm cluster. For instructions on deploying a compose project to the newer integrated swarm mode, consult the [Docker Stacks](/engine/reference/commandline/stack_deploy.md) documentation.
 {% endcomment %}
-> **メモ**: ここに示す手順は、[かつての Docker Swarm](/compose/swarm) の操作に基づいています。
+> **メモ**: ここに示す手順は、[かつての Docker Swarm](swarm.md) の操作に基づいています。
 > したがってかつてのスウォームクラスターを対象とする場合にのみ動作します。
-> Compose によるプロジェクトを、最新の統合されたスウォームモードにデプロイするには、[Docker Stacks](/compose/bundles.md) に示すドキュメントを参照してください。
+> Compose によるプロジェクトを、最新の統合されたスウォームモードにデプロイするには、[Docker Stacks](/engine/reference/commandline/stack_deploy.md) に示すドキュメントを参照してください。
 
 {% comment %}
 When [deploying a Compose application to a Swarm cluster](swarm.md), you can make use of the built-in `overlay` driver to enable multi-host communication between containers with no changes to your Compose file or application code.
@@ -176,9 +175,9 @@ When [deploying a Compose application to a Swarm cluster](swarm.md), you can mak
 Compose ファイルやアプリケーションコードへの変更は必要ありません。
 
 {% comment %}
-Consult the [Getting started with multi-host networking](/engine/userguide/networking/get-started-overlay/) to see how to set up a Swarm cluster. The cluster uses the `overlay` driver by default, but you can specify it explicitly if you prefer - see below for how to do this.
+Consult the [Getting started with multi-host networking](/network/network-tutorial-overlay.md) to see how to set up a Swarm cluster. The cluster uses the `overlay` driver by default, but you can specify it explicitly if you prefer - see below for how to do this.
 {% endcomment %}
-[複数ホストによるネットワークをはじめよう](/engine/userguide/networking/get-started-overlay/) を参考に、スウォームクラスターの構築方法を確認してください。
+[複数ホストによるネットワークをはじめよう](/network/network-tutorial-overlay.md) を参考に、スウォームクラスターの構築方法を確認してください。
 デフォルトでクラスターは `overlay` ドライバーを用います。
 ただし明示的にこれを指定することもできます。
 詳しくは後述します。
@@ -240,14 +239,14 @@ Here's an example Compose file defining two custom networks. The `proxy` service
           bar: "2"
 
 {% comment %}
-Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file/compose-file-v2.md#ipv4-address-ipv6-address) for each attached network.
+Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](/compose/compose-file/compose-file-v2.md#ipv4_address-ipv6_address) for each attached network.
 {% endcomment %}
-接続するネットワークのそれぞれは、[ipv4_address または ipv6_address](compose-file/compose-file-v2.md#ipv4-address-ipv6-address) を使ってスタティック IP アドレスを設定することができます。
+接続するネットワークのそれぞれは、[ipv4_address または ipv6_address](/compose/compose-file/compose-file-v2.md#ipv4_address-ipv6_address) を使ってスタティック IP アドレスを設定することができます。
 
 {% comment %}
-Networks can also be given a [custom name](compose-file/index.md#name-1) (since version 3.5):
+Networks can also be given a [custom name](/compose/compose-file/index.md#network-configuration-reference) (since version 3.5):
 {% endcomment %}
-ネットワークには [独自の名前](compose-file/index.md#name-1) も設定することができます。
+ネットワークには [独自の名前](/compose/compose-file/index.md#network-configuration-reference) も設定することができます。
 （バージョン 3.5 から）
 
     version: "3.5"
@@ -262,11 +261,11 @@ For full details of the network configuration options available, see the followi
 ネットワーク設定に関して利用可能なオプションについては、以下のリファレンスを参照してください。
 
 {% comment %}
-- [Top-level `networks` key](compose-file/compose-file-v2.md#network-configuration-reference)
-- [Service-level `networks` key](compose-file/compose-file-v2.md#networks)
+- [Top-level `networks` key](/compose/compose-file/compose-file-v2.md#network-configuration-reference)
+- [Service-level `networks` key](/compose/compose-file/compose-file-v2.md#networks)
 {% endcomment %}
-- [最上位の `networks` キー](compose-file/compose-file-v2.md#network-configuration-reference)
-- [service レベルの `networks` キー](compose-file/compose-file-v2.md#networks)
+- [最上位の `networks` キー](/compose/compose-file/compose-file-v2.md#network-configuration-reference)
+- [service レベルの `networks` キー](/compose/compose-file/compose-file-v2.md#networks)
 
 {% comment %}
 ## Configure the default network
@@ -318,9 +317,9 @@ Instead of (or as well as) specifying your own networks, you can also change the
 {: #use-a-pre-existing-network }
 
 {% comment %}
-If you want your containers to join a pre-existing network, use the [`external` option](compose-file/compose-file-v2.md#network-configuration-reference):
+If you want your containers to join a pre-existing network, use the [`external` option](/compose/compose-file/compose-file-v2.md#network-configuration-reference):
 {% endcomment %}
-コンテナーを既存のネットワークに接続したい場合は [`external` オプション](compose-file/compose-file-v2.md#network-configuration-reference) を利用します。
+コンテナーを既存のネットワークに接続したい場合は [`external` オプション](/compose/compose-file/compose-file-v2.md#network-configuration-reference) を利用します。
 
     networks:
       default:

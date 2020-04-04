@@ -50,17 +50,17 @@ services.
 
 {% comment %}
 If a service is defined in both files, Compose merges the configurations using
-the rules described in [Adding and overriding
-configuration](extends.md#adding-and-overriding-configuration).
+the rules described in
+[Adding and overriding configuration](extends.md#adding-and-overriding-configuration).
 {% endcomment %}
 サービスの定義が両方のファイルに存在した場合、Compose は [設定の追加と上書き](extends.md#adding-and-overriding-configuration) に示すルールに従って定義設定をマージします。
 
 {% comment %}
 To use multiple override files, or an override file with a different name, you
 can use the `-f` option to specify the list of files. Compose merges files in
-the order they're specified on the command line. See the [`docker-compose`
-command reference](/compose/reference/overview.md) for more information about
-using `-f`.
+the order they're specified on the command line. See the
+[`docker-compose` command reference](/compose/reference/overview.md) for more information
+about using `-f`.
 {% endcomment %}
 複数の上書きファイルがある場合、あるいは上書きファイルが 1 つであってもその名前を別にしている場合、`-f` オプションを使って、ファイル名を列記して指定することができます。
 Compose はコマンドライン上に指定された順に、設定ファイルをマージします。
@@ -260,23 +260,24 @@ backup, include the `docker-compose.admin.yml` as well.
 {: #extending-services }
 
 {% comment %}
-> **Note**: The `extends` keyword is supported in earlier Compose file formats
-up to Compose file version 2.1 (see [extends in
-v1](/compose/compose-file/compose-file-v1.md#extends) and [extends in
-v2](/compose/compose-file/compose-file-v2.md#extends)), but is not supported in
-Compose version 3.x. See the [Version 3
-summary](/compose/compose-file/compose-versioning.md#version-3) of keys added
-and removed, along with information on [how to
-upgrade](/compose/compose-file/compose-versioning.md#upgrading). See
-[moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
-discussion thread on possibility of adding support for `extends` in some form in
-future versions.
+> **Note**
+>
+> The `extends` keyword is supported in earlier Compose file formats up to Compose
+> file version 2.1 (see [extends in v1](/compose/compose-file/compose-file-v1.md#extends)
+> and [extends in v2](/compose/compose-file/compose-file-v2.md#extends)), but is
+> not supported in Compose version 3.x. See the [Version 3 summary](/compose/compose-file/compose-versioning.md#version-3)
+> of keys added and removed, along with information on [how to upgrade](/compose/compose-file/compose-versioning.md#upgrading).
+> See [moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
+> discussion thread on possibility of adding support for `extends` in some form in
+> future versions.
 {% endcomment %}
-> **メモ**: キーワード `extends` は、かつての Compose ファイルフォーマットバージョン 2.1 までにおいてサポートされます。
-（[バージョン 1 における extends](/compose/compose-file/compose-file-v1.md#extends) と [バージョン 2 における extends](/compose/compose-file/compose-file-v2.md#extends) を参照のこと。）
+> **メモ**:
+>
+> キーワード `extends` は、かつての Compose ファイルフォーマットバージョン 2.1 までにおいてサポートされます。
+>（[バージョン 1 における extends](/compose/compose-file/compose-file-v1.md#extends) と [バージョン 2 における extends](/compose/compose-file/compose-file-v2.md#extends) を参照のこと。）
 これは Compose バージョン 3.x ではサポートされていません。
-キーワードの追加、削除に関しては [バージョン 3 のまとめ](/compose/compose-file/compose-versioning.md#version-3) や [アップグレード方法](/compose/compose-file/compose-versioning.md#upgrading) を参照してください。
-また [moby/moby#31101](https://github.com/moby/moby/issues/31101) では、将来のバージョンにおいて、何らかの形式で `extends` をサポートする可能性について議論するスレッドがありますので、確認してみてください。
+> キーワードの追加、削除に関しては [バージョン 3 のまとめ](/compose/compose-file/compose-versioning.md#version-3) や [アップグレード方法](/compose/compose-file/compose-versioning.md#upgrading) を参照してください。
+> また [moby/moby#31101](https://github.com/moby/moby/issues/31101) では、将来のバージョンにおいて何らかの形式で `extends` をサポートする可能性について議論するスレッドがありますので、確認してみてください。
 
 {% comment %}
 Docker Compose's `extends` keyword enables sharing of common configurations
@@ -568,8 +569,8 @@ container:
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](./reference/index.md)
-- [Compose file reference](compose-file.md)
+- [Command line reference](/compose/reference/index.md)
+- [Compose file reference](/compose/compose-file/index.md)
 {% endcomment %}
 - [ユーザーガイド](index.md)
 - [Compose のインストール](install.md)
@@ -577,5 +578,5 @@ container:
 - [Django を使ってはじめよう](django.md)
 - [Rails を使ってはじめよう](rails.md)
 - [WordPress を使ってはじめよう](wordpress.md)
-- [コマンドラインリファレンス](./reference/index.md)
-- [Compose ファイルリファレンス](compose-file.md)
+- [コマンドラインリファレンス](/compose/reference/index.md)
+- [Compose ファイルリファレンス](/compose/compose-file/index.md)

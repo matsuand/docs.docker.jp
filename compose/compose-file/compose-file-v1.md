@@ -627,9 +627,9 @@ options and tags it with the specified tag.
 ### labels
 
 {% comment %}
-Add metadata to containers using [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either an array or a dictionary.
+Add metadata to containers using [Docker labels](/config/labels-custom-metadata.md). You can use either an array or a dictionary.
 {% endcomment %}
-[Docker labels](/engine/userguide/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+[Docker labels](/config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -662,10 +662,10 @@ a link alias (`"SERVICE:ALIAS"`), or just the service name.
 
 {% comment %}
 > Links are a legacy option. We recommend using
-> [networks](#networks) instead.
+> [networks](/compose/networking.md) instead.
 {% endcomment %}
 > links は古いオプションです。
-> かわりに [networks](#networks) を用いることをお勧めします。
+> かわりに [networks](/compose/networking.md) を用いることをお勧めします。
 
 ```yaml
 web:
@@ -684,30 +684,30 @@ the alias, or the service name if no alias was specified.
 
 {% comment %}
 Links also express dependency between services in the same way as
-[depends_on](#depends_on), so they determine the order of service startup.
+[depends_on](compose-file-v2.md#depends_on), so they determine the order of service startup.
 {% endcomment %}
-Links は [depends_on](#depends_on) と同様にサービス間の依存関係を表わします。
+Links は [depends_on](compose-file-v2.md#depends_on) と同様にサービス間の依存関係を表わします。
 したがってサービスの起動順を設定するものになります。
 
 {% comment %}
 > **Note**
 >
-> If you define both links and [networks](#networks), services with
+> If you define both links and [networks](index.md#networks), services with
 > links between them must share at least one network in common in order to
 > communicate.
 {% endcomment %}
 > **メモ**：
 >
-> links と [networks](#networks) をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。
+> links と [networks](index.md#networks) をともに設定する場合、リンクするサービスは、少なくとも 1 つのネットワークが共有され通信ができるようにする必要があります。
 
 ### log_driver
 
 {% comment %}
-> [Version 1 file format](compose-versioning#version-1) only. In version 2 and up, use
-> [logging](/compose/compose-file/index.md#logging).
+> [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and up, use
+> [logging](index.md#logging).
 {% endcomment %}
-> [ファイルフォーアットバージョン 1](compose-versioning#version-1) のみ。
-> バージョン 2 またはそれ以降においては、[logging](/compose/compose-file/index.md#logging) を用いてください。
+> [ファイルフォーアットバージョン 1](compose-versioning.md#version-1) のみ。
+> バージョン 2 またはそれ以降においては、[logging](index.md#logging) を用いてください。
 
 {% comment %}
 Specify a log driver. The default is `json-file`.
@@ -722,11 +722,11 @@ log_driver: syslog
 ### log_opt
 
 {% comment %}
-> [Version 1 file format](compose-versioning#version-1) only. In version 2 and up, use
-> [logging](/compose/compose-file/index.md#logging).
+> [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and up, use
+> [logging](index.md#logging).
 {% endcomment %}
-> [ファイルフォーアットバージョン 1](compose-versioning#version-1) のみ。
-> バージョン 2 またはそれ以降においては、[logging](/compose/compose-file/index.md#logging) を用いてください。
+> [ファイルフォーアットバージョン 1](compose-versioning.md#version-1) のみ。
+> バージョン 2 またはそれ以降においては、[logging](index.md#logging) を用いてください。
 
 {% comment %}
 Specify logging options as key-value pairs. An example of `syslog` options:
@@ -743,10 +743,10 @@ log_opt:
 
 {% comment %}
 > [Version 1 file format](compose-versioning.md#version-1) only. In version 2 and up, use
-> [network_mode](/compose/compose-file/index.md#networkmode) and [networks](/compose/compose-file/index.md#networks).
+> [network_mode](index.md#network_mode) and [networks](index.md#networks).
 {% endcomment %}
 > [ファイルフォーアットバージョン 1](compose-versioning#version-1) のみ。
-> バージョン 2 またはそれ以降においては、[network_mode](/compose/compose-file/index.md#networkmode) と [networks](/compose/compose-file/index.md#networks) を用いてください。
+> バージョン 2 またはそれ以降においては、[network_mode](index.md#networkmode) と [networks](index.md#networks) を用いてください。
 
 {% comment %}
 Network mode. Use the same values as the docker client `--net` parameter.
@@ -872,15 +872,15 @@ ulimits:
 {% comment %}
 Mount paths or named volumes, optionally specifying a path on the host machine
 (`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
-For [version 2 files](compose-versioning#version-2), named volumes need to be specified with the
+For [version 2 files](compose-versioning.md#version-2), named volumes need to be specified with the
 [top-level `volumes` key](compose-file-v2.md#volume-configuration-reference).
-When using [version 1](compose-versioning#version-1), the Docker Engine creates the named
+When using [version 1](compose-versioning.md#version-1), the Docker Engine creates the named
 volume automatically if it doesn't exist.
 {% endcomment %}
 パスまたは名前つきボリュームをマウントします。
 任意の設定としてホストマシン上のパスを指定したり（`HOST:CONTAINER`）、アクセスモードを指定したり(`HOST:CONTAINER:ro`)することができます。
-[ファイルフォーマットバージョン 2](compose-versioning#version-2) における名前つきボリュームは、[最上位の `volumes` キー](compose-file-v2.md#volume-configuration-reference) において指定しておく必要があります。
-[バージョン 1](compose-versioning#version-1) を利用している場合、名前つきボリュームが存在しないときは Docker Engine が自動的に生成します。
+[ファイルフォーマットバージョン 2](compose-versioning.md#version-2) における名前つきボリュームは、[最上位の `volumes` キー](compose-file-v2.md#volume-configuration-reference) において指定しておく必要があります。
+[バージョン 1](compose-versioning.md#version-1) を利用している場合、名前つきボリュームが存在しないときは Docker Engine が自動的に生成します。
 
 {% comment %}
 You can mount a relative path on the host, which expands relative to
@@ -939,15 +939,15 @@ volume_driver: mydriver
 
 {% comment %}
 There are several things to note, depending on which
-[Compose file version](compose-versioning#versioning) you're using:
+[Compose file version](compose-versioning.md#versioning) you're using:
 {% endcomment %}
-[Compose ファイルバージョン](compose-versioning#versioning) に応じて、以下のことを明記しておきます。
+[Compose ファイルバージョン](compose-versioning.md#versioning) に応じて、以下のことを明記しておきます。
 
 {% comment %}
-- For [version 1 files](compose-versioning#version-1), both named volumes and
+- For [version 1 files](compose-versioning.md#version-1), both named volumes and
   container volumes use the specified driver.
 {% endcomment %}
-- [ファイルフォーマットバージョン 1](compose-versioning#version-1) においては, 名前つきボリュームとコンテナーボリュームは、どちらも特定のドライバーを利用します。
+- [ファイルフォーマットバージョン 1](compose-versioning.md#version-1) においては, 名前つきボリュームとコンテナーボリュームは、どちらも特定のドライバーを利用します。
 {% comment %}
 - No path expansion is done if you have also specified a `volume_driver`.
   For example, if you specify a mapping of `./foo:/data`, the `./foo` part
@@ -958,10 +958,10 @@ There are several things to note, depending on which
   このとき `./foo` の部分はボリュームドライバーにそのまま引き渡され、パスが展開されることはありません。
 
 {% comment %}
-See [Docker Volumes](/engine/userguide/dockervolumes.md) and
-[Volume Plugins](/engine/extend/plugins_volume.md) for more information.
+See [Docker Volumes](/storage/volumes.md) and
+[Volume Plugins](/engine/extend/plugins_volume/) for more information.
 {% endcomment %}
-詳しくは [Docker ボリューム](/engine/userguide/dockervolumes.md) と [ボリュームプラグイン](/engine/extend/plugins_volume.md) を参照してください。
+詳しくは [Docker ボリューム](/storage/volumes.md) と [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
 
 ### volumes_from
 
@@ -1023,11 +1023,11 @@ tty: true
 - [User guide](/compose/index.md)
 - [Installing Compose](/compose/install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Samples](/samples/)
-- [Command line reference](/compose/reference/)
+- [Samples](/samples/index.md)
+- [Command line reference](/compose/reference/index.md)
 {% endcomment %}
 - [ユーザーガイド](/compose/index.md)
 - [Compose のインストール](/compose/install.md)
 - [Compose ファイルバージョン and upgrading](compose-versioning.md)
-- [サンプル](/samples/)
-- [コマンドラインリファレンス](/compose/reference/)
+- [サンプル](/samples/index.md)
+- [コマンドラインリファレンス](/compose/reference/index.md)

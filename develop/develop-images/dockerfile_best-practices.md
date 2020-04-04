@@ -622,11 +622,11 @@ request.
 
 {% comment %}
 Use your best judgment to keep containers as clean and modular as possible. If
-containers depend on each other, you can use [Docker container networks](/engine/userguide/networking/)
+containers depend on each other, you can use [Docker container networks](/network/index.md)
 to ensure that these containers can communicate.
 {% endcomment %}
 コンテナーはできるかぎりすっきりとモジュール分割されるように、適切に判断してください。
-コンテナーが互いに依存している場合は、[Docker container ネットワーク](https://docs.docker.com/engine/userguide/networking/>) を用いることで、コンテナー間の通信を確実に行うことができます。
+コンテナーが互いに依存している場合は、[Docker container ネットワーク](/network/index.md) を用いることで、コンテナー間の通信を確実に行うことができます。
 
 {% comment %}
 ### Minimize the number of layers
@@ -888,9 +888,9 @@ LABEL vendor=ACME\ Incorporated \
 {% comment %}
 See [Understanding object labels](/config/labels-custom-metadata.md)
 for guidelines about acceptable label keys and values. For information about
-querying labels, refer to the items related to filtering in [Managing labels on
-objects](/config/labels-custom-metadata.md#managing-labels-on-objects). See also
-[LABEL](/engine/reference/builder/#label) in the Dockerfile reference.
+querying labels, refer to the items related to filtering in
+[Managing labels on objects](/config/labels-custom-metadata.md#manage-labels-on-objects).
+See also [LABEL](/engine/reference/builder/#label) in the Dockerfile reference.
 {% endcomment %}
 利用可能なラベルのキーおよび値に関するガイドラインが [オブジェクトラベルの理解](/config/labels-custom-metadata.md) に示されています。
 ラベルを検索する方法については、[オブジェクト内のラベル管理](/config/labels-custom-metadata.md#managing-labels-on-objects) に示されているフィルタリングに関する項目を参照してください。

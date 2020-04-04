@@ -270,8 +270,7 @@ For more information, see:
 
 - [Namespaces](osxfs.md#namespaces){: target="_blank" class="_"} in the topic on
   [osxfs file system sharing](osxfs.md).
-- [Volume mounting requires file sharing for any project directories outside of
-  `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+- [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
 #### Proxies
 
@@ -307,8 +306,8 @@ You can configure Docker Desktop networking to work on a virtual private network
 
 The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.
 
-Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine [dockerd commandline
-reference](/engine/reference/commandline/dockerd.md){:target="_blank"
+Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
+[dockerd commandline reference](/engine/reference/commandline/dockerd.md){:target="_blank"
 class="_"}.
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
@@ -365,7 +364,7 @@ that you can test deploying your Docker workloads on Kubernetes.
 The Kubernetes client command, `kubectl`, is included and configured to connect
 to the local Kubernetes server. If you have `kubectl` already installed and
 pointing to some other environment, such as `minikube` or a GKE cluster, be sure
-to change context so that `kubectl` is pointing to `docker-for-desktop`:
+to change context so that `kubectl` is pointing to `docker-desktop`:
 
 ```bash
 $ kubectl config get-contexts
@@ -472,7 +471,7 @@ Desktop `xhyve` virtual machine).
 >   effect.
 >
 > * The registry cannot be listed as an _insecure registry_ (see [Docker
->   Daemon](index.md#docker-daemon)). Docker Desktop ignores certificates listed
+>   Engine](#docker-engine). Docker Desktop ignores certificates listed
 >   under insecure registries, and does not send client certificates. Commands
 >   like `docker run` that attempt to pull from the registry produce error
 >   messages on the command line, as well as on the registry.
@@ -513,9 +512,9 @@ also in your keychain.
 ```
 
 To learn more about how to install a CA root certificate for the registry and
-how to set the client TLS certificate for verification, see [Verify repository
-client with certificates](/engine/security/certificates.md) in the Docker Engine
-topics.
+how to set the client TLS certificate for verification, see
+[Verify repository client with certificates](/engine/security/certificates.md)
+in the Docker Engine topics.
 
 ## Install shell completion
 
@@ -573,8 +572,8 @@ forum](https://forums.docker.com/c/docker-for-mac){:target="_blank" class="_"}.
 
 To report bugs or problems, log on to Docker Desktop [for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues){:target="_blank" class="_"},
-where you can review community reported issues, and file new ones.  See [Logs
-and Troubleshooting](troubleshoot.md) for more details.
+where you can review community reported issues, and file new ones.  See
+[Logs and Troubleshooting](troubleshoot.md) for more details.
 
 For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
 
@@ -585,8 +584,7 @@ Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your
 For more information, refer to the following [Docker Hub topics](/docker-hub/index.md){:target="_blank"
 class="_"}:
 
-* [Organizations and Teams in Docker
-  Hub](/docker-cloud/orgs/index.md){:target="_blank" class="_"}
+* [Organizations and Teams in Docker Hub](/docker-hub/orgs.md){:target="_blank" class="_"}
 * [Builds](/docker-hub/builds/index.md){:target="_blank" class="_"}
 
 ### Two-factor authentication
@@ -615,8 +613,8 @@ After you have successfully authenticated, you can access your organizations and
 * Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example
   walkthroughs and source code.
 
-* For a summary of Docker command line interface (CLI) commands, see [Docker CLI
-  Reference Guide](/engine/api.md){: target="_blank" class="_"}.
+* For a summary of Docker command line interface (CLI) commands, see
+  [Docker CLI Reference Guide](/engine/api/index.md){: target="_blank" class="_"}.
 
 * Check out the blog post, [What’s New in Docker 17.06 Community Edition
   (CE)](https://blog.docker.com/2017/07/whats-new-docker-17-06-community-edition-ce/){:

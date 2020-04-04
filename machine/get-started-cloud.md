@@ -182,12 +182,10 @@ available from 3rd party contributors. These are use-at-your-own-risk plugins,
 not maintained by or formally associated with Docker.
 
 {% comment %}
-See [Available driver
-plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:
+See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:
 target="_blank" class="_"}.
 {% endcomment %}
-See [Available driver
-plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:
+See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:
 target="_blank" class="_"}.
 
 {% comment %}

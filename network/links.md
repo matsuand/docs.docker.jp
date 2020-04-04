@@ -17,7 +17,7 @@ with `--link` is sharing environment variables between containers. However,
 you can use other mechanisms such as volumes to share environment variables
 between containers in a more controlled way.
 >
-> See [Differences between user-defined bridges and the default bridge](bridge.md##differences-between-user-defined-bridges-and-the-default-bridge)
+> See [Differences between user-defined bridges and the default bridge](bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
 > for some alternatives to using `--link`.
 {:.warning}
 {% endcomment %}
@@ -28,7 +28,7 @@ between containers in a more controlled way.
 >`--link` に存在していて、ユーザー定義のネットワークにない機能は、コンテナー間で環境変数を共有できる機能です。
 >ただしボリュームのような別の機能を使えば、コンテナー間での環境変数の共有は、より制御しやすく利用できます。
 >
-> [ユーザー定義のブリッジとデフォルトブリッジの違い](bridge.md##differences-between-user-defined-bridges-and-the-default-bridge) を参照して、`--link` とは違う方法について確認してください。
+> [ユーザー定義のブリッジとデフォルトブリッジの違い](bridge.md#differences-between-user-defined-bridges-and-the-default-bridge) を参照して、`--link` とは違う方法について確認してください。
 {:.warning}
 
 {% comment %}
@@ -40,16 +40,16 @@ Docker.
 これは Docker のデフォルトである `bridge` ネットワーク内にあるもので、この `bridge` ネットワークは Docker をインストールした際に自動的に生成されます。
 
 {% comment %}
-Before the [Docker networks feature](/engine/userguide/networking/index.md), you could use the
+Before the [Docker networks feature](/network/index.md), you could use the
 Docker link feature to allow containers to discover each other and securely
 transfer information about one container to another container. With the
 introduction of the Docker networks feature, you can still create links but they
 behave differently between default `bridge` network and
-[user defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks).
+[user defined networks](/network/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge).
 {% endcomment %}
-[Docker のネットワーク機能](/engine/userguide/networking/index.md) が提供される以前は、Docker のリンク機能によって複数のコンテナーが互いを検出し、一方から他方への情報送信を安全に行うようにしていました。
+[Docker のネットワーク機能](/network/index.md) が提供される以前は、Docker のリンク機能によって複数のコンテナーが互いを検出し、一方から他方への情報送信を安全に行うようにしていました。
 Docker のネットワーク機能が導入されてからも、リンクを生成することはできます。
-ただしデフォルトの `bridge` ネットワークであるか、[ユーザー定義のネットワーク](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks) であるかによって、その動作は異なることになります。
+ただしデフォルトの `bridge` ネットワークであるか、[ユーザー定義のネットワーク](/network/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge) であるかによって、その動作は異なることになります。
 
 {% comment %}
 This section briefly discusses connecting via a network port and then goes into
@@ -74,12 +74,12 @@ Let's say you used this command to run a simple Python Flask application:
 > **Note**:
 > Containers have an internal network and an IP address.
 > Docker can have a variety of network configurations. You can see more
-> information on Docker networking [here](/engine/userguide/networking/index.md).
+> information on Docker networking [here](/network/index.md).
 {% endcomment %}
 > **メモ**:
 > コンテナーには内部ネットワークと IP アドレスがあります。
 > そして Docker にはさまざまなネットワーク設定方法があります。
-> Docker のネットワーク機能の詳細は [こちら](/engine/userguide/networking/index.md) を参照してください。
+> Docker のネットワーク機能の詳細は [こちら](/network/index.md) を参照してください。
 
 {% comment %}
 When that container was created, the `-P` flag was used to automatically map
@@ -195,12 +195,12 @@ configurations. For example, if you've bound the container port to the
 {% comment %}
 > **Note**:
 > This section covers the legacy link feature in the default `bridge` network.
-> Refer to [linking containers in user-defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks)
+> Refer to [differences between user-defined bridges and the default bridge](/network/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
 > for more information on links in user-defined networks.
 {% endcomment %}
 > **メモ**:
 > この節ではデフォルトの `bridge` ネットワーク内の古い機能であるリンク機能について説明します。
-> ユーザー定義ネットワーク上のリンクに関しては [ユーザー定義ネットワークでのコンテナーのリンク](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks) を参照してください。
+> ユーザー定義ネットワーク上のリンクに関しては [ユーザー定義ネットワークでのコンテナーのリンク](/network/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge) を参照してください。
 
 {% comment %}
 Network port mappings are not the only way Docker containers can connect to one

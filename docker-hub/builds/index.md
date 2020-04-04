@@ -155,7 +155,7 @@ You might redirected to the settings page to [link](link-source.md) the code rep
 
     {% comment %}
     {% endcomment %}
-    [Build caching](/engine/userguide/eng-image/dockerfile_best-practices/#/build-cache) can save time if you are building a large image frequently or have
+    [Build caching](/develop/develop-images/dockerfile_best-practices.md#leverage-build-cache) can save time if you are building a large image frequently or have
     many dependencies. You might want to leave build caching disabled to
     make sure all of your dependencies are resolved at build time, or if
     you have a large layer that is quicker to build locally.
