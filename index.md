@@ -87,9 +87,9 @@ Docker Engine - Community はデスクトップからクラウドのサーバー
 また理解できているものを利用したい場合は安定（stable）チャンネルを選んでください。
 
 {% comment %}
-[Learn more about Docker Engine - Community](/install/){: class="button outline-btn"}
+[Learn more about Docker Engine - Community](/engine/index.md){: class="button outline-btn"}
 {% endcomment %}
-[Docker Engine - Community について学ぶ](/install/){: class="button outline-btn"}
+[Docker Engine - Community について学ぶ](/engine/index.md){: class="button outline-btn"}
 
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">

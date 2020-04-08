@@ -47,13 +47,13 @@ the machine reboots.
 
 {% comment %}
 The command to start Docker depends on your operating system. Check the correct
-page under [Install Docker](/install/index.md). To configure Docker
+page under [Install Docker](/engine/install/index.md). To configure Docker
 to start automatically at system boot, see
-[Configure Docker to start on boot](/install/linux/linux-postinstall.md#configure-docker-to-start-on-boot).
+[Configure Docker to start on boot](/engine/install/linux-postinstall.md#configure-docker-to-start-on-boot).
 {% endcomment %}
 Docker を起動させるコマンドはオペレーティングシステムによります。
-[Docker のインストール](/install/index.md) の中から適切なページを確認してください。
-システム起動時に Docker を自動起動するように設定する場合は [システムブート時の Docker 起動設定](/install/linux/linux-postinstall.md#configure-docker-to-start-on-boot) を参照してください。
+[Docker のインストール](/engine/install/index.md) の中から適切なページを確認してください。
+システム起動時に Docker を自動起動するように設定する場合は [システムブート時の Docker 起動設定](/engine/install/linux-postinstall.md#configure-docker-to-start-on-boot) を参照してください。
 
 {% comment %}
 ## Start the daemon manually

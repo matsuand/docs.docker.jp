@@ -32,18 +32,18 @@ included as part of those desktop installs.
 
 {% comment %}
 - On Linux systems, first install the
-[Docker](/install/index.md#server){: target="_blank" class="_"}
+[Docker Engine](/engine/install/index.md#server){: target="_blank" class="_"}
 for your OS as described on the Get Docker page, then come back here for
 instructions on installing Compose on
 Linux systems.
 {% endcomment %}
-- Linux システムではまず、 Docker 入手のページに説明されている各 OS 向けの [Docker](/install/index.md#server){: target="_blank" class="_"} をインストールします。
+- Linux システムではまず、 Docker 入手のページに説明されている各 OS 向けの [Docker](/engine/install/index.md#server){: target="_blank" class="_"} をインストールします。
 そしてこのページに戻り、Linux システム上での Compose のインストール手順に従います。
 
 {% comment %}
-- To run Compose as a non-root user, see [Manage Docker as a non-root user](/install/linux/linux-postinstall.md).
+- To run Compose as a non-root user, see [Manage Docker as a non-root user](/engine/install/linux-postinstall.md).
 {% endcomment %}
-Compose をルートユーザー以外で起動するには、[ルートユーザー以外による Docker の管理](/install/linux/linux-postinstall.md) を参照してください。
+Compose をルートユーザー以外で起動するには、[ルートユーザー以外による Docker の管理](/engine/install/linux-postinstall.md) を参照してください。
 
 {% comment %}
 ## Install Compose

@@ -38,9 +38,10 @@ Shared between centOS.md, rhel.md, oracle.md
 --->
 
 {% comment %}
-For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker Engine - Community for CentOS](/install/linux/docker-ce/centos.md).
+For Docker Community Edition on {{ linux-dist-cap }}, see
+[Install Docker Engine on CentOS](/engine/install/centos.md).
 {% endcomment %}
-{{ linux-dist-cap }} 向けの Docker Community Edition については [Docker Engine - Community の入手（CentOS 向け）](/install/linux/docker-ce/centos.md) を参照してください。
+{{ linux-dist-cap }} 向けの Docker Community Edition については [Docker Engine - Community の入手（CentOS 向け）](/engine/install/centos.md) を参照してください。
 
 {% comment %}
 ## Prerequisites
@@ -381,12 +382,12 @@ Shared between centOS.md, oracle.md
 
     {% comment %}
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
     {% endcomment %}
     Docker Engine - Enterprise がインストールされ、実行できました。
     Docker コマンドの実行には `sudo` が必要になります。
-    続いて [Linux のインストール後](/engine/installation/linux/linux-postinstall.md)に進み、非特権ユーザーでも Docker コマンドが実行できる設定方法を参照してください。
+    続いて [Linux のインストール後](/engine/install/linux-postinstall.md){: target="_blank" class="_" } に進み、非特権ユーザーでも Docker コマンドが実行できる設定方法を参照してください。
 
 <!---
 Shared between centOS.md, rhel.md, oracle.md
@@ -493,11 +494,11 @@ Not shared
 
     {% comment %}
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
     {% endcomment %}
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/install/linux/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 <!---
@@ -585,9 +586,9 @@ Shared between centOS.md, rhel.md, oracle.md
 
 
 {% comment %}
-- Continue to [Post-installation steps for Linux](/install/linux/linux-postinstall.md){: target="_blank" class="_" }
+- Continue to [Post-installation steps for Linux](/engine/install/linux-postinstall.md){: target="_blank" class="_" }
 {% endcomment %}
-- [Linux のインストール後](/install/linux/linux-postinstall.md){: target="_blank" class="_" }へ進む
+- [Linux のインストール後](/engine/install/linux-postinstall.md){: target="_blank" class="_" }へ進む
 
 {% comment %}
 - Continue with user guides on [Universal Control Plane (UCP)](/ee/ucp/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/ee/dtr/){: target="_blank" class="_" }

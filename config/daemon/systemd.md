@@ -62,9 +62,9 @@ Docker をインストールしたら Docker デーモンを起動する必要�
 
 {% comment %}
 If you want Docker to start at boot, see
-[Configure Docker to start on boot](/install/linux/linux-postinstall.md#configure-docker-to-start-on-boot).
+[Configure Docker to start on boot](/engine/install/linux-postinstall.md#configure-docker-to-start-on-boot).
 {% endcomment %}
-Docker をシステムブート時に起動したい場合は [システムブート時の Docker 起動設定](/install/linux/linux-postinstall.md#configure-docker-to-start-on-boot) を参照してください。
+Docker をシステムブート時に起動したい場合は [システムブート時の Docker 起動設定](/engine/install/linux-postinstall.md#configure-docker-to-start-on-boot) を参照してください。
 
 {% comment %}
 ## Custom Docker daemon options
@@ -273,9 +273,10 @@ you need to add this configuration in the Docker systemd service file.
 ## Configure where the Docker daemon listens for connections
 
 {% comment %}
+[Configure where the Docker daemon listens for connections](/engine/install/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections).
 {% endcomment %}
 See
-[Configure where the Docker daemon listens for connections](/install/linux/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections).
+[Configure where the Docker daemon listens for connections](/engine/install/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections).
 
 {% comment %}
 ## Manually create the systemd unit files

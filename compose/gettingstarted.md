@@ -21,11 +21,11 @@ understandable even if you're not familiar with it.
 ## 前提条件
 
 {% comment %}
-Make sure you have already installed both [Docker Engine](/install/index.md)
+Make sure you have already installed both [Docker Engine](/get-docker.md)
 and [Docker Compose](install.md). You don't need to install Python or Redis, as
 both are provided by Docker images.
 {% endcomment %}
-[Docker Engine](/install/index.md) と [Docker Compose](install.md) をインストールしておいてください。
+[Docker Engine](/get-docker.md) と [Docker Compose](install.md) をインストールしておいてください。
 Python や Redis はインストールする必要はありません。
 これはいずれも Docker イメージとして提供されます。
 

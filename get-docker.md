@@ -3,6 +3,10 @@ description: Home page for Get Docker
 keywords: Docker, download, documentation, manual
 landing: true
 title: Docker の入手
+redirect_from:
+- /install/
+- /install/overview/
+- /installation/
 ---
 
 
@@ -46,7 +50,7 @@ Docker はさまざまなプラットフォームにダウンロードしイン�
                 <div class="component-icon">
                     <a href="install/linux/ubuntu/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>
                 </div>
-                <h3 id="docker-for-linux"><a href="install/linux/ubuntu/">Docker for Linux</a></h3>
+                <h3 id="docker-for-linux"><a href="engine/install/">Docker for Linux</a></h3>
                 <p>インストール済みの Linux ディストリビューション上に Docker をインストールします。</p>
             </div>
         </div>

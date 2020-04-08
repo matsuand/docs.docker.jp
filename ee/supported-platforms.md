@@ -221,10 +221,10 @@ details on EOL of minor and major versions of Docker Enterprise.
 ## Where to go next
 
 {% comment %}
-- [Install Docker Engine - Enterprise for RHEL](/install/linux/docker-ee/rhel/)
-- [Install Docker Engine - Enterprise for Ubuntu](/install/linux/docker-ee/ubuntu/)
-- [Install Docker Engine - Enterprise for Windows Server](/install/windows/docker-ee/)
+- [Install Docker Engine - Enterprise for RHEL](/ee/docker-ee/rhel.md)
+- [Install Docker Engine - Enterprise for Ubuntu](/ee/docker-ee/ubuntu/)
+- [Install Docker Engine - Enterprise for Windows Server](/ee/docker-ee/windows/docker-ee.md)
 {% endcomment %}
-- [Install Docker Engine - Enterprise for RHEL](/install/linux/docker-ee/rhel/)
-- [Install Docker Engine - Enterprise for Ubuntu](/install/linux/docker-ee/ubuntu/)
-- [Install Docker Engine - Enterprise for Windows Server](/install/windows/docker-ee/)
+- [Install Docker Engine - Enterprise for RHEL](/ee/docker-ee/rhel.md)
+- [Install Docker Engine - Enterprise for Ubuntu](/ee/docker-ee/ubuntu/)
+- [Install Docker Engine - Enterprise for Windows Server](/ee/docker-ee/windows/docker-ee.md)

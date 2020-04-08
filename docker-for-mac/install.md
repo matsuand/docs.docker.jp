@@ -104,11 +104,11 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 
 {% comment %}
 The Docker Desktop installation includes
-  [Docker Engine](/install/), Docker CLI client,
-  [Docker Compose](/compose/), [Notary](/notary/getting_started/), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
+  [Docker Engine](/engine/index.md), Docker CLI client,
+  [Docker Compose](/compose/index.md), [Notary](/notary/getting_started/), [Kubernetes](https://github.com/kubernetes/kubernetes/), and [Credential Helper](https://github.com/docker/docker-credential-helpers/).
 {% endcomment %}
 * Docker Desktop のインストールにより以下のものが利用できます。
-  [Docker Engine](/install/)、Docker CLI クライアント、[Docker Compose](/compose/)、[Notary](/notary/getting_started/)、[Kubernetes](https://github.com/kubernetes/kubernetes/)、[Credential Helper](https://github.com/docker/docker-credential-helpers/)。
+  [Docker Engine](/engine/index.md)、Docker CLI クライアント、[Docker Compose](/compose/index.md)、[Notary](/notary/getting_started/)、[Kubernetes](https://github.com/kubernetes/kubernetes/)、[Credential Helper](https://github.com/docker/docker-credential-helpers/)。
 
 {% comment %}
 ## Install and run Docker Desktop on Mac
