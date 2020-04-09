@@ -438,7 +438,7 @@ the default registry configuration):
 {% comment %}
 Services allow you to scale containers across multiple Docker daemons, which
 all work together as a _swarm_ with multiple _managers_ and _workers_. Each
-member of a swarm is a Docker daemon, and the daemons all communicate using
+member of a swarm is a Docker daemon, and all the daemons communicate using
 the Docker API. A service allows you to define the desired state, such as the
 number of replicas of the service that must be available at any given time.
 By default, the service is load-balanced across all worker nodes. To
@@ -446,7 +446,7 @@ the consumer, the Docker service appears to be a single application. Docker
 Engine supports swarm mode in Docker 1.12 and higher.
 {% endcomment %}
 サービスは、複数の Docker デーモンにわたって、コンテナーのスケール変更ができるようにします。
-複数のデーモンは*スォーム*と呼ばれるものとして扱われ、複数の*マネージャー* 、*ワーカー*とともに動作します。
+複数のデーモンは*スウォーム*と呼ばれるものとして扱われ、複数の*マネージャー* 、*ワーカー*とともに動作します。
 そしてすべてのデーモンが Docker API を利用して通信します。
 サービスは必要となる状態を定義することが可能であり、たとえばサービスのレプリカ数を、指定した時間においてどれだけ作り出すかを定義できます。
 デフォルトでは、すべてのワーカーノードにわたって負荷分散が行われます。

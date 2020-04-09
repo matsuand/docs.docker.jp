@@ -124,11 +124,17 @@ Docker 外部にあるプロセスが Docker コンテナーに依存するよ�
 この場合は [upstart](http://upstart.ubuntu.com/)、[systemd](http://freedesktop.org/wiki/Software/systemd/)、[supervisor](http://supervisord.org/) といったプロセスマネージャーを利用します。
 
 {% comment %}
-> **Warning**: Do not try to combine Docker restart policies with host-level
-> process managers, because this creates conflicts.
+> **Warning**
+>
+> Do not try to combine Docker restart policies with host-level process managers,
+> because this creates conflicts.
+{:.warning}
 {% endcomment %}
-> **警告**: Docker の再起動ポリシーとホストのプロセスマネージャーを組み合わせた利用は避けてください。
+> **警告**
+>
+> Docker の再起動ポリシーとホストのプロセスマネージャーを組み合わせた利用は避けてください。
 > これを行うと衝突が発生します。
+{:.warning}
 
 {% comment %}
 To use a process manager, configure it to start your container or service using
@@ -154,12 +160,17 @@ running and starts/restart it if not.
 このプロセスマネージャーから、プロセスの実行状態を確認したり、起動、再起動を行うこともできます。
 
 {% comment %}
-> **Warning**: These are not Docker-aware and just monitor operating system processes within the container.
+> **Warning**
 >
-> Docker does not recommend this approach, because it is platform-dependent and even differs within different versions of a given Linux distribution.
+> These are not Docker-aware and just monitor operating system processes within
+> the container. Docker does not recommend this approach, because it is
+> platform-dependent and even differs within different versions of a given Linux
+> distribution.
+{:.warning}
 {% endcomment %}
-> **警告**: この場合は Docker が察知できる状況ではなくなり、コンテナー内のオペレーティングシステムのプロセスをただ監視するだけになります。
+> **警告**
 >
+> この場合は Docker が察知できる状況ではなくなり、コンテナー内のオペレーティングシステムのプロセスをただ監視するだけになります。
 > Docker ではこの方法を推奨しません。
 > これはプラットフォームに依存する話であり、利用する Linux ディストリビューションの各バージョンによって異なるからです。
-
+{:.warning}

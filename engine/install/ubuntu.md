@@ -207,10 +207,10 @@ from the repository.
 
     {% comment %}
     Verify that you now have the key with the fingerprint
-    `9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88`, by searching for the
+    <span><code>9DC8 5822 9FC7 DD38 854A&nbsp;&nbsp;E2D8 8D81 803C 0EBF CD88</code></span>, by searching for the
     last 8 characters of the fingerprint.
     {% endcomment %}
-    鍵を取得し、その指紋が `9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88` であることを確認してください。
+    鍵を取得し、その指紋が <span><code>9DC8 5822 9FC7 DD38 854A&nbsp;&nbsp;E2D8 8D81 803C 0EBF CD88</code></span> であることを確認してください。
     最後の 8 文字の一致を確認します。
 
     ```bash
