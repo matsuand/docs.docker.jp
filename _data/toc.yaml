@@ -1131,11 +1131,11 @@ manuals:
     - path: /docker-for-mac/kubernetes/
       title: Deploy on Kubernetes
     - path: /docker-for-mac/docker-toolbox/
-      title: Docker Desktop for Mac vs. Docker Toolbox
+      title: Docker Desktop for Mac と Docker Toolbox
     - path: /docker-for-mac/multi-arch/
       title: Leveraging Multi-CPU architecture support
     - path: /docker-for-mac/networking/
-      title: Networking
+      title: ネットワーク機能
     - path: /docker-for-mac/osxfs/
       title: File system sharing
     - path: /docker-for-mac/osxfs-caching/
@@ -1157,13 +1157,13 @@ manuals:
     - path: /docker-for-windows/
       title: はじめよう
     - path: /docker-for-windows/install/
-      title: Install Docker Desktop for Windows
+      title: Docker Desktop for Windows のインストール
     - path: /docker-for-windows/dashboard/
       title: ダッシュボード
     - path: /docker-for-windows/kubernetes/
       title: Deploy on Kubernetes
     - path: /docker-for-windows/networking/
-      title: Networking
+      title: ネットワーク機能
     - path: /docker-for-windows/docker-toolbox/
       title: Migrate Docker Toolbox
     - path: /docker-for-windows/troubleshoot/
