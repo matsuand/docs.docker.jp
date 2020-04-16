@@ -36,8 +36,8 @@ Raspbian versions:
 {% endcomment %}
 Docker Engine をインストールするには、Debian か Raspbian の 64 ビットバージョンが必要です。
 
-- Ubuntu Buster 10 (安定版)
-- Ubuntu Stretch 9 / Raspbian Stretch
+- Debian Buster 10 (安定版)
+- Debian Stretch 9 / Raspbian Stretch
 
 {% comment %}
 Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.

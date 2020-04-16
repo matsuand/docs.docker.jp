@@ -53,74 +53,85 @@ script:
 もっともそれほどの柔軟性を必要としないのであれば、以下のようなラッパースクリプトを使ってこの問題を回避する方法もあります。
 
 {% comment %}
--   Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
-    [dockerize](https://github.com/jwilder/dockerize), or sh-compatible
-    [wait-for](https://github.com/Eficode/wait-for). These are small
-    wrapper scripts which you can include in your application's image to
-    poll a given host and port until it's accepting TCP connections.
+- Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
+  [dockerize](https://github.com/jwilder/dockerize), or sh-compatible
+  [wait-for](https://github.com/Eficode/wait-for). These are small
+  wrapper scripts which you can include in your application's image to
+  poll a given host and port until it's accepting TCP connections.
 {% endcomment %}
--   [wait-for-it](https://github.com/vishnubob/wait-for-it)、
-    [dockerize](https://github.com/jwilder/dockerize)、あるいはシェル互換の [wait-for](https://github.com/Eficode/wait-for) を利用します。
-    これは非常に小さなラッパースクリプトです。
-    これをアプリケーションイメージに含めて、指定されたホストが TCP 接続を受け入れるまでの間、指定ポートに問い合わせを行うようにすることができます。
+- [wait-for-it](https://github.com/vishnubob/wait-for-it)、
+  [dockerize](https://github.com/jwilder/dockerize)、あるいはシェル互換の [wait-for](https://github.com/Eficode/wait-for) を利用します。
+  これは非常に小さなラッパースクリプトです。
+  これをアプリケーションイメージに含めて、指定されたホストが TCP 接続を受け入れるまでの間、指定ポートに問い合わせを行うようにすることができます。
 
-    {% comment %}
-    For example, to use `wait-for-it.sh` or `wait-for` to wrap your service's command:
-    {% endcomment %}
-    たとえば `wait-for-it.sh` または `wait-for` を使って、サービスコマンドをラップするには以下のようにします。
+  {% comment %}
+  For example, to use `wait-for-it.sh` or `wait-for` to wrap your service's command:
+  {% endcomment %}
+  たとえば `wait-for-it.sh` または `wait-for` を使って、サービスコマンドをラップするには以下のようにします。
 
-        version: "2"
-        services:
-          web:
-            build: .
-            ports:
-              - "80:8000"
-            depends_on:
-              - "db"
-            command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
-          db:
-            image: postgres
+  ```yaml
+  version: "2"
+  services:
+    web:
+      build: .
+      ports:
+        - "80:8000"
+      depends_on:
+        - "db"
+      command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
+    db:
+      image: postgres
+  ```
 
-    {% comment %}
-    >**Tip**: There are limitations to this first solution. For example, it doesn't verify when a specific service is really ready. If you add more arguments to the command, use the `bash shift` command with a loop, as shown in the next example.
-    {% endcomment %}
-    >**ヒント**: この解決方法には限界があります。
-    > たとえば指定するサービスが、本当に準備状態であるかどうかは確認できません。
-    > コマンドにさらに引数を追加して `bash shift` を利用し、ループによって対処するのが次の例です。
+  {% comment %}
+  > **Tip**
+  >
+  > There are limitations to this first solution. For example, it doesn't verify
+  > when a specific service is really ready. If you add more arguments to the
+  > command, use the `bash shift` command with a loop, as shown in the next
+  > example.
+  {% endcomment %}
+  > **ヒント**
+  >
+  > この解決方法には限界があります。
+  > たとえば指定するサービスが、本当に準備状態であるかどうかは確認できません。
+  > コマンドにさらに引数を追加して `bash shift` を利用し、ループによって対処するのが次の例です。
 
 {% comment %}
--   Alternatively, write your own wrapper script to perform a more application-specific health
-    check. For example, you might want to wait until Postgres is definitely
-    ready to accept commands:
+- Alternatively, write your own wrapper script to perform a more application-specific
+  health check. For example, you might want to wait until Postgres is ready to
+  accept commands:
 {% endcomment %}
--   別の方法として、独自にラッパースクリプトを用意して、アプリケーション特有のヘルスチェックを実現することも考えられます。
-    たとえば、Postgres が完全に準備状態になって、コマンドを受け付けるようになるまで待ちたいとするなら、以下のスクリプトを用意します。
+- 別の方法として、独自にラッパースクリプトを用意して、アプリケーション特有のヘルスチェックを実現することも考えられます。
+  たとえば Postgres が完全に準備状態になって、コマンドを受け付けるようになるまで待ちたいとするなら、以下のスクリプトを用意します。
 
-        #!/bin/sh
-        # wait-for-postgres.sh
+  ```bash
+  #!/bin/sh
+  # wait-for-postgres.sh
 
-        set -e
+  set -e
 
-        host="$1"
-        shift
-        cmd="$@"
+  host="$1"
+  shift
+  cmd="$@"
 
-        until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -U "postgres" -c '\q'; do
-          >&2 echo "Postgres is unavailable - sleeping"
-          sleep 1
-        done
+  until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -U "postgres" -c '\q'; do
+    >&2 echo "Postgres is unavailable - sleeping"
+    sleep 1
+  done
 
-        >&2 echo "Postgres is up - executing command"
-        exec $cmd
+  >&2 echo "Postgres is up - executing command"
+  exec $cmd
+  ```
 
-    {% comment %}
-    You can use this as a wrapper script as in the previous example, by setting:
-    {% endcomment %}
-    このラッパースクリプトを先の例において利用するには、以下のように設定します。
+  {% comment %}
+  You can use this as a wrapper script as in the previous example, by setting:
+  {% endcomment %}
+  このラッパースクリプトを先の例において利用するには、以下のように設定します。
 
-    ```none
-    command: ["./wait-for-postgres.sh", "db", "python", "app.py"]
-    ```
+  ```yaml
+  command: ["./wait-for-postgres.sh", "db", "python", "app.py"]
+  ```
 
 
 {% comment %}

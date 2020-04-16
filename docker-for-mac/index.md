@@ -24,17 +24,20 @@ Docker Desktop へようこそ！
 {% comment %}
 The _Docker Desktop for Mac_ section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
 {% endcomment %}
-The _Docker Desktop for Mac_ section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
+**Docker Desktop for Mac** に関するこのページでは、Docker Desktop Community 安定版リリースについて説明します。
+Edge 版リリースにおいて利用可能な機能に関しては [Edge リリースノート](edge-release-notes/) を参照してください。
+また Docker Desktop Enterprise (DDE) リリースについては [Docker Desktop Enterprise](/ee/desktop/) を参照してください。
 
 {% comment %}
 Docker is a full development platform to build, run, and share containerized applications. Docker Desktop is the best way to get started with Docker on Mac.
 {% endcomment %}
-Docker is a full development platform to build, run, and share containerized applications. Docker Desktop is the best way to get started with Docker on Mac.
+Docker には、コンテナー化アプリケーションをビルド、実行し、共有するための開発プラットフォームがすべて含まれています。
+Mac 上において Docker をはじめるには Docker Desktop が最適です。
 
 {% comment %}
 See [Install Docker Desktop](install.md){: target="_blank" class="_"} for download information, system requirements, and installation instructions.
 {% endcomment %}
-See [Install Docker Desktop](install.md){: target="_blank" class="_"} for download information, system requirements, and installation instructions.
+[Docker Desktop のインストール](install.md){: target="_blank" class="_"} を参照して、ダウンロード情報、システム前提条件、インストール手順を確認してください。
 
 {% comment %}
 ## Check versions

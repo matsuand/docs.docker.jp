@@ -37,8 +37,8 @@ production. These changes may include:
 - Removing any volume bindings for application code, so that code stays inside
   the container and can't be changed from outside
 - Binding to different ports on the host
-- Setting environment variables differently, such as when you need to decrease the verbosity of
-  logging, or to enable email sending)
+- Setting environment variables differently, such as reducing the verbosity of
+  logging, or to specify settings for external services such as an email server
 - Specifying a restart policy like `restart: always` to avoid downtime
 - Adding extra services such as a log aggregator
 {% endcomment %}
@@ -46,7 +46,7 @@ production. These changes may include:
   コードは内部のみで実現するようにし、外部から変更されないようにします。
 - ホスト上のポートは別のものを割り当てます。
 - 環境変数は区別して割り当てます。
-  （たとえば冗長なログ出力とならないようにログレベルを下げる、メール送信を可能にする、など。）
+  たとえば冗長なログ出力が不要な場合にログレベルを下げるとか、メールサーバーのような外部サーバーの設定を行うなど。
 - 再起動ポリシーを設定します。
   例えば `restart: always` とすることで、システムダウンの時間を減らします。
 - ログ収集といったような追加サービスを設定します。

@@ -1,4 +1,4 @@
-{% assign green-check = '![yes](/install/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign green-check = '![yes](/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
 
 |  性能                                                                              | Docker エンジン - Comunity版  | Docker エンジン - Enterprise版 | Docker Enterprise |
 |:-----------------------------------------------------------------------------------|:------------------:|:-------------------------:|:----------------------------:|

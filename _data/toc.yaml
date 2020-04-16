@@ -147,7 +147,7 @@ guides:
         - path: /engine/security/trust/trust_sandbox/
           title: Play in a content trust sandbox
       - path: /engine/security/antivirus/
-        title: Antivirus software and Docker
+        title: ウィルス対策ソフトウェアと Docker
       - path: /engine/security/apparmor/
         title: AppArmor security profiles for Docker
       - path: /engine/security/seccomp/
@@ -1102,10 +1102,10 @@ manuals:
     title: Docker スタックと配布アプリケーションバンドル
   - path: /compose/swarm/
     title: Compose において Swarm を使う
-  - path: /compose/env-file/
-    title: 環境ファイル
   - path: /compose/environment-variables/
     title: Compose の環境変数
+  - path: /compose/env-file/
+    title: 環境ファイル
   - path: /compose/extends/
     title: Compose の拡張サービス
   - path: /compose/networking/

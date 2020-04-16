@@ -274,10 +274,10 @@ However, the `configs` key is not supported for `docker compose`. See
 {% comment %}
 This simple example shows how configs work in just a few commands. For a
 real-world example, continue to
-[Intermediate example: Use configs with a Nginx service](#advanced-example-use-configs-with-a-nginx-service).
+[Advanced example: Use configs with a Nginx service](#advanced-example-use-configs-with-a-nginx-service).
 {% endcomment %}
 この簡単な例では、コマンドを少し書くだけで configs が動作することを示します。
-現実的な例としては、[応用例: Nginx サービスに configs を利用する](#advanced-example-use-configs-with-a-nginx-service)に進んでください。
+現実的な例としては、[応用例: Nginx サービスに configs を利用する](#advanced-example-use-configs-with-a-nginx-service) に進んでください。
 
 {% comment %}
 1.  Add a config to Docker. The `docker config create` command reads standard

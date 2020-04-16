@@ -1,6 +1,6 @@
 ---
 description: Docker Hub のウェブフック。
-keywords: Docker, webhookds, hub, builds
+keywords: Docker, webhooks, hub, builds
 title: Docker Hub のウェブフック
 ---
 
