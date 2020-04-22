@@ -10,3 +10,5 @@ Docker ではこの試験的機能に対するサポートは行っていませ�
 > Docker Desktop メニューから試験的機能を有効にするには、**Settings** (macOS の場合は **Preferences**) > **Command Line** をクリックし、**Enable experimental features** チェックを有効にします。
 そして **Apply & Restart** をクリックしてください。
 {: .important }
+
+Docker CLI における現時点での試験的機能については [Docker CLI 試験的機能](https://github.com/docker/cli/blob/master/experimental/README.md) の一覧を参照してください。

@@ -122,25 +122,29 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     このファイルがどのようにして動作するかの詳細は [`docker-compose.yml` リファレンス](/compose/compose-file/index.md)を参照してください。
 
 {% comment %}
-9.  Add the following configuration to the file.
+9. Add the following configuration to the file.
 {% endcomment %}
-9.  以下の設定内容をファイルに記述します。
+9. 以下の設定内容をファイルに記述します。
 
     ```none
-    version: '3'
+     version: '3'
 
-    services:
-      db:
-        image: postgres
-      web:
-        build: .
-        command: python manage.py runserver 0.0.0.0:8000
-        volumes:
-          - .:/code
-        ports:
-          - "8000:8000"
-        depends_on:
-          - db
+     services:
+       db:
+         image: postgres
+         environment:
+           - POSTGRES_DB=postgres
+           - POSTGRES_USER=postgres
+           - POSTGRES_PASSWORD=postgres
+       web:
+         build: .
+         command: python manage.py runserver 0.0.0.0:8000
+         volumes:
+           - .:/code
+         ports:
+           - "8000:8000"
+         depends_on:
+           - db
     ```
 
     {% comment %}
@@ -253,26 +257,29 @@ In this section, you set up the database connection for Django.
 1.  プロジェクトディレクトリにおいて`composeexample/settings.py`ファイルを編集します。
 
 {% comment %}
-2.  Replace the `DATABASES = ...` with the following:
+2. Replace the `DATABASES = ...` with the following:
 {% endcomment %}
-2.  `DATABASES = ...`の部分を以下のように書き換えます。
+2. `DATABASES = ...`の部分を以下のように書き換えます。
 
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql',
-                'NAME': 'postgres',
-                'USER': 'postgres',
-                'HOST': 'db',
-                'PORT': 5432,
-            }
-        }
+       # setting.py
 
-    {% comment %}
-    These settings are determined by the
-    [postgres](https://hub.docker.com/_/postgres) Docker image
-    specified in `docker-compose.yml`.
-    {% endcomment %}
-    上の設定は`docker-compose.yml`に指定した Docker イメージ [postgres](https://hub.docker.com/_/postgres) が定めている内容です。
+       DATABASES = {
+           'default': {
+               'ENGINE': 'django.db.backends.postgresql',
+               'NAME': 'postgres',
+               'USER': 'postgres',
+               'PASSWORD': 'postgres',
+               'HOST': 'db',
+               'PORT': 5432,
+           }
+       }
+
+   {% comment %}
+   These settings are determined by the
+   [postgres](https://hub.docker.com/_/postgres) Docker image
+   specified in `docker-compose.yml`.
+   {% endcomment %}
+   上の設定は`docker-compose.yml`に指定した Docker イメージ [postgres](https://hub.docker.com/_/postgres) が定めている内容です。
 
 {% comment %}
 3.  Save and close the file.

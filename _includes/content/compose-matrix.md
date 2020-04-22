@@ -9,6 +9,7 @@ This table shows which Compose file versions support specific Docker releases.
 {% endcomment %}
 | **Compose ファイルフォーマット** | **Docker Engine リリース** |
 |  -------------------    |    ------------------     |
+|      3.8                |       19.03.0 以上        |
 |      3.7                |       18.06.0 以上        |
 |      3.6                |       18.02.0 以上        |
 |      3.5                |       17.12.0 以上        |

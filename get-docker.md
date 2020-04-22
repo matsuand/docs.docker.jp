@@ -30,18 +30,18 @@ Docker はさまざまなプラットフォームにダウンロードしイン�
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="docker-for-mac/install/"> <img src="../images/apple_48.svg" alt="Docker Desktop for Mac"> </a>
+                    <a href="/docker-for-mac/install/"> <img src="../images/apple_48.svg" alt="Docker Desktop for Mac"> </a>
                 </div>
-                <h3 id="docker-for-mac"><a href="docker-for-mac/install/">Docker Desktop for Mac</a></h3>
+                <h3 id="docker-for-mac"><a href="/docker-for-mac/install/">Docker Desktop for Mac</a></h3>
                 <p>Mac 上ですべての Docker ツールを実行するために macOS サンドボックスセキュリティモデルを使うネイティブなアプリケーションです。</p>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="docker-for-windows/install/"> <img src="../images/windows_48.svg" alt="Docker Desktop for Windows"> </a>
+                    <a href="/docker-for-windows/install/"> <img src="../images/windows_48.svg" alt="Docker Desktop for Windows"> </a>
                 </div>
-                <h3 id="docker-for-windows/install/"><a href="docker-for-windows/install/">Docker Desktop for Windows</a></h3>
+                <h3 id="docker-for-windows/install/"><a href="/docker-for-windows/install/">Docker Desktop for Windows</a></h3>
                 <p>Windows コンピューター上ですべての Docker ツールを実行するためのネイティブ Windows アプリケーションです。</p>
             </div>
         </div>
@@ -50,7 +50,7 @@ Docker はさまざまなプラットフォームにダウンロードしイン�
                 <div class="component-icon">
                     <a href="install/linux/ubuntu/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>
                 </div>
-                <h3 id="docker-for-linux"><a href="engine/install/">Docker for Linux</a></h3>
+                <h3 id="docker-for-linux"><a href="/engine/install/">Docker for Linux</a></h3>
                 <p>インストール済みの Linux ディストリビューション上に Docker をインストールします。</p>
             </div>
         </div>

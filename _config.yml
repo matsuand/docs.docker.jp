@@ -1,4 +1,4 @@
-name: Docker ドキュメント
+name: Docker Documentation
 markdown: kramdown
 kramdown:
   input: GFM
@@ -11,10 +11,8 @@ incremental: true
 permalink: pretty
 safe: false
 lsi: false
-lang: ja_JP
-url: https://matsuand.github.io/docs.docker.jp.onthefly
 # This needs to have all the directories you expect to be in the archives (delivered by docs-base in the Dockerfile)
-keep_files: ["v17.03", "v17.06", "v17.09", "v17.12", "v18.03", "v18.09"]
+keep_files: ["v17.06", "v18.03", "v18.09"]
 exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.html"]
 
 # Component versions -- address like site.docker_ce_version
@@ -23,8 +21,8 @@ exclude: ["_scripts", "apidocs/layouts", "Gemfile", "hooks", "index.html", "404.
 latest_engine_api_version: "1.40"
 docker_ce_version: "19.03"
 docker_ee_version: "19.03"
-compose_version: "1.24.1"
-compose_file_v3: "3.7"
+compose_version: "1.25.5"
+compose_file_v3: "3.8"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
 distribution_version: "2.7"
@@ -82,10 +80,7 @@ tablabels:
   engine-19.03: Docker EE Engine 19.03
   engine-18.09: Docker EE Engine 18.09
   engine-18.03: Docker EE Engine 18.03
-  engine-17.12: Docker EE Engine 17.12
-  engine-17.09: Docker EE Engine 17.09
   engine-17.06: Docker EE Engine 17.06
-  engine-17.03: Docker EE Engine 17.03
   docker-cli-linux: Docker CLI on Mac/Linux
   docker-cli-win: Docker CLI on Windows
   kubectl: Kubernetes CLI
@@ -110,10 +105,6 @@ defaults:
       toc_max: 3
       tree: true
   - scope:
-      path: "install"
-    values:
-      win_latest_build: "docker-19.03.3"
-  - scope:
       path: "datacenter"
     values:
       enterprise: true
@@ -125,8 +116,9 @@ defaults:
       ucp_repo: "ucp"
       dtr_org: "docker"
       dtr_repo: "dtr"
-      ucp_version: "3.2.3"
-      dtr_version: "2.7.3"
+      ucp_version: "3.2.6"
+      dtr_version: "2.7.6"
+      win_latest_build: "docker-19.03.5"
   # Previous DTR Releases
   - scope:
       path: "datacenter/dtr/2.6"
@@ -134,14 +126,14 @@ defaults:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.6.10"
+      dtr_version: "2.6.12"
   - scope:
       path: "datacenter/dtr/2.5"
     values:
       hide_from_sitemap: true
       dtr_org: "docker"
       dtr_repo: "dtr"
-      dtr_version: "2.5.14"
+      dtr_version: "2.5.16"
   - scope:
       path: "datacenter/dtr/2.4"
     values:
@@ -179,14 +171,14 @@ defaults:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.1.11"
+      ucp_version: "3.1.12"
   - scope:
       path: "datacenter/ucp/3.0"
     values:
       hide_from_sitemap: true
       ucp_org: "docker"
       ucp_repo: "ucp"
-      ucp_version: "3.0.15"
+      ucp_version: "3.0.16"
   - scope:
       path: "datacenter/ucp/2.2"
     values:
