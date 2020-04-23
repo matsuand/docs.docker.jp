@@ -508,6 +508,17 @@ build:
   network: custom_network_1
 ```
 
+{% comment %}
+Use `none` to disable networking during build:
+{% endcomment %}
+`none` を指定すると、ビルド中のネットワークを無効にします。
+
+```yaml
+build:
+  context: .
+  network: none
+```
+
 #### shm_size
 
 {% comment %}

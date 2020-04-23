@@ -200,7 +200,7 @@ If you want to test it out, you can clone
 {: #more-resources }
 
 {% comment %}
-There are lots more resources available to help you write your `Dockerfile`.
+There are lots of resources available to help you write your `Dockerfile`.
 {% endcomment %}
 `Dockerfile`の書き方については、他にも多く触れています。
 

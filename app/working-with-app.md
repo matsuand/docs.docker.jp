@@ -216,7 +216,7 @@ Creating service my-app_hello
 Application "my-app" installed on context "default"
 ```
 
-By default, `docker app` uses the [current context](/engine/context/working-with-contexts) to run the
+By default, `docker app` uses the [current context]({{site.baseurl}}/engine/context/working-with-contexts) to run the
 installation container and as a target context to deploy the application. You can override the second context
 using the flag `--target-context` or by using the environment variable `DOCKER_TARGET_CONTEXT`. This flag is also
 available for the commands `status`, `upgrade`, and `uninstall`.

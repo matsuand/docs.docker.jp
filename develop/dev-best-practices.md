@@ -149,7 +149,7 @@ keep image size small:
 ## テストやデプロイ時の CI/CD 利用
 
 {% comment %}
-- When you check a change into source control or create a pull request, use
+- When you check in a change to source control or create a pull request, use
   [Docker Hub](/docker-hub/builds/index.md) or
   another CI/CD pipeline to automatically build and tag a Docker image and test
   it.

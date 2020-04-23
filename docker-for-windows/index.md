@@ -21,7 +21,7 @@ Welcome to Docker Desktop!
 
 {% comment %}
 {% endcomment %}
-The _Docker Desktop for Windows_ section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/ee/desktop/).
+The _Docker Desktop for Windows_ section contains information about the Docker Desktop Community Stable release. For information about features available in Edge releases, see the [Edge release notes](edge-release-notes/). For information about Docker Desktop Enterprise (DDE) releases, see [Docker Desktop Enterprise](/desktop/enterprise/).
 
 {% comment %}
 {% endcomment %}

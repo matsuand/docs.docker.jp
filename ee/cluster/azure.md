@@ -13,7 +13,7 @@ title: Azure 上にて Docker Cluster をはじめよう
 ## 前提条件
 
 {% comment %}
-- Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
+- Completed installation of [Docker Desktop Enterprise](/desktop/enterprise/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
 - Sign up for the following items for your Azure account:
   - Service Principal UUID
   - Service Principal App Secret
@@ -22,7 +22,7 @@ title: Azure 上にて Docker Cluster をはじめよう
 - Organizations wishing to provision roles with explicit permissions should refer to [custom roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
 and [Azure Permissions](https://github.com/kubernetes/cloud-provider-azure/blob/master/docs/azure-permissions.md) for more information.
 {% endcomment %}
-- Completed installation of [Docker Desktop Enterprise](../ee/desktop/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
+- Completed installation of [Docker Desktop Enterprise](/desktop/enterprise/) on Windows or Mac, or the [Docker Enterprise Engine](https://docs.docker.com/ee/supported-platforms/) on Linux.
 - Sign up for the following items for your Azure account:
   - Service Principal UUID
   - Service Principal App Secret

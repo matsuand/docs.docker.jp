@@ -164,9 +164,9 @@ When you license UCP, the same license is applied to the underlying engines in t
 ### Desktop Enterprise
 
 {% comment %}
-> Docker Desktop Enterprise licenses are not included as part of your UCP, DTR, and Engine - Enterprise license. It is a separate license installed on developer workstations. Please contact your Sales team to obtain [Docker Desktop Enterprise](https://docs.docker.com/ee/desktop/) licenses.
+> Docker Desktop Enterprise licenses are not included as part of your UCP, DTR, and Engine - Enterprise license. It is a separate license installed on developer workstations. Please contact your Sales team to obtain [Docker Desktop Enterprise](https://docs.docker.com/desktop/enterprise/) licenses.
 {% endcomment %}
-> Docker Desktop Enterprise licenses are not included as part of your UCP, DTR, and Engine - Enterprise license. It is a separate license installed on developer workstations. Please contact your Sales team to obtain [Docker Desktop Enterprise](https://docs.docker.com/ee/desktop/) licenses.
+> Docker Desktop Enterprise licenses are not included as part of your UCP, DTR, and Engine - Enterprise license. It is a separate license installed on developer workstations. Please contact your Sales team to obtain [Docker Desktop Enterprise](https://docs.docker.com/desktop/enterprise/) licenses.
 
 {% comment %}
 {% endcomment %}

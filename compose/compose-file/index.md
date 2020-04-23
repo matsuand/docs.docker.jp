@@ -485,6 +485,42 @@ build:
     - "com.example.label-with-empty-value"
 ```
 
+#### network
+
+{% comment %}
+> Added in [version 3.4](compose-versioning.md#version-34) file format
+{% endcomment %}
+> ファイルフォーマット[バージョン 3.4](compose-versioning.md#version-34) における追加。
+
+{% comment %}
+Set the network containers connect to for the `RUN` instructions during
+build.
+{% endcomment %}
+ビルド中の `RUN` 命令において、ネットワークコンテナーの接続先を設定します。
+
+```yaml
+build:
+  context: .
+  network: host
+```
+
+```yaml
+build:
+  context: .
+  network: custom_network_1
+```
+
+{% comment %}
+Use `none` to disable networking during build:
+{% endcomment %}
+`none` を指定すると、ビルド中のネットワークを無効にします。
+
+```yaml
+build:
+  context: .
+  network: none
+```
+
 #### shm_size
 
 {% comment %}
@@ -988,9 +1024,9 @@ Several sub-options are available:
 #### endpoint_mode
 
 {% comment %}
-> Added in [version 3.3](compose-versioning.md#version-33) file format.
+> Added in [version 3.2](compose-versioning.md#version-32) file format.
 {% endcomment %}
-> ファイルフォーマット[バージョン 3](compose-versioning.md#version-3) における追加
+> ファイルフォーマット[バージョン 3.2](compose-versioning.md#version-32) における追加。
 
 {% comment %}
 Specify a service discovery method for external clients connecting to a swarm.
@@ -1131,10 +1167,13 @@ services:
 #### placement
 
 {% comment %}
-Specify placement of constraints and preferences. See the docker service create documentation for a full description of the syntax and available types of [constraints](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint) and [preferences](/engine/reference/commandline/service_create.md#specify-service-placement-preferences-placement-pref).
+Specify placement of constraints and preferences. See the docker service create
+documentation for a full description of the syntax and available types of
+[constraints](../../engine/reference/commandline/service_create.md#specify-service-constraints---constraint)
+and [preferences](../../engine/reference/commandline/service_create.md#specify-service-placement-preferences---placement-pref).
 {% endcomment %}
 制約（constraints）とプリファレンス（preferences）の記述場所を指定します。
-docker service create のドキュメントには、[制約](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint) と [プリファレンス](/engine/reference/commandline/service_create.md#specify-service-placement-preferences-placement-pref) に関する文法と設定可能な型について、詳細に説明しているので参照してください。
+docker service create のドキュメントには、[制約](../../engine/reference/commandline/service_create.md#specify-service-constraints---constraint) と [プリファレンス](../../engine/reference/commandline/service_create.md#specify-service-placement-preferences---placement-pref) に関する文法と設定可能な型について、詳細に説明しているので参照してください。
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
