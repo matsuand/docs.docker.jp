@@ -28,7 +28,7 @@ production servers in the cloud. Total reading time is less than an hour.
 {% comment %}
 [Get started with Docker](/get-started/){: class="button outline-btn"}
 {% endcomment %}
-[Docker をはじめよう](/get-started/){: class="button outline-btn"}
+[Docker をはじめよう]({{ site.baseurl }}/get-started/){: class="button outline-btn"}
 
 {% comment %}
 ## Docker products
@@ -41,7 +41,7 @@ production servers in the cloud. Total reading time is less than an hour.
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="docker-for-mac/install/"> <img src="../images/apple_48.svg" alt="Docker Desktop for Mac"> </a>
+                    <a href="docker-for-mac/install/"> <img src="{{ site.baseurl }}/images/apple_48.svg" alt="Docker Desktop for Mac"> </a>
                 </div>
                 <h3 id="docker-for-mac"><a href="/docker-for-mac/install/">Docker Desktop for Mac</a></h3>
                 <p>Mac 上ですべての Docker ツールを実行するために macOS サンドボックスセキュリティモデルを使うネイティブなアプリケーションです。</p>
@@ -50,7 +50,7 @@ production servers in the cloud. Total reading time is less than an hour.
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="docker-for-windows/install/"> <img src="../images/windows_48.svg" alt="Docker Desktop for Windows"> </a>
+                    <a href="docker-for-windows/install/"> <img src="{{ site.baseurl }}/images/windows_48.svg" alt="Docker Desktop for Windows"> </a>
                 </div>
                 <h3 id="docker-for-windows"><a href="/docker-for-windows/install/">Docker Desktop for Windows</a></h3>
                 <p>Windows コンピューター上ですべての Docker ツールを実行するためのネイティブ Windows アプリケーションです。</p>
@@ -59,7 +59,7 @@ production servers in the cloud. Total reading time is less than an hour.
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="engine/install/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>
+                    <a href="engine/install/"> <img src="{{ site.baseurl }}/images/linux_48.svg" alt="Docker for Linux"> </a>
                 </div>
                 <h3 id="docker-for-linux"><a href="/engine/install/">Docker for Linux</a></h3>
                 <p>インストール済みの Linux ディストリビューション上に Docker をインストールします。</p>
@@ -111,7 +111,7 @@ DTR はエンタープライズレベルのレジストリにおいてイメー�
 {% comment %}
 [Learn more about Docker Enterprise](/ee/){: class="button outline-btn"}
 {% endcomment %}
-[Docker Enterprise について学ぶ](/ee/){: class="button outline-btn"}
+[Docker Enterprise について学ぶ]({{ site.baseurl }}/ee/){: class="button outline-btn"}
 
 </div>
 </div><!-- end row -->
