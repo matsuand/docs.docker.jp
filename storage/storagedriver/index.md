@@ -678,8 +678,8 @@ work, with one or more virtual disks per virtual machine.
 ## 関連情報
 
 {% comment %}
-* [Volumes](/storage/volumes.md)
+* [Volumes](../volumes.md)
 * [Select a storage driver](select-storage-driver.md)
 {% endcomment %}
-* [ボリューム](/storage/volumes.md)
+* [ボリューム](../volumes.md)
 * [ストレージドライバーの選定](select-storage-driver.md)

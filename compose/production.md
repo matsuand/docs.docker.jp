@@ -111,13 +111,13 @@ recreating any services which `web` depends on.
 You can use Compose to deploy an app to a remote Docker host by setting the
 `DOCKER_HOST`, `DOCKER_TLS_VERIFY`, and `DOCKER_CERT_PATH` environment variables
 appropriately. For tasks like this,
-[Docker Machine](/machine/overview.md) makes managing local and
+[Docker Machine](../machine/overview.md) makes managing local and
 remote Docker hosts very easy, and is recommended even if you're not deploying
 remotely.
 {% endcomment %}
 Compose を使って、リモートの Docker ホストへアプリをデプロイすることができます。
 これを行うには `DOCKER_HOST`、`DOCKER_TLS_VERIFY`、`DOCKER_CERT_PATH` という各環境変数を適切に設定します。
-この作業を行うにあたっては  [Docker Machine](/machine/overview.md) を用いれば、Docker ホストがローカルでもリモートでも簡単に管理することができます。
+この作業を行うにあたっては  [Docker Machine](../machine/overview.md) を用いれば、Docker ホストがローカルでもリモートでも簡単に管理することができます。
 リモートへのデプロイを行うことがない場合でも、このツールを用いることをお勧めします。
 
 {% comment %}
@@ -133,11 +133,11 @@ commands work with no further configuration.
 {: #running-compose-on-a-swarm-cluster }
 
 {% comment %}
-[Docker Swarm](/swarm/overview.md), a Docker-native clustering
+[Docker Swarm](../swarm/overview.md), a Docker-native clustering
 system, exposes the same API as a single Docker host, which means you can use
 Compose against a Swarm instance and run your apps across multiple hosts.
 {% endcomment %}
-[Docker Swarm](/swarm/overview.md) は Docker のネイティブなクラスターシステムです。
+[Docker Swarm](../swarm/overview.md) は Docker のネイティブなクラスターシステムです。
 単一 Docker ホストと同様の API を提供します。
 つまりスウォームインタンスに対しても Compose を利用することができ、また複数ホストにわたってアプリを実行することができるということです。
 
@@ -155,9 +155,9 @@ Compose と Swarm の統合に関しては、[統合に関する説明](swarm.md
 
 {% comment %}
 - [Installing Compose](install.md)
-- [Command line reference](/compose/reference/index.md)
-- [Compose file reference](/compose/compose-file/index.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)
 {% endcomment %}
 - [Compose のインストール](install.md)
-- [コマンドラインリファレンス](/compose/reference/index.md)
-- [Compose ファイルリファレンス](/compose/compose-file/index.md)
+- [コマンドラインリファレンス](reference/index.md)
+- [Compose ファイルリファレンス](compose-file/index.md)

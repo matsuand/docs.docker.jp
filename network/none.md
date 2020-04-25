@@ -73,14 +73,14 @@ only the loopback device is created. The following example illustrates this.
 ## 次のステップ
 
 {% comment %}
--  Go through the [host networking tutorial](/network/network-tutorial-host.md)
-- Learn about [networking from the container's point of view](/config/containers/container-networking.md)
-- Learn about [bridge networks](/network/bridge.md)
-- Learn about [overlay networks](/network/overlay.md)
-- Learn about [Macvlan networks](/network/macvlan.md)
+-  Go through the [host networking tutorial](network-tutorial-host.md)
+- Learn about [networking from the container's point of view](../config/containers/container-networking.md)
+- Learn about [bridge networks](bridge.md)
+- Learn about [overlay networks](overlay.md)
+- Learn about [Macvlan networks](macvlan.md)
 {% endcomment %}
-- [ホストネットワークチュートリアル](/network/network-tutorial-host.md) を一通り読む
-- [コンテナーから見たネットワーク](/config/containers/container-networking.md) について学ぶ
-- [ブリッジネットワーク](/network/bridge.md) について学ぶ
-- [オーバーレイネットワーク](/network/overlay.md) について学ぶ
-- [Macvlan ネットワーク](/network/macvlan.md) について学ぶ
+- [ホストネットワークチュートリアル](network-tutorial-host.md) を一通り読む
+- [コンテナーから見たネットワーク](../config/containers/container-networking.md) について
+- [ブリッジネットワーク](bridge.md) について
+- [オーバーレイネットワーク](overlay.md) について
+- [Macvlan ネットワーク](macvlan.md) について

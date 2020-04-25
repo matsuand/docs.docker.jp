@@ -146,17 +146,17 @@ SELinux や AppArmor を設定し有効にする手順については、各 Linu
 
 {% comment %}
 - Enable `seccomp` security profiles if possible. See
-  [Enabling `seccomp` for Docker](/engine/security/seccomp.md).
+  [Enabling `seccomp` for Docker](../security/seccomp.md).
 {% endcomment %}
 - 利用可能であれば、セキュリティプロファイル `seccomp` を有効にしてください。
-  [Docker における `seccomp` の利用](/engine/security/seccomp.md)を参照。
+  [Docker における `seccomp` の利用](../security/seccomp.md) を参照。
 
 {% comment %}
 - Enable user namespaces if possible. See the
-  [Daemon user namespace options](/engine/reference/commandline/dockerd.md#daemon-user-namespace-options).
+  [Daemon user namespace options](/engine/reference/commandline/dockerd/#daemon-user-namespace-options).
 {% endcomment %}
 - 利用可能であればユーザー名前空間を有効にしてください。
-  [デーモンのユーザー名前空間に関するオプション](/engine/reference/commandline/dockerd.md#daemon-user-namespace-options)を参照。
+  [デーモンのユーザー名前空間に関するオプション](/engine/reference/commandline/#daemon-user-namespace-options) を参照。
 
 {% comment %}
 ### Install static binaries
@@ -323,11 +323,11 @@ Docker Engine を手動によりインストールしていて、これをアッ
 
 {% comment %}
 - Continue to [Post-installation steps for Linux](linux-postinstall.md).
-- Take a look at the [Get started](/get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
-- Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.
+- Take a look at the [Get started](../../get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
+- Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.
 {% endcomment %}
 - [Linux インストール後の作業](linux-postinstall.md) へ進む
-- [Docker をはじめよう](/get-started/index.md) に示すトレーニングを見てください。
+- [Docker をはじめよう](../../get-started/index.md) に示すトレーニングを見てください。
   イメージのビルド方法や、イメージをコンテナー化アプリケーションとして起動する方法を学んでいきます。
-- [Docker を用いた開発](/develop/index.md) における各項目を参照してください。
+- [Docker を用いた開発](../../develop/index.md) における各項目を参照してください。
   Docker を使ったアプリケーションの構築方法を学びます。

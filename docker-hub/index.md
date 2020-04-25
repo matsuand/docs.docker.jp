@@ -81,28 +81,28 @@ redirect_from:
 [Docker Hub](https://hub.docker.com) is a service provided by Docker for
 finding and sharing container images with your team. It provides the following
 major features:
-* [Repositories](/docker-hub/repos.md): Push and pull container images.
-* [Teams & Organizations](/docker-hub/orgs.md): Manage access to private
+* [Repositories](repos.md): Push and pull container images.
+* [Teams & Organizations](orgs.md): Manage access to private
 repositories of container images.
-* [Official Images](/docker-hub/official_images.md): Pull and use high-quality
+* [Official Images](official_images.md): Pull and use high-quality
 container images provided by Docker.
-* [Publisher Images](/docker-hub/publish/customer_faq.md): Pull and use high-
+* [Publisher Images](publish/customer_faq.md): Pull and use high-
 quality container images provided by external vendors. Certified images also
 include support and guarantee compatibility with Docker Enterprise.
-* [Builds](/docker-hub/builds.md): Automatically build container images from
+* [Builds](builds/index.md): Automatically build container images from
 GitHub and Bitbucket and push them to Docker Hub.
-* [Webhooks](/docker-hub/webhooks.md): Trigger actions after a successful push
+* [Webhooks](webhooks.md): Trigger actions after a successful push
   to a repository to integrate Docker Hub with other services.
 {% endcomment %}
 [Docker Hub](https://hub.docker.com) は、開発チームに向けて Docker のコンテナーイメージを検索したり共有したりするために Docker が提供しているサービスの 1 つです。
 主な機能として以下があります。
-* [リポジトリ](/docker-hub/repos.md): コンテナーイメージのプッシュ、プルを行います。
-* [チームと組織](/docker-hub/orgs.md): コンテナーイメージを配するプライベートリポジトリへのアクセスを管理します。
-* [公式イメージ](/docker-hub/official_images.md): Docker が提供している高品質のコンテナーイメージをプルして利用します。
-* [開発提供イメージ](/docker-hub/publish/customer_faq.md): 外部ベンダーによって提供されている高品質のコンテナーイメージをプルして利用します。
+* [リポジトリ](repos.md): コンテナーイメージのプッシュ、プルを行います。
+* [チームと組織](orgs.md): コンテナーイメージを配するプライベートリポジトリへのアクセスを管理します。
+* [公式イメージ](official_images.md): Docker が提供している高品質のコンテナーイメージをプルして利用します。
+* [開発提供イメージ](publish/customer_faq.md): 外部ベンダーによって提供されている高品質のコンテナーイメージをプルして利用します。
   認定されているイメージであれば、Docker Enterprise との互換性が保証されサポートされます。
-* [ビルド](/docker-hub/builds.md): GitHub や Bitbucket のコンテナーイメージを自動ビルドして Docker Hub へプッシュします。
-* [ウェブフック](/docker-hub/webhooks.md)（webhook）: リポジトリへ正常にプッシュができた際に処理起動されるトリガーであり、Docker Hub と他サービスとの連携を図ります。
+* [ビルド](builds/index.md): GitHub や Bitbucket のコンテナーイメージを自動ビルドして Docker Hub へプッシュします。
+* [ウェブフック](webhooks.md)（webhook）: リポジトリへ正常にプッシュができた際に処理起動されるトリガーであり、Docker Hub と他サービスとの連携を図ります。
 
 
 

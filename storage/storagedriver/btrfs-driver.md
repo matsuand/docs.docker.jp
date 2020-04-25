@@ -1,42 +1,23 @@
 ---
 description: Learn how to optimize your use of Btrfs driver.
 keywords: 'container, storage, driver, Btrfs '
-title: BTRFS ストレージドライバーの利用
+title: Use the BTRFS storage driver
 redirect_from:
 - /engine/userguide/storagedriver/btrfs-driver/
 ---
 
-{% comment %}
-Btrfs is a next generation copy-on-write filesystem that supports many advanced
-storage technologies that make it a good fit for Docker. Btrfs is included in
-the mainline Linux kernel.
-{% endcomment %}
 Btrfs is a next generation copy-on-write filesystem that supports many advanced
 storage technologies that make it a good fit for Docker. Btrfs is included in
 the mainline Linux kernel.
 
-{% comment %}
-Docker's `btrfs` storage driver leverages many Btrfs features for image and
-container management. Among these features are block-level operations, thin
-provisioning, copy-on-write snapshots, and ease of administration. You can
-easily combine multiple physical block devices into a single Btrfs filesystem.
-{% endcomment %}
 Docker's `btrfs` storage driver leverages many Btrfs features for image and
 container management. Among these features are block-level operations, thin
 provisioning, copy-on-write snapshots, and ease of administration. You can
 easily combine multiple physical block devices into a single Btrfs filesystem.
 
-{% comment %}
-This article refers to Docker's Btrfs storage driver as `btrfs` and the overall
-Btrfs Filesystem as Btrfs.
-{% endcomment %}
 This article refers to Docker's Btrfs storage driver as `btrfs` and the overall
 Btrfs Filesystem as Btrfs.
 
-{% comment %}
-> **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on Ubuntu
-> or Debian, and Docker EE / CS Engine on SLES.
-{% endcomment %}
 > **Note**: The `btrfs` storage driver is only supported on Docker Engine - Community on Ubuntu
 > or Debian, and Docker EE / CS Engine on SLES.
 
@@ -131,10 +112,8 @@ This procedure is essentially identical on SLES and Ubuntu.
     }
     ```
 
-    See all storage options for each storage driver:
-
-    - [Stable](/engine/reference/commandline/dockerd.md#storage-driver-options)
-    - [Edge](/edge/engine/reference/commandline/dockerd.md#storage-driver-options)
+    See all storage options for each storage driver in the
+    [daemon reference documentation](/engine/reference/commandline/dockerd/#storage-driver-options)
 
 7.  Start Docker. After it is running, verify that `btrfs` is being used as the
     storage driver.
@@ -332,6 +311,6 @@ storage driver.
 
 ## Related Information
 
-* [Volumes](/storage/volumes.md)
-* [Understand images, containers, and storage drivers](imagesandcontainers.md)
-* [Select a storage driver](selectadriver.md)
+- [Volumes](../volumes.md)
+- [Understand images, containers, and storage drivers](index.md)
+- [Select a storage driver](select-storage-driver.md)

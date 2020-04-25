@@ -497,8 +497,8 @@ You must delete any edited configuration files manually.
 
 {% comment %}
 - Continue to [Post-installation steps for Linux](linux-postinstall.md).
-- Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.
+- Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.
 {% endcomment %}
 - [Linux のインストール後](linux-postinstall.md) へ進む。
-- [Docker を用いた開発](/develop/index.md) における各項目を参照してください。
+- [Docker を用いた開発](../../develop/index.md) における各項目を参照してください。
   Docker を使ったアプリケーションの構築方法を学びます。

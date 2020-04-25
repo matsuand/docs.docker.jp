@@ -324,6 +324,6 @@ The `ping` shows it is contacting a different IP address, the address on the `my
 ## 次のステップ
 
 {% comment %}
-Now that you know how to network containers, see [how to manage data in containers](dockervolumes.md).
+Now that you know how to network containers, see [how to manage data in containers](../../storage/volumes.md).
 {% endcomment %}
-コンテナーのネットワーク設定方法がわかったら、次は [コンテナーにおけるデータ管理方法](dockervolumes.md) に進んでください。
+コンテナーのネットワーク設定方法がわかったら、次は [コンテナーにおけるデータ管理方法](../../storage/volumes.md) に進んでください。

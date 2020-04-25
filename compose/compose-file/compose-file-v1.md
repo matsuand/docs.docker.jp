@@ -177,10 +177,10 @@ cap_drop:
 
 {% comment %}
 > **Note**: These options are ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 {% endcomment %}
-> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> **メモ**: Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
 
 ### command
 
@@ -195,9 +195,9 @@ command: bundle exec thin -p 3000
 
 {% comment %}
 The command can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#cmd):
+[dockerfile](../../engine/reference/builder.md#cmd):
 {% endcomment %}
-このコマンドは [dockerfile](/engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
+このコマンドは [dockerfile](../../engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
 
 ```yaml
 command: ["bundle", "exec", "thin", "-p", "3000"]
@@ -297,10 +297,10 @@ entrypoint: /code/entrypoint.sh
 
 {% comment %}
 The entrypoint can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#entrypoint):
+[dockerfile](../../engine/reference/builder.md#entrypoint):
 {% endcomment %}
 エントリーポイントはリスト形式で設定することができます。
-その指定方法は [Dockerfile](/engine/reference/builder.md#entrypoint) と同様です。
+その指定方法は [Dockerfile](../../engine/reference/builder.md#entrypoint) と同様です。
 
 ```yaml
 entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
@@ -534,9 +534,9 @@ returns an error if it encounters one.
 
 {% comment %}
 For more on `extends`, see the
-[the extends documentation](/compose/extends.md#extending-services).
+[the extends documentation](../extends.md#extending-services).
 {% endcomment %}
-`extends` に関する詳細は [extends ドキュメント](/compose/extends.md#extending-services) を参照してください。
+`extends` に関する詳細は [extends ドキュメント](../extends.md#extending-services) を参照してください。
 
 ### external_links
 
@@ -627,9 +627,9 @@ options and tags it with the specified tag.
 ### labels
 
 {% comment %}
-Add metadata to containers using [Docker labels](/config/labels-custom-metadata.md). You can use either an array or a dictionary.
+Add metadata to containers using [Docker labels](../../config/labels-custom-metadata.md). You can use either an array or a dictionary.
 {% endcomment %}
-[Docker labels](/config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+[Docker labels](../../config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -662,10 +662,10 @@ a link alias (`"SERVICE:ALIAS"`), or just the service name.
 
 {% comment %}
 > Links are a legacy option. We recommend using
-> [networks](/compose/networking.md) instead.
+> [networks](../networking.md) instead.
 {% endcomment %}
 > links は古いオプションです。
-> かわりに [networks](/compose/networking.md) を用いることをお勧めします。
+> かわりに [networks](../networking.md) を用いることをお勧めします。
 
 ```yaml
 web:
@@ -958,10 +958,10 @@ There are several things to note, depending on which
   このとき `./foo` の部分はボリュームドライバーにそのまま引き渡され、パスが展開されることはありません。
 
 {% comment %}
-See [Docker Volumes](/storage/volumes.md) and
+See [Docker Volumes](../../storage/volumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume/) for more information.
 {% endcomment %}
-詳しくは [Docker ボリューム](/storage/volumes.md) と [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
+詳しくは [Docker ボリューム](../../storage/volumes.md) と [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
 
 ### volumes_from
 
@@ -984,9 +984,9 @@ volumes_from:
 
 {% comment %}
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md) counterpart.
+[docker run](../../engine/reference/run.md) counterpart.
 {% endcomment %}
-ここに示すオプションはいずれも、値 1 つを設定するものであり、[docker run](/engine/reference/run.md) のオプションに対応づいています。
+ここに示すオプションはいずれも、値 1 つを設定するものであり、[docker run](../../engine/reference/run.md) のオプションに対応づいています。
 
 ```yaml
 cpu_shares: 73
@@ -1020,14 +1020,14 @@ tty: true
 ## Compose ドキュメント
 
 {% comment %}
-- [User guide](/compose/index.md)
-- [Installing Compose](/compose/install.md)
+- [User guide](../index.md)
+- [Installing Compose](../install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Samples](/samples/index.md)
-- [Command line reference](/compose/reference/index.md)
+- [Samples](../../samples/index.md)
+- [Command line reference](../reference/index.md)
 {% endcomment %}
-- [ユーザーガイド](/compose/index.md)
-- [Compose のインストール](/compose/install.md)
+- [ユーザーガイド](../index.md)
+- [Compose のインストール](../install.md)
 - [Compose ファイルバージョン and upgrading](compose-versioning.md)
-- [サンプル](/samples/index.md)
-- [コマンドラインリファレンス](/compose/reference/index.md)
+- [サンプル](../../samples/index.md)
+- [コマンドラインリファレンス](../reference/index.md)

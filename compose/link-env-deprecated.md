@@ -8,22 +8,22 @@ notoc: true
 ---
 
 {% comment %}
-> **Note**: Environment variables are no longer the recommended method for connecting to linked services. Instead, you should use the link name (by default, the name of the linked service) as the hostname to connect to. See the [docker-compose.yml documentation](/compose/compose-file/#links) for details.
+> **Note**: Environment variables are no longer the recommended method for connecting to linked services. Instead, you should use the link name (by default, the name of the linked service) as the hostname to connect to. See the [docker-compose.yml documentation](compose-file/#links) for details.
 >
-> Environment variables are only populated if you're using the [legacy version 1 Compose file format](/compose/compose-file/compose-versioning.md#versioning).
+> Environment variables are only populated if you're using the [legacy version 1 Compose file format](compose-file/compose-versioning.md#versioning).
 {% endcomment %}
 > **メモ**: リンクされているサービスに接続する方法として、環境変数を用いることは推奨されなくなりました。
 > その代わりに、接続するホスト名としてリンク名（デフォルトはリンクされているサービス名）を用いてください。
-> 詳しくは [docker-compose.yml ドキュメント](/compose/compose-file/#links) を参照してください。
+> 詳しくは [docker-compose.yml ドキュメント](compose-file/#links) を参照してください。
 >
-> 環境変数は [かつての Compose ファイルフォーマットバージョン 1](/compose/compose-file/compose-versioning.md#versioning) においてのみ定義されます。
+> 環境変数は [かつての Compose ファイルフォーマットバージョン 1](compose-file/compose-versioning.md#versioning) においてのみ定義されます。
 
 {% comment %}
-Compose uses [Docker links](/network/links.md)
+Compose uses [Docker links](../network/links.md)
 to expose services' containers to one another. Each linked container injects a set of
 environment variables, each of which begins with the uppercase name of the container.
 {% endcomment %}
-Compose は [Docker links](/network/links.md) を利用して、サービスのコンテナーをその他のコンテナーに対して情報を公開します。
+Compose は [Docker links](../network/links.md) を利用して、サービスのコンテナーをその他のコンテナーに対して情報を公開します。
 リンクされたコンテナーは複数の環境変数を提供します。
 各環境変数は、コンテナー名を大文字にしたものが先頭につきます。
 
@@ -89,10 +89,10 @@ Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
 {% comment %}
 - [User guide](index.md)
 - [Installing Compose](install.md)
-- [Command line reference](/compose/reference/index.md)
-- [Compose file reference](/compose/compose-file/index.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)
 {% endcomment %}
 - [ユーザーガイド](index.md)
 - [Compose のインストール](install.md)
-- [コマンドラインリファレンス](/compose/reference/index.md)
-- [Compose ファイルリファレンス](/compose/compose-file/index.md)
+- [コマンドラインリファレンス](reference/index.md)
+- [Compose ファイルリファレンス](compose-file/index.md)

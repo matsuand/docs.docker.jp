@@ -17,22 +17,22 @@ Dockerfile は普通は親イメージから作り始めます。
 その違いは以下のとおりです。
 
 {% comment %}
-- A [parent image](/glossary.md#parent_image) is the image that your
+- A [parent image](../../glossary.md#parent_image) is the image that your
   image is based on. It refers to the contents of the `FROM` directive in the
   Dockerfile. Each subsequent declaration in the Dockerfile modifies this parent
   image. Most Dockerfiles start from a parent image, rather than a base image.
   However, the terms are sometimes used interchangeably.
 {% endcomment %}
-- [親イメージ](/glossary.md#parent_image) は基準とするイメージのことです。
+- [親イメージ](../../glossary.md#parent_image) は基準とするイメージのことです。
   Dockerfile 内の `FROM` ディレクティブによって指定されます。
   Dockerfile 内のこれに続く定義は、その親イメージを修正指示するものとなります。
   Dockerfile は普通は親イメージから作り始め、ベースイメージから作るのはまれです。
   ただしこの用語は混同されて用いられることもあります。
 
 {% comment %}
-- A [base image](/glossary.md#base_image) has `FROM scratch` in its Dockerfile.
+- A [base image](../../glossary.md#base_image) has `FROM scratch` in its Dockerfile.
 {% endcomment %}
-- [ベースイメージ](/glossary.md#base_image) は Dockerfile において `FROM scratch` に記述されるものです。
+- [ベースイメージ](../../glossary.md#base_image) は Dockerfile において `FROM scratch` に記述されるものです。
 
 {% comment %}
 This topic shows you several ways to create a base image. The specific process
@@ -205,11 +205,11 @@ There are lots of resources available to help you write your `Dockerfile`.
 `Dockerfile`の書き方については、他にも多く触れています。
 
 {% comment %}
-* There's a [complete guide to all the instructions](/engine/reference/builder.md) available for use in a `Dockerfile` in the reference section.
+* There's a [complete guide to all the instructions](../../engine/reference/builder.md) available for use in a `Dockerfile` in the reference section.
 * To help you write a clear, readable, maintainable `Dockerfile`, we've also
 written a [`Dockerfile` best practices guide](dockerfile_best-practices.md).
-* If your goal is to create a new Official Image, be sure to read up on Docker's [Official Images](/docker-hub/official_images/).
+* If your goal is to create a new Official Image, be sure to read up on Docker's [Official Images](../../docker-hub/official_images.md).
 {% endcomment %}
-* リファレンスには`Dockerfile`にて利用可能な[全コマンドのガイド](/engine/reference/builder.md) があります。
-* `Dockerfile`をわかりやすく読みやすく、保守がしやすくするように、[`Dockerfile`ベストプラクティス](dockerfile_best-practices.md)も記述しています。
-* 公式イメージを作ることが目的であれば Docker の[公式イメージ](/docker-hub/official_images/)を確認してください。
+* リファレンスには `Dockerfile` にて利用可能な [全コマンドのガイド](../../engine/reference/builder.md) があります。
+* `Dockerfile`をわかりやすく読みやすく、保守がしやすくするように、[`Dockerfile`ベストプラクティス](dockerfile_best-practices.md) も記述しています。
+* 公式イメージを作ることが目的であれば Docker の[公式イメージ](../../docker-hub/official_images/) を確認してください。

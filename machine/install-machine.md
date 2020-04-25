@@ -21,9 +21,9 @@ GitHub 上の [docker/machine リリースページ](https://github.com/docker/m
 {: #install-docker-machine }
 
 {% comment %}
-1.  Install [Docker](/engine/installation/index.md){: target="_blank" class="_" }.
+1.  Install [Docker](../engine/install/index.md){: target="_blank" class="_" }.
 {% endcomment %}
-1.  [Docker](/engine/installation/index.md){: target="_blank" class="_" } をインストールします。
+1.  [Docker](../engine/installation/index.md){: target="_blank" class="_" } をインストールします。
 
 {% comment %}
 2.  Download the Docker Machine binary and extract it to your PATH.
@@ -183,12 +183,12 @@ Docker Machine のアンインストールは以下のようにします。
    {% comment %}
    Removing machines is an optional step because there are cases where
    you might want to save and migrate existing machines to a
-   [Docker for Mac](/docker-for-mac/index.md) or
-   [Docker Desktop for Windows](/docker-for-windows/index.md) environment,
+   [Docker for Mac](../docker-for-mac/index.md) or
+   [Docker Desktop for Windows](../docker-for-windows/index.md) environment,
    for example.
    {% endcomment %}
    マシンを削除するのは任意の作業です。
-   それはたとえば [Docker for Mac](/docker-for-mac/index.md) または [Docker Desktop for Windows](/docker-for-windows/index.md) 環境向けに、既存マシンを移行して利用したい場合もあるからです。
+   それはたとえば [Docker for Mac](../docker-for-mac/index.md) または [Docker Desktop for Windows](../docker-for-windows/index.md) 環境向けに、既存マシンを移行して利用したい場合もあるからです。
 
 {% comment %}
 *  Remove the executable: `rm $(which docker-machine)`
@@ -220,11 +220,11 @@ VM に対しては、それがローカルでもリモートでも影響しま�
 -  [Docker Machine overview](overview.md)
 -  Create and run a Docker host on your [local system using virtualization](get-started.md)
 -  Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
--  [Docker Machine driver reference](/machine/drivers/index.md)
--  [Docker Machine subcommand reference](/machine/reference/index.md)
+-  [Docker Machine driver reference](drivers/index.md)
+-  [Docker Machine subcommand reference](reference/index.md)
 {% endcomment %}
 -  [Docker Machine 概要](overview.md)
 -  [仮想環境を用いてローカルシステム上](get-started.md)に Docker ホストを生成して実行
 -  [クラウドプロバイダー](get-started-cloud.md)上に複数の Docker ホストを実現
--  [Docker Machine ドライバーリファレンス](/machine/drivers/index.md)
--  [Docker Machine サブコマンドリファレンス](/machine/reference/index.md)
+-  [Docker Machine ドライバーリファレンス](drivers/index.md)
+-  [Docker Machine サブコマンドリファレンス](reference/index.md)

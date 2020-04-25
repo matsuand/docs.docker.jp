@@ -6,11 +6,11 @@ title: Compose を使ったサンプルアプリ
 
 {% comment %}
 The following samples show the various aspects of how to work with Docker
-Compose. As a prerequisite, be sure to [install Docker Compose](/compose/install.md)
+Compose. As a prerequisite, be sure to [install Docker Compose](install.md)
 if you have not already done so.
 {% endcomment %}
 The following samples show the various aspects of how to work with Docker
-Compose. As a prerequisite, be sure to [install Docker Compose](/compose/install.md)
+Compose. As a prerequisite, be sure to [install Docker Compose](install.md)
 if you have not already done so.
 
 {% comment %}
@@ -26,20 +26,20 @@ The samples should help you to:
 
 {% comment %}
 - define services based on Docker images using
-  [Compose files](/compose/compose-file/index.md) `docker-compose.yml` and
+  [Compose files](compose-file/index.md) `docker-compose.yml` and
   `docker-stack.yml` files
 - understand the relationship between `docker-compose.yml` and
   [Dockerfiles](/engine/reference/builder/)
 - learn how to make calls to your application services from Compose files
-- learn how to deploy applications and services to a [swarm](/engine/swarm/index.md)
+- learn how to deploy applications and services to a [swarm](../engine/swarm/index.md)
 {% endcomment %}
 - define services based on Docker images using
-  [Compose files](/compose/compose-file/index.md) `docker-compose.yml` and
+  [Compose files](compose-file/index.md) `docker-compose.yml` and
   `docker-stack.yml` files
 - understand the relationship between `docker-compose.yml` and
   [Dockerfiles](/engine/reference/builder/)
 - learn how to make calls to your application services from Compose files
-- learn how to deploy applications and services to a [swarm](/engine/swarm/index.md)
+- learn how to deploy applications and services to a [swarm](../engine/swarm/index.md)
 
 {% comment %}
 ## Samples tailored to demo Compose
@@ -53,19 +53,19 @@ These samples focus specifically on Docker Compose:
 以下のサンプルは特に Docker Compose に着目しています。
 
 {% comment %}
-- [Quickstart: Compose and Django](/compose/django.md) - Shows how to use Docker Compose to set up and run a simple Django/PostgreSQL app.
+- [Quickstart: Compose and Django](django.md) - Shows how to use Docker Compose to set up and run a simple Django/PostgreSQL app.
 {% endcomment %}
-- [クイックスタート: Compose と Django](/compose/django.md) - Docker Compose を使って、簡単な Django/PostgreSQL アプリのセットアップと実行方法を示します。
+- [クイックスタート: Compose と Django](django.md) - Docker Compose を使って、簡単な Django/PostgreSQL アプリのセットアップと実行方法を示します。
 
 {% comment %}
-- [Quickstart: Compose and Rails](/compose/rails.md) - Shows how to use
+- [Quickstart: Compose and Rails](rails.md) - Shows how to use
 Docker Compose to set up and run a Rails/PostgreSQL app.
 {% endcomment %}
-- [クイックスタート: Compose と Rails](/compose/rails.md) - Docker Compose を使って、Rails/PostgreSQL アプリのセットアップと実行方法を示します。
+- [クイックスタート: Compose と Rails](rails.md) - Docker Compose を使って、Rails/PostgreSQL アプリのセットアップと実行方法を示します。
 
 {% comment %}
-- [Quickstart: Compose and WordPress](/compose/wordpress.md) - Shows how to
+- [Quickstart: Compose and WordPress](wordpress.md) - Shows how to
 use Docker Compose to set up and run WordPress in an isolated environment
 with Docker containers.
 {% endcomment %}
-- [クイックスタート: Compose と WordPress](/compose/wordpress.md) - Docker コンテナーを使って、独立した環境内にて WordPress をセットアップし実行する方法を示します。
+- [クイックスタート: Compose と WordPress](wordpress.md) - Docker コンテナーを使って、独立した環境内にて WordPress をセットアップし実行する方法を示します。

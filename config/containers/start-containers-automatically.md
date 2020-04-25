@@ -9,13 +9,13 @@ title: コンテナーの自動起動
 ---
 
 {% comment %}
-Docker provides [restart policies](/engine/reference/run.md#restart-policies---restart)
+Docker provides [restart policies](../../engine/reference/run.md#restart-policies---restart)
 to control whether your containers start automatically when they exit, or when
 Docker restarts. Restart policies ensure that linked containers are started in
 the correct order. Docker recommends that you use restart policies, and avoid
 using process managers to start containers.
 {% endcomment %}
-Docker では [再起動ポリシー](/engine/reference/run.md#restart-policies---restart) (restart policy) が提供されています。
+Docker では [再起動ポリシー](../../engine/reference/run.md#restart-policies---restart) (restart policy) が提供されています。
 これは Docker の停止や再起動を指示した場合に、コンテナーを自動的に起動するかどうかを制御するものです。
 再起動ポリシーを使えば、リンクしているコンテナーは確実に正しい順番で起動させることができます。
 Docker ではこの再起動ポリシーを利用することが推奨されています。
@@ -65,7 +65,7 @@ restart unless it is explicitly stopped or Docker is restarted.
 以下の例は Redis コンテナーを起動する際に、常に (always) 再起動するように設定していますが、ただし明示的に停止した場合や Docker が再起動された場合には再起動しないという設定です。
 
 ```bash
-$ docker run -dit --restart unless-stopped redis
+$ docker run -d --restart unless-stopped redis
 ```
 
 {% comment %}
@@ -100,11 +100,11 @@ Keep the following in mind when using restart policies:
 {% comment %}
 - Restart policies only apply to _containers_. Restart policies for swarm
   services are configured differently. See the
-  [flags related to service restart](/engine/reference/commandline/service_create/).
+  [flags related to service restart](../../engine/reference/commandline/service_create/).
 {% endcomment %}
 - 再起動ポリシーが適用されるのは **コンテナー** に対してのみです。
   Swarm サービスに対する再起動ポリシーは、別の方法により設定します。
-  [service restart に対するフラグ](/engine/reference/commandline/service_create/) を参照してください。
+  [service restart に対するフラグ](../../engine/reference/commandline/service_create/) を参照してください。
 
 
 {% comment %}

@@ -104,7 +104,7 @@ Docker Compose を使うと、Docker コンテナーとして生成される独�
    > **Notes**:
    >
    * The docker volume `db_data` persists any updates made by WordPress
-   to the database. [Learn more about docker volumes](/storage/volumes.md)
+   to the database. [Learn more about docker volumes](../storage/volumes.md)
    >
    * WordPress Multisite works only on ports `80` and `443`.
    {: .note-vanilla}
@@ -112,7 +112,7 @@ Docker Compose を使うと、Docker コンテナーとして生成される独�
    > **メモ**:
    >
    * Docker ボリューム `db_data` は、WordPress 上から実行されるデータ更新をデータベースに保存します。
-   > 詳細は [Docker ボリューム](/storage/volumes.md) を参照してください。
+   > 詳細は [Docker ボリューム](../storage/volumes.md) を参照してください。
    >
    * WordPress のマルチサイトは、ポート `80` と `443` 上においてのみ動作します。
    {: .note-vanilla}
@@ -129,11 +129,11 @@ Now, run `docker-compose up -d` from your project directory.
 プロジェクトディレクトリ上にて `docker-compose up -d` を実行します。
 
 {% comment %}
-This runs [`docker-compose up`](/compose/reference/up.md) in detached mode, pulls
+This runs [`docker-compose up`](reference/up.md) in detached mode, pulls
 the needed Docker images, and starts the wordpress and database containers, as shown in
 the example below.
 {% endcomment %}
-これはデタッチモードにより [`docker-compose up`](/compose/reference/up.md) を実行し、必要な Docker イメージがあれば取得します。
+これはデタッチモードにより [`docker-compose up`](reference/up.md) を実行し、必要な Docker イメージがあれば取得します。
 そして WordPress と データベースの両コンテナーを起動します。
 たとえば以下のようになります。
 
@@ -190,11 +190,11 @@ minutes before the first load.
 > **メモ**: WordPress サイトはポート `8000` を使って稼動していると述べましたが、即座に利用できるわけではありません。コンテナーは初期化を行っている最中であり、初回の読み込み処理には数分の時間を要するからです。
 
 {% comment %}
-If you are using [Docker Machine](/machine/index.md), you can run the command
+If you are using [Docker Machine](../machine/index.md), you can run the command
 `docker-machine ip MACHINE_VM` to get the machine address, and then open
 `http://MACHINE_VM_IP:8000` in a web browser.
 {% endcomment %}
-[Docker Machine](/machine/index.md) を利用している場合は、`docker-machine ip MACHINE_VM` を実行してマシンの IP アドレスを取得できます。
+[Docker Machine](../machine/index.md) を利用している場合は、`docker-machine ip MACHINE_VM` を実行してマシンの IP アドレスを取得できます。
 そこでウェブブラウザーから `http://MACHINE_VM_IP:8000` にアクセスしてください。
 
 {% comment %}
@@ -221,10 +221,10 @@ Docker Desktop for Mac や Docker Desktop for Windows を利用している場�
 {: #shutdown-and-cleanup }
 
 {% comment %}
-The command [`docker-compose down`](/compose/reference/down.md) removes the
+The command [`docker-compose down`](reference/down.md) removes the
 containers and default network, but preserves your WordPress database.
 {% endcomment %}
-[`docker-compose down`](/compose/reference/down.md) コマンドを実行すると、コンテナーとデフォルトネットワークが削除されます。
+[`docker-compose down`](reference/down.md) コマンドを実行すると、コンテナーとデフォルトネットワークが削除されます。
 ただし WordPress データベースは残ります。
 
 {% comment %}
@@ -240,18 +240,18 @@ network, and the WordPress database.
 {: #more-compose-documentation }
 
 {% comment %}
-- [User guide](/compose/index.md)
-- [Installing Compose](/compose/install.md)
-- [Getting Started](/compose/gettingstarted.md)
-- [Get started with Django](/compose/django.md)
-- [Get started with Rails](/compose/rails.md)
-- [Command line reference](/compose/reference/index.md)
-- [Compose file reference](/compose/compose-file/index.md)
+- [User guide](index.md)
+- [Installing Compose](install.md)
+- [Getting Started](gettingstarted.md)
+- [Get started with Django](django.md)
+- [Get started with Rails](rails.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)
 {% endcomment %}
-- [ユーザーガイド](/compose/index.md)
-- [Compose のインストール](/compose/install.md)
-- [はじめよう](/compose/gettingstarted.md)
-- [Django を使ってはじめよう](/compose/django.md)
-- [Rails を使ってはじめよう](/compose/rails.md)
-- [コマンドラインリファレンス](/compose/reference/index.md)
-- [Compose ファイルリファレンス](/compose/compose-file/index.md)
+- [ユーザーガイド](index.md)
+- [Compose のインストール](install.md)
+- [はじめよう](gettingstarted.md)
+- [Django を使ってはじめよう](django.md)
+- [Rails を使ってはじめよう](rails.md)
+- [コマンドラインリファレンス](reference/index.md)
+- [Compose ファイルリファレンス](compose-file/index.md)

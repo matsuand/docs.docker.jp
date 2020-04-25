@@ -129,19 +129,17 @@ and CPUs, rather than the default behavior of creating smaller servers.
 {% comment %}
 For a full list of the flags/settings available and their defaults, see the
 output of `docker-machine create -h` at the command line, the
-[create](/machine/reference/create/){: target="_blank" class="_" } command in
-the Machine [command line reference](/machine/reference/index.md){:
-target="_blank" class="_" }, and [driver options and operating system
-defaults](/machine/drivers/os-base/){: target="_blank" class="_" } in the
-Machine driver reference.
+[create](reference/create.md){: target="_blank" class="_" } command in
+the Machine [command line reference](reference/index.md){:
+target="_blank" class="_" }, and [driver options and operating system defaults](drivers/os-base.md){: target="_blank" class="_" }
+in the Machine driver reference.
 {% endcomment %}
 For a full list of the flags/settings available and their defaults, see the
 output of `docker-machine create -h` at the command line, the
-[create](/machine/reference/create/){: target="_blank" class="_" } command in
-the Machine [command line reference](/machine/reference/index.md){:
-target="_blank" class="_" }, and [driver options and operating system
-defaults](/machine/drivers/os-base/){: target="_blank" class="_" } in the
-Machine driver reference.
+[create](reference/create.md){: target="_blank" class="_" } command in
+the Machine [command line reference](reference/index.md){:
+target="_blank" class="_" }, and [driver options and operating system defaults](drivers/os-base.md){: target="_blank" class="_" }
+in the Machine driver reference.
 
 {% comment %}
 ## Drivers for cloud providers
@@ -158,13 +156,13 @@ providers (like Amazon Web Services, DigitalOcean, or Microsoft Azure) and
 local providers (like Oracle VirtualBox, VMWare Fusion, or Microsoft Hyper-V).
 
 {% comment %}
-See [Docker Machine driver reference](/machine/drivers/index.md){:
-target="_blank" class="_"} for details on the drivers, including required flags
-and configuration options (which vary by provider).
+See [Docker Machine driver reference](drivers/index.md){:target="_blank" class="_"}
+for details on the drivers, including required flags and configuration options
+(which vary by provider).
 {% endcomment %}
-See [Docker Machine driver reference](/machine/drivers/index.md){:
-target="_blank" class="_"} for details on the drivers, including required flags
-and configuration options (which vary by provider).
+See [Docker Machine driver reference](drivers/index.md){:target="_blank" class="_"}
+for details on the drivers, including required flags and configuration options
+(which vary by provider).
 
 {% comment %}
 ## 3rd-party driver plugins
@@ -182,11 +180,9 @@ available from 3rd party contributors. These are use-at-your-own-risk plugins,
 not maintained by or formally associated with Docker.
 
 {% comment %}
-See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:
-target="_blank" class="_"}.
+See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:target="_blank" class="_"}.
 {% endcomment %}
-See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:
-target="_blank" class="_"}.
+See [Available driver plugins](https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md){:target="_blank" class="_"}.
 
 {% comment %}
 ## Add a host without a driver
@@ -212,25 +208,25 @@ You can register an already existing docker host by passing the daemon url. With
 > Swarm mode supersedes Docker Machine provisioning of swarm clusters
 >
 > In previous releases, Docker Machine was used to provision swarm
-clusters, but this is legacy. [Swarm mode](/engine/swarm/index.md), built
-into Docker Engine, supersedes Machine provisioning of swarm clusters. The
-topics below show you how to get started with the new swarm mode.
+> clusters, but this is legacy. [Swarm mode](../engine/swarm/index.md), built
+> into Docker Engine, supersedes Machine provisioning of swarm clusters. The
+> topics below show you how to get started with the new swarm mode.
 {: .important}
 {% endcomment %}
 > Swarm mode supersedes Docker Machine provisioning of swarm clusters
 >
 > In previous releases, Docker Machine was used to provision swarm
-clusters, but this is legacy. [Swarm mode](/engine/swarm/index.md), built
-into Docker Engine, supersedes Machine provisioning of swarm clusters. The
-topics below show you how to get started with the new swarm mode.
+> clusters, but this is legacy. [Swarm mode](../engine/swarm/index.md), built
+> into Docker Engine, supersedes Machine provisioning of swarm clusters. The
+> topics below show you how to get started with the new swarm mode.
 {: .important}
 
 {% comment %}
 You can use Docker Machine to create local virtual hosts on which to deploy
-and test [swarm mode](/engine/swarm/index.md) clusters.
+and test [swarm mode](../engine/swarm/index.md) clusters.
 {% endcomment %}
 You can use Docker Machine to create local virtual hosts on which to deploy
-and test [swarm mode](/engine/swarm/index.md) clusters.
+and test [swarm mode](../engine/swarm/index.md) clusters.
 
 {% comment %}
 Good places to start working with Docker Machine and swarm mode are these
@@ -240,14 +236,14 @@ Good places to start working with Docker Machine and swarm mode are these
 tutorials:
 
 {% comment %}
-* [Get started with Docker](/get-started/index.md)
+* [Get started with Docker](../get-started/index.md)
 {% endcomment %}
-* [Get started with Docker](/get-started/index.md)
+* [Get started with Docker](../get-started/index.md)
 
 {% comment %}
-* [Getting started with swarm mode](/engine/swarm/swarm-tutorial/index.md)
+* [Getting started with swarm mode](../engine/swarm/swarm-tutorial/index.md)
 {% endcomment %}
-* [Getting started with swarm mode](/engine/swarm/swarm-tutorial/index.md)
+* [Getting started with swarm mode](../engine/swarm/swarm-tutorial/index.md)
 
 
 {% comment %}
@@ -260,11 +256,11 @@ tutorials:
 -   [Understand Machine concepts](concepts.md)
 -   [Docker Machine driver reference](drivers/index.md)
 -   [Docker Machine subcommand reference](reference/index.md)
--   [Provision a Docker Swarm cluster with Docker Machine](/swarm/provision-with-machine.md)
+-   [Provision a Docker Swarm cluster with Docker Machine](../swarm/provision-with-machine.md)
 {% endcomment %}
 -   Example: Provision Dockerized [DigitalOcean Droplets](examples/ocean.md)
 -   Example: Provision Dockerized [AWS EC2 Instances](examples/aws.md)
 -   [Understand Machine concepts](concepts.md)
 -   [Docker Machine driver reference](drivers/index.md)
 -   [Docker Machine subcommand reference](reference/index.md)
--   [Provision a Docker Swarm cluster with Docker Machine](/swarm/provision-with-machine.md)
+-   [Provision a Docker Swarm cluster with Docker Machine](../swarm/provision-with-machine.md)

@@ -40,16 +40,16 @@ Docker.
 これは Docker のデフォルトである `bridge` ネットワーク内にあるもので、この `bridge` ネットワークは Docker をインストールした際に自動的に生成されます。
 
 {% comment %}
-Before the [Docker networks feature](/network/index.md), you could use the
+Before the [Docker networks feature](index.md), you could use the
 Docker link feature to allow containers to discover each other and securely
 transfer information about one container to another container. With the
 introduction of the Docker networks feature, you can still create links but they
 behave differently between default `bridge` network and
-[user defined networks](/network/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge).
+[user defined networks](bridge.md#differences-between-user-defined-bridges-and-the-default-bridge).
 {% endcomment %}
-[Docker のネットワーク機能](/network/index.md) が提供される以前は、Docker のリンク機能によって複数のコンテナーが互いを検出し、一方から他方への情報送信を安全に行うようにしていました。
+[Docker のネットワーク機能](index.md) が提供される以前は、Docker のリンク機能によって複数のコンテナーが互いを検出し、一方から他方への情報送信を安全に行うようにしていました。
 Docker のネットワーク機能が導入されてからも、リンクを生成することはできます。
-ただしデフォルトの `bridge` ネットワークであるか、[ユーザー定義のネットワーク](/network/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge) であるかによって、その動作は異なることになります。
+ただしデフォルトの `bridge` ネットワークであるか、[ユーザー定義のネットワーク](bridge.md#differences-between-user-defined-bridges-and-the-default-bridge) であるかによって、その動作は異なることになります。
 
 {% comment %}
 This section briefly discusses connecting via a network port and then goes into
@@ -74,12 +74,12 @@ Let's say you used this command to run a simple Python Flask application:
 > **Note**:
 > Containers have an internal network and an IP address.
 > Docker can have a variety of network configurations. You can see more
-> information on Docker networking [here](/network/index.md).
+> information on Docker networking [here](index.md).
 {% endcomment %}
 > **メモ**:
 > コンテナーには内部ネットワークと IP アドレスがあります。
 > そして Docker にはさまざまなネットワーク設定方法があります。
-> Docker のネットワーク機能の詳細は [こちら](/network/index.md) を参照してください。
+> Docker のネットワーク機能の詳細は [こちら](index.md) を参照してください。
 
 {% comment %}
 When that container was created, the `-P` flag was used to automatically map
@@ -195,12 +195,12 @@ configurations. For example, if you've bound the container port to the
 {% comment %}
 > **Note**:
 > This section covers the legacy link feature in the default `bridge` network.
-> Refer to [differences between user-defined bridges and the default bridge](/network/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
+> Refer to [differences between user-defined bridges and the default bridge](bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
 > for more information on links in user-defined networks.
 {% endcomment %}
 > **メモ**:
 > この節ではデフォルトの `bridge` ネットワーク内の古い機能であるリンク機能について説明します。
-> ユーザー定義ネットワーク上のリンクに関しては [ユーザー定義ネットワークでのコンテナーのリンク](/network/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge) を参照してください。
+> ユーザー定義ネットワーク上のリンクに関しては [ユーザー定義ネットワークでのコンテナーのリンク](bridge.md#differences-between-user-defined-bridges-and-the-default-bridge) を参照してください。
 
 {% comment %}
 Network port mappings are not the only way Docker containers can connect to one

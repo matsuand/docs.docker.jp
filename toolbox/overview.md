@@ -6,11 +6,11 @@ title: Docker Toolbox 概要
 ---
 
 {% comment %}
-Docker Toolbox is an installer for quick setup and launch of a Docker environment on older Mac and Windows systems that do not meet the requirements of the new [Docker Desktop for Mac](/docker-for-mac/index.md) and [Docker Desktop for Windows](/docker-for-windows/index.md) apps.
+Docker Toolbox is an installer for quick setup and launch of a Docker environment on older Mac and Windows systems that do not meet the requirements of the new [Docker Desktop for Mac](../docker-for-mac/index.md) and [Docker Desktop for Windows](../docker-for-windows/index.md) apps.
 {% endcomment %}
 Docker Toolbox は Mac や Windows システム向けの Docker インストーラーです。
 これにより Docker 環境をすばやくセットアップして起動できるようになります。
-ただし Mac や Windows のやや古いバージョン向けのものであって、そのようなシステムでは、新しい [Docker Desktop for Mac](/docker-for-mac/index.md) や [Docker Desktop for Windows](/docker-for-windows/index.md) の利用要件を満たしません。
+ただし Mac や Windows のやや古いバージョン向けのものであって、そのようなシステムでは、新しい [Docker Desktop for Mac](../docker-for-mac/index.md) や [Docker Desktop for Windows](../docker-for-windows/index.md) の利用要件を満たしません。
 
 {% comment %}
 ![Toolbox installer](images/toolbox-installer.png)
@@ -91,26 +91,26 @@ Choose the install instructions for your platform, and follow the steps:
 {: #next-steps }
 
 {% comment %}
-* Try the [Get started](/get-started/) tutorial.
+* Try the [Get started](../get-started/index.md) tutorial.
 {% endcomment %}
-* チュートリアル [「はじめよう」](/get-started/) を試す。
+* チュートリアル [「はじめよう」](../get-started/index.md) を試す。
 
 {% comment %}
-* Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
+* Dig in deeper with [more tutorials and examples](../engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
 {% endcomment %}
-* [さらなるチュートリアルと例](/engine/tutorials/index.md)を読んで、イメージ構築、コンテナー実行、ネットワーク、データ管理、Docker Hub へのイメージ保存に進む。
+* [さらなるチュートリアルと例](../engine/tutorials/index.md) を読んで、イメージ構築、コンテナー実行、ネットワーク、データ管理、Docker Hub へのイメージ保存に進む。
 
 {% comment %}
-* [Learn about Kitematic](/kitematic/userguide.md)
+* [Learn about Kitematic](../kitematic/userguide.md)
 {% endcomment %}
-* [Kitematic について学ぶ](/kitematic/userguide.md)
+* [Kitematic について学ぶ](../kitematic/userguide.md)
 
 {% comment %}
-* [Learn about Docker Machine](/machine/overview.md)
+* [Learn about Docker Machine](../machine/overview.md)
 {% endcomment %}
-* [Docker Machine について学ぶ](/machine/overview.md)
+* [Docker Machine について学ぶ](../machine/overview.md)
 
 {% comment %}
-* [Learn about Docker Compose](/compose/overview.md)
+* [Learn about Docker Compose](../compose/index.md)
 {% endcomment %}
-* [Docker Compose について学ぶ](/compose/overview.md)
+* [Docker Compose について学ぶ](../compose/overview.md)

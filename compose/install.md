@@ -32,18 +32,18 @@ included as part of those desktop installs.
 
 {% comment %}
 - On Linux systems, first install the
-[Docker Engine](/engine/install/index.md#server){: target="_blank" class="_"}
+[Docker Engine](../engine/install/index.md#server){: target="_blank" class="_"}
 for your OS as described on the Get Docker page, then come back here for
 instructions on installing Compose on
 Linux systems.
 {% endcomment %}
-- Linux システムではまず、 Docker 入手のページに説明されている各 OS 向けの [Docker](/engine/install/index.md#server){: target="_blank" class="_"} をインストールします。
+- Linux システムではまず、 Docker 入手のページに説明されている各 OS 向けの [Docker](../engine/install/index.md#server){: target="_blank" class="_"} をインストールします。
 そしてこのページに戻り、Linux システム上での Compose のインストール手順に従います。
 
 {% comment %}
-- To run Compose as a non-root user, see [Manage Docker as a non-root user](/engine/install/linux-postinstall.md).
+- To run Compose as a non-root user, see [Manage Docker as a non-root user](../engine/install/linux-postinstall.md).
 {% endcomment %}
-Compose をルートユーザー以外で起動するには、[ルートユーザー以外による Docker の管理](/engine/install/linux-postinstall.md) を参照してください。
+Compose をルートユーザー以外で起動するには、[ルートユーザー以外による Docker の管理](../engine/install/linux-postinstall.md) を参照してください。
 
 {% comment %}
 ## Install Compose
@@ -102,11 +102,11 @@ Docker install instructions for these are here:
 上記ソフトウェアのインストール手順は以下にあります。
 
 {% comment %}
-  * [Get Docker Desktop for Mac](/docker-for-mac/install.md)
-  * [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
+  * [Get Docker Desktop for Mac](../docker-for-mac/install.md)
+  * [Get Docker Toolbox](../toolbox/overview.md) (for older systems)
 {% endcomment %}
-  * [Docker Desktop for Mac の入手](/docker-for-mac/install.md)。
-  * [Docker Toolbox の入手](/toolbox/overview.md)（古いシステムの場合）。
+  * [Docker Desktop for Mac の入手](../docker-for-mac/install.md)。
+  * [Docker Toolbox の入手](../toolbox/overview.md)（古いシステムの場合）。
 
 </div>
 <div id="windows" class="tab-pane fade" markdown="1">
@@ -126,11 +126,11 @@ install Compose separately. Docker install instructions for these are here:
 上記ソフトウェアのインストール手順は以下にあります。
 
 {% comment %}
-* [Get Docker Desktop for Windows](/docker-for-windows/install.md)
-* [Get Docker Toolbox](/toolbox/overview.md) (for older systems)
+* [Get Docker Desktop for Windows](../docker-for-windows/install.md)
+* [Get Docker Toolbox](../toolbox/overview.md) (for older systems)
 {% endcomment %}
-* [Docker Desktop for Windows の入手](/docker-for-windows/install.md)。
-* [Docker Toolbox の入手](/toolbox/overview.md)（古いシステムの場合）。
+* [Docker Desktop for Windows の入手](../docker-for-windows/install.md)。
+* [Docker Toolbox の入手](../toolbox/overview.md)（古いシステムの場合）。
 
 {% comment %}
 If you are running the Docker daemon and client directly on Microsoft
@@ -149,10 +149,9 @@ Docker デーモンや Docker クライアントを Windows Server 上で直接�
 
 {% comment %}
 Follow these instructions if you are running the Docker daemon and client directly
-on Microsoft Windows Server with [Docker Engine - Enterprise](/ee/docker-ee/windows/docker-ee.md),
-and want to install Docker Compose.
+on Microsoft Windows Server and want to install Docker Compose.
 {% endcomment %}
-Docker デーモンや Docker クライアントを Windows Server 上で [Docker Engine - Enterprise](/ee/docker-ee/windows/docker-ee.md) を使って直接起動している場合、および Docker Compose をインストールしたい場合は、以下の手順に従ってください。
+Docker デーモンや Docker クライアントを Microsoft Windows Server 上で直接起動している場合、および Docker Compose をインストールしたい場合は、以下の手順に従ってください。
 
 
 {% comment %}
@@ -506,13 +505,13 @@ pip uninstall docker-compose
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](/compose/reference/index.md)
-- [Compose file reference](/compose/compose-file/index.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)
 {% endcomment %}
 - [ユーザーガイド](index.md)
 - [Compose をはじめよう](gettingstarted.md)
 - [Django を使ってはじめよう](django.md)
 - [Rails を使ってはじめよう](rails.md)
 - [WordPress を使ってはじめよう](wordpress.md)
-- [コマンドラインリファレンス](/compose/reference/index.md)
-- [Compose ファイルリファレンス](/compose/compose-file/index.md)
+- [コマンドラインリファレンス](reference/index.md)
+- [Compose ファイルリファレンス](compose-file/index.md)

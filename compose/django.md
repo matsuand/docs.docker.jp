@@ -43,12 +43,12 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     {% comment %}
     The Dockerfile defines an application's image content via one or more build
     commands that configure that image. Once built, you can run the image in a
-    container.  For more information on `Dockerfile`, see the [Docker user guide](/get-started/index.md)
+    container.  For more information on `Dockerfile`, see the [Docker user guide](../get-started/index.md)
     and the [Dockerfile reference](/engine/reference/builder/).
     {% endcomment %}
     Dockerfile はアプリケーションイメージの内容を定義するものであり、イメージを設定しビルドするコマンドがいくつか記述されます。
     ビルドが成功すると、コンテナー内にてイメージが起動します。
-    `Dockerfile` の詳細は [Docker ユーザーガイド](/get-started/index.md)や [Dockerfile リファレンス](/engine/reference/builder/) を参照してください。
+    `Dockerfile` の詳細は [Docker ユーザーガイド](../get-started/index.md)や [Dockerfile リファレンス](/engine/reference/builder/) を参照してください。
 
 {% comment %}
 3. Add the following content to the `Dockerfile`.
@@ -111,7 +111,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     also describes which Docker images these services use, how they link
     together, any volumes they might need mounted inside the containers.
     Finally, the `docker-compose.yml` file describes which ports these services
-    expose. See the [`docker-compose.yml` reference](/compose/compose-file/index.md) for more
+    expose. See the [`docker-compose.yml` reference](compose-file/index.md) for more
     information on how this file works.
     {% endcomment %}
     `docker-compose.yml`ファイルは、アプリケーションを作り出すサービスを記述するものです。
@@ -119,7 +119,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     Compose ファイルはまた、各サービスが利用する Docker イメージを記述します。
     そしてどのように互いにリンクし合い、コンテナー内部にマウントすべきボリュームはどのようなものかを定義します。
     そして`docker-compose.yml`ファイルには、各サービスが公開するポート番号が何かも記述します。
-    このファイルがどのようにして動作するかの詳細は [`docker-compose.yml` リファレンス](/compose/compose-file/index.md)を参照してください。
+    このファイルがどのようにして動作するかの詳細は [`docker-compose.yml` リファレンス](compose-file/index.md)を参照してください。
 
 {% comment %}
 9. Add the following configuration to the file.
@@ -175,9 +175,9 @@ In this step, you create a Django starter project by building the image from the
 
 {% comment %}
 2. Create the Django project by running
-the [docker-compose run](/compose/reference/run.md) command as follows.
+the [docker-compose run](reference/run.md) command as follows.
 {% endcomment %}
-2. Django プロジェクトを生成するために [docker-compose run](/compose/reference/run.md) コマンドを以下のように実行します。
+2. Django プロジェクトを生成するために [docker-compose run](reference/run.md) コマンドを以下のように実行します。
 
        sudo docker-compose run web django-admin startproject composeexample .
 
@@ -287,9 +287,9 @@ In this section, you set up the database connection for Django.
 3.  ファイルを保存して閉じます。
 
 {% comment %}
-4.  Run the [docker-compose up](/compose/reference/up.md) command from the top level directory for your project.
+4.  Run the [docker-compose up](reference/up.md) command from the top level directory for your project.
 {% endcomment %}
-4.  プロジェクトのトップディレクトリにおいてコマンド [docker-compose up](/compose/reference/up.md) を実行します。
+4.  プロジェクトのトップディレクトリにおいてコマンド [docker-compose up](reference/up.md) を実行します。
 
     ```none
     $ docker-compose up
@@ -316,13 +316,13 @@ In this section, you set up the database connection for Django.
     At this point, your Django app should be running at port `8000` on
     your Docker host. On Docker Desktop for Mac and Docker Desktop for Windows, go
     to `http://localhost:8000` on a web browser to see the Django
-    welcome page. If you are using [Docker Machine](/machine/overview.md),
+    welcome page. If you are using [Docker Machine](../machine/overview.md),
     then `docker-machine ip MACHINE_VM` returns the Docker host IP
     address, to which you can append the port (`<Docker-Host-IP>:8000`).
     {% endcomment %}
     この段階で Django アプリは Docker ホスト上のポート`8000`で稼動しています。
     Docker Desktop for Mac または Docker Desktop for Windows の場合は、ブラウザーから `http://localhost:8000` にアクセスすることで、Django の Welcome ページを確認できます。
-    [Docker Machine](/machine/overview.md) を利用している場合は、`docker-machine ip MACHINE_VM` を実行すると Docker ホストの IP アドレスが得られるので、ポート番号をつけてアクセスします（`<DockerホストID>:8000`）。
+    [Docker Machine](../machine/overview.md) を利用している場合は、`docker-machine ip MACHINE_VM` を実行すると Docker ホストの IP アドレスが得られるので、ポート番号をつけてアクセスします（`<DockerホストID>:8000`）。
 
     {% comment %}
     ![Django example](images/django-it-worked.png)
@@ -385,9 +385,9 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
       ```
 
     {% comment %}
-    * Or, for a more elegant shutdown, switch to a different shell, and run [docker-compose down](/compose/reference/down.md) from the top level of your Django sample project directory.
+    * Or, for a more elegant shutdown, switch to a different shell, and run [docker-compose down](reference/down.md) from the top level of your Django sample project directory.
     {% endcomment %}
-    * もう少しきれいなやり方として別のシェル画面に切り替えて、Django サンプルプロジェクトのトップディレクトリにおいて [docker-compose down](/compose/reference/down.md) を実行します。
+    * もう少しきれいなやり方として別のシェル画面に切り替えて、Django サンプルプロジェクトのトップディレクトリにおいて [docker-compose down](reference/down.md) を実行します。
 
       ```none
       vmb at mymachine in ~/sandbox/django
@@ -418,13 +418,13 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
 - [Getting Started](gettingstarted.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](/compose/reference/index.md)
-- [Compose file reference](/compose/compose-file/index.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)
 {% endcomment %}
 - [ユーザーガイド](index.md)
 - [Compose のインストール](install.md)
 - [はじめよう](gettingstarted.md)
 - [Rails  を使ってはじめよう](rails.md)
 - [WordPress を使ってはじめよう](wordpress.md)
-- [コマンドラインリファレンス](/compose/reference/index.md)
-- [Compose ファイルリファレンス](/compose/compose-file/index.md)
+- [コマンドラインリファレンス](reference/index.md)
+- [Compose ファイルリファレンス](compose-file/index.md)

@@ -543,12 +543,11 @@ technologies such as BSD Jails or Solaris Zones.
 
 {% comment %}
 ## Next steps
-- Read about [installing Docker](/get-docker.md).
+- Read about [installing Docker](../get-docker.md).
 - Get hands-on experience with the [Getting started with Docker](index.md)
+    tutorial.
 {% endcomment %}
 ## 次のステップ
 {: #next-steps }
 - [Docker のインストール](/get-docker.md) に進む。
-- [Docker をはじめよう](getstarted/index.md) を試す。
 - 利用例を確認したり詳細なトピックを突き詰めたりするために [Docker Engine ユーザーガイド](index.md) を読む。
-    tutorial.

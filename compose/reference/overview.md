@@ -198,13 +198,13 @@ in an environment file.
 
 {% comment %}
 For an example of using the `-f` option at the command line, suppose you are
-running the [Compose Rails sample](/compose/rails.md), and
+running the [Compose Rails sample](../rails.md), and
 have a `docker-compose.yml` file in a directory called `sandbox/rails`. You can
 use a command like [docker-compose pull](pull.md) to get the
 postgres image for the `db` service from anywhere by using the `-f` flag as
 follows: `docker-compose -f ~/sandbox/rails/docker-compose.yml pull db`
 {% endcomment %}
-コマンドラインから `-f` オプションを利用する例として、[Compose Rails サンプル](/compose/rails.md) を利用しているとします。
+コマンドラインから `-f` オプションを利用する例として、[Compose Rails サンプル](../rails.md) を利用しているとします。
 そして `sandbox/rails` というディレクトリに `docker-compose.yml` があるとします。
 [docker-compose pull](pull.md) のようなコマンドを使って、`db` サービスにおける postgres イメージをどこからでも取得できるようにするには、`-f` フラグを使って以下のようにします。
 `docker-compose -f ~/sandbox/rails/docker-compose.yml pull db`
@@ -272,9 +272,9 @@ relates to the `-f` flag, and `COMPOSE_PROJECT_NAME`
 また[環境変数 COMPOSE_PROJECT_NAME](envvars.md#compose_project_name) は `-p` フラグに関連づいています。
 
 {% comment %}
-Also, you can set some of these variables in an [environment file](/compose/env-file.md).
+Also, you can set some of these variables in an [environment file](../env-file.md).
 {% endcomment %}
-また環境変数の中には[環境ファイル](/compose/env-file.md)において設定できるものもあります。
+また環境変数の中には[環境ファイル](../env-file.md) において設定できるものもあります。
 
 {% comment %}
 ## Where to go next
@@ -284,7 +284,7 @@ Also, you can set some of these variables in an [environment file](/compose/env-
 
 {% comment %}
 * [CLI environment variables](envvars.md)
-* [Declare default environment variables in file](/compose/env-file.md)
+* [Declare default environment variables in file](../env-file.md)
 {% endcomment %}
 * [CLI 環境変数](envvars.md)
-* [環境変数のデフォルトをファイル内に定義する](/compose/env-file.md)
+* [環境変数のデフォルトをファイル内に定義する](../env-file.md)

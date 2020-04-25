@@ -191,8 +191,8 @@ Follow the instructions appropriate for your operating system to download and in
 {% endcomment %}
 利用しているオペレーティングシステムに対応する以下の手順に従って、Docker Desktop のダウンロードとインストールを行ってください。
 
- - [Docker Desktop for Mac](/docker-for-mac/install/){: target="_blank" class="_"}
- - [Docker Desktop for Windows](/docker-for-windows/install/){: target="_blank" class="_"}
+ - [Docker Desktop for Mac]({{ site.baseurl }}/docker-for-mac/install/){: target="_blank" class="_"}
+ - [Docker Desktop for Windows]({{ site.baseurl }}/docker-for-windows/install/){: target="_blank" class="_"}
 
 {% comment %}
 ### Test Docker version
@@ -283,7 +283,7 @@ Refer to the following topics for further documentation on all CLI commands used
 {% endcomment %}
 本節において用いた CLI コマンドの詳細は、以下から確認することができます。
 
-- [docker version](https://docs.docker.com/engine/reference/commandline/version/)
-- [docker run](https://docs.docker.com/engine/reference/commandline/run/)
-- [docker image](https://docs.docker.com/engine/reference/commandline/image/)
-- [docker container](https://docs.docker.com/engine/reference/commandline/container/)
+- [docker version]({{ site.baseurl }}/engine/reference/commandline/version/)
+- [docker run]({{ site.baseurl }}/engine/reference/commandline/run/)
+- [docker image]({{ site.baseurl }}/engine/reference/commandline/image/)
+- [docker container]({{ site.baseurl }}/engine/reference/commandline/container/)

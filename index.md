@@ -41,27 +41,27 @@ production servers in the cloud. Total reading time is less than an hour.
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="docker-for-mac/install/"> <img src="{{ site.baseurl }}/images/apple_48.svg" alt="Docker Desktop for Mac"> </a>
+                    <a href="{{ site.baseurl }}/docker-for-mac/install/"><img src="{{ site.baseurl }}/images/apple_48.svg" alt="Docker Desktop for Mac"></a>
                 </div>
-                <h3 id="docker-for-mac"><a href="/docker-for-mac/install/">Docker Desktop for Mac</a></h3>
+                <h3 id="docker-for-mac"><a href="{{ site.baseurl }}/docker-for-mac/install/">Docker Desktop for Mac</a></h3>
                 <p>Mac 上ですべての Docker ツールを実行するために macOS サンドボックスセキュリティモデルを使うネイティブなアプリケーションです。</p>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="docker-for-windows/install/"> <img src="{{ site.baseurl }}/images/windows_48.svg" alt="Docker Desktop for Windows"> </a>
+                    <a href="{{ site.baseurl }}/docker-for-windows/install/"><img src="{{ site.baseurl }}/images/windows_48.svg" alt="Docker Desktop for Windows"></a>
                 </div>
-                <h3 id="docker-for-windows"><a href="/docker-for-windows/install/">Docker Desktop for Windows</a></h3>
+                <h3 id="docker-for-windows/install/"><a href="{{ site.baseurl }}/docker-for-windows/install/">Docker Desktop for Windows</a></h3>
                 <p>Windows コンピューター上ですべての Docker ツールを実行するためのネイティブ Windows アプリケーションです。</p>
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="engine/install/"> <img src="{{ site.baseurl }}/images/linux_48.svg" alt="Docker for Linux"> </a>
+                    <a href="/engine/install/"><img src="{{ site.baseurl }}/images/linux_48.svg" alt="Docker for Linux"></a>
                 </div>
-                <h3 id="docker-for-linux"><a href="/engine/install/">Docker for Linux</a></h3>
+                <h3 id="docker-for-linux"><a href="{{ site.baseurl }}/engine/install/">Docker for Linux</a></h3>
                 <p>インストール済みの Linux ディストリビューション上に Docker をインストールします。</p>
             </div>
         </div>
@@ -87,9 +87,9 @@ Docker Engine - Community はデスクトップからクラウドのサーバー
 また理解できているものを利用したい場合は安定（stable）チャンネルを選んでください。
 
 {% comment %}
-[Learn more about Docker Engine - Community](/engine/index.md){: class="button outline-btn"}
+[Learn more about Docker Engine - Community](engine/index.md){: class="button outline-btn"}
 {% endcomment %}
-[Docker Engine - Community について学ぶ](/engine/index.md){: class="button outline-btn"}
+[Docker Engine - Community について学ぶ](engine/index.md){: class="button outline-btn"}
 
 </div>
 <div markdown="1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">

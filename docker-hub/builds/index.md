@@ -65,13 +65,6 @@ image. Automated tests do not push images to the registry on their own. [Learn m
 ## 自動ビルドの設定
 
 {% comment %}
-> **Note**: Automated builds created with the old Docker Hub are
-now Classic Automated Builds. [Learn more](classic.md)
-{% endcomment %}
-> **メモ**: Automated builds created with the old Docker Hub are
-now Classic Automated Builds. [Learn more](classic.md)
-
-{% comment %}
 You can configure repositories in Docker Hub so that they automatically
 build an image each time you push new code to your source provider. If you have
 [automated tests](automated-testing.md) configured, the new image is only pushed
@@ -155,7 +148,7 @@ You might redirected to the settings page to [link](link-source.md) the code rep
 
     {% comment %}
     {% endcomment %}
-    [Build caching](/develop/develop-images/dockerfile_best-practices.md#leverage-build-cache) can save time if you are building a large image frequently or have
+    [Build caching](../../develop/develop-images/dockerfile_best-practices.md#leverage-build-cache) can save time if you are building a large image frequently or have
     many dependencies. You might want to leave build caching disabled to
     make sure all of your dependencies are resolved at build time, or if
     you have a large layer that is quicker to build locally.

@@ -7,18 +7,18 @@ title: Compose において Swarm を使う
 ---
 
 {% comment %}
-Docker Compose and [Docker Swarm](/swarm/overview.md) aim to have full integration, meaning
+Docker Compose and [Docker Swarm](../swarm/overview.md) aim to have full integration, meaning
 you can point a Compose app at a Swarm cluster and have it all just work as if
 you were using a single Docker host.
 {% endcomment %}
-Docker Compose と [Docker Swarm](/swarm/overview.md) は完全な統合を目指しています。
+Docker Compose と [Docker Swarm](../swarm/overview.md) は完全な統合を目指しています。
 このことは Compose アプリといえば Swarm クラスターのことを指すものであって、これらすべてが一つになり、まるで単一の Docker ホストを使っているかのように動作することを意味します。
 
 {% comment %}
 The actual extent of integration depends on which version of the
-[Compose file format](/compose/compose-file/compose-versioning.md) you are using:
+[Compose file format](compose-file/compose-versioning.md) you are using:
 {% endcomment %}
-実際の統合の程度に関しては [Compose ファイルフォーマット](/compose/compose-file/compose-versioning.md) のどのバージョンを用いるかによって変わります。
+実際の統合の程度に関しては [Compose ファイルフォーマット](compose-file/compose-versioning.md) のどのバージョンを用いるかによって変わります。
 
 {% comment %}
 1.  If you're using version 1 along with `links`, your app works, but Swarm
@@ -39,16 +39,16 @@ The actual extent of integration depends on which version of the
     - [制約](swarm.md#limitations)に関しては後述しています。
 
     {% comment %}
-    - as long as the Swarm cluster is configured to use the [overlay driver](/network/overlay.md),
+    - as long as the Swarm cluster is configured to use the [overlay driver](../network/overlay.md),
       or a custom driver which supports multi-host networking.
     {% endcomment %}
-    - スウォームクラスターの設定において[オーバーレイドライバー](/network/overlay.md) を利用するか、あるいはマルチホストネットワーキングをサポートするカスタムドライバーを利用することが前提です。
+    - スウォームクラスターの設定において[オーバーレイドライバー](../network/overlay.md) を利用するか、あるいはマルチホストネットワーキングをサポートするカスタムドライバーを利用することが前提です。
 
 {% comment %}
-Read [Get started with multi-host networking](/network/network-tutorial-overlay.md) to see how to
-set up a Swarm cluster with [Docker Machine](/machine/overview.md) and the overlay driver. Once you've got it running, deploying your app to it should be as simple as:
+Read [Get started with multi-host networking](../network/network-tutorial-overlay.md) to see how to
+set up a Swarm cluster with [Docker Machine](../machine/overview.md) and the overlay driver. Once you've got it running, deploying your app to it should be as simple as:
 {% endcomment %}
-[マルチホストネットワーキングをはじめよう](/network/network-tutorial-overlay.md) を読むと、[Docker Machine](/machine/overview.md) を使ったスウォームクラスターやオーバーレイドライバーの設定方法がわかります。
+[マルチホストネットワーキングをはじめよう](../network/network-tutorial-overlay.md) を読むと、[Docker Machine](../machine/overview.md) を使ったスウォームクラスターやオーバーレイドライバーの設定方法がわかります。
 稼動させてしまえば、アプリをデプロイすることは以下のように簡単にできます。
 
     $ eval "$(docker-machine env --swarm <name of swarm master machine>)"
@@ -280,6 +280,6 @@ Swarm では豊富なスケジュール機能や affinity フィルターを提�
 
 {% comment %}
 For the full set of available filters and expressions, see the
-[Swarm documentation](/swarm/scheduler/filter.md).
+[Swarm documentation](../swarm/scheduler/filter.md).
 {% endcomment %}
-利用可能なフィルターや記述書式については [Swarm ドキュメント](/swarm/scheduler/filter.md) を参照してください。
+利用可能なフィルターや記述書式については [Swarm ドキュメント](../swarm/scheduler/filter.md) を参照してください。

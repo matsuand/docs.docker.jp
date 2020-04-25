@@ -63,9 +63,9 @@ with a single member (you!).
 これは **owners** チームであり、ただ一人のメンバー、つまりあなた自身が含まれています。
 
 {% comment %}
-In some situations, you can also create an organization by [converting a user account](/convert-account.md).
+In some situations, you can also create an organization by [converting a user account](convert-account.md).
 {% endcomment %}
-状況によっては [ユーザーアカウントの変更](/convert-account.md) を行って組織を生成することもできます。
+状況によっては [ユーザーアカウントの変更](convert-account.md) を行って組織を生成することもできます。
 
 {% comment %}
 #### The owners team

@@ -16,9 +16,9 @@ This page contains a list of resources for application developers who would like
 ## 前提条件
 
 {% comment %}
-Work through the learning modules in [Get started](/get-started/index.md) to understand how to build an image and run it as a containerized application.
+Work through the learning modules in [Get started](../get-started/index.md) to understand how to build an image and run it as a containerized application.
 {% endcomment %}
-[Docker をはじめよう](/get-started/index.md) の各パートを学習し、イメージのビルド方法やコンテナー化アプリケーションの実行方法について理解してください。
+[Docker をはじめよう](../get-started/index.md) の各パートを学習し、イメージのビルド方法やコンテナー化アプリケーションの実行方法について理解してください。
 
 {% comment %}
 ## Develop new apps on Docker
@@ -34,17 +34,17 @@ most benefits from Docker.
 Docker を使って新しいアプリを開発しようとしている方は、以下のような情報を確認し、Docker を効率よく利用する開発パターンについて理解してください。
 
 {% comment %}
-- Use [multistage builds](/develop/develop-images/multistage-build.md){: target="_blank" class="_"} to keep your images lean
-- Manage application data using [volumes](/storage/volumes.md) and [bind mounts](/storage/bind-mounts.md){: target="_blank" class="_"}
-- [Scale your app](/get-started/kube-deploy.md){: target="_blank" class="_"} with kubernetes
-- [Scale your app](/get-started/swarm-deploy.md){: target="_blank" class="_"} as a swarm service
-- [General application development best practices](/develop/dev-best-practices.md){: target="_blank" class="_"}
+- Use [multistage builds](develop-images/multistage-build.md){: target="_blank" class="_"} to keep your images lean
+- Manage application data using [volumes](../storage/volumes.md) and [bind mounts](../storage/bind-mounts.md){: target="_blank" class="_"}
+- [Scale your app](../get-started/kube-deploy.md){: target="_blank" class="_"} with kubernetes
+- [Scale your app](../get-started/swarm-deploy.md){: target="_blank" class="_"} as a swarm service
+- [General application development best practices](dev-best-practices.md){: target="_blank" class="_"}
 {% endcomment %}
-- [マルチステージビルド](/develop/develop-images/multistage-build.md){: target="_blank" class="_"} を利用して、イメージをスリムなものにしてください。
-- アプリケーションデータは [ボリューム](/storage/volumes.md) や [バインドマウント](/storage/bind-mounts.md){: target="_blank" class="_"} を利用して管理してください。
-- [Scale your app](/get-started/kube-deploy.md){: target="_blank" class="_"} with kubernetes
-- [Scale your app](/get-started/swarm-deploy.md){: target="_blank" class="_"} as a swarm service
-- [General application development best practices](/develop/dev-best-practices.md){: target="_blank" class="_"}
+- [マルチステージビルド](develop-images/multistage-build.md){: target="_blank" class="_"} を利用して、イメージをスリムなものにしてください。
+- アプリケーションデータは [ボリューム](..//storage/volumes.md) や [バインドマウント](../storage/bind-mounts.md){: target="_blank" class="_"} を利用して管理してください。
+- [Scale your app](../get-started/kube-deploy.md){: target="_blank" class="_"} with kubernetes
+- [Scale your app](../get-started/swarm-deploy.md){: target="_blank" class="_"} as a swarm service
+- [General application development best practices](dev-best-practices.md){: target="_blank" class="_"}
 
 {% comment %}
 ## Learn about language-specific app development with Docker
@@ -56,14 +56,14 @@ Docker を使って新しいアプリを開発しようとしている方は、�
 - [Docker for Java developers](https://github.com/docker/labs/tree/master/developer-tools/java/){: target="_blank" class="_"} lab
 - [Port a node.js app to Docker](https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting){: target="_blank" class="_"}
 - [Ruby on Rails app on Docker](https://github.com/docker/labs/tree/master/developer-tools/ruby){: target="_blank" class="_"} lab
-- [Dockerize a .Net Core application](/engine/examples/dotnetcore.md){: target="_blank" class="_"}
-- [Dockerize an ASP.NET Core application with SQL Server on Linux](/compose/aspnet-mssql-compose.md){: target="_blank" class="_"} using Docker Compose
+- [Dockerize a .Net Core application](../engine/examples/dotnetcore.md){: target="_blank" class="_"}
+- [Dockerize an ASP.NET Core application with SQL Server on Linux](../compose/aspnet-mssql-compose.md){: target="_blank" class="_"} using Docker Compose
 {% endcomment %}
 - [Docker for Java developers](https://github.com/docker/labs/tree/master/developer-tools/java/){: target="_blank" class="_"} lab
 - [Port a node.js app to Docker](https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting){: target="_blank" class="_"}
 - [Ruby on Rails app on Docker](https://github.com/docker/labs/tree/master/developer-tools/ruby){: target="_blank" class="_"} lab
-- [Dockerize a .Net Core application](/engine/examples/dotnetcore.md){: target="_blank" class="_"}
-- [Dockerize an ASP.NET Core application with SQL Server on Linux](/compose/aspnet-mssql-compose.md){: target="_blank" class="_"} using Docker Compose
+- [Dockerize a .Net Core application](../engine/examples/dotnetcore.md){: target="_blank" class="_"}
+- [Dockerize an ASP.NET Core application with SQL Server on Linux](../compose/aspnet-mssql-compose.md){: target="_blank" class="_"} using Docker Compose
 
 {% comment %}
 ## Advanced development with the SDK or API

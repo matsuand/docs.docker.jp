@@ -20,12 +20,12 @@ efficient images.
 Docker builds images automatically by reading the instructions from a
 `Dockerfile` -- a text file that contains all commands, in order, needed to
 build a given image. A `Dockerfile` adheres to a specific format and set of
-instructions which you can find at [Dockerfile reference](/engine/reference/builder/).
+instructions which you can find at [Dockerfile reference](../../engine/reference/builder.md).
 {% endcomment %}
 Docker は `Dockerfile` に書かれた指示を読み込んで、自動的にイメージを構築します。
 このファイルはあらゆる命令を含んだテキストファイルであり、順に処理することで指定されたイメージを構築するために必要となるものです。
 `Dockerfile` は所定のフォーマットや各種の命令に従います。
-その内容は [Dockerfile リファレンス](/engine/reference/builder/) に示しています。
+その内容は [Dockerfile リファレンス](../../engine/reference/builder.md) に示しています。
 
 {% comment %}
 A Docker image consists of read-only layers each of which represents a
@@ -71,9 +71,9 @@ deleting files, are written to this thin writable container layer.
 
 {% comment %}
 For more on image layers (and how Docker builds and stores images), see
-[About storage drivers](/storage/storagedriver/).
+[About storage drivers](../../storage/storagedriver/index.md).
 {% endcomment %}
-イメージレイヤー（また Docker がイメージをどう作り保存するか）については [ストレージドライバーについて](/storage/storagedriver/) を参照してください。
+イメージレイヤー（また Docker がイメージをどう作り保存するか）については [ストレージドライバーについて](../../storage/storagedriver/index.md) を参照してください。
 
 {% comment %}
 ## General guidelines and recommendations
@@ -465,11 +465,11 @@ EOF
 To exclude files not relevant to the build (without restructuring your source
 repository) use a `.dockerignore` file. This file supports exclusion patterns
 similar to `.gitignore` files. For information on creating one, see the
-[.dockerignore file](/engine/reference/builder.md#dockerignore-file).
+[.dockerignore file](../../engine/reference/builder.md#dockerignore-file).
 {% endcomment %}
 ビルドに関係のないファイルを（ソースリポジトリを変更することなく）除外するには `.dockerignore` ファイルを利用します。
 このファイルは `.gitignore` ファイルと同様のファイル除外指定パターンに対応しています。
-ファイルの生成に関しては [.dockerignore ファイル](/engine/reference/builder.md#dockerignore-file) を参照してください。
+ファイルの生成に関しては [.dockerignore ファイル](../../engine/reference/builder.md#dockerignore-file) を参照してください。
 
 {% comment %}
 ### Use multi-stage builds
@@ -609,7 +609,7 @@ database, and an in-memory cache in a decoupled manner.
 {% comment %}
 Limiting each container to one process is a good rule of thumb, but it is not a
 hard and fast rule. For example, not only can containers be
-[spawned with an init process](/engine/reference/run.md#specify-an-init-process),
+[spawned with an init process](../../engine/reference/run.md#specify-an-init-process),
 some programs might spawn additional processes of their own accord. For
 instance, [Celery](http://www.celeryproject.org/) can spawn multiple worker
 processes, and [Apache](https://httpd.apache.org/) can create one process per
@@ -617,16 +617,16 @@ request.
 {% endcomment %}
 個々のコンテナーを 1 つのプロセスのみに限定して割り当てることは、優れた経験則となることがあります。
 しかし決して厳密な規則というわけでもありません。
-たとえばコンテナーは [初期プロセスにおいて起動](/engine/reference/run/#/specifying-an-init-process) することが可能であり、プログラムの中には必要に応じて追加のプロセスを起動するようなものもあります。
+たとえばコンテナーは [初期プロセスにおいて起動](../../engine/reference/run.md#specify-an-init-process) することが可能であり、プログラムの中には必要に応じて追加のプロセスを起動するようなものもあります。
 例をあげると、[Celery](http://www.celeryproject.org/) はワーカープロセスを複数起動し、[Apache](https://httpd.apache.org/) はリクエストごとにプロセスを生成します。
 
 {% comment %}
 Use your best judgment to keep containers as clean and modular as possible. If
-containers depend on each other, you can use [Docker container networks](/network/index.md)
+containers depend on each other, you can use [Docker container networks](../../network/index.md)
 to ensure that these containers can communicate.
 {% endcomment %}
 コンテナーはできるかぎりすっきりとモジュール分割されるように、適切に判断してください。
-コンテナーが互いに依存している場合は、[Docker container ネットワーク](/network/index.md) を用いることで、コンテナー間の通信を確実に行うことができます。
+コンテナーが互いに依存している場合は、[Docker container ネットワーク](../../network/index.md) を用いることで、コンテナー間の通信を確実に行うことができます。
 
 {% comment %}
 ### Minimize the number of layers
@@ -779,9 +779,9 @@ maintainable `Dockerfile`.
 ### FROM
 
 {% comment %}
-[Dockerfile reference for the FROM instruction](/engine/reference/builder.md#from)
+[Dockerfile reference for the FROM instruction](../../engine/reference/builder.md#from)
 {% endcomment %}
-[Dockerfile リファレンスの FROM コマンド](/engine/reference/builder.md#from)
+[Dockerfile リファレンスの FROM コマンド](../../engine/reference/builder.md#from)
 
 {% comment %}
 Whenever possible, use current official images as the basis for your
@@ -796,9 +796,9 @@ being a full Linux distribution.
 ### LABEL
 
 {% comment %}
-[Understanding object labels](/config/labels-custom-metadata.md)
+[Understanding object labels](../../config/labels-custom-metadata.md)
 {% endcomment %}
-[オブジェクトラベルを理解する](/config/labels-custom-metadata.md)
+[オブジェクトラベルを理解する](../../config/labels-custom-metadata.md)
 
 {% comment %}
 You can add labels to your image to help organize images by project, record
@@ -886,22 +886,22 @@ LABEL vendor=ACME\ Incorporated \
 ```
 
 {% comment %}
-See [Understanding object labels](/config/labels-custom-metadata.md)
+See [Understanding object labels](../../config/labels-custom-metadata.md)
 for guidelines about acceptable label keys and values. For information about
 querying labels, refer to the items related to filtering in
-[Managing labels on objects](/config/labels-custom-metadata.md#manage-labels-on-objects).
-See also [LABEL](/engine/reference/builder/#label) in the Dockerfile reference.
+[Managing labels on objects](../../config/labels-custom-metadata.md#manage-labels-on-objects).
+See also [LABEL](../../engine/reference/builder.md#label) in the Dockerfile reference.
 {% endcomment %}
-利用可能なラベルのキーおよび値に関するガイドラインが [オブジェクトラベルの理解](/config/labels-custom-metadata.md) に示されています。
-ラベルを検索する方法については、[オブジェクト内のラベル管理](/config/labels-custom-metadata.md#managing-labels-on-objects) に示されているフィルタリングに関する項目を参照してください。
-また Dockerfile リファレンスの [LABEL](/engine/reference/builder/#label) も参考になります。
+利用可能なラベルのキーおよび値に関するガイドラインが [オブジェクトラベルの理解](../../config/labels-custom-metadata.md) に示されています。
+ラベルを検索する方法については、[オブジェクト内のラベル管理](../../config/labels-custom-metadata.md#manage-labels-on-objects) に示されているフィルタリングに関する項目を参照してください。
+また Dockerfile リファレンスの [LABEL](../../engine/reference/builder.md#label) も参考になります。
 
 ### RUN
 
 {% comment %}
-[Dockerfile reference for the RUN instruction](/engine/reference/builder.md#run)
+[Dockerfile reference for the RUN instruction](../../engine/reference/builder.md#run)
 {% endcomment %}
-[Dockerfile リファレンスの RUN コマンド](/engine/reference/builder.md#run)
+[Dockerfile リファレンスの RUN コマンド](../../engine/reference/builder.md#run)
 
 {% comment %}
 Split long or complex `RUN` statements on multiple lines separated with
@@ -924,13 +924,13 @@ look out for.
 {% comment %}
 Avoid `RUN apt-get upgrade` and `dist-upgrade`, as many of the "essential"
 packages from the parent images cannot upgrade inside an
-[unprivileged container](/engine/reference/run.md#security-configuration). If a package
+[unprivileged container](../../engine/reference/run.md#security-configuration). If a package
 contained in the parent image is out-of-date, contact its maintainers. If you
 know there is a particular package, `foo`, that needs to be updated, use
 `apt-get install -y foo` to update automatically.
 {% endcomment %}
 `RUN apt-get upgrade` や `dist-upgrade` の実行は避けてください。
-親イメージに含まれる重要パッケージは、[権限が与えられていないコンテナー](/engine/reference/run.md#security-configuration)内ではほとんど更新できないからです。
+親イメージに含まれる重要パッケージは、[権限が与えられていないコンテナー](../../engine/reference/run.md#security-configuration) 内ではほとんど更新できないからです。
 親イメージ内のパッケージが古くなっていたら、開発者に連絡をとってください。
 `foo` というパッケージを更新する必要があれば `apt-get install -y foo` を利用してください。
 これによってパッケージは自動的に更新されます。
@@ -1126,9 +1126,9 @@ RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 ### CMD
 
 {% comment %}
-[Dockerfile reference for the CMD instruction](/engine/reference/builder.md#cmd)
+[Dockerfile reference for the CMD instruction](../../engine/reference/builder.md#cmd)
 {% endcomment %}
-[Dockerfile リファレンスの CMD コマンド](/engine/reference/builder.md#cmd)
+[Dockerfile リファレンスの CMD コマンド](../../engine/reference/builder.md#cmd)
 
 {% comment %}
 The `CMD` instruction should be used to run the software contained in your
@@ -1149,22 +1149,22 @@ python and perl. For example, `CMD ["perl", "-de0"]`, `CMD ["python"]`, or `CMD
 ["php", "-a"]`. Using this form means that when you execute something like
 `docker run -it python`, you’ll get dropped into a usable shell, ready to go.
 `CMD` should rarely be used in the manner of `CMD ["param", "param"]` in
-conjunction with [`ENTRYPOINT`](/engine/reference/builder.md#entrypoint), unless
+conjunction with [`ENTRYPOINT`](../../engine/reference/builder.md#entrypoint), unless
 you and your expected users are already quite familiar with how `ENTRYPOINT`
 works.
 {% endcomment %}
 上記以外では、`CMD` に対して bash、python、perl などインタラクティブシェルを与えることが行われます。
 たとえば `CMD ["perl", "-de0"]`、`CMD ["python"]`、`CMD ["php", "-a"]` といった具合です。
 この実行形式を利用するということは、たとえば `docker run -it python` というコマンドを実行したときに、指定したシェルの中に入り込んで、処理を進めていくことを意味します。
-`CMD` と `ENTRYPOINT` を組み合わせて用いる `CMD ["引数", "引数"]` という実行形式がありますが、これを利用するのはまれです。
+`CMD` と [`ENTRYPOINT`](../../engine/reference/builder.md#entrypoint) を組み合わせて用いる `CMD ["引数", "引数"]` という実行形式がありますが、これを利用するのはまれです。
 開発者自身や利用者にとって `ENTRYPOINT` がどのように動作するのかが十分に分かっていないなら、用いないようにしましょう。
 
 ### EXPOSE
 
 {% comment %}
-[Dockerfile reference for the EXPOSE instruction](/engine/reference/builder.md#expose)
+[Dockerfile reference for the EXPOSE instruction](../../engine/reference/builder.md#expose)
 {% endcomment %}
-[Dockerfile リファレンスの EXPOSE コマンド](/engine/reference/builder.md#expose)
+[Dockerfile リファレンスの EXPOSE コマンド](../../engine/reference/builder.md#expose)
 
 {% comment %}
 The `EXPOSE` instruction indicates the ports on which a container listens
@@ -1192,9 +1192,9 @@ Docker のリンク機能においては環境変数が利用できます。
 ### ENV
 
 {% comment %}
-[Dockerfile reference for the ENV instruction](/engine/reference/builder.md#env)
+[Dockerfile reference for the ENV instruction](../../engine/reference/builder.md#env)
 {% endcomment %}
-[Dockerfile リファレンスの ENV コマンド](/engine/reference/builder.md#env)
+[Dockerfile リファレンスの ENV コマンド](../../engine/reference/builder.md#env)
 
 {% comment %}
 To make new software easier to run, you can use `ENV` to update the
@@ -1299,11 +1299,11 @@ $ docker run --rm test sh -c 'echo $ADMIN_USER'
 ### ADD と COPY
 
 {% comment %}
-- [Dockerfile reference for the ADD instruction](/engine/reference/builder.md#add)
-- [Dockerfile reference for the COPY instruction](/engine/reference/builder.md#copy)
+- [Dockerfile reference for the ADD instruction](../../engine/reference/builder.md#add)
+- [Dockerfile reference for the COPY instruction](../../engine/reference/builder.md#copy)
 {% endcomment %}
-- [Dockerfile リファレンスの ADD コマンド](/engine/reference/builder.md#add)
-- [Dockerfile リファレンスの COPY コマンド](/engine/reference/builder.md#copy)
+- [Dockerfile リファレンスの ADD コマンド](../../engine/reference/builder.md#add)
+- [Dockerfile リファレンスの COPY コマンド](../../engine/reference/builder.md#copy)
 
 {% comment %}
 Although `ADD` and `COPY` are functionally similar, generally speaking, `COPY`
@@ -1386,9 +1386,9 @@ auto-extraction capability, you should always use `COPY`.
 ### ENTRYPOINT
 
 {% comment %}
-[Dockerfile reference for the ENTRYPOINT instruction](/engine/reference/builder.md#entrypoint)
+[Dockerfile reference for the ENTRYPOINT instruction](../../engine/reference/builder.md#entrypoint)
 {% endcomment %}
-[Dockerfile リファレンスの ENTRYPOINT コマンド](/engine/reference/builder.md#entrypoint)
+[Dockerfile リファレンスの ENTRYPOINT コマンド](../../engine/reference/builder.md#entrypoint)
 
 {% comment %}
 The best use for `ENTRYPOINT` is to set the image's main command, allowing that
@@ -1470,14 +1470,14 @@ exec "$@"
 > This script uses [the `exec` Bash command](http://wiki.bash-hackers.org/commands/builtin/exec)
 > so that the final running application becomes the container's PID 1. This
 > allows the application to receive any Unix signals sent to the container.
-> For more, see the [`ENTRYPOINT` reference](/engine/reference/builder.md#entrypoint).
+> For more, see the [`ENTRYPOINT` reference](../../engine/reference/builder.md#entrypoint).
 {% endcomment %}
 > アプリを PID 1 として実行
 >
 > このスクリプトでは [Bash の `exec` コマンド](http://wiki.bash-hackers.org/commands/builtin/exec) を利用しています。
 > このため最後に実行されるアプリケーションが、コンテナーの PID 1 になります。
 > したがってコンテナーに送信される Unix シグナルは、そのアプリケーションが受け取ることになります。
-> 詳しくは [`ENTRYPOINT` リファレンス](/engine/reference/builder.md#entrypoint) を参照してください。
+> 詳しくは [`ENTRYPOINT` リファレンス](../../engine/reference/builder.md#entrypoint) を参照してください。
 
 {% comment %}
 The helper script is copied into the container and run via `ENTRYPOINT` on
@@ -1526,9 +1526,9 @@ $ docker run --rm -it postgres bash
 ### VOLUME
 
 {% comment %}
-[Dockerfile reference for the VOLUME instruction](/engine/reference/builder.md#volume)
+[Dockerfile reference for the VOLUME instruction](../../engine/reference/builder.md#volume)
 {% endcomment %}
-[Dockerfile リファレンスの VOLUME コマンド](/engine/reference/builder.md#volume)
+[Dockerfile リファレンスの VOLUME コマンド](../../engine/reference/builder.md#volume)
 
 {% comment %}
 The `VOLUME` instruction should be used to expose any database storage area,
@@ -1542,9 +1542,9 @@ parts of your image.
 ### USER
 
 {% comment %}
-[Dockerfile reference for the USER instruction](/engine/reference/builder.md#user)
+[Dockerfile reference for the USER instruction](../../engine/reference/builder.md#user)
 {% endcomment %}
-[Dockerfile リファレンスの USER コマンド](/engine/reference/builder.md#user)
+[Dockerfile リファレンスの USER コマンド](../../engine/reference/builder.md#user)
 
 {% comment %}
 If a service can run without privileges, use `USER` to change to a non-root
@@ -1602,9 +1602,9 @@ frequently.
 ### WORKDIR
 
 {% comment %}
-[Dockerfile reference for the WORKDIR instruction](/engine/reference/builder.md#workdir)
+[Dockerfile reference for the WORKDIR instruction](../../engine/reference/builder.md#workdir)
 {% endcomment %}
-[Dockerfile リファレンスの WORKDIR コマンド](/engine/reference/builder.md#workdir)
+[Dockerfile リファレンスの WORKDIR コマンド](../../engine/reference/builder.md#workdir)
 
 {% comment %}
 For clarity and reliability, you should always use absolute paths for your
@@ -1619,9 +1619,9 @@ maintain.
 ### ONBUILD
 
 {% comment %}
-[Dockerfile reference for the ONBUILD instruction](/engine/reference/builder.md#onbuild)
+[Dockerfile reference for the ONBUILD instruction](../../engine/reference/builder.md#onbuild)
 {% endcomment %}
-[Dockerfile リファレンスの ONBUILD コマンド](/engine/reference/builder.md#onbuild)
+[Dockerfile リファレンスの ONBUILD コマンド](../../engine/reference/builder.md#onbuild)
 
 {% comment %}
 An `ONBUILD` command executes after the current `Dockerfile` build completes.
@@ -1687,13 +1687,13 @@ These Official Images have exemplary `Dockerfile`s:
 ## その他の情報
 
 {% comment %}
-* [Dockerfile Reference](/engine/reference/builder.md)
+* [Dockerfile Reference](../../engine/reference/builder.md)
 * [More about Base Images](baseimages.md)
-* [More about Automated Builds](/docker-hub/builds/)
-* [Guidelines for Creating Official Images](/docker-hub/official_images/)
+* [More about Automated Builds](../../docker-hub/builds/index.md)
+* [Guidelines for Creating Official Images](../../docker-hub/official_images.md)
 {% endcomment %}
-* [Dockerfile リファレンス](/engine/reference/builder.md)
+* [Dockerfile リファレンス](../../engine/reference/builder.md)
 * [ベースイメージの詳細](baseimages.md)
-* [自動ビルドの詳細](/docker-hub/builds/)
-* [公式イメージ作成のガイドライン](/docker-hub/official_images/)
+* [自動ビルドの詳細](../../docker-hub/builds/index.md)
+* [公式イメージ作成のガイドライン](../../docker-hub/official_images.md)
 

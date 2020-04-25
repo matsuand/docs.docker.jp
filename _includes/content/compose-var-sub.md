@@ -32,10 +32,10 @@ the `image` option is `postgres:`.
 
 {% comment %}
 You can set default values for environment variables using a
-[`.env` file](../env-file.md), which Compose automatically looks for. Values
+[`.env` file](/compose/env-file/), which Compose automatically looks for. Values
 set in the shell environment override those set in the `.env` file.
 {% endcomment %}
-環境変数のデフォルト値を [`.env` ファイル](../env-file.md)に設定しておくことができます。
+環境変数のデフォルト値を [`.env` ファイル](/compose/env-file/) に設定しておくことができます。
 Compose はこのファイルを自動的に探しにいきます。
 `.env` ファイルで定義されたものよりも、シェル環境で設定された値が優先されます。
 
@@ -52,11 +52,11 @@ Compose はこのファイルを自動的に探しにいきます。
 
 {% comment %}
 Both `$VARIABLE` and `${VARIABLE}` syntax are supported. Additionally when using
-the [2.1 file format](compose-versioning.md#version-21), it is possible to
+the [2.1 file format](/compose/compose-file/compose-versioning/#version-21), it is possible to
 provide inline default values using typical shell syntax:
 {% endcomment %}
 `$VARIABLE` と `${VARIABLE}` という 2 つの文法がともにサポートされます。
-さらに [2.1 ファイルフォーマット](compose-versioning.md#version-21)を利用している場合は、シェル上でも利用されているインラインのデフォルト指定方法を行うことができます。
+さらに [2.1 ファイルフォーマット](/compose/compose-file/compose-versioning/#version-21) を利用している場合は、シェル上でも利用されているインラインのデフォルト指定方法を行うことができます。
 
 {% comment %}
 - `${VARIABLE:-default}` evaluates to `default` if `VARIABLE` is unset or

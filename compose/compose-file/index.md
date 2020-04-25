@@ -286,13 +286,13 @@ This results in an image named `webapp` and tagged `tag`, built from `./dir`.
 > Note when using docker stack deploy
 >
 > The `build` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 > The `docker stack` command does not build images before deploying.
 {: .important }
 {% endcomment %}
 > docker のスタックデプロイ時のメモ
 >
-> `build `オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
+> `build `オプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
 > `docker stack` コマンドは、デプロイするまではイメージをビルドしません。
 {: .important }
 
@@ -393,13 +393,13 @@ build:
 > In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
 > If you need an argument to be available in both places, also specify it under
-> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder.md#understand-how-arg-and-from-interact)
+> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](../../engine/reference/builder.md#understand-how-arg-and-from-interact)
 > section in the documentation for usage details.
 {% endcomment %}
 > build 引数の適用範囲
 >
 > Dockerfile にて `FROM` 命令の前に `ARG` 命令を指定した場合、`FROM` 以降のビルド命令において `ARG` の値は利用することができません。
-> `FROM` の前後どこでも、そして特に `FROM` 命令の後でもその値を利用したい場合は、[ARG と FROM の関連について](/engine/reference/builder.md#understand-how-arg-and-from-interact) を参照してください。
+> `FROM` の前後どこでも、そして特に `FROM` 命令の後でもその値を利用したい場合は、[ARG と FROM の関連について](../../engine/reference/builder.md#understand-how-arg-and-from-interact) を参照してください。
 
 {% comment %}
 You can omit the value when specifying a build argument, in which case its value
@@ -454,10 +454,10 @@ build:
 > ファイルフォーマット[バージョン 3.3](compose-versioning.md#version-33) における追加
 
 {% comment %}
-Add metadata to the resulting image using [Docker labels](/config/labels-custom-metadata.md).
+Add metadata to the resulting image using [Docker labels](../../config/labels-custom-metadata.md).
 You can use either an array or a dictionary.
 {% endcomment %}
-[Docker labels](/config/labels-custom-metadata.md) を使ってイメージにメタデータを追加します。
+[Docker labels](../../config/labels-custom-metadata.md) を使ってイメージにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -557,10 +557,10 @@ build:
 
 {% comment %}
 Build the specified stage as defined inside the `Dockerfile`. See the
-[multi-stage build docs](/develop/develop-images/multistage-build.md) for
+[multi-stage build docs](../../develop/develop-images/multistage-build.md) for
 details.
 {% endcomment %}
-`Dockerfile` 内部に定義されている特定のステージをビルドする方法は、[マルチステージビルド](/develop/develop-images/multistage-build.md) を参照してください。
+`Dockerfile` 内部に定義されている特定のステージをビルドする方法は、[マルチステージビルド](../../develop/develop-images/multistage-build.md) を参照してください。
 
 ```yaml
 build:
@@ -590,12 +590,12 @@ cap_drop:
 > Note when using docker stack deploy
 >
 > The `cap_add` and `cap_drop` options are ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 {: .important }
 {% endcomment %}
 > docker のスタックデプロイ時のメモ
 >
-> `cap_add` オプションと `cap_drop` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> `cap_add` オプションと `cap_drop` オプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
 {: .important }
 
 ### cgroup_parent
@@ -613,12 +613,12 @@ cgroup_parent: m-executor-abcd
 > Note when using docker stack deploy
 >
 > The `cgroup_parent` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 {: .important }
 {% endcomment %}
 > docker のスタックデプロイ時のメモ
 >
-> `cgroup_parent` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> `cgroup_parent` オプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
 {: .important }
 
 ### command
@@ -634,9 +634,9 @@ command: bundle exec thin -p 3000
 
 {% comment %}
 The command can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#cmd):
+[dockerfile](../../engine/reference/builder.md#cmd):
 {% endcomment %}
-このコマンドは [dockerfile](/engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
+このコマンドは [dockerfile](../../engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
 
 ```yaml
 command: ["bundle", "exec", "thin", "-p", "3000"]
@@ -660,9 +660,9 @@ configuration. Two different syntax variants are supported.
 > そうでない場合、このファイルによるデプロイが失敗します。
 
 {% comment %}
-For more information on configs, see [configs](/engine/swarm/configs.md).
+For more information on configs, see [configs](../../engine/swarm/configs.md).
 {% endcomment %}
-configs に関する詳細は [configs](/engine/swarm/configs.md) を参照してください。
+configs に関する詳細は [configs](../../engine/swarm/configs.md) を参照してください。
 
 {% comment %}
 #### Short syntax
@@ -828,12 +828,12 @@ Docker コンテナー名はユニークである必要があります。
 > Note when using docker stack deploy
 >
 > The `container_name` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 {: .important }
 {% endcomment %}
 > docker のスタックデプロイ時のメモ
 >
-> `container_name` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> `container_name` オプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
 {: .important }
 
 ### credential_spec
@@ -972,19 +972,19 @@ services:
 >
 > - `depends_on` does not wait for `db` and `redis` to be "ready" before
 >   starting `web` - only until they have been started. If you need to wait
->   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
+>   for a service to be ready, see [Controlling startup order](../startup-order.md)
 >   for more on this problem and strategies for solving it.
 > - Version 3 no longer supports the `condition` form of `depends_on`.
 > - The `depends_on` option is ignored when
->   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+>   [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 >   with a version 3 Compose file.
 {% endcomment %}
 > `depends_on` の利用にあたっては、気をつけておくべきことがあります。
 >
 > - `depends_on` では `db` や `redis` が「準備」状態になるのを待たずに、つまりそれらを開始したらすぐに `web` を起動します。
->   準備状態になるのを待ってから次のサービスを起動することが必要な場合は、[Compose における起動順の制御](/compose/startup-order.md)にて示す内容と解決方法を確認してください。
+>   準備状態になるのを待ってから次のサービスを起動することが必要な場合は、[Compose における起動順の制御](../startup-order.md)にて示す内容と解決方法を確認してください。
 > - バージョン 3 では `depends_on` の `condition` 形式はサポートされなくなりました。
-> - Compose ファイルバージョン 3 において `depends_on` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> - Compose ファイルバージョン 3 において `depends_on` オプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
 
 ### deploy
 
@@ -995,12 +995,12 @@ services:
 
 {% comment %}
 Specify configuration related to the deployment and running of services. This
-only takes effect when deploying to a [swarm](/engine/swarm/index.md) with
-[docker stack deploy](/engine/reference/commandline/stack_deploy.md), and is
+only takes effect when deploying to a [swarm](../../engine/swarm/index.md) with
+[docker stack deploy](../../engine/reference/commandline/stack_deploy.md), and is
 ignored by `docker-compose up` and `docker-compose run`.
 {% endcomment %}
 サービスのデプロイや起動に関する設定を行います。
-この設定が有効になるのは[スウォーム](/engine/swarm/index.md)に対して [docker stack deploy](/engine/reference/commandline/stack_deploy.md) コマンドを実行したときであって、`docker-compose up` や `docker-compose run` を実行したときには無視されます。
+この設定が有効になるのは [スウォーム](../../engine/swarm/index.md) に対して [docker stack deploy](../../engine/reference/commandline/stack_deploy.md) コマンドを実行したときであって、`docker-compose up` や `docker-compose run` を実行したときには無視されます。
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -1094,19 +1094,19 @@ networks:
 
 {% comment %}
 The options for `endpoint_mode` also work as flags on the swarm mode CLI command
-[docker service create](/engine/reference/commandline/service_create.md). For a
+[docker service create](../../engine/reference/commandline/service_create.md). For a
 quick list of all swarm related `docker` commands, see
-[Swarm mode CLI commands](/engine/swarm/index.md#swarm-mode-key-concepts-and-tutorial).
+[Swarm mode CLI commands](../../engine/swarm/index.md#swarm-mode-key-concepts-and-tutorial).
 {% endcomment %}
-`endpoint_mode` に対する設定は、スウォームモードの CLI コマンド [docker service create](/engine/reference/commandline/service_create.md) におけるフラグとしても動作します。
-スウォームに関連する `docker` コマンドの一覧は [スウォームモード CLI コマンド](/engine/swarm/index.md#swarm-mode-key-concepts-and-tutorial) を参照してください。
+`endpoint_mode` に対する設定は、スウォームモードの CLI コマンド [docker service create](../../engine/reference/commandline/service_create.md) におけるフラグとしても動作します。
+スウォームに関連する `docker` コマンドの一覧は [スウォームモード CLI コマンド](../../engine/swarm/index.md#swarm-mode-key-concepts-and-tutorial) を参照してください。
 
 {% comment %}
 To learn more about service discovery and networking in swarm mode, see
-[Configure service discovery](/engine/swarm/networking.md#configure-service-discovery)
+[Configure service discovery](../../engine/swarm/networking.md#configure-service-discovery)
 in the swarm mode topics.
 {% endcomment %}
-スウォームモードにおけるサービスディスカバリーやネットワークに関しての詳細は、スウォームモードのトピックにある [サービスディスカバリーの設定](/engine/swarm/networking.md#configure-service-discovery) を参照してください。
+スウォームモードにおけるサービスディスカバリーやネットワークに関しての詳細は、スウォームモードのトピックにある [サービスディスカバリーの設定](../../engine/swarm/networking.md#configure-service-discovery) を参照してください。
 
 
 #### labels
@@ -1147,12 +1147,12 @@ services:
 {% comment %}
 Either `global` (exactly one container per swarm node) or `replicated` (a
 specified number of containers). The default is `replicated`. (To learn more,
-see [Replicated and global services](/engine/swarm/how-swarm-mode-works/services.md#replicated-and-global-services)
-in the [swarm](/engine/swarm/index.md) topics.)
+see [Replicated and global services](../../engine/swarm/how-swarm-mode-works/services.md#replicated-and-global-services)
+in the [swarm](../../engine/swarm/index.md) topics.)
 {% endcomment %}
 `global`（スウォームノードごとに 1 つのコンテナーとする）か、`replicated`（指定されたコンテナー数とするか）のいずれかを設定します。
 デフォルトは `replicated` です。
-（詳しくは [スウォーム](/engine/swarm/index.md)のトピックにある [サービスの Replicated と global](/engine/swarm/how-swarm-mode-works/services.md#replicated-and-global-services) を参照してください。）
+（詳しくは [スウォーム](../../engine/swarm/index.md)のトピックにある [サービスの Replicated と global](../../engine/swarm/how-swarm-mode-works/services.md#replicated-and-global-services) を参照してください。）
 
 
 ```yaml
@@ -1256,10 +1256,10 @@ Configures resource constraints.
 
 {% comment %}
 Each of these is a single value, analogous to its
-[docker service create](/engine/reference/commandline/service_create.md) counterpart.
+[docker service create](../../engine/reference/commandline/service_create.md) counterpart.
 {% endcomment %}
 個々の設定には単一の値を指定します。
-これは [docker service create](/engine/reference/commandline/service_create.md) のオプションに対応づきます。
+これは [docker service create](../../engine/reference/commandline/service_create.md) のオプションに対応づきます。
 
 {% comment %}
 In this general example, the `redis` service is constrained to use no more than
@@ -1316,12 +1316,12 @@ If your services or containers attempt to use more memory than the system has
 available, you may experience an Out Of Memory Exception (OOME) and a container,
 or the Docker daemon, might be killed by the kernel OOM killer. To prevent this
 from happening, ensure that your application runs on hosts with adequate memory
-and see [Understand the risks of running out of memory](/config/containers/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
+and see [Understand the risks of running out of memory](../../config/containers/resource_constraints.md#understand-the-risks-of-running-out-of-memory).
 {% endcomment %}
 サービスやコンテナーが、システムにおいて利用可能なメモリ容量以上を利用しようとして、Out Of Memory Exception (OOME) が発生するということがあります。
 コンテナーあるいは Docker デーモンは、このときカーネルの OOM killer によって強制終了させられます。
 これが発生しないようにするためには、ホスト上で動作させるアプリケーションのメモリ利用を適切に行うことが必要です。
-[メモリ不足のリスクへの理解](/config/containers/resource_constraints.md#understand-the-risks-of-running-out-of-memory) を参照してください。
+[メモリ不足のリスクへの理解](../../config/containers/resource_constraints.md#understand-the-risks-of-running-out-of-memory) を参照してください。
 
 
 #### restart_policy
@@ -1515,12 +1515,12 @@ devices:
 > Note when using docker stack deploy
 >
 > The `devices` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 {: .important }
 {% endcomment %}
 > docker のスタックデプロイ時のメモ
 >
-> `devices` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> `devices` オプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
 {: .important }
 
 ### dns
@@ -1572,10 +1572,10 @@ entrypoint: /code/entrypoint.sh
 
 {% comment %}
 The entrypoint can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#entrypoint):
+[dockerfile](../../engine/reference/builder.md#entrypoint):
 {% endcomment %}
 エントリーポイントはリスト形式で設定することができます。
-その指定方法は [Dockerfile](/engine/reference/builder.md#entrypoint) と同様です。
+その指定方法は [dockerfile](../../engine/reference/builder.md#entrypoint) と同様です。
 
 ```yaml
 entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
@@ -1801,7 +1801,7 @@ external_links:
 > Note when using docker stack deploy
 >
 > The `external_links` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 {: .important }
 {% endcomment %}
 > **メモ**
@@ -1812,7 +1812,7 @@ external_links:
 
 > docker のスタックデプロイ時のメモ
 >
-> `external_links` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> `external_links` オプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
 
 ### extra_hosts
 
@@ -1844,11 +1844,11 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 {% comment %}
 Configure a check that's run to determine whether or not containers for this
 service are "healthy". See the docs for the
-[HEALTHCHECK Dockerfile instruction](/engine/reference/builder.md#healthcheck)
+[HEALTHCHECK Dockerfile instruction](../../engine/reference/builder.md#healthcheck)
 for details on how healthchecks work.
 {% endcomment %}
 このサービスを起動させているコンテナーが「健康」（healthy）かどうかを確認する処理を設定します。
-ヘルスチェックがどのように動作するのかの詳細は [Dockerfile の HEALTHCHECK 命令](/engine/reference/builder.md#healthcheck) を参照してください。
+ヘルスチェックがどのように動作するのかの詳細は [Dockerfile の HEALTHCHECK 命令](../../engine/reference/builder.md#healthcheck) を参照してください。
 
 ```yaml
 healthcheck:
@@ -1991,20 +1991,20 @@ services:
 Specify a container’s isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
+[Docker Engine docs](../../engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
 for details.
 {% endcomment %}
 コンテナーの分離技術（isolation technology）を設定します。
 Linux においてサポートされるのは `default` のみです。
 Windows では `default`, `process`, `hyperv` の設定が可能です。
-詳しくは [Docker Engine ドキュメント](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation) を参照してください。
+詳しくは [Docker Engine ドキュメント](../../engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation) を参照してください。
 
 ### labels
 
 {% comment %}
-Add metadata to containers using [Docker labels](/config/labels-custom-metadata.md). You can use either an array or a dictionary.
+Add metadata to containers using [Docker labels](../../config/labels-custom-metadata.md). You can use either an array or a dictionary.
 {% endcomment %}
-[Docker labels](/config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+[Docker labels](../../config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -2033,7 +2033,7 @@ labels:
 >
 > The `--link` flag is a legacy feature of Docker. It may eventually be removed.
 > Unless you absolutely need to continue using it, we recommend that you use
-> [user-defined networks](/compose/networking.md)
+> [user-defined networks](../networking.md)
 > to facilitate communication between two containers instead of using `--link`.
 >
 > One feature that user-defined networks do not support that you can do with
@@ -2045,7 +2045,7 @@ labels:
 >**警告**
 >
 > `--link` フラグはすでに古い機能であり、そのうち削除されるかもしれません。
-> このフラグを利用し続ける必要が明確にないのであれば、[ユーザー定義のネットワーク](/compose/networking.md) を利用することをお勧めします。
+> このフラグを利用し続ける必要が明確にないのであれば、[ユーザー定義のネットワーク](../networking.md) を利用することをお勧めします。
 > そうすれば `--link` を用いなくても、2 つのコンテナー間での通信を実現できます。
 >
 > ただしユーザー定義のネットワークではサポートされない機能が 1 つあります。
@@ -2078,11 +2078,11 @@ the alias, or the service name if no alias was specified.
 {% comment %}
 Links are not required to enable services to communicate - by default,
 any service can reach any other service at that service’s name. (See also, the
-[Links topic in Networking in Compose](/compose/networking.md#links).)
+[Links topic in Networking in Compose](../networking.md#links).)
 {% endcomment %}
 Links はサービスを通信可能とするために必要になるものではありません。
 デフォルトで各サービスは、サービス名を使って他サービスにアクセスすることができます。
-（[Compose ネットワークにおける Links のトピック](/compose/networking.md#links) も参照してください。）
+（[Compose ネットワークにおける Links のトピック](../networking.md#links) も参照してください。）
 
 {% comment %}
 Links also express dependency between services in the same way as
@@ -2101,7 +2101,7 @@ Links は [depends_on](#depends_on) と同様にサービス間の依存関係�
 > Note when using docker stack deploy
 >
 > The `links` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 {: .important }
 {% endcomment %}
 > **メモ**
@@ -2110,7 +2110,7 @@ Links は [depends_on](#depends_on) と同様にサービス間の依存関係�
 
 > docker のスタックデプロイ時のメモ
 >
-> Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
 {: .important }
 
 ### logging
@@ -2130,11 +2130,11 @@ logging:
 {% comment %}
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
-([documented here](/config/containers/logging/configure.md)).
+([documented here](../../config/containers/logging/configure.md)).
 {% endcomment %}
 `driver` 名にはサービスコンテナーにおけるロギングドライバーを指定します。
 これは docker run コマンドに対する `--log-driver` オプションと同じです。
-（[ドキュメントはこちら](/config/containers/logging/configure.md)）
+（[ドキュメントはこちら](../../config/containers/logging/configure.md)）
 
 {% comment %}
 The default value is json-file.
@@ -2182,9 +2182,9 @@ options:
 ```
 
 {% comment %}
-The default driver [json-file](/config/containers/logging/json-file.md), has options to limit the amount of logs stored. To do this, use a key-value pair for maximum storage size and maximum number of files:
+The default driver [json-file](../../config/containers/logging/json-file.md), has options to limit the amount of logs stored. To do this, use a key-value pair for maximum storage size and maximum number of files:
 {% endcomment %}
-デフォルトドライバーである [json-file](/config/containers/logging/json-file.md) には、保存するログの容量を制限するオプションがあります。
+デフォルトドライバーである [json-file](../../config/containers/logging/json-file.md) には、保存するログの容量を制限するオプションがあります。
 これを利用する場合は、キーバリューのペアを使って、最大保存容量（max-size）と最大ファイル数（max-file）を指定します。
 
 ```yaml
@@ -2225,16 +2225,16 @@ services:
 > Logging options available depend on which logging driver you use
 >
 > The above example for controlling log files and sizes uses options
-> specific to the [json-file driver](/config/containers/logging/json-file.md).
+> specific to the [json-file driver](../../config/containers/logging/json-file.md).
 > These particular options are not available on other logging drivers.
 > For a full list of supported logging drivers and their options, refer to the
-> [logging drivers](/config/containers/logging/configure.md) documentation.
+> [logging drivers](../../config/containers/logging/configure.md) documentation.
 {% endcomment %}
 > 利用可能なロギングオプションはロギングドライバーに依存
 >
-> 上で示した例においては、ログファイルや容量を制御するために [json-file ドライバー](/config/containers/logging/json-file.md) に固有のオプションを利用しました。
+> 上で示した例においては、ログファイルや容量を制御するために [json-file ドライバー](../../config/containers/logging/json-file.md) に固有のオプションを利用しました。
 > このようなオプションはその他のロギングドライバーでは利用できません。
-> サポートされるロギングドライバーと個々のオプションについては [ロギングドライバー](/config/containers/logging/configure.md) を参照してください。
+> サポートされるロギングドライバーと個々のオプションについては [ロギングドライバー](../../config/containers/logging/configure.md) を参照してください。
 
 ### network_mode
 
@@ -2266,13 +2266,13 @@ network_mode: "container:[container name/id]"
 > **Note**
 >
 > * This option is ignored when
->   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+>   [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
 > * `network_mode: "host"` cannot be mixed with [links](#links).
 {: .important }
 {% endcomment %}
 > **メモ**
 >
-> * このオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> * このオプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
 > * `network_mode: "host"` とした場合、[links](#links) を同時に指定することはできません。
 {: .important }
 
@@ -2561,12 +2561,12 @@ on-failure error.
 > Note when using docker stack deploy
 >
 > The `restart` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
 {: .important }
 {% endcomment %}
 > docker のスタックデプロイ時のメモ
 >
->Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+>Compose ファイルバージョン 3 においてこのオプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
 {: .important }
 
 ### secrets
@@ -2593,9 +2593,9 @@ configuration. Two different syntax variants are supported.
 {: .important }
 
 {% comment %}
-For more information on secrets, see [secrets](/engine/swarm/secrets.md).
+For more information on secrets, see [secrets](../../engine/swarm/secrets.md).
 {% endcomment %}
-secrets に関する詳細は [secrets](/engine/swarm/secrets.md) を参照してください。
+secrets に関する詳細は [secrets](../../engine/swarm/secrets.md) を参照してください。
 
 {% comment %}
 #### Short syntax
@@ -2744,12 +2744,12 @@ security_opt:
 > Note when using docker stack deploy
 >
 > The `security_opt` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
 {: .important }
 {% endcomment %}
 > docker のスタックデプロイ時のメモ
 >
-> `security_opt` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> `security_opt` オプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
 {: .important }
 
 ### stop_grace_period
@@ -2817,22 +2817,22 @@ sysctls:
 You can only use sysctls that are namespaced in the kernel. Docker does not
 support changing sysctls inside a container that also modify the host system.
 For an overview of supported sysctls, refer to
-[configure namespaced kernel parameters (sysctls) at runtime](/engine/reference/commandline/run.md#configure-namespaced-kernel-parameters-sysctls-at-runtime).
+[configure namespaced kernel parameters (sysctls) at runtime](../../engine/reference/commandline/run.md#configure-namespaced-kernel-parameters-sysctls-at-runtime).
 {% endcomment %}
 You can only use sysctls that are namespaced in the kernel. Docker does not
 support changing sysctls inside a container that also modify the host system.
 For an overview of supported sysctls, refer to
-[configure namespaced kernel parameters (sysctls) at runtime](/engine/reference/commandline/run.md#configure-namespaced-kernel-parameters-sysctls-at-runtime).
+[configure namespaced kernel parameters (sysctls) at runtime](../../engine/reference/commandline/run.md#configure-namespaced-kernel-parameters-sysctls-at-runtime).
 
 {% comment %}
 > Note when using docker stack deploy
 >
 > This option requires Docker Engine 19.03 or up when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
 {% endcomment %}
 > docker のスタックデプロイ時のメモ
 >
-> このオプションを [スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md) において用いるには Docker Engine 19.03 以降が必要です。
+> このオプションを [スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) において用いるには Docker Engine 19.03 以降が必要です。
 
 ### tmpfs
 
@@ -2861,12 +2861,12 @@ tmpfs:
 > Note when using docker stack deploy
 >
 > This option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 > with a (version 3-3.5) Compose file.
 {% endcomment %}
 > docker のスタックデプロイ時のメモ
 >
-> Compose ファイルバージョン 3 ～ 3.5 においてこのオプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> Compose ファイルバージョン 3 ～ 3.5 においてこのオプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
 
 {% comment %}
 Mount a temporary file system inside the container. Size parameter specifies the size
@@ -2918,12 +2918,12 @@ Docker デーモンにおいてユーザー名前空間が設定されていて�
 > Note when using docker stack deploy
 >
 > The `userns_mode` option is ignored when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md).
+> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
 {: .important }
 {% endcomment %}
 > docker のスタックデプロイ時のメモ
 >
-> `userns_mode` オプションは、[スウォームモードでのスタックのデプロイ](/engine/reference/commandline/stack_deploy.md)を行う場合には無視されます。
+> `userns_mode` オプションは、[スウォームモードでのスタックのデプロイ](../../engine/reference/commandline/stack_deploy.md) を行う場合には無視されます。
 {: .important }
 
 ### volumes
@@ -3003,12 +3003,12 @@ volumes:
 {% comment %}
 > **Note**
 >
-> For general information on volumes, refer to the [use volumes](/storage/volumes.md)
+> For general information on volumes, refer to the [use volumes](../../storage/volumes.md)
 > and [volume plugins](/engine/extend/plugins_volume/) sections in the documentation.
 {% endcomment %}
 > **メモ**
 >
-> ボリュームに関する一般的な情報については [ボリュームの利用](/storage/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
+> ボリュームに関する一般的な情報については [ボリュームの利用](../../storage/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
 
 
 {% comment %}
@@ -3150,14 +3150,14 @@ volumes:
 > When creating bind mounts, using the long syntax requires the
 > referenced folder to be created beforehand. Using the short syntax
 > creates the folder on the fly if it doesn't exist.
-> See the [bind mounts documentation](/storage/bind-mounts.md#differences-between--v-and---mount-behavior)
+> See the [bind mounts documentation](../../storage/bind-mounts.md#differences-between--v-and---mount-behavior)
 > for more information.
 {% endcomment %}
 > **メモ**
 >
 > バインドマウントを生成するにあたって長い文法を用いるのであれば、参照するパスはあらかじめ生成しておく必要があります。
 > 短い文法であれば、そのパスが存在いていなかった場合には生成されます。
-> 詳しくは [バインドマウント](/storage/bind-mounts.md#differences-between--v-and---mount-behavior) を参照してください。
+> 詳しくは [バインドマウント](../../storage/bind-mounts.md#differences-between--v-and---mount-behavior) を参照してください。
 
 {% comment %}
 #### Volumes for services, swarms, and stack files
@@ -3283,17 +3283,17 @@ services:
 {% comment %}
 Full detail on these flags, the problems they solve, and their
 `docker run` counterparts is in the Docker Desktop for Mac topic
-[Performance tuning for volume mounts (shared filesystems)](/docker-for-mac/osxfs-caching.md).
+[Performance tuning for volume mounts (shared filesystems)](../../docker-for-mac/osxfs-caching.md).
 {% endcomment %}
-このフラグの詳細、これにより解決される諸問題、`docker run` での対応オプションについては Docker Desktop for Mac のトピック、[ボリュームマウント（共有ファイルシステム）でのパフォーマンスチューニング](/docker-for-mac/osxfs-caching.md) を参照してください。
+このフラグの詳細、これにより解決される諸問題、`docker run` での対応オプションについては Docker Desktop for Mac のトピック、[ボリュームマウント（共有ファイルシステム）でのパフォーマンスチューニング](../../docker-for-mac/osxfs-caching.md) を参照してください。
 
 ### domainname, hostname, ipc, mac\_address, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 {% comment %}
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md) counterpart. Note that `mac_address` is a legacy option.
+[docker run](../../engine/reference/run.md) counterpart. Note that `mac_address` is a legacy option.
 {% endcomment %}
-ここに示すオプションはいずれも、値 1 つを設定するものであり、[docker run](/engine/reference/run.md) のオプションに対応づいています。
+ここに示すオプションはいずれも、値 1 つを設定するものであり、[docker run](../../engine/reference/run.md) のオプションに対応づいています。
 なお `mac_address` は古くなったオプションです。
 
 ```yaml
@@ -3377,18 +3377,18 @@ While it is possible to declare [volumes](#volumes) on the fly as part of the
 service declaration, this section allows you to create named volumes that can be
 reused across multiple services (without relying on `volumes_from`), and are
 easily retrieved and inspected using the docker command line or API.
-See the [docker volume](/engine/reference/commandline/volume_create.md)
+See the [docker volume](../../engine/reference/commandline/volume_create.md)
 subcommand documentation for more information.
 {% endcomment %}
 サービスの宣言の一部として、一時的に [ボリューム](#volumes) を宣言することが可能ですが、このセクションでは（`volumes_from` を利用せずに）マルチサービスにわたって再利用可能な名前つきボリュームの生成方法を説明します。
 またこのボリュームは docker コマンドラインや API を使って簡単に抽出したり確認したりすることができます。
-詳しくは [docker volume](/engine/reference/commandline/volume_create.md) のサブコマンドを確認してください。
+詳しくは [docker volume](../../engine/reference/commandline/volume_create.md) のサブコマンドを確認してください。
 
 {% comment %}
-See [use volumes](/storage/volumes.md) and [volume
+See [use volumes](../../storage/volumes.md) and [volume
 plugins](/engine/extend/plugins_volume/) for general information on volumes.
 {% endcomment %}
-ボリュームに関する一般的な情報については [ボリュームの利用](/storage/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
+ボリュームに関する一般的な情報については [ボリュームの利用](../../storage/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
 
 {% comment %}
 Here's an example of a two-service setup where a database's data directory is
@@ -3533,18 +3533,18 @@ volumes:
 {% comment %}
 > Note when using docker stack deploy
 >
-> External volumes that do not exist _are created_ if you use [docker stack
-> deploy](#deploy) to launch the app in [swarm mode](/engine/swarm/index.md)
-> (instead of [docker compose up](/compose/reference/up.md)). In swarm mode, a
-> volume is automatically created when it is defined by a service. As service
-> tasks are scheduled on new nodes, [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md)
+> External volumes that do not exist _are created_ if you use [docker stack deploy](#deploy)
+> to launch the app in [swarm mode](../../engine/swarm/index.md) (instead of
+> [docker compose up](../reference/up.md)). In swarm mode, a volume is
+> automatically created when it is defined by a service. As service tasks are
+> scheduled on new nodes, [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md)
 > creates the volume on the local node. To learn more, see [moby/moby#29976](https://github.com/moby/moby/issues/29976).
 {: .important }
 {% endcomment %}
 > docker のスタックデプロイ時のメモ
 >
-> external ボリュームが存在しない場合に、[docker stack deploy](#deploy) を実行してアプリを [スウォームモード](/engine/swarm/index.md) 内に導入すると、ボリュームが**生成されます**。
-> （[docker compose up](/compose/reference/up.md) とは異なります。）
+> external ボリュームが存在しない場合に、[docker stack deploy](#deploy) を実行してアプリを [スウォームモード](../../engine/swarm/index.md) 内に導入すると、ボリュームが**生成されます**。
+> （[docker compose up](../reference/up.md) とは異なります。）
 > スウォームモードにおいて、サービスとして定義されているボリュームは自動生成されます。
 > サービスタスクは新たなノード上においてスケジューリングされるので、[swarmkit](https://github.com/docker/swarmkit/blob/master/README.md) がローカルノード上にボリュームを生成します。
 > 詳しくは [moby/moby#29976](https://github.com/moby/moby/issues/29976) を参照してください。
@@ -3553,10 +3553,10 @@ volumes:
 
 {% comment %}
 Add metadata to containers using
-[Docker labels](/config/labels-custom-metadata.md). You can use either
+[Docker labels](../../config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 {% endcomment %}
-[Docker labels](/config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+[Docker labels](../../config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -3629,9 +3629,9 @@ The top-level `networks` key lets you specify networks to be created.
 
 {% comment %}
 * For a full explanation of Compose's use of Docker networking features and all
-  network driver options, see the [Networking guide](/compose/networking.md).
+  network driver options, see the [Networking guide](../networking.md).
 {% endcomment %}
-* Compose が利用する Docker ネットワーク機能やネットワークドライバーのオプションに関して、詳細は [ネットワークガイド](/compose/networking.md) を参照してください。
+* Compose が利用する Docker ネットワーク機能やネットワークドライバーのオプションに関して、詳細は [ネットワークガイド](../networking.md) を参照してください。
 {% comment %}
 * For [Docker Labs](https://github.com/docker/labs/blob/master/README.md)
   tutorials on networking, start with [Designing Scalable, Portable Docker Container Networks](https://github.com/docker/labs/blob/master/networking/README.md)
@@ -3676,9 +3676,9 @@ bridge ネットワークがどのように動作するかは、Docker Labs の�
 
 {% comment %}
 The `overlay` driver creates a named network across multiple nodes in a
-[swarm](/engine/swarm/index.md).
+[swarm](../../engine/swarm/index.md).
 {% endcomment %}
-`overlay` ドライバーは、[スウォーム](/engine/swarm/index.md) 内での複数ノードにわたって、名前づけされたネットワークを生成します。
+`overlay` ドライバーは、[スウォーム](../../engine/swarm/index.md) 内での複数ノードにわたって、名前づけされたネットワークを生成します。
 
 {% comment %}
 * For a working example of how to build and use an
@@ -3885,10 +3885,10 @@ you can set this option to `true`.
 
 {% comment %}
 Add metadata to containers using
-[Docker labels](/config/labels-custom-metadata.md). You can use either
+[Docker labels](../../config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 {% endcomment %}
-[Docker labels](/config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+[Docker labels](../../config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -4029,10 +4029,10 @@ networks:
 
 {% comment %}
 The top-level `configs` declaration defines or references
-[configs](/engine/swarm/configs.md) that can be granted to the services in this
+[configs](../../engine/swarm/configs.md) that can be granted to the services in this
 stack. The source of the config is either `file` or `external`.
 {% endcomment %}
-最上位の `configs` の宣言では、このスタックファイル内のサービスに対して適用する [configs](/engine/swarm/configs.md) を定義し参照します。
+最上位の `configs` の宣言では、このスタックファイル内のサービスに対して適用する [configs](../../engine/swarm/configs.md) を定義し参照します。
 config の値となるのは `file` か `external` です。
 
 {% comment %}
@@ -4104,10 +4104,10 @@ stack.
 
 {% comment %}
 The top-level `secrets` declaration defines or references
-[secrets](/engine/swarm/secrets.md) that can be granted to the services in this
+[secrets](../../engine/swarm/secrets.md) that can be granted to the services in this
 stack. The source of the secret is either `file` or `external`.
 {% endcomment %}
-最上位の `secrets` の宣言では、このスタックファイル内のサービスに対して適用する [secrets](/engine/swarm/secrets.md) を定義し参照します。
+最上位の `secrets` の宣言では、このスタックファイル内のサービスに対して適用する [secrets](../../engine/swarm/secrets.md) を定義し参照します。
 secret の値となるのは `file` か `external` です。
 
 {% comment %}
@@ -4215,14 +4215,14 @@ stack.
 ## Compose ドキュメント
 
 {% comment %}
-- [User guide](/compose/index.md)
-- [Installing Compose](/compose/install.md)
+- [User guide](../index.md)
+- [Installing Compose](../install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Samples](/samples/index.md)
-- [Command line reference](/compose/reference/index.md)
+- [Samples](../../samples/index.md)
+- [Command line reference](../reference/index.md)
 {% endcomment %}
 - [ユーザーガイド](/compose/index.md)
 - [Compose のインストール](/compose/install.md)
 - [Compose ファイルのバージョンとアップグレード](compose-versioning.md)
-- [サンプル](/samples/index.md)
-- [コマンドラインリファレンス](/compose/reference/index.md)
+- [サンプル](../../samples/index.md)
+- [コマンドラインリファレンス](../reference/index.md)

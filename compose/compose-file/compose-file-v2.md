@@ -342,13 +342,13 @@ build:
 > In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
 > If you need an argument to be available in both places, also specify it under
-> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](/engine/reference/builder.md#understand-how-arg-and-from-interact)
+> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](../../engine/reference/builder.md#understand-how-arg-and-from-interact)
 > section in the documentation for usage details.
 {% endcomment %}
 > ビルド引数のスコープ
 >
 > Dockerfile にて `FROM` 命令の前に `ARG` 命令を指定した場合、`FROM` 以降のビルド命令において `ARG` の値は利用することができません。
-> `FROM` の前後どこでも、そして特に `FROM` 命令の後でもその値を利用したい場合は、[ARG と FROM の関連について](/engine/reference/builder.md#understand-how-arg-and-from-interact) を参照してください。
+> `FROM` の前後どこでも、そして特に `FROM` 命令の後でもその値を利用したい場合は、[ARG と FROM の関連について](../../engine/reference/builder.md#understand-how-arg-and-from-interact) を参照してください。
 
 {% comment %}
 You can omit the value when specifying a build argument, in which case its value
@@ -431,13 +431,13 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 Specify a build’s container isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
+[Docker Engine docs](../../engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
 for details.
 {% endcomment %}
 ビルドにおけるコンテナーの分離技術（isolation technology）を設定します。
 Linux においてサポートされるのは `default` のみです。
 Windows では `default`, `process`, `hyperv` の設定が可能です。
-詳しくは [Docker Engine ドキュメント](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation) を参照してください。
+詳しくは [Docker Engine ドキュメント](../../engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation) を参照してください。
 
 {% comment %}
 If unspecified, Compose will use the `isolation` value found in the service's definition
@@ -453,10 +453,10 @@ to determine the value to use for builds.
 > ファイルフォーマット[バージョン 2.1](compose-versioning.md#version-21) において追加されました。
 
 {% comment %}
-Add metadata to the resulting image using [Docker labels](/config/labels-custom-metadata.md).
+Add metadata to the resulting image using [Docker labels](../../config/labels-custom-metadata.md).
 You can use either an array or a dictionary.
 {% endcomment %}
-[Docker labels](/config/labels-custom-metadata.md) を使ってビルドされるイメージにメタデータを追加します。
+[Docker labels](../../config/labels-custom-metadata.md) を使ってビルドされるイメージにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -555,10 +555,10 @@ build:
 
 {% comment %}
 Build the specified stage as defined inside the `Dockerfile`. See the
-[multi-stage build docs](/develop/develop-images/multistage-build.md) for
+[multi-stage build docs](../../develop/develop-images/multistage-build.md) for
 details.
 {% endcomment %}
-`Dockerfile` 内部に定義されている特定のステージをビルドする方法は、[マルチステージビルド](/develop/develop-images/multistage-build.md) を参照してください。
+`Dockerfile` 内部に定義されている特定のステージをビルドする方法は、[マルチステージビルド](../../develop/develop-images/multistage-build.md) を参照してください。
 
 ```yaml
 build:
@@ -608,9 +608,9 @@ command: bundle exec thin -p 3000
 
 {% comment %}
 The command can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#cmd):
+[dockerfile](../../engine/reference/builder.md#cmd):
 {% endcomment %}
-このコマンドは [dockerfile](/engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
+このコマンドは [dockerfile](../../engine/reference/builder.md#cmd) の場合と同じように、リスト形式により指定することもできます。
 
 ```yaml
 command: ["bundle", "exec", "thin", "-p", "3000"]
@@ -749,13 +749,13 @@ services:
 >
 > `depends_on` does not wait for `db` and `redis` to be "ready" before
 > starting `web` - only until they have been started. If you need to wait
-> for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
+> for a service to be ready, see [Controlling startup order](../startup-order.md)
 > for more on this problem and strategies for solving it.
 {% endcomment %}
 > **メモ**
 >
 > `depends_on` では `db` や `redis` が「準備」状態になるのを待たずに、つまりそれらを開始したらすぐに `web` を起動します。
-> 準備状態になるのを待ってから次のサービスを起動することが必要な場合は、[Compose における起動順の制御](/compose/startup-order.md)にて示す内容と解決方法を確認してください。
+> 準備状態になるのを待ってから次のサービスを起動することが必要な場合は、[Compose における起動順の制御](../startup-order.md) にて示す内容と解決方法を確認してください。
 
 {% comment %}
 > Added in [version 2.1](compose-versioning.md#version-21) file format.
@@ -868,10 +868,10 @@ entrypoint: /code/entrypoint.sh
 
 {% comment %}
 The entrypoint can also be a list, in a manner similar to
-[dockerfile](/engine/reference/builder.md#entrypoint):
+[dockerfile](../../engine/reference/builder.md#entrypoint):
 {% endcomment %}
 エントリーポイントはリスト形式で設定することができます。
-その指定方法は [Dockerfile](/engine/reference/builder.md#entrypoint) と同様です。
+その指定方法は [dockerfile](../../engine/reference/builder.md#entrypoint) と同様です。
 
 ```yaml
 entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
@@ -1121,9 +1121,9 @@ returns an error if it encounters one.
 
 {% comment %}
 For more on `extends`, see the
-[the extends documentation](/compose/extends.md#extending-services).
+[the extends documentation](../extends.md#extending-services).
 {% endcomment %}
-`extends` に関する詳細は [extends ドキュメント](/compose/extends.md#extending-services) を参照してください。
+`extends` に関する詳細は [extends ドキュメント](../extends.md#extending-services) を参照してください。
 
 ### external_links
 
@@ -1192,14 +1192,14 @@ host system to be added. An example of where this is useful is when multiple
 containers (running as different users) need to all read or write the same
 file on the host system. That file can be owned by a group shared by all the
 containers, and specified in `group_add`. See the
-[Docker documentation](/engine/reference/run.md#additional-groups) for more
+[Docker documentation](../../engine/reference/run.md#additional-groups) for more
 details.
 {% endcomment %}
 コンテナー内部のユーザーを所属させたい追加のグループを（グループ名か ID により）指定します。
 追加のグループは、コンテナーとホストシステムの双方に存在している必要があります。
 これが必要になるのは、たとえば複数コンテナーが別々のユーザーによって起動していて、しかもホストシステム上の同一のファイルへの読み書きを行いたいような場合です。
 そのファイルが、コンテナーすべてに共通するグループにより所有されているようにすればよく、これを `group_add` により実現できます。
-詳しくは [Docker ドキュメント](/engine/reference/run.md#additional-groups) を参照してください。
+詳しくは [Docker ドキュメント](../../engine/reference/run.md#additional-groups) を参照してください。
 
 {% comment %}
 A full example:
@@ -1233,11 +1233,11 @@ used.
 {% comment %}
 Configure a check that's run to determine whether or not containers for this
 service are "healthy". See the docs for the
-[HEALTHCHECK Dockerfile instruction](/engine/reference/builder.md#healthcheck)
+[HEALTHCHECK Dockerfile instruction](../../engine/reference/builder.md#healthcheck)
 for details on how healthchecks work.
 {% endcomment %}
 このサービスを起動させているコンテナーが「健康」（healthy）かどうかを確認する処理を設定します。
-ヘルスチェックがどのように動作するのかの詳細は [Dockerfile の HEALTHCHECK 命令](/engine/reference/builder.md#healthcheck) を参照してください。
+ヘルスチェックがどのように動作するのかの詳細は [Dockerfile の HEALTHCHECK 命令](../../engine/reference/builder.md#healthcheck) を参照してください。
 
 ```yaml
 healthcheck:
@@ -1373,10 +1373,10 @@ services:
 > The default init binary that is used is [Tini](https://github.com/krallin/tini),
 > and is installed in `/usr/libexec/docker-init` on the daemon host. You can
 > configure the daemon to use a custom init binary through the
-> [`init-path` configuration option](/engine/reference/commandline/dockerd.md#daemon-configuration-file).
+> [`init-path` configuration option](../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 {% endcomment %}
 > 利用されるデフォルトの init の実行モジュールは [Tini](https://github.com/krallin/tini) であり、デーモンホストの `/usr/libexec/docker-init` にインストールされています。
-> デーモンに対して独自の init 実行モジュールを設定するには、[`init-path` 設定オプション](/engine/reference/commandline/dockerd.md#daemon-configuration-file) を利用します。
+> デーモンに対して独自の init 実行モジュールを設定するには、[`init-path` 設定オプション](../../engine/reference/commandline/dockerd.md#daemon-configuration-file) を利用します。
 
 ### isolation
 
@@ -1389,20 +1389,20 @@ services:
 Specify a container’s isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
+[Docker Engine docs](../../engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
 for details.
 {% endcomment %}
 コンテナーの分離技術（isolation technology）を設定します。
 Linux においてサポートされるのは `default` のみです。
 Windows では `default`, `process`, `hyperv` の設定が可能です。
-詳しくは [Docker Engine ドキュメント](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation) を参照してください。
+詳しくは [Docker Engine ドキュメント](../../engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation) を参照してください。
 
 ### labels
 
 {% comment %}
-Add metadata to containers using [Docker labels](/config/labels-custom-metadata.md). You can use either an array or a dictionary.
+Add metadata to containers using [Docker labels](../../config/labels-custom-metadata.md). You can use either an array or a dictionary.
 {% endcomment %}
-[Docker labels](/config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+[Docker labels](../../config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -1457,7 +1457,7 @@ the alias, or the service name if no alias was specified.
 
 Links are not required to enable services to communicate - by default,
 any service can reach any other service at that service’s name. (See also, the
-[Links topic in Networking in Compose](/compose/networking.md#links).)
+[Links topic in Networking in Compose](../networking.md#links).)
 
 {% comment %}
 Links also express dependency between services in the same way as
@@ -1495,11 +1495,11 @@ logging:
 {% comment %}
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
-([documented here](/config/containers/logging/configure.md)).
+([documented here](../../config/containers/logging/configure.md)).
 {% endcomment %}
 `driver` 名にはサービスコンテナーにおけるロギングドライバーを指定します。
 これは docker run コマンドに対する `--log-driver` オプションと同じです。
-（[ドキュメントはこちら](/config/containers/logging/configure.md)）
+（[ドキュメントはこちら](../../config/containers/logging/configure.md)）
 
 {% comment %}
 The default value is json-file.
@@ -1981,11 +1981,11 @@ web:
 Specify the default number of containers to deploy for this service. Whenever
 you run `docker-compose up`, Compose creates or removes containers to match
 the specified number. This value can be overridden using the
-[`--scale`](/compose/reference/up.md) flag.
+[`--scale`](../reference/up.md) flag.
 {% endcomment %}
 本サービスに対して、デプロイするコンテナーのデフォルト数を設定します。
 `docker-compose up` を実行したとき、Compose はこの設定数に従ってコンテナーの生成や削除を行います。
-この値は [`--scale`](/compose/reference/up.md) フラグを使って上書きすることができます。
+この値は [`--scale`](../reference/up.md) フラグを使って上書きすることができます。
 
 ```yaml
 web:
@@ -2285,14 +2285,14 @@ volumes:
 > When creating bind mounts, using the long syntax requires the
 > referenced folder to be created beforehand. Using the short syntax
 > creates the folder on the fly if it doesn't exist.
-> See the [bind mounts documentation](/storage/bind-mounts.md#differences-between--v-and---mount-behavior)
+> See the [bind mounts documentation](../../storage/bind-mounts.md#differences-between--v-and---mount-behavior)
 > for more information.
 {% endcomment %}
 > **Note**
 >
 > 長い文法を使ってバインドマウントを生成する際には、参照されるフォルダーをあらかじめ生成しておく必要があります。
 > 短い文法を利用する場合、そのフォルダーが存在しなければ生成されます。
-> 詳しくは [バインドマウントのドキュメント](/storage/bind-mounts.md#differences-between--v-and---mount-behavior) を参照してください。
+> 詳しくは [バインドマウントのドキュメント](../../storage/bind-mounts.md#differences-between--v-and---mount-behavior) を参照してください。
 
 ### volume\_driver
 
@@ -2323,10 +2323,10 @@ volume_driver: mydriver
 
 
 {% comment %}
-See [Docker Volumes](/storage/volumes.md) and
+See [Docker Volumes](../../storage/volumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume/) for more information.
 {% endcomment %}
-詳しくは [Docker ボリューム](/storage/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
+詳しくは [Docker ボリューム](../../storage/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
 
 ### volumes_from
 
@@ -2401,9 +2401,9 @@ restart: unless-stopped
 
 {% comment %}
 Each of these is a single value, analogous to its
-[docker run](/engine/reference/run.md#runtime-constraints-on-resources) counterpart.
+[docker run](../../engine/reference/run.md#runtime-constraints-on-resources) counterpart.
 {% endcomment %}
-ここに示すオプションはいずれも、値 1 つを設定するものであり、[docker run](/engine/reference/run.md#runtime-constraints-on-resources) のオプションに対応づいています。
+ここに示すオプションはいずれも、値 1 つを設定するものであり、[docker run](../../engine/reference/run.md#runtime-constraints-on-resources) のオプションに対応づいています。
 
 {% comment %}
 > Added in [version 2.2](compose-versioning.md#version-22) file format.
@@ -2519,18 +2519,18 @@ While it is possible to declare [volumes](#volumes) on the fly as part of the
 service declaration, this section allows you to create named volumes that can be
 reused across multiple services (without relying on `volumes_from`), and are
 easily retrieved and inspected using the docker command line or API.
-See the [docker volume](/engine/reference/commandline/volume_create.md)
+See the [docker volume](../../engine/reference/commandline/volume_create.md)
 subcommand documentation for more information.
 {% endcomment %}
 サービスの宣言の一部として、ファイル上に [ボリューム](#volumes) を宣言することが可能ですが、このセクションでは（`volumes_from` を利用せずに）名前つきボリュームを生成する方法を説明します。
 このボリュームは、複数のサービスにわたっての再利用が可能であり、docker コマンドラインや API を使って簡単に抽出したり確認したりすることができます。
-詳しくは [docker volume](/engine/reference/commandline/volume_create.md) のサブコマンドを確認してください。
+詳しくは [docker volume](../../engine/reference/commandline/volume_create.md) のサブコマンドを確認してください。
 
 {% comment %}
-See [use volumes](/storage/volumes.md) and [volume plugins](/engine/extend/plugins_volume/)
+See [use volumes](../../storage/volumes.md) and [volume plugins](/engine/extend/plugins_volume/)
 for general information on volumes.
 {% endcomment %}
-詳しくは [Docker ボリューム](/storage/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
+詳しくは [Docker ボリューム](../../storage/volumes.md) や [ボリュームプラグイン](/engine/extend/plugins_volume/) を参照してください。
 
 {% comment %}
 Here's an example of a two-service setup where a database's data directory is
@@ -2680,10 +2680,10 @@ volumes:
 
 {% comment %}
 Add metadata to containers using
-[Docker labels](/config/labels-custom-metadata.md). You can use either
+[Docker labels](../../config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 {% endcomment %}
-[Docker labels](/config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+[Docker labels](../../config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -2752,10 +2752,10 @@ volumes:
 {% comment %}
 The top-level `networks` key lets you specify networks to be created. For a full
 explanation of Compose's use of Docker networking features, see the
-[Networking guide](/compose/networking.md).
+[Networking guide](../networking.md).
 {% endcomment %}
 最上位の `networks` キーは、生成するネットワークを指定します。
-Compose が利用する Docker ネットワーク機能に関して、詳細は [ネットワークガイド](/compose/networking.md) を参照してください。
+Compose が利用する Docker ネットワーク機能に関して、詳細は [ネットワークガイド](../networking.md) を参照してください。
 
 ### driver
 
@@ -2893,10 +2893,10 @@ you can set this option to `true`.
 
 {% comment %}
 Add metadata to containers using
-[Docker labels](/config/labels-custom-metadata.md). You can use either
+[Docker labels](../../config/labels-custom-metadata.md). You can use either
 an array or a dictionary.
 {% endcomment %}
-[Docker labels](/config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
+[Docker labels](../../config/labels-custom-metadata.md) を使ってコンテナーにメタデータを追加します。
 配列形式と辞書形式のいずれかにより指定します。
 
 {% comment %}
@@ -3052,14 +3052,14 @@ networks:
 ## Compose ドキュメント
 
 {% comment %}
-- [User guide](/compose/index.md)
-- [Installing Compose](/compose/install.md)
+- [User guide](../index.md)
+- [Installing Compose](../install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Samples](/samples/index.md)
-- [Command line reference](/compose/reference/index.md)
+- [Samples](../../samples/index.md)
+- [Command line reference](../reference/index.md)
 {% endcomment %}
-- [ユーザーガイド](/compose/index.md)
-- [Compose のインストール](/compose/install.md)
+- [ユーザーガイド](../index.md)
+- [Compose のインストール](../install.md)
 - [Compose ファイルのバージョンとアップグレード](compose-versioning.md)
-- [サンプル](/samples/index.md)
-- [コマンドラインリファレンス](/compose/reference/index.md)
+- [サンプル](../../samples/index.md)
+- [コマンドラインリファレンス](../reference/index.md)

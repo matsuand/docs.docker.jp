@@ -45,12 +45,12 @@ These syntax rules apply to the `.env` file:
 
 {% comment %}
 The environment variables you define here are used for
-[variable substitution](/compose/compose-file/index.md#variable-substitution)
+[variable substitution](compose-file/index.md#variable-substitution)
 in your Compose file, and can also be used to define the following
-[CLI variables](/compose/reference/envvars.md):
+[CLI variables](reference/envvars.md):
 {% endcomment %}
-環境変数を定義すると Compose ファイル内では[変数置換](/compose/compose-file/index.md#variable-substitution) が行われます。
-また以下の [CLI 変数](/compose/reference/envvars.md) の定義に利用することもできます。
+環境変数を定義すると Compose ファイル内では[変数置換](compose-file/index.md#variable-substitution) が行われます。
+また以下の [CLI 変数](reference/envvars.md) の定義に利用することもできます。
 
 - `COMPOSE_API_VERSION`
 - `COMPOSE_CONVERT_WINDOWS_PATHS`
@@ -71,7 +71,7 @@ in your Compose file, and can also be used to define the following
 > * Environment variables defined in the `.env` file are not automatically
 >   visible inside containers. To set container-applicable environment variables,
 >   follow the guidelines in the topic
->   [Environment variables in Compose](/compose/environment-variables.md), which
+>   [Environment variables in Compose](environment-variables.md), which
 >   describes how to pass shell environment variables through to containers,
 >   define environment variables in Compose files, and more.
 {% endcomment %}
@@ -81,7 +81,7 @@ in your Compose file, and can also be used to define the following
 >   同じこととして、コマンドライン引数から与えられた値も、同様に優先され上書きされます。
 >
 > * `.env` ファイルにて定義された環境変数は、コンテナー内部では自動的に見えるものではありません。
->   コンテナーが認識できる環境変数として設定するには、[Compose における環境変数](/compose/environment-variables.md) に示されているガイドラインに従ってください。
+>   コンテナーが認識できる環境変数として設定するには、[Compose における環境変数](environment-variables.md) に示されているガイドラインに従ってください。
 >   そこでは、シェル環境変数をコンテナーに受け渡す方法や、Compose ファイル内での環境変数の定義方法などを説明しています。
 
 {% comment %}
@@ -92,9 +92,9 @@ in your Compose file, and can also be used to define the following
 
 {% comment %}
 - [User guide](index.md)
-- [Command line reference](/compose/reference/index.md)
-- [Compose file reference](/compose/compose-file/index.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)
 {% endcomment %}
 - [ユーザーガイド](index.md)
-- [コマンドラインリファレンス](/compose/reference/index.md)
-- [Compose ファイルリファレンス](/compose/compose-file/index.md)
+- [コマンドラインリファレンス](reference/index.md)
+- [Compose ファイルリファレンス](compose-file/index.md)

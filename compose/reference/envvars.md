@@ -19,9 +19,9 @@ Docker command-line client. If you're using `docker-machine`, then the `eval "$(
 
 {% comment %}
 > **Note**: Some of these variables can also be provided using an
-> [environment file](/compose/env-file.md).
+> [environment file](../env-file.md).
 {% endcomment %}
-> **メモ**： ここに示す環境変数の中には、[環境ファイル](/compose/env-file.md)を用いて設定できるものもあります。
+> **メモ**： ここに示す環境変数の中には、[環境ファイル](../env-file.md) を用いて設定できるものもあります。
 
 ## COMPOSE\_PROJECT\_NAME
 
@@ -179,12 +179,12 @@ using this character as path separator.
 ## COMPOSE\_FORCE\_WINDOWS\_HOST
 
 {% comment %}
-If set, volume declarations using the [short syntax](/compose/compose-file/#short-syntax-3)
+If set, volume declarations using the [short syntax](../compose-file/#short-syntax-3)
 are parsed assuming the host path is a Windows path, even if Compose is
 running on a UNIX-based system.
 Supported values: `true` or `1` to enable, `false` or `0` to disable.
 {% endcomment %}
-If set, volume declarations using the [short syntax](/compose/compose-file/#short-syntax-3)
+If set, volume declarations using the [short syntax](../compose-file/#short-syntax-3)
 are parsed assuming the host path is a Windows path, even if Compose is
 running on a UNIX-based system.
 Supported values: `true` or `1` to enable, `false` or `0` to disable.
@@ -213,12 +213,12 @@ Supported: `true` or `1` to enable, `false` or `0` to disable.
 {: #related-information }
 
 {% comment %}
-- [User guide](/compose/index.md)
-- [Installing Compose](/compose/install.md)
-- [Compose file reference](/compose/compose-file/index.md)
-- [Environment file](/compose/env-file.md)
+- [User guide](../index.md)
+- [Installing Compose](../install.md)
+- [Compose file reference](../compose-file/index.md)
+- [Environment file](../env-file.md)
 {% endcomment %}
-- [ユーザーガイド](/compose/index.md)
-- [Compose のインストール](/compose/install.md)
-- [Compose ファイルリファレンス](/compose/compose-file/index.md)
-- [環境ファイル](/compose/env-file.md)
+- [ユーザーガイド](../index.md)
+- [Compose のインストール](../install.md)
+- [Compose ファイルリファレンス](../compose-file/index.md)
+- [環境ファイル](../env-file.md)

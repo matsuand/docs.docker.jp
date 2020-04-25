@@ -27,26 +27,6 @@ Ubuntu 向けに Docker Engine を始めるには、[前提条件を満たして
 ## 前提条件
 
 {% comment %}
-### Docker EE customers
-{% endcomment %}
-### Docker EE を利用する方は
-{: #docker-ee-customers }
-
-{% comment %}
-To install Docker Enterprise Edition (Docker EE), go to
-[Get Docker EE for Ubuntu](/ee/docker-ee/ubuntu.md)
-**instead of this topic**.
-{% endcomment %}
-Docker Enterprise エディション（Docker Enterprise Edition; EE）をインストールする場合は、
-**このページではなく** [Docer EE の入手（Ubuntu 向け）](/ee/docker-ee/ubuntu.md) に進んでください。
-
-{% comment %}
-To learn more about Docker EE, see
-[Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
-{% endcomment %}
-Docker EE の詳細を学ぶには、[Docker Enterprise エディション](https://www.docker.com/enterprise-edition/)をご覧ください。
-
-{% comment %}
 ### OS requirements
 {% endcomment %}
 {: #os-requirements }
@@ -111,11 +91,11 @@ Ubuntu 向けの Docker Engine では `overlay2`、`aufs`、`btrfs` の各スト
 {% comment %}
 Docker Engine uses the `overlay2` storage driver by default. If you need to use
 `aufs` instead, you need to configure it manually.
-See [use the AUFS storage driver](/storage/storagedriver/aufs-driver.md)
+See [use the AUFS storage driver](../../storage/storagedriver/aufs-driver.md)
 {% endcomment %}
 Docker Engine はデフォルトで `overlay2` ストレージドライバーを採用しています。
 `aufs` を利用する必要がある場合は、手動で設定しなければなりません。
-[aufs](/storage/storagedriver/aufs-driver.md) を参照してください。
+[aufs](../../storage/storagedriver/aufs-driver.md) を参照してください。
 
 {% comment %}
 ## Installation methods
@@ -545,8 +525,8 @@ You must delete any edited configuration files manually.
 
 {% comment %}
 - Continue to [Post-installation steps for Linux](linux-postinstall.md).
-- Review the topics in [Develop with Docker](/develop/index.md) to learn how to build new applications using Docker.
+- Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.
 {% endcomment %}
 - [Linux のインストール後](linux-postinstall.md) へ進む
-- [Docker を用いた開発](/develop/index.md) における各項目を参照してください。
+- [Docker を用いた開発](../../develop/index.md) における各項目を参照してください。
   Docker を使ったアプリケーションの構築方法を学びます。

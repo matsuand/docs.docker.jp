@@ -13,12 +13,12 @@ title: Engine チュートリアル
 {: #learn-by-example }
 
 {% comment %}
-* [Network containers](/engine/tutorials/networkingcontainers.md)
-* [Manage data in containers](/engine/tutorials/dockervolumes.md)
-* [Samples](/samples/)
-* [Get Started](/get-started/)
+* [Network containers](networkingcontainers.md)
+* [Manage data in containers](../../storage/volumes.md)
+* [Samples](../../samples/index.md)
+* [Get Started](../../get-started/index.md)
 {% endcomment %}
-* [コンテナーのネットワーク設定](/engine/tutorials/networkingcontainers.md)
-* [コンテナー内でのデータ管理](/engine/tutorials/dockervolumes.md)
-* [サンプル](/samples/)
-* [はじめよう](/get-started/)
+* [コンテナーのネットワーク設定](networkingcontainers.md)
+* [コンテナー内でのデータ管理](../../storage/volumes.md)
+* [サンプル](../../samples/index.md)
+* [はじめよう](../../get-started/index.md)

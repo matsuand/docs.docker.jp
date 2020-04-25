@@ -225,10 +225,10 @@ Use these links to read about specific commands, or continue to the
 コマンドの詳細は以下のリンクを参照してください。
 また [サービスにおける configs の利用例](#advanced-example-use-configs-with-a-nginx-service) も参照してください。
 
-- [`docker config create`](/engine/reference/commandline/config_create.md)
-- [`docker config inspect`](/engine/reference/commandline/config_inspect.md)
-- [`docker config ls`](/engine/reference/commandline/config_ls.md)
-- [`docker config rm`](/engine/reference/commandline/config_rm.md)
+- [`docker config create`](../reference/commandline/config_create.md)
+- [`docker config inspect`](../reference/commandline/config_inspect.md)
+- [`docker config ls`](../reference/commandline/config_ls.md)
+- [`docker config rm`](../reference/commandline/config_rm.md)
 
 {% comment %}
 ## Examples
@@ -259,11 +259,11 @@ Docker configs.
 {% comment %}
 The `docker stack` command supports defining configs in a Compose file.
 However, the `configs` key is not supported for `docker compose`. See
-[the Compose file reference](/compose/compose-file/index.md#configs) for details.
+[the Compose file reference](../../compose/compose-file/index.md#configs) for details.
 {% endcomment %}
 `docker stack` コマンドには、Compose ファイルにて configs を定義する機能がサポートされています。
 しかし `configs` キーは `docker compose` コマンドではサポートされていません。
-詳しくは [Compose ファイルリファレンス](/compose/compose-file/index.md#configs) を参照してください。
+詳しくは [Compose ファイルリファレンス](../../compose/compose-file/index.md#configs) を参照してください。
 
 {% comment %}
 ### Simple example: Get started with configs

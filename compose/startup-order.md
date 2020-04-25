@@ -7,11 +7,11 @@ notoc: true
 
 {% comment %}
 You can control the order of service startup and shutdown with the
-[depends_on](/compose/compose-file/index.md#depends_on) option. Compose always starts and stops
+[depends_on](compose-file/index.md#depends_on) option. Compose always starts and stops
 containers in dependency order, where dependencies are determined by
 `depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 {% endcomment %}
-サービスの起動順や停止順は、[depends_on](/compose/compose-file/index.md#depends_on) オプションを使って制御することができます。
+サービスの起動順や停止順は、[depends_on](compose-file/index.md#depends_on) オプションを使って制御することができます。
 Compose では必ず依存順に応じて、コンテナーの起動または停止を行いますが、この依存順とは `depends_on`、`links`、`volumes_from`、`network_mode: "service:..."` によって決定します。
 
 {% comment %}
@@ -145,12 +145,12 @@ script:
 - [Get started with Django](django.md)
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
-- [Command line reference](/compose/reference/index.md)
-- [Compose file reference](/compose/compose-file/index.md)
+- [Command line reference](reference/index.md)
+- [Compose file reference](compose-file/index.md)
 {% endcomment %}
 - [Compose のインストール](install.md)
 - [Django を使ってはじめよう](django.md)
 - [Rails を使ってはじめよう](rails.md)
 - [WordPress を使ってはじめよう](wordpress.md)
-- [コマンドラインリファレンス](/compose/reference/index.md)
-- [Compose ファイルリファレンス](/compose/compose-file/index.md)
+- [コマンドラインリファレンス](reference/index.md)
+- [Compose ファイルリファレンス](compose-file/index.md)

@@ -38,9 +38,9 @@ Docker Engine - Community は {{ linux-dist-long }} に対してサポート_さ
 {% endif %}
 {% if linux-dist == "centos" %}
 {% comment %}
-For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker Engine - Community for CentOS](/engine/install/centos.md).
+For Docker Community Edition on {{ linux-dist-cap }}, see [Get Docker Engine - Community for CentOS](/engine/install/centos/).
 {% endcomment %}
-{{ linux-dist-cap }} 向けの Docker Community エディションについては、[Docker Engine - Community の入手（CentOS 向け）](/engine/install/centos.md) を参照してください。
+{{ linux-dist-cap }} 向けの Docker Community エディションについては、[Docker Engine - Community の入手（CentOS 向け）](/engine/install/centos/) を参照してください。
 {% endif %}
 
 {% elsif section == "find-ee-repo-url" %}
@@ -418,12 +418,12 @@ You only need to set up the repository once, after which you can install Docker 
 
     {% comment %}
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall/){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
     {% endcomment %}
     Docker Engine - Enterprise がインストールされ、実行できました。
     Docker コマンドの実行には `sudo` が必要になります。
-    続いて [Linux のインストール後](/engine/install/linux-postinstall.md)に進み、非特権ユーザーでも Docker コマンドが実行できる設定方法を参照してください。
+    続いて [Linux のインストール後](/engine/install/linux-postinstall/) に進み、非特権ユーザーでも Docker コマンドが実行できる設定方法を参照してください。
 
 
 {% elsif section == "upgrade-using-yum-repo" %}
@@ -511,7 +511,7 @@ Docker Enterprise をアップグレードする際には、常に新しいフ�
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall/){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 </div>
@@ -554,7 +554,7 @@ Docker Enterprise をアップグレードする際には、常に新しいフ�
     ```
 
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall/){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
 
 </div>
@@ -633,12 +633,12 @@ Docker Enterprise をアップグレードする際には、常に新しいフ�
 
     {% comment %}
     Docker Engine - Enterprise is installed and running. Use `sudo` to run Docker commands. See
-    [Linux postinstall](/engine/install/linux-postinstall.md){: target="_blank" class="_" } to allow
+    [Linux postinstall](/engine/install/linux-postinstall/){: target="_blank" class="_" } to allow
     non-privileged users to run Docker commands.
     {% endcomment %}
     Docker Engine - Enterprise がインストールされ、実行できました。
     Docker コマンドの実行には `sudo` が必要になります。
-    続いて [Linux のインストール後](/engine/install/linux-postinstall.md){: target="_blank" class="_" } に進み、非特権ユーザーでも Docker コマンドが実行できる設定方法を参照してください。
+    続いて [Linux のインストール後](/engine/install/linux-postinstall/){: target="_blank" class="_" } に進み、非特権ユーザーでも Docker コマンドが実行できる設定方法を参照してください。
 {% endif %}
 
 {% elsif section == "upgrade-using-yum-package" %}
@@ -703,9 +703,9 @@ You must delete any edited configuration files manually.
 {% elsif section == "linux-install-nextsteps" %}
 
 {% comment %}
-- Continue to [Post-installation steps for Linux](/engine/install/linux-postinstall.md){: target="_blank" class="_" }
+- Continue to [Post-installation steps for Linux](/engine/install/linux-postinstall/){: target="_blank" class="_" }
 {% endcomment %}
-- [Linux のインストール後](/engine/install/linux-postinstall.md){: target="_blank" class="_" }へ進む
+- [Linux のインストール後](/engine/install/linux-postinstall/){: target="_blank" class="_" } へ進む
 
 {% comment %}
 - Continue with user guides on [Universal Control Plane (UCP)](/ee/ucp/){: target="_blank" class="_" } and [Docker Trusted Registry (DTR)](/ee/dtr/){: target="_blank" class="_" }

@@ -123,11 +123,11 @@ documents.
 
 {% comment %}
 The [Docker Swarm API](swarm-api.md) is compatible with the
-[Docker remote API](/engine/api/index.md), and extends it with some new
+[Docker remote API](../engine/api/index.md), and extends it with some new
 endpoints.
 {% endcomment %}
 The [Docker Swarm API](swarm-api.md) is compatible with the
-[Docker remote API](/engine/api/index.md), and extends it with some new
+[Docker remote API](../engine/api/index.md), and extends it with some new
 endpoints.
 
 {% comment %}
