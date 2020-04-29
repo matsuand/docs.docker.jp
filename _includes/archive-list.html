@@ -3,6 +3,6 @@
     {% for item in site.data.docsarchive.archives %}{% if item.current == true %}Docker {{ item.name }} (最新) {% endif %} {% endfor %}<span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-    {% for item in site.data.docsarchive.archives %}{% if item.current != true %}<li><a href="{{ site.baseurl }}/{{ item.name }}/">Docker {{ item.name }}</a></li>{% endif %}{% endfor %}
+    {% for item in site.data.docsarchive.archives %}{% if item.current != true %}<li><a href="{{ site.url }}{{ site.baseurl }}/{{ item.name }}/">Docker {{ item.name }}</a></li>{% endif %}{% endfor %}
   </ul>
 </div>
