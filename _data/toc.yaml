@@ -513,8 +513,6 @@ reference:
       title: docker cp
     - path: /engine/reference/commandline/create/
       title: docker create
-    - path: /engine/reference/commandline/deploy/
-      title: docker deploy
     - path: /engine/reference/commandline/diff/
       title: docker diff
     - path: /engine/reference/commandline/events/
@@ -944,10 +942,10 @@ reference:
     - path: /compose/compose-file/compose-file-v1/
       title: バージョン 1
     - path: /compose/compose-file/compose-versioning/
-      title: About versions and upgrading
+      title: バージョンとアップグレードについて
     - path: /compose/faq/
       title: よく尋ねられる質問
-- sectiontitle: Drivers and specifications
+- sectiontitle: ドライバーと仕様
   section:
   - sectiontitle: Registry image manifests
     section:
@@ -988,7 +986,7 @@ reference:
     - path: /registry/storage-drivers/swift/
       title: Swift storage driver
 - path: /glossary/
-  title: Glossary
+  title: 用語集
 
 
 
