@@ -100,11 +100,11 @@ Keep the following in mind when using restart policies:
 {% comment %}
 - Restart policies only apply to _containers_. Restart policies for swarm
   services are configured differently. See the
-  [flags related to service restart](../../engine/reference/commandline/service_create/).
+  [flags related to service restart](../../engine/reference/commandline/service_create.md).
 {% endcomment %}
 - 再起動ポリシーが適用されるのは **コンテナー** に対してのみです。
   Swarm サービスに対する再起動ポリシーは、別の方法により設定します。
-  [service restart に対するフラグ](../../engine/reference/commandline/service_create/) を参照してください。
+  [service restart に対するフラグ](../../engine/reference/commandline/service_create.md) を参照してください。
 
 
 {% comment %}
