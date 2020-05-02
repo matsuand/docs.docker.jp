@@ -2,12 +2,18 @@
 description: Docker Desktop ダッシュボード
 keywords: Docker Desktop Dashboard, container view
 title: Docker Desktop ダッシュボード
+redirect_from:
+- /docker-for-mac/dashboard/
+- /docker-for-windows/dashboard/
 ---
 
 {% comment %}
 The Docker Desktop Dashboard provides a simple interface that enables you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their status. It provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications.
 {% endcomment %}
-The Docker Desktop Dashboard provides a simple interface that enables you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their status. It provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications.
+Docker Desktop ダッシュボードは、コンテナーやアプリケーションに簡単にアクセスできるようなインターフェースを提供します。
+またアプリケーションのライフサイクルを手元のマシンから直接管理できるようになります。
+ダッシュボードの UI 画面からは、すべてのコンテナーが実行中、停止中、起動中といったステータスとともに表示されます。
+直感的なインターフェースを通じて、コンテナーや Docker Compose ベースのアプリケーションといった Docker オブジェクトを、確認しやり取りを行い管理することができます。
 
 {% comment %}
 The Docker Desktop Dashboard offers the following benefits:
@@ -33,13 +39,13 @@ In addition, the Dashboard UI allows you to:
 さらにダッシュボード UI では以下のことが可能です。
 
 {% comment %}
-- Navigate to the [Settings](index.md#docker-settings-dialog) menu to configure Docker Desktop preferences
-- Access the [Troubleshoot](troubleshoot.md) menu to debug and perform restart operations
-- Sign into [Docker Hub](index.md#docker-hub) using your Docker ID
+- Navigate to the **Preferences** (**Settings** in Windows) menu to configure Docker Desktop preferences
+- Access the **Troubleshoot** menu to debug and perform restart operations
+- Sign into [Docker Hub](https://hub.docker.com/) using your Docker ID
 {% endcomment %}
-- [Settings](index.md#docker-settings-dialog) メニューから Docker Desktop の設定を行うことができます。
-- [Troubleshoot](troubleshoot.md) メニューを使ってデバッグや再起動操作を行うことができます。
-- Docker ID を使って [Docker Hub](index.md#docker-hub) にサインインすることができます。
+- **Preferences** から（Windows では **Settings**）メニューから Docker Desktop の設定を行うことができます。
+- **Troubleshoot** メニューを使ってデバッグや再起動操作を行うことができます。
+- Docker ID を使って [Docker Hub](https://hub.docker.com/) にサインインすることができます。
 
 {% comment %}
 To access the Docker Desktop Dashboard, from the Docker menu, select **Dashboard**. The Dashboard provides a runtime view of all your containers and applications.
@@ -48,9 +54,9 @@ Docker Desktop ダッシュボードにアクセスするには、Docker メニ�
 Dashboard からは、すべてのコンテナーやアプリケーションの最新状況を確認することができます。
 
 {% comment %}
-![Docker Desktop Dashboard](images/dashboard-settings.png)
+![Docker Desktop Dashboard](images/mac-dashboard.png)
 {% endcomment %}
-![Docker Desktop ダッシュボード](images/dashboard-settings.png)
+![Docker Desktop ダッシュボード](images/mac-dashboard.png)
 
 {% comment %}
 ## Explore running containers and applications
@@ -91,9 +97,9 @@ This creates a new Redis container. From the Docker menu, select **Dashboard** t
 Docker メニューから **Dashboard** を実行して、新しい Redis コンテナーを確認してみます。
 
 {% comment %}
-![Redis container](images/redis-container.png){:width="700px"}
+![Redis container](images/mac-redis-container.png){:width="700px"}
 {% endcomment %}
-![Redis コンテナー](images/redis-container.png){:width="700px"}
+![redis コンテナー](images/mac-redis-container.png){:width="700px"}
 
 {% comment %}
 ### Start a sample application
@@ -114,7 +120,7 @@ Docker サンプルページから [サンプル投票アプリ](https://github.
 ![サンプル投票アプリのアーキテクチャー構成図](images/example-app-architecture.png){:width="600px"}
 
 {% comment %}
-The example voting application contains:
+The example voting app contains:
 {% endcomment %}
 サンプル投票アプリは以下により構成されます。
 
@@ -169,15 +175,15 @@ Attaching to db, redis, example-voting-app-master_result_1, example-voting-app-m
 ```
 
 {% comment %}
-When the application successfully starts, from the Docker menu, select **Dashboard** to see the example voting application. Expand the application to see the containers running inside the application.
+When the application successfully starts, from the Docker menu, select **Dashboard** to see the Example voting application. Expand the application to see the containers running inside the application.
 {% endcomment %}
 アプリケーションが正常に起動したら、Docker メニューから **Dashboard** を実行して、サンプル投票アプリを確認してみます。
 アプリケーションの表示を展開して、アプリケーション内部で稼動するコンテナーを確認してみます。
 
 {% comment %}
-![App Dashboard view](images/app-dashboard-view.png){:width="700px"}
+![Spring Boot application view](images/app-dashboard-view.png){:width="700px"}
 {% endcomment %}
-![アプリダッシュボードビュー](images/app-dashboard-view.png){:width="700px"}
+![Spring Boot アプリケーションビュー](images/app-dashboard-view.png){:width="700px"}
 
 {% comment %}
 Now that you can see the list of running containers and applications on the Dashboard, let us explore some of the actions you can perform:
@@ -226,9 +232,9 @@ Hover over the containers to see some of the core actions you can perform. Use t
 また **Copy** アイコンを選択すれば、その出力ログをクリップボードにコピーすることができます。
 
 {% comment %}
-![Application view](images/application-view.png){:width="700px"}
+![Application view](images/mac-application-view.png){:width="700px"}
 {% endcomment %}
-![アプリケーションビュー](images/application-view.png){:width="700px"}
+![アプリケーションビュー](images/mac-application-view.png){:width="700px"}
 
 {% comment %}
 Click on a specific container for detailed information about the container. The **container view** displays **Logs**, **Inspect**, and **Stats** tabs and provides quick action buttons to perform various actions.
@@ -238,9 +244,9 @@ Click on a specific container for detailed information about the container. The 
 ボタンクリックによってさまざまな操作をすばやく行うことができます。
 
 {% comment %}
-![Explore the app](images/container-view.png){:width="700px"}
+![Explore the app](images/mac-container-view.png){:width="700px"}
 {% endcomment %}
-![アプリの確認](images/container-view.png){:width="700px"}
+![アプリの確認](images/mac-container-view.png){:width="700px"}
 
 {% comment %}
 - Select **Logs** to see logs from the container. You can also search the logs for specific events and copy the logs to your clipboard.
@@ -272,9 +278,9 @@ Click **Port** to open the port exposed by the container in a browser.
 **Port** をクリックすると、コンテナーが開放しているポートをブラウザー上にて確認することができます。
 
 {% comment %}
-![Spring app browser view](images/app-browser-view.png){:width="700px"}
+![Spring app browser view](images/mac-browser-view.png){:width="700px"}
 {% endcomment %}
-![Spring アプリのブラウザービュー](images/app-browser-view.png){:width="700px"}
+![Spring アプリのブラウザービュー](images/mac-browser-view.png){:width="700px"}
 
 {% comment %}
 ## Feedback
@@ -283,7 +289,7 @@ Click **Port** to open the port exposed by the container in a browser.
 ## フィードバック
 
 {% comment %}
-We would like to hear from you about the new Dashboard UI. Let us know your feedback by creating an issue in the [docker/for-win](https://github.com/docker/for-win/issues) GitHub repository.
+We would like to hear from you about the new Dashboard UI. Let us know your feedback by creating an issue in the [docker/for-mac](https://github.com/docker/for-mac/issues) or [docker/for-win](https://github.com/docker/for-win/issues) GitHub repository.
 {% endcomment %}
 新たなこのダッシュボード UI について、みなさんからのご意見をうかがいたいと思います。
-GitHub リポジトリ [docker/for-win](https://github.com/docker/for-win/issues) に issue を生成してフィードバックを行ってください。
+GitHub リポジトリ [docker/for-mac](https://github.com/docker/for-mac/issues) や [docker/for-win](https://github.com/docker/for-win/issues) に issue を生成してフィードバックを行ってください。

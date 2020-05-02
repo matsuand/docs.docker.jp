@@ -165,7 +165,7 @@ VM ではより多くのオーバーヘッドが発生します。
 {% comment %}
 ![Container stack example](/images/Container%402x.png){:width="300px"} | ![Virtual machine stack example](/images/VM%402x.png){:width="300px"}
 {% endcomment %}
-![コンテナースタックの例](/images/Container%402x.png){:width="300px"} | ![仮想マシンスタックの例](/images/VM%402x.png){:width="300px"}
+![コンテナースタックの例]({{ site.baseurl }}/images/Container%402x.png){:width="300px"} | ![仮想マシンスタックの例]({{ site.baseurl }}/images/VM%402x.png){:width="300px"}
 
 {% comment %}
 ## Set up your Docker environment
