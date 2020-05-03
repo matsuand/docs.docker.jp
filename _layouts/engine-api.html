@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
     <title>Docker Engine API {{ page.name | replace: '.md' }} リファレンス</title>
     <!-- needed for adaptive design -->
@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/css/api-reference.css" />
 </head>
 <body>
-<redoc spec-url="{{ site.url }}{{ site.baseurl }}/engine/api/{{ page.name | replace: '.md'}}.yaml" hide-hostname="true" suppress-warnings="true" lazy-rendering></redoc>
-<script src="{{ site.url }}{{ site.baseurl }}/js/redoc.min.js"></script>
+<redoc spec-url="{{ site.baseurl }}/engine/api/{{ page.name | replace: '.md'}}.yaml" hide-hostname="true" suppress-warnings="true" lazy-rendering></redoc>
+<script src="{{ site.baseurl }}/js/redoc.min.js"></script>
 </body>
 </html>

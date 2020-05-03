@@ -36,8 +36,7 @@ Docker Desktop というもののおかげで、開発環境を整えること�
 2. Assemble your containers and supporting infrastructure into a complete application.
 3. Test, share, and deploy your complete containerized application.
 {% endcomment %}
-1. アプリケーションの各コンポーネントに対応するコンテナーを生成しテストします。
-   その前にまずは Docker イメージを生成します。
+1. 初めての Docker イメージを生成した上で、アプリケーションの各コンポーネントに対応するコンテナーを生成しテストします。
 2. コンテナーとこれを支えるインフラストラクチャーを整えて、一体となったアプリケーションとします。
 3. 完全にコンテナー化されたアプリケーションをテスト、共有しデプロイを行います。
 
@@ -179,59 +178,71 @@ Dockerfile を記述することが、アプリケーションコンテナー化
 このファイルでは以下の手順を行います。
 
 {% comment %}
-- `FROM` により既存の `node:current-slim` というイメージからはじめます。
-  This is an *official image*, built by the node.js vendors and validated by Docker to be a high-quality image containing the Node.js Long Term Support (LTS) interpreter and basic dependencies.
-- Use `WORKDIR` to specify that all subsequent actions should be taken from the directory `/usr/src/app` *in your image filesystem* (never the host's filesystem).
-- `COPY` the file `package.json` from your host to the present location (`.`) in your image (so in this case, to `/usr/src/app/package.json`)
-- `RUN` the command `npm install` inside your image filesystem (which will read `package.json` to determine your app's node dependencies, and install them)
-- `COPY` in the rest of your app's source code from your host to your image filesystem.
-{% endcomment %}
 - Start `FROM` the pre-existing `node:current-slim` image. This is an *official image*, built by the node.js vendors and validated by Docker to be a high-quality image containing the Node.js Long Term Support (LTS) interpreter and basic dependencies.
 - Use `WORKDIR` to specify that all subsequent actions should be taken from the directory `/usr/src/app` *in your image filesystem* (never the host's filesystem).
 - `COPY` the file `package.json` from your host to the present location (`.`) in your image (so in this case, to `/usr/src/app/package.json`)
 - `RUN` the command `npm install` inside your image filesystem (which will read `package.json` to determine your app's node dependencies, and install them)
 - `COPY` in the rest of your app's source code from your host to your image filesystem.
+{% endcomment %}
+- `FROM` により既存の `node:current-slim` というイメージからはじめます。
+  これは **公式イメージ** の  1 つであり node.js ベンダーによって構築されています。
+  さらに Node.js 長期サポート（LTS）インタープリターや基本的な依存パッケージを含んだ高品質イメージとして、Docker により検証されているものです。
+- この後に続けて行っていく処理を、**イメージのファイルシステム** 上にて実行する `/usr/src/app` ディレクトリを `WORKDIR` により指定します（ホストのファイルシステムではありません）。
+- `COPY` によってホスト内のファイル `package.json` を、イメージ内の現在ディレクトリ（`.`）にコピーします（この例では `/usr/src/app/package.json` となります）。
+- `RUN` によってイメージ内のファイルシステム上で、コマンド `npm install` を実行します（このコマンドは `package.json` を読み込み、node アプリケーションに必要となる依存パッケージを検出してインストールします）。
+- 上記以外のアプリケーションソースコードを、`COPY` によってホストからイメージ内のファイルシステムにコピーします。
 
 {% comment %}
 You can see that these are much the same steps you might have taken to set up and install your app on your host. However, capturing these as a Dockerfile allows you to do the same thing inside a portable, isolated Docker image.
 {% endcomment %}
-You can see that these are much the same steps you might have taken to set up and install your app on your host. However, capturing these as a Dockerfile allows you to do the same thing inside a portable, isolated Docker image.
+お気づきのように上記の手順は、ホスト上においてアプリケーションをインストールし設定することと、ほとんど変わりません。
+ただし Dockerfile 内にこういった手順を書き記すことにより、携帯可能で独立した Docker イメージに対して、同様の処理内容を実現できることを意味します。
 
 {% comment %}
 The steps above built up the filesystem of our image, but there are other lines in your Dockerfile.
 {% endcomment %}
-The steps above built up the filesystem of our image, but there are other lines in your Dockerfile.
+上の手順ではイメージ内にファイルシステムを構築していますが、Dockerfile 内にはそれ以外のことも行っています。
 
 {% comment %}
 The `CMD` directive is the first example of specifying some metadata in your image that describes how to run a container based on this image. In this case, it's saying that the containerized process that this image is meant to support is `npm start`.
 {% endcomment %}
-The `CMD` directive is the first example of specifying some metadata in your image that describes how to run a container based on this image. In this case, it's saying that the containerized process that this image is meant to support is `npm start`.
+`CMD` ディレクティブは、イメージ内にてメタデータを指定する最初の例です。
+これはイメージ内において、どのようにしてコンテナーを起動するかを記述しています。
+今の場合、このイメージがサポートするコンテナー化プロセスが `npm start` である、ということになります。
 
 {% comment %}
 The `EXPOSE 8080` informs Docker that the container is listening on port 8080 at runtime.
 {% endcomment %}
-The `EXPOSE 8080` informs Docker that the container is listening on port 8080 at runtime.
+`EXPOSE 8080` は Docker に対して、コンテナー実行時にはポート 8080 を用いることを指示します。
 
 {% comment %}
 What you see above is a good way to organize a simple Dockerfile; always start with a `FROM` command, follow it with the steps to build up your private filesystem, and conclude with any metadata specifications. There are many more Dockerfile directives than just the few you see above. For a complete list, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
 {% endcomment %}
-What you see above is a good way to organize a simple Dockerfile; always start with a `FROM` command, follow it with the steps to build up your private filesystem, and conclude with any metadata specifications. There are many more Dockerfile directives than just the few you see above. For a complete list, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
+上で見てきた内容は、単純な Dockerfile を構成するものとしては的確なものです。
+必ず `FROM` コマンドから始めます。
+続けてプライベートファイルシステムを構築していきます。
+そしてメタデータの仕様を定めます。
+上に示した Dockerfile ディレクティブはほんのわずかであって、まだまだたくさんのものがあります。
+ディレクティブの一覧は [Dockerfile リファレンス](https://docs.docker.com/engine/reference/builder/) を参照してください。
 
 {% comment %}
 ## Build and test your image
 {% endcomment %}
 {: #build-and-test-your-image }
-## Build and test your image
+## イメージの構築とテスト
 
 {% comment %}
 Now that you have some source code and a Dockerfile, it's time to build your first image, and make sure the containers launched from it work as expected.
 {% endcomment %}
-Now that you have some source code and a Dockerfile, it's time to build your first image, and make sure the containers launched from it work as expected.
+ここにソースコードと Dockerfile の準備が整いました。
+そこで初めてのイメージビルドを行います。
+そしてそこから起動されるコンテナーが、期待どおりに動作することを確認します。
 
 {% comment %}
 > **Windows users**: this example uses Linux containers. Make sure your environment is running Linux containers by right-clicking on the Docker logo in your system tray, and clicking **Switch to Linux containers** if the option appears. Don't worry - all the commands in this tutorial work the exact same way for Windows containers.
 {% endcomment %}
-> **Windows users**: this example uses Linux containers. Make sure your environment is running Linux containers by right-clicking on the Docker logo in your system tray, and clicking **Switch to Linux containers** if the option appears. Don't worry - all the commands in this tutorial work the exact same way for Windows containers.
+> **Windows ユーザーの場合**: 本例では Linux コンテナーを用います。
+> Make sure your environment is running Linux containers by right-clicking on the Docker logo in your system tray, and clicking **Switch to Linux containers** if the option appears. Don't worry - all the commands in this tutorial work the exact same way for Windows containers.
 
 {% comment %}
 Make sure you're in the directory `node-bulletin-board/bulletin-board-app` in a terminal or PowerShell using the `cd` command. Let's build your bulletin board image:
@@ -256,12 +267,12 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
 ## Run your image as a container
 {% endcomment %}
 {: #run-your-image-as-a-container }
-## Run your image as a container
+## イメージをコンテナーとして実行
 
 {% comment %}
 1.  Start a container based on your new image:
 {% endcomment %}
-1.  Start a container based on your new image:
+1.  新しいイメージに基づいたコンテナーを起動します。
 
     ```script
     docker run --publish 8000:8080 --detach --name bb bulletinboard:1.0
@@ -334,6 +345,6 @@ Further documentation for all CLI commands used in this article are available he
 - [docker container](https://docs.docker.com/engine/reference/commandline/container/)
 - [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 {% endcomment %}
-- [docker image](https://docs.docker.com/engine/reference/commandline/image/)
-- [docker container](https://docs.docker.com/engine/reference/commandline/container/)
-- [Dockerfile リファレンス](https://docs.docker.com/engine/reference/builder/)
+- [docker image]({{ site.baseurl }}/engine/reference/commandline/image/)
+- [docker container]({{ site.baseurl }}/engine/reference/commandline/container/)
+- [Dockerfile リファレンス]({{ site.baseurl }}/engine/reference/builder/)
