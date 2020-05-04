@@ -43,12 +43,17 @@ Docker Desktop というもののおかげで、開発環境を整えること�
 {% comment %}
 In this stage of the tutorial, let's focus on step 1 of this workflow: creating the images that your containers will be based on. Remember, a Docker image captures the private filesystem that your containerized processes will run in; you need to create an image that contains just what your application needs to run.
 {% endcomment %}
-In this stage of the tutorial, let's focus on step 1 of this workflow: creating the images that your containers will be based on. Remember, a Docker image captures the private filesystem that your containerized processes will run in; you need to create an image that contains just what your application needs to run.
+チュートリアルのこの段階にて、1 部に示した手順として、コンテナーが生成される元となるイメージの生成について着目します。
+Docker イメージは、コンテナー化されたプロセスが実行されることになる、プライベートなファイルシステムを用いることを思い出してください。
+イメージを生成する際には、アプリケーション実行に必要なものだけを含んだイメージを生成するようにします。
 
 {% comment %}
 > **Containerized development environments** are easier to set up than traditional development environments, once you learn how to build images as we'll discuss below. This is because a containerized development environment will isolate all the dependencies your app needs inside your Docker image; there's no need to install anything other than Docker on your development machine. In this way, you can easily develop applications for different stacks without changing anything on your development machine.
 {% endcomment %}
-> **Containerized development environments** are easier to set up than traditional development environments, once you learn how to build images as we'll discuss below. This is because a containerized development environment will isolate all the dependencies your app needs inside your Docker image; there's no need to install anything other than Docker on your development machine. In this way, you can easily develop applications for different stacks without changing anything on your development machine.
+> **コンテナー化開発環境** は、後述するイメージビルド方法を理解しさえすれば、従来の開発環境よりも簡単に構築することができます。
+> なぜならコンテナー化開発環境は、Docker イメージ内でアプリケーションが必要とするパッケージをすべて分離して扱うからです。
+> つまり開発マシンには Docker 以外のものをインストールする必要がありません。
+> このようにして、さまざまな環境上に向けたアプリケーション開発が容易にできるようになるため、開発マシン上で変更すべきものがなくなります。
 
 {% comment %}
 ## Set up
@@ -242,7 +247,9 @@ Now that you have some source code and a Dockerfile, it's time to build your fir
 > **Windows users**: this example uses Linux containers. Make sure your environment is running Linux containers by right-clicking on the Docker logo in your system tray, and clicking **Switch to Linux containers** if the option appears. Don't worry - all the commands in this tutorial work the exact same way for Windows containers.
 {% endcomment %}
 > **Windows ユーザーの場合**: 本例では Linux コンテナーを用います。
-> Make sure your environment is running Linux containers by right-clicking on the Docker logo in your system tray, and clicking **Switch to Linux containers** if the option appears. Don't worry - all the commands in this tutorial work the exact same way for Windows containers.
+> 開発環境上において Linux コンテナーが動いていることを確認してください。
+> まずシステムトレイ上の Docker ロゴを右クリックして、オプション **Switch to Linux containers** が表示されていれば、これをクリックします。
+> 本チュートリアルのコマンドはすべて、Windows コンテナーに対しても全く同じ方法で動作しますから、心配はいりません。
 
 {% comment %}
 Make sure you're in the directory `node-bulletin-board/bulletin-board-app` in a terminal or PowerShell using the `cd` command. Let's build your bulletin board image:
