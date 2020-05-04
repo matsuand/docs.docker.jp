@@ -8,10 +8,10 @@ keywords: ucp, architecture
 
 {% comment %}
 Docker Universal Control Plane (UCP) is a containerized application that runs on
-[Docker Enterprise Edition](/ee/index.md), extending its functionality
+[Docker Enterprise Edition](../index.md), extending its functionality
 to simplify the deployment, configuration, and monitoring of your applications at scale.
 {% endcomment %}
-Docker Universal Control Plane (UCP) は [Docker Enterprise Edition](/ee/index.md) 上に稼動する、コンテナー化されたアプリケーションです。
+Docker Universal Control Plane (UCP) は [Docker Enterprise Edition](../index.md) 上に稼動する、コンテナー化されたアプリケーションです。
 Docker Enterprise Edition 機能の拡張によって、デプロイや設定を単純化し、アプリケーションの規模に応じて監視を行えるようにします。
 
 {% comment %}
@@ -51,23 +51,23 @@ UCP は Docker が提供するクラスター機能やオーケストレーシ�
 
 {% comment %}
 A swarm is a collection of nodes that are in the same Docker cluster.
-[Nodes](/engine/swarm/key-concepts.md) in a Docker swarm operate in one of two
+[Nodes](../../engine/swarm/key-concepts.md) in a Docker swarm operate in one of two
 modes: manager or worker. If nodes are not already running in a swarm when
 installing UCP, nodes will be configured to run in swarm mode.
 {% endcomment %}
 スウォームというものはノードの集まりであって、そのノードはすべて同一の Docker クラスター内にあるものです。
-Docker スウォーム内の [ノード](/engine/swarm/key-concepts.md) は 2 つあるモード、つまりマネージャーかワーカーのいずれかにより動作します。
+Docker スウォーム内の [ノード](../../engine/swarm/key-concepts.md) は 2 つあるモード、つまりマネージャーかワーカーのいずれかにより動作します。
 UCP をインストールする際にノードがまだ起動していなかった場合は、ノードはスウォームモード内にて起動するように設定されます。
 
 {% comment %}
 When you deploy UCP, it starts running a globally scheduled service called
 `ucp-agent`. This service monitors the node where it's running and starts
 and stops UCP services, based on whether the node is a
-[manager or a worker node](/engine/swarm/key-concepts.md).
+[manager or a worker node](../../engine/swarm/key-concepts.md).
 {% endcomment %}
 UCP をデプロイすると、グローバルなスケジュールサービス `ucp-agent` が起動します。
 このサービスは起動中のノードを監視したり、UCP サービスの起動、停止を行ったりします。
-このサービスは [マネージャーあるいはワーカーノード](/engine/swarm/key-concepts.md) において起動されます。
+このサービスは [マネージャーあるいはワーカーノード](../../engine/swarm/key-concepts.md) において起動されます。
 
 {% comment %}
 If the node is a:

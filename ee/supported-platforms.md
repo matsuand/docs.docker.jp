@@ -124,9 +124,9 @@ Enterprise users the ability to install as many CLI packages as needed without
 using the Engine node licenses for client-only systems.
 
 {% comment %}
-[Learn more about Docker Enterprise](/ee/index.md).
+[Learn more about Docker Enterprise](index.md).
 {% endcomment %}
-[Learn more about Docker Enterprise](/ee/index.md).
+[Learn more about Docker Enterprise](index.md).
 
 
 {% comment %}
@@ -156,14 +156,14 @@ a CLI plugin for automated deployment and configuration, and third-party ecosyst
 {% comment %}
 | Platform  | Docker Enterprise support |
 :----------------------------------------------------------------------------------------|:-------------------------:|
-| [Amazon Web Services](..\cluster\aws.md) |  {{ page.green-check }}   |
-| [Azure](..\cluster\azure.md) |  {{ page.green-check }}   |
+| [Amazon Web Services](cluster/aws.md) |  {{ page.green-check }}   |
+| [Azure](cluster/azure.md) |  {{ page.green-check }}   |
 | VMware  |  coming soon  |
 {% endcomment %}
 | プラットフォーム | Docker Enterprise エディション |
 :----------------------------------------------------------------------------------------|:-------------------------:|
-| [Amazon Web Services](..\cluster\aws.md) |  {{ page.green-check }}   |
-| [Azure](..\cluster\azure.md) |  {{ page.green-check }}   |
+| [Amazon Web Services](cluster/aws.md) |  {{ page.green-check }}   |
+| [Azure](cluster/azure.md) |  {{ page.green-check }}   |
 | VMware  |  coming soon  |
 
 {% comment %}
@@ -221,10 +221,10 @@ details on EOL of minor and major versions of Docker Enterprise.
 ## Where to go next
 
 {% comment %}
-- [Install Docker Engine - Enterprise for RHEL](/ee/docker-ee/rhel.md)
-- [Install Docker Engine - Enterprise for Ubuntu](/ee/docker-ee/ubuntu/)
-- [Install Docker Engine - Enterprise for Windows Server](/ee/docker-ee/windows/docker-ee.md)
+- [Install Docker Engine - Enterprise for RHEL](docker-ee/rhel.md)
+- [Install Docker Engine - Enterprise for Ubuntu](docker-ee/ubuntu.md)
+- [Install Docker Engine - Enterprise for Windows Server](docker-ee/windows/docker-ee.md)
 {% endcomment %}
-- [Install Docker Engine - Enterprise for RHEL](/ee/docker-ee/rhel.md)
-- [Install Docker Engine - Enterprise for Ubuntu](/ee/docker-ee/ubuntu/)
-- [Install Docker Engine - Enterprise for Windows Server](/ee/docker-ee/windows/docker-ee.md)
+- [Install Docker Engine - Enterprise for RHEL](docker-ee/rhel.md)
+- [Install Docker Engine - Enterprise for Ubuntu](docker-ee/ubuntu.md)
+- [Install Docker Engine - Enterprise for Windows Server](docker-ee/windows/docker-ee.md)

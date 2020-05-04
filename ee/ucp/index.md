@@ -143,7 +143,7 @@ Managers: 1
 
 {% comment %}
 - [Install UCP](admin/install/index.md)
-- [Docker Enterprise architecture](/ee/docker-ee-architecture.md)
+- [Docker Enterprise architecture](../docker-ee-architecture.md)
 {% endcomment %}
 - [UCP のインストール](admin/install/index.md)
-- [Docker Enterprise アーキテクチャー](/ee/docker-ee-architecture.md)
+- [Docker Enterprise アーキテクチャー](../docker-ee-architecture.md)
