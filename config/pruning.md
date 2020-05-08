@@ -1,7 +1,7 @@
 ---
-description: Pruning unused objects
+description: 未使用オブジェクトを取り除く。
 keywords: pruning, prune, images, volumes, containers, networks, disk, administration, garbage collection
-title: 未使用 Docker オブジェクトの取り除き (prune)
+title: 未使用 Docker オブジェクトの取り除き
 redirect_from:
 - /engine/admin/pruning/
 ---
@@ -15,13 +15,13 @@ object, Docker provides a `prune` command. In addition, you can use `docker
 system prune` to clean up multiple types of objects at once. This topic shows
 how to use these `prune` commands.
 {% endcomment %}
-Docker takes a conservative approach to cleaning up unused objects (often
-referred to as "garbage collection"), such as images, containers, volumes, and
-networks: these objects are generally not removed unless you explicitly ask
-Docker to do so. This can cause Docker to use extra disk space. For each type of
-object, Docker provides a `prune` command. In addition, you can use `docker
-system prune` to clean up multiple types of objects at once. This topic shows
-how to use these `prune` commands.
+Docker では未使用となったオブジェクトを取り除くために、従来どおりの（"ガベージコレクション" と呼ばれる）方法をとっています。
+オブジェクトは、イメージ、コンテナー、ボリューム、ネットワークなどです。
+こういったオブジェクトは、Docker に対して明示的に削除の指示を出さない限り、普通は削除されません。
+こういった場合、Docker が余計なディスク容量を消費することにもつながります。
+そこで Docker では、オブジェクトごとに `prune` コマンドが提供されています。
+さらに `docker system prune` を使えば、複数タイプのオブジェクトを一度に取り除くことができます。
+ここでは、そういった `prune` コマンドの利用方法について示します。
 
 {% comment %}
 ## Prune images
@@ -29,6 +29,12 @@ how to use these `prune` commands.
 {: #prune-images }
 ## イメージの取り除き
 
+{% comment %}
+The `docker image prune` command allows you to clean up unused images. By
+default, `docker image prune` only cleans up _dangling_ images. A dangling image
+is one that is not tagged and is not referenced by any container. To remove
+dangling images:
+{% endcomment %}
 The `docker image prune` command allows you to clean up unused images. By
 default, `docker image prune` only cleans up _dangling_ images. A dangling image
 is one that is not tagged and is not referenced by any container. To remove
@@ -41,6 +47,10 @@ WARNING! This will remove all dangling images.
 Are you sure you want to continue? [y/N] y
 ```
 
+{% comment %}
+To remove all images which are not used by existing containers, use the `-a`
+flag:
+{% endcomment %}
 To remove all images which are not used by existing containers, use the `-a`
 flag:
 
@@ -51,9 +61,18 @@ WARNING! This will remove all images without at least one container associated t
 Are you sure you want to continue? [y/N] y
 ```
 
+{% comment %}
+By default, you are prompted to continue. To bypass the prompt, use the `-f` or
+`--force` flag.
+{% endcomment %}
 By default, you are prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
 
+{% comment %}
+You can limit which images are pruned using filtering expressions with the
+`--filter` flag. For example, to only consider images created more than 24
+hours ago:
+{% endcomment %}
 You can limit which images are pruned using filtering expressions with the
 `--filter` flag. For example, to only consider images created more than 24
 hours ago:

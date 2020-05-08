@@ -234,7 +234,7 @@ What you see above is a good way to organize a simple Dockerfile; always start w
 ## Build and test your image
 {% endcomment %}
 {: #build-and-test-your-image }
-## イメージの構築とテスト
+## イメージの構築と確認
 
 {% comment %}
 Now that you have some source code and a Dockerfile, it's time to build your first image, and make sure the containers launched from it work as expected.
@@ -254,7 +254,8 @@ Now that you have some source code and a Dockerfile, it's time to build your fir
 {% comment %}
 Make sure you're in the directory `node-bulletin-board/bulletin-board-app` in a terminal or PowerShell using the `cd` command. Let's build your bulletin board image:
 {% endcomment %}
-Make sure you're in the directory `node-bulletin-board/bulletin-board-app` in a terminal or PowerShell using the `cd` command. Let's build your bulletin board image:
+端末画面あるいは PowerShell から `cd` コマンドを使って `node-bulletin-board/bulletin-board-app` ディレクトリに移動します。
+ここから掲示板アプリのイメージを作り上げていきます。
 
 ```script
 docker build --tag bulletinboard:1.0 .
@@ -263,12 +264,16 @@ docker build --tag bulletinboard:1.0 .
 {% comment %}
 You'll see Docker step through each instruction in your Dockerfile, building up your image as it goes. If successful, the build process should end with a message `Successfully tagged bulletinboard:1.0`.
 {% endcomment %}
-You'll see Docker step through each instruction in your Dockerfile, building up your image as it goes. If successful, the build process should end with a message `Successfully tagged bulletinboard:1.0`.
+Docker の処理ステップは Dockerfile に記述された各命令を見ればわかります。
+命令が進むにつれてイメージが作られていきます。
+ビルド処理が正常に終了すれば、最後に `Successfully tagged bulletinboard:1.0` というメッセージが表示されます。
 
 {% comment %}
 > **Windows users:** you may receive a message titled 'SECURITY WARNING' at this step, noting the read, write, and execute permissions being set for files added to your image. We aren't handling any sensitive information in this example, so feel free to disregard the warning in this example.
 {% endcomment %}
-> **Windows users:** you may receive a message titled 'SECURITY WARNING' at this step, noting the read, write, and execute permissions being set for files added to your image. We aren't handling any sensitive information in this example, so feel free to disregard the warning in this example.
+> **Windows ユーザー:** この段階において、'SECURITY WARNING' というタイトルがついたメッセージが表示される場合があります。
+> そこでは、イメージ内のファイルに対して読み書きや実行の許可が設定されたことが示されます。
+> ここに示す例において機密情報は何も用いませんので、この警告メッセージはここでは無視して構いません。
 
 {% comment %}
 ## Run your image as a container
@@ -288,37 +293,54 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
     {% comment %}
     There are a couple of common flags here:
     {% endcomment %}
-    There are a couple of common flags here:
+    ここでは、よく用いるフラグが登場します。
 
     {% comment %}
     - `--publish` asks Docker to forward traffic incoming on the host's port 8000, to the container's port 8080. Containers have their own private set of ports, so if you want to reach one from the network, you have to forward traffic to it in this way. Otherwise, firewall rules will prevent all network traffic from reaching your container, as a default security posture.
     - `--detach` asks Docker to run this container in the background.
     - `--name` specifies a name with which you can refer to your container in subsequent commands, in this case `bb`.
     {% endcomment %}
-    - `--publish` asks Docker to forward traffic incoming on the host's port 8000, to the container's port 8080. Containers have their own private set of ports, so if you want to reach one from the network, you have to forward traffic to it in this way. Otherwise, firewall rules will prevent all network traffic from reaching your container, as a default security posture.
-    - `--detach` asks Docker to run this container in the background.
-    - `--name` specifies a name with which you can refer to your container in subsequent commands, in this case `bb`.
+    - `--publish` は、ホストのポート 8000 への受信トラフィックをコンテナのポート 8080 に転送することを Docker に指示します。
+       コンテナーにはそれぞれに独自のポートがあります。
+       そこでネットワークからどこか 1 つにアクセスしたい場合、この方法によりトラフィックを転送する必要があります。
+       これを行っておかないとファイアウォールルールによって、コンテナーへのネットワークトラフィック転送が遮断されてしまいます。
+       これはセキュリティ上のデフォルトの動作です。
+    - `--detach` は Docker に対して、コンテナーをバックグラウンドで実行することを指示します。
+    - `--name` はコンテナー名を指定するものです。
+      この後のコマンドにおいてその名称により参照されます。
+      この例では `bb` というものにしています。
 
     {% comment %}
     Also notice, you didn't specify what process you wanted your container to run. You didn't have to, as you've used the `CMD` directive when building your Dockerfile; thanks to this, Docker knows to automatically run the process `npm start` inside the container when it starts up.
     {% endcomment %}
-    Also notice, you didn't specify what process you wanted your container to run. You didn't have to, as you've used the `CMD` directive when building your Dockerfile; thanks to this, Docker knows to automatically run the process `npm start` inside the container when it starts up.
+    さらに見ておくべきことは、コンテナーに対してどのようなプロセスを起動させるかを指定していない点です。
+    ここでそれを行う必要はありません。
+    すでに Dockerfile を生成した際に `CMD` ディレクティブを使っているからです。
+    この仕組みによって、Docker はコンテナーが起動した際に、そのコンテナー内にて `npm start` というプロセスを自動起動できるようになります。
 
 {% comment %}
 2.  Visit your application in a browser at `localhost:8000`. You should see your bulletin board application up and running. At this step, you would normally do everything you could to ensure your container works the way you expected; now would be the time to run unit tests, for example.
 {% endcomment %}
-2.  Visit your application in a browser at `localhost:8000`. You should see your bulletin board application up and running. At this step, you would normally do everything you could to ensure your container works the way you expected; now would be the time to run unit tests, for example.
+2.  ブラウザから `localhost:8000` を入力し、アプリケーションにアクセスします。
+    掲示板アプリケーションが実行されていることが確認できます。
+    ここでやりたいことを好きなようにやってみてください。
+    思ったとおりにコンテナーが動作していることがわかります。
+    その次にはユニットテストを行うといったこともできます。
 
 {% comment %}
 3.  Once you're satisfied that your bulletin board container works correctly, you can delete it:
 {% endcomment %}
-3.  Once you're satisfied that your bulletin board container works correctly, you can delete it:
+3.  掲示板アプリのコンテナーが正しく動作したことを確認したら、コンテナーを削除します。
 
     ```script
     docker rm --force bb
     ```
 
+    {% comment %}
     The `--force` option removes the running container. If you stop the container running with `docker stop bb` you do not need to use `--force`.
+    {% endcomment %}
+    `--force` オプションは実行中のコンテナーを削除します。
+    コンテナーを停止するだけの場合は `docker stop bb` とし `--force` をつける必要はありません。
 
 {% comment %}
 ## Conclusion
@@ -329,7 +351,10 @@ You'll see Docker step through each instruction in your Dockerfile, building up 
 {% comment %}
 At this point, you've successfully built an image, performed a simple containerization of an application, and confirmed that your app runs successfully in its container. The next step will be to share your images on [Docker Hub](https://hub.docker.com/), so they can be easily downloaded and run on any destination machine.
 {% endcomment %}
-At this point, you've successfully built an image, performed a simple containerization of an application, and confirmed that your app runs successfully in its container. The next step will be to share your images on [Docker Hub](https://hub.docker.com/), so they can be easily downloaded and run on any destination machine.
+このようにしてイメージの構築がうまくできました。
+アプリケーションが簡単にコンテナー化されて、そのコンテナー内においてアプリケーションが正常動作することを確認できました。
+次はそのイメージを [Docker Hub](https://hub.docker.com/) 上にて共有していきます。
+そうすればそのイメージを簡単にダウンロードすることができ、目的とするマシンのいずれにおいても動作させることができるようになります。
 
 {% comment %}
 [On to Part 3 >>](part3.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
@@ -345,7 +370,7 @@ At this point, you've successfully built an image, performed a simple containeri
 {% comment %}
 Further documentation for all CLI commands used in this article are available here:
 {% endcomment %}
-Further documentation for all CLI commands used in this article are available here:
+ここまでに示した CLI コマンドをすべて確認するには、以下を参考にしてください。
 
 {% comment %}
 - [docker image](https://docs.docker.com/engine/reference/commandline/image/)
