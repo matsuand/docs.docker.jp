@@ -878,7 +878,7 @@ reference:
     - path: /engine/api/sdk/examples/
       title: SDK 利用例
     - path: /engine/api/latest/
-      title: v1.40 リファレンス (最新)
+      title: v{{ site.latest_engine_api_version }} リファレンス (最新)
     - sectiontitle: 各バージョンごとの API リファレンス
       section:
       - path: /engine/api/version-history/
@@ -1152,6 +1152,8 @@ manuals:
     section:
     - path: /docker-for-windows/install/
       title: Docker Desktop for Windows のインストール
+    - path: /docker-for-windows/install-windows-home/
+      title: Docker Desktop on Windows Home のインストール
     - path: /docker-for-windows/
       title: はじめよう
     - path: /docker-for-windows/kubernetes/

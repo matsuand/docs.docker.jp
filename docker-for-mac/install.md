@@ -140,13 +140,6 @@ The Docker Desktop installation includes
     ![Hockeyapp 内の Docker](images/docker-app-in-apps.png)
 
     {% comment %}
-    You are prompted to authorize `Docker.app` with your system password after you launch it.
-    Privileged access is needed to install networking components and links to the Docker apps.
-    {% endcomment %}
-    You are prompted to authorize `Docker.app` with your system password after you launch it.
-    Privileged access is needed to install networking components and links to the Docker apps.
-
-    {% comment %}
     The Docker menu in the top status bar indicates that Docker Desktop is running, and accessible from a terminal.
     {% endcomment %}
     The Docker menu in the top status bar indicates that Docker Desktop is running, and accessible from a terminal.
@@ -157,20 +150,14 @@ The Docker Desktop installation includes
       ![メニューバー内のクジラアイコン](images/whale-in-menu-bar.png)
 
     {% comment %}
-    If you just installed the app, you also get a message with suggested
-    next steps and a link to the documentation. Click the Docker menu (![whale
-    menu](images/whale-x.png){: .inline}) in the status bar to
-    dismiss this pop-up notification.
+    If you've just installed the app, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
     {% endcomment %}
-    If you just installed the app, you also get a message with suggested
-    next steps and a link to the documentation. Click the Docker menu (![whale
-    menu](images/whale-x.png){: .inline}) in the status bar to
-    dismiss this pop-up notification.
+    If you've just installed the app, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 
-      {% comment %}
-      ![Startup information](images/mac-install-success.png)
-      {% endcomment %}
-      ![Startup information](images/mac-install-success.png)
+    {% comment %}
+    ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
+    {% endcomment %}
+    ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
 
 {% comment %}
 3. Click the Docker menu (![whale menu](images/whale-x.png){: .inline}) to see

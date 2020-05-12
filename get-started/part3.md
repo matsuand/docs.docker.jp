@@ -28,7 +28,10 @@ Work through the steps to build an image and run it as a containerized applicati
 {% comment %}
 At this point, you've built a containerized application in [Part 2](part2.md) on your local development machine, thanks to Docker Desktop. The final step in developing a containerized application is to share your images on a registry like [Docker Hub](https://hub.docker.com/), so they can be easily downloaded and run on any destination machine.
 {% endcomment %}
-At this point, you've built a containerized application in [Part 2](part2.md) on your local development machine, thanks to Docker Desktop. The final step in developing a containerized application is to share your images on a registry like [Docker Hub](https://hub.docker.com/), so they can be easily downloaded and run on any destination machine.
+ここでは [2 部](part2.md) での作業を通じて、ローカル開発マシン上にコンテナー化されたアプリケーションが構築できているものとします。
+最後の作業として、開発しているコンテナー化アプリケーションを、[Docker Hub](https://hub.docker.com/) のようなレジストリ上にてイメージを共有していきます。
+こうすればイメージを簡単にダウンロードすることができ、目的とするマシンのいずれにおいても動作させることができます。
+
 
 {% comment %}
 ## Set up your Docker Hub account
