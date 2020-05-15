@@ -18,7 +18,7 @@ guides:
   path: /get-docker/
 - sectiontitle: はじめよう
   section:
-  - path: /engine/docker-overview/
+  - path: /get-started/overview/
     title: Docker 概要
   - sectiontitle: クイックスタート
     section:
@@ -1198,24 +1198,30 @@ manuals:
             title: Recover your Docker Hub account
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
-  - path: /docker-hub/release-notes/
-    title: リリースノート
+  - sectiontitle: Administration
+    section:
+     - path: /docker-hub/deactivate-account/
+       title: Deactivate an account or an organization
+  - sectiontitle: Billing
+    section:
+    - path: /docker-hub/billing/
+      title: Overview
+    - path: /docker-hub/billing/upgrade/
+      title: プランのアップグレード
+    - path: /docker-hub/billing/downgrade/
+      title: プランのダウングレード
+    - path: /docker-hub/billing/add-seats/
+      title: Add seats
+    - path: /docker-hub/billing/remove-seats/
+      title: Remove seats
+    - path: /docker-hub/billing/faq/
+      title: Billing FAQ
+  - path: /docker-hub/orgs/
+    title: チームと組織
   - path: /docker-hub/repos/
     title: リポジトリ
   - path: /docker-hub/official_images/
     title: 公式イメージ
-  - path: /docker-hub/orgs/
-    title: チームと組織
-  - sectiontitle: Administration
-    section:
-     - path: /docker-hub/upgrade/
-       title: プランのアップグレード
-     - path: /docker-hub/cancel-downgrade/
-       title: プランのキャンセル、ダウングレード
-     - path: /docker-hub/convert-account/
-       title: アカウントから組織への移行
-     - path: /docker-hub/deactivate-account/
-       title: アカウントや組織の無効化
   - path: /docker-hub/webhooks/
     title: ウェブフック
   - path: /docker-hub/slack_integration/
@@ -1248,6 +1254,10 @@ manuals:
       title: Trust chain
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
+  - path: /docker-hub/download-rate-limit/
+    title: Download rate limit
+  - path: /docker-hub/release-notes/
+    title: リリースノート
 - sectiontitle: オープンソースプロジェクト
   section:
   - sectiontitle: Notary

@@ -4,6 +4,7 @@ keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Doc
 title: チームと組織
 redirect_from:
 - /docker-cloud/orgs/
+- /docker-hub/convert-account/
 ---
 
 {% comment %}
@@ -63,11 +64,6 @@ with a single member (you!).
 これは **owners** チームであり、ただ一人のメンバー、つまりあなた自身が含まれています。
 
 {% comment %}
-In some situations, you can also create an organization by [converting a user account](convert-account.md).
-{% endcomment %}
-状況によっては [ユーザーアカウントの変更](convert-account.md) を行って組織を生成することもできます。
-
-{% comment %}
 #### The owners team
 {% endcomment %}
 {: #the-owners-team }
@@ -90,7 +86,6 @@ Members of this team can:
 - 組織の設定や支払い方法を管理できます。
 - チームを生成し、チームメンバーの管理を行うことができます。
 - 組織に属しているリポジトリすべてにアクセスし更新することができます。
-
 
 {% comment %}
 ### Access an organization
@@ -156,21 +151,10 @@ If you don't see the organization, then you are neither a member or an owner of 
 {% endcomment %}
 2. **Teams** タブを開いて **Create Team** をクリックします。
 
-      {% comment %}
-      ![Teams view](images/orgs-teams2019.png)
-      {% endcomment %}
-      ![チーム画面](images/orgs-teams2019.png)
-
 {% comment %}
 3. Fill out your team's information and click **Create**.
 {% endcomment %}
 3. チーム情報を入力し、**Create** をクリックします。
-
-      {% comment %}
-      ![Create a team](images/orgs-new-team2019.png)
-      {% endcomment %}
-      ![チームの生成](images/orgs-new-team2019.png)
-
 
 {% comment %}
 ### Add a member to a team
@@ -189,7 +173,7 @@ If the user isn't in your organization:
 ユーザーが組織に含まれていない場合、
 
 {% comment %}
-1. Go **Organizations** in Docker Hub, and select your organization.
+1. Go to **Organizations** in Docker Hub, and select your organization.
 {% endcomment %}
 1. Docker Hub の **Organizations** へアクセスし、目的の組織を選びます。
 
@@ -198,21 +182,15 @@ If the user isn't in your organization:
 {% endcomment %}
 2. **Add Member** をクリックします。
 
-      {% comment %}
-      ![Add member from members list](images/org-members2019.png)
-      {% endcomment %}
-      ![メンバー一覧からのメンバー追加](images/org-members2019.png)
+{% comment %}
+3. Enter the user's Docker ID or email, and select a team from the drop-down list.
+{% endcomment %}
+3. 追加するユーザーの Docker ID かメールアドレスを入力して、ドロップダウンリストからチームを選びます。
 
 {% comment %}
-3. Provide the user's Docker ID username _or_ email, and select a team from the dropdown.
+4. Click **Add** to confirm.
 {% endcomment %}
-3. 追加するユーザーの Docker ID ユーザー名かメールアドレスを入力して、ドロップダウンリストからチームを選びます。
-
-      {% comment %}
-      ![Add user to team from org page](images/orgs-add-member2019.png)
-      {% endcomment %}
-      ![組織ページにおけるチームへのユーザー追加](images/orgs-add-member2019.png)
-
+4. **Add** をクリックして確定します。
 
 {% comment %}
 If the user already belongs to another team in the organization:
@@ -226,18 +204,14 @@ If the user already belongs to another team in the organization:
    **Organizations** > **＜目的の組織＞** > **Teams** > **＜目的のチーム＞**
 
 {% comment %}
-2. Click **Add User**.
+2. Click **Add user**.
 {% endcomment %}
-2. **Add User** をクリックします。
-{% comment %}
-3. Provide the user's Docker ID username _or_ email to add them to the team.
-{% endcomment %}
-3. 追加するユーザーの Docker ID ユーザー名かメールアドレスを入力して、チームへ追加します。
+2. **Add user** をクリックします。
 
-      {% comment %}
-      ![Add user to team from team page](images/teams-add-member2019.png)
-      {% endcomment %}
-      ![チームページにおけるチームへのユーザー追加](images/teams-add-member2019.png)
+{% comment %}
+3. Enter the user's Docker ID or email to add them to the team.
+{% endcomment %}
+3. 追加するユーザーの Docker ID メールアドレスを入力して、チームへ追加します。
 
       {% comment %}
       > **Note**: You are not automatically added to teams created by your organization.
@@ -256,20 +230,21 @@ To remove a member from all teams in an organization:
 組織内のすべてのチームから、メンバー 1 名を削除するには、
 
 {% comment %}
-1. Go **Organizations** in Docker Hub, and select your organization.
+1. Go to **Organizations** in Docker Hub, and select your organization. The Organizations page lists all team members.
 {% endcomment %}
 1. Docker Hub の **Organizations** にアクセスして、目的の組織を選択します。
+   組織のページにはチームメンバーがすべて一覧表示されています。
 
 {% comment %}
-2. Click the **x** next to a member's name:
+2. Click the **x** next to a member’s name to remove them from all the teams in the organization.
 {% endcomment %}
 2. メンバー名の横にある **x** をクリックします。
+   これによって組織内にあるチームのすべてからメンバーが削除されます。
 
-      {% comment %}
-      ![Add User to Team](images/org-members2019.png)
-      {% endcomment %}
-      ![チームへのユーザー追加](images/org-members2019.png)
-
+{% comment %}
+3. When prompted, click **Remove** to confirm the removal.
+{% endcomment %}
+3. 確認画面が出たら、**Remove** をクリックして削除を確定しす。
 
 {% comment %}
 To remove a member from a specific team:
@@ -277,40 +252,26 @@ To remove a member from a specific team:
 1 つのチームからメンバー 1 名を削除するには、
 
 {% comment %}
-1. Open the team this user is on. You can do this in one of two ways:
+1. Go to **Organizations** in Docker Hub, and select your organization.
 {% endcomment %}
-1. そのユーザーが属しているチームを開きます。
-   以下の 2 つの方法があります。
-
-      {% comment %}
-      * If you know the team name, go to **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
-      {% endcomment %}
-      * 目的のチーム名がわかっている場合は、**Organizations** > **＜目的の組織＞** > **Teams** > **＜目的のチーム＞** とアクセスします。
-
-          {% comment %}
-          > **Note:** You can filter the **Teams** tab by username, but you have to use the format _@username_ in the search field (partial names will not work).
-          {% endcomment %}
-          > **メモ**  **Teams** タブにおいてはユーザー名によるフィルタリング検索が可能です。
-            ただし検索は _@username_ という書式を用いる必要があります。
-            （部分検索を行うことはできません。）
-
-      {% comment %}
-      * If you don't know the team name, go to **Organizations** > **_Your Organization_** and search for the user. Hover over **View** to see all of their teams, then click on **View** > **_Team Name_**.
-      {% endcomment %}
-      * チーム名がわかっていない場合は、**Organizations** > **＜目的の組織＞** とアクセスして、そのユーザーを検索します。
-        **View** の上にマウス移動すると、所属するチーム名がすべて表示されます。
-        そこで **View** > **＜目的のチーム＞** をクリックします。
+1. Docker Hub の **Organizations** にアクセスして、目的の組織を選択します。
 
 {% comment %}
-2. Find the user in the list, and click the **x** next to the user's name to remove them.
+2. Click on the **Teams** tab and select the team from the list.
 {% endcomment %}
-2. 目的のユーザーを一覧から探し、ユーザー名の横にある **x** をクリックして削除します。
+2. **Teams** タブをクリックし、一覧から目的のチームを選択します。
 
-      {% comment %}
-      ![List of members on a team](images/orgs-team-members2019.png)
-      {% endcomment %}
-      ![チーム内のメンバー一覧](images/orgs-team-members2019.png)
+{% comment %}
+3. Click the **x** next to the user's name to remove them from the team.
+{% endcomment %}
+3. ユーザー名の横にある **x** をクリックします。
+   これによってチーム内からユーザーが削除されます。
 
+{% comment %}
+4. When prompted, click **Remove** to confirm the removal.
+to confirm the removal.
+{% endcomment %}
+4. 確認画面が出たら、**Remove** をクリックして削除を確定しす。
 
 {% comment %}
 ### Give a team access to a repository
