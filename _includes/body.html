@@ -179,17 +179,17 @@
     <footer class="footer">
         {% include footer.html %}
     </footer>
-    <link rel="stylesheet" href="/css/github.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/github.css">
     {% if page.highlightjs == true %}
-    <script src="/js/highlight.pack.js"></script>
+    <script src="{{ site.baseurl }}/js/highlight.pack.js"></script>
     <script>
         hljs.initHighlightingOnLoad();
     </script>
     {% endif %}
-    <script defer src="/js/anchorlinks.js"></script>
-    <script defer src="/js/menu.js"></script>
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script defer src="{{ site.baseurl }}/js/anchorlinks.js"></script>
+    <script defer src="{{ site.baseurl }}/js/menu.js"></script>
+    <script src="{{ site.baseurl }}/js/jquery.js"></script>
+    <script src="{{ site.baseurl }}/js/bootstrap.min.js"></script>
     <!-- Always include the archive.js, but it doesn't do much unless we are an archive -->
     <script>
         // Default to assuming this is an archive and hiding some stuff
@@ -204,12 +204,12 @@
         }
         var pageURL = jekyllEnv + '{{ page.url }}';
     </script>
-    <script src="/js/archive.js"></script>
-    <script src="/js/stickyfill.min.js"></script>
-    <script defer src="/js/metadata.js"></script>
-    <script src="/js/glossary.js"></script>
-    <script defer src="/js/docs.js"></script>
-    <script defer src="/js/toc.js"></script>
+    <script src="{{ site.baseurl }}/js/archive.js"></script>
+    <script src="{{ site.baseurl }}/js/stickyfill.min.js"></script>
+    <script defer src="{{ site.baseurl }}/js/metadata.js"></script>
+    <script src="{{ site.baseurl }}/js/glossary.js"></script>
+    <script defer src="{{ site.baseurl }}/js/docs.js"></script>
+    <script defer src="{{ site.baseurl }}/js/toc.js"></script>
     <script>
         jQuery(document).ready(function () { hookupTOCEvents(); });
     </script>
