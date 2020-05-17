@@ -62,8 +62,7 @@ For more information on build options, see the reference guide on the
 * Only supported for building Linux containers
 * BuildKit mode is compatible with UCP 3.2 or newer
 {% endcomment %}
-* Only supported for building Linux containers
-* BuildKit mode is compatible with UCP 3.2 or newer
+* Linux コンテナーのビルドにのみ対応しています。
 * BuildKit モードは、UCP 3.2 およびそれ以降と互換性があります。
 
 {% comment %}
@@ -76,8 +75,7 @@ For more information on build options, see the reference guide on the
 Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1`
 environment variable when invoking the `docker build` command, such as:
 {% endcomment %}
-Easiest way from a fresh install of docker is to set the `DOCKER_BUILDKIT=1`
-environment variable when invoking the `docker build` command, such as:
+一番簡単な方法としては docker を起動し始める際に環境変数 `DOCKER_BUILDKIT=1` を設定した上で `docker build` コマンドを起動します。
 
 ```bash
 $ DOCKER_BUILDKIT=1 docker build .
@@ -87,8 +85,7 @@ $ DOCKER_BUILDKIT=1 docker build .
 To enable docker BuildKit by default, set daemon configuration in
 `/etc/docker/daemon.json` feature to true and restart the daemon:
 {% endcomment %}
-To enable docker BuildKit by default, set daemon configuration in
-`/etc/docker/daemon.json` feature to true and restart the daemon:
+docker BuildKit をデフォルトで有効にするには、`/etc/docker/daemon.json` にあるデーモン設定の features を true にしデーモンを再起動します。
 
 ```json
 { "features": { "buildkit": true } }
@@ -136,7 +133,7 @@ $ docker build .
 {% comment %}
 New docker build BuildKit plain output:
 {% endcomment %}
-BuildKit の簡易な出力は以下のとおりです。
+新たな BuildKit の plain な出力は以下のとおりです。
 
 ```console
 $ docker build --progress=plain .
@@ -203,22 +200,21 @@ is  associated with the `RUN --mount` identifier to use in the Dockerfile. Docke
 does not use the filename of where the secret is kept outside of the Dockerfile,
 since this may be sensitive information.
 {% endcomment %}
-`id` is the identifier to pass into the `docker build --secret`. This identifier
-is  associated with the `RUN --mount` identifier to use in the Dockerfile. Docker
-does not use the filename of where the secret is kept outside of the Dockerfile,
-since this may be sensitive information.
+`id` は `docker build --secret` において受け渡される識別子です。
+これは Dockerfile 内において用いられる `RUN --mount` 識別子に関連づいています。
+Docker では Dockerfile の外に保持されている機密情報のファイル名は用いません。
+これが重要な情報となることもあるからです。
 
 {% comment %}
 `dst` renames the secret file to a specific file in the Dockerfile `RUN` command
 to use.
 {% endcomment %}
-`dst` renames the secret file to a specific file in the Dockerfile `RUN` command
-to use.
+`dst` は Dockerfile 内にて用いられる `RUN` コマンドにおいての機密情報ファイルを、所定ファイル名に名称変更します。
 
 {% comment %}
 For example, with a secret piece of information stored in a text file:
 {% endcomment %}
-For example, with a secret piece of information stored in a text file:
+たとえば以下のようなテキストファイル内に、一部の機密情報が含まれているとします。
 
 ```console
 $ echo 'WARMACHINEROX' > mysecret.txt
@@ -231,7 +227,10 @@ And with a Dockerfile that specifies use of a BuildKit frontend
 And with a Dockerfile that specifies use of a BuildKit frontend
 `docker/dockerfile:1.0-experimental`, the secret can be accessed.
 
+{% comment %}
 For example:
+{% endcomment %}
+たとえば以下のとおりです。
 
 ```dockerfile
 # syntax = docker/dockerfile:1.0-experimental
@@ -244,6 +243,11 @@ RUN --mount=type=secret,id=mysecret cat /run/secrets/mysecret
 RUN --mount=type=secret,id=mysecret,dst=/foobar cat /foobar
 ```
 
+{% comment %}
+This Dockerfile is only to demonstrate that the secret can be accessed. As you
+can see the secret printed in the build output. The final image built will not
+have the secret file:
+{% endcomment %}
 This Dockerfile is only to demonstrate that the secret can be accessed. As you
 can see the secret printed in the build output. The final image built will not
 have the secret file:
@@ -270,12 +274,26 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 ...
 ```
 
+{% comment %}
+## Using SSH to access private data in builds
+{% endcomment %}
+{: #using-ssh-to-access-private-data-in-builds }
 ## Using SSH to access private data in builds
 
+{% comment %}
+> **Acknowledgment**:
+> Please see [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
+> for more information and examples.
+{% endcomment %}
 > **Acknowledgment**:
 > Please see [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
 > for more information and examples.
 
+{% comment %}
+The `docker build` has a `--ssh` option to allow the Docker Engine to forward
+SSH agent connections. For more information on SSH agent, see the
+[OpenSSH man page](https://man.openbsd.org/ssh-agent).
+{% endcomment %}
 The `docker build` has a `--ssh` option to allow the Docker Engine to forward
 SSH agent connections. For more information on SSH agent, see the
 [OpenSSH man page](https://man.openbsd.org/ssh-agent).

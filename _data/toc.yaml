@@ -41,7 +41,7 @@ guides:
     - path: /develop/develop-images/dockerfile_best-practices/
       title: Dockerfile ベストプラクティス
     - path: /develop/develop-images/build_enhancements/
-      title: Build images with BuildKit
+      title: BuildKit によるイメージ構築
     - path: /develop/develop-images/multistage-build/
       title: マルチステージビルドの利用
     - path: /develop/develop-images/image_management/
