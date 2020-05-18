@@ -337,10 +337,10 @@ Docker の処理ステップは Dockerfile に記述された各命令を見れ�
     ```
 
     {% comment %}
-    The `--force` option removes the running container. If you stop the container running with `docker stop bb` you do not need to use `--force`.
+    The `--force` option stops a running container, so it can be removed. If you stop the container running with `docker stop bb` first, then you do not need to use `--force` to remove it.
     {% endcomment %}
-    `--force` オプションは実行中のコンテナーを削除します。
-    コンテナーを停止するだけの場合は `docker stop bb` とし `--force` をつける必要はありません。
+    `--force` オプションは実行中のコンテナーを停止させるので、削除できるようになるものです。
+    この前に `docker stop bb` によって実行コンテナーを停止している場合は、`--force` をつける必要はありません。
 
 {% comment %}
 ## Conclusion
