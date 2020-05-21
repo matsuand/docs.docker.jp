@@ -177,6 +177,12 @@ Congratulations! You are now successfully running Docker Desktop.
 Docker Desktop を正常に実行することができました。
 
 {% comment %}
+If you would like to rerun the tutorial, go to the Docker Desktop menu
+and select **Learn**.
+{% endcomment %}
+チュートリアルに戻りたい場合は Docker Desktop メニューから **Learn** を実行してください。
+
+{% comment %}
 ## Uninstall Docker Desktop
 {% endcomment %}
 {: #uninstall-docker-desktop }
