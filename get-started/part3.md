@@ -26,12 +26,15 @@ Work through the steps to build an image and run it as a containerized applicati
 ## はじめに
 
 {% comment %}
-At this point, you've built a containerized application in [Part 2](part2.md) on your local development machine, thanks to Docker Desktop. The final step in developing a containerized application is to share your images on a registry like [Docker Hub](https://hub.docker.com/), so they can be easily downloaded and run on any destination machine.
+At this point, you've built a containerized application described in [Part 2](part2.md) on your local development machine.
 {% endcomment %}
-ここでは [2 部](part2.md) での作業を通じて、ローカル開発マシン上にコンテナー化されたアプリケーションが構築できているものとします。
-最後の作業として、開発しているコンテナー化アプリケーションを、[Docker Hub](https://hub.docker.com/) のようなレジストリ上にてイメージを共有していきます。
-こうすればイメージを簡単にダウンロードすることができ、目的とするマシンのいずれにおいても動作させることができます。
+ここでは [2 部](part2.md) に示した作業を通じて、ローカル開発マシン上にコンテナー化されたアプリケーションが構築できているものとします。
 
+{% comment %}
+The final step in developing a containerized application is to share your images on a registry like [Docker Hub](https://hub.docker.com/){: target="_blank" class="_”}, so they can be easily downloaded and run on any destination machine.
+{% endcomment %}
+最後の作業として、開発しているコンテナー化アプリケーションを、[Docker Hub](https://hub.docker.com/){: target="_blank" class="_”} のようなレジストリ上にてイメージを共有していきます。
+こうすればイメージを簡単にダウンロードすることができ、目的とするマシンのいずれにおいても動作させることができます。
 
 {% comment %}
 ## Set up your Docker Hub account
@@ -40,15 +43,15 @@ At this point, you've built a containerized application in [Part 2](part2.md) on
 ## Docker Hub アカウントの設定
 
 {% comment %}
-If you don't yet have a Docker ID, follow these steps to set one up; this will allow you to share images on Docker Hub.
+If you don't have a Docker ID, follow these steps to create one. A Docker ID allows you to share images on Docker Hub.
 {% endcomment %}
-まだ Docker ID を持っていない場合は、以下の手順により取得します。
+Docker ID を持っていない場合は、以下の手順により取得します。
 これを行っておくことで Docker Hub 上でのイメージの共有ができるようになります。
 
 {% comment %}
-1.  Visit the Docker Hub sign up page, [https://hub.docker.com/signup](https://hub.docker.com/signup).
+1.  Visit the [Docker Hub sign up](https://hub.docker.com/signup){: target="_blank" class="_”} page.
 {% endcomment %}
-1.  Docker Hub のサインアップページ [https://hub.docker.com/signup](https://hub.docker.com/signup) にアクセスします。
+1.  [Docker Hub のサインアップページ](https://hub.docker.com/signup){: target="_blank" class="_”} にアクセスします。
 
 {% comment %}
 2.  Fill out the form and submit to create your Docker ID.
@@ -72,9 +75,9 @@ If you don't yet have a Docker ID, follow these steps to set one up; this will a
     認証が正しく行われると、先ほど実行した Docker Desktop メニューの 'Sign in' のところに Docker ID が表示されます。
 
     {% comment %}
-    > You can do the same thing from the command line by typing `docker login`.
+    You can also sign into Docker Hub from the command line by typing `docker login`.
     {% endcomment %}
-    > 同じことはコマンドラインから `docker login` を入力して行うこともできます。
+    Docker Hub へのサインインは、コマンドラインから `docker login` を入力して行うこともできます。
 
 {% comment %}
 ## Create a Docker Hub repository and push your image
@@ -83,23 +86,28 @@ If you don't yet have a Docker ID, follow these steps to set one up; this will a
 ## Docker Hub リポジトリの生成とイメージプッシュ
 
 {% comment %}
-At this point, you've set up your Docker Hub account and have connected it to your Docker Desktop. Now let's make our first repo, and share our bulletin board app there.
+>
+> Before creating a repository, ensure you’ve set up your Docker Hub account and have connected it to your Docker Desktop.
 {% endcomment %}
-ここまでに Docker Hub アカウントを設定し、Docker Desktop に接続しました。
-それでは初めてのリポジトリを生成し、掲示板アプリを共有しましょう。
+>
+> リポジトリを生成する前に、Docker Hub のアカウントが取得済であり、Docker Desktop から接続できていることを確認してください。
 
 {% comment %}
-1.  Click on the Docker icon in your menu bar, and navigate to **Repositories > Create**. You'll be taken to a Docker Hub page to create a new repository.
+Now let's create your first repository, and push your bulletin board image to Docker Hub.
+{% endcomment %}
+それでは初めてのリポジトリを生成し、掲示板アプリのイメージをプッシュしましょう。
+
+{% comment %}
+1.  Click on the Docker icon in your menu bar, and navigate to **Repositories > Create**. You'll be redirected to the **Create Repository** page on Docker Hub.
 {% endcomment %}
 1.  メニューバー上の Docker アイコンをクリックして **Repositories > Create** を実行します。
-    Docker Hub ページが開くので、新たなリポジトリを生成していきます。
+    Docker Hub の **Create Repository** というページにリダイレクトされます。
 
 {% comment %}
 2.  Fill out the repository name as `bulletinboard`. Leave all the other options alone for now, and click **Create** at the bottom.
 {% endcomment %}
-2.  リポジトリ名に `bulletinboard` と入力します。
-    これ以外の欄は、ここではとりあえずそのままとします。
-    そして下段にある **Create** をクリックします。
+2.  リポジトリ名に `bulletinboard` と入力して、下段にある **Create** をクリックします。
+    リポジトリ以外の欄は、とりあえずここでは何も入力しないことにします。
 
     {% comment %}
     ![make a repo](images/newrepo.png){:width="100%"}
@@ -113,11 +121,14 @@ At this point, you've set up your Docker Hub account and have connected it to yo
     ただし共有する前に、まずやっておくべきことがあります。
     Docker Hub 上にイメージを共有するには、イメージの名前空間を適切に設定しておかなければなりません。
     具体的には、イメージ名を `<Docker ID>/<リポジトリ名>:<タグ>` とする必要があります。
-    つまり `bulletinboard:1.0` イメージは、以下のようにしてリネームします。
-    (もちろん `gordon` の部分は、自分の Docker ID に代えてください。)
+
+    {% comment %}
+    Make sure you’re in the `node-bulletin-board/bulletin-board-app` directory in a terminal or PowerShell then and run:
+    {% endcomment %}
+    そこで端末画面か PowerShell 上において、`node-bulletin-board/bulletin-board-app` ディレクトリにいることを確認して、以下を実行します。
 
     ```shell
-    docker tag bulletinboard:1.0 gordon/bulletinboard:1.0
+    docker tag bulletinboard:1.0 <あなたの Docker ID>/bulletinboard:1.0
     ```
 
 {% comment %}
@@ -126,17 +137,17 @@ At this point, you've set up your Docker Hub account and have connected it to yo
 4.  最後にイメージを Docker Hub にプッシュします。
 
     ```shell
-    docker push gordon/bulletinboard:1.0
+    docker push <あなたの Docker ID>/bulletinboard:1.0
     ```
 
     {% comment %}
-    Visit your repository in Docker Hub, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
+    Visit your repository in [Docker Hub](https://hub.docker.com/repositories){: target="_blank" class="_”}, and you'll see your new image there. Remember, Docker Hub repositories are public by default.
     {% endcomment %}
-    Docker Hub においてこのリポジトリにアクセスしてみると、新たなイメージがそこに表示されています。
+    [Docker Hub](https://hub.docker.com/repositories){: target="_blank" class="_”} においてこのリポジトリにアクセスしてみると、新たなイメージがそこに表示されています。
     Docker Hub リポジトリは、デフォルトで公開されている（public となっている）ことに注意してください。
 
     {% comment %}
-    > **Having trouble pushing?** Remember, you must be signed in to Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps. If the push seemed to work, but you don't see it in Docker Hub, refresh your browser after a couple of minutes and check again.
+    > **Having trouble pushing?** Remember, you must be signed into Docker Hub through Docker Desktop or the command line, and you must also name your images correctly, as per the above steps. If the push seemed to work, but you don't see it in Docker Hub, refresh your browser after a couple of minutes and check again.
     {% endcomment %}
     > **プッシュに失敗した場合** Docker Hub へは Docker Desktop から、あるいはコマンドラインからサインインしていることが必要です。
     > また上記の手順にて示したように、イメージは適切な名称としていなければなりません。

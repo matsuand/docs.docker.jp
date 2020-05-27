@@ -24,20 +24,24 @@ Work through the orientation and setup in [Part 1](index.md).
 ## はじめに
 
 {% comment %}
-Now that you've set up your development environment, thanks to Docker Desktop,
-you can begin to develop containerized applications. In general, the development workflow looks like this:
+Now that you've set up your development environment, you can begin to develop containerized applications. In general, the development workflow looks like this:
 {% endcomment %}
-Docker Desktop というもののおかげで、開発環境を整えることができました。
-ここからはコンテナー化されたアプリケーションを作り出していくことにします。
+開発環境を整えることができたので、ここからはコンテナー化されたアプリケーションを作り出していくことにします。
 構築の手順は一般に以下のようになります。
 
 {% comment %}
 1. Create and test individual containers for each component of your application by first creating Docker images.
-2. Assemble your containers and supporting infrastructure into a complete application.
-3. Test, share, and deploy your complete containerized application.
 {% endcomment %}
 1. 初めての Docker イメージを生成した上で、アプリケーションの各コンポーネントに対応するコンテナーを生成しテストします。
+
+{% comment %}
+2. Assemble your containers and supporting infrastructure into a complete application.
+{% endcomment %}
 2. コンテナーとこれを支えるインフラストラクチャーを整えて、一体となったアプリケーションとします。
+
+{% comment %}
+3. Test, share, and deploy your complete containerized application.
+{% endcomment %}
 3. 完全にコンテナー化されたアプリケーションをテスト、共有しデプロイを行います。
 
 {% comment %}
@@ -48,14 +52,6 @@ Docker イメージは、コンテナー化されたプロセスが実行され�
 イメージを生成する際には、アプリケーション実行に必要なものだけを含んだイメージを生成するようにします。
 
 {% comment %}
-> **Containerized development environments** are easier to set up than traditional development environments, once you learn how to build images as we'll discuss below. This is because a containerized development environment will isolate all the dependencies your app needs inside your Docker image; there's no need to install anything other than Docker on your development machine. In this way, you can easily develop applications for different stacks without changing anything on your development machine.
-{% endcomment %}
-> **コンテナー化開発環境** は、後述するイメージビルド方法を理解しさえすれば、従来の開発環境よりも簡単に構築することができます。
-> なぜならコンテナー化開発環境は、Docker イメージ内でアプリケーションが必要とするパッケージをすべて分離して扱うからです。
-> つまり開発マシンには Docker 以外のものをインストールする必要がありません。
-> このようにして、さまざまな環境上に向けたアプリケーション開発が容易にできるようになるため、開発マシン上で変更すべきものがなくなります。
-
-{% comment %}
 ## Set up
 {% endcomment %}
 {: #set-up }
@@ -64,7 +60,8 @@ Docker イメージは、コンテナー化されたプロセスが実行され�
 {% comment %}
 Let us download an example project from the [Docker Samples](https://github.com/dockersamples/node-bulletin-board) page.
 {% endcomment %}
-[Docker サンプル](https://github.com/dockersamples/node-bulletin-board) のページから、サンプルプロジェクトをダウンロードすることにします。
+サンプルプロジェクト `node-bulletin-board` をダウンロードしましょう。
+これは Node.js によって書かれた、簡単な掲示板アプリケーションです。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#clonegit">Git</a></li>
@@ -134,23 +131,159 @@ cd node-bulletin-board-master/bulletin-board-app
 </div>
 
 {% comment %}
-The `node-bulletin-board` project is a simple bulletin board application, written in Node.js. In this example, let's imagine you wrote this app, and are now trying to containerize it.
-{% endcomment %}
-`node-bulletin-board` プロジェクトは簡易な掲示板（bulletin board）アプリケーションであり、Node.js を用いて開発されているものです。
-この例では、すでに作り上げているアプリケーションを、これからコンテナー化していく状況にあると考えてください。
-
-{% comment %}
 ## Define a container with Dockerfile
 {% endcomment %}
 ## Dockerfile におけるコンテナーの定義
 
 {% comment %}
-Take a look at the file called `Dockerfile` in the bulletin board application. Dockerfiles describe how to assemble a private filesystem for a container, and can also contain some metadata describing how to run a container based on this image. The bulletin board app Dockerfile looks like this:
+After downloading the project, take a look at the file called `Dockerfile` in the bulletin board application. Dockerfiles describe how to assemble a private filesystem for a container, and can also contain some metadata describing how to run a container based on this image.
 {% endcomment %}
-掲示板アプリケーションに対応する `Dockerfile` というファイルを見てみます。
-Dockerfile というものには、コンテナーにはどのようなプライベートファイルシステムを用いるのかが記述されます。
-あるいはそのイメージに基づくコンテナーをどのように起動させるかを表わすメタデータを含ませることもあります。
-掲示板アプリケーションの Dockerfile はたとえば以下のようになります。
+プロジェクトをダウンロードした後に、この掲示板アプリケーション内の `Dockerfile` というファイルを見てください。
+Dockerfile というものは、どのようにしてコンテナー用のプライベートファイルシステムを作り出すかを指示しています。
+またこのイメージに基づいたコンテナーをどのように実行するかを記述したメタデータも含まれています。
+
+{% comment %}
+For more information about the Dockerfile used in the bulletin board application, see [Sample Dockerfile](#sample-dockerfile).
+{% endcomment %}
+この掲示板アプリケーションにおいて用いられている Dockerfile の詳細については [サンプル Dockerfile](#sample-dockerfile) を参照してください。
+
+{% comment %}
+## Build and test your image
+{% endcomment %}
+{: #build-and-test-your-image }
+## イメージの構築と確認
+
+{% comment %}
+Now that you have some source code and a Dockerfile, it's time to build your first image, and make sure the containers launched from it work as expected.
+{% endcomment %}
+ここにソースコードと Dockerfile の準備が整いました。
+そこで初めてのイメージビルドを行います。
+そしてそこから起動されるコンテナーが、期待どおりに動作することを確認します。
+
+{% comment %}
+Make sure you're in the directory `node-bulletin-board/bulletin-board-app` in a terminal or PowerShell using the `cd` command. Let's build your bulletin board image:
+{% endcomment %}
+端末画面あるいは PowerShell から `cd` コマンドを使って `node-bulletin-board/bulletin-board-app` ディレクトリに移動します。
+そして以下のコマンドを実行して掲示板アプリのイメージを作ります。
+
+```script
+docker build --tag bulletinboard:1.0 .
+```
+
+{% comment %}
+You'll see Docker step through each instruction in your Dockerfile, building up your image as it goes. If successful, the build process should end with a message `Successfully tagged bulletinboard:1.0`.
+{% endcomment %}
+Docker の処理ステップは Dockerfile に記述された各命令を見ればわかります。
+命令が進むにつれてイメージが作られていきます。
+ビルド処理が正常に終了すれば、最後に `Successfully tagged bulletinboard:1.0` というメッセージが表示されます。
+
+{% comment %}
+> **Windows users:**
+>
+> This example uses Linux containers. Make sure your environment is running Linux containers by right-clicking on the Docker logo in your system tray, and clicking **Switch to Linux containers**. Don't worry - all the commands in this tutorial work the exact same way for Windows containers.
+>
+> You may receive a message titled 'SECURITY WARNING' after running the image, noting the read, write, and execute permissions being set for files added to your image. We aren't handling any sensitive information in this example, so feel free to disregard the warning in this example.
+{% endcomment %}
+> **Windows ユーザーの方**
+>
+> この例では Linux コンテナーを用います。
+> 動作環境において Linux コンテナーを動作させるためには、システムトレイにある Docker ロゴを右クリックし、**Switch to Linux containers** をクリックしてください。
+> 本チュートリアルのコマンドはすべて、Windows コンテナーに対しても全く同じ方法で動作しますから、心配はいりません。
+>
+> イメージの起動後に 'SECURITY WARNING' というタイトルがついたメッセージが表示される場合があります。
+> そこでは、イメージ内のファイルに対して読み書きや実行の許可が設定されたことが示されます。
+> ここに示す例において機密情報は何も用いませんので、この警告メッセージはここでは無視して構いません。
+
+{% comment %}
+## Run your image as a container
+{% endcomment %}
+{: #run-your-image-as-a-container }
+## イメージをコンテナーとして実行
+
+{% comment %}
+1.  Run the following command to start a container based on your new image:
+{% endcomment %}
+1.  以下のコマンドを実行して新しいイメージに基づいたコンテナーを起動します。
+
+    ```script
+    docker run --publish 8000:8080 --detach --name bb bulletinboard:1.0
+    ```
+
+    {% comment %}
+    There are a couple of common flags here:
+    {% endcomment %}
+    ここでは、よく用いるフラグが登場します。
+
+    {% comment %}
+    - `--publish` asks Docker to forward traffic incoming on the host's port 8000 to the container's port 8080. Containers have their own private set of ports, so if you want to reach one from the network, you have to forward traffic to it in this way. Otherwise, firewall rules will prevent all network traffic from reaching your container, as a default security posture.
+    - `--detach` asks Docker to run this container in the background.
+    - `--name` specifies a name with which you can refer to your container in subsequent commands, in this case `bb`.
+    {% endcomment %}
+    - `--publish` は、ホストのポート 8000 への受信トラフィックをコンテナのポート 8080 に転送することを Docker に指示します。
+       コンテナーにはそれぞれに独自のポートがあります。
+       そこでネットワークからどこか 1 つにアクセスしたい場合、この方法によりトラフィックを転送する必要があります。
+       これを行っておかないとファイアウォールルールによって、コンテナーへのネットワークトラフィック転送が遮断されてしまいます。
+       これはセキュリティ上のデフォルトの動作です。
+    - `--detach` は Docker に対して、コンテナーをバックグラウンドで実行することを指示します。
+    - `--name` はコンテナー名を指定するものです。
+      この後のコマンドではその名称を使ってコンテナーを参照します。
+      この例では `bb` というものにしています。
+
+{% comment %}
+2.  Visit your application in a browser at `localhost:8000`. You should see your bulletin board application up and running. At this step, you would normally do everything you could to ensure your container works the way you expected; now would be the time to run unit tests, for example.
+{% endcomment %}
+2.  ブラウザーから `localhost:8000` を入力し、アプリケーションにアクセスします。
+    掲示板アプリケーションが実行されていることが確認できます。
+    ここでやりたいことを好きなようにやってみてください。
+    思ったとおりにコンテナーが動作していることがわかります。
+    その次にはユニットテストを行うといったこともできます。
+
+{% comment %}
+3.  Once you're satisfied that your bulletin board container works correctly, you can delete it:
+{% endcomment %}
+3.  掲示板アプリのコンテナーが正しく動作したことを確認したら、コンテナーを削除します。
+
+    ```script
+    docker rm --force bb
+    ```
+
+    {% comment %}
+    The `--force` option stops a running container, so it can be removed. If you stop the container running with `docker stop bb` first, then you do not need to use `--force` to remove it.
+    {% endcomment %}
+    `--force` オプションは実行中のコンテナーを停止させるので、削除できるようになるものです。
+    この前に `docker stop bb` によって実行コンテナーを停止している場合は、`--force` をつける必要はありません。
+
+{% comment %}
+## Conclusion
+{% endcomment %}
+{: #conclusion }
+## まとめ
+
+{% comment %}
+At this point, you've successfully built an image, performed a simple containerization of an application, and confirmed that your app runs successfully in its container. The next step will be to share your images on [Docker Hub](https://hub.docker.com/), so they can be easily downloaded and run on any destination machine.
+{% endcomment %}
+このようにしてイメージの構築がうまくできました。
+アプリケーションが簡単にコンテナー化されて、そのコンテナー内においてアプリケーションが正常動作することを確認できました。
+次はそのイメージを [Docker Hub](https://hub.docker.com/) 上にて共有します。
+そうすればイメージを簡単にダウンロードすることができ、目的とするマシンのいずれにおいても動作させることができます。
+
+{% comment %}
+[On to Part 3 >>](part3.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
+{% endcomment %}
+[3 部へ >>](part3.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
+
+{% comment %}
+## Sample Dockerfile
+{% endcomment %}
+{: #sample-dockerfile }
+## サンプル Dockerfile
+
+{% comment %}
+Writing a Dockerfile is the first step to containerizing an application. You can think of these Dockerfile commands as a step-by-step recipe on how to build up your image. The Dockerfile in the bulletin board app looks like this:
+{% endcomment %}
+Dockerfile を記述することが、アプリケーションコンテナー化の第一歩です。
+この Dockerfile に記述するコマンドは、いってみればイメージの構築方法を順に示すレシピのようなものです。
+このファイルでは以下の手順を行います。
 
 ```dockerfile
 # 親イメージとして公式イメージを利用
@@ -176,11 +309,9 @@ COPY . .
 ```
 
 {% comment %}
-Writing a Dockerfile is the first step to containerizing an application. You can think of these Dockerfile commands as a step-by-step recipe on how to build up your image. This one takes the following steps:
+The dockerfile defined in this example takes the following steps:
 {% endcomment %}
-Dockerfile を記述することが、アプリケーションコンテナー化の第一歩です。
-この Dockerfile に記述するコマンドは、いってみればイメージの構築方法を順に示すレシピのようなものです。
-このファイルでは以下の手順を行います。
+この例における Dockerfile では、以下の順により処理が行われます。
 
 {% comment %}
 - Start `FROM` the pre-existing `node:current-slim` image. This is an *official image*, built by the node.js vendors and validated by Docker to be a high-quality image containing the Node.js Long Term Support (LTS) interpreter and basic dependencies.
@@ -229,137 +360,6 @@ What you see above is a good way to organize a simple Dockerfile; always start w
 そしてメタデータの仕様を定めます。
 上に示した Dockerfile ディレクティブはほんのわずかであって、まだまだたくさんのものがあります。
 ディレクティブの一覧は [Dockerfile リファレンス](https://docs.docker.com/engine/reference/builder/) を参照してください。
-
-{% comment %}
-## Build and test your image
-{% endcomment %}
-{: #build-and-test-your-image }
-## イメージの構築と確認
-
-{% comment %}
-Now that you have some source code and a Dockerfile, it's time to build your first image, and make sure the containers launched from it work as expected.
-{% endcomment %}
-ここにソースコードと Dockerfile の準備が整いました。
-そこで初めてのイメージビルドを行います。
-そしてそこから起動されるコンテナーが、期待どおりに動作することを確認します。
-
-{% comment %}
-> **Windows users**: this example uses Linux containers. Make sure your environment is running Linux containers by right-clicking on the Docker logo in your system tray, and clicking **Switch to Linux containers** if the option appears. Don't worry - all the commands in this tutorial work the exact same way for Windows containers.
-{% endcomment %}
-> **Windows ユーザーの場合**: 本例では Linux コンテナーを用います。
-> 開発環境上において Linux コンテナーが動いていることを確認してください。
-> まずシステムトレイ上の Docker ロゴを右クリックして、オプション **Switch to Linux containers** が表示されていれば、これをクリックします。
-> 本チュートリアルのコマンドはすべて、Windows コンテナーに対しても全く同じ方法で動作しますから、心配はいりません。
-
-{% comment %}
-Make sure you're in the directory `node-bulletin-board/bulletin-board-app` in a terminal or PowerShell using the `cd` command. Let's build your bulletin board image:
-{% endcomment %}
-端末画面あるいは PowerShell から `cd` コマンドを使って `node-bulletin-board/bulletin-board-app` ディレクトリに移動します。
-ここから掲示板アプリのイメージを作り上げていきます。
-
-```script
-docker build --tag bulletinboard:1.0 .
-```
-
-{% comment %}
-You'll see Docker step through each instruction in your Dockerfile, building up your image as it goes. If successful, the build process should end with a message `Successfully tagged bulletinboard:1.0`.
-{% endcomment %}
-Docker の処理ステップは Dockerfile に記述された各命令を見ればわかります。
-命令が進むにつれてイメージが作られていきます。
-ビルド処理が正常に終了すれば、最後に `Successfully tagged bulletinboard:1.0` というメッセージが表示されます。
-
-{% comment %}
-> **Windows users:** you may receive a message titled 'SECURITY WARNING' at this step, noting the read, write, and execute permissions being set for files added to your image. We aren't handling any sensitive information in this example, so feel free to disregard the warning in this example.
-{% endcomment %}
-> **Windows ユーザー:** この段階において、'SECURITY WARNING' というタイトルがついたメッセージが表示される場合があります。
-> そこでは、イメージ内のファイルに対して読み書きや実行の許可が設定されたことが示されます。
-> ここに示す例において機密情報は何も用いませんので、この警告メッセージはここでは無視して構いません。
-
-{% comment %}
-## Run your image as a container
-{% endcomment %}
-{: #run-your-image-as-a-container }
-## イメージをコンテナーとして実行
-
-{% comment %}
-1.  Start a container based on your new image:
-{% endcomment %}
-1.  新しいイメージに基づいたコンテナーを起動します。
-
-    ```script
-    docker run --publish 8000:8080 --detach --name bb bulletinboard:1.0
-    ```
-
-    {% comment %}
-    There are a couple of common flags here:
-    {% endcomment %}
-    ここでは、よく用いるフラグが登場します。
-
-    {% comment %}
-    - `--publish` asks Docker to forward traffic incoming on the host's port 8000, to the container's port 8080. Containers have their own private set of ports, so if you want to reach one from the network, you have to forward traffic to it in this way. Otherwise, firewall rules will prevent all network traffic from reaching your container, as a default security posture.
-    - `--detach` asks Docker to run this container in the background.
-    - `--name` specifies a name with which you can refer to your container in subsequent commands, in this case `bb`.
-    {% endcomment %}
-    - `--publish` は、ホストのポート 8000 への受信トラフィックをコンテナのポート 8080 に転送することを Docker に指示します。
-       コンテナーにはそれぞれに独自のポートがあります。
-       そこでネットワークからどこか 1 つにアクセスしたい場合、この方法によりトラフィックを転送する必要があります。
-       これを行っておかないとファイアウォールルールによって、コンテナーへのネットワークトラフィック転送が遮断されてしまいます。
-       これはセキュリティ上のデフォルトの動作です。
-    - `--detach` は Docker に対して、コンテナーをバックグラウンドで実行することを指示します。
-    - `--name` はコンテナー名を指定するものです。
-      この後のコマンドではその名称を使ってコンテナーを参照します。
-      この例では `bb` というものにしています。
-
-    {% comment %}
-    Also notice, you didn't specify what process you wanted your container to run. You didn't have to, as you've used the `CMD` directive when building your Dockerfile; thanks to this, Docker knows to automatically run the process `npm start` inside the container when it starts up.
-    {% endcomment %}
-    さらに見ておくべきことは、コンテナーに対してどのようなプロセスを起動させるかを指定していない点です。
-    ここでそれを行う必要はありません。
-    すでに Dockerfile を生成した際に `CMD` ディレクティブを使っているからです。
-    この仕組みによって、Docker はコンテナーが起動した際に、そのコンテナー内にて `npm start` というプロセスを自動起動できるようになります。
-
-{% comment %}
-2.  Visit your application in a browser at `localhost:8000`. You should see your bulletin board application up and running. At this step, you would normally do everything you could to ensure your container works the way you expected; now would be the time to run unit tests, for example.
-{% endcomment %}
-2.  ブラウザーから `localhost:8000` を入力し、アプリケーションにアクセスします。
-    掲示板アプリケーションが実行されていることが確認できます。
-    ここでやりたいことを好きなようにやってみてください。
-    思ったとおりにコンテナーが動作していることがわかります。
-    その次にはユニットテストを行うといったこともできます。
-
-{% comment %}
-3.  Once you're satisfied that your bulletin board container works correctly, you can delete it:
-{% endcomment %}
-3.  掲示板アプリのコンテナーが正しく動作したことを確認したら、コンテナーを削除します。
-
-    ```script
-    docker rm --force bb
-    ```
-
-    {% comment %}
-    The `--force` option stops a running container, so it can be removed. If you stop the container running with `docker stop bb` first, then you do not need to use `--force` to remove it.
-    {% endcomment %}
-    `--force` オプションは実行中のコンテナーを停止させるので、削除できるようになるものです。
-    この前に `docker stop bb` によって実行コンテナーを停止している場合は、`--force` をつける必要はありません。
-
-{% comment %}
-## Conclusion
-{% endcomment %}
-{: #conclusion }
-## まとめ
-
-{% comment %}
-At this point, you've successfully built an image, performed a simple containerization of an application, and confirmed that your app runs successfully in its container. The next step will be to share your images on [Docker Hub](https://hub.docker.com/), so they can be easily downloaded and run on any destination machine.
-{% endcomment %}
-このようにしてイメージの構築がうまくできました。
-アプリケーションが簡単にコンテナー化されて、そのコンテナー内においてアプリケーションが正常動作することを確認できました。
-次はそのイメージを [Docker Hub](https://hub.docker.com/) 上にて共有します。
-そうすればイメージを簡単にダウンロードすることができ、目的とするマシンのいずれにおいても動作させることができます。
-
-{% comment %}
-[On to Part 3 >>](part3.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
-{% endcomment %}
-[3 部へ >>](part3.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 
 {% comment %}
 ## CLI references

@@ -77,7 +77,7 @@ function walkTree(tree) {
             outputLetNav.push("</ul></li>");
         } else {
             // just a regular old topic; this is a leaf, not a branch; render a link!
-            outputLetNav.push('<li><a href="/SUBBASEURL' + tree[j].path + '"')
+            outputLetNav.push('<li><a href="__URL__SUBBASEURL' + tree[j].path + '"')
             if (tree[j].path === pageURL && !tree[j].nosync) {
                 sectionToHighlight = currentSection;
                 outputLetNav.push('class="active currentPage"')
@@ -102,9 +102,11 @@ function renderNav(docstoc) {
         if (docstoc.horizontalnav[i].path === pageURL || docstoc.horizontalnav[i].node === sectionToHighlight) {
             outputHorzTabs.push(' class="active"');
         }
-        outputHorzTabs.push('><a href="/SUBBASEURL' + docstoc.horizontalnav[i].path + '">' + docstoc.horizontalnav[i].title + "</a></li>\n");
+        outputHorzTabs.push('><a href="__URL__SUBBASEURL' + docstoc.horizontalnav[i].path + '">' + docstoc.horizontalnav[i].title + "</a></li>\n");
     }
-    document.getElementById("jsTOCHorizontal").innerHTML = outputHorzTabs.join("");
+    document.querySelectorAll('.jsTOCHorizontal').forEach(function(element) {
+        element.innerHTML = outputHorzTabs.join("");
+    });
     document.getElementById("jsTOCLeftNav").innerHTML = outputLetNav.join("");
 }
 
