@@ -1,22 +1,113 @@
 ---
-description: Change log / release notes per stable release
+description: 安定版リリースの変更履歴、リリースノート。
 keywords: Docker Desktop for Windows, stable, release notes
 redirect_from:
 - /winkit/release-notes/
-title: Docker Desktop for Windows Stable Release notes
+title: Docker Desktop for Windows 安定版リリースノート
 toc_min: 1
 toc_max: 2
 ---
 
+{% comment %}
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop Stable releases.
+{% endcomment %}
+このページでは Docker Desktop リリースにおける新機能、更新状況、既知の不具合、バグフィックスといった情報を示します。
 
+{% comment %}
 For information about Edge releases, see the [Edge release notes](edge-release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
+{% endcomment %}
+最新版（Edge）リリースについての情報は [最新版リリースノート](edge-release-notes.md) を参照してください。
+Docker Desktop のシステム要件については [インストール前に確認すべきこと](install.md#what-to-know-before-you-install) を参照してください。
+
+## Docker Desktop Community 2.3.0.3
+2020-05-27
+
+{% comment %}
+> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+{% endcomment %}
+> [ダウンロード](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades }
+### アップグレード
+
+{% comment %}
+- [Linux kernel 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-83885d3b4cff391813f4262099b36a529bca2df8-amd64/images/sha256-0214b82436af70054e013ea51cb1fea72bd943d0d6245b6521f1ff09a505c40f?context=repo)
+{% endcomment %}
+- [Linux カーネル 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-83885d3b4cff391813f4262099b36a529bca2df8-amd64/images/sha256-0214b82436af70054e013ea51cb1fea72bd943d0d6245b6521f1ff09a505c40f?context=repo)
+
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+
+{% comment %}
+- Fixed a crash when resetting to factory defaults with Hyper-V disabled. Fixes [docker/for-win#6738](https://github.com/docker/for-win/issues/6738).
+{% endcomment %}
+- Hyper-V 無効の状態で、ファクトリ設定をデフォルトにリセットする際に発生するクラッシュを修正。
+  [docker/for-win#6738](https://github.com/docker/for-win/issues/6738) を Fix に。
+{% comment %}
+- Fixed opening an application in VS Code from a WSL 2 running app. Fixes [docker/for-win#6472](https://github.com/docker/for-win/issues/6472).
+{% endcomment %}
+- WSL 2 上にて起動しているアプリに対して、VS Code からアプリを開く際の問題を修正。
+  [docker/for-win#6472](https://github.com/docker/for-win/issues/6472) を Fix に。
+{% comment %}
+- Fixed Swarm mounts in WSL 2. Fixes [docker/for-win#6507](https://github.com/docker/for-win/issues/6507).
+{% endcomment %}
+- WSL 2 における Swarm マウントを修正。
+  [docker/for-win#6507](https://github.com/docker/for-win/issues/6507) を Fix に。
+{% comment %}
+- Fixed a bug when using the Microsoft `mssql` image. Fixes [docker/for-win#6646](https://github.com/docker/for-win/issues/6646)
+{% endcomment %}
+- Microsoft の `mssql` イメージを用いた際のバグを修正。
+  [docker/for-win#6646](https://github.com/docker/for-win/issues/6646) を Fix に。
+{% comment %}
+- Implemented `fallocate` for shared file systems. See [docker/for-win#6658](https://github.com/docker/for-win/issues/6658#issuecomment-627736820)
+{% endcomment %}
+- `fallocate` を共有ファイルシステムに対して実装。
+  [docker/for-win#6658](https://github.com/docker/for-win/issues/6658#issuecomment-627736820) 参照。
+{% comment %}
+- Fixed an installer crash when an old and/or partially uninstalled version of Docker Desktop was present on the system. Fixes [docker/for-win#6536](https://github.com/docker/for-win/issues/6536).
+{% endcomment %}
+- インストールされている Docker Desktop が古い場合、あるいは部分的にインストールが残っている場合に、インストーラーがクラッシュするのを修正。
+  [docker/for-win#6536](https://github.com/docker/for-win/issues/6536) を Fix に。
+{% comment %}
+- Fixed a delay caused when opening the systray menu. Fixes [docker/for-win#1011](https://github.com/docker/for-win/issues/1011).
+{% endcomment %}
+- システムトレイメニューを開いている際に動作が遅くなるのを修正。
+  [docker/for-win#1011](https://github.com/docker/for-win/issues/1011) を Fix に。
+{% comment %}
+- Fixed a regression where containers couldn’t anymore refer to mounted folders using the host drive letters. Fixes [docker/for-win#6628](https://github.com/docker/for-win/issues/6628).
+{% endcomment %}
+- コンテナーがマウントしているフォルダーに、ホストのドライブ文字を含めていた場合に、参照できなくなる不具合を修正。
+  [docker/for-win#6628](https://github.com/docker/for-win/issues/6628) を Fix に。
+{% comment %}
+- Fixed a regression where sharing a folder using a double leading slash notation would fail. Fixes [docker/for-win#6668](https://github.com/docker/for-win/issues/6668).
+{% endcomment %}
+- フォルダー共有において、先頭にスラッシュを 2 つ記述した場合の不具合を修正。
+  [docker/for-win#6668](https://github.com/docker/for-win/issues/6668) を Fix に。
+{% comment %}
+- Re-added device-mapper to the embedded Linux kernel. Fixes [docker/for-mac#4549](https://github.com/docker/for-mac/issues/4549).
+{% endcomment %}
+- 埋め込み Linux カーネルに対するデバイスマッパーを再追加。
+  [docker/for-mac#4549](https://github.com/docker/for-mac/issues/4549) を Fix に。
+{% comment %}
+- Fixed an issue which caused the `:z` attribute in bind mounts to fail. Fixes [docker/for-win#6634](https://github.com/docker/for-win/issues/6634).
+{% endcomment %}
+- バインドマウントにおける `:z` 属性が機能しない不具合を修正。
+  [docker/for-win#6634](https://github.com/docker/for-win/issues/6634) を Fix に。
 
 ## Docker Desktop Community 2.3.0.2
 2020-05-11
 
-> [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
+{% comment %}
+> [Download](https://download.docker.com/win/stable/45183/Docker%20Desktop%20Installer.exe)
+{% endcomment %}
+> [ダウンロード](https://download.docker.com/win/stable/45183/Docker%20Desktop%20Installer.exe)
 
 ### New
 

@@ -1230,7 +1230,8 @@ services:
     deploy:
       mode: replicated
       replicas: 6
-      max_replicas_per_node: 1
+      placement:
+        max_replicas_per_node: 1
 ```
 
 #### resources

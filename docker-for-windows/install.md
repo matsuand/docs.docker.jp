@@ -1,21 +1,40 @@
 ---
 description: How to install Docker Desktop for Windows
 keywords: windows, install, download, run, docker, local
-title: Install Docker Desktop on Windows
+title: Docker Desktop on Windows のインストール
 ---
 
+{% comment %}
 Docker Desktop for Windows is the [Community](https://www.docker.com/community-edition) version of Docker for Microsoft Windows.
 You can download Docker Desktop for Windows from Docker Hub.
+{% endcomment %}
+Docker Desktop for Windows は Microsoft Windows 向け Docker の [コミュニティ](https://www.docker.com/community-edition) 版です。
+Docker Desktop for Windows は Docker Hub からダウンロードすることができます。
 
+{% comment %}
+This page contains information on installing Docker Desktop on Windows 10 Pro, Enterprise, and Education. If you are looking for information about installing Docker Desktop on Windows 10 Home, see [Install Docker Desktop on Windows Home](/install-windows-home.md).
+{% endcomment %}
 This page contains information on installing Docker Desktop on Windows 10 Pro, Enterprise, and Education. If you are looking for information about installing Docker Desktop on Windows 10 Home, see [Install Docker Desktop on Windows Home](/install-windows-home.md).
 
+{% comment %}
+[Download from Docker
+Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:
+.button .outline-btn}
+{% endcomment %}
 [Download from Docker
 Hub](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:
 .button .outline-btn}
 
+{% comment %}
+By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
+{% endcomment %}
 By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
 
+{% comment %}
 ## What to know before you install
+{% endcomment %}
+{: #what-to-know-before-you-install }
+## インストール前に確認すべきこと
 
 ### System Requirements
 
