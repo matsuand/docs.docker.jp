@@ -42,9 +42,9 @@ Docker を使って新しいアプリを開発しようとしている方は、�
 {% endcomment %}
 - [マルチステージビルド](develop-images/multistage-build.md){: target="_blank" class="_"} を利用して、イメージをスリムなものにしてください。
 - アプリケーションデータは [ボリューム](..//storage/volumes.md) や [バインドマウント](../storage/bind-mounts.md){: target="_blank" class="_"} を利用して管理してください。
-- [Scale your app](../get-started/kube-deploy.md){: target="_blank" class="_"} with kubernetes
-- [Scale your app](../get-started/swarm-deploy.md){: target="_blank" class="_"} as a swarm service
-- [General application development best practices](dev-best-practices.md){: target="_blank" class="_"}
+- kubernetes を用いた [アプリのスケール変更](../get-started/kube-deploy.md){: target="_blank" class="_"}
+- swarm サービスにおける [アプリのスケール変更](../get-started/swarm-deploy.md){: target="_blank" class="_"}
+- [一般的なアプリケーション開発におけるベストプラクティス](dev-best-practices.md){: target="_blank" class="_"}
 
 {% comment %}
 ## Learn about language-specific app development with Docker
@@ -59,11 +59,11 @@ Docker を使って新しいアプリを開発しようとしている方は、�
 - [Dockerize a .Net Core application](../engine/examples/dotnetcore.md){: target="_blank" class="_"}
 - [Dockerize an ASP.NET Core application with SQL Server on Linux](../compose/aspnet-mssql-compose.md){: target="_blank" class="_"} using Docker Compose
 {% endcomment %}
-- [Docker for Java developers](https://github.com/docker/labs/tree/master/developer-tools/java/){: target="_blank" class="_"} lab
-- [Port a node.js app to Docker](https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting){: target="_blank" class="_"}
-- [Ruby on Rails app on Docker](https://github.com/docker/labs/tree/master/developer-tools/ruby){: target="_blank" class="_"} lab
-- [Dockerize a .Net Core application](../engine/examples/dotnetcore.md){: target="_blank" class="_"}
-- [Dockerize an ASP.NET Core application with SQL Server on Linux](../compose/aspnet-mssql-compose.md){: target="_blank" class="_"} using Docker Compose
+- Java 開発者向けの [Docker for Java developers](https://github.com/docker/labs/tree/master/developer-tools/java/){: target="_blank" class="_"} ラボ
+- [node.js アプリの Docker へのポート](https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting){: target="_blank" class="_"}
+- [Docker 上の Ruby on Rails アプリ](https://github.com/docker/labs/tree/master/developer-tools/ruby){: target="_blank" class="_"} ラボ
+- [.Net Core アプリケーションの Docker 化](../engine/examples/dotnetcore.md){: target="_blank" class="_"}
+- Docker Compose 利用により [SQL Server on Linux を用いた ASP.NET Core アプリケーションの Docker 化](../compose/aspnet-mssql-compose.md){: target="_blank" class="_"}
 
 {% comment %}
 ## Advanced development with the SDK or API
@@ -74,4 +74,4 @@ Docker を使って新しいアプリを開発しようとしている方は、�
 {% comment %}
 After you can write Dockerfiles or Compose files and use Docker CLI, take it to the next level by using Docker Engine SDK for Go/Python or use the HTTP API directly.
 {% endcomment %}
-After you can write Dockerfiles or Compose files and use Docker CLI, take it to the next level by using Docker Engine SDK for Go/Python or use the HTTP API directly.
+Dockerfiles や Compose ファイルの記述や Docker CLI の利用に慣れてきたら、次のレベルとして Docker Engine SDK for Go/Python や HTTP API を直接操作してみましょう。

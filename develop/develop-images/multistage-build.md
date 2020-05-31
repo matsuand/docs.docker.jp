@@ -293,9 +293,17 @@ Docker クライアントは必要なときにはイメージを取得します�
 COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf
 ```
 
+{% comment %}
 ## Use a previous stage as a new stage
+{% endcomment %}
+{: #use-a-previous-stage-as-a-new-stage }
+## 前のステージを新たなステージとして利用
 
+{% comment %}
 You can pick up where a previous stage left off by referring to it when using the `FROM` directive. For example:
+{% endcomment %}
+前にビルドしたステージを参照して用いることができます。
+それには `FROM` ディレクティブを用いて、たとえば以下のようにします。
 
 ```dockerfile
 FROM alpine:latest as builder
