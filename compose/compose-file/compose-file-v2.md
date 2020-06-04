@@ -788,7 +788,7 @@ services:
   redis:
     image: redis
   db:
-    image: redis
+    image: postgres
     healthcheck:
       test: "exit 0"
 ```

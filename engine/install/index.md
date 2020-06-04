@@ -220,7 +220,7 @@ These builds allow for testing from the latest code on the master branch.
 {% comment %}
 {% endcomment %}
 Docker Engine releases of a year-month branch are supported with patches as
-needed for one month after the the next year-month general availability release.
+needed for one month after the next year-month general availability release.
 
 {% comment %}
 {% endcomment %}

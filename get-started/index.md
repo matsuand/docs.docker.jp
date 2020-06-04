@@ -58,11 +58,26 @@ redirect_from:
 {% include_relative nav.html selected="1" %}
 
 {% comment %}
-Welcome! We are excited that you want to learn Docker. The Docker Quickstart training module teaches you how to:
+Welcome! We are excited that you want to learn Docker.
 {% endcomment %}
 ようこそ！
 みなさんが Docker の使い方を学ぼうとしているのはすばらしいことです。
-Docker クイックスタートトレーニングモジュールでは、以下のことを学んでいきます。
+
+{% comment %}
+This page contains step-by-step instructions on how to get started with Docker. We also recommend the video walkthrough from Dockercon 2020.
+{% endcomment %}
+このページでは順を追って手順を進めていくことで Docker を学んでいきます。
+Dockercon 2020 のビデオウォークスルーもお勧めします。
+
+{% comment %}
+[![How to get started with Docker](images/vid-get-started-pmckee.png)](https://docker.events.cube365.net/docker/dockercon/content/Videos/hgMFTyX5kYKmTPWZo){: target="_blank" class="_”}
+{% endcomment %}
+[![Docker のはじめ方](images/vid-get-started-pmckee.png)](https://docker.events.cube365.net/docker/dockercon/content/Videos/hgMFTyX5kYKmTPWZo){: target="_blank" class="_”}
+
+{% comment %}
+The Docker Quickstart training module teaches you how to:
+{% endcomment %}
+Docker クイックスタートトレーニングでは、以下のことを学んでいきます。
 
 {% comment %}
 1.  Set up your Docker environment (on this page)
