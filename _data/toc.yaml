@@ -1207,8 +1207,10 @@ manuals:
             title: Generate a new recovery code
   - sectiontitle: Administration
     section:
+     - path: /docker-hub/convert-account/
+       title: アカウントから組織への移行
      - path: /docker-hub/deactivate-account/
-       title: Deactivate an account or an organization
+       title: アカウントや組織の無効化
   - sectiontitle: Billing
     section:
     - path: /docker-hub/billing/

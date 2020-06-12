@@ -40,7 +40,7 @@ Docker Engine は Docker Desktop を通じて、各種の [Linux プラットフ
 {: #desktop }
 #### デスクトップ
 
-{% assign yes = '![yes](/images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
+{% assign yes = '![yes](../../images/green-check.svg){: style="height: 14px; margin: 0 auto"}' %}
 
 {% comment %}
 | Platform                                                          | x86_64 / amd64                                   |

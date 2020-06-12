@@ -4,7 +4,6 @@ keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Doc
 title: チームと組織
 redirect_from:
 - /docker-cloud/orgs/
-- /docker-hub/convert-account/
 ---
 
 {% comment %}

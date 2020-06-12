@@ -142,35 +142,75 @@ you need to add this configuration in the Docker systemd service file.
 企業内で設定されるような HTTP あるいは HTTPS プロキシーサーバーを利用している場合は、Docker systemd サービスファイルに、これらの設定を加える必要があります。
 
 {% comment %}
+> **Note for rootless mode**
+{% endcomment %}
+> **rootless モードに関するメモ**
+>
+{% comment %}
+> The location of systemd configuration files are different when running Docker
+> in [rootless mode](../../engine/security/rootless.md). When running in rootless
+> mode, Docker is started as a user-mode systemd service, and uses files stored
+> in each users' home directory in `~/.config/systemd/user/docker.service.d/`.
+> In addition, `systemctl` must be executed without `sudo` and with the `--user`
+> flag. Select the _"rootless mode"_ tab below if you are running Docker in rootless mode.
+{% endcomment %}
+> The location of systemd configuration files are different when running Docker
+> in [rootless mode](../../engine/security/rootless.md). When running in rootless
+> mode, Docker is started as a user-mode systemd service, and uses files stored
+> in each users' home directory in `~/.config/systemd/user/docker.service.d/`.
+> In addition, `systemctl` must be executed without `sudo` and with the `--user`
+> flag. Select the _"rootless mode"_ tab below if you are running Docker in rootless mode.
+
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#rootful">通常のインストール</a></li>
+  <li><a data-toggle="tab" data-target="#rootless">rootless モード</a></li>
+</ul>
+<div class="tab-content">
+<div id="rootful" class="tab-pane fade in active" markdown="1">
+
+{% comment %}
 1.  Create a systemd drop-in directory for the docker service:
 {% endcomment %}
 1.  Docker サービスに対応した systemd のドロップインディレクトリを生成します。
 
     ```bash
-    $ sudo mkdir -p /etc/systemd/system/docker.service.d
+    sudo mkdir -p /etc/systemd/system/docker.service.d
     ```
 
 {% comment %}
-2.  Create a file called `/etc/systemd/system/docker.service.d/http-proxy.conf`
+2.  Create a file named `/etc/systemd/system/docker.service.d/http-proxy.conf`
     that adds the `HTTP_PROXY` environment variable:
 {% endcomment %}
 2.  `/etc/systemd/system/docker.service.d/http-proxy.conf` というファイルを生成して、そこに環境変数 `HTTP_PROXY` の設定を書きます。
 
     ```conf
     [Service]
-    Environment="HTTP_PROXY=http://proxy.example.com:80/"
+    Environment="HTTP_PROXY=http://proxy.example.com:80"
     ```
 
     {% comment %}
-    Or, if you are behind an HTTPS proxy server, create a file called
-    `/etc/systemd/system/docker.service.d/https-proxy.conf`
-    that adds the `HTTPS_PROXY` environment variable:
+    If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
+    variable:
     {% endcomment %}
-    また HTTPS プロキシーサーバーを利用している場合には `/etc/systemd/system/docker.service.d/https-proxy.conf` というファイルを生成して、そこに環境変数 `HTTPS_PROXY` の設定を書きます。
+    HTTPS プロキシーサーバーを利用している場合には、環境変数 `HTTPS_PROXY` の設定を書きます。
 
     ```conf
     [Service]
-    Environment="HTTPS_PROXY=https://proxy.example.com:443/"
+    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    ```
+
+    {% comment %}
+    Multiple environment variables can be set; to set both a non-HTTPS and
+    a HTTPs proxy;
+    {% endcomment %}
+    環境変数を同時に複数設定することもできます。
+    以下は HTTP および HTTPs プロキシーを設定します。
+
+    ```conf
+    [Service]
+    Environment="HTTP_PROXY=http://proxy.example.com:80"
+    Environment="HTTPS_PROXY=https://proxy.example.com:443"
     ```
 
 {% comment %}
@@ -209,62 +249,163 @@ you need to add this configuration in the Docker systemd service file.
       and domain names (`foo.example.com:80`)
 
     {% comment %}
-    Config examples:
+    Config example:
     {% endcomment %}
     設定例は以下です。
 
     ```conf
     [Service]
-    Environment="HTTP_PROXY=http://proxy.example.com:80/" "NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
+    Environment="HTTP_PROXY=http://proxy.example.com:80"
+    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
     ```
 
-    {% comment %}
-    Or, if you are behind an HTTPS proxy server:
-    {% endcomment %}
-    また HTTPS プロキシーサーバーであれば以下のようになります。
+{% comment %}
+4.  Flush changes and restart Docker
+{% endcomment %}
+4.  設定を反映して Docker を再起動します。
+
+    ```bash
+    sudo systemctl daemon-reload
+    sudo systemctl restart docker
+    ```
+
+{% comment %}
+5.  Verify that the configuration has been loaded and matches the changes you
+    made, for example:
+{% endcomment %}
+5.  設定が適切にロードされていること、そして変更した内容が反映されていることを確認します。
+    たとえば以下のようにします。
+
+    ```bash
+    sudo systemctl show --property=Environment docker
+
+    Environment=HTTP_PROXY=http://proxy.example.com:80 HTTPS_PROXY=https://proxy.example.com:443 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
+    ```
+
+</div>
+<div id="rootless" class="tab-pane fade in" markdown="1">
+
+{% comment %}
+1.  Create a systemd drop-in directory for the docker service:
+{% endcomment %}
+1.  Create a systemd drop-in directory for the docker service:
+
+    ```bash
+    mkdir -p ~/.config/systemd/user/docker.service.d
+    ```
+
+{% comment %}
+2.  Create a file named `~/.config/systemd/user/docker.service.d/http-proxy.conf`
+    that adds the `HTTP_PROXY` environment variable:
+{% endcomment %}
+2.  Create a file named `~/.config/systemd/user/docker.service.d/http-proxy.conf`
+    that adds the `HTTP_PROXY` environment variable:
 
     ```conf
     [Service]
-    Environment="HTTPS_PROXY=https://proxy.example.com:443/" "NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
-    ```
-
-{% comment %}
-4.  Flush changes:
-{% endcomment %}
-4.  設定を反映します。
-
-    ```bash
-    $ sudo systemctl daemon-reload
-    ```
-
-{% comment %}
-5.  Restart Docker:
-{% endcomment %}
-5.  Docker を再起動します。
-
-    ```bash
-    $ sudo systemctl restart docker
-    ```
-
-{% comment %}
-6.  Verify that the configuration has been loaded:
-{% endcomment %}
-6.  設定がロードされていることを確認します。
-
-    ```bash
-    $ systemctl show --property=Environment docker
-    Environment=HTTP_PROXY=http://proxy.example.com:80/
+    Environment="HTTP_PROXY=http://proxy.example.com:80"
     ```
 
     {% comment %}
-    Or, if you are behind an HTTPS proxy server:
+    If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
+    variable:
     {% endcomment %}
-    HTTPS プロキシーサーバーの場合は以下のとおりです。
+    If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
+    variable:
+
+    ```conf
+    [Service]
+    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    ```
+
+    {% comment %}
+    Multiple environment variables can be set; to set both a non-HTTPS and
+    a HTTPs proxy;
+    {% endcomment %}
+    Multiple environment variables can be set; to set both a non-HTTPS and
+    a HTTPs proxy;
+
+    ```conf
+    [Service]
+    Environment="HTTP_PROXY=http://proxy.example.com:80"
+    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    ```
+
+{% comment %}
+3.  If you have internal Docker registries that you need to contact without
+    proxying, you can specify them via the `NO_PROXY` environment variable.
+{% endcomment %}
+3.  If you have internal Docker registries that you need to contact without
+    proxying, you can specify them via the `NO_PROXY` environment variable.
+
+    {% comment %}
+    The `NO_PROXY` variable specifies a string that contains comma-separated
+    values for hosts that should be excluded from proxying. These are the
+    options you can specify to exclude hosts:
+    * IP address prefix (`1.2.3.4`)
+    * Domain name, or a special DNS label (`*`)
+    * A domain name matches that name and all subdomains. A domain name with
+      a leading "." matches subdomains only. For example, given the domains
+      `foo.example.com` and `example.com`:
+      * `example.com` matches `example.com` and `foo.example.com`, and
+      * `.example.com` matches only `foo.example.com`
+    * A single asterisk (`*`) indicates that no proxying should be done
+    * Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`)
+      and domain names (`foo.example.com:80`)
+    {% endcomment %}
+    The `NO_PROXY` variable specifies a string that contains comma-separated
+    values for hosts that should be excluded from proxying. These are the
+    options you can specify to exclude hosts:
+    * IP address prefix (`1.2.3.4`)
+    * Domain name, or a special DNS label (`*`)
+    * A domain name matches that name and all subdomains. A domain name with
+      a leading "." matches subdomains only. For example, given the domains
+      `foo.example.com` and `example.com`:
+      * `example.com` matches `example.com` and `foo.example.com`, and
+      * `.example.com` matches only `foo.example.com`
+    * A single asterisk (`*`) indicates that no proxying should be done
+    * Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`)
+      and domain names (`foo.example.com:80`)
+
+    {% comment %}
+    Config example:
+    {% endcomment %}
+    Config example:
+
+    ```conf
+    [Service]
+    Environment="HTTP_PROXY=http://proxy.example.com:80"
+    Environment="HTTPS_PROXY=https://proxy.example.com:443"
+    Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
+    ```
+
+{% comment %}
+4.  Flush changes and restart Docker
+{% endcomment %}
+4.  Flush changes and restart Docker
 
     ```bash
-    $ systemctl show --property=Environment docker
-    Environment=HTTPS_PROXY=https://proxy.example.com:443/
+    systemctl --user daemon-reload
+    systemctl --user restart docker
     ```
+
+{% comment %}
+5.  Verify that the configuration has been loaded and matches the changes you
+    made, for example:
+{% endcomment %}
+5.  Verify that the configuration has been loaded and matches the changes you
+    made, for example:
+
+    ```bash
+    systemctl --user show --property=Environment docker
+
+    Environment=HTTP_PROXY=http://proxy.example.com:80 HTTPS_PROXY=https://proxy.example.com:443 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
+    ```
+
+</div>
+</div> <!-- tab-content -->
+
 
 {% comment %}
 ## Configure where the Docker daemon listens for connections
