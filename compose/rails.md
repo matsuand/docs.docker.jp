@@ -125,6 +125,8 @@ to link them together and expose the web app's port.
         image: postgres
         volumes:
           - ./tmp/db:/var/lib/postgresql/data
+        environment:
+          POSTGRES_PASSWORD: password
       web:
         build: .
         command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -250,7 +252,7 @@ default: &default
   encoding: unicode
   host: db
   username: postgres
-  password:
+  password: password
   pool: 5
 
 development:
