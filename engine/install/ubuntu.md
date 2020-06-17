@@ -44,10 +44,9 @@ Docker Engine をインストールするには、以下に示す Ubuntu の 64 
 - Ubuntu Xenial 16.04 (LTS)
 
 {% comment %}
-Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, `arm64`, `s390x`
-(IBM Z), and `ppc64le` (IBM Power) architectures.
+Docker Engine is supported on `x86_64` (or `amd64`), `armhf`, and `arm64` architectures.
 {% endcomment %}
-Docker Engine は `x86_64`（または `amd64`）、`armhf`、`arm64`、`s390x`（IBM Z）、`ppc64le`（IBM Power）の各アーキテクチャーをサポートします。
+Docker Engine は `x86_64`（または `amd64`）、`armhf`、`arm64` の各アーキテクチャーをサポートします。
 
 {% comment %}
 ### Uninstall old versions
@@ -231,8 +230,6 @@ from the repository.
       <li class="active"><a data-toggle="tab" data-target="#x86_64_repo">x86_64 / amd64</a></li>
       <li><a data-toggle="tab" data-target="#armhf_repo">armhf</a></li>
       <li><a data-toggle="tab" data-target="#arm64_repo">arm64</a></li>
-      <li><a data-toggle="tab" data-target="#ppc64le_repo">ppc64le (IBM Power)</a></li>
-      <li><a data-toggle="tab" data-target="#s390x_repo">s390x (IBM Z)</a></li>
     </ul>
     <div class="tab-content">
     <div id="x86_64_repo" class="tab-pane fade in active" markdown="1">
@@ -260,26 +257,6 @@ from the repository.
     ```bash
     $ sudo add-apt-repository \
        "deb [arch=arm64] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
-    ```
-
-    </div>
-    <div id="ppc64le_repo" class="tab-pane fade" markdown="1">
-
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=ppc64el] {{ download-url-base }} \
-       $(lsb_release -cs) \
-       stable"
-    ```
-
-    </div>
-    <div id="s390x_repo" class="tab-pane fade" markdown="1">
-
-    ```bash
-    $ sudo add-apt-repository \
-       "deb [arch=s390x] {{ download-url-base }} \
        $(lsb_release -cs) \
        stable"
     ```
@@ -411,12 +388,12 @@ Docker リポジトリを利用した Docker Engine のインストールがで�
 {% comment %}
 1.  Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" class="_" },
     choose your Ubuntu version, then browse to `pool/stable/`, choose `amd64`,
-    `armhf`, `arm64`, `ppc64el`, or `s390x`, and download the `.deb` file for the
+    `armhf`, or `arm64`, and download the `.deb` file for the
     Docker Engine version you want to install.
 {% endcomment %}
 1.  [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/){: target="_blank" class="_" }
     にアクセスして、インストールしたい Ubuntu バージョンを選びます。
-    そして `pool/stable/` にアクセスし、`amd64`、`armhf`、`arm64`、`ppc64el`、`s390x` のいずれかを選び、インストールしたいバージョンの Docker Engine に対応する `.deb` ファイルをダウンロードします。
+    そして `pool/stable/` にアクセスし、`amd64`、`armhf`、`arm64` のいずれかを選び、インストールしたいバージョンの Docker Engine に対応する `.deb` ファイルをダウンロードします。
 
     {% comment %}
     > **Note**: To install a **nightly**  package, change the word

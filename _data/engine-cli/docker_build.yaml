@@ -1,5 +1,5 @@
 command: docker build
-short: Build an image from a Dockerfile
+short: Dockerfile からのイメージビルド
 long: |-
   The `docker build` command builds Docker images from a Dockerfile and a
   "context". A build's context is the set of files located in the specified
@@ -10,7 +10,7 @@ long: |-
   The `URL` parameter can refer to three kinds of resources: Git repositories,
   pre-packaged tarball contexts and plain text files.
 
-  ### Git repositories
+  ### Git リポジトリ
 
   When the `URL` parameter points to the location of a Git repository, the
   repository acts as the build context. The system recursively fetches the

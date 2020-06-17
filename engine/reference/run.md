@@ -12,7 +12,11 @@ keywords: "docker, run, configure, runtime"
      will be rejected.
 -->
 
+{% comment %}
 # Docker run reference
+{% endcomment %}
+{: #docker-run-reference }
+# Docker run リファレンス
 
 Docker runs processes in isolated containers. A container is a process
 which runs on a host. The host may be local or remote. When an operator
@@ -23,12 +27,24 @@ isolated process tree separate from the host.
 This page details how to use the `docker run` command to define the
 container's resources at runtime.
 
+{% comment %}
 ## General form
+{% endcomment %}
+{: #general-form }
+## 一般的書式
 
+{% comment %}
 The basic `docker run` command takes this form:
+{% endcomment %}
+基本的な `docker run` コマンドは以下の書式です。
 
     $ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
 
+{% comment %}
+The `docker run` command must specify an [*IMAGE*](glossary.md#image)
+to derive the container from. An image developer can define image
+defaults related to:
+{% endcomment %}
 The `docker run` command must specify an [*IMAGE*](glossary.md#image)
 to derive the container from. An image developer can define image
 defaults related to:

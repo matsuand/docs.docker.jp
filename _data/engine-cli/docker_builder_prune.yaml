@@ -1,6 +1,6 @@
 command: docker builder prune
-short: Remove build cache
-long: Remove build cache
+short: ビルドキャッシュの削除
+long: ビルドキャッシュを削除します。
 usage: docker builder prune
 pname: docker builder
 plink: docker_builder.yaml
@@ -9,7 +9,7 @@ options:
   shorthand: a
   value_type: bool
   default_value: "false"
-  description: Remove all unused build cache, not just dangling ones
+  description: タグづけなし、参照なしを問わず、未使用のビルドキャッシュをすべて削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -17,7 +17,7 @@ options:
   swarm: false
 - option: filter
   value_type: filter
-  description: Provide filter values (e.g. 'until=24h')
+  description: フィルター値を定めます。（たとえば 'until=24h'）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -27,7 +27,7 @@ options:
   shorthand: f
   value_type: bool
   default_value: "false"
-  description: Do not prompt for confirmation
+  description: 確認のためのプロンプトを表示しません。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -36,7 +36,7 @@ options:
 - option: keep-storage
   value_type: bytes
   default_value: "0"
-  description: Amount of disk space to keep for cache
+  description: キャッシュに必要なディスク総容量を定めます。
   deprecated: false
   experimental: false
   experimentalcli: false

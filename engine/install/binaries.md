@@ -156,7 +156,7 @@ SELinux や AppArmor を設定し有効にする手順については、各 Linu
   [Daemon user namespace options](/engine/reference/commandline/dockerd/#daemon-user-namespace-options).
 {% endcomment %}
 - 利用可能であればユーザー名前空間を有効にしてください。
-  [デーモンのユーザー名前空間に関するオプション](/engine/reference/commandline/#daemon-user-namespace-options) を参照。
+  [デーモンのユーザー名前空間に関するオプション]({{ site.baseur }}/engine/reference/commandline/#daemon-user-namespace-options) を参照。
 
 {% comment %}
 ### Install static binaries

@@ -102,14 +102,21 @@ your client and daemon API versions.
 {% endif %}
 {% unless controller_data.long == controller_data.short %}
 
+{% comment %}
 ## Extended description
+{% endcomment %}
+{: #extended-description }
+## 追加説明
 
 {{ controller_data.long | replace_relative_links: page.path }}
 
 {% endunless %}
 
 {% if controller_data.examples %}
+{% comment %}
 For example uses of this command, refer to the [examples section](#examples) below.
+{% endcomment %}
+本コマンドの利用例については、以下に示す [利用例の節](#examples) を参照してください。
 {% endif %}
 
 {% if controller_data.options %}
@@ -154,7 +161,11 @@ For example uses of this command, refer to the [examples section](#examples) bel
 
 {% if controller_data.examples %}
 
+{% comment %}
 ## Examples
+{% endcomment %}
+{: #examples }
+## 利用例
 
 {{ controller_data.examples | replace_relative_links: page.path }}
 

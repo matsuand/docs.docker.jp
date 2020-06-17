@@ -248,7 +248,7 @@ Docker では [ロギングドライバーの機能](../../config/containers/log
 {% comment %}
 ## Configure where the Docker daemon listens for connections
 {% endcomment %}
-## Docker デーモンが接続待ちする方法を設定
+## Docker デーモンがどこからの接続待ちをするかの設定
 {: #configure-where-the-docker-daemon-listens-for-connections }
 
 {% comment %}

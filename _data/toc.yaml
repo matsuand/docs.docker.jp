@@ -70,7 +70,7 @@ guides:
     - path: /config/pruning/
       title: 未使用オブジェクトの取り除き
     - path: /config/formatting/
-      title: Format command and log output
+      title: コマンド出力やログ出力のフォーマット変更
   - sectiontitle: デーモンの設定
     section:
     - path: /config/daemon/
@@ -84,7 +84,7 @@ guides:
     - path: /config/containers/start-containers-automatically/
       title: コンテナーの自動起動
     - path: /config/containers/live-restore/
-      title: Keep containers alive during daemon downtime
+      title: デーモン停止時のコンテナー継続起動
     - path: /config/containers/multi-service_container/
       title: コンテナー内での複数サービス起動
     - path: /config/containers/runmetrics/
@@ -816,14 +816,14 @@ reference:
         title: docker volume rm
     - path: /engine/reference/commandline/wait/
       title: docker wait
-  - sectiontitle: Docker Compose CLI reference
+  - sectiontitle: Docker Compose CLI リファレンス
     section:
     - path: /compose/reference/overview/
-      title: Overview of docker-compose CLI
+      title: docker-compose CLI 概要
     - path: /compose/reference/envvars/
-      title: CLI environment variables
+      title: CLI 環境変数
     - path: /compose/completion/
-      title: Command-line completion
+      title: コマンドライン補完
     - path: /compose/reference/build/
       title: docker-compose build
     - path: /compose/reference/config/
@@ -895,9 +895,9 @@ reference:
       - path: /engine/api/v1.38/
         title: v1.38 リファレンス
       - path: /engine/api/v1.37/
-        title: v1.37 reference
+        title: v1.37 リファレンス
       - path: /engine/api/v1.36/
-        title: v1.36 reference
+        title: v1.36 リファレンス
       - path: /engine/api/v1.35/
         title: v1.35 リファレンス
       - path: /engine/api/v1.34/
@@ -972,24 +972,24 @@ reference:
       title: Token scope documentation
     - path: /registry/spec/auth/token/
       title: Token authentication specification
-  - sectiontitle: Registry storage drivers
+  - sectiontitle: Registry ストレージドライバー
     section:
     - path: /registry/storage-drivers/
-      title: Storage driver overview
+      title: ストレージドライバー概要
     - path: /registry/storage-drivers/oss/
       title: Aliyun OSS storage driver
     - path: /registry/storage-drivers/filesystem/
-      title: Filesystem storage driver
+      title: ファイルシステムストレージドライバー
     - path: /registry/storage-drivers/gcs/
-      title: GCS storage driver
+      title: GCS ストレージドライバー
     - path: /registry/storage-drivers/inmemory/
-      title: In-memory storage driver
+      title: インメモリストレージドライバー
     - path: /registry/storage-drivers/azure/
-      title: Microsoft Azure storage driver
+      title: Microsoft Azure ストレージドライバー
     - path: /registry/storage-drivers/s3/
-      title: S3 storage driver
+      title: S3 ストレージドライバー
     - path: /registry/storage-drivers/swift/
-      title: Swift storage driver
+      title: Swift ストレージドライバー
 - path: /glossary/
   title: 用語集
 
@@ -997,7 +997,7 @@ reference:
 
 samples:
 - path: /samples/#tutorial-labs
-  title: Tutorial labs
+  title: チュートリアルラボ
 - sectiontitle: サンプルアプリケーション
   section:
   - path: /samples/
@@ -1021,7 +1021,7 @@ samples:
   - path: /engine/examples/running_ssh_service/
     title: SSHd
 - path: /samples/#library-references
-  title: Library references
+  title: ライブラリリファレンス
 
 manuals:
 - sectiontitle: Docker Engine
@@ -1049,39 +1049,39 @@ manuals:
   - sectiontitle: 以前のバージョン
     section:
     - path: /engine/release-notes/18.09/
-      title: Engine 18.09 release notes
+      title: Engine 18.09 リリースノート
     - path: /engine/release-notes/18.06/
-      title: Engine 18.06 release notes
+      title: Engine 18.06 リリースノート
     - path: /engine/release-notes/18.05/
-      title: Engine 18.05 release notes
+      title: Engine 18.05 リリースノート
     - path: /engine/release-notes/18.04/
-      title: Engine 18.04 release notes
+      title: Engine 18.04 リリースノート
     - path: /engine/release-notes/18.03/
-      title: Engine 18.03 release notes
+      title: Engine 18.03 リリースノート
     - path: /engine/release-notes/18.02/
-      title: Engine 18.02 release notes
+      title: Engine 18.02 リリースノート
     - path: /engine/release-notes/18.01/
-      title: Engine 18.01 release notes
+      title: Engine 18.01 リリースノート
     - path: /engine/release-notes/17.12/
-      title: Engine 17.12 release notes
+      title: Engine 17.12 リリースノート
     - path: /engine/release-notes/17.11/
-      title: Engine 17.11 release notes
+      title: Engine 17.11 リリースノート
     - path: /engine/release-notes/17.10/
-      title: Engine 17.10 release notes
+      title: Engine 17.10 リリースノート
     - path: /engine/release-notes/17.09/
-      title: Engine 17.09 release notes
+      title: Engine 17.09 リリースノート
     - path: /engine/release-notes/17.07/
-      title: Engine 17.07 release notes
+      title: Engine 17.07 リリースノート
     - path: /engine/release-notes/17.06/
-      title: Engine 17.06 release notes
+      title: Engine 17.06 リリースノート
     - path: /engine/release-notes/17.05/
-      title: Engine 17.05 release notes
+      title: Engine 17.05 リリースノート
     - path: /engine/release-notes/17.04/
-      title: Engine 17.04 release notes
+      title: Engine 17.04 リリースノート
     - path: /engine/release-notes/17.03/
-      title: Engine 17.03 release notes
+      title: Engine 17.03 リリースノート
     - path: /engine/release-notes/prior-releases/
-      title: Engine 1.13 and earlier
+      title: Engine 1.13 およびそれ以前
   - path: /engine/deprecated/
     title: Deprecated features
 
@@ -1191,7 +1191,7 @@ manuals:
     title: クイックスタート
   - path: /docker-id/
     title: Docker ID アカウント
-  - sectiontitle: Security and authentication
+  - sectiontitle: セキュリティと認証
     section:
       - path: /docker-hub/access-tokens/
         title: アクセストークンの管理
@@ -1214,7 +1214,7 @@ manuals:
   - sectiontitle: Billing
     section:
     - path: /docker-hub/billing/
-      title: Overview
+      title: 概要
     - path: /docker-hub/billing/upgrade/
       title: プランのアップグレード
     - path: /docker-hub/billing/downgrade/
@@ -1248,11 +1248,11 @@ manuals:
   - sectiontitle: Publisher & certified content
     section:
     - path: /docker-hub/publish/
-      title: Overview
+      title: 概要
     - path: /docker-hub/publish/publish/
       title: Submit a product for Docker Hub
     - path: /docker-hub/publish/customer_faq/
-      title: User FAQs
+      title: ユーザー FAQ
     - path: /docker-hub/publish/publisher_faq/
       title: Publisher FAQs
     - path: /docker-hub/publish/certify-images/
@@ -1294,19 +1294,19 @@ manuals:
   - sectiontitle: Docker Registry
     section:
     - path: /registry/
-      title: Registry overview
+      title: Registry 概要
     - path: /registry/introduction/
-      title: Understand the Registry
+      title: Registry の理解
     - path: /registry/deploying/
-      title: Deploy a registry server
+      title: Registry サーバーのデプロイ
     - path: /registry/configuration/
-      title: Configure a registry
+      title: Registry の設定
     - path: /registry/notifications/
       title: Work with notifications
     - sectiontitle: Recipes
       section:
       - path: /registry/recipes/
-        title: Recipes overview
+        title: Recipes 概要
       - path: /registry/recipes/apache/
         title: Authenticating proxy with apache
       - path: /registry/recipes/nginx/
@@ -1320,9 +1320,9 @@ manuals:
       - path: /registry/insecure/
         title: Testing an insecure registry
     - path: /registry/deprecated/
-      title: Deprecated features
+      title: 廃止予定機能
     - path: /registry/compatibility/
-      title: Compatibility
+      title: 互換性
     - path: /registry/help/
       title: Getting help
 - path: /release-notes/
@@ -1341,7 +1341,7 @@ manuals:
       title: Get started with a local VM
     - path: /machine/get-started-cloud/
       title: Provision hosts in the cloud
-    - sectiontitle: Learn by example
+    - sectiontitle: 例から学ぶ
       section:
       - path: /machine/examples/ocean/
         title: Provision Digital Ocean Droplets
@@ -1354,7 +1354,7 @@ manuals:
         - path: /machine/reference/
           title: Machine CLI 概要
         - path: /machine/completion/
-          title: Machine command-line completion
+          title: Machine コマンドライン補完
         - path: /machine/reference/active/
           title: active
         - path: /machine/reference/config/
@@ -1397,10 +1397,10 @@ manuals:
           title: upgrade
         - path: /machine/reference/url/
           title: url
-      - sectiontitle: Machine drivers
+      - sectiontitle: Machine ドライバー
         section:
         - path: /machine/drivers/
-          title: Drivers overview
+          title: ドライバー概要
         - path: /machine/drivers/os-base/
           title: Driver options and operating system defaults
         - path: /machine/drivers/aws/
@@ -1436,27 +1436,27 @@ manuals:
   - sectiontitle: Docker Toolbox (legacy)
     section:
     - path: /toolbox/overview/
-      title: Toolbox overview
+      title: Toolbox 概要
     - path: /toolbox/toolbox_install_mac/
       title: Install Toolbox on Mac
     - path: /toolbox/toolbox_install_windows/
-      title: Install Toolbox on Windows
+      title: Toolbox on Windows のインストール
   - sectiontitle: Kitematic
     section:
     - path: /kitematic/userguide/
       title: "Kitematic user guide: intro &amp; overview"
     - path: /kitematic/nginx-web-server/
-      title: Set up an Nginx web server
+      title: Nginx ウェブサーバーの設定
     - path: /kitematic/minecraft-server/
-      title: Set up a Minecraft Server
+      title: Minecraft Server の設定
     - path: /kitematic/rethinkdb-dev-database/
       title: Creating a local RethinkDB database for development
     - path: /kitematic/faq/
-      title: Frequently asked questions
+      title: よく尋ねられる質問
     - path: /kitematic/known-issues/
-      title: Known issues
+      title: 既知の問題
     - path: /toolbox/faqs/troubleshoot/
-      title: Troubleshooting
+      title: トラブルシューティング
       nosync: true
 - sectiontitle: Docker Desktop Enterprise
   section:

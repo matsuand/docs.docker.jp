@@ -1,17 +1,16 @@
 command: docker run
-short: Run a command in a new container
+short: 新たなコンテナー内でのコマンド実行
 long: |-
-  The `docker run` command first `creates` a writeable container layer over the
-  specified image, and then `starts` it using the specified command. That is,
-  `docker run` is equivalent to the API `/containers/create` then
-  `/containers/(id)/start`. A stopped container can be restarted with all its
-  previous changes intact using `docker start`. See `docker ps -a` to view a list
-  of all containers.
+  `docker run` コマンドは、指定されたイメージの上に書き込み可能コンテナーレイヤーを `create`（生成）します。
+  そして指定されたコマンドを使ってコンテナーを `start`（起動）します。
+  `docker run` は API で言うと、`/containers/create` の実行後に `/containers/(id)/start` を起動することと同じです。
+  停止しているコンテナーの場合は、以前からの変更をすべて考慮して `docker start` によって起動されます。
+  コンテナーの全一覧は `docker ps -a` により確認できます。
 
   The `docker run` command can be used in combination with `docker commit` to
   [*change the command that a container runs*](commit.md). There is additional detailed information about `docker run` in the [Docker run reference](../run.md).
 
-  For information on connecting a container to a network, see the ["*Docker network overview*"](https://docs.docker.com/network/).
+  コンテナーからネットワークへの接続方法については ["**Docker ネットワーク概要**"](/docker/network/) を参照してください。
 usage: docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker
 plink: docker.yaml

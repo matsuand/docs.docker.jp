@@ -162,12 +162,23 @@ Now let's create your first repository, and push your bulletin board image to Do
 {% comment %}
 Now that your image is available on Docker Hub, you'll be able to run it anywhere. If you try to use it on a new machine that doesn't have it yet, Docker will automatically try and download it from Docker Hub. By moving images around in this way, you no longer need to install any dependencies except Docker on the machines you want to run your software on. The dependencies of containerized applications are completely encapsulated and isolated within your images, which you can share using Docker Hub as described above.
 {% endcomment %}
-Now that your image is available on Docker Hub, you'll be able to run it anywhere. If you try to use it on a new machine that doesn't have it yet, Docker will automatically try and download it from Docker Hub. By moving images around in this way, you no longer need to install any dependencies except Docker on the machines you want to run your software on. The dependencies of containerized applications are completely encapsulated and isolated within your images, which you can share using Docker Hub as described above.
+こうして Docker Hub 上でのイメージ共有ができるようになりました。
+これからはどのような環境上でもこれを実行できることになります。
+このイメージをまだ入手していない新たなマシンを使って、このイメージを利用しようとすると、Docker が自動的に Docker Hub からイメージを入手、ダウンロードします。
+このようにしてイメージをあちこちに移動して利用します。
+つまりソフトウェアを実行しようとしているマシン上には、Docker 以外に依存パッケージをインストールしておく必要がありません。
+コンテナー化アプリケーションにとっての依存パッケージは、完全にイメージ内部にカプセル化され切り離されます。
+こうしてそのイメージは、上で説明した Docker Hub を利用して共有できることになります。
 
 {% comment %}
 Another thing to keep in mind: at the moment, you've only pushed your image to Docker Hub; what about your Dockerfile? A crucial best practice is to keep these in version control, perhaps alongside your source code for your application. You can add a link or note in your Docker Hub repository description indicating where these files can be found, preserving the record not only of how your image was built, but how it's meant to be run as a full application.
 {% endcomment %}
-Another thing to keep in mind: at the moment, you've only pushed your image to Docker Hub; what about your Dockerfile? A crucial best practice is to keep these in version control, perhaps alongside your source code for your application. You can add a link or note in your Docker Hub repository description indicating where these files can be found, preserving the record not only of how your image was built, but how it's meant to be run as a full application.
+もう一つ意識しておくことがあります。
+この時点では Docker Hub にイメージをプッシュしただけです。
+さて対応する Dockerfile はどうしますか？
+重要なベストプラクティスとして、こういったファイルはバージョン管理システムを使い、おそらくはアプリケーションソースコードとともに管理すべきです。
+Docker Hub リポジトリにおいては、それらファイルがどこにあるかをメモやリンクにより説明することができます。
+そこでは単にイメージのビルド方法を示すだけではなく、アプリケーションを完全に動作させるための方法を示すことが必要になります。
 
 {% comment %}
 ## Where to go next
@@ -178,4 +189,5 @@ Another thing to keep in mind: at the moment, you've only pushed your image to D
 {% comment %}
 We recommend that you take a look at the topics in [Develop with Docker](../develop/index.md) to learn how to develop your own applications using Docker.
 {% endcomment %}
-We recommend that you take a look at the topics in [Develop with Docker](../develop/index.md) to learn how to develop your own applications using Docker.
+以下のトピック [Docker を用いた開発](../develop/index.md) の一読をおすすめします。
+Docker を用いた独自アプリケーションの開発方法を学んでください。

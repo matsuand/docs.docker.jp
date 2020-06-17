@@ -446,7 +446,7 @@ the consumer, the Docker service appears to be a single application. Docker
 Engine supports swarm mode in Docker 1.12 and higher.
 {% endcomment %}
 サービスは、複数の Docker デーモンにわたって、コンテナーのスケール変更ができるようにします。
-複数のデーモンは*スウォーム*と呼ばれるものとして扱われ、複数の*マネージャー* 、*ワーカー*とともに動作します。
+複数のデーモンは*スウォーム*と呼ばれるものとして扱われ、複数の **マネージャー** 、**ワーカー** とともに動作します。
 そしてすべてのデーモンが Docker API を利用して通信します。
 サービスは必要となる状態を定義することが可能であり、たとえばサービスのレプリカ数を、指定した時間においてどれだけ作り出すかを定義できます。
 デフォルトでは、すべてのワーカーノードにわたって負荷分散が行われます。
@@ -470,7 +470,7 @@ called the *container*. When you run a container, Docker creates a set of
 {% endcomment %}
 ### 名前空間
 {: #namespaces }
-Docker は名前空間という技術を利用して `コンテナー`と呼ぶ作業空間を分離して提供します。
+Docker は名前空間という技術を利用して **コンテナー** と呼ぶ作業空間を分離して提供します。
 コンテナーが実行されたとき、Docker はそのコンテナーに対して複数の *名前空間* を生成します。
 
 {% comment %}
@@ -509,11 +509,12 @@ Control groups allow Docker Engine to share available hardware resources to
 containers and optionally enforce limits and constraints. For example,
 you can limit the memory available to a specific container.
 {% endcomment %}
-### コントロールグループ
 {: #control-groups }
-Linux 上で動作する Docker Engine には、さらに _コントールグループ_ （`cgroups`; control groups）と呼ばれる技術も併用されます。
+### コントロールグループ
+Linux 上で動作する Docker Engine では、さらに **コントールグループ** （`cgroups`; control groups）と呼ばれる技術も併用されます。
 cgroup は、アプリケーションが利用するリソースを特定のものに限定します。
-つまりコントロールグループは、Docker Engine が利用可能なハードウェアリソースをコンテナー間で共有するようにし、必要に応じて利用上限や制約をつけることも行います。たとえば特定のコンテナーが利用するメモリの上限を設定することもできます。
+つまりコントロールグループは、Docker Engine が利用可能なハードウェアリソースをコンテナー間で共有するようにし、必要に応じて利用上限や制約をつけることも行います。
+たとえば特定のコンテナーが利用するメモリの上限を設定することもできます。
 
 {% comment %}
 ### Union file systems
@@ -524,7 +525,7 @@ including AUFS, btrfs, vfs, and DeviceMapper.
 {% endcomment %}
 ### ユニオンファイルシステム
 {: #union-file-systems }
-ユニオンファイルシステムは UnionFS というものであり、レイヤが作り出され、軽量かつ高速に処理が行われるファイルシステムのことです。
+ユニオンファイルシステムは UnionFS というものであり、レイヤーが作り出され、軽量かつ高速に処理が行われるファイルシステムのことです。
 Docker Engine は UnionFS を利用して、コンテナーにおけるブロックを構築します。
 Docker Engine では AUFS、btrfs、vfs、DeviceMapper などの UnionFS 系のファイルシステムも利用できます。
 

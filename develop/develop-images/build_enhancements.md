@@ -45,11 +45,10 @@ For more information on build options, see the reference guide on the
 ## システム要件
 
 {% comment %}
-* System requirements are docker-ce x86_64, ppc64le, s390x, aarch64, armhf; or
-  docker-ee x86_64 only
+* A current version of Docker (18.09 or higher)
 * Network connection required for downloading images of custom frontends
 {% endcomment %}
-* システム要件は docker-ce x86_64, ppc64le, s390x, aarch64, armhf、また docker-ee であれば x86_64 のみです。
+* Docker 最新版 （18.09 または それ以降）
 * 独自のフロントエンドイメージをダウンロードするにはネットワーク接続が必要です。
 
 {% comment %}
@@ -60,10 +59,8 @@ For more information on build options, see the reference guide on the
 
 {% comment %}
 * Only supported for building Linux containers
-* BuildKit mode is compatible with UCP 3.2 or newer
 {% endcomment %}
 * Linux コンテナーのビルドにのみ対応しています。
-* BuildKit モードは、UCP 3.2 およびそれ以降と互換性があります。
 
 {% comment %}
 ## To enable BuildKit builds
@@ -224,8 +221,7 @@ $ echo 'WARMACHINEROX' > mysecret.txt
 And with a Dockerfile that specifies use of a BuildKit frontend
 `docker/dockerfile:1.0-experimental`, the secret can be accessed.
 {% endcomment %}
-And with a Dockerfile that specifies use of a BuildKit frontend
-`docker/dockerfile:1.0-experimental`, the secret can be accessed.
+そして BuildKit フロントエンド `docker/dockerfile:1.0-experimental` を指定した Dockerfile を使えば、機密情報にアクセスすることができます。
 
 {% comment %}
 For example:
@@ -248,9 +244,9 @@ This Dockerfile is only to demonstrate that the secret can be accessed. As you
 can see the secret printed in the build output. The final image built will not
 have the secret file:
 {% endcomment %}
-This Dockerfile is only to demonstrate that the secret can be accessed. As you
-can see the secret printed in the build output. The final image built will not
-have the secret file:
+この Dockerfile は、単に機密情報にアクセスできる例を示したにすぎません。
+機密情報はビルド時の出力に表示されます。
+最終的にビルドされるイメージに、この機密情報ファイルは含まれません。
 
 ```console
 $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt .
@@ -278,52 +274,68 @@ $ docker build --no-cache --progress=plain --secret id=mysecret,src=mysecret.txt
 ## Using SSH to access private data in builds
 {% endcomment %}
 {: #using-ssh-to-access-private-data-in-builds }
-## Using SSH to access private data in builds
+## SSH を用いたビルド内個人情報へのアクセス
 
 {% comment %}
-> **Acknowledgment**:
+> **Acknowledgment**
+>
 > Please see [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
 > for more information and examples.
 {% endcomment %}
-> **Acknowledgment**:
-> Please see [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066)
-> for more information and examples.
+> **感謝**
+>
+> 詳しい情報と利用例については [Build secrets and SSH forwarding in Docker 18.09](https://medium.com/@tonistiigi/build-secrets-and-ssh-forwarding-in-docker-18-09-ae8161d066) （Docker 18.09 における機密情報生成と SSH フォワーディング）を参照してください。
 
 {% comment %}
 The `docker build` has a `--ssh` option to allow the Docker Engine to forward
 SSH agent connections. For more information on SSH agent, see the
 [OpenSSH man page](https://man.openbsd.org/ssh-agent).
 {% endcomment %}
-The `docker build` has a `--ssh` option to allow the Docker Engine to forward
-SSH agent connections. For more information on SSH agent, see the
-[OpenSSH man page](https://man.openbsd.org/ssh-agent).
+`docker build` には `--ssh` オプションがあります。
+これは Docker Engine に対して SSH エージェントのフォワードによる接続を許可するものです。
+SSH エージェントについては [OpenSSH man ページ](https://man.openbsd.org/ssh-agent) を参照してください。
 
+{% comment %}
 Only the commands in the `Dockerfile` that have explicitly requested the SSH
 access by defining `type=ssh` mount have access to SSH agent connections. The
 other commands have no knowledge of any SSH agent being available.
+{% endcomment %}
+`Dockerfile` 内にて SSH アクセスを要求するために明示されるコマンド記述は、マウントタイプを `type=ssh` とするだけです。
+これが SSH エージェントによる接続を行うものとなります。
+これ以外のコマンド記述からは、SSH エージェントを利用しているかどうかを知ることはできません。
 
+{% comment %}
 To request SSH access for a `RUN` command in the `Dockerfile`, define a mount
 with type `ssh`. This will set up the `SSH_AUTH_SOCK` environment variable to
 make programs relying on SSH automatically use that socket.
+{% endcomment %}
+`Dockerfile` 内の `RUN` コマンドにおいて SSH アクセスを指定するには、マウントタイプを `ssh` として定義します。
+これにより環境変数 `SSH_AUTH_SOCK` が設定され、プログラムが SSH に基づいて自動的にソケット通信を行うようになります。
 
+{% comment %}
 Here is an example Dockerfile using SSH in the container:
+{% endcomment %}
+Docker ファイル内にてコンテナーが SSH を利用する例が以下です。
 
 ```dockerfile
 # syntax=docker/dockerfile:experimental
 FROM alpine
 
-# Install ssh client and git
+# ssh クライアントと git のインストール
 RUN apk add --no-cache openssh-client git
 
-# Download public key for github.com
+# github.com に対する公開鍵をダウンロード
 RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-# Clone private repository
+# プライベートリポジトリのクローン
 RUN --mount=type=ssh git clone git@github.com:myorg/myproject.git myproject
 ```
 
+{% comment %}
 Once the `Dockerfile` is created, use the `--ssh` option for connectivity with
 the SSH agent.
+{% endcomment %}
+`Dockerfile` の用意ができたら、SSH エージェント接続を行う `--ssh` オプションを使います。
 
 ```bash
 $ docker build --ssh default .
@@ -346,9 +358,7 @@ If you are fetching images from insecure registry (with self-signed certificates
 and/or using such a registry as a mirror, you are facing a known issue in
 Docker 18.09 :
 {% endcomment %}
-If you are fetching images from insecure registry (with self-signed certificates)
-and/or using such a registry as a mirror, you are facing a known issue in
-Docker 18.09 :
+Docker イメージを（自己署名証明書を使って）セキュアではないレジストリから取得しようとする場合、あるいはそのようなレジストリをミラーとして利用する場合、Docker 18.09 では既知の問題が発生します。
 
 ```console
 [+] Building 0.4s (3/3) FINISHED
@@ -363,18 +373,26 @@ Docker 18.09 :
 failed to do request: Head https://repo.mycompany.com/v2/docker/dockerfile/manifests/experimental: x509: certificate signed by unknown authority
 ```
 
+{% comment %}
 Solution : secure your registry properly. You can get SSL certificates from
 Let's Encrypt for free. See /registry/deploying/
+{% endcomment %}
+解決方法 : レジストリを適切にセキュアなものにしてください。
+無償の Let's Encrypt から SSL 証明書を取得することができます。
+/registry/deploying/ を参照してください。
 
 
 {% comment %}
 #### image not found when the private registry is running on Sonatype Nexus version < 3.15
 {% endcomment %}
 {: #image-not-found-when-the-private-registry-is-running-on-sonatype-nexus-version--315 }
-#### image not found when the private registry is running on Sonatype Nexus version < 3.15
+#### Sonatype Nexus バージョン 3.15 未満、プライベートリポジトリ実行時のイメージ "not found"
 
+{% comment %}
 If you are running a private registry using Sonatype Nexus version < 3.15, and
 receive an error similar to the following :
+{% endcomment %}
+Sonatype Nexus バージョン 3.15 未満を利用してプライベートリポジトリを起動させている場合、以下のようなエラーとなる場合があります。
 
 ```console
 ------
@@ -386,6 +404,12 @@ receive an error similar to the following :
 rpc error: code = Unknown desc = docker.io/library/maven:3.5.3-alpine not found
 ```
 
+{% comment %}
 you may be facing the bug below : [NEXUS-12684](https://issues.sonatype.org/browse/NEXUS-12684)
+{% endcomment %}
+以下に示すバグ [NEXUS-12684](https://issues.sonatype.org/browse/NEXUS-12684) に該当している可能性があります。
 
+{% comment %}
 Solution is to upgrade your Nexus to version 3.15 or above.
+{% endcomment %}
+これを解決するには Nexus をバージョン 3.15 以上にアップグレードしてください。

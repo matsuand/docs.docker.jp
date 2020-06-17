@@ -154,12 +154,11 @@ you need to add this configuration in the Docker systemd service file.
 > In addition, `systemctl` must be executed without `sudo` and with the `--user`
 > flag. Select the _"rootless mode"_ tab below if you are running Docker in rootless mode.
 {% endcomment %}
-> The location of systemd configuration files are different when running Docker
-> in [rootless mode](../../engine/security/rootless.md). When running in rootless
-> mode, Docker is started as a user-mode systemd service, and uses files stored
-> in each users' home directory in `~/.config/systemd/user/docker.service.d/`.
-> In addition, `systemctl` must be executed without `sudo` and with the `--user`
-> flag. Select the _"rootless mode"_ tab below if you are running Docker in rootless mode.
+> Docker を [rootless モード](../../engine/security/rootless.md) で起動させるとき、systemd 設定ファイルの収容ディレクトリは異なるところにあります。
+> rootless モードの起動にあたって、Docker はユーザーモードの systemd サービスとして起動されます。
+> そしてその設定ファイルは、各ユーザーのホームディレクトリ配下の `~/.config/systemd/user/docker.service.d/` にあるものを利用します。
+> これに加えて `systemctl` は `sudo` を用いず `--user` フラグをつけて実行することが必要です。
+> rootless モードにより Docker を動作させる場合は、以下の **"rootless モード"** を選んでください。
 
 
 <ul class="nav nav-tabs">
@@ -219,7 +218,6 @@ you need to add this configuration in the Docker systemd service file.
 {% endcomment %}
 3.  内部に Docker レジストリがあって、プロキシーを介さずに接続する必要がある場合は、環境変数 `NO_PROXY` を通じて設定することができます。
 
-    {% comment %}
     The `NO_PROXY` variable specifies a string that contains comma-separated
     values for hosts that should be excluded from proxying. These are the
     options you can specify to exclude hosts:
@@ -230,20 +228,11 @@ you need to add this configuration in the Docker systemd service file.
       `foo.example.com` and `example.com`:
       * `example.com` matches `example.com` and `foo.example.com`, and
       * `.example.com` matches only `foo.example.com`
+    {% comment %}
     * A single asterisk (`*`) indicates that no proxying should be done
     * Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`)
       and domain names (`foo.example.com:80`)
     {% endcomment %}
-    The `NO_PROXY` variable specifies a string that contains comma-separated
-    values for hosts that should be excluded from proxying. These are the
-    options you can specify to exclude hosts:
-    * IP address prefix (`1.2.3.4`)
-    * Domain name, or a special DNS label (`*`)
-    * A domain name matches that name and all subdomains. A domain name with
-      a leading "." matches subdomains only. For example, given the domains
-      `foo.example.com` and `example.com`:
-      * `example.com` matches `example.com` and `foo.example.com`, and
-      * `.example.com` matches only `foo.example.com`
     * A single asterisk (`*`) indicates that no proxying should be done
     * Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`)
       and domain names (`foo.example.com:80`)
@@ -289,7 +278,7 @@ you need to add this configuration in the Docker systemd service file.
 {% comment %}
 1.  Create a systemd drop-in directory for the docker service:
 {% endcomment %}
-1.  Create a systemd drop-in directory for the docker service:
+1.  Docker サービスに対応した systemd のドロップインディレクトリを生成します。
 
     ```bash
     mkdir -p ~/.config/systemd/user/docker.service.d
@@ -299,8 +288,7 @@ you need to add this configuration in the Docker systemd service file.
 2.  Create a file named `~/.config/systemd/user/docker.service.d/http-proxy.conf`
     that adds the `HTTP_PROXY` environment variable:
 {% endcomment %}
-2.  Create a file named `~/.config/systemd/user/docker.service.d/http-proxy.conf`
-    that adds the `HTTP_PROXY` environment variable:
+2.  `~/.config/systemd/user/docker.service.d/http-proxy.conf` というファイルを生成して、そこに環境変数 `HTTP_PROXY` の設定を書きます。
 
     ```conf
     [Service]
@@ -311,8 +299,7 @@ you need to add this configuration in the Docker systemd service file.
     If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
     variable:
     {% endcomment %}
-    If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
-    variable:
+    HTTPS プロキシーサーバーを利用している場合には、環境変数 `HTTPS_PROXY` の設定を書きます。
 
     ```conf
     [Service]
@@ -323,8 +310,8 @@ you need to add this configuration in the Docker systemd service file.
     Multiple environment variables can be set; to set both a non-HTTPS and
     a HTTPs proxy;
     {% endcomment %}
-    Multiple environment variables can be set; to set both a non-HTTPS and
-    a HTTPs proxy;
+    環境変数を同時に複数設定することもできます。
+    以下は HTTP および HTTPs プロキシーを設定します。
 
     ```conf
     [Service]
@@ -336,24 +323,8 @@ you need to add this configuration in the Docker systemd service file.
 3.  If you have internal Docker registries that you need to contact without
     proxying, you can specify them via the `NO_PROXY` environment variable.
 {% endcomment %}
-3.  If you have internal Docker registries that you need to contact without
-    proxying, you can specify them via the `NO_PROXY` environment variable.
+3.  内部に Docker レジストリがあって、プロキシーを介さずに接続する必要がある場合は、環境変数 `NO_PROXY` を通じて設定することができます。
 
-    {% comment %}
-    The `NO_PROXY` variable specifies a string that contains comma-separated
-    values for hosts that should be excluded from proxying. These are the
-    options you can specify to exclude hosts:
-    * IP address prefix (`1.2.3.4`)
-    * Domain name, or a special DNS label (`*`)
-    * A domain name matches that name and all subdomains. A domain name with
-      a leading "." matches subdomains only. For example, given the domains
-      `foo.example.com` and `example.com`:
-      * `example.com` matches `example.com` and `foo.example.com`, and
-      * `.example.com` matches only `foo.example.com`
-    * A single asterisk (`*`) indicates that no proxying should be done
-    * Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`)
-      and domain names (`foo.example.com:80`)
-    {% endcomment %}
     The `NO_PROXY` variable specifies a string that contains comma-separated
     values for hosts that should be excluded from proxying. These are the
     options you can specify to exclude hosts:
@@ -371,7 +342,7 @@ you need to add this configuration in the Docker systemd service file.
     {% comment %}
     Config example:
     {% endcomment %}
-    Config example:
+    設定例は以下です。
 
     ```conf
     [Service]
@@ -383,7 +354,7 @@ you need to add this configuration in the Docker systemd service file.
 {% comment %}
 4.  Flush changes and restart Docker
 {% endcomment %}
-4.  Flush changes and restart Docker
+4.  設定を反映して Docker を再起動します。
 
     ```bash
     systemctl --user daemon-reload
@@ -394,8 +365,8 @@ you need to add this configuration in the Docker systemd service file.
 5.  Verify that the configuration has been loaded and matches the changes you
     made, for example:
 {% endcomment %}
-5.  Verify that the configuration has been loaded and matches the changes you
-    made, for example:
+5.  設定が適切にロードされていること、そして変更した内容が反映されていることを確認します。
+    たとえば以下のようにします。
 
     ```bash
     systemctl --user show --property=Environment docker
@@ -411,13 +382,12 @@ you need to add this configuration in the Docker systemd service file.
 ## Configure where the Docker daemon listens for connections
 {% endcomment %}
 {: #configure-where-the-docker-daemon-listens-for-connections }
-## Configure where the Docker daemon listens for connections
+## Docker デーモンがどこからの接続待ちをするかの設定
 
 {% comment %}
 [Configure where the Docker daemon listens for connections](../../engine/install/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections).
 {% endcomment %}
-See
-[Configure where the Docker daemon listens for connections](../../engine/install/linux-postinstall.md#control-where-the-docker-daemon-listens-for-connections).
+[Docker デーモンがどこからの接続待ちをするかの設定](../../engine/install/linux-postinstall.md#configure-where-the-docker-daemon-listens-for-connections) を参照してください。
 
 {% comment %}
 ## Manually create the systemd unit files
