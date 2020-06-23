@@ -138,25 +138,32 @@ log the daemon normally reads. A full log blocks containers from logging more
 data. The default buffer size is 64K. If the buffers fill, you must restart
 the Docker daemon to flush them.
 {% endcomment %}
-デーモンが長い期間停止している場合、
-If the daemon is down for a long time, running containers may fill up the FIFO
-log the daemon normally reads. A full log blocks containers from logging more
-data. The default buffer size is 64K. If the buffers fill, you must restart
-the Docker daemon to flush them.
+デーモンが長い期間停止している場合、実行中のコンテナーが普段デーモンが読み込んでいる FIFO ログを、出力し続けているかもしれません。
+ログがあふれてしまうと、コンテナーのログ出力はそれ以上できなくなります。
+デフォルトのバッファーサイズは 64K です。
+このバッファーがいっぱいになった場合は、これをフラッシュするために Docker デーモンを再起動する必要があります。
 
 {% comment %}
-{% endcomment %}
 On Linux, you can modify the kernel's buffer size by changing
 `/proc/sys/fs/pipe-max-size`. You cannot modify the buffer size on Docker Desktop for
 Mac or Docker Desktop for Windows.
+{% endcomment %}
+Linux の場合、`/proc/sys/fs/pipe-max-size` の値を編集することで、カーネルバッファーサイズを変更することができます。
+Docker Desktop for Mac や Docker Desktop for Windows では、このバッファサイズを変更することはできません。
 
 {% comment %}
-{% endcomment %}
 ## Live restore and swarm mode
+{% endcomment %}
+{: #live-restore-and-swarm-mode }
+## ライブリストアと Swarm モード
 
 {% comment %}
-{% endcomment %}
 The live restore option only pertains to standalone containers, and not to swarm
 services. Swarm services are managed by swarm managers. If swarm managers are
 not available, swarm services continue to run on worker nodes but cannot be
 managed until enough swarm managers are available to maintain a quorum.
+{% endcomment %}
+ライブリストアオプションはスタンドアロンコンテナーに対するものであって、Swarm サービスには適用されません。
+Swarm サービスは Swarm マネージャーによって管理されます。
+Swarm マネージャーが利用できないときに、Swarm サービスはワーカーノード上において起動を続けます。
+ただし Swarm マネージャーが管理できる状態になるまで、Swarm サービスを管理することはできません。

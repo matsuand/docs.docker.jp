@@ -130,7 +130,7 @@ guides:
     - sectiontitle: セキュリティ
       section:
       - path: /engine/security/security/
-        title: Docker セキュリティ
+        title: Docker におけるセキュリティ
       - path: /engine/security/non-events/
         title: Docker security non-events
       - path: /engine/security/https/

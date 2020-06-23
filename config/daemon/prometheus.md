@@ -115,10 +115,10 @@ Docker swarm 上の Docker サービスとして Prometheus を実行します�
 {% endcomment %}
 > **前提条件**
 >
-> 1.  One or more Docker engines are joined into a Docker swarm, using `docker swarm init`
->     on one manager and `docker swarm join` on other managers and worker nodes.
+> 1.  1 つまたは複数の Docker Engine が参加して 1 つの Docker Swarm が形成されていること。
+>     つまり 1 つのマネージャー上から `docker swarm init` を実行しているか、あるいは他のマネージャーやワーカーノードから `docker swarm join` を実行していること。
 >
-> 2.  You need an internet connection to pull the Prometheus image.
+> 2.  Prometheus イメージをプルできるように、インターネット接続ができていること。
 
 
 {% comment %}
@@ -128,11 +128,10 @@ is a stock Prometheus configuration file, except for the addition of the Docker
 job definition at the bottom of the file. Docker Desktop for Mac and Docker Desktop for Windows
 need a slightly different configuration.
 {% endcomment %}
-Copy one of the following configuration files and save it to
-`/tmp/prometheus.yml` (Linux or Mac) or `C:\tmp\prometheus.yml` (Windows). This
-is a stock Prometheus configuration file, except for the addition of the Docker
-job definition at the bottom of the file. Docker Desktop for Mac and Docker Desktop for Windows
-need a slightly different configuration.
+以下の設定ファイルの内容をいずれかコピーして、（Linux や Mac の場合）`/tmp/prometheus.yml`、（Windows の場合）`C:\tmp\prometheus.yml` に保存してください。
+This is a stock Prometheus configuration file, except for the addition of the Docker
+job definition at the bottom of the file.
+Docker Desktop for Mac や Docker Desktop for Windows では、多少異なる設定が必要となります。
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#linux-config" data-group="linux">Docker for Linux</a></li>
@@ -144,7 +143,7 @@ need a slightly different configuration.
 <div id="linux-config" class="tab-pane fade in active" markdown="1">
 
 ```yml
-# my global config
+# グローバルな設定。
 global:
   scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
   evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
@@ -155,7 +154,7 @@ global:
   external_labels:
       monitor: 'codelab-monitor'
 
-# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+# ルールを一度ロードし、以降はグローバルな 'evaluation_interval' に従って定期的に評価。
 rule_files:
   # - "first.rules"
   # - "second.rules"
@@ -184,7 +183,7 @@ scrape_configs:
 <div id="mac-config" class="tab-pane fade" markdown="1">
 
 ```yml
-# my global config
+# グローバルな設定。
 global:
   scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
   evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
@@ -195,7 +194,7 @@ global:
   external_labels:
       monitor: 'codelab-monitor'
 
-# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+# ルールを一度ロードし、以降はグローバルな 'evaluation_interval' に従って定期的に評価。
 rule_files:
   # - "first.rules"
   # - "second.rules"
@@ -206,15 +205,15 @@ scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
 
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
+    # metrics_path のデフォルトを '/metrics' に。
+    # スキームのデフォルトを 'http' に。
 
     static_configs:
-      - targets: ['host.docker.internal:9090'] # Only works on Docker Desktop for Mac
+      - targets: ['host.docker.internal:9090'] # Docker Desktop for Mac においてのみ動作。
 
   - job_name: 'docker'
-         # metrics_path defaults to '/metrics'
-         # scheme defaults to 'http'.
+         # metrics_path のデフォルトを '/metrics' に。
+         # スキームのデフォルトを 'http' に。
 
     static_configs:
       - targets: ['docker.for.mac.host.internal:9323']
@@ -224,7 +223,7 @@ scrape_configs:
 <div id="win-config" class="tab-pane fade" markdown="1">
 
 ```yml
-# my global config
+# グローバルな設定
 global:
   scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
   evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
@@ -235,7 +234,7 @@ global:
   external_labels:
       monitor: 'codelab-monitor'
 
-# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+# ルールを一度ロードし、以降はグローバルな 'evaluation_interval' に従って定期的に評価
 rule_files:
   # - "first.rules"
   # - "second.rules"
@@ -250,7 +249,7 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['host.docker.internal:9090'] # Only works on Docker Desktop for Windows
+      - targets: ['host.docker.internal:9090'] # Docker Desktop for Windows でのみ動作
 
   - job_name: 'docker'
          # metrics_path defaults to '/metrics'
@@ -267,12 +266,12 @@ scrape_configs:
 {% comment %}
 Next, start a single-replica Prometheus service using this configuration.
 {% endcomment %}
-Next, start a single-replica Prometheus service using this configuration.
+次にこの設定を使って、単一レプリカとなる Prometheus サービスを起動します。
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#linux-run" data-group="linux">Docker for Linux</a></li>
 <li><a data-toggle="tab" data-target="#mac-run" data-group="mac">Docker Desktop for Mac</a></li>
-<li><a data-toggle="tab" data-target="#win-run" data-group="win">Docker Desktop for Windows or Windows Server</a></li>
+<li><a data-toggle="tab" data-target="#win-run" data-group="win">Docker Desktop for Windows または Windows Server</a></li>
 </ul>
 
 <div class="tab-content">
@@ -312,7 +311,7 @@ PS C:\> docker service create --replicas 1 --name my-prometheus
 {% comment %}
 Verify that the Docker target is listed at http://localhost:9090/targets/.
 {% endcomment %}
-http://localhost:9090/targets/ において Docker ターゲットが一覧表示されていることを確認します。
+http://localhost:9090/targets/ にアクセスして Docker ターゲットが一覧表示されていることを確認します。
 
 {% comment %}
 ![Prometheus targets page](images/prometheus-targets.png)
@@ -323,8 +322,7 @@ http://localhost:9090/targets/ において Docker ターゲットが一覧表�
 You can't access the endpoint URLs directly if you use Docker Desktop
 for Mac or Docker Desktop for Windows.
 {% endcomment %}
-You can't access the endpoint URLs directly if you use Docker Desktop
-for Mac or Docker Desktop for Windows.
+Docker Desktop for Mac や Docker Desktop for Windows を利用している場合は、エンドポイント URL に直接アクセスすることはできません。
 
 {% comment %}
 ## Use Prometheus
@@ -352,17 +350,17 @@ Prometheus UI 画面の **Graphs** リンクをクリックします。
 The above graph shows a pretty idle Docker instance. Your graph might look
 different if you are running active workloads.
 {% endcomment %}
-The above graph shows a pretty idle Docker instance. Your graph might look
-different if you are running active workloads.
+上のグラフは Docker インスタンスがアイドル状態であることを表わします。
+作業をし始めると、このグラフは変化していきます。
 
 {% comment %}
 To make the graph more interesting, create some network actions by starting
 a service with 10 tasks that just ping Docker non-stop (you can change the
 ping target to anything you like):
 {% endcomment %}
-To make the graph more interesting, create some network actions by starting
-a service with 10 tasks that just ping Docker non-stop (you can change the
-ping target to anything you like):
+このグラフが変化していくことを見るために、ネットワーク処理を生成してみます。
+1 つのサービスに 10 個のタスクを用意し、Docker に対して停止なしに ping を打ち続けるようにします。
+（ping 先は好きなように変更してください。）
 
 ```bash
 $ docker service create \
@@ -398,8 +396,7 @@ $ docker service remove ping_service
 Wait a few minutes and you should see that the graph falls back to the idle
 level.
 {% endcomment %}
-Wait a few minutes and you should see that the graph falls back to the idle
-level.
+しばらくしてみると、このグラフがまたアイドル状態に戻るはずです。
 
 
 {% comment %}
@@ -409,6 +406,8 @@ level.
 ## 次のステップ
 
 {% comment %}
+- Read the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/){: target="_blank" class="_" }
+- Set up some [alerts](https://prometheus.io/docs/alerting/overview/){: target="_blank" class="_" }
 {% endcomment %}
 - [Prometheus のドキュメント](https://prometheus.io/docs/introduction/overview/){: target="_blank" class="_" } を読む。
 - [警告](https://prometheus.io/docs/alerting/overview/){: target="_blank" class="_" } を設定してみる。

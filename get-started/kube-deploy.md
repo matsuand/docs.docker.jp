@@ -226,7 +226,7 @@ Kubernetes 内の全コンテナーは **ポッド**（pod）としてスケジ�
 {% comment %}
 At this point, we have successfully used Docker Desktop to deploy our application to a fully-featured Kubernetes environment on our development machine. We haven't done much with Kubernetes yet, but the door is now open; you can begin adding other components to your app and taking advantage of all the features and power of Kubernetes, right on your own machine.
 {% endcomment %}
-ここまで、開発マシン上にて Kubernetes の全機能を実現した環境上に、Docker Desktop を用いてアプリケーションをデプロイすることに成功しました。
+開発マシン上にて Kubernetes の全機能を実現した環境に、Docker Desktop を用いてアプリケーションをデプロイすることに成功しました。
 Kubernetes を使った作業には、まだまだ多くのことがあります。
 これは入り口に入ったばかりということです。
 アプリケーションに別のコンポーネントを加えてみれば、Kubernetes の優れた機能や性能が見えてきます。
@@ -238,7 +238,7 @@ In addition to deploying to Kubernetes, we have also described our application a
 Kubernetes へのデプロイに加えて、アプリケーションを Kubernetes YAML ファイルとして記述しました。
 この単純なテキストファイルが、アプリケーションを生成して実行するために必要なものをすべて含んでいるわけです。
 このファイルをバージョン管理システムにアップして、仲間と共有してみましょう。
-そうすればこのアプリケーションを別のクラスター（おそらく開発環境の次に作り出すものとしてテスト環境クラスターや本番環境クラスター）上に容易に実現できることになります。
+そうすればこのアプリケーションを別の担当者（おそらく開発担当者から受け渡す先として、テスト環境担当者や本番環境担当者）に容易に配布できることになります。
 
 {% comment %}
 ## Kubernetes references

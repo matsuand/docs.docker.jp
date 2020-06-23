@@ -63,7 +63,7 @@ only the loopback device is created. The following example illustrates this.
     `--rm` フラグを使って生成しているため、コンテナーは自動的に削除されます。
 
     ```bash
-    $ docker container rm no-net-alpine
+    $ docker stop no-net-alpine
     ```
 
 {% comment %}

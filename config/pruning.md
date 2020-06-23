@@ -35,10 +35,10 @@ default, `docker image prune` only cleans up _dangling_ images. A dangling image
 is one that is not tagged and is not referenced by any container. To remove
 dangling images:
 {% endcomment %}
-The `docker image prune` command allows you to clean up unused images. By
-default, `docker image prune` only cleans up _dangling_ images. A dangling image
-is one that is not tagged and is not referenced by any container. To remove
-dangling images:
+`docker image prune` コマンドは未使用イメージを取り除くものです。
+デフォルトで `docker image prune` は **「浮いている」**（dangling）イメージのみを対象とします。
+ここで「浮いている」イメージとは、タグづけがされておらず、どのコンテナーからも参照されていないものを指します。
+「浮いている」イメージを削除するには以下を行います。
 
 ```bash
 $ docker image prune
@@ -51,8 +51,7 @@ Are you sure you want to continue? [y/N] y
 To remove all images which are not used by existing containers, use the `-a`
 flag:
 {% endcomment %}
-To remove all images which are not used by existing containers, use the `-a`
-flag:
+既存コンテナーから利用されていないイメージをすべて削除するには `-a` フラグを使います。
 
 ```bash
 $ docker image prune -a
@@ -65,34 +64,48 @@ Are you sure you want to continue? [y/N] y
 By default, you are prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
 {% endcomment %}
-By default, you are prompted to continue. To bypass the prompt, use the `-f` or
-`--force` flag.
+デフォルトでは、続行して良いかどうかが表示されます。
+このプロンプトを省略したい場合は `-f` または `--force` フラグを用います。
 
 {% comment %}
 You can limit which images are pruned using filtering expressions with the
 `--filter` flag. For example, to only consider images created more than 24
 hours ago:
 {% endcomment %}
-You can limit which images are pruned using filtering expressions with the
-`--filter` flag. For example, to only consider images created more than 24
-hours ago:
+取り除かれるイメージを限定したい場合は、`--filter` フラグによるフィルター表現を指定することができます。
+たとえば、生成されてから 24 時間以上経過したイメージを対象とする場合は、以下のようにします。
 
 ```bash
 $ docker image prune -a --filter "until=24h"
 ```
 
+{% comment %}
 Other filtering expressions are available. See the
 [`docker image prune` reference](../engine/reference/commandline/image_prune.md)
 for more examples.
+{% endcomment %}
+フィルター表現は他にもあります。
+さまざまな例については [`docker image prune` リファレンス](../engine/reference/commandline/image_prune.md) を参照してください。
 
+{% comment %}
 ## Prune containers
+{% endcomment %}
+{: #prune-containers }
+## コンテナーの取り除き
 
+{% comment %}
 When you stop a container, it is not automatically removed unless you started it
 with the `--rm` flag. To see all containers on the Docker host, including
 stopped containers, use `docker ps -a`. You may be surprised how many containers
 exist, especially on a development system! A stopped container's writable layers
 still take up disk space. To clean this up, you can use the `docker container
 prune` command.
+{% endcomment %}
+コンテナーを停止しても、`--rm` フラグを指定した起動を行っていなければ、コンテナーは自動的には削除されません。
+Docker ホスト上において、停止しているコンテナーも含めてコンテナーすべてを見るには `docker ps -a` を実行します。
+ひょっとすると特に開発マシンでは、たくさんのコンテナーが存在していたことに驚くかもしれません。
+停止しているコンテナーの書き込みレイヤーは、まだディスク領域を占有しています。
+これを取り除くには `docker container prune` コマンドを実行します。
 
 ```bash
 $ docker container prune
@@ -101,26 +114,49 @@ WARNING! This will remove all stopped containers.
 Are you sure you want to continue? [y/N] y
 ```
 
+{% comment %}
 By default, you are prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
+{% endcomment %}
+デフォルトでは、続行して良いかどうかが表示されます。
+このプロンプトを省略したい場合は `-f` または `--force` フラグを用います。
 
+{% comment %}
 By default, all stopped containers are removed. You can limit the scope using
 the `--filter` flag. For instance, the following command only removes
 stopped containers older than 24 hours:
+{% endcomment %}
+デフォルトで、停止しているコンテナーはすべて削除されます。
+`--filter` フラグを使うと、削除の範囲を限定することができます。
+たとえば以下のコマンドの場合、停止してから 24 時間以上経過したコンテナーを削除します。
 
 ```bash
 $ docker container prune --filter "until=24h"
 ```
 
+{% comment %}
 Other filtering expressions are available. See the
 [`docker container prune` reference](../engine/reference/commandline/container_prune.md)
 for more examples.
+{% endcomment %}
+フィルター表現は他にもあります。
+さまざまな例については [`docker container prune` リファレンス](../engine/reference/commandline/container_prune.md) を参照してください。
 
+{% comment %}
 ## Prune volumes
+{% endcomment %}
+{: #prune-volumes }
+## ボリュームの取り除き
 
+{% comment %}
 Volumes can be used by one or more containers, and take up space on the Docker
 host. Volumes are never removed automatically, because to do so could destroy
 data.
+{% endcomment %}
+ボリュームは複数のコンテナーにおいて利用できるものです。
+したがって Docker ホスト上に容量を多くとります。
+ボリュームは自動的に削除されることがありません。
+これを行ってしまうと、データを壊してしまうかもしれないからです。
 
 ```bash
 $ docker volume prune
@@ -129,27 +165,50 @@ WARNING! This will remove all volumes not used by at least one container.
 Are you sure you want to continue? [y/N] y
 ```
 
+{% comment %}
 By default, you are prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
+{% endcomment %}
+デフォルトでは、続行して良いかどうかが表示されます。
+このプロンプトを省略したい場合は `-f` または `--force` フラグを用います。
 
+{% comment %}
 By default, all unused volumes are removed. You can limit the scope using
 the `--filter` flag. For instance, the following command only removes
 volumes which are not labelled with the `keep` label:
+{% endcomment %}
+デフォルトで、未使用のボリュームはすべて削除されます。
+`--filter` フラグを使うと、削除の範囲を限定することができます。
+たとえば以下のコマンドの場合、`keep` ラベルがついていないボリュームだけが削除されます。
 
 ```bash
 $ docker volume prune --filter "label!=keep"
 ```
 
+{% comment %}
 Other filtering expressions are available. See the
 [`docker volume prune` reference](../engine/reference/commandline/volume_prune.md)
 for more examples.
+{% endcomment %}
+フィルター表現は他にもあります。
+さまざまな例については [`docker volume prune` リファレンス](../engine/reference/commandline/volume_prune.md) を参照してください。
 
+{% comment %}
 ## Prune networks
+{% endcomment %}
+{: #prune-networks }
+## ネットワークの取り除き
 
+{% comment %}
 Docker networks don't take up much disk space, but they do create `iptables`
 rules, bridge network devices, and routing table entries. To clean these things
 up, you can use `docker network prune` to clean up networks which aren't used
 by any containers.
+{% endcomment %}
+Docker ネットワークはそれほど容量をとるものではありません。
+ただしネットワークからは、`iptables` ルール、ブリッジネットワークデバイス、ルーティングテーブル項目が生成されます。
+これらを削除するために `docker network prune` コマンドを用います。
+これによって、どのコンテナーからも利用されていないネットワークが削除されます。
 
 ```bash
 $ docker network prune
@@ -158,27 +217,49 @@ WARNING! This will remove all networks not used by at least one container.
 Are you sure you want to continue? [y/N] y
 ```
 
+{% comment %}
 By default, you are prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
+{% endcomment %}
+デフォルトでは、続行して良いかどうかが表示されます。
+このプロンプトを省略したい場合は `-f` または `--force` フラグを用います。
 
+{% comment %}
 By default, all unused networks are removed. You can limit the scope using
 the `--filter` flag. For instance, the following command only removes
 networks older than 24 hours:
+{% endcomment %}
+デフォルトで、未使用のネットワークはすべて削除されます。
+`--filter` フラグを使うと、削除の範囲を限定することができます。
+たとえば以下のコマンドの場合、24 時間以上古いネットワークを削除します。
 
 ```bash
 $ docker network prune --filter "until=24h"
 ```
 
+{% comment %}
 Other filtering expressions are available. See the
 [`docker network prune` reference](../engine/reference/commandline/network_prune.md)
 for more examples.
+{% endcomment %}
+フィルター表現は他にもあります。
+さまざまな例については [`docker network prune` リファレンス](../engine/reference/commandline/network_prune.md) を参照してください。
 
+{% comment %}
 ## Prune everything
+{% endcomment %}
+{: #prune-everything }
+## すべての取り除き
 
+{% comment %}
 The `docker system prune` command is a shortcut that prunes images, containers,
 and networks. In Docker 17.06.0 and earlier, volumes are also pruned. In Docker
 17.06.1 and higher, you must specify the `--volumes` flag for
 `docker system prune` to prune volumes.
+{% endcomment %}
+`docker system prune` コマンドは、イメージ、コンテナー、ネットワークを取り除くコマンドを合わせたものです。
+Docker 17.06.0 およびそれ以前においては、ボリュームも取り除かれていました。
+Docker 17.06.1 およびそれ以降において `docker system prune` 実行時にボリュームも取り除くには `--volumes` フラグをつける必要があります。
 
 ```bash
 $ docker system prune
@@ -191,8 +272,11 @@ WARNING! This will remove:
 Are you sure you want to continue? [y/N] y
 ```
 
+{% comment %}
 If you are on Docker 17.06.1 or higher and want to also prune volumes, add
 the `--volumes` flag:
+{% endcomment %}
+Docker 17.06.1 およびそれ以降においてボリュームも取り除きたい場合は `--volumes` フラグをつけます。
 
 ```bash
 $ docker system prune --volumes
@@ -206,6 +290,10 @@ WARNING! This will remove:
 Are you sure you want to continue? [y/N] y
 ```
 
+{% comment %}
 By default, you are prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
+{% endcomment %}
+デフォルトでは、続行して良いかどうかが表示されます。
+このプロンプトを省略したい場合は `-f` または `--force` フラグを用います。
 
