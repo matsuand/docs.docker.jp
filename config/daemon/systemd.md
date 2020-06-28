@@ -339,19 +339,38 @@ you need to add this configuration in the Docker systemd service file.
 {% endcomment %}
 3.  内部に Docker レジストリがあって、プロキシーを介さずに接続する必要がある場合は、環境変数 `NO_PROXY` を通じて設定することができます。
 
+    {% comment %}
     The `NO_PROXY` variable specifies a string that contains comma-separated
     values for hosts that should be excluded from proxying. These are the
     options you can specify to exclude hosts:
+    {% endcomment %}
+    変数 `NO_PROXY` は、プロキシーから除外したいホスト名を、カンマで区切った文字列として指定します。
+    ホストを除外する設定は必要に応じて行います。
+    {% comment %}
     * IP address prefix (`1.2.3.4`)
     * Domain name, or a special DNS label (`*`)
+    {% endcomment %}
+    * IP アドレスプレフィックス (`1.2.3.4`)
+    * ドメイン名、あるいは特別な DNS ラベル (`*`)
+    {% comment %}
     * A domain name matches that name and all subdomains. A domain name with
       a leading "." matches subdomains only. For example, given the domains
       `foo.example.com` and `example.com`:
       * `example.com` matches `example.com` and `foo.example.com`, and
       * `.example.com` matches only `foo.example.com`
+    {% endcomment %}
+    * ドメイン名は、その名前とサブドメインすべてにマッチします。
+      先頭に "." のついたドメイン名は、サブドメインのみにマッチします。
+      たとえばドメイン名が `foo.example.com` と `example.com` であるとします。
+      * `example.com` は `example.com` と `foo.example.com` にマッチします。
+      * `.example.com` は `foo.example.com` のみにマッチします。
+    {% comment %}
     * A single asterisk (`*`) indicates that no proxying should be done
     * Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`)
       and domain names (`foo.example.com:80`)
+    {% endcomment %}
+    * 単一のアスタリスク (`*`) を指定するとプロキシーは行われません。
+    * リテラル数値としてポート番号を IP アドレスやドメイン名につけることができます（`1.2.3.4:80` や `foo.example.com:80`）。
 
     {% comment %}
     Config example:
