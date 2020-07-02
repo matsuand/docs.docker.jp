@@ -33,7 +33,7 @@ Docker. Volumes have several advantages over bind mounts:
 - ボリュームは Linux と Windows 上のコンテナーにおいて動作します。
 - ボリュームは複数コンテナー間にて安全に共有できます。
 - ボリュームドライバーを用いると、リモートホスト上、あるいはクラウドプロバイダー上のボリュームに保存できるようになります。保存の際にはボリューム内データを暗号化することができ、その他にも種々の機能を利用することができます。
-- New volumes can have their content pre-populated by a container.
+- ボリュームを新たに生成すると、その内容はコンテナーがあらかじめ用意していた内容になります。
 
 {% comment %}
 In addition, volumes are often a better choice than persisting data in a
@@ -41,8 +41,9 @@ container's writable layer, because a volume does not increase the size of the
 containers using it, and the volume's contents exist outside the lifecycle of a
 given container.
 {% endcomment %}
-さらに永続的にデータを保持する方法として、コンテナーの書き込みレイヤーを用いるのではなく、ボリュームを用いることの方が適切となる場合が多々あります。
-というのもボリュームであれば、これを利用するコンテナーのサイズを増加させることはなく、ボリューム内のデータは、コンテナーのライフサイクルから離れたところに存在しているからです。
+さらに永続的にデータを保持するならば、コンテナーの書き込みレイヤーを用いるのではなく、ボリュームを用いることの方が適切となる場合が多々あります。
+というのもボリュームであれば、これを利用するコンテナーのサイズを増加させることはありません。
+ボリューム内のデータは、コンテナーのライフサイクルから離れたところに存在しているからです。
 
 {% comment %}
 {% endcomment %}
@@ -246,6 +247,7 @@ local               my-vol
 ```
 
 {% comment %}
+**Inspect a volume**:
 {% endcomment %}
 **Inspect a volume**:
 
@@ -272,7 +274,9 @@ $ docker volume rm my-vol
 ```
 
 {% comment %}
+## Start a container with a volume
 {% endcomment %}
+{: #start-a-container-with-a-volume }
 ## Start a container with a volume
 
 {% comment %}
@@ -353,7 +357,9 @@ $ docker volume rm myvol2
 ```
 
 {% comment %}
+### Start a service with volumes
 {% endcomment %}
+{: #start-a-service-with-volumes }
 ### Start a service with volumes
 
 {% comment %}
@@ -401,7 +407,9 @@ Removing the service does not remove any volumes created by the service.
 Volume removal is a separate step.
 
 {% comment %}
+#### Syntax differences for services
 {% endcomment %}
+{: #syntax-differences-for-services }
 #### Syntax differences for services
 
 {% comment %}
@@ -411,7 +419,9 @@ When mounting a volume into a service's containers, you must use the `--mount`
 flag.
 
 {% comment %}
+### Populate a volume using a container
 {% endcomment %}
+{: #populate-a-volume-using-a-container }
 ### Populate a volume using a container
 
 {% comment %}
@@ -475,8 +485,10 @@ $ docker volume rm nginx-vol
 ```
 
 {% comment %}
-{% endcomment %}
 ## Use a read-only volume
+{% endcomment %}
+{: #use-a-read-only-volume }
+## 読み込み専用ボリュームの利用
 
 {% comment %}
 {% endcomment %}
@@ -558,8 +570,10 @@ $ docker volume rm nginx-vol
 ```
 
 {% comment %}
-{% endcomment %}
 ## Share data among machines
+{% endcomment %}
+{: #share-data-among-machines }
+## マシン間でのデータ共有
 
 {% comment %}
 {% endcomment %}
@@ -585,10 +599,17 @@ driver, you can update the services to use a different driver, as an example to
 store data in the cloud, without changing the application logic.
 
 {% comment %}
-{% endcomment %}
 ## Use a volume driver
+{% endcomment %}
+{: #use-a-volume-driver }
+## ボリュームドライバーの利用
 
 {% comment %}
+When you create a volume using `docker volume create`, or when you start a
+container which uses a not-yet-created volume, you can specify a volume driver.
+The following examples use the `vieux/sshfs` volume driver, first when creating
+a standalone volume, and then when starting a container which creates a new
+volume.
 {% endcomment %}
 When you create a volume using `docker volume create`, or when you start a
 container which uses a not-yet-created volume, you can specify a volume driver.
@@ -597,10 +618,14 @@ a standalone volume, and then when starting a container which creates a new
 volume.
 
 {% comment %}
-{% endcomment %}
 ### Initial set-up
+{% endcomment %}
+{: #initial-set-up }
+### 初期設定
 
 {% comment %}
+This example assumes that you have two nodes, the first of which is a Docker
+host and can connect to the second using SSH.
 {% endcomment %}
 This example assumes that you have two nodes, the first of which is a Docker
 host and can connect to the second using SSH.
@@ -744,10 +769,14 @@ You can use the techniques above to automate backup, migration and restore
 testing using your preferred tools.
 
 {% comment %}
-{% endcomment %}
 ## Remove volumes
+{% endcomment %}
+{: #remove-volumes }
+## ボリュームの削除
 
 {% comment %}
+A Docker data volume persists after a container is deleted. There are two types
+of volumes to consider:
 {% endcomment %}
 A Docker data volume persists after a container is deleted. There are two types
 of volumes to consider:
@@ -758,8 +787,10 @@ of volumes to consider:
 - **Anonymous volumes** have no specific source so when the container is deleted, instruct the Docker Engine daemon to remove them.
 
 {% comment %}
-{% endcomment %}
 ### Remove anonymous volumes
+{% endcomment %}
+{: #remove-anonymous-volumes }
+### 匿名ボリュームの削除
 
 {% comment %}
 {% endcomment %}
@@ -772,12 +803,15 @@ $ docker run --rm -v /foo -v awesome:/bar busybox top
 ```
 
 {% comment %}
-{% endcomment %}
 ### Remove all volumes
+{% endcomment %}
+{: #remove-all-volumes }
+### 全ボリュームの削除
 
 {% comment %}
-{% endcomment %}
 To remove all unused volumes and free up space:
+{% endcomment %}
+未使用のボリュームを削除して容量を開放するには、以下のコマンドを実行します。
 
 ```
 $ docker volume prune
@@ -800,12 +834,18 @@ $ docker volume prune
 
 
 {% comment %}
-{% endcomment %}
 ## Next steps
+{% endcomment %}
+{: #next-steps }
+## 次のステップ
 
 {% comment %}
-{% endcomment %}
 - Learn about [bind mounts](bind-mounts.md).
 - Learn about [tmpfs mounts](tmpfs.md).
 - Learn about [storage drivers](/storage/storagedriver/).
 - Learn about [third-party volume driver plugins](/engine/extend/legacy_plugins/).
+{% endcomment %}
+- [バインドマウント](bind-mounts.md) について学ぶ。
+- [tmpfs マウント](tmpfs.md) について学ぶ。
+- [ストレージドライバー](/storage/storagedriver/) について学ぶ。
+- [サードパーティー製のボリュームドライバープラグイン](/engine/extend/legacy_plugins/) について学ぶ。
