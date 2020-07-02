@@ -91,7 +91,7 @@ guides:
       title: Container runtime metrics
     - path: /config/containers/resource_constraints/
       title: Runtime options with Memory, CPUs, and GPUs
-    - sectiontitle: Logging
+    - sectiontitle: ログ出力
       section:
       - path: /config/containers/logging/
         title: View a container's logs
@@ -102,7 +102,7 @@ guides:
       - path: /config/containers/logging/plugins/
         title: Use a logging driver plugin
       - path: /config/containers/logging/log_tags/
-        title: Customize log driver output
+        title: ログドライバー出力のカスタマイズ
       - sectiontitle: Logging driver details
         section:
         - path: /config/containers/logging/local/
@@ -136,21 +136,21 @@ guides:
       - path: /engine/security/https/
         title: Protect the Docker daemon socket
       - path: /engine/security/certificates/
-        title: Using certificates for repository client verification
-      - sectiontitle: Use trusted images
+        title: 証明書を使ったリポジトリクライアントの確認
+      - sectiontitle: 信頼できるイメージの利用
         section:
         - path: /engine/security/trust/content_trust/
-          title: Content trust in Docker
+          title: Docker のコンテントトラスト
         - path: /engine/security/trust/trust_automation/
-          title: Automation with content trust
+          title: コンテントトラストの自動化
         - path: /engine/security/trust/trust_delegation/
           title: Delegations for content trust
         - path: /engine/security/trust/deploying_notary/
           title: Deploying Notary
         - path: /engine/security/trust/trust_key_mng/
-          title: Manage keys for content trust
+          title: コンテントトラストの鍵管理
         - path: /engine/security/trust/trust_sandbox/
-          title: Play in a content trust sandbox
+          title: コンテントトラストのサンドボックスで遊ぶ
       - path: /engine/security/antivirus/
         title: ウィルス対策ソフトウェアと Docker
       - path: /engine/security/apparmor/
@@ -166,25 +166,25 @@ guides:
       - path: /engine/swarm/
         title: Swarm モード概要
       - path: /engine/swarm/key-concepts/
-        title: Swarm mode key concepts
-      - sectiontitle: Get started with swarm mode
+        title: Swarm モードの重要な考え方
+      - sectiontitle: Swarm モードをはじめる
         section:
         - path: /engine/swarm/swarm-tutorial/
-          title: Set up for the tutorial
+          title: チュートリアルに向けた設定
         - path: /engine/swarm/swarm-tutorial/create-swarm/
-          title: Create a swarm
+          title: Swarm の生成
         - path: /engine/swarm/swarm-tutorial/add-nodes/
-          title: Add nodes to the swarm
+          title: Swarm へのノード追加
         - path: /engine/swarm/swarm-tutorial/deploy-service/
-          title: Deploy a service
+          title: サービスのデプロイ
         - path: /engine/swarm/swarm-tutorial/inspect-service/
-          title: Inspect the service
+          title: サービスの確認
         - path: /engine/swarm/swarm-tutorial/scale-service/
-          title: Scale the service
+          title: サービスのスケール変更
         - path: /engine/swarm/swarm-tutorial/delete-service/
-          title: Delete the service
+          title: サービスの削除
         - path: /engine/swarm/swarm-tutorial/rolling-update/
-          title: Apply rolling updates
+          title: ローリングアップデートの適用
         - path: /engine/swarm/swarm-tutorial/drain-node/
           title: Drain a node
         - path: /engine/swarm/ingress/

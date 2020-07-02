@@ -1,11 +1,41 @@
 ---
-title: Docker Compose release notes
+title: Docker Compose リリースノート
 description: Release notes for Docker Compose
 keywords: release notes, compose
 toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+
+## 1.26.1
+(2020-06-30)
+
+{% comment %}
+### Features
+{% endcomment %}
+{: #features }
+### 機能
+
+{% comment %}
+- Bumped `docker-py` from 4.2.1 to 4.2.2.
+{% endcomment %}
+- Bumped `docker-py` from 4.2.1 to 4.2.2.
+
+{% comment %}
+### Bug fixes
+{% endcomment %}
+{: #bug-fixes }
+### バグフィックス
+
+{% comment %}
+- Enforced `docker-py` 4.2.1 as minimum version when installing with pip.
+{% endcomment %}
+- Enforced `docker-py` 4.2.1 as minimum version when installing with pip.
+
+{% comment %}
+- Fixed context load for non-docker endpoints.
+{% endcomment %}
+- Fixed context load for non-docker endpoints.
 
 ## 1.26.0
 (2020-06-03)

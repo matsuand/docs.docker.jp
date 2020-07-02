@@ -1,5 +1,5 @@
 ---
-description: コンテナーとどのように動作するかの説明。
+description: コンテナーがどのように動作するかを説明します。
 keywords: docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home, intro
 redirect_from:
 - /engine/userguide/containers/

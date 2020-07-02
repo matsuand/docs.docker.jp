@@ -93,7 +93,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 6. 上のファイルに必要となるソフトウェアを記述します。
 
        Django>=2.0,<3.0
-       psycopg2>=2.7,<3.0
+       psycopg2-binary>=2.8
 
 {% comment %}
 7. Save and close the `requirements.txt` file.

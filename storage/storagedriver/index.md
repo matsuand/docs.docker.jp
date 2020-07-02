@@ -28,10 +28,10 @@ write speeds are lower than native file system performance.
 
 {% comment %}
  > **Note**: Operations that are known to be problematic include write-intensive database storage,
-particularly when pre-existing data exists in the write-only layer. More details are provided in this document.
+particularly when pre-existing data exists in the read-only layer. More details are provided in this document.
 {% endcomment %}
  > **メモ**: 問題が発生すると言われる処理として、書き込みを重点的に行うデータベースストレージの利用があります。
- > 特に書き込み専用レイヤーに既にデータが存在している場合が挙げられます。
+ > 特に読み込み専用レイヤーに既にデータが存在している場合が挙げられます。
  > 詳しくは本文にて説明します。
 
 {% comment %}

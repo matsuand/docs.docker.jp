@@ -90,7 +90,7 @@ Docker Engine は、主に以下の 3 つのコンポーネントからなるク
 {% comment %}
 ![Docker Engine Components Flow](/engine/images/engine-components-flow.png)
 {% endcomment %}
-![Docker Engine コンポーネントの関連](/engine/images/engine-components-flow.png)
+![Docker Engine コンポーネントの関連]({{ site.baseurl }}/engine/images/engine-components-flow.png)
 
 {% comment %}
 The CLI uses the Docker REST API to control or interact with the Docker daemon
@@ -218,7 +218,7 @@ Docker クライアントとデーモンの間の通信には REST API が利用
 {% comment %}
 ![Docker Architecture Diagram](/engine/images/architecture.svg)
 {% endcomment %}
-![Docker アーキテクチャー構成図](/engine/images/architecture.svg)
+![Docker アーキテクチャー構成図]({{ site.baseurl }}/engine/images/architecture.svg)
 
 {% comment %}
 ### The Docker daemon

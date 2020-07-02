@@ -56,7 +56,7 @@ services:
 
   service2:
     build: .
-    image: youruser/yourimage  # goes to youruser DockerHub registry
+    image: your-dockerid/yourimage  # goes to your repository on Docker Hub
 ```
 {% endcomment %}
 ```yaml
