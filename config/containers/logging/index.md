@@ -1,17 +1,23 @@
 ---
 description: How to write to and view a container's logs
 keywords: docker, logging
-title: View logs for a container or service
+title: コンテナーまたはサービスのログ確認
 redirect_from:
 - /engine/admin/logging/
 - /engine/admin/logging/view_container_logs/
 ---
 
+{% comment %}
 The `docker logs` command shows information logged by a running container. The
 `docker service logs` command shows information logged by all containers
 participating in a service. The information that is logged and the format of the
 log depends almost entirely on the container's endpoint command.
+{% endcomment %}
+`docker logs` は実行中のコンテナーが出力するログ情報を確認するコマンドです。
+`docker service logs` コマンドは、1 つのサービスに参加しているコンテナーすべてのログ情報を確認します。
+出力されるログ情報およびその出力書式は、ほぼコンテナーのエンドポイントコマンドにより定まります。
 
+{% comment %}
 By default, `docker logs` or `docker service logs` shows the command's output
 just as it would appear if you ran the command interactively in a terminal. UNIX
 and Linux commands typically open three I/O streams when they run, called
@@ -21,34 +27,83 @@ usually a command's normal output, and `STDERR` is typically used to output
 error messages. By default, `docker logs` shows the command's `STDOUT` and
 `STDERR`. To read more about I/O and Linux, see the
 [Linux Documentation Project article on I/O redirection](http://www.tldp.org/LDP/abs/html/io-redirection.html).
+{% endcomment %}
+デフォルトにおいて `docker logs` や `docker service logs` は、端末画面にて対話的にコマンドを入力した際、そのコマンドが出力するものと同じような情報を得ることができます。
+UNIX や Linux コマンドは普通、3 つの I/O ストリームを実行時に開きます。
+それは `STDIN`、`STDOUT`、`STDERR` です。
+`STDIN` はコマンドの入力ストリームです。
+これはキーボードから入力されるか、あるいは他のコマンドからの入力の場合もあります。
+`STDOUT` はコマンドの標準出力です。
+そして `STDERR` は通常、エラーメッセージを出力するために用いられます。
+デフォルトで `docker logs` は、コマンドの `STDOUT` と `STDERR` を表示します。
+I/O と Linux に関しての詳細は [Linux Documentation Project における I/O リダイレクション](http://www.tldp.org/LDP/abs/html/io-redirection.html) を参照してください。
 
+{% comment %}
 In some cases, `docker logs` may not show useful information unless you take
 additional steps.
+{% endcomment %}
+`docker logs` の出力だけでは不十分なことがあります。
+その場合は別の手順が必要になります。
 
+{% comment %}
 - If you use a [logging driver](configure.md) which sends logs to a file, an
   external host, a database, or another logging back-end, `docker logs` may not
   show useful information.
+{% endcomment %}
+- [ログドライバー](configure.md) を利用するにあたって、そのドライバーのログ出力先が、ファイル、外部ホスト、データベース、別のログバックエンドである場合、`docker logs` の出力は不十分である場合があります。
+  show useful information.
 
+{% comment %}
+- If your image runs a non-interactive process such as a web server or a
+  database, that application may send its output to log files instead of `STDOUT`
+  and `STDERR`.
+{% endcomment %}
 - If your image runs a non-interactive process such as a web server or a
   database, that application may send its output to log files instead of `STDOUT`
   and `STDERR`.
 
+{% comment %}
+In the first case, your logs are processed in other ways and you may choose not
+to use `docker logs`. In the second case, the official `nginx` image shows one
+workaround, and the official Apache `httpd` image shows another.
+{% endcomment %}
 In the first case, your logs are processed in other ways and you may choose not
 to use `docker logs`. In the second case, the official `nginx` image shows one
 workaround, and the official Apache `httpd` image shows another.
 
+{% comment %}
+The official `nginx` image creates a symbolic link from `/var/log/nginx/access.log`
+to `/dev/stdout`, and creates another symbolic link
+from `/var/log/nginx/error.log` to `/dev/stderr`, overwriting the log files and
+causing logs to be sent to the relevant special device instead. See the
+[Dockerfile](https://github.com/nginxinc/docker-nginx/blob/8921999083def7ba43a06fabd5f80e4406651353/mainline/jessie/Dockerfile#L21-L23).
+{% endcomment %}
 The official `nginx` image creates a symbolic link from `/var/log/nginx/access.log`
 to `/dev/stdout`, and creates another symbolic link
 from `/var/log/nginx/error.log` to `/dev/stderr`, overwriting the log files and
 causing logs to be sent to the relevant special device instead. See the
 [Dockerfile](https://github.com/nginxinc/docker-nginx/blob/8921999083def7ba43a06fabd5f80e4406651353/mainline/jessie/Dockerfile#L21-L23).
 
+{% comment %}
+The official `httpd` driver changes the `httpd` application's configuration to
+write its normal output directly to `/proc/self/fd/1` (which is `STDOUT`) and
+its errors to `/proc/self/fd/2` (which is `STDERR`). See the
+[Dockerfile](https://github.com/docker-library/httpd/blob/b13054c7de5c74bbaa6d595dbe38969e6d4f860c/2.2/Dockerfile#L72-L75).
+{% endcomment %}
 The official `httpd` driver changes the `httpd` application's configuration to
 write its normal output directly to `/proc/self/fd/1` (which is `STDOUT`) and
 its errors to `/proc/self/fd/2` (which is `STDERR`). See the
 [Dockerfile](https://github.com/docker-library/httpd/blob/b13054c7de5c74bbaa6d595dbe38969e6d4f860c/2.2/Dockerfile#L72-L75).
 
+{% comment %}
 ## Next steps
+{% endcomment %}
+{: #next-steps }
+## 次のステップ
 
+{% comment %}
 - Configure [logging drivers](configure.md).
 - Write a [Dockerfile](../../../engine/reference/builder.md).
+{% endcomment %}
+- [ログドライバー](configure.md) の設定。
+- [Dockerfile](../../../engine/reference/builder.md) を記述する。

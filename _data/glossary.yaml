@@ -78,10 +78,6 @@
   開発者やシステム管理者がアプリケーションの開発、移行、実行を行うプラットフォームのこと。
   - ホスト上で稼動する docker デーモンのこと。
   そのホストはイメージとコンテナーを管理します（Docker Engine とも呼びます）。
-<a class="glossary" name="docker_enterprise">Docker Enterprise</a>: |
-  Docker Enterprise is a platform to build, ship, and run containerized applications, that
-  you can deploy in the cloud or on-premise. It includes a tested and certified version of Docker,
-  web UIs for managing your app resources, and support.
 <a class="glossary" name="docker_desktop_for_mac">Docker Desktop for Mac</a>: |
   [Docker Desktop for Mac](/docker-for-mac/) is an easy-to-install, lightweight
   Docker development environment designed specifically for the Mac. A native

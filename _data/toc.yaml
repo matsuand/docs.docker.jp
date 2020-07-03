@@ -94,7 +94,7 @@ guides:
     - sectiontitle: ログ出力
       section:
       - path: /config/containers/logging/
-        title: View a container's logs
+        title: コンテナーのログ確認
       - path: /config/containers/logging/configure/
         title: Configure logging drivers
       - path: /config/containers/logging/dual-logging/

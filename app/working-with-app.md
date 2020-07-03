@@ -49,9 +49,9 @@ Docker App lets you  _build_, _validate_ and _deploy_ applications with the `doc
 even leverage secure supply-chain features such as signed `push` and `pull` operations.
 
 {% comment %}
-> **NOTE**: `docker app` works with `Engine - Community 19.03` or higher and `Engine - Enterprise 19.03` or higher.
+> **NOTE**: `docker app` works with `Docker 19.03` or higher.
 {% endcomment %}
-> **NOTE**: `docker app` works with `Engine - Community 19.03` or higher and `Engine - Enterprise 19.03` or higher.
+> **NOTE**: `docker app` works with `Docker 19.03` or higher.
 
 {% comment %}
 This guide walks you through two scenarios:
@@ -86,7 +86,7 @@ This section describes the steps for creating a new Docker App project to famili
 1. Populate the project
 1. Validate the app
 1. Deploy the app
-1. Push the app to Docker Hub or Docker Trusted Registry
+1. Push the app to Docker Hub
 1. Install the app directly from Docker Hub
 {% endcomment %}
 1. Prerequisites
@@ -94,7 +94,7 @@ This section describes the steps for creating a new Docker App project to famili
 1. Populate the project
 1. Validate the app
 1. Deploy the app
-1. Push the app to Docker Hub or Docker Trusted Registry
+1. Push the app to Docker Hub
 1. Install the app directly from Docker Hub
 
 {% comment %}
@@ -602,33 +602,7 @@ $ docker app push my-app --platform="linux/amd64" --tag <hub-id>/<repo>:0.1.0
 
 {% comment %}
 {% endcomment %}
-### Push the app to DTR
-
-{% comment %}
-{% endcomment %}
-Pushing an app to Docker Trusted Registry (DTR) involves the same procedure as
-[pushing an app to Docker Hub](#push-the-app-to-docker-hub) except that you
-need your DTR user credentials and [your DTR repository
-information](/ee/dtr/user/manage-images/review-repository-info/). To use client
-certificates for DTR authentication, see [Enable Client Certificate
-Authentication](/ee/enable-client-certificate-authentication/).
-
-{% comment %}
-{% endcomment %}
-By default, all platform architectures are pushed to DTR. If you are pushing an
-official Docker image as part of your app, you may find your app bundle
-becomes large with all image architectures embedded. To just push the
-architecture required, you can add the `--platform` flag.
-
-```bash
-$ docker login dtr.example.com
-
-$ docker app push my-app --platform="linux/amd64" --tag dtr.example.com/<user>/<repo>:0.1.0
-```
-
-{% comment %}
-{% endcomment %}
-### Install the app directly from Docker Hub or DTR
+### Install the app directly from Docker Hub
 
 {% comment %}
 {% endcomment %}
@@ -651,7 +625,7 @@ hello.text     Hello world!
 
 {% comment %}
 {% endcomment %}
-This action was performed directly against the app in the registry. Note that for DTR, the application will be prefixed with the Fully Qualified Domain Name (FQDN) of your trusted registry.
+This action was performed directly against the app in the registry.
 
 {% comment %}
 {% endcomment %}

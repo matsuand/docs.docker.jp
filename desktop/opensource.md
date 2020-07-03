@@ -14,7 +14,7 @@ licensing, choose ![whale menu](/docker-for-mac/images/whale-x.png){: .inline}
 → &nbsp;**About Docker Desktop** and then **Acknowledgements**.
 {% endcomment %}
 Docker Desktop はオープンソースソフトウェアを利用して構築されています。
-ライセンスの詳細は、アプリケーション上の ![クジラメニュー](/docker-for-mac/images/whale-x.png){: .inline} → **About Docker** を選び **Acknowledgements** をクリックしてください。
+ライセンスの詳細は、アプリケーション上の ![クジラメニュー]({{ site.baseurl }}/docker-for-mac/images/whale-x.png){: .inline} → **About Docker** を選び **Acknowledgements** をクリックしてください。
 
 {% comment %}
 Docker Desktop distributes some components that are licensed under the
