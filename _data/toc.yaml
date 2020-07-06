@@ -88,7 +88,7 @@ guides:
     - path: /config/containers/multi-service_container/
       title: コンテナー内での複数サービス起動
     - path: /config/containers/runmetrics/
-      title: Container runtime metrics
+      title: コンテナーランタイムメトリックス
     - path: /config/containers/resource_constraints/
       title: Runtime options with Memory, CPUs, and GPUs
     - sectiontitle: ログ出力
@@ -96,14 +96,14 @@ guides:
       - path: /config/containers/logging/
         title: コンテナーのログ確認
       - path: /config/containers/logging/configure/
-        title: Configure logging drivers
+        title: ログドライバーの設定
       - path: /config/containers/logging/dual-logging/
         title: Use docker logs with a logging driver
       - path: /config/containers/logging/plugins/
-        title: Use a logging driver plugin
+        title: ログドライバープラグインの利用
       - path: /config/containers/logging/log_tags/
         title: ログドライバー出力のカスタマイズ
-      - sectiontitle: Logging driver details
+      - sectiontitle: ログドライバー詳細
         section:
         - path: /config/containers/logging/local/
           title: Local file logging driver
@@ -134,7 +134,7 @@ guides:
       - path: /engine/security/non-events/
         title: Docker security non-events
       - path: /engine/security/https/
-        title: Protect the Docker daemon socket
+        title: Docker デーモンソケットの保護
       - path: /engine/security/certificates/
         title: 証明書を使ったリポジトリクライアントの確認
       - sectiontitle: 信頼できるイメージの利用
@@ -154,9 +154,9 @@ guides:
       - path: /engine/security/antivirus/
         title: ウィルス対策ソフトウェアと Docker
       - path: /engine/security/apparmor/
-        title: AppArmor security profiles for Docker
+        title: Docker 向け AppArmor セキュリティプロファイル
       - path: /engine/security/seccomp/
-        title: Seccomp security profiles for Docker
+        title: Docker 向け Seccomp セキュリティプロファイル
       - path: /engine/security/userns-remap/
         title: Isolate containers with a user namespace
       - path: /engine/security/rootless/

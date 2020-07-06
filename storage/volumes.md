@@ -81,11 +81,9 @@ syntax separates them. Here is a comparison of the syntax for each flag.
 {% endcomment %}
 もともと `-v` フラグや `--volume` フラグはスタンドアロンコンテナーに対して、また `--mount` フラグはスウォームサービスに対して用いられてきたものです。
 しかし Docker 17.06 からは `--mount` をスタンドアロンコンテナーに対しても利用できるようになりました。
-全般に `--mount` の方が明示的であり、
-In general,
-`--mount` is more explicit and verbose. The biggest difference is that the `-v`
-syntax combines all the options together in one field, while the `--mount`
-syntax separates them. Here is a comparison of the syntax for each flag.
+全般に `--mount` の方がわかりやすいものですが、記述は増えます。
+両者の最大の違いは、`-v` の文法がオプション指定のすべてを 1 項目にとりまとめるものであるのに対して、`--mount` の文法はそれを 1 つずつ個別に分けている点です。
+以下に両フラグにおける文法を比較します。
 
 {% comment %}
 > New users should try `--mount` syntax which is simpler than `--volume` syntax.
@@ -109,16 +107,16 @@ If you need to specify volume driver options, you must use `--mount`.
   - The third field is optional, and is a comma-separated list of options, such
     as `ro`. These options are discussed below.
 {% endcomment %}
-- **`-v` or `--volume`**: Consists of three fields, separated by colon characters
-  (`:`). The fields must be in the correct order, and the meaning of each field
-  is not immediately obvious.
-  - In the case of named volumes, the first field is the name of the volume, and is
-    unique on a given host machine. For anonymous volumes, the first field is
-    omitted.
-  - The second field is the path where the file or directory are mounted in
-    the container.
-  - The third field is optional, and is a comma-separated list of options, such
-    as `ro`. These options are discussed below.
+- **`-v` または `--volume`**: 3 つの項目から構成され、それぞれをコロン（`:`）で区切ります。
+  各項目は正しい順に記述する必要があります。
+  各項目の意味は、そのときどきによって変わります。
+  - 名前つきボリュームの場合、1 つめの項目は、そのボリューム名です。
+    指定されるホストマシン上において固有の名称であるものです。
+    匿名ボリュームの場合、1 つめの項目は省略されます。
+  - 2 つめは、コンテナー内にマウントされるファイルまたディレクトリのパスです。
+  - 3 つめは任意の指定項目であり、オプション指定をカンマ区切りで指定します。
+    指定内容には `ro` などがあります。
+    このオプションに関しては後に説明しています。
 
 {% comment %}
 - **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
@@ -139,23 +137,21 @@ If you need to specify volume driver options, you must use `--mount`.
   - The `volume-opt` option, which can be specified more than once, takes a
     key-value pair consisting of the option name and its value.
 {% endcomment %}
-- **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
-  consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
-  than `-v` or `--volume`, but the order of the keys is not significant, and
-  the value of the flag is easier to understand.
-  - The `type` of the mount, which can be [`bind`](bind-mounts.md), `volume`, or
-    [`tmpfs`](tmpfs.md). This topic discusses volumes, so the type is always
-    `volume`.
-  - The `source` of the mount. For named volumes, this is the name of the volume.
-    For anonymous volumes, this field is omitted. May be specified as `source`
-    or `src`.
-  - The `destination` takes as its value the path where the file or directory
-    is mounted in the container. May be specified as `destination`, `dst`,
-    or `target`.
-  - The `readonly` option, if present, causes the bind mount to be [mounted into
-    the container as read-only](#use-a-read-only-volume).
-  - The `volume-opt` option, which can be specified more than once, takes a
-    key-value pair consisting of the option name and its value.
+- **`--mount`**: 複数のキーバリューペアを指定し、各ペアはカンマにより区切ります。
+  そしてそれぞれのペアは `<key>=<value>` という記述を行います。
+  `--mount` における記述は `-v` や `--volume` におけるものよりも長くなります。
+  しかしキーの並び順に意味はなく、このフラグに与えられたキーバリューの内容は容易に理解することができます。
+  - `type` はマウントのタイプであり、[`bind`](bind-mounts.md), `volume`, [`tmpfs`](tmpfs.md) といった値を指定します。
+    ここで説明しているのはボリュームであるため、常に `volume` であるものとします。
+  - `source` はマウント元です。
+    名前つきボリュームの場合は、そのボリューム名です。
+    匿名ボリュームの場合、この項目は省略します。
+    `source` あるいは `src` といった指定がよく用いられます。
+  - `destination` には、コンテナー上にてマウントするファイルまたはディレクトリのパスを指定します。
+    `destination`, `dst`, `target` といった指定がよく用いられます。
+  - オプション `readonly` が指定されると、そのボリュームが [コンテナーにおける読み込み専用マウント](#use-a-read-only-volume) としてマウントされます。
+  - `volume-opt` オプションは複数の指定が可能です。
+    オプション名とその値からなるキーバリューペアを指定します。
 
 {% comment %}
 > Escape values from outer CSV parser
@@ -195,25 +191,25 @@ If you need to specify volume driver options, you must use `--mount`.
 The examples below show both the `--mount` and `-v` syntax where possible, and
     `--mount` is presented first.
 {% endcomment %}
-The examples below show both the `--mount` and `-v` syntax where possible, and
-    `--mount` is presented first.
+これ以降においては、可能なら `--mount` と `-v` の両方の例を示していきます。
+また先に示すのは `--mount` とします。
 
 {% comment %}
 ### Differences between `-v` and `--mount` behavior
 {% endcomment %}
-### Differences between `-v` and `--mount` behavior
+{: #differences-between--v-and---mount-behavior }
+### `-v` と `--mount` の動作の違い
 
 {% comment %}
 As opposed to bind mounts, all options for volumes are available for both
 `--mount` and `-v` flags.
 {% endcomment %}
-As opposed to bind mounts, all options for volumes are available for both
-`--mount` and `-v` flags.
+バインドマウントの場合とは違い、ボリュームのオプションは、`--mount` と `-v` フラグの両方においてすべて利用できます。
 
 {% comment %}
 When using volumes with services, only `--mount` is supported.
 {% endcomment %}
-When using volumes with services, only `--mount` is supported.
+サービスにおいてボリュームを利用する場合は `--mount` のみがサポートされます。
 
 {% comment %}
 ## Create and manage volumes
@@ -225,20 +221,21 @@ When using volumes with services, only `--mount` is supported.
 Unlike a bind mount, you can create and manage volumes outside the scope of any
 container.
 {% endcomment %}
-Unlike a bind mount, you can create and manage volumes outside the scope of any
-container.
+バインドマウントとは異なり、ボリュームの生成と管理はコンテナーの外部から行います。
 
 {% comment %}
-{% endcomment %}
 **Create a volume**:
+{% endcomment %}
+**ボリュームの生成**:
 
 ```bash
 $ docker volume create my-vol
 ```
 
 {% comment %}
-{% endcomment %}
 **List volumes**:
+{% endcomment %}
+**ボリュームの一覧表示**:
 
 ```bash
 $ docker volume ls
@@ -249,7 +246,7 @@ local               my-vol
 {% comment %}
 **Inspect a volume**:
 {% endcomment %}
-**Inspect a volume**:
+**ボリュームの確認**:
 
 ```bash
 $ docker volume inspect my-vol
@@ -266,8 +263,9 @@ $ docker volume inspect my-vol
 ```
 
 {% comment %}
-{% endcomment %}
 **Remove a volume**:
+{% endcomment %}
+**ボリュームの削除**:
 
 ```bash
 $ docker volume rm my-vol
@@ -277,19 +275,24 @@ $ docker volume rm my-vol
 ## Start a container with a volume
 {% endcomment %}
 {: #start-a-container-with-a-volume }
-## Start a container with a volume
+## ボリュームを使ったコンテナーの起動
 
 {% comment %}
-{% endcomment %}
 If you start a container with a volume that does not yet exist, Docker creates
 the volume for you. The following example mounts the volume `myvol2` into
 `/app/` in the container.
+{% endcomment %}
+ボリュームがまだ存在していない状態で、そのボリュームを使ったコンテナーを起動すると、Docker はその際にボリュームを生成します。
+以下の例はボリューム `myvol2` をコンテナー内の `/app/` にマウントするものです。
 
 {% comment %}
-{% endcomment %}
 The `-v` and `--mount` examples below produce the same result. You can't run
 them both unless you remove the `devtest` container and the `myvol2` volume
 after running the first one.
+{% endcomment %}
+`--mount` と `-v` によるそれぞれの例は、同一の結果になります。
+ただし 2 つの例を同時に実行することはできません。
+実行するためには、実行前に `devtest` コンテナーと `myvol2` ボリュームを削除しておくことが必要になります。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-run"><code>--mount</code></a></li>
@@ -319,9 +322,11 @@ $ docker run -d \
 </div><!--tab-content-->
 
 {% comment %}
-{% endcomment %}
 Use `docker inspect devtest` to verify that the volume was created and mounted
 correctly. Look for the `Mounts` section:
+{% endcomment %}
+ボリュームが正しく生成されたかどうかを `docker inspect devtest` により確認します。
+出力の中で `Mounts` の項目を見てみます。
 
 ```json
 "Mounts": [
@@ -339,14 +344,18 @@ correctly. Look for the `Mounts` section:
 ```
 
 {% comment %}
-{% endcomment %}
 This shows that the mount is a volume, it shows the correct source and
 destination, and that the mount is read-write.
+{% endcomment %}
+この情報から、マウントはボリュームであることがわかります。
+そしてマウント元、マウント先が正しいものであること、マウントが読み書き可能であることがわかります。
 
 {% comment %}
-{% endcomment %}
 Stop the container and remove the volume. Note volume removal is a separate
 step.
+{% endcomment %}
+コンテナーを停止し、ボリュームを削除します。
+ボリュームの削除は別操作になります。
 
 ```bash
 $ docker container stop devtest
@@ -360,7 +369,7 @@ $ docker volume rm myvol2
 ### Start a service with volumes
 {% endcomment %}
 {: #start-a-service-with-volumes }
-### Start a service with volumes
+### ボリュームを使ったサービスの起動
 
 {% comment %}
 {% endcomment %}

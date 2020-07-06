@@ -8,10 +8,10 @@ hide_from_sitemap: true
 redirect_from:
 - /samples/mono/
 description: |
-  Mono is an open source implementation of Microsoft's .NET Framework
+  Mono は Microsoft の .NET Framework のオープンソース実装です。
 ---
 
-Mono is an open source implementation of Microsoft's .NET Framework
+Mono は Microsoft の .NET Framework のオープンソース実装です。
 
 
 {% include library-samples.md %}

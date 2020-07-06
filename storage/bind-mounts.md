@@ -57,7 +57,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
 {% endcomment %}
 もともと `-v` フラグや `--volume` フラグはスタンドアロンコンテナーに対して、また `--mount` フラグはスウォームサービスに対して用いられてきたものです。
 しかし Docker 17.06 からは `--mount` をスタンドアロンコンテナーに対しても利用できるようになりました。
-全般に `--mount` の方がわかりやすいものの記述は増えます。
+全般に `--mount` の方がわかりやすいものですが、記述は増えます。
 両者の最大の違いは、`-v` の文法がオプション指定のすべてを 1 項目にとりまとめるものであるのに対して、`--mount` の文法はそれを 1 つずつ個別に分けている点です。
 以下に両フラグにおける文法を比較します。
 
@@ -88,7 +88,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
   - バインドマウントの場合、1 つめの項目は **ホストマシン** 上のファイルまたはディレクトリへのパスです。
   - 2 つめは、コンテナー内にマウントされるファイルまたディレクトリのパスです。
   - 3 つめは任意の指定項目であり、オプション指定をカンマ区切りで指定します。
-    指定内容には `ro`, `consistent`, `delegated`, `cached`, `z`, `Z` があります。
+    指定内容には `ro`, `consistent`, `delegated`, `cached`, `z`, `Z` などがあります。
     このオプションに関しては後に説明しています。
 
 {% comment %}
@@ -128,7 +128,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
     `destination`, `dst`, `target` といった指定がよく用いられます。
   - オプション `readonly` が指定されると、そのバインドマウンドが [コンテナーにおける読み込み専用マウント](#use-a-read-only-bind-mount) としてマウントされます。
   - オプション `bind-propagation` が指定されると、[バインドプロパゲーション](#configure-bind-propagation)（bind propagation）の設定変更を行います。
-    `rprivate`, `private`, `rshared`, `shared`, `rslave`, `slave` のいずれかが指定されます。
+    `rprivate`, `private`, `rshared`, `shared`, `rslave`, `slave` のいずれかを指定します。
   - オプション [`consistency`](#configure-mount-consistency-for-macos) が指定される場合は、`consistent`, `delegated`, `cached` のいずれかを指定します。
     この設定は Docker Desktop for Mac に対してのみ適用されるものであり、これ以外のプラットフォームでは無視されます。
   - `--mount` フラグは、selinux ラベルを修正するための `z` または `Z` オプションには対応していません。
@@ -152,7 +152,7 @@ time, their behavior cannot be changed. This means that **there is one behavior
 that is different between `-v` and `--mount`.**
 {% endcomment %}
 `-v` および `--volume` フラグは、長らく Docker の一部分として実現してきているため、その動作を今さら変更することはできません。
-このことがつまり、**`-v` と `--mount` の動作の 1 つの違い** になります。
+このことがつまり、**`-v` と `--mount` の動作の違いの 1 つ** になります。
 
 {% comment %}
 If you use `-v` or `--volume` to bind-mount a file or directory that does not
@@ -200,8 +200,8 @@ can't run them both unless you remove the `devtest` container after running the
 first one.
 {% endcomment %}
 `--mount` と `-v` によるそれぞれの例は、同一の結果になります。
-2 つの例は同時に実行することはできません。
-それをする場合は、1 つを実行した後に `devtest` コンテナーを削除しておくことが必要になります。
+ただし 2 つの例を同時に実行することはできません。
+実行するためには、実行前に `devtest` コンテナーを削除しておくことが必要になります。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-run"><code>--mount</code></a></li>

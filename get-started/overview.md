@@ -548,5 +548,5 @@ technologies such as BSD Jails or Solaris Zones.
 {% endcomment %}
 ## 次のステップ
 {: #next-steps }
-- [Docker のインストール](/get-docker.md) に進む。
+- [Docker のインストール](../get-docker.md) に進む。
 - 利用例を確認したり詳細なトピックを突き詰めたりするために [Docker Engine ユーザーガイド](index.md) を読む。

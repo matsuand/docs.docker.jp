@@ -9,7 +9,7 @@ long: |-
   If you need more detailed information about a container's resource usage, use
   the `/containers/(id)/stats` API endpoint.
 
-  > **Note**
+  > **メモ**
   >
   > On Linux, the Docker CLI reports memory usage by subtracting page cache usage
   > from the total memory usage. The API does not perform such a calculation but
@@ -79,7 +79,7 @@ examples: |-
   If you don't [specify a format string using `--format`](#formatting), the
   following columns are shown.
 
-  | Column name               | Description                                                                                   |
+  | カラム名                  | 内容説明                                                                                      |
   |---------------------------|-----------------------------------------------------------------------------------------------|
   | `CONTAINER ID` and `Name` | the ID and name of the container                                                              |
   | `CPU %` and `MEM %`       | the percentage of the host's CPU and memory the container is using                            |
@@ -88,7 +88,7 @@ examples: |-
   | `BLOCK I/O`               | The amount of data the container has read to and written from block devices on the host       |
   | `PIDs`                    | the number of processes or threads the container has created                                  |
 
-  Running `docker stats` on multiple containers by name and id against a Linux daemon.
+  Linux デーモンに向けて、コンテナー名とコンテナー ID を複数指定して `docker stats` を実行します。
 
   ```bash
   $ docker stats awesome_brattain 67b2525d8ad1
@@ -98,7 +98,7 @@ examples: |-
   67b2525d8ad1        foobar              0.00%               1.727MiB / 1.952GiB   0.09%               2.48kB / 0B         4.11MB / 0B         2
   ```
 
-  Running `docker stats` with customized format on all (Running and Stopped) containers.
+  出力をカスタマイズして、（実行中と停止を含む）すべてのコンテナーに対して `docker stats` を実行します。
 
   ```bash
   $ docker stats --all --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}" fervent_panini 5acfcb1b4fd1 drunk_visvesvaraya big_heisenberg

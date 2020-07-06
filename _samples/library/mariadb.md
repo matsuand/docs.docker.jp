@@ -8,10 +8,10 @@ hide_from_sitemap: true
 redirect_from:
 - /samples/mariadb/
 description: |
-  MariaDB is a community-developed fork of MySQL intended to remain free under the GNU GPL.
+  MariaDB は MySQL からフォークしたコミュニティ開発版であり、GNU GPL のもとでフリーであることを保証します。
 ---
 
-MariaDB is a community-developed fork of MySQL intended to remain free under the GNU GPL.
+MariaDB は MySQL からフォークしたコミュニティ開発版であり、GNU GPL のもとでフリーであることを保証します。
 
 
 {% include library-samples.md %}

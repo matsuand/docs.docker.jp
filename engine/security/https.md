@@ -4,7 +4,7 @@ keywords: docker, docs, article, example, https, daemon, tls, ca,  certificate
 redirect_from:
 - /engine/articles/https/
 - /articles/https/
-title: Protect the Docker daemon socket
+title: Docker デーモンソケットの保護
 ---
 
 {% comment %}
@@ -421,4 +421,4 @@ flags:
 {% comment %}
 {% endcomment %}
 * [Using certificates for repository client verification](certificates.md)
-* [Use trusted images](trust/index.md)
+* [信頼できるイメージの利用](trust/index.md)

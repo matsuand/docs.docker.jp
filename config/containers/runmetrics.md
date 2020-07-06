@@ -5,16 +5,24 @@ redirect_from:
 - /engine/articles/run_metrics
 - /engine/articles/runmetrics
 - /engine/admin/runmetrics/
-title: Runtime metrics
+title: ランタイムメトリックス
 ---
 
 ## Docker stats
 
+{% comment %}
+You can use the `docker stats` command to live stream a container's
+runtime metrics. The command supports CPU, memory usage, memory limit,
+and network IO metrics.
+{% endcomment %}
 You can use the `docker stats` command to live stream a container's
 runtime metrics. The command supports CPU, memory usage, memory limit,
 and network IO metrics.
 
+{% comment %}
 The following is a sample output from the `docker stats` command
+{% endcomment %}
+以下は `docker stats` コマンドの出力例です。
 
 ```bash
 $ docker stats redis1 redis2
@@ -24,69 +32,118 @@ redis1              0.07%               796 KB / 64 MB        1.21%             
 redis2              0.07%               2.746 MB / 64 MB      4.29%               1.266 KB / 648 B    12.4 MB / 0 B
 ```
 
+{% comment %}
 The [docker stats](../../engine/reference/commandline/stats.md) reference page has
 more details about the `docker stats` command.
+{% endcomment %}
+[docker stats](../../engine/reference/commandline/stats.md) のリファレンスページでは、より詳細に `docker stats` コマンドについて説明しています。
 
+{% comment %}
 ## Control groups
+{% endcomment %}
+{: #control-groups }
+## コントロールグループ
 
+{% comment %}
 Linux Containers rely on [control groups](
 https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt)
 which not only track groups of processes, but also expose metrics about
 CPU, memory, and block I/O usage. You can access those metrics and
 obtain network usage metrics as well. This is relevant for "pure" LXC
 containers, as well as for Docker containers.
+{% endcomment %}
+Linux のコンテナーは [コントロールグループ](https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt) に依存しています。
+これは単に複数のプロセスを追跡するだけでなく、CPU、メモリ、ブロック I/O 使用量に関するメトリックスを提供します。
+このメトリックスがアクセス可能であり、同様にネットワーク使用量メトリックスも得ることができます。
+これは「純粋な」LXC コンテナーに関連があり、Docker のコンテナーにも関係します。
 
+{% comment %}
 Control groups are exposed through a pseudo-filesystem. In recent
 distros, you should find this filesystem under `/sys/fs/cgroup`. Under
 that directory, you see multiple sub-directories, called devices,
 freezer, blkio, etc.; each sub-directory actually corresponds to a different
 cgroup hierarchy.
+{% endcomment %}
+コントロールグループは擬似ファイルシステムを通じて提供されます。
+最近のディストリビューションでは、このファイルシステムは `/sys/fs/cgroup` にあります。
+このディレクトリの下には devices、freezer、blkio などのサブディレクトリが複数あります。
+各サブディレクトリは、実にさまざまな cgroup 階層に対応しています。
 
+{% comment %}
+On older systems, the control groups might be mounted on `/cgroup`, without
+distinct hierarchies. In that case, instead of seeing the sub-directories,
+you see a bunch of files in that directory, and possibly some directories
+corresponding to existing containers.
+{% endcomment %}
 On older systems, the control groups might be mounted on `/cgroup`, without
 distinct hierarchies. In that case, instead of seeing the sub-directories,
 you see a bunch of files in that directory, and possibly some directories
 corresponding to existing containers.
 
+{% comment %}
+{% endcomment %}
 To figure out where your control groups are mounted, you can run:
 
 ```bash
 $ grep cgroup /proc/mounts
 ```
 
+{% comment %}
+{% endcomment %}
 ### Enumerate cgroups
 
+{% comment %}
+{% endcomment %}
 You can look into `/proc/cgroups` to see the different control group subsystems
 known to the system, the hierarchy they belong to, and how many groups they contain.
 
+{% comment %}
+{% endcomment %}
 You can also look at `/proc/<pid>/cgroup` to see which control groups a process
 belongs to. The control group is shown as a path relative to the root of
 the hierarchy mountpoint. `/` means the process has not been assigned to a
 group, while `/lxc/pumpkin` indicates that the process is a member of a
 container named `pumpkin`.
 
+{% comment %}
+{% endcomment %}
 ### Find the cgroup for a given container
 
+{% comment %}
+{% endcomment %}
 For each container, one cgroup is created in each hierarchy. On
 older systems with older versions of the LXC userland tools, the name of
 the cgroup is the name of the container. With more recent versions
 of the LXC tools, the cgroup is `lxc/<container_name>.`
 
+{% comment %}
+{% endcomment %}
 For Docker containers using cgroups, the container name is the full
 ID or long ID of the container. If a container shows up as ae836c95b4c3
 in `docker ps`, its long ID might be something like
 `ae836c95b4c3c9e9179e0e91015512da89fdec91612f63cebae57df9a5444c79`. You can
 look it up with `docker inspect` or `docker ps --no-trunc`.
 
+{% comment %}
+{% endcomment %}
 Putting everything together to look at the memory metrics for a Docker
 container, take a look at `/sys/fs/cgroup/memory/docker/<longid>/`.
 
+{% comment %}
+{% endcomment %}
 ### Metrics from cgroups: memory, CPU, block I/O
 
+{% comment %}
+{% endcomment %}
 For each subsystem (memory, CPU, and block I/O), one or
 more pseudo-files exist and contain statistics.
 
+{% comment %}
+{% endcomment %}
 #### Memory metrics: `memory.stat`
 
+{% comment %}
+{% endcomment %}
 Memory metrics are found in the "memory" cgroup. The memory
 control group adds a little overhead, because it does very fine-grained
 accounting of the memory usage on your host. Therefore, many distros
@@ -94,6 +151,8 @@ chose to not enable it by default. Generally, to enable it, all you have
 to do is to add some kernel command-line parameters:
 `cgroup_enable=memory swapaccount=1`.
 
+{% comment %}
+{% endcomment %}
 The metrics are in the pseudo-file `memory.stat`.
 Here is what it looks like:
 
@@ -126,10 +185,14 @@ Here is what it looks like:
     total_active_file 4489052160
     total_unevictable 32768
 
+{% comment %}
+{% endcomment %}
 The first half (without the `total_` prefix) contains statistics relevant
 to the processes within the cgroup, excluding sub-cgroups. The second half
 (with the `total_` prefix) includes sub-cgroups as well.
 
+{% comment %}
+{% endcomment %}
 Some metrics are "gauges", or values that can increase or decrease. For instance,
 `swap` is the amount of swap space used by the members of the cgroup.
 Some others are "counters", or values that can only go up, because
@@ -138,6 +201,8 @@ indicates the number of page faults since the creation of the cgroup.
 
 <style>table tr > td:first-child { white-space: nowrap;}</style>
 
+{% comment %}
+{% endcomment %}
 Metric                                | Description
 --------------------------------------|-----------------------------------------------------------
 **cache**                             | The amount of memory used by the processes of this control group that can be associated precisely with a block on a block device. When you read from and write to files on disk, this amount increases. This is the case if you use "conventional" I/O (`open`, `read`, `write` syscalls) as well as mapped files (with `mmap`). It also accounts for the memory used by `tmpfs` mounts, though the reasons are unclear.
@@ -150,6 +215,8 @@ Metric                                | Description
 **unevictable**                       | The amount of memory that cannot be reclaimed; generally, it accounts for memory that has been "locked" with `mlock`. It is often used by crypto frameworks to make sure that secret keys and other sensitive material never gets swapped out to disk.
 **memory_limit**, **memsw_limit**     | These are not really metrics, but a reminder of the limits applied to this cgroup. The first one indicates the maximum amount of physical memory that can be used by the processes of this control group; the second one indicates the maximum amount of RAM+swap.
 
+{% comment %}
+{% endcomment %}
 Accounting for memory in the page cache is very complex. If two
 processes in different control groups both read the same file
 (ultimately relying on the same blocks on disk), the corresponding
@@ -158,21 +225,31 @@ it also means that when a cgroup is terminated, it could increase the
 memory usage of another cgroup, because they are not splitting the cost
 anymore for those memory pages.
 
+{% comment %}
+{% endcomment %}
 ### CPU metrics: `cpuacct.stat`
 
+{% comment %}
+{% endcomment %}
 Now that we've covered memory metrics, everything else is
 simple in comparison. CPU metrics are in the
 `cpuacct` controller.
 
+{% comment %}
+{% endcomment %}
 For each container, a pseudo-file `cpuacct.stat` contains the CPU usage
 accumulated by the processes of the container, broken down into `user` and
 `system` time. The distinction is:
 
+{% comment %}
+{% endcomment %}
 - `user` time is the amount of time a process has direct control of the CPU,
   executing process code.
 - `system` time is the time the kernel is executing system calls on behalf of
   the process.
 
+{% comment %}
+{% endcomment %}
 Those times are expressed in ticks of 1/100th of a second, also called "user
 jiffies". There are `USER_HZ` *"jiffies"* per second, and on x86 systems,
 `USER_HZ` is 100. Historically, this mapped exactly to the number of scheduler
@@ -180,8 +257,12 @@ jiffies". There are `USER_HZ` *"jiffies"* per second, and on x86 systems,
 [tickless kernels]( http://lwn.net/Articles/549580/) have made the number of
 ticks irrelevant.
 
+{% comment %}
+{% endcomment %}
 #### Block I/O metrics
 
+{% comment %}
+{% endcomment %}
 Block I/O is accounted in the `blkio` controller.
 Different metrics are scattered across different files. While you can
 find in-depth details in the [blkio-controller](
@@ -190,6 +271,8 @@ file in the kernel documentation, here is a short list of the most
 relevant ones:
 
 
+{% comment %}
+{% endcomment %}
 Metric                      | Description
 ----------------------------|-----------------------------------------------------------
 **blkio.sectors**           | Contains the number of 512-bytes sectors read and written by the processes member of the cgroup, device by device. Reads and writes are merged in a single counter.
@@ -197,8 +280,12 @@ Metric                      | Description
 **blkio.io_serviced**       | The number of I/O operations performed, regardless of their size. It also has 4 counters per device.
 **blkio.io_queued**         | Indicates the number of I/O operations currently queued for this cgroup. In other words, if the cgroup isn't doing any I/O, this is zero. The opposite is not true. In other words, if there is no I/O queued, it does not mean that the cgroup is idle (I/O-wise). It could be doing purely synchronous reads on an otherwise quiescent device, which can therefore handle them immediately, without queuing. Also, while it is helpful to figure out which cgroup is putting stress on the I/O subsystem, keep in mind that it is a relative quantity. Even if a process group does not perform more I/O, its queue size can increase just because the device load increases because of other devices.
 
+{% comment %}
+{% endcomment %}
 ### Network metrics
 
+{% comment %}
+{% endcomment %}
 Network metrics are not exposed directly by control groups. There is a
 good explanation for that: network interfaces exist within the context
 of *network namespaces*. The kernel could probably accumulate metrics
@@ -212,13 +299,21 @@ interfaces, potentially multiple `eth0`
 interfaces, etc.; so this is why there is no easy way to gather network
 metrics with control groups.
 
+{% comment %}
+{% endcomment %}
 Instead we can gather network metrics from other sources:
 
+{% comment %}
+{% endcomment %}
 #### IPtables
 
+{% comment %}
+{% endcomment %}
 IPtables (or rather, the netfilter framework for which iptables is just
 an interface) can do some serious accounting.
 
+{% comment %}
+{% endcomment %}
 For instance, you can setup a rule to account for the outbound HTTP
 traffic on a web server:
 
@@ -226,20 +321,28 @@ traffic on a web server:
 $ iptables -I OUTPUT -p tcp --sport 80
 ```
 
+{% comment %}
+{% endcomment %}
 There is no `-j` or `-g` flag,
 so the rule just counts matched packets and goes to the following
 rule.
 
+{% comment %}
+{% endcomment %}
 Later, you can check the values of the counters, with:
 
 ```bash
 $ iptables -nxvL OUTPUT
 ```
 
+{% comment %}
+{% endcomment %}
 Technically, `-n` is not required, but it
 prevents iptables from doing DNS reverse lookups, which are probably
 useless in this scenario.
 
+{% comment %}
+{% endcomment %}
 Counters include packets and bytes. If you want to setup metrics for
 container traffic like this, you could execute a `for`
 loop to add two `iptables` rules per
@@ -248,23 +351,33 @@ chain. This only meters traffic going through the NAT
 layer; you also need to add traffic going through the userland
 proxy.
 
+{% comment %}
+{% endcomment %}
 Then, you need to check those counters on a regular basis. If you
 happen to use `collectd`, there is a [nice plugin](https://collectd.org/wiki/index.php/Table_of_Plugins)
 to automate iptables counters collection.
 
+{% comment %}
+{% endcomment %}
 #### Interface-level counters
 
+{% comment %}
+{% endcomment %}
 Since each container has a virtual Ethernet interface, you might want to check
 directly the TX and RX counters of this interface. Each container is associated
 to a virtual Ethernet interface in your host, with a name like `vethKk8Zqi`.
 Figuring out which interface corresponds to which container is, unfortunately,
 difficult.
 
+{% comment %}
+{% endcomment %}
 But for now, the best way is to check the metrics *from within the
 containers*. To accomplish this, you can run an executable from the host
 environment within the network namespace of a container using **ip-netns
 magic**.
 
+{% comment %}
+{% endcomment %}
 The `ip-netns exec` command allows you to execute any
 program (present in the host system) within any network namespace
 visible to the current process. This means that your host can
@@ -272,18 +385,24 @@ visible to the current process. This means that your host can
 can't access the host or other peer containers.
 Containers can interact with their sub-containers, though.
 
+{% comment %}
+{% endcomment %}
 The exact format of the command is:
 
 ```bash
 $ ip netns exec <nsname> <command...>
 ```
 
+{% comment %}
+{% endcomment %}
 For example:
 
 ```bash
 $ ip netns exec mycontainer netstat -i
 ```
 
+{% comment %}
+{% endcomment %}
 `ip netns` finds the "mycontainer" container by
 using namespaces pseudo-files. Each process belongs to one network
 namespace, one PID namespace, one `mnt` namespace,
@@ -292,23 +411,33 @@ etc., and those namespaces are materialized under
 namespace of PID 42 is materialized by the pseudo-file
 `/proc/42/ns/net`.
 
+{% comment %}
+{% endcomment %}
 When you run `ip netns exec mycontainer ...`, it
 expects `/var/run/netns/mycontainer` to be one of
 those pseudo-files. (Symlinks are accepted.)
 
+{% comment %}
+{% endcomment %}
 In other words, to execute a command within the network namespace of a
 container, we need to:
 
+{% comment %}
+{% endcomment %}
 - Find out the PID of any process within the container that we want to investigate;
 - Create a symlink from `/var/run/netns/<somename>` to `/proc/<thepid>/ns/net`
 - Execute `ip netns exec <somename> ....`
 
+{% comment %}
+{% endcomment %}
 Review [Enumerate Cgroups](#enumerate-cgroups) for how to find
 the cgroup of an in-container process whose network usage you want to measure.
 From there, you can examine the pseudo-file named
 `tasks`, which contains all the PIDs in the
 cgroup (and thus, in the container). Pick any one of the PIDs.
 
+{% comment %}
+{% endcomment %}
 Putting everything together, if the "short ID" of a container is held in
 the environment variable `$CID`, then you can do this:
 
@@ -320,14 +449,20 @@ $ ln -sf /proc/$PID/ns/net /var/run/netns/$CID
 $ ip netns exec $CID netstat -i
 ```
 
+{% comment %}
+{% endcomment %}
 ## Tips for high-performance metric collection
 
+{% comment %}
+{% endcomment %}
 Running a new process each time you want to update metrics is
 (relatively) expensive. If you want to collect metrics at high
 resolutions, and/or over a large number of containers (think 1000
 containers on a single host), you do not want to fork a new process each
 time.
 
+{% comment %}
+{% endcomment %}
 Here is how to collect metrics from a single process. You need to
 write your metric collector in C (or any language that lets you do
 low-level system calls). You need to use a special system call,
@@ -336,28 +471,42 @@ arbitrary namespace. It requires, however, an open file descriptor to
 the namespace pseudo-file (remember: that's the pseudo-file in
 `/proc/<pid>/ns/net`).
 
+{% comment %}
+{% endcomment %}
 However, there is a catch: you must not keep this file descriptor open.
 If you do, when the last process of the control group exits, the
 namespace is not destroyed, and its network resources (like the
 virtual interface of the container) stays around forever (or until
 you close that file descriptor).
 
+{% comment %}
+{% endcomment %}
 The right approach would be to keep track of the first PID of each
 container, and re-open the namespace pseudo-file each time.
 
+{% comment %}
+{% endcomment %}
 ## Collect metrics when a container exits
 
+{% comment %}
+{% endcomment %}
 Sometimes, you do not care about real time metric collection, but when a
 container exits, you want to know how much CPU, memory, etc. it has
 used.
 
+{% comment %}
+{% endcomment %}
 Docker makes this difficult because it relies on `lxc-start`, which carefully
 cleans up after itself. It is usually easier to collect metrics at regular
 intervals, and this is the way the `collectd` LXC plugin works.
 
+{% comment %}
+{% endcomment %}
 But, if you'd still like to gather the stats when a container stops,
 here is how:
 
+{% comment %}
+{% endcomment %}
 For each container, start a collection process, and move it to the
 control groups that you want to monitor by writing its PID to the tasks
 file of the cgroup. The collection process should periodically re-read
@@ -366,12 +515,16 @@ the tasks file to check if it's the last process of the control group.
 previous section, you should also move the process to the appropriate
 network namespace.)
 
+{% comment %}
+{% endcomment %}
 When the container exits, `lxc-start` attempts to
 delete the control groups. It fails, since the control group is
 still in use; but that's fine. Your process should now detect that it is
 the only one remaining in the group. Now is the right time to collect
 all the metrics you need!
 
+{% comment %}
+{% endcomment %}
 Finally, your process should move itself back to the root control group,
 and remove the container control group. To remove a control group, just
 `rmdir` its directory. It's counter-intuitive to

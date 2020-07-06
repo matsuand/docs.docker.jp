@@ -557,7 +557,7 @@ Docker をより安全にする方法を検討している方は、Docker コミ
 * [On the Security of Containers (2014)](https://medium.com/@ewindisch/on-the-security-of-containers-2c60ffe25a9e)
 * [Docker swarm mode overlay network security model](../../network/overlay.md)
 {% endcomment %}
-* [信頼のあるイメージを使う](trust/index.md)
+* [信頼できるイメージの利用](trust/index.md)
 * [Docker 向け Seccomp セキュリティプロファイル](seccomp.md)
 * [Docker 向け AppArmor セキュリティプロファイル](apparmor.md)
 * [On the Security of Containers (2014)](https://medium.com/@ewindisch/on-the-security-of-containers-2c60ffe25a9e)

@@ -69,10 +69,7 @@ This page contains step-by-step instructions on how to get started with Docker. 
 このページでは順を追って手順を進めていくことで Docker を学んでいきます。
 Dockercon 2020 のビデオウォークスルーもお勧めします。
 
-{% comment %}
-[![How to get started with Docker](images/vid-get-started-pmckee.png)](https://docker.events.cube365.net/docker/dockercon/content/Videos/hgMFTyX5kYKmTPWZo){: target="_blank" class="_”}
-{% endcomment %}
-[![Docker のはじめ方](images/vid-get-started-pmckee.png)](https://docker.events.cube365.net/docker/dockercon/content/Videos/hgMFTyX5kYKmTPWZo){: target="_blank" class="_”}
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iqqDU2crIEQ?start=30" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 {% comment %}
 The Docker Quickstart training module teaches you how to:

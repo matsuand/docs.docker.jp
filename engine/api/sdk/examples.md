@@ -9,20 +9,35 @@ redirect_from:
 - /develop/sdk/examples/
 ---
 
+{% comment %}
 After you
 [install Docker](../../../get-docker.md), you can
 [install the Go or Python SDK](index.md#install-the-sdks) and
 also try out the Docker Engine API.
+{% endcomment %}
+[Docker のインストール](../../../get-docker.md) を行ったら、, you can
+[install the Go or Python SDK](index.md#install-the-sdks) and
+also try out the Docker Engine API.
 
+{% comment %}
+Each of these examples show how to perform a given Docker operation using the Go
+and Python SDKs and the HTTP API using `curl`.
+{% endcomment %}
 Each of these examples show how to perform a given Docker operation using the Go
 and Python SDKs and the HTTP API using `curl`.
 
+{% comment %}
+{% endcomment %}
 ## Run a container
 
+{% comment %}
+{% endcomment %}
 This first example shows how to run a container using the Docker API. On the
 command line, you would use the `docker run` command, but this is just as easy
 to do from your own apps too.
 
+{% comment %}
+{% endcomment %}
 This is the equivalent of typing `docker run alpine echo hello world` at the
 command prompt:
 
@@ -126,8 +141,12 @@ hello world
 </div>
 </div><!-- end tab-content -->
 
+{% comment %}
+{% endcomment %}
 ## Run a container in the background
 
+{% comment %}
+{% endcomment %}
 You can also run containers in the background, the equivalent of typing
 `docker run -d bfirsh/reticulate-splines`:
 
@@ -212,8 +231,12 @@ $ curl --unix-socket /var/run/docker.sock -X POST http:/v1.24/containers/1c6594f
 </div>
 </div><!-- end tab-content -->
 
+{% comment %}
+{% endcomment %}
 ## List and manage containers
 
+{% comment %}
+{% endcomment %}
 You can use the API to list containers that are running, just like using
 `docker ps`:
 
@@ -284,11 +307,17 @@ $ curl --unix-socket /var/run/docker.sock http:/v1.24/containers/json
 </div>
 </div><!-- end tab-content -->
 
+{% comment %}
+{% endcomment %}
 ## Stop all running containers
 
+{% comment %}
+{% endcomment %}
 Now that you know what containers exist, you can perform operations on them.
 This example stops all running containers.
 
+{% comment %}
+{% endcomment %}
 > **Note**: Don't run this on a production server. Also, if you are using swarm
 > services, the containers stop, but Docker creates new ones to keep
 > the service running in its configured state.
@@ -367,8 +396,12 @@ $ curl --unix-socket /var/run/docker.sock \
 </div>
 </div><!-- end tab-content -->
 
+{% comment %}
+{% endcomment %}
 ## Print the logs of a specific container
 
+{% comment %}
+{% endcomment %}
 You can also perform actions on individual containers. This example prints the
 logs of a container given its ID. You need to modify the code before running it
 to change the hard-coded ID of the container to print the logs for.
@@ -439,8 +472,12 @@ Reticulating spline 5...
 </div>
 </div><!-- end tab-content -->
 
+{% comment %}
+{% endcomment %}
 ## List all images
 
+{% comment %}
+{% endcomment %}
 List the images on your Engine, similar to `docker image ls`:
 
 <ul class="nav nav-tabs">
@@ -509,8 +546,12 @@ $ curl --unix-socket /var/run/docker.sock http:/v1.24/images/json
 </div>
 </div><!-- end tab-content -->
 
+{% comment %}
+{% endcomment %}
 ## Pull an image
 
+{% comment %}
+{% endcomment %}
 Pull an image, like `docker pull`:
 
 <ul class="nav nav-tabs">
@@ -580,10 +621,16 @@ $ curl --unix-socket /var/run/docker.sock \
 </div> <!-- end tab-content -->
 
 
+{% comment %}
+{% endcomment %}
 ## Pull an image with authentication
 
+{% comment %}
+{% endcomment %}
 Pull an image, like `docker pull`, with authentication:
 
+{% comment %}
+{% endcomment %}
 > **Note**: Credentials are sent in the clear. Docker's official registries use
 > HTTPS. Private registries should also be configured to use HTTPS.
 
@@ -642,6 +689,8 @@ func main() {
 
 <div id="tab-pullimages-auth-python" class="tab-pane fade" markdown="1">
 
+{% comment %}
+{% endcomment %}
 The Python SDK retrieves authentication information from the [credentials
 store](/engine/reference/commandline/login/#credentials-store) file and
 integrates with [credential
@@ -661,6 +710,8 @@ print image.id
 
 <div id="tab-pullimages-curl" class="tab-pane fade" markdown="1">
 
+{% comment %}
+{% endcomment %}
 This example leaves the credentials in your shell's history, so consider
 this a naive implementation. The credentials are passed as a Base-64-encoded
 JSON structure.
@@ -682,8 +733,12 @@ $ curl --unix-socket /var/run/docker.sock \
 </div>
 </div> <!-- end tab-content -->
 
+{% comment %}
+{% endcomment %}
 ## Commit a container
 
+{% comment %}
+{% endcomment %}
 Commit a container to create an image from its contents:
 
 <ul class="nav nav-tabs">

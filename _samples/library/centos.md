@@ -8,10 +8,10 @@ hide_from_sitemap: true
 redirect_from:
 - /samples/centos/
 description: |
-  The official build of CentOS.
+  CentOS の公式ビルドイメージ。
 ---
 
-The official build of CentOS.
+CentOS の公式ビルドイメージ。
 
 
 {% include library-samples.md %}

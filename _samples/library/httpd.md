@@ -8,10 +8,10 @@ hide_from_sitemap: true
 redirect_from:
 - /samples/httpd/
 description: |
-  The Apache HTTP Server Project
+  Apache HTTP サーバープロジェクト。
 ---
 
-The Apache HTTP Server Project
+Apache HTTP サーバープロジェクト。
 
 
 {% include library-samples.md %}

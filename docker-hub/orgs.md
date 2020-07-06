@@ -27,9 +27,9 @@ They belong only to teams within an organization.
 > ユーザーは、あくまで組織内にあるチームに属するものです。
 
 {% comment %}
-[![overview of organizations in Docker Hub](images/vid-org-overview.png)](https://youtu.be/G7lvSnAqed8){: target="_blank" class="_”}
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/G7lvSnAqed8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 {% endcomment %}
-[![Docker Hub における組織の概要](images/vid-org-overview.png)](https://youtu.be/G7lvSnAqed8){: target="_blank" class="_”}
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/G7lvSnAqed8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 {% comment %}
 ## Working with organizations
@@ -43,7 +43,7 @@ They belong only to teams within an organization.
 {: #create-an-organization }
 ### 組織の生成
 
-[![Docker Hub での組織生成方法](images/vid-create-org.png)](https://youtu.be/b0TKcIqa9Po){: target="_blank" class="_”}
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/b0TKcIqa9Po" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 {% comment %}
 1. Start by clicking on **[Organizations](https://hub.docker.com/orgs)** in
@@ -141,7 +141,7 @@ If you don't see the organization, then you are neither a member or an owner of 
 {: #working-with-teams-and-members }
 ## チームとメンバーの利用
 
-[![Docker Hub のチーム概要](images/vid-teams-overview.png)](https://www.youtube.com/watch?v=MROKmtmWCVI){: target="_blank" class="_”}
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/MROKmtmWCVI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 {% comment %}
 ### Create a team
@@ -149,7 +149,7 @@ If you don't see the organization, then you are neither a member or an owner of 
 {: #create-a-team }
 ### チームの生成
 
-[![Docker Hub でのチーム生成と管理](images/vid-teams-manage.png)](https://www.youtube.com/watch?v=78wbbBoasIc){: target="_blank" class="_”}
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/78wbbBoasIc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 {% comment %}
 1. Go to **Organizations** in Docker Hub, and select your organization.

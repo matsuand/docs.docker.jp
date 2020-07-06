@@ -58,18 +58,16 @@ additional steps.
   database, that application may send its output to log files instead of `STDOUT`
   and `STDERR`.
 {% endcomment %}
-- If your image runs a non-interactive process such as a web server or a
-  database, that application may send its output to log files instead of `STDOUT`
-  and `STDERR`.
+- 実行するイメージが、ウェブサーバーやデータベースのような非対話的なプロセスである場合、ログは `STDOUT`
+  や `STDERR` にではなく、ログファイルに対して出力されるかもしれません。
 
 {% comment %}
 In the first case, your logs are processed in other ways and you may choose not
 to use `docker logs`. In the second case, the official `nginx` image shows one
 workaround, and the official Apache `httpd` image shows another.
 {% endcomment %}
-In the first case, your logs are processed in other ways and you may choose not
-to use `docker logs`. In the second case, the official `nginx` image shows one
-workaround, and the official Apache `httpd` image shows another.
+上の 1 点めに該当する場合、ログ出力が他の方法で処理されているため、`docker logs` は利用しないようにすることが考えられます。
+2 点めの場合、`nginx` の公式イメージではその解決がなされていて、公式の Apache イメージ `httpd` では、また別の解決方法をとっています。
 
 {% comment %}
 The official `nginx` image creates a symbolic link from `/var/log/nginx/access.log`
@@ -78,11 +76,10 @@ from `/var/log/nginx/error.log` to `/dev/stderr`, overwriting the log files and
 causing logs to be sent to the relevant special device instead. See the
 [Dockerfile](https://github.com/nginxinc/docker-nginx/blob/8921999083def7ba43a06fabd5f80e4406651353/mainline/jessie/Dockerfile#L21-L23).
 {% endcomment %}
-The official `nginx` image creates a symbolic link from `/var/log/nginx/access.log`
-to `/dev/stdout`, and creates another symbolic link
-from `/var/log/nginx/error.log` to `/dev/stderr`, overwriting the log files and
-causing logs to be sent to the relevant special device instead. See the
-[Dockerfile](https://github.com/nginxinc/docker-nginx/blob/8921999083def7ba43a06fabd5f80e4406651353/mainline/jessie/Dockerfile#L21-L23).
+`nginx` の公式イメージでは、`/var/log/nginx/access.log` から `/dev/stdout` へのシンボリックリンクを生成しています。
+同じく `/var/log/nginx/error.log` は `/dev/stderr` へのリンクとしています。
+ログファイルをこのように設定し、ログ内容に合わせた特別デバイスへの出力を行っています。
+詳しくは [Dockerfile](https://github.com/nginxinc/docker-nginx/blob/8921999083def7ba43a06fabd5f80e4406651353/mainline/jessie/Dockerfile#L21-L23) を参照してください。
 
 {% comment %}
 The official `httpd` driver changes the `httpd` application's configuration to
@@ -90,10 +87,8 @@ write its normal output directly to `/proc/self/fd/1` (which is `STDOUT`) and
 its errors to `/proc/self/fd/2` (which is `STDERR`). See the
 [Dockerfile](https://github.com/docker-library/httpd/blob/b13054c7de5c74bbaa6d595dbe38969e6d4f860c/2.2/Dockerfile#L72-L75).
 {% endcomment %}
-The official `httpd` driver changes the `httpd` application's configuration to
-write its normal output directly to `/proc/self/fd/1` (which is `STDOUT`) and
-its errors to `/proc/self/fd/2` (which is `STDERR`). See the
-[Dockerfile](https://github.com/docker-library/httpd/blob/b13054c7de5c74bbaa6d595dbe38969e6d4f860c/2.2/Dockerfile#L72-L75).
+公式イメージ `httpd` では、`httpd` アプリケーション設定を変更して、標準出力を直接 `/proc/self/fd/1` (すなわち `STDOUT`) に、またエラーを `/proc/self/fd/2` (すなわち `STDERR`) にそれぞれ出力するようにしています。
+詳しくは [Dockerfile](https://github.com/docker-library/httpd/blob/b13054c7de5c74bbaa6d595dbe38969e6d4f860c/2.2/Dockerfile#L72-L75) を参照してください。
 
 {% comment %}
 ## Next steps
