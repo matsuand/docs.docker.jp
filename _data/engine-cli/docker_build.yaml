@@ -1,5 +1,5 @@
 command: docker build
-short: Dockerfile からのイメージビルド
+short: Dockerfile からイメージをビルドします。
 long: |-
   The `docker build` command builds Docker images from a Dockerfile and a
   "context". A build's context is the set of files located in the specified

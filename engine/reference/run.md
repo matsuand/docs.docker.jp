@@ -18,25 +18,35 @@ keywords: "docker, run, configure, runtime"
 {: #docker-run-reference }
 # Docker run リファレンス
 
+{% comment %}
 Docker runs processes in isolated containers. A container is a process
 which runs on a host. The host may be local or remote. When an operator
 executes `docker run`, the container process that runs is isolated in
 that it has its own file system, its own networking, and its own
 isolated process tree separate from the host.
+{% endcomment %}
+Docker は隔離されたコンテナー内でプロセスを実行します。
+コンテナーとは、ホスト上で実行される 1 つのプロセスです。
+ここでいうホストは、ローカルとリモートのどちらもあります。
+`docker run` を実行すると、分離された状態でコンテナープロセスが起動します。
+そこではホストから切り離されたところで、独自のファイルシステム、独自のネットワーク、分離されたプロセスツリーを持ちます。
 
+{% comment %}
 This page details how to use the `docker run` command to define the
 container's resources at runtime.
+{% endcomment %}
+このページでは、コンテナーのリソースを実行時に定義して `docker run` コマンドを利用する方法を示します。
 
 {% comment %}
 ## General form
 {% endcomment %}
 {: #general-form }
-## 一般的書式
+## 一般的な書式
 
 {% comment %}
 The basic `docker run` command takes this form:
 {% endcomment %}
-基本的な `docker run` コマンドは以下の書式です。
+基本的な `docker run` コマンドは以下の書式で表わされます。
 
     $ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
 
@@ -45,15 +55,30 @@ The `docker run` command must specify an [*IMAGE*](glossary.md#image)
 to derive the container from. An image developer can define image
 defaults related to:
 {% endcomment %}
-The `docker run` command must specify an [*IMAGE*](glossary.md#image)
-to derive the container from. An image developer can define image
+`docker run` コマンドには [**イメージ**](glossary.md#image) を指定することが必要です。
+コンテナーはこのイメージから作り出されます。
+An image developer can define image
 defaults related to:
 
+ {% comment %}
  * detached or foreground running
  * container identification
  * network settings
  * runtime constraints on CPU and memory
+ {% endcomment %}
+ * デタッチ実行かフォアグラウンド実行か
+ * container identification
+ * ネットワーク設定
+ * CPU やメモリに対する実行時の制約
 
+{% comment %}
+With the `docker run [OPTIONS]` an operator can add to or override the
+image defaults set by a developer. And, additionally, operators can
+override nearly all the defaults set by the Docker runtime itself. The
+operator's ability to override image and Docker runtime defaults is why
+[*run*](commandline/run.md) has more options than any
+other `docker` command.
+{% endcomment %}
 With the `docker run [OPTIONS]` an operator can add to or override the
 image defaults set by a developer. And, additionally, operators can
 override nearly all the defaults set by the Docker runtime itself. The
@@ -61,9 +86,21 @@ operator's ability to override image and Docker runtime defaults is why
 [*run*](commandline/run.md) has more options than any
 other `docker` command.
 
+{% comment %}
+To learn how to interpret the types of `[OPTIONS]`, see [*Option
+types*](commandline/cli.md#option-types).
+{% endcomment %}
 To learn how to interpret the types of `[OPTIONS]`, see [*Option
 types*](commandline/cli.md#option-types).
 
+{% comment %}
+> **Note**: Depending on your Docker system configuration, you may be
+> required to preface the `docker run` command with `sudo`. To avoid
+> having to use `sudo` with the `docker` command, your system
+> administrator can create a Unix group called `docker` and add users to
+> it. For more information about this configuration, refer to the Docker
+> installation documentation for your operating system.
+{% endcomment %}
 > **Note**: Depending on your Docker system configuration, you may be
 > required to preface the `docker run` command with `sudo`. To avoid
 > having to use `sudo` with the `docker` command, your system
@@ -72,11 +109,20 @@ types*](commandline/cli.md#option-types).
 > installation documentation for your operating system.
 
 
+{% comment %}
+## Operator exclusive options
+{% endcomment %}
+{: #operator-exclusive-options }
 ## Operator exclusive options
 
+{% comment %}
+Only the operator (the person executing `docker run`) can set the
+following options.
+{% endcomment %}
 Only the operator (the person executing `docker run`) can set the
 following options.
 
+{% comment %}
  - [Detached vs foreground](#detached-vs-foreground)
      - [Detached (-d)](#detached--d)
      - [Foreground](#foreground)
@@ -89,28 +135,65 @@ following options.
  - [Clean up (--rm)](#clean-up---rm)
  - [Runtime constraints on resources](#runtime-constraints-on-resources)
  - [Runtime privilege and Linux capabilities](#runtime-privilege-and-linux-capabilities)
+{% endcomment %}
+ - [デタッチ実行かフォアグラウンド実行か](#detached-vs-foreground)
+     - [デタッチ起動 (-d)](#detached--d)
+     - [フォアグラウンド起動](#foreground)
+ - [Container identification](#container-identification)
+     - [Name (--name)](#name---name)
+     - [PID equivalent](#pid-equivalent)
+ - [IPC settings (--ipc)](#ipc-settings---ipc)
+ - [Network settings](#network-settings)
+ - [再起動ポリシー (--restart)](#restart-policies---restart)
+ - [Clean up (--rm)](#clean-up---rm)
+ - [Runtime constraints on resources](#runtime-constraints-on-resources)
+ - [Runtime privilege and Linux capabilities](#runtime-privilege-and-linux-capabilities)
 
+{% comment %}
 ## Detached vs foreground
+{% endcomment %}
+{: #detached-vs-foreground }
+## デタッチ実行かフォアグラウンド実行か
 
+{% comment %}
 When starting a Docker container, you must first decide if you want to
 run the container in the background in a "detached" mode or in the
 default foreground mode:
+{% endcomment %}
+Docker コンテナーの起動時には、コンテナーを「デタッチ」（detached）モードによりバックグラウンドで実行するか、デフォルトのフォアグラウンドモードで実行するかを取り決めておく必要があります。
 
     -d=false: Detached mode: Run container in the background, print new container id
 
+{% comment %}
 ### Detached (-d)
+{% endcomment %}
+{: #detached--d }
+### デタッチ起動 (-d)
 
+{% comment %}
+To start a container in detached mode, you use `-d=true` or just `-d` option. By
+design, containers started in detached mode exit when the root process used to
+run the container exits, unless you also specify the `--rm` option. If you use
+`-d` with `--rm`, the container is removed when it exits **or** when the daemon
+exits, whichever happens first.
+{% endcomment %}
 To start a container in detached mode, you use `-d=true` or just `-d` option. By
 design, containers started in detached mode exit when the root process used to
 run the container exits, unless you also specify the `--rm` option. If you use
 `-d` with `--rm`, the container is removed when it exits **or** when the daemon
 exits, whichever happens first.
 
+{% comment %}
+Do not pass a `service x start` command to a detached container. For example, this
+command attempts to start the `nginx` service.
+{% endcomment %}
 Do not pass a `service x start` command to a detached container. For example, this
 command attempts to start the `nginx` service.
 
     $ docker run -d -p 80:80 my_image service nginx start
 
+{% comment %}
+{% endcomment %}
 This succeeds in starting the `nginx` service inside the container. However, it
 fails the detached container paradigm in that, the root process (`service nginx
 start`) returns and the detached container stops as designed. As a result, the
@@ -119,15 +202,30 @@ such as the `nginx` web server do the following:
 
     $ docker run -d -p 80:80 my_image nginx -g 'daemon off;'
 
+{% comment %}
+{% endcomment %}
 To do input/output with a detached container use network connections or shared
 volumes. These are required because the container is no longer listening to the
 command line where `docker run` was run.
 
+{% comment %}
+{% endcomment %}
 To reattach to a detached container, use `docker`
 [*attach*](commandline/attach.md) command.
 
+{% comment %}
 ### Foreground
+{% endcomment %}
+{: #foreground }
+### フォアグラウンド起動
 
+{% comment %}
+In foreground mode (the default when `-d` is not specified), `docker
+run` can start the process in the container and attach the console to
+the process's standard input, output, and standard error. It can even
+pretend to be a TTY (this is what most command line executables expect)
+and pass along signals. All of that is configurable:
+{% endcomment %}
 In foreground mode (the default when `-d` is not specified), `docker
 run` can start the process in the container and attach the console to
 the process's standard input, output, and standard error. It can even
@@ -139,6 +237,8 @@ and pass along signals. All of that is configurable:
     --sig-proxy=true: Proxy all received signals to the process (non-TTY mode only)
     -i              : Keep STDIN open even if not attached
 
+{% comment %}
+{% endcomment %}
 If you do not specify `-a` then Docker will [attach to both stdout and stderr
 ]( https://github.com/docker/docker/blob/4118e0c9eebda2412a09ae66e90c34b85fae3275/runconfig/opts/parse.go#L267).
 You can specify to which of the three standard streams (`STDIN`, `STDOUT`,
@@ -146,6 +246,8 @@ You can specify to which of the three standard streams (`STDIN`, `STDOUT`,
 
     $ docker run -a stdin -a stdout -i -t ubuntu /bin/bash
 
+{% comment %}
+{% endcomment %}
 For interactive processes (like a shell), you must use `-i -t` together in
 order to allocate a tty for the container process. `-i -t` is often written `-it`
 as you'll see in later examples.  Specifying `-t` is forbidden when the client
@@ -153,23 +255,35 @@ is receiving its standard input from a pipe, as in:
 
     $ echo test | docker run -i busybox cat
 
+{% comment %}
+{% endcomment %}
 >**Note**: A process running as PID 1 inside a container is treated
 >specially by Linux: it ignores any signal with the default action.
 >So, the process will not terminate on `SIGINT` or `SIGTERM` unless it is
 >coded to do so.
 
+{% comment %}
+{% endcomment %}
 ## Container identification
 
+{% comment %}
+{% endcomment %}
 ### Name (--name)
 
+{% comment %}
+{% endcomment %}
 The operator can identify a container in three ways:
 
+{% comment %}
+{% endcomment %}
 | Identifier type       | Example value                                                      |
 |:----------------------|:-------------------------------------------------------------------|
 | UUID long identifier  | "f78375b1c487e03c9438c729345e54db9d20cfa2ac1fc3494b6eb60872e74778" |
 | UUID short identifier | "f78375b1c487"                                                     |
 | Name                  | "evil_ptolemy"                                                     |
 
+{% comment %}
+{% endcomment %}
 The UUID identifiers come from the Docker daemon. If you do not assign a
 container name with the `--name` option, then the daemon generates a random
 string name for you. Defining a `name` can be a handy way to add meaning to a
@@ -177,11 +291,17 @@ container. If you specify a `name`, you can use it  when referencing the
 container within a Docker network. This works for both background and foreground
 Docker containers.
 
+{% comment %}
+{% endcomment %}
 > **Note**: Containers on the default bridge network must be linked to
 > communicate by name.
 
+{% comment %}
+{% endcomment %}
 ### PID equivalent
 
+{% comment %}
+{% endcomment %}
 Finally, to help with automation, you can have Docker write the
 container ID out to a file of your choosing. This is similar to how some
 programs might write out their process ID to a file (you've seen them as
@@ -189,43 +309,65 @@ PID files):
 
     --cidfile="": Write the container ID to the file
 
+{% comment %}
+{% endcomment %}
 ### Image[:tag]
 
+{% comment %}
+{% endcomment %}
 While not strictly a means of identifying a container, you can specify a version of an
 image you'd like to run the container with by adding `image[:tag]` to the command. For
 example, `docker run ubuntu:14.04`.
 
+{% comment %}
+{% endcomment %}
 ### Image[@digest]
 
+{% comment %}
+{% endcomment %}
 Images using the v2 or later image format have a content-addressable identifier
 called a digest. As long as the input used to generate the image is unchanged,
 the digest value is predictable and referenceable.
 
+{% comment %}
+{% endcomment %}
 The following example runs a container from the `alpine` image with the
 `sha256:9cacb71397b640eca97488cf08582ae4e4068513101088e9f96c9814bfda95e0` digest:
 
     $ docker run alpine@sha256:9cacb71397b640eca97488cf08582ae4e4068513101088e9f96c9814bfda95e0 date
 
+{% comment %}
+{% endcomment %}
 ## PID settings (--pid)
 
     --pid=""  : Set the PID (Process) Namespace mode for the container,
                  'container:<name|id>': joins another container's PID namespace
                  'host': use the host's PID namespace inside the container
 
+{% comment %}
+{% endcomment %}
 By default, all containers have the PID namespace enabled.
 
+{% comment %}
+{% endcomment %}
 PID namespace provides separation of processes. The PID Namespace removes the
 view of the system processes, and allows process ids to be reused including
 pid 1.
 
+{% comment %}
+{% endcomment %}
 In certain cases you want your container to share the host's process namespace,
 basically allowing processes within the container to see all of the processes
 on the system.  For example, you could build a container with debugging tools
 like `strace` or `gdb`, but want to use these tools when debugging processes
 within the container.
 
+{% comment %}
+{% endcomment %}
 ### Example: run htop inside a container
 
+{% comment %}
+{% endcomment %}
 Create this Dockerfile:
 
 ```
@@ -234,28 +376,40 @@ RUN apk add --update htop && rm -rf /var/cache/apk/*
 CMD ["htop"]
 ```
 
+{% comment %}
+{% endcomment %}
 Build the Dockerfile and tag the image as `myhtop`:
 
 ```bash
 $ docker build -t myhtop .
 ```
 
+{% comment %}
+{% endcomment %}
 Use the following command to run `htop` inside a container:
 
 ```
 $ docker run -it --rm --pid=host myhtop
 ```
 
+{% comment %}
+{% endcomment %}
 Joining another container's pid namespace can be used for debugging that container.
 
+{% comment %}
+{% endcomment %}
 ### Example
 
+{% comment %}
+{% endcomment %}
 Start a container running a redis server:
 
 ```bash
 $ docker run --name my-redis -d redis
 ```
 
+{% comment %}
+{% endcomment %}
 Debug the redis container by running another container that has strace in it:
 
 ```bash
@@ -263,27 +417,39 @@ $ docker run -it --pid=container:my-redis my_strace_docker_image bash
 $ strace -p 1
 ```
 
+{% comment %}
+{% endcomment %}
 ## UTS settings (--uts)
 
     --uts=""  : Set the UTS namespace mode for the container,
            'host': use the host's UTS namespace inside the container
 
+{% comment %}
+{% endcomment %}
 The UTS namespace is for setting the hostname and the domain that is visible
 to running processes in that namespace.  By default, all containers, including
 those with `--network=host`, have their own UTS namespace.  The `host` setting will
 result in the container using the same UTS namespace as the host.  Note that
 `--hostname` and `--domainname` are invalid in `host` UTS mode.
 
+{% comment %}
+{% endcomment %}
 You may wish to share the UTS namespace with the host if you would like the
 hostname of the container to change as the hostname of the host changes.  A
 more advanced use case would be changing the host's hostname from a container.
 
+{% comment %}
+{% endcomment %}
 ## IPC settings (--ipc)
 
     --ipc="MODE"  : Set the IPC mode for the container
 
+{% comment %}
+{% endcomment %}
 The following values are accepted:
 
+{% comment %}
+{% endcomment %}
 | Value                      | Description                                                                       |
 |:---------------------------|:----------------------------------------------------------------------------------|
 | ""                         | Use daemon's default.                                                             |
@@ -293,12 +459,18 @@ The following values are accepted:
 | "container:<_name-or-ID_>" | Join another ("shareable") container's IPC namespace.                             |
 | "host"                     | Use the host system's IPC namespace.                                              |
 
+{% comment %}
+{% endcomment %}
 If not specified, daemon default is used, which can either be `"private"`
 or `"shareable"`, depending on the daemon version and configuration.
 
+{% comment %}
+{% endcomment %}
 IPC (POSIX/SysV IPC) namespace provides separation of named shared memory
 segments, semaphores and message queues.
 
+{% comment %}
+{% endcomment %}
 Shared memory segments are used to accelerate inter-process communication at
 memory speed, rather than through pipes or through the network stack. Shared
 memory is commonly used by databases and custom-built (typically C/OpenMPI,
@@ -308,6 +480,8 @@ are broken into multiple containers, you might need to share the IPC mechanisms
 of the containers, using `"shareable"` mode for the main (i.e. "donor")
 container, and `"container:<donor-name-or-ID>"` for other containers.
 
+{% comment %}
+{% endcomment %}
 ## Network settings
 
     --dns=[]           : Set custom dns servers for the container
@@ -324,22 +498,32 @@ container, and `"container:<donor-name-or-ID>"` for other containers.
     --ip6=""           : Sets the container's Ethernet device's IPv6 address
     --link-local-ip=[] : Sets one or more container's Ethernet device's link local IPv4/IPv6 addresses
 
+{% comment %}
+{% endcomment %}
 By default, all containers have networking enabled and they can make any
 outgoing connections. The operator can completely disable networking
 with `docker run --network none` which disables all incoming and outgoing
 networking. In cases like this, you would perform I/O through files or
 `STDIN` and `STDOUT` only.
 
+{% comment %}
+{% endcomment %}
 Publishing ports and linking to other containers only works with the default (bridge). The linking feature is a legacy feature. You should always prefer using Docker network drivers over linking.
 
+{% comment %}
+{% endcomment %}
 Your container will use the same DNS servers as the host by default, but
 you can override this with `--dns`.
 
+{% comment %}
+{% endcomment %}
 By default, the MAC address is generated using the IP address allocated to the
 container. You can set the container's MAC address explicitly by providing a
 MAC address via the `--mac-address` parameter (format:`12:34:56:78:9a:bc`).Be
 aware that Docker does not check if manually specified MAC addresses are unique.
 
+{% comment %}
+{% endcomment %}
 Supported networks :
 
 <table>
@@ -384,15 +568,23 @@ Supported networks :
   </tbody>
 </table>
 
+{% comment %}
+{% endcomment %}
 #### Network: none
 
+{% comment %}
+{% endcomment %}
 With the network is `none` a container will not have
 access to any external routes.  The container will still have a
 `loopback` interface enabled in the container but it does not have any
 routes to external traffic.
 
+{% comment %}
+{% endcomment %}
 #### Network: bridge
 
+{% comment %}
+{% endcomment %}
 With the network set to `bridge` a container will use docker's
 default networking setup.  A bridge is setup on the host, commonly named
 `docker0`, and a pair of `veth` interfaces will be created for the
@@ -402,6 +594,8 @@ container's namespaces in addition to the `loopback` interface.  An IP
 address will be allocated for containers on the bridge's network and
 traffic will be routed though this bridge to the container.
 
+{% comment %}
+{% endcomment %}
 Containers can communicate via their IP addresses by default. To communicate by
 name, they must be linked.
 
@@ -490,16 +684,25 @@ may be situations when processes inside the container can end up reading an
 empty or incomplete `/etc/hosts` file. In most cases, retrying the read again
 should fix the problem.
 
+{% comment %}
+## Restart policies (--restart)
+{% endcomment %}
 ## Restart policies (--restart)
 
+{% comment %}
+{% endcomment %}
 Using the `--restart` flag on Docker run you can specify a restart policy for
 how a container should or should not be restarted on exit.
 
+{% comment %}
+{% endcomment %}
 When a restart policy is active on a container, it will be shown as either `Up`
 or `Restarting` in [`docker ps`](commandline/ps.md). It can also be
 useful to use [`docker events`](commandline/events.md) to see the
 restart policy in effect.
 
+{% comment %}
+{% endcomment %}
 Docker supports the following restart policies:
 
 <table>
@@ -549,15 +752,21 @@ Docker supports the following restart policies:
   </tbody>
 </table>
 
+{% comment %}
+{% endcomment %}
 An ever increasing delay (double the previous delay, starting at 100
 milliseconds) is added before each restart to prevent flooding the server.
 This means the daemon will wait for 100 ms, then 200 ms, 400, 800, 1600,
 and so on until either the `on-failure` limit is hit, or when you `docker stop`
 or `docker rm -f` the container.
 
+{% comment %}
+{% endcomment %}
 If a container is successfully restarted (the container is started and runs
 for at least 10 seconds), the delay is reset to its default value of 100 ms.
 
+{% comment %}
+{% endcomment %}
 You can specify the maximum amount of times Docker will try to restart the
 container when using the **on-failure** policy.  The default is that Docker
 will try forever to restart the container. The number of (attempted) restarts
@@ -569,6 +778,8 @@ for container "my-container";
     # 2
     {% endraw %}
 
+{% comment %}
+{% endcomment %}
 Or, to get the last time the container was (re)started;
 
     {% raw %}
@@ -577,14 +788,20 @@ Or, to get the last time the container was (re)started;
     {% endraw %}
 
 
+{% comment %}
+{% endcomment %}
 Combining `--restart` (restart policy) with the `--rm` (clean up) flag results
 in an error. On container restart, attached clients are disconnected. See the
 examples on using the [`--rm` (clean up)](#clean-up-rm) flag later in this page.
 
+{% comment %}
+{% endcomment %}
 ### Examples
 
     $ docker run --restart=always redis
 
+{% comment %}
+{% endcomment %}
 This will run the `redis` container with a restart policy of **always**
 so that if the container exits, Docker will restart it.
 

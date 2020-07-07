@@ -1,11 +1,25 @@
 ---
 title: Docker Compose リリースノート
-description: Release notes for Docker Compose
+description: Docker Compose のリリースノート。
 keywords: release notes, compose
 toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+
+## 1.26.2
+(2020-07-02)
+
+{% comment %}
+### Bug fixes
+{% endcomment %}
+{: #bug-fixes }
+### バグフィックス
+
+{% comment %}
+- Enforced `docker-py` 4.2.2 as minimum version when installing with pip.
+{% endcomment %}
+- Enforced `docker-py` 4.2.2 as minimum version when installing with pip.
 
 ## 1.26.1
 (2020-06-30)
@@ -24,7 +38,7 @@ redirect_from:
 {% comment %}
 ### Bug fixes
 {% endcomment %}
-{: #bug-fixes }
+{: #bug-fixes-1 }
 ### バグフィックス
 
 {% comment %}
@@ -40,25 +54,57 @@ redirect_from:
 ## 1.26.0
 (2020-06-03)
 
+{% comment %}
+### Features
+{% endcomment %}
+{: #features }
 ### Features
 
+{% comment %}
 - Added `docker context` support.
+{% endcomment %}
+- `docker context` サポートの追加。
 
+{% comment %}
+- Added missing test dependency `ddt` to `setup.py`.
+{% endcomment %}
 - Added missing test dependency `ddt` to `setup.py`.
 
+{% comment %}
+- Added `--attach-dependencies` to command `up` for attaching to dependencies.
+{% endcomment %}
 - Added `--attach-dependencies` to command `up` for attaching to dependencies.
 
+{% comment %}
+- Allowed compatibility option with `COMPOSE_COMPATIBILITY` environment variable.
+{% endcomment %}
 - Allowed compatibility option with `COMPOSE_COMPATIBILITY` environment variable.
 
+{% comment %}
+- Bumped `Pytest` to 5.3.4 and add refactor compatibility with new version.
+{% endcomment %}
 - Bumped `Pytest` to 5.3.4 and add refactor compatibility with new version.
 
+{% comment %}
+- Bumped `OpenSSL` from 1.1.1f to 1.1.1g.
+{% endcomment %}
 - Bumped `OpenSSL` from 1.1.1f to 1.1.1g.
 
+{% comment %}
+- Bumped `certifi` from 2019.11.28 to 2020.4.5.1.
+{% endcomment %}
 - Bumped `certifi` from 2019.11.28 to 2020.4.5.1.
 
+{% comment %}
+- Bumped `docker-py` from 4.2.0 to 4.2.1.
+{% endcomment %}
 - Bumped `docker-py` from 4.2.0 to 4.2.1.
 
+{% comment %}
 ### Bug fixes
+{% endcomment %}
+{: #bug-fixes-2 }
+### バグフィックス
 
 - Properly escaped values coming from `env_files`.
 
