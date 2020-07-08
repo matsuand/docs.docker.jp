@@ -2894,10 +2894,10 @@ size パラメーターは tmpfs マウントのサイズをバイト単位で�
 デフォルトは無制限です。
 
 ```yaml
- - type: tmpfs
-     target: /app
-     tmpfs:
-       size: 1000
+- type: tmpfs
+  target: /app
+  tmpfs:
+    size: 1000
 ```
 
 ### ulimits
