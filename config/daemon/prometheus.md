@@ -129,8 +129,8 @@ job definition at the bottom of the file. Docker Desktop for Mac and Docker Desk
 need a slightly different configuration.
 {% endcomment %}
 以下の設定ファイルの内容をいずれかコピーして、（Linux や Mac の場合）`/tmp/prometheus.yml`、（Windows の場合）`C:\tmp\prometheus.yml` に保存してください。
-This is a stock Prometheus configuration file, except for the addition of the Docker
-job definition at the bottom of the file.
+これは Prometheus のごく普通の設定ファイルです。
+ただしファイルの最後段には Docker の処理定義を加えています。
 Docker Desktop for Mac や Docker Desktop for Windows では、多少異なる設定が必要となります。
 
 <ul class="nav nav-tabs">
@@ -145,9 +145,9 @@ Docker Desktop for Mac や Docker Desktop for Windows では、多少異なる�
 ```yml
 # グローバルな設定。
 global:
-  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-  # scrape_timeout is set to the global default (10s).
+  scrape_interval:     15s # 情報を取り出す(scrapeする)間隔を15秒ごとに。デフォルトは1分ごと。
+  evaluation_interval: 15s # 15秒ごとにルールを評価。デフォルトは1分ごと。
+  # scrape_timeout はグローバルなデフォルト値(10s)に設定。
 
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
@@ -160,20 +160,20 @@ rule_files:
   # - "second.rules"
 
 # A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
+# ここが Prometheus の設定そのもの。
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  # この設定から取得されるすべてのタイムシリーズにて、ジョブ名は `job=<job_name>` というラベルとして追加。
   - job_name: 'prometheus'
 
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
+    # metrics_path のデフォルトを '/metrics' に。
+    # スキームのデフォルトを 'http' に。
 
     static_configs:
       - targets: ['localhost:9090']
 
   - job_name: 'docker'
-         # metrics_path defaults to '/metrics'
-         # scheme defaults to 'http'.
+         # metrics_path のデフォルトを '/metrics' に。
+         # スキームのデフォルトを 'http' に。
 
     static_configs:
       - targets: ['localhost:9323']
@@ -185,9 +185,9 @@ scrape_configs:
 ```yml
 # グローバルな設定。
 global:
-  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-  # scrape_timeout is set to the global default (10s).
+  scrape_interval:     15s # 情報を取り出す(scrapeする)間隔を15秒ごとに。デフォルトは1分ごと。
+  evaluation_interval: 15s # 15秒ごとにルールを評価。デフォルトは1分ごと。
+  # scrape_timeout はグローバルなデフォルト値(10s)に設定。
 
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
@@ -202,7 +202,7 @@ rule_files:
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  # この設定から取得されるすべてのタイムシリーズにて、ジョブ名は `job=<job_name>` というラベルとして追加。
   - job_name: 'prometheus'
 
     # metrics_path のデフォルトを '/metrics' に。
@@ -225,9 +225,9 @@ scrape_configs:
 ```yml
 # グローバルな設定
 global:
-  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-  # scrape_timeout is set to the global default (10s).
+  scrape_interval:     15s # 情報を取り出す(scrapeする)間隔を15秒ごとに。デフォルトは1分ごと。
+  evaluation_interval: 15s # 15秒ごとにルールを評価。デフォルトは1分ごと。
+  # scrape_timeout はグローバルなデフォルト値(10s)に設定。
 
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
@@ -242,18 +242,18 @@ rule_files:
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  # この設定から取得されるすべてのタイムシリーズにて、ジョブ名は `job=<job_name>` というラベルとして追加。
   - job_name: 'prometheus'
 
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
+    # metrics_path のデフォルトを '/metrics' に。
+    # スキームのデフォルトを 'http' に。
 
     static_configs:
-      - targets: ['host.docker.internal:9090'] # Docker Desktop for Windows でのみ動作
+      - targets: ['host.docker.internal:9090'] # Docker Desktop for Windows でのみ動作。
 
   - job_name: 'docker'
-         # metrics_path defaults to '/metrics'
-         # scheme defaults to 'http'.
+         # metrics_path のデフォルトを '/metrics' に。
+         # スキームのデフォルトを 'http' に。
 
     static_configs:
       - targets: ['192.168.65.1:9323']
@@ -373,20 +373,19 @@ $ docker service create \
 Wait a few minutes (the default scrape interval is 15 seconds) and reload
 your graph.
 {% endcomment %}
-Wait a few minutes (the default scrape interval is 15 seconds) and reload
-your graph.
+ほんの数分（デフォルトとした scrape interval 15 秒）待って、グラフを再表示してみます。
 
 {% comment %}
 ![Prometheus engine_daemon_network_actions_seconds_count report](images/prometheus-graph_load.png)
 {% endcomment %}
-![Prometheus engine_daemon_network_actions_seconds_count report](images/prometheus-graph_load.png)
+![Prometheus の engine_daemon_network_actions_seconds_count レポート](images/prometheus-graph_load.png)
 
 {% comment %}
 When you are ready, stop and remove the `ping_service` service, so that you
 are not flooding a host with pings for no reason.
 {% endcomment %}
-When you are ready, stop and remove the `ping_service` service, so that you
-are not flooding a host with pings for no reason.
+確認ができたら、サービス `ping_service` を停止して削除します。
+こうして、余計な ping によってホストが溢れないようにします。
 
 ```bash
 $ docker service remove ping_service

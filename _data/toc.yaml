@@ -106,9 +106,9 @@ guides:
       - sectiontitle: ログドライバー詳細
         section:
         - path: /config/containers/logging/local/
-          title: Local file logging driver
+          title: local ログドライバー
         - path: /config/containers/logging/logentries/
-          title: Logentries logging driver
+          title: logentries ログドライバー
         - path: /config/containers/logging/json-file/
           title: JSON File logging driver
         - path: /config/containers/logging/gelf/
@@ -160,7 +160,7 @@ guides:
       - path: /engine/security/userns-remap/
         title: Isolate containers with a user namespace
       - path: /engine/security/rootless/
-        title: Run the Docker daemon as a non-root user (Rootless mode)
+        title: root ユーザー以外による Docker デーモン起動（rootless モード）
     - sectiontitle: アプリのスケーリング
       section:
       - path: /engine/swarm/
