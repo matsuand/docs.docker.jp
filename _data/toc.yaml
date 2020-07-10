@@ -1093,6 +1093,8 @@ manuals:
     title: Docker Context
   - path: /engine/context/aci-integration/
     title: Docker と ACI (ベータ版)
+  - path: /engine/context/ecs-integration/
+    title: Docker と ECS (ベータ版)
 - sectiontitle: Docker Compose
   section:
   - path: /compose/

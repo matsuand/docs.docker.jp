@@ -1,5 +1,5 @@
 ---
-description: ボリュームの利用
+description: ボリュームを利用します。
 title: ボリュームの利用
 keywords: storage, persistence, data persistence, volumes
 redirect_from:
@@ -62,8 +62,8 @@ writable layer.
 Volumes use `rprivate` bind propagation, and bind propagation is not
 configurable for volumes.
 {% endcomment %}
-Volumes use `rprivate` bind propagation, and bind propagation is not
-configurable for volumes.
+ボリュームはバインドプロパゲーションの 1 つである `rprivate` を利用します。
+ただしボリュームにおいてバインドプロパゲーションを設定することはできません。
 
 {% comment %}
 ## Choose the -v or --mount flag
@@ -170,15 +170,13 @@ If you need to specify volume driver options, you must use `--mount`.
 >         <IMAGE>
 > {: .warning}
 {% endcomment %}
-> Escape values from outer CSV parser
+> 上位レベルの CSV 解析をエスケープする
 >
-> If your volume driver accepts a comma-separated list as an option,
-> you must escape the value from the outer CSV parser. To escape a `volume-opt`,
-> surround it with double quotes (`"`) and surround the entire mount parameter
-> with single quotes (`'`).
+> 利用するボリュームドライバーが、オプションとしてカンマ区切りリストを受け取る場合、そのリストが上位レベルの CSV として解析されないようにエスケープすることが必要になります。
+> `volume-opt` をエスケープするには、そのオプションをダブルクォート（`"`）で囲み、かつマウントパラメーター全体の文字列をシングルクォート（`'`）で囲みます。
 >
-> For example, the `local` driver accepts mount options as a comma-separated
-> list in the `o` parameter. This example shows the correct way to escape the list.
+> たとえば `local` ドライバーは `o` パラメーターにおいて、マウントオプションにカンマ区切りリストを受けつけます。
+> ここに示す例は、そのリストを正しくエスケープする方法を示しています。
 >
 >     $ docker service create \
 >          --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
@@ -226,7 +224,7 @@ container.
 {% comment %}
 **Create a volume**:
 {% endcomment %}
-**ボリュームの生成**:
+**ボリュームの生成**
 
 ```bash
 $ docker volume create my-vol
@@ -235,7 +233,7 @@ $ docker volume create my-vol
 {% comment %}
 **List volumes**:
 {% endcomment %}
-**ボリュームの一覧表示**:
+**ボリュームの一覧表示**
 
 ```bash
 $ docker volume ls
@@ -246,7 +244,7 @@ local               my-vol
 {% comment %}
 **Inspect a volume**:
 {% endcomment %}
-**ボリュームの確認**:
+**ボリュームの確認**
 
 ```bash
 $ docker volume inspect my-vol
@@ -265,7 +263,7 @@ $ docker volume inspect my-vol
 {% comment %}
 **Remove a volume**:
 {% endcomment %}
-**ボリュームの削除**:
+**ボリュームの削除**
 
 ```bash
 $ docker volume rm my-vol
@@ -372,16 +370,21 @@ $ docker volume rm myvol2
 ### ボリュームを使ったサービスの起動
 
 {% comment %}
-{% endcomment %}
 When you start a service and define a volume, each service container uses its own
 local volume. None of the containers can share this data if you use the `local`
 volume driver, but some volume drivers do support shared storage. Docker for AWS and
 Docker for Azure both support persistent storage using the Cloudstor plugin.
+{% endcomment %}
+サービスを起動してボリュームを定義すると、各サービスそれぞれは固有のローカルボリュームを利用します。
+`local` ボリュームドライバーを利用する場合は、コンテナー間でデータが共有されることはありません。
+一方、ボリュームドライバーの中には、ストレージの共有をサポートするものがあります。
+Docker for AWS と Docker for Azure では、Cloudstor プラグインを利用して恒常的なストレージをサポートしています。
 
 {% comment %}
-{% endcomment %}
 The following example starts a `nginx` service with four replicas, each of which
 uses a local volume called `myvol2`.
+{% endcomment %}
+以下の例は `nginx` サービスを 4 つのレプリカを使って起動し、そのレプリカの個々が `myvol2` というローカルボリュームを利用します。
 
 ```bash
 $ docker service create -d \
@@ -392,8 +395,9 @@ $ docker service create -d \
 ```
 
 {% comment %}
-{% endcomment %}
 Use `docker service ps devtest-service` to verify that the service is running:
+{% endcomment %}
+`docker service ps devtest-service` を実行して、サービスが起動していることを確認します。
 
 ```bash
 $ docker service ps devtest-service
@@ -403,29 +407,35 @@ ID                  NAME                IMAGE               NODE                
 ```
 
 {% comment %}
-{% endcomment %}
 Remove the service, which stops all its tasks:
+{% endcomment %}
+サービスを削除します。
+これによりすべてのタスクが止まります。
 
 ```bash
 $ docker service rm devtest-service
 ```
 
 {% comment %}
-{% endcomment %}
 Removing the service does not remove any volumes created by the service.
 Volume removal is a separate step.
+{% endcomment %}
+サービスを削除しても、そのサービスによって生成されたボリュームは削除されません。
+ボリュームの削除は別操作になります。
 
 {% comment %}
 #### Syntax differences for services
 {% endcomment %}
 {: #syntax-differences-for-services }
-#### Syntax differences for services
+#### サービスにおける文法の違い
 
 {% comment %}
-{% endcomment %}
 The `docker service create` command does not support the `-v` or `--volume` flag.
 When mounting a volume into a service's containers, you must use the `--mount`
 flag.
+{% endcomment %}
+`docker service create` コマンドは `-v` フラグや `--volume` フラグをサポートしていません。
+サービスコンテナー内にボリュームをマウントするには、`--mount` フラグを使う必要があります。
 
 {% comment %}
 ### Populate a volume using a container
@@ -434,23 +444,30 @@ flag.
 ### Populate a volume using a container
 
 {% comment %}
-{% endcomment %}
 If you start a container which creates a new volume, as above, and the container
 has files or directories in the directory to be mounted (such as `/app/` above),
 the directory's contents are copied into the volume. The container then
 mounts and uses the volume, and other containers which use the volume also
 have access to the pre-populated content.
+{% endcomment %}
+起動するコンテナーが上で示したように、新たなボリュームを生成するとします。
+そして（上でいうと `/app` のように）マウントされるディレクトリ内に、すでにファイルやサブディレクトリが存在していた場合、このディレクトリの内容はボリュームにコピーされます。
+そうしてからコンテナーは、ボリュームをマウントして利用していきます。
+このボリュームを利用する別のコンテナーは、コピーを済ませた内容にアクセスすることになります。
 
 {% comment %}
-{% endcomment %}
 To illustrate this, this example starts an `nginx` container and populates the
 new volume `nginx-vol` with the contents of the container's
 `/usr/share/nginx/html` directory, which is where Nginx stores its default HTML
 content.
+{% endcomment %}
+この状況を示すために、以下では `nginx` コンテナーを起動して、コンテナー内の `/usr/share/nginx/html` の内容を、新たなボリューム `nginx-vol` にコピーする例を示します。
+`/usr/share/nginx/html` 内には、Nginx によるデフォルトの HTML ファイルが保存されています。
 
 {% comment %}
-{% endcomment %}
 The `--mount` and `-v` examples have the same end result.
+{% endcomment %}
+`--mount` と `-v` の例は、いずれも同一の結果となります。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-empty-run"><code>--mount</code></a></li>
@@ -480,9 +497,11 @@ $ docker run -d \
 </div><!--tab-content-->
 
 {% comment %}
-{% endcomment %}
 After running either of these examples, run the following commands to clean up
 the containers and volumes.  Note volume removal is a separate step.
+{% endcomment %}
+どちらかの例を実行した後は、以下のコマンドを実行して、コンテナーとボリュームを削除します。
+ボリュームの削除は別操作になります。
 
 
 ```bash
@@ -500,9 +519,15 @@ $ docker volume rm nginx-vol
 ## 読み込み専用ボリュームの利用
 
 {% comment %}
-{% endcomment %}
 For some development applications, the container needs to write into the bind
 mount so that changes are propagated back to the Docker host. At other times,
+the container only needs read access to the data. Remember that multiple
+containers can mount the same volume, and it can be mounted read-write for some
+of them and read-only for others, at the same time.
+{% endcomment %}
+開発アプリケーションによっては、コンテナーからバインドマウントへの書き込みを行って、変更内容を Docker ホストにコピーし直すことが必要になる場合があります。
+
+At other times,
 the container only needs read access to the data. Remember that multiple
 containers can mount the same volume, and it can be mounted read-write for some
 of them and read-only for others, at the same time.
