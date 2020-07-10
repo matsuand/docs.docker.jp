@@ -190,7 +190,7 @@ The examples below show both the `--mount` and `-v` syntax where possible, and
     `--mount` is presented first.
 {% endcomment %}
 これ以降においては、可能なら `--mount` と `-v` の両方の例を示していきます。
-また先に示すのは `--mount` とします。
+先に示すのは `--mount` とします。
 
 {% comment %}
 ### Differences between `-v` and `--mount` behavior
@@ -441,7 +441,7 @@ flag.
 ### Populate a volume using a container
 {% endcomment %}
 {: #populate-a-volume-using-a-container }
-### Populate a volume using a container
+### コンテナーからボリュームへのデータコピー
 
 {% comment %}
 If you start a container which creates a new volume, as above, and the container
@@ -450,7 +450,7 @@ the directory's contents are copied into the volume. The container then
 mounts and uses the volume, and other containers which use the volume also
 have access to the pre-populated content.
 {% endcomment %}
-起動するコンテナーが上で示したように、新たなボリュームを生成するとします。
+上で示したように起動するコンテナーが、新たなボリュームを生成するとします。
 そして（上でいうと `/app` のように）マウントされるディレクトリ内に、すでにファイルやサブディレクトリが存在していた場合、このディレクトリの内容はボリュームにコピーされます。
 そうしてからコンテナーは、ボリュームをマウントして利用していきます。
 このボリュームを利用する別のコンテナーは、コピーを済ませた内容にアクセスすることになります。
@@ -526,22 +526,23 @@ containers can mount the same volume, and it can be mounted read-write for some
 of them and read-only for others, at the same time.
 {% endcomment %}
 開発アプリケーションによっては、コンテナーからバインドマウントへの書き込みを行って、変更内容を Docker ホストにコピーし直すことが必要になる場合があります。
-
-At other times,
-the container only needs read access to the data. Remember that multiple
-containers can mount the same volume, and it can be mounted read-write for some
-of them and read-only for others, at the same time.
+単にコンテナーが、データの読み込みができさえすればよい場合もあります。
+複数のコンテナーは同一のボリュームをマウントすることが可能であり、その場合、一部を読み書き可能なボリュームとしてマウントし、残りは読み込み専用のボリュームとしてマウントする、といったことが同時にできます。
 
 {% comment %}
-{% endcomment %}
 This example modifies the one above but mounts the directory as a read-only
 volume, by adding `ro` to the (empty by default) list of options, after the
 mount point within the container. Where multiple options are present, separate
 them by commas.
+{% endcomment %}
+上の例を修正して次の例では、ディレクトリを読み込み専用ボリュームとしてマウントします。
+これを実現するには、コンテナー内のマウントポイントの指定に続けて（デフォルトでは空の）オプションリストに `ro` を加えます。
+複数のオプション指定がある場合は、カンマで区切ります。
 
 {% comment %}
-{% endcomment %}
 The `--mount` and `-v` examples have the same result.
+{% endcomment %}
+`--mount` と `-v` の例は、いずれも同一の結果となります。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-group="mount" data-target="#mount-readonly"><code>--mount</code></a></li>
@@ -571,9 +572,11 @@ $ docker run -d \
 </div><!--tab-content-->
 
 {% comment %}
-{% endcomment %}
 Use `docker inspect nginxtest` to verify that the readonly mount was created
 correctly. Look for the `Mounts` section:
+{% endcomment %}
+`docker inspect nginxtest` を実行して、読み込み専用のマウントが正しく生成されていることを確認します。
+確認するのは `Mounts` の項です。
 
 ```json
 "Mounts": [
@@ -591,9 +594,12 @@ correctly. Look for the `Mounts` section:
 ```
 
 {% comment %}
-{% endcomment %}
 Stop and remove the container, and remove the volume. Volume removal is a
 separate step.
+{% endcomment %}
+コンテナーを停止して削除します。
+またボリュームも削除します。
+ボリュームの削除は別操作になります。
 
 ```bash
 $ docker container stop nginxtest
@@ -610,27 +616,36 @@ $ docker volume rm nginx-vol
 ## マシン間でのデータ共有
 
 {% comment %}
-{% endcomment %}
 When building fault-tolerant applications, you might need to configure multiple
 replicas of the same service to have access to the same files.
+{% endcomment %}
+フォールトトレラントなアプリケーションを構築する場合、1 つのサービスに対するレプリカを複数生成して、それらがアクセスするファイルを同一にするような設定を行う場合があります。
 
 {% comment %}
-{% endcomment %}
 ![shared storage](images/volumes-shared-storage.svg)
+{% endcomment %}
+![共有ストレージ](images/volumes-shared-storage.svg)
 
 {% comment %}
-{% endcomment %}
 There are several ways to achieve this when developing your applications.
 One is to add logic to your application to store files on a cloud object
 storage system like Amazon S3. Another is to create volumes with a driver that
 supports writing files to an external storage system like NFS or Amazon S3.
+{% endcomment %}
+開発アプリケーションにおいて、これを実現する方法はいくつかあります。
+1 つは、Amazon S3 のようなクラウド上のストレージシステムに、ファイルを保存するようなロジックをアプリケーションに組み入れることです。
+別の方法として、NFS や Amazon S3 などの外部ストレージシステムにファイル書き込みを行うドライバーを利用して、ボリュームを生成する方法です。
 
 {% comment %}
-{% endcomment %}
 Volume drivers allow you to abstract the underlying storage system from the
 application logic. For example, if your services use a volume with an NFS
 driver, you can update the services to use a different driver, as an example to
 store data in the cloud, without changing the application logic.
+{% endcomment %}
+ボリュームドライバーを使うと、アプリケーションロジックが利用するストレージシステムを抽象化することができます。
+たとえば NFS ドライバーを使ったボリュームを持つサービスがあったとします。
+そして別のドライバーを使うようにサービスを変更したいとします。
+このような場合、たとえばクラウド上にデータを保存するような変更は、アプリケーションロジックを変更することなく実現できます。
 
 {% comment %}
 ## Use a volume driver
@@ -645,11 +660,9 @@ The following examples use the `vieux/sshfs` volume driver, first when creating
 a standalone volume, and then when starting a container which creates a new
 volume.
 {% endcomment %}
-When you create a volume using `docker volume create`, or when you start a
-container which uses a not-yet-created volume, you can specify a volume driver.
-The following examples use the `vieux/sshfs` volume driver, first when creating
-a standalone volume, and then when starting a container which creates a new
-volume.
+`docker volume create` を実行してボリュームを生成する場合、あるいはコンテナーを起動した際にボリュームがまだ生成されていない場合に、ボリュームドライバーを指定することができます。
+以下の例では `vieux/sshfs` ボリュームドライバーというものを利用しています。
+はじめはスタンドアロンのボリュームを生成する場合であり、次はコンテナー起動時に新たなボリュームが生成される場合です。
 
 {% comment %}
 ### Initial set-up
@@ -661,26 +674,32 @@ volume.
 This example assumes that you have two nodes, the first of which is a Docker
 host and can connect to the second using SSH.
 {% endcomment %}
-This example assumes that you have two nodes, the first of which is a Docker
-host and can connect to the second using SSH.
+この例では 2 つのノードがあるものとします。
+1 つめが Docker ホストであり、2 つめのノードに対して SSH により接続するものとします。
 
 {% comment %}
-{% endcomment %}
 On the Docker host, install the `vieux/sshfs` plugin:
+{% endcomment %}
+Docker ホストでは `vieux/sshfs` プラグインをインストールします。
 
 ```bash
 $ docker plugin install --grant-all-permissions vieux/sshfs
 ```
 
 {% comment %}
-{% endcomment %}
 ### Create a volume using a volume driver
+{% endcomment %}
+{: #create-a-volume-using-a-volume-driver }
+### ボリュームドライバーを用いたボリュームの生成
 
 {% comment %}
-{% endcomment %}
 This example specifies a SSH password, but if the two hosts have shared keys
 configured, you can omit the password. Each volume driver may have zero or more
 configurable options, each of which is specified using an `-o` flag.
+{% endcomment %}
+この例では SSH パスワードを指定することにしていますが、2 つのホスト間で鍵を共有する設定しているのであれば、パスワードは省略可能です。
+各ボリュームドライバーは、設定可能なオプションを持つことがあります。
+オプションの指定には `-o` フラグを用います。
 
 ```bash
 $ docker volume create --driver vieux/sshfs \
@@ -690,15 +709,20 @@ $ docker volume create --driver vieux/sshfs \
 ```
 
 {% comment %}
-{% endcomment %}
 ### Start a container which creates a volume using a volume driver
+{% endcomment %}
+{: #start-a-container-which-creates-a-volume-using-a-volume-driver }
+### ボリュームドライバーを用いた、ボリューム生成を行うコンテナーの起動
 
 {% comment %}
-{% endcomment %}
 This example specifies a SSH password, but if the two hosts have shared keys
 configured, you can omit the password. Each volume driver may have zero or more
 configurable options. **If the volume driver requires you to pass options, you
 must use the `--mount` flag to mount the volume, rather than `-v`.**
+{% endcomment %}
+この例では SSH パスワードを指定することにしていますが、2 つのホスト間で鍵を共有する設定しているのであれば、パスワードは省略可能です。
+各ボリュームドライバーは、設定可能なオプションを持つことがあります。
+**ボリュームドライバーにオプション指定が必要な場合、ボリュームマウントを行うには `-v` フラグではなく `--mount` フラグを用いなければなりません。**
 
 ```bash
 $ docker run -d \
@@ -709,12 +733,17 @@ $ docker run -d \
 ```
 
 {% comment %}
-{% endcomment %}
 ### Create a service which creates an NFS volume
+{% endcomment %}
+{: #create-a-service-which-creates-an-nfs-volume }
+### NFS ボリュームを生成するサービスの起動
 
 {% comment %}
-{% endcomment %}
 This example shows how you can create an NFS volume when creating a service. This example uses `10.0.0.10` as the NFS server and `/var/docker-nfs` as the exported directory on the NFS server. Note that the volume driver specified is `local`.
+{% endcomment %}
+この例は、サービス生成時に NFS ボリュームを生成する方法を示すものです。
+ここでは NFS サーバーとして `10.0.0.10` を利用し、NFS サーバーにエクスポートするディレクトリ を `/var/docker-nfs` とします。
+指定するボリュームドライバーは `local` です。
 
 #### NFSv3
 ```bash
@@ -733,74 +762,94 @@ docker service create -d \
 ```
 
 {% comment %}
-{% endcomment %}
 ## Backup, restore, or migrate data volumes
+{% endcomment %}
+{: #backup-restore-or-migrate-data-volumes }
+## データボリュームのバックアップ、復元、移行
 
 {% comment %}
-{% endcomment %}
 Volumes are useful for backups, restores, and migrations. Use the
 `--volumes-from` flag to create a new container that mounts that volume.
+{% endcomment %}
+ボリュームはバックアップ、復元、移行が簡単にできます。
+`--volumes-from` フラグを使うと、ボリュームをマウントする新たなコンテナーが生成されます。
 
 {% comment %}
-{% endcomment %}
 ### Backup a container
+{% endcomment %}
+{: #backup-a-container }
+### コンテナーのバックアップ
 
 {% comment %}
-{% endcomment %}
 For example, create a new container named `dbstore`:
+{% endcomment %}
+たとえば `dbstore` という名のコンテナーを新規生成します。
 
 ```
 $ docker run -v /dbdata --name dbstore ubuntu /bin/bash
 ```
 
 {% comment %}
-{% endcomment %}
 Then in the next command, we:
+{% endcomment %}
+次のコマンドでは以下のことを行います。
 
 {% comment %}
-{% endcomment %}
 - Launch a new container and mount the volume from the `dbstore` container
 - Mount a local host directory as `/backup`
 - Pass a command that tars the contents of the `dbdata` volume to a `backup.tar` file inside our `/backup` directory.
+{% endcomment %}
+- 新規のコンテナーを起動し、`dbstore` コンテナーからボリュームをマウントします。
+- ホストディレクトリを `/backup` としてマウントします。
+- `/backup` ディレクトリ内に入って、`dbdata` ボリュームの内容を tar コマンドにより `backup.tar` ファイルとして生成します。
 
 ```
 $ docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
 ```
 
 {% comment %}
-{% endcomment %}
 When the command completes and the container stops, we are left with a backup of
 our `dbdata` volume.
+{% endcomment %}
+コマンドが正常終了すると、コンテナーは停止されます。
+そして `dbdata` ボリュームのバックアップを得ることができます。
 
 {% comment %}
-{% endcomment %}
 ### Restore container from backup
+{% endcomment %}
+{: #restore-container-from-backup }
+### バックアップからのコンテナー復元
 
 {% comment %}
-{% endcomment %}
 With the backup just created, you can restore it to the same container, or
 another that you made elsewhere.
+{% endcomment %}
+上で生成したバックアップを使えば、同一コンテナー内にこれを復元することができます。
+あるいはまったく別のところに作り出している別コンテナーでもかまいません。
 
 {% comment %}
-{% endcomment %}
 For example, create a new container named `dbstore2`:
+{% endcomment %}
+たとえば `dbstore2` という名の新たなコンテナーを生成します。
 
 ```
 $ docker run -v /dbdata --name dbstore2 ubuntu /bin/bash
 ```
 
 {% comment %}
-{% endcomment %}
 Then un-tar the backup file in the new container`s data volume:
+{% endcomment %}
+そして新たなコンテナーのデータボリューム内に、バックアップファイルを untar します。
 
 ```
 $ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
 ```
 
 {% comment %}
-{% endcomment %}
 You can use the techniques above to automate backup, migration and restore
 testing using your preferred tools.
+{% endcomment %}
+上で見てきた作業については、好みのツールを利用して、バックアップ、復元、移行を自動化してテストを行うようにすることができます。
 
 {% comment %}
 ## Remove volumes
@@ -812,13 +861,17 @@ testing using your preferred tools.
 A Docker data volume persists after a container is deleted. There are two types
 of volumes to consider:
 {% endcomment %}
-A Docker data volume persists after a container is deleted. There are two types
-of volumes to consider:
+Docker データボリュームは、コンテナーが削除された後も残り続けます。
+ボリュームには 2 つのタイプがあるので考慮しておくことが必要です。
 
 {% comment %}
-{% endcomment %}
 - **Named volumes** have a specific source from outside the container, for example `awesome:/bar`.
 - **Anonymous volumes** have no specific source so when the container is deleted, instruct the Docker Engine daemon to remove them.
+{% endcomment %}
+- **名前つきボリューム** には、コンテナー外部から得られた所定の名称があります。
+  たとえば `awesome:/bar` と表わされます。
+- **匿名ボリューム** には名称がありません。
+  したがってコンテナーが削除されたときには Docker Engine に対して、匿名ボリュームの削除を指示する必要があります。
 
 {% comment %}
 ### Remove anonymous volumes
@@ -827,10 +880,14 @@ of volumes to consider:
 ### 匿名ボリュームの削除
 
 {% comment %}
-{% endcomment %}
 To automatically remove anonymous volumes, use the `--rm` option. For example,
 this command creates an anonymous `/foo` volume. When the container is removed,
 the Docker Engine removes the `/foo` volume but not the `awesome` volume.
+{% endcomment %}
+匿名ボリュームを自動的に削除するには `--rm` オプションを利用します。
+たとえば以下のコマンドは、匿名の `/foo` というボリュームを生成します。
+コンテナーが削除されると Docker Engine は `/foo` を削除します。
+ただし `awesome` ボリュームは削除しません。
 
 ```
 $ docker run --rm -v /foo -v awesome:/bar busybox top
