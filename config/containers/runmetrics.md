@@ -257,10 +257,10 @@ Metric                                | Description
 **mapped_file**                       | このコントロールグループのプロセスによってマッピングされるメモリの使用量。メモリを **どれだけ** 利用しているかの情報は得られません。ここからわかるのは **どのように** 利用されているかです。
 **pgfault**, **pgmajfault**           | cgroup のプロセスにおいて発生した「ページフォールト」、「メジャーフォールト」の回数を表わします。ページフォールトは、プロセスがアクセスした仮想メモリスペースの一部が、存在していないかアクセス拒否された場合に発生します。存在しないというのは、そのプロセスにバグがあり、不正なアドレスにアクセスしようとしたことを表わします（`SIGSEGV` シグナルが送信され、`Segmentation fault` といういつものメッセージを受けたとたんに、プロセスが停止されます）。アクセス拒否されるのは、スワップしたメモリ領域、あるいはマップファイルに対応するメモリ領域を読み込もうとしたときに発生します。この場合、カーネルがディスクからページを読み込み、CPU のメモリアクセスを成功させます。またコピーオンライトメモリ領域へプロセスが書き込みを行う場合にも発生することがあります。同様にカーネルがプロセスの切り替え（preemption）を行ってからメモリページを複製し、ページ内のプロセス自体のコピーに対して書き込み処理を復元します。「メジャーフォールト」はカーネルがディスクからデータを読み込む必要がある際に発生します。既存ページを複製する場合や空のページを割り当てる場合は、通常の（つまり「マイナー」の）フォールトになります。
 **swap**                              | この cgroup 内のプロセスによって現時点利用されているスワップ総量。
-**active_anon**、**inactive_anon**    | The amount of *anonymous* memory that has been identified has respectively *active* and *inactive* by the kernel. "Anonymous" memory is the memory that is *not* linked to disk pages. In other words, that's the equivalent of the rss counter described above. In fact, the very definition of the rss counter is **active_anon** + **inactive_anon** - **tmpfs** (where tmpfs is the amount of memory used up by `tmpfs` filesystems mounted by this control group). Now, what's the difference between "active" and "inactive"? Pages are initially "active"; and at regular intervals, the kernel sweeps over the memory, and tags some pages as "inactive". Whenever they are accessed again, they are immediately retagged "active". When the kernel is almost out of memory, and time comes to swap out to disk, the kernel swaps "inactive" pages.
-**active_file**, **inactive_file**    | Cache memory, with *active* and *inactive* similar to the *anon* memory above. The exact formula is **cache** = **active_file** + **inactive_file** + **tmpfs**. The exact rules used by the kernel to move memory pages between active and inactive sets are different from the ones used for anonymous memory, but the general principle is the same. When the kernel needs to reclaim memory, it is cheaper to reclaim a clean (=non modified) page from this pool, since it can be reclaimed immediately (while anonymous pages and dirty/modified pages need to be written to disk first).
-**unevictable**                       | The amount of memory that cannot be reclaimed; generally, it accounts for memory that has been "locked" with `mlock`. It is often used by crypto frameworks to make sure that secret keys and other sensitive material never gets swapped out to disk.
-**memory_limit**, **memsw_limit**     | These are not really metrics, but a reminder of the limits applied to this cgroup. The first one indicates the maximum amount of physical memory that can be used by the processes of this control group; the second one indicates the maximum amount of RAM+swap.
+**active_anon**、**inactive_anon**    | カーネルによって **アクティブ** か **非アクティブ** のいずれかに特定される **匿名** メモリの使用量。"匿名" メモリとは、ディスクページにひもづいて **いない** メモリのことです。別の表現でいえば、上で示した rss カウンターと同等のものです。正確な rss カウンターの定義式は、**active_anon** ＋ **inactive_anon** － **tmpfs** です。（コントロールグループが `tmpfs` ファイルシステムをマウントしている場合に、ここでいう tmpfs は、そのファイルシステムが利用するメモリ使用量のことです。）では "アクティブ" と "非アクティブ" の違いは？  ページは初めは "アクティブ" です。一定間隔でカーネルがメモリを走査し、一部に "非アクティブ" というタグをつけます。再度アクセスが行われると、すぐに "アクティブ" というタグにつけかえられます。カーネルがほぼメモリ不足に陥って、ディスクへのスワップが必要になると、カーネルは "非アクティブ" ページをスワップします。
+**active_file**, **inactive_file**    | 上で示した **anon** メモリと同様、**アクティブ**、**非アクティブ** の状態があるキャッシュメモリのこと。正確な式で表現すると、**cache** ＝ **active_file** ＋ **inactive_file** ＋ **tmpfs** です。カーネルが採用する規則として、アクティブ、非アクティブなメモリページを移動させる方法は、匿名メモリのときとは異なります。ただしその一般的な原理は同じです。カーネルがメモリを要求するとき、クリーンな（修正がかかっていない）ページを取り出すことの方が、簡単に済みます。取り出すことがすぐにできるからです。（一方、匿名ページや、汚れた修正のかかったページでは、その前にディスクに書き出すことが必要になるからです。）
+**unevictable**                       | 取り出し要求ができないメモリ量のこと。一般には `mlock` によって "ロックされた" メモリとされます。暗号フレームワークにおいて利用されることがあり、その場合、秘密鍵や機密情報がディスクにスワップされないようにするものです。
+**memory_limit**, **memsw_limit**     | これは実際のメトリックスではありません。この cgroup に適用される上限を確認するためのものです。**memory_limit** は、このコントロールグループのプロセスが利用可能な物理メモリの最大容量を示します。**memsw_limit** は RAM ＋ スワップの最大容量を示します。
 
 {% comment %}
 Accounting for memory in the page cache is very complex. If two
@@ -290,7 +290,7 @@ Now that we've covered memory metrics, everything else is
 simple in comparison. CPU metrics are in the
 `cpuacct` controller.
 {% endcomment %}
-メモリメトリックスについて説明してきました。
+これまでメモリメトリックスについて説明してきました。
 これ以外のものは比較的簡単です。
 CPU メトリックスは `cpuacct` コントローラー内にあります。
 
@@ -299,9 +299,9 @@ For each container, a pseudo-file `cpuacct.stat` contains the CPU usage
 accumulated by the processes of the container, broken down into `user` and
 `system` time. The distinction is:
 {% endcomment %}
-For each container, a pseudo-file `cpuacct.stat` contains the CPU usage
-accumulated by the processes of the container, broken down into `user` and
-`system` time. The distinction is:
+各コンテナーに対応して擬似ファイル `cpuacct.stat` があり、コンテナープロセスの CPU 使用時間が積算されています。
+そしてこれが `user` 時間と `system` 時間に割り振られています。
+両者の違いは以下のとおりです。
 
 {% comment %}
 - `user` time is the amount of time a process has direct control of the CPU,
@@ -309,18 +309,23 @@ accumulated by the processes of the container, broken down into `user` and
 - `system` time is the time the kernel is executing system calls on behalf of
   the process.
 {% endcomment %}
-- `user` 時間は、プロセスが CPU を直接制御する時間のことで、
+- `user` 時間は、プロセスが CPU を直接制御して、プロセスコードを実行している時間のことです。
   executing process code.
 - `system` 時間は、カーネルがプロセスのためにシステムコールを実行している時間のことです。
 
 {% comment %}
-{% endcomment %}
 Those times are expressed in ticks of 1/100th of a second, also called "user
 jiffies". There are `USER_HZ` *"jiffies"* per second, and on x86 systems,
 `USER_HZ` is 100. Historically, this mapped exactly to the number of scheduler
 "ticks" per second, but higher frequency scheduling and
 [tickless kernels]( http://lwn.net/Articles/549580/) have made the number of
 ticks irrelevant.
+{% endcomment %}
+この時間は 1/100 秒の tick という周期で表わされます。
+別名「user jiffies」ともいいます。
+1 秒には `USER_HZ` 分の "**jiffies**" があり、x86 システムでは `USER_HZ` は 100 です。
+これまでの経緯として、これは 1 秒に割り当てられるスケジューラー "ticks" の数です。
+ただしそれ以上に頻繁にスケジューリングされることや、[tickless kernels]( http://lwn.net/Articles/549580/) があり、これらは ticks 数は関係がなくなります。
 
 {% comment %}
 #### Block I/O metrics
@@ -336,12 +341,9 @@ https://www.kernel.org/doc/Documentation/cgroup-v1/blkio-controller.txt)
 file in the kernel documentation, here is a short list of the most
 relevant ones:
 {% endcomment %}
-Block I/O is accounted in the `blkio` controller.
-Different metrics are scattered across different files. While you can
-find in-depth details in the [blkio-controller](
-https://www.kernel.org/doc/Documentation/cgroup-v1/blkio-controller.txt)
-file in the kernel documentation, here is a short list of the most
-relevant ones:
+ブロック I/O は `blkio` コントローラー内において計算されます。
+さまざまなメトリックスが、さまざまなファイルにわたって保持されています。
+より詳細は、カーネルドキュメント内にある [blkio-controller](https://www.kernel.org/doc/Documentation/cgroup-v1/blkio-controller.txt) ファイルに記述されていますが、以下では最も関連のある内容を手短に示します。
 
 
 {% comment %}
@@ -354,10 +356,10 @@ Metric                      | Description
 {% endcomment %}
 メトリックス                | 内容説明
 ----------------------------|-----------------------------------------------------------
-**blkio.sectors**           | Contains the number of 512-bytes sectors read and written by the processes member of the cgroup, device by device. Reads and writes are merged in a single counter.
-**blkio.io_service_bytes**  | Indicates the number of bytes read and written by the cgroup. It has 4 counters per device, because for each device, it differentiates between synchronous vs. asynchronous I/O, and reads vs. writes.
-**blkio.io_serviced**       | The number of I/O operations performed, regardless of their size. It also has 4 counters per device.
-**blkio.io_queued**         | Indicates the number of I/O operations currently queued for this cgroup. In other words, if the cgroup isn't doing any I/O, this is zero. The opposite is not true. In other words, if there is no I/O queued, it does not mean that the cgroup is idle (I/O-wise). It could be doing purely synchronous reads on an otherwise quiescent device, which can therefore handle them immediately, without queuing. Also, while it is helpful to figure out which cgroup is putting stress on the I/O subsystem, keep in mind that it is a relative quantity. Even if a process group does not perform more I/O, its queue size can increase just because the device load increases because of other devices.
+**blkio.sectors**           | 512 バイトのセクター数。cgroup のプロセスメンバーによって、デバイスごとに読み書きされます。読み書きは 1 つのカウンターに合計されます。
+**blkio.io_service_bytes**  | cgroup によって読み書きされるバイト数を表わします。デバイスごとに 4 つのカウンターがあり、1 つのデバイスつき、同期、非同期 I/O の別、読み込み、書き込みの別が示されています。
+**blkio.io_serviced**       | 処理された I/O 操作の数。そのサイズとは無関係です。デバイスごとに、やはり 4 つのカウンターがあります。
+**blkio.io_queued**         | この cgroup において、その時点でキューに入っている I/O 操作の数を表わします。言い換えると  cgroup に I/O が発生していなければ、この値はゼロになります。一方、この逆は正しくなりません。I/O がキューに入っていなかったとしても、それは cgroup が（I/O 的に）アイドルであるとは言えません。普段は静止しているデバイスが、純粋に同期読み込み処理を行っているかもしれないからです。その場合には、I/O 操作をすぐに処理できるわけであり、キューに入れることなく扱うことができます。またこのメトリックスは I/O サブシステム上のどの cgroup に負荷がかかっているかがわかります。ただし示される値は相対的な量にすぎません。プロセスグループがこれ以上に I/O を処理しない場合であっても、他のデバイスの影響によりデバイス負荷が増加するため、キューサイズも増加することになります。
 
 {% comment %}
 ### Network metrics
@@ -379,23 +381,21 @@ interfaces, potentially multiple `eth0`
 interfaces, etc.; so this is why there is no easy way to gather network
 metrics with control groups.
 {% endcomment %}
-Network metrics are not exposed directly by control groups. There is a
-good explanation for that: network interfaces exist within the context
-of *network namespaces*. The kernel could probably accumulate metrics
-about packets and bytes sent and received by a group of processes, but
-those metrics wouldn't be very useful. You want per-interface metrics
-(because traffic happening on the local `lo`
-interface doesn't really count). But since processes in a single cgroup
-can belong to multiple network namespaces, those metrics would be harder
-to interpret: multiple network namespaces means multiple `lo`
-interfaces, potentially multiple `eth0`
-interfaces, etc.; so this is why there is no easy way to gather network
-metrics with control groups.
+ネットワークメトリックスは、コントロールグループによって直接表わされるものではありません。
+わかりやすく説明します。
+ネットワークインターフェースは、**ネットワーク名前空間** コンテキストの中に存在します。
+カーネルは、プロセスグループとの間で送受信されるパケットやバイトに関して、メトリックスを収集します。
+ただこのメトリックスはあまり役に立つものではありません。
+欲しいのはインターフェースごとのメトリックスであるはずです。
+（なぜならメトリックスでは `lo` インターフェースに発生するトラフィックはカウントされません。）
+もっとも 1 つの cgroup は、複数のネットワーク名前空間に属することができるため、そのメトリックスを計算することは、より難しくなります。
+複数のネットワーク名前空間になるということは、`lo` インターフェースが複数あるということであり、場合によっては複数の `eth0` インターフェースを持つこともあります。
+コントロールグループを用いてネットワークメトリックスを簡単に集めることができないのは、こういった理由によります。
 
 {% comment %}
 Instead we can gather network metrics from other sources:
 {% endcomment %}
-Instead we can gather network metrics from other sources:
+そのかわり、ネットワークメトリックスは別の情報から収集することができます。
 
 #### IPtables
 
@@ -403,15 +403,13 @@ Instead we can gather network metrics from other sources:
 IPtables (or rather, the netfilter framework for which iptables is just
 an interface) can do some serious accounting.
 {% endcomment %}
-IPtables (or rather, the netfilter framework for which iptables is just
-an interface) can do some serious accounting.
+iptables （むしろ iptables がインターフェースとなる netfilter フレームワーク）から重要な情報が得られます。
 
 {% comment %}
 For instance, you can setup a rule to account for the outbound HTTP
 traffic on a web server:
 {% endcomment %}
-For instance, you can setup a rule to account for the outbound HTTP
-traffic on a web server:
+たとえばウェブサーバー上におけるアウトバウンド HTTP トラフィックを計算するルールを設定することができます。
 
 ```bash
 $ iptables -I OUTPUT -p tcp --sport 80
@@ -422,14 +420,13 @@ There is no `-j` or `-g` flag,
 so the rule just counts matched packets and goes to the following
 rule.
 {% endcomment %}
-There is no `-j` or `-g` flag,
-so the rule just counts matched packets and goes to the following
-rule.
+ここでは `-j` フラグや `-g` フラグは用いません。
+このルールがパケットをカウントし、後続のルールの処理を行います。
 
 {% comment %}
 Later, you can check the values of the counters, with:
 {% endcomment %}
-Later, you can check the values of the counters, with:
+このカウンター値は以下のようにして確認できます。
 
 ```bash
 $ iptables -nxvL OUTPUT
