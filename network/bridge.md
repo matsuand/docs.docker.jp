@@ -210,7 +210,6 @@ Use the `docker network create` command to create a user-defined bridge
 network.
 {% endcomment %}
 ユーザー定義ブリッジネットワークを生成するには、コマンド `docker network create` を実行します。
-network.
 
 ```bash
 $ docker network create my-net
@@ -227,18 +226,19 @@ reference or the output of `docker network create --help` for details.
 あるいは `docker network create --help` の出力を確認してください。
 
 {% comment %}
-{% endcomment %}
 Use the `docker network rm` command to remove a user-defined bridge
 network. If containers are currently connected to the network,
 [disconnect them](#disconnect-a-container-from-a-user-defined-bridge)
 first.
+{% endcomment %}
+`docker network rm` コマンドを使うと、ユーザー定義のブリッジネットワークを削除することができます。
+コンテナーがその時点でネットワークに接続しているのであれば、その前に [接続を切って](#disconnect-a-container-from-a-user-defined-bridge) ください。
 
 ```bash
 $ docker network rm my-net
 ```
 
 {% comment %}
-{% endcomment %}
 > **What's really happening?**
 >
 > When you create or remove a user-defined bridge or connect or disconnect a
@@ -247,18 +247,31 @@ $ docker network rm my-net
 > or removing bridge devices or configuring `iptables` rules on Linux). These
 > details should be considered implementation details. Let Docker manage your
 > user-defined networks for you.
+{% endcomment %}
+> **実際には何が起きるか**
+>
+> ユーザー定義ブリッジの生成、削除を行う場合、あるいはユーザー定義ブリッジとコンテナーを接続する、または接続を切る場合、Docker はオペレーティングシステムに固有のツールを使って、用いられているネットワークインフラストラクチャー（ブリッジデバイスの加除や Linux 上の `iptables` の設定など）を制御します。
+> この動作は実装の詳細を考慮して処理されるべきであるため、ユーザー定義ネットワークの管理は Docker
+の動作に従ってください。
 
 {% comment %}
-{% endcomment %}
 ## Connect a container to a user-defined bridge
+{% endcomment %}
+{: #connect-a-container-to-a-user-defined-bridge }
+## ユーザー定義ブリッジへのコンテナーの接続
 
 {% comment %}
-{% endcomment %}
 When you create a new container, you can specify one or more `--network` flags.
 This example connects a Nginx container to the `my-net` network. It also
 publishes port 80 in the container to port 8080 on the Docker host, so external
 clients can access that port. Any other container connected to the `my-net`
 network has access to all ports on the `my-nginx` container, and vice versa.
+{% endcomment %}
+新たにコンテナーを生成するときは、`--network` フラグを複数指定することができます。
+以下の例では Nginx コンテナーを `my-net` ネットワークに接続しています。
+またコンテナーのポート 80 を Docker ホストのポート 8080 に公開しています。
+外部のクライアントプログラムは、このポートからアクセスすることができます。
+`my-net` ネットワークに別のコンテナーが接続していたら、`my-nginx` コンテナー上のポートすべてにアクセスすることができます。元のコンテナーからも同じことが言えます。
 
 ```bash
 $ docker create --name my-nginx \
@@ -268,109 +281,143 @@ $ docker create --name my-nginx \
 ```
 
 {% comment %}
-{% endcomment %}
 To connect a **running** container to an existing user-defined bridge, use the
 `docker network connect` command. The following command connects an already-running
 `my-nginx` container to an already-existing `my-net` network:
+{% endcomment %}
+**実行中** のコンテナーを既存のユーザー定義ブリッジに接続するには `docker network connect` コマンドを使います。
+以下に示すコマンドは、すでに実行されている `my-nginx` コンテナーを、既存の `my-net` ネットワークに接続します。
 
 ```bash
 $ docker network connect my-net my-nginx
 ```
 
 {% comment %}
-{% endcomment %}
 ## Disconnect a container from a user-defined bridge
+{% endcomment %}
+{: #disconnect-a-container-from-a-user-defined-bridge }
+## ユーザー定義ブリッジからのコンテナーの接続解除
 
 {% comment %}
-{% endcomment %}
 To disconnect a running container from a user-defined bridge, use the `docker
 network disconnect` command. The following command disconnects the `my-nginx`
 container from the `my-net` network.
+{% endcomment %}
+ユーザー定義ブリッジから実行コンテナーの接続を解除するには `docker network disconnect` コマンドを使います。
+以下に示すコマンドは、`my-nginx` コンテナーを `my-net` ネットワークから切り離します。
 
 ```bash
 $ docker network disconnect my-net my-nginx
 ```
 
 {% comment %}
-{% endcomment %}
 ## Use IPv6
+{% endcomment %}
+{: #use-ipv6 }
+## IPv6 の利用
 
 {% comment %}
-{% endcomment %}
 If you need IPv6 support for Docker containers, you need to
 [enable the option](../config/daemon/ipv6.md) on the Docker daemon and reload its
 configuration, before creating any IPv6 networks or assigning containers IPv6
 addresses.
+{% endcomment %}
+Docker コンテナーが IPv6 をサポートする必要がある場合は、Docker デーモンにおいて [オプションを有効](../config/daemon/ipv6.md) にして、設定を再読み込みする必要があります。
+ただしそれを行うには、あらかじめ IPv6 ネットワークを構築しておき、コンテナーに対して IPv6 アドレスを割り当てておくことが必要です。
 
 {% comment %}
-{% endcomment %}
 When you create your network, you can specify the `--ipv6` flag to enable
 IPv6. You can't selectively disable IPv6 support on the default `bridge` network.
+{% endcomment %}
+ネットワークを構築する際に `--ipv6` フラグを指定すれば IPv6 を有効にすることができます。
+なおデフォルトの `bridge` ネットワークにおいては、IPv6 サポートを無効にすることはできません。
 
 {% comment %}
-{% endcomment %}
 ## Enable forwarding from Docker containers to the outside world
+{% endcomment %}
+{: #enable-forwarding-from-docker-containers-to-the-outside-world }
+## Docker コンテナーからの外部フォワード有効化
 
 {% comment %}
-{% endcomment %}
 By default, traffic from containers connected to the default bridge network is
 **not** forwarded to the outside world. To enable forwarding, you need to change
 two settings. These are not Docker commands and they affect the Docker host's
 kernel.
+{% endcomment %}
+デフォルトブリッジネットワークに接続されているコンテナーからのトラフィックは、デフォルトでは外部にフォワード **されません**。
+フォワードを有効にするには、設定変更が 2 つ必要です。
+それは Docker コマンドで行うものではなく、Docker ホストのカーネルを変更するものです。
 
 {% comment %}
-{% endcomment %}
 1.  Configure the Linux kernel to allow IP forwarding.
+{% endcomment %}
+1.  Linux カーネルにおいて IP フォワーディングを有効に設定します。
 
     ```bash
     $ sysctl net.ipv4.conf.all.forwarding=1
     ```
 
 {% comment %}
-{% endcomment %}
 2.  Change the policy for the `iptables` `FORWARD` policy from `DROP` to
     `ACCEPT`.
+{% endcomment %}
+2.  `iptables` の `FORWARD` ポリシーを `DROP` から `ACCEPT` に変更します。
 
     ```bash
     $ sudo iptables -P FORWARD ACCEPT
     ```
 
 {% comment %}
-{% endcomment %}
 These settings do not persist across a reboot, so you may need to add them to a
 start-up script.
+{% endcomment %}
+上で行ったことは、再起動後には設定が失われます。
+そこで起動スクリプトにその設定を加えることにします。
 
 {% comment %}
-{% endcomment %}
 ## Use the default bridge network
+{% endcomment %}
+{: #use-the-default-bridge-network }
+## デフォルトのブリッジネットワークの利用
 
 {% comment %}
-{% endcomment %}
 The default `bridge` network is considered a legacy detail of Docker and is not
 recommended for production use. Configuring it is a manual operation, and it has
 [technical shortcomings](#differences-between-user-defined-bridges-and-the-default-bridge).
+{% endcomment %}
+デフォルトの `bridge` ネットワークは Docker の古い機能の一部に過ぎないので、本番環境での利用はお勧めできません。
+これは手動で設定するものになっていて、[技術的な欠点](#differences-between-user-defined-bridges-and-the-default-bridge) があります。
 
 {% comment %}
-{% endcomment %}
 ### Connect a container to the default bridge network
+{% endcomment %}
+{: #connect-a-container-to-the-default-bridge-network }
+### デフォルトブリッジネットワークへのコンテナーの接続
 
 {% comment %}
-{% endcomment %}
 If you do not specify a network using the `--network` flag, and you do specify a
 network driver, your container is connected to the default `bridge` network by
 default. Containers connected to the default `bridge` network can communicate,
 but only by IP address, unless they are linked using the
 [legacy `--link` flag](links.md).
+{% endcomment %}
+`--network` フラグを指定しなかった場合で、ネットワークドライバーの指定を行った場合、デフォルトでコンテナーは、デフォルト の `bridge` ネットワークに接続されます。
+デフォルト `bridge` ネットワークに接続されたコンテナーは通信が可能ですが、[かつての `--link` フラグ](links.md) を利用しない限りは、互いに IP アドレスを使ってしか通信はできません。
 
 {% comment %}
-{% endcomment %}
 ### Configure the default bridge network
+{% endcomment %}
+{: #configure-the-default-bridge-network }
+### デフォルトブリッジネットワークの設定
 
 {% comment %}
-{% endcomment %}
 To configure the default `bridge` network, you specify options in `daemon.json`.
 Here is an example `daemon.json` with several options specified. Only specify
 the settings you need to customize.
+{% endcomment %}
+デフォルト `bridge` ネットワークを設定するには、`daemon.json` 内においてオプションを指定します。
+以下は `daemon.json` においてオプションをいくつか指定した例です。
+オプション指定は、設定変更を行いたいもののみ記述してください。
 
 ```json
 {
@@ -385,18 +432,23 @@ the settings you need to customize.
 ```
 
 {% comment %}
-{% endcomment %}
 Restart Docker for the changes to take effect.
+{% endcomment %}
+設定変更を有効にするため Docker を再起動します。
 
 {% comment %}
-{% endcomment %}
 ### Use IPv6 with the default bridge network
+{% endcomment %}
+{: #use-ipv6-with-the-default-bridge-network }
+### デフォルトブリッジネットワークにおける IPv6 の利用
 
 {% comment %}
-{% endcomment %}
 If you configure Docker for IPv6 support (see [Use IPv6](#use-ipv6)), the
 default bridge network is also configured for IPv6 automatically. Unlike
 user-defined bridges, you can't selectively disable IPv6 on the default bridge.
+{% endcomment %}
+Docker において IPv6（[IPv6 の利用](#use-ipv6) 参照）のサポートを設定すると、デフォルトブリッジネットワークも IPv6 に対応するように自動的に設定されます。
+ユーザー定義ブリッジとは違って、デフォルトブリッジにおいては IPv6 を無効にすることはできません。
 
 {% comment %}
 ## Next steps
@@ -405,8 +457,12 @@ user-defined bridges, you can't selectively disable IPv6 on the default bridge.
 ## 次のステップ
 
 {% comment %}
-{% endcomment %}
 - Go through the [standalone networking tutorial](network-tutorial-standalone.md)
 - Learn about [networking from the container's point of view](../config/containers/container-networking.md)
 - Learn about [overlay networks](overlay.md)
 - Learn about [Macvlan networks](macvlan.md)
+{% endcomment %}
+- [スタンドアロンネットワークのチュートリアル](network-tutorial-standalone.md) を確認する。
+- [コンテナーから見たネットワーク](../config/containers/container-networking.md) について。
+- [overlay ネットワーク](overlay.md) について。
+- [Macvlan ネットワーク](macvlan.md) について。
