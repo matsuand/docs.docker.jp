@@ -18,7 +18,7 @@ You can use the `docker stats` command to live stream a container's
 runtime metrics. The command supports CPU, memory usage, memory limit,
 and network IO metrics.
 {% endcomment %}
-`docker stats` コマンドを使って、コンテナーの実行メトリックスからの出力を得ることができます。
+`docker stats` コマンドを使うと、コンテナーの実行メトリックスからの出力を順次得ることができます。
 このコマンドは、CPU、メモリ使用量、メモリ上限、ネットワーク I/O に対するメトリックスをサポートしています。
 
 {% comment %}
@@ -55,9 +55,9 @@ obtain network usage metrics as well. This is relevant for "pure" LXC
 containers, as well as for Docker containers.
 {% endcomment %}
 Linux のコンテナーは [コントロールグループ](https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt) に依存しています。
-これは単に複数のプロセスを追跡するだけでなく、CPU、メモリ、ブロック I/O 使用量に関するメトリックスを提供します。
-このメトリックスがアクセス可能であり、同様にネットワーク使用量メトリックスも得ることができます。
-これは「純粋な」LXC コンテナーに関連があり、Docker のコンテナーにも関係します。
+コントロールグループは、単に複数のプロセスを追跡するだけでなく、CPU、メモリ、ブロック I/O 使用量に関するメトリックスを提供します。
+そういったメトリックスがアクセス可能であり、同様にネットワーク使用量のメトリックスも得ることができます。
+これは「純粋な」LXC コンテナーに関連しており、Docker のコンテナーにも関連します。
 
 {% comment %}
 Control groups are exposed through a pseudo-filesystem. In recent
@@ -69,7 +69,7 @@ cgroup hierarchy.
 コントロールグループは擬似ファイルシステムを通じて提供されます。
 最近のディストリビューションでは、このファイルシステムは `/sys/fs/cgroup` にあります。
 このディレクトリの下には devices、freezer、blkio などのサブディレクトリが複数あります。
-各サブディレクトリは、実にさまざまな cgroup 階層に対応しています。
+これらのサブディレクトリが、独特の cgroup 階層を構成しています。
 
 {% comment %}
 On older systems, the control groups might be mounted on `/cgroup`, without
@@ -78,7 +78,7 @@ you see a bunch of files in that directory, and possibly some directories
 corresponding to existing containers.
 {% endcomment %}
 かつてのシステムでは、コントロールグループが `/cgroup` にマウントされていて、わかりやすい階層構造にはなっていませんでした。
-その場合サブディレクトリを確認していくのではなく、そのディレクトリ内の数多くのファイルを見てまわって、どこかにあるディレクトリが既存のコンテナーに対応するものであろう、と確認していくしかありませんでした。
+その場合、サブディレクトリそのものを確認していくのではなく、サブディレクトリ内にある数多くのファイルを見渡して、そのディレクトリが既存のコンテナーに対応するものであろう、と確認していくしかありません。
 
 {% comment %}
 To figure out where your control groups are mounted, you can run:
@@ -99,7 +99,7 @@ $ grep cgroup /proc/mounts
 You can look into `/proc/cgroups` to see the different control group subsystems
 known to the system, the hierarchy they belong to, and how many groups they contain.
 {% endcomment %}
-`/proc/cgroups` を覗いてみるとわかりますが、システムが利用するコントロールグループのサブシステムには実にさまざまなものがあり、それが階層化されていて、数多くのグループが属しているのがわかります。
+`/proc/cgroups` を覗いてみるとわかりますが、システムが利用するコントロールグループのサブシステムには実にさまざまなものがあり、それが階層化されていて、数多くのグループが含まれているのがわかります。
 
 {% comment %}
 You can also look at `/proc/<pid>/cgroup` to see which control groups a process
@@ -108,7 +108,7 @@ the hierarchy mountpoint. `/` means the process has not been assigned to a
 group, while `/lxc/pumpkin` indicates that the process is a member of a
 container named `pumpkin`.
 {% endcomment %}
-また `/proc/<pid>/cgroup` を確認してみると、1 つのプロセスがどのコントロールグループに属しているかがわかります。
+また `/proc/<pid>/cgroup` を確認してみれば、1 つのプロセスがどのコントロールグループに属しているかがわかります。
 そのときのコントロールグループは、階層構造のルートとなるマウントポイントからの相対パスで表わされます。
 `/` が表示されていれば、そのプロセスにはグループが割り当てられていません。
 一方 `/lxc/pumpkin` といった表示になっていれば、そのプロセスは `pumpkin` という名のコンテナーのメンバーであることがわかります。
@@ -127,7 +127,7 @@ of the LXC tools, the cgroup is `lxc/<container_name>.`
 {% endcomment %}
 各コンテナーでは、各階層内に 1 つの cgroup が生成されます。
 かつてのシステムにおいて、ユーザーランドツール LXC の古い版を利用している場合、cgroup 名はそのままコンテナー名になっています。
-より新しい LXC ツールでの cgroup は `lxc/<コンテナー名>` となります。
+より新しい LXC ツールでの cgroup 名は `lxc/<コンテナー名>` となります。
 
 {% comment %}
 For Docker containers using cgroups, the container name is the full
@@ -144,7 +144,7 @@ cgroup を利用する Docker コンテナーにおいて、コンテナー名�
 Putting everything together to look at the memory metrics for a Docker
 container, take a look at `/sys/fs/cgroup/memory/docker/<longid>/`.
 {% endcomment %}
-Docker コンテナーに対するメモリーメトリックスを取りまとめて確認するには、`/sys/fs/cgroup/memory/docker/<longid>/` を見ます。
+Docker コンテナーに対するメモリメトリックスを取りまとめて確認するには、`/sys/fs/cgroup/memory/docker/<longid>/` を見ます。
 
 {% comment %}
 ### Metrics from cgroups: memory, CPU, block I/O
@@ -172,7 +172,7 @@ chose to not enable it by default. Generally, to enable it, all you have
 to do is to add some kernel command-line parameters:
 `cgroup_enable=memory swapaccount=1`.
 {% endcomment %}
-メモリメトリックスは cgroup の "memory" にあります。
+メモリメトリックスは cgroup の「memory」にあります。
 メモリコントロールグループには多少のオーバーヘッドがあります。
 ホスト上のメモリ利用量をきめ細かく算出しているためです。
 したがって各種ディストリビューションの多くでは、デフォルトでこれを無効にしています。
@@ -229,10 +229,10 @@ Some others are "counters", or values that can only go up, because
 they represent occurrences of a specific event. For instance, `pgfault`
 indicates the number of page faults since the creation of the cgroup.
 {% endcomment %}
-メトリックスの中には「メーター」、つまり増減を繰り返す値表記になっているものがあります。
+メトリックスの中には「メーター」つまり増減を繰り返す値表記になっているものがあります。
 たとえば `swap` は、cgroup のメンバーによって利用されるスワップ容量の合計です。
 この他に「カウンター」となっているもの、つまり数値がカウントアップされていくものがあります。
-これは特定のイベントがどれだけ発生したかを表わしています。
+これは特定のイベントがどれだけ発生したかを表わします。
 たとえば `pgfault` は cgroup の生成以降に、どれだけページフォールトが発生したかを表わします。
 
 <style>table tr > td:first-child { white-space: nowrap;}</style>
@@ -252,9 +252,9 @@ Metric                                | Description
 {% endcomment %}
 メトリックス                          | 内容説明
 --------------------------------------|-----------------------------------------------------------
-**cache**                             | このコントロールグループのプロセスが利用するメモリ使用量。ブロックデバイス上の各ブロックに細かく関連づけられるものです。ディスク上のファイルと読み書きを行うと、この値が増加します。ふだん利用する I/O（システムコールの `open`、`read`、`write`）利用時に発生し、（`mmap` を用いた）マップファイルの場合も同様です。`tmpfs` が利用するメモリをこれにより説明されますが、理由は明らかではありません。
-**rss**                               | ディスク上の操作に対応づかないメモリ使用量。たとえばスタック、ヒープ、匿名メモリマップなどです。
-**mapped_file**                       | このコントロールグループのプロセスによってマッピングされるメモリの使用量。メモリを **どれだけ** 利用しているかの情報は得られません。ここからわかるのは **どのように** 利用されているかです。
+**cache**                             | このコントロールグループのプロセスによるメモリ使用量です。ブロックデバイス上の各ブロックに細かく関連づけられるものです。ディスク上のファイルと読み書きを行うと、この値が増加します。ふだん利用する I/O（システムコールの `open`、`read`、`write`）利用時に発生し、（`mmap` を用いた）マップファイルの場合も同様です。`tmpfs` によるメモリ使用もここに含まれますが、理由は明らかではありません。
+**rss**                               | ディスク上の操作に対応づかないメモリ使用量です。たとえばスタック、ヒープ、匿名メモリマップなどです。
+**mapped_file**                       | このコントロールグループのプロセスによって割り当てられるメモリの使用量です。メモリを **どれだけ** 利用しているかの情報は得られません。ここからわかるのは **どのように** 利用されているかです。
 **pgfault**, **pgmajfault**           | cgroup のプロセスにおいて発生した「ページフォールト」、「メジャーフォールト」の回数を表わします。ページフォールトは、プロセスがアクセスした仮想メモリスペースの一部が、存在していないかアクセス拒否された場合に発生します。存在しないというのは、そのプロセスにバグがあり、不正なアドレスにアクセスしようとしたことを表わします（`SIGSEGV` シグナルが送信され、`Segmentation fault` といういつものメッセージを受けたとたんに、プロセスが停止されます）。アクセス拒否されるのは、スワップしたメモリ領域、あるいはマップファイルに対応するメモリ領域を読み込もうとしたときに発生します。この場合、カーネルがディスクからページを読み込み、CPU のメモリアクセスを成功させます。またコピーオンライトメモリ領域へプロセスが書き込みを行う場合にも発生することがあります。同様にカーネルがプロセスの切り替え（preemption）を行ってからメモリページを複製し、ページ内のプロセス自体のコピーに対して書き込み処理を復元します。「メジャーフォールト」はカーネルがディスクからデータを読み込む必要がある際に発生します。既存ページを複製する場合や空のページを割り当てる場合は、通常の（つまり「マイナー」の）フォールトになります。
 **swap**                              | この cgroup 内のプロセスによって現時点利用されているスワップ総量。
 **active_anon**、**inactive_anon**    | カーネルによって **アクティブ** か **非アクティブ** のいずれかに特定される **匿名** メモリの使用量。"匿名" メモリとは、ディスクページにひもづいて **いない** メモリのことです。別の表現でいえば、上で示した rss カウンターと同等のものです。正確な rss カウンターの定義式は、**active_anon** ＋ **inactive_anon** － **tmpfs** です。（コントロールグループが `tmpfs` ファイルシステムをマウントしている場合に、ここでいう tmpfs は、そのファイルシステムが利用するメモリ使用量のことです。）では "アクティブ" と "非アクティブ" の違いは？  ページは初めは "アクティブ" です。一定間隔でカーネルがメモリを走査し、一部に "非アクティブ" というタグをつけます。再度アクセスが行われると、すぐに "アクティブ" というタグにつけかえられます。カーネルがほぼメモリ不足に陥って、ディスクへのスワップが必要になると、カーネルは "非アクティブ" ページをスワップします。
@@ -437,9 +437,8 @@ Technically, `-n` is not required, but it
 prevents iptables from doing DNS reverse lookups, which are probably
 useless in this scenario.
 {% endcomment %}
-Technically, `-n` is not required, but it
-prevents iptables from doing DNS reverse lookups, which are probably
-useless in this scenario.
+技術的なことだけで言えば `-n` は必要ありません。
+DNS の逆引きを避けるためのものですが、ここでの作業ではおそらく不要です。
 
 {% comment %}
 Counters include packets and bytes. If you want to setup metrics for
@@ -450,28 +449,24 @@ chain. This only meters traffic going through the NAT
 layer; you also need to add traffic going through the userland
 proxy.
 {% endcomment %}
-Counters include packets and bytes. If you want to setup metrics for
-container traffic like this, you could execute a `for`
-loop to add two `iptables` rules per
-container IP address (one in each direction), in the `FORWARD`
-chain. This only meters traffic going through the NAT
-layer; you also need to add traffic going through the userland
-proxy.
+カウンターにはパケット数とバイト数があります。
+このトラフィックのようなメトリックスを設定したい場合は、`for` ループを実行して、コンテナー IP アドレスに対して 2 つの `iptables` ルールを `FORWARD` チェーンに追加します（1 方向に対して 1 つ）。
+これにより NAT 層を通過するトラフィックのみ計測されます。
+ユーザーランドプロキシーを通過するトラフィックを計測する場合も、ルールを追加する必要があります。
 
 {% comment %}
 Then, you need to check those counters on a regular basis. If you
 happen to use `collectd`, there is a [nice plugin](https://collectd.org/wiki/index.php/Table_of_Plugins)
 to automate iptables counters collection.
 {% endcomment %}
-Then, you need to check those counters on a regular basis. If you
-happen to use `collectd`, there is a [nice plugin](https://collectd.org/wiki/index.php/Table_of_Plugins)
-to automate iptables counters collection.
+これを行ったら、カウンターを定期的に確認することになります。
+`collectd` を使ってみるのであれば、iptables のカウンター情報を自動的に収集してくれる [便利なプラグイン](https://collectd.org/wiki/index.php/Table_of_Plugins) があります。
 
 {% comment %}
 #### Interface-level counters
 {% endcomment %}
 {: #interface-level-counters }
-#### Interface-level counters
+#### インターフェースレベルのカウンター
 
 {% comment %}
 Since each container has a virtual Ethernet interface, you might want to check
@@ -480,11 +475,9 @@ to a virtual Ethernet interface in your host, with a name like `vethKk8Zqi`.
 Figuring out which interface corresponds to which container is, unfortunately,
 difficult.
 {% endcomment %}
-Since each container has a virtual Ethernet interface, you might want to check
-directly the TX and RX counters of this interface. Each container is associated
-to a virtual Ethernet interface in your host, with a name like `vethKk8Zqi`.
-Figuring out which interface corresponds to which container is, unfortunately,
-difficult.
+各コンテナーには仮想イーサネットインターフェースがあるので、このインターフェースの TX および RX カウンターを直接確認したいかもしれません。
+各コンテナーは、ホスト上の仮想イーサネットインターフェースに関連づけられていて、その名称は `vethKk8Zqi` などとなっています。
+もっともどのコンテナーに対して、どのインターフェースが対応しているかを判別するのは、残念ながら困難です。
 
 {% comment %}
 But for now, the best way is to check the metrics *from within the
@@ -492,10 +485,9 @@ containers*. To accomplish this, you can run an executable from the host
 environment within the network namespace of a container using **ip-netns
 magic**.
 {% endcomment %}
-But for now, the best way is to check the metrics *from within the
-containers*. To accomplish this, you can run an executable from the host
-environment within the network namespace of a container using **ip-netns
-magic**.
+今のところ、メトリックスを確認する一番の方法は、**そのコンテナーの内部から** 確認することです。
+これを実現する方法は、**ip netns を巧みに** 利用します。
+これを使えば、コンテナーのネットワーク名前空間内に、ホスト環境上のモジュールを実行させることができます。
 
 {% comment %}
 The `ip-netns exec` command allows you to execute any
@@ -505,17 +497,15 @@ visible to the current process. This means that your host can
 can't access the host or other peer containers.
 Containers can interact with their sub-containers, though.
 {% endcomment %}
-The `ip-netns exec` command allows you to execute any
-program (present in the host system) within any network namespace
-visible to the current process. This means that your host can
- enter the network namespace of your containers, but your containers
-can't access the host or other peer containers.
-Containers can interact with their sub-containers, though.
+`ip-netns exec` コマンドは、どのようなネットワーク名前空間内に対しても、現在のプロセスから状況を確認できる形で（ホスト内に存在する）プログラムを何でも実行することができます。
+つまりコンテナーのネットワーク名前空間内に、ホストから入ることができるということです。
+ただしコンテナーからは、ホストや別のコンテナーにはアクセスできません。
+サブコンテナーであれば、互いに通信することができます。
 
 {% comment %}
 The exact format of the command is:
 {% endcomment %}
-The exact format of the command is:
+このコマンドの正確な書式は以下のとおりです。
 
 ```bash
 $ ip netns exec <nsname> <command...>
@@ -524,7 +514,7 @@ $ ip netns exec <nsname> <command...>
 {% comment %}
 For example:
 {% endcomment %}
-For example:
+たとえば以下のように実行します。
 
 ```bash
 $ ip netns exec mycontainer netstat -i
@@ -539,38 +529,33 @@ etc., and those namespaces are materialized under
 namespace of PID 42 is materialized by the pseudo-file
 `/proc/42/ns/net`.
 {% endcomment %}
-`ip netns` finds the "mycontainer" container by
-using namespaces pseudo-files. Each process belongs to one network
-namespace, one PID namespace, one `mnt` namespace,
-etc., and those namespaces are materialized under
-`/proc/<pid>/ns/`. For example, the network
-namespace of PID 42 is materialized by the pseudo-file
-`/proc/42/ns/net`.
+`ip netns` コマンドは、名前空間の擬似ファイルからコンテナー "mycontainer" を探します。
+各プロセスは 1 つのネットワーク名前空間、1 つの PID 名前空間、1 つの `mnt` 名前空間、といったものに属します。
+これらの名前空間は `/proc/<pid>/ns/` の下に実現されます。
+たとえば PID が 42 であるネットワーク名前空間は、擬似ファイル `/proc/42/ns/net` として実現されます。
 
 {% comment %}
 When you run `ip netns exec mycontainer ...`, it
 expects `/var/run/netns/mycontainer` to be one of
 those pseudo-files. (Symlinks are accepted.)
 {% endcomment %}
-When you run `ip netns exec mycontainer ...`, it
-expects `/var/run/netns/mycontainer` to be one of
-those pseudo-files. (Symlinks are accepted.)
+`ip netns exec mycontainer ...` が実行されるとき、`/var/run/netns/mycontainer` が擬似ファイルの 1 つであるとみなされます。
+（シンボリックリンクが張られています。）
 
 {% comment %}
 In other words, to execute a command within the network namespace of a
 container, we need to:
 {% endcomment %}
-In other words, to execute a command within the network namespace of a
-container, we need to:
+別の点から表現すると、コンテナーのネットワーク名前空間内にてコマンドを実行するためには、以下のことが必要になるということです。
 
 {% comment %}
 - Find out the PID of any process within the container that we want to investigate;
 - Create a symlink from `/var/run/netns/<somename>` to `/proc/<thepid>/ns/net`
 - Execute `ip netns exec <somename> ....`
 {% endcomment %}
-- Find out the PID of any process within the container that we want to investigate;
-- Create a symlink from `/var/run/netns/<somename>` to `/proc/<thepid>/ns/net`
-- Execute `ip netns exec <somename> ....`
+- 調査したいコンテナー内部で動作させるプロセスの PID を調べます。
+- `/var/run/netns/<somename>` から `/proc/<pid>/ns/net` へのシンボリックリンクを生成します。
+- `ip netns exec <somename> ....` を実行します。
 
 {% comment %}
 Review [Enumerate Cgroups](#enumerate-cgroups) for how to find
@@ -579,18 +564,16 @@ From there, you can examine the pseudo-file named
 `tasks`, which contains all the PIDs in the
 cgroup (and thus, in the container). Pick any one of the PIDs.
 {% endcomment %}
-Review [Enumerate Cgroups](#enumerate-cgroups) for how to find
-the cgroup of an in-container process whose network usage you want to measure.
-From there, you can examine the pseudo-file named
-`tasks`, which contains all the PIDs in the
-cgroup (and thus, in the container). Pick any one of the PIDs.
+ネットワーク使用量の計測を行おうとしているコンテナー内部のプロセスに対し、その cgroup がどれであるかを探し出すには [cgroups の確認](#enumerate-cgroups) を参照してください。
+その方法に従って、`tasks` という名前の擬似ファイルを調べます。
+その擬似ファイル内には cgroup 内の（つまりコンテナー内の） PID がすべて示されています。
+そのうちの 1 つを取り出して扱います。
 
 {% comment %}
 Putting everything together, if the "short ID" of a container is held in
 the environment variable `$CID`, then you can do this:
 {% endcomment %}
-Putting everything together, if the "short ID" of a container is held in
-the environment variable `$CID`, then you can do this:
+環境変数 `$CID` にコンテナーの「短めの ID」が設定されているとし、これまで説明してきたことをすべてまとめて、以下のコマンドとして実行します。
 
 ```bash
 $ TASKS=/sys/fs/cgroup/devices/docker/$CID*/tasks
@@ -604,7 +587,7 @@ $ ip netns exec $CID netstat -i
 ## Tips for high-performance metric collection
 {% endcomment %}
 {: #tips-for-high-performance-metric-collection }
-## Tips for high-performance metric collection
+## 詳細なメトリックスを収集するためのヒント
 
 {% comment %}
 Running a new process each time you want to update metrics is
@@ -613,11 +596,8 @@ resolutions, and/or over a large number of containers (think 1000
 containers on a single host), you do not want to fork a new process each
 time.
 {% endcomment %}
-Running a new process each time you want to update metrics is
-(relatively) expensive. If you want to collect metrics at high
-resolutions, and/or over a large number of containers (think 1000
-containers on a single host), you do not want to fork a new process each
-time.
+新しいプロセスを起動するたびに、メトリックスを最新のものにすることは（比較的）面倒なことです。
+詳細なメトリックスが必要な場合、しかもそれが非常に多くのコンテナー（1 ホスト上に 1000 個くらいのコンテナー）を扱わなければならないとしたら、毎回の新規プロセス起動は行う気になれません。
 
 {% comment %}
 Here is how to collect metrics from a single process. You need to
@@ -628,13 +608,12 @@ arbitrary namespace. It requires, however, an open file descriptor to
 the namespace pseudo-file (remember: that's the pseudo-file in
 `/proc/<pid>/ns/net`).
 {% endcomment %}
-Here is how to collect metrics from a single process. You need to
-write your metric collector in C (or any language that lets you do
-low-level system calls). You need to use a special system call,
-`setns()`, which lets the current process enter any
-arbitrary namespace. It requires, however, an open file descriptor to
-the namespace pseudo-file (remember: that's the pseudo-file in
-`/proc/<pid>/ns/net`).
+1 つのプロセスを作り出してメトリックスを収集する方法をここに示します。
+メトリックスを収集するプログラムを C 言語（あるいは低レベルシステムコールを実行できる言語）で記述する必要があります。
+利用するのは特別なシステムコール `setns()` です。
+これはその時点でのプロセスを、任意の名前空間に参加させることができます。
+そこでは、その名前空間に応じた擬似ファイルへのファイルディスクリプターをオープンしておくことが必要とされます。
+（擬似ファイルは `/proc/<pid>/ns/net` にあることを思い出してください。）
 
 {% comment %}
 However, there is a catch: you must not keep this file descriptor open.
@@ -643,40 +622,48 @@ namespace is not destroyed, and its network resources (like the
 virtual interface of the container) stays around forever (or until
 you close that file descriptor).
 {% endcomment %}
-However, there is a catch: you must not keep this file descriptor open.
-If you do, when the last process of the control group exits, the
-namespace is not destroyed, and its network resources (like the
-virtual interface of the container) stays around forever (or until
-you close that file descriptor).
+ただしこれは本当のことではありません。
+実はファイルディスクリプターをオープンにしておく必要はないのです。
+オープンにしたままであると、コントロールグループの最後の 1 つとなるプロセスがある場合に、名前空間は削除されず、そのネットワークリソース（コンテナーの仮想インターフェースなど）がずっと残り続けてしまいます。
+（あるいはそれは、ファイルディスクリプターを閉じるまで続きます。）
 
 {% comment %}
-{% endcomment %}
 The right approach would be to keep track of the first PID of each
 container, and re-open the namespace pseudo-file each time.
+{% endcomment %}
+適切なやり方は、各コンテナーの初めの PID を追跡し、ことあるごとに名前空間の擬似ファイルを、その都度開いて確認していくしかありません。
 
 {% comment %}
-{% endcomment %}
 ## Collect metrics when a container exits
+{% endcomment %}
+{: #collect-metrics-when-a-container-exits }
+## コンテナー起動時のメトリックス収集
 
 {% comment %}
-{% endcomment %}
 Sometimes, you do not care about real time metric collection, but when a
 container exits, you want to know how much CPU, memory, etc. it has
 used.
+{% endcomment %}
+リアルタイムにメトリックスを収集する、ということに気づかない方もいます。
+しかしコンテナーがそこにあれば、CPU、メモリなどをどれだけ利用しているかを知りたくなります。
 
 {% comment %}
-{% endcomment %}
 Docker makes this difficult because it relies on `lxc-start`, which carefully
 cleans up after itself. It is usually easier to collect metrics at regular
 intervals, and this is the way the `collectd` LXC plugin works.
+{% endcomment %}
+Docker は `lxc-start` によって処理を行うため、リアルタイムなメトリックス収集は困難です。
+`lxc-start` が自身の処理の後に、まわりをきれいにしてしまうためです。
+メトリックスの収集は、一定間隔をおいて取得するのが、より簡単な方法と言えます。
+`collectd` にある LXC プラグインは、この方法により動作しています。
 
 {% comment %}
-{% endcomment %}
 But, if you'd still like to gather the stats when a container stops,
 here is how:
+{% endcomment %}
+コンテナーを停止してから情報収集する方がよいのであれば、以下の方法をとります。
 
 {% comment %}
-{% endcomment %}
 For each container, start a collection process, and move it to the
 control groups that you want to monitor by writing its PID to the tasks
 file of the cgroup. The collection process should periodically re-read
@@ -684,20 +671,36 @@ the tasks file to check if it's the last process of the control group.
 (If you also want to collect network statistics as explained in the
 previous section, you should also move the process to the appropriate
 network namespace.)
+{% endcomment %}
+各コンテナーにおいて、情報収集用のプロセスを実行し、コントロールグループに移動させます。
+そのコントロールグループとは監視対象としたいもので、cgroup のタスクファイル内に PID を記述しておきます。
+情報収集のプロセスは、定期的にそのタスクファイルを読み込み、そのプロセス自体が、コントロールグループ内で残っている最後のプロセスであるかどうかを確認します。
+（前節に示したように、ネットワーク統計情報も収集したい場合は、そのプロセスを適切なネットワーク名前空間において実行することも必要になります。）
 
 {% comment %}
-{% endcomment %}
 When the container exits, `lxc-start` attempts to
 delete the control groups. It fails, since the control group is
 still in use; but that's fine. Your process should now detect that it is
 the only one remaining in the group. Now is the right time to collect
 all the metrics you need!
+{% endcomment %}
+コンテナーが終了するときに、`lxc-start` はコントロールグループを削除しようとします。
+削除に失敗するのは、コントロールグループがまだ利用されているということです。
+でも問題ありません。
+情報収集用のプロセスはこのとき、コントロールグループ内にはただ 1 つのプロセスしか残っていないことが検出できるはずです。
+このときこそ、メトリックスをすべて収集するタイミングとなります。
 
 {% comment %}
-{% endcomment %}
 Finally, your process should move itself back to the root control group,
 and remove the container control group. To remove a control group, just
 `rmdir` its directory. It's counter-intuitive to
 `rmdir` a directory as it still contains files; but
 remember that this is a pseudo-filesystem, so usual rules don't apply.
 After the cleanup is done, the collection process can exit safely.
+{% endcomment %}
+最後にそのプロセスを root コントロールグループに戻して、コンテナーのコントロールグループを削除します。
+コントロールグループの削除は、単にそのディレクトリを `rmdir` で削除するだけです。
+ディレクトリ内にファイルが残っているのに、ディレクトリを削除するというのは、やってはいけないことのように思えます。
+しかしこれは擬似ファイルシステムです。
+普通の取り扱いをする必要のないものです。
+すべてをきれいにした後であれば、情報収集用のプロセスを安全に終了させることができます。

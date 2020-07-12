@@ -22,16 +22,16 @@ can re-map this user to a less-privileged user on the Docker host. The mapped
 user is assigned a range of UIDs which function within the namespace as normal
 UIDs from 0 to 65536, but have no privileges on the host machine itself.
 {% endcomment %}
-コンテナー内部から権限昇格による攻撃を防ぐ最大の方法は、コンテナーアプリケーションを非特権ユーザーで実行することです。
+コンテナー内部からの権限昇格による攻撃を防ぐ最大の方法は、コンテナーのアプリケーションを非特権ユーザーで実行することです。
 コンテナー内において、プロセスを `root` ユーザーで実行しなければならない場合は、この `root` ユーザーを、Docker ホスト上のより権限の少ないユーザーに再割り当て（re-map）します。
-割り当てるユーザーには、名前空間内の通常の 0 から 65536 の UID として機能する範囲で UID を定めます。
-ただしホストマシン上では権限を持ちません。
+名前空間内では通常 0 から 65536 という範囲の UID が正しく機能しますが、割り当て対象のユーザーには、この範囲内で UID を定めます。
+ただしこの UID はホストマシン上では何の権限もないものです。
 
 {% comment %}
 ## About remapping and subordinate user and group IDs
 {% endcomment %}
 {: #about-remapping-and-subordinate-user-and-group-ids }
-## UID/GID の再割り当てとサブ ID
+## ユーザー ID、グループ ID の再割り当てとサブ ID
 
 {% comment %}
 The remapping itself is handled by two files: `/etc/subuid` and `/etc/subgid`.
@@ -77,7 +77,7 @@ UID `231072` は、名前空間内（ここではコンテナー内）におい�
 > 1 つのユーザーまたはグループに対して、サブ ID の範囲を複数割り当てることができます。
 > これを行うには `/etc/subuid` または `/etc/subgid` において 1 つのユーザーあるいはグループに対して、互いに重複しない範囲指定を複数行います。
 > これを行った場合、Docker は複数の範囲指定の中から、はじめの 5 つ分のみを利用します。
-> これは `/proc/self/uid_map` や `/proc/self/gid_map` において、カーネルが 5 つ分のエントリーしか取り扱わない制約に従ったものです。
+> カーネルが `/proc/self/uid_map` や `/proc/self/gid_map` において、5 つ分のエントリーしか取り扱わないという制約に従ったものです。
 
 {% comment %}
 When you configure Docker to use the `userns-remap` feature, you can optionally
@@ -87,7 +87,7 @@ purpose.
 {% endcomment %}
 Docker において `userns-remap` 機能を利用する際には、必要に応じて既存のユーザーやグループを指定することができます。
 あるいは `default` を指定することもできます。
-`default` を指定した場合、`dockremap` というユーザーおよびグループが生成され、所定の機能実現のために利用されます。
+`default` を指定した場合、`dockremap` というユーザーおよびグループが生成され、この機能のために利用されます。
 
 {% comment %}
 > **Warning**: Some distributions, such as RHEL and CentOS 7.3, do not
@@ -107,7 +107,7 @@ access in a different namespace. On most Linux distributions, system utilities
 manage the ranges for you when you add or remove users.
 {% endcomment %}
 範囲指定は重複していないことがとても重要です。
-そうなっていないと、さまざまな名前空間内においてプロセスのアクセスが実現できません。
+そうなっていないと、プロセスが別の名前空間内でのアクセスを実現できません。
 Linux ディストリビューションの多くでは、ユーザーの追加、削除を行う際の ID 範囲指定を制御するシステムユーティリティーを提供しています。
 
 {% comment %}
@@ -121,7 +121,7 @@ avoid these situations.
 ただし設定を行う上では複雑な状況がありえます。
 たとえば Docker ホスト上のリソースにコンテナーがアクセスする必要がある場合です。
 具体的にバインドマウントでは、システムユーザーが書き込み不能なファイルシステムの領域にマウントを行います。
-セキュリティの観点からは、こういった状況は避けるべきことです。
+セキュリティの観点からは、こういった状況は避けることが一番です。
 
 {% comment %}
 ## Prerequisites
@@ -140,7 +140,7 @@ avoid these situations.
     authentication back-end, this requirement may translate differently.
 {% endcomment %}
 1.  サブ UID とサブ GID の設定範囲は、既存ユーザーに対して関連づいていなければなりません。
-    たとえ関連づけが、実装上の都合として必要であってもです。
+    ただし関連づけは、実装上の都合によるものです。
     ユーザーは `/var/lib/docker/` 配下に、名前空間により分けられた保存ディレクトリを所有します。
     既存ユーザーを利用したくない場合は、Docker がかわりにユーザーを生成して利用してくれます。
     逆に既存ユーザーの名前または ID を利用したい場合は、あらかじめ存在していなければなりません。
@@ -164,10 +164,10 @@ avoid these situations.
     distributions such as RHEL and CentOS 7.3, you may need to manage these
     files manually.
 {% endcomment %}
-2.  名前空間の再割り当てがホスト上において取り扱われる際には、2 つのファイルが利用されます。
-    `/etc/subuid` と `/etc/subgid`です。
+2.  名前空間の再割り当てがホスト上において処理される際には、2 つのファイルが利用されます。
+    `/etc/subuid` と `/etc/subgid` です。
     このファイルは通常は、ユーザーやグループの追加、削除の際に、自動的に生成管理されます。
-    ただし RHEL や CentOS 7.3 のような一部のディストリビューションにおいては、このファイルの手動での管理を必要とするものがあります。
+    ただし RHEL や CentOS 7.3 のような一部のディストリビューションでは、このファイルの手動での管理を必要とするものがあります。
 
     {% comment %}
     Each file contains three fields: the username or ID of the user, followed by
@@ -191,7 +191,7 @@ avoid these situations.
     {% endcomment %}
     上が意味することは以下のとおりです。
     `testuser` によって起動されたユーザー名前空間のプロセスは、ホスト上の `231072`（名前空間内では UID `0` として見えるもの）から `296607` (231072 + 65536 - 1) までの間の UID によって所有されます。
-    この範囲は他とは重複してはなりません。
+    この範囲は他と重複してはなりません。
     これを確実に行うことで、名前空間内のプロセスが別の名前空間へアクセスできないようにします。
 
     {% comment %}
@@ -217,7 +217,7 @@ avoid these situations.
     automatically created by Docker, but you can't modify the
     permissions until after configuring and restarting Docker.
 {% endcomment %}
-3.  Docker ホスト上において非特権ユーザーが書き込みを必要とするディレクトリがあったとします。
+3.  Docker ホスト上に、非特権ユーザーが書き込みを必要とするディレクトリがあるとします。
     その場合はそのディレクトリのパーミッションを適切に調整してください。
     これは Docker によって自動生成された `dockremap` ユーザーを利用する場合も同様ですが、このときにはパーミッション変更後に Docker を再起動しない限り、その設定変更は反映されません。
 
@@ -228,7 +228,7 @@ avoid these situations.
     stores them in a subdirectory within `/var/lib/docker/`. It is best to enable
     this feature on a new Docker installation rather than an existing one.
 {% endcomment %}
-4.  `userns-remap` を有効にすることで、既存イメージやコンテナーレイヤーは効果的に保護されます。
+4.  `userns-remap` を有効にすることで、既存イメージやコンテナーのレイヤーは効果的に保護されます。
     これは `/var/lib/docker/` 内にある Docker オブジェクトすべてについて言えることです。
     そもそも Docker ではそういったリソース類の所有者を調整する必要があり、そうして `/var/lib/docker/` 内のサブディレクトリに情報を保存するからです。
     新たな Docker インストールの際に、この機能を有効にして利用していくことがベストです。
@@ -301,8 +301,8 @@ $ dockerd --userns-remap="testuser:testuser"
     > **Note**: To use the `dockremap` user and have Docker create it for you,
     > set the value to `default` rather than `testuser`.
     {% endcomment %}
-    > **メモ**: `dockremap` ユーザーを利用すると Docker はこれを生成します。
-    > こうする場合は、設定値に `testuser` ではなく `default` を指定してください。
+    > **メモ**: `dockremap` ユーザーは Docker が生成します。
+    > `dockremap` ユーザーを利用する場合は、設定値に `testuser` ではなく `default` を指定してください。
 
     {% comment %}
     Save the file and restart Docker.
@@ -313,7 +313,7 @@ $ dockerd --userns-remap="testuser:testuser"
 2.  If you are using the `dockremap` user, verify that Docker created it using
     the `id` command.
 {% endcomment %}
-2.  `dockremap` ユーザーを利用している場合は、`id` コマンドを実行して Docker がそのユーザーを生成していることを確認します。
+2.  `dockremap` ユーザーを利用する場合は、`id` コマンドを実行して Docker がそのユーザーを生成していることを確認します。
 
     ```bash
     $ id dockremap
@@ -343,7 +343,7 @@ $ dockerd --userns-remap="testuser:testuser"
     ranges.
     {% endcomment %}
     上のようなエントリーが存在しない場合は、`root` ユーザーになってこのファイルを編集します。
-    そして UID または GID の開始値として大きな値を割り当て、オフセット値（ここでは `65536`）を指定します。
+    そして UID または GID の開始値として、すでに割り当てられている最大値を割り当て、これに加えてオフセット値（ここでは `65536`）を指定します。
     複数の範囲指定のそれぞれにて ID の重複がないようにします。
 
 {% comment %}
@@ -369,7 +369,7 @@ $ dockerd --userns-remap="testuser:testuser"
     owned by `root` and have different permissions.
 {% endcomment %}
 4.  `/var/lib/docker/` 配下に名前空間によるディレクトリがあることを確認します。
-    ディレクトリ名は名前空間におけるユーザーの UID と GID が用いられています。
+    ディレクトリ名には、名前空間におけるユーザーの UID と GID が用いられています。
     その所有は UID および GID であり、グループやワールドは読み込み権限がありません。
     サブディレクトリの中には `root` が所有しているものがあり、パーミッションも別のものになっています。
 
@@ -406,7 +406,7 @@ $ dockerd --userns-remap="testuser:testuser"
     enabled.
     {% endcomment %}
     再割り当てによるユーザーが所有するディレクトリは、`/var/lib/docker/` 直下にある同名ディレクトリとは切り離されて利用されます。
-    同名ディレクトリの使用しなくなった方（この例においては `/var/lib/docker/tmp/` など）は削除してもかまいません。
+    同名ディレクトリの使用しなくなった方（この例においては `/var/lib/docker/tmp/` など）は削除してかまいません。
     Docker は `userns-remap` が有効になっている間は、それを利用しません。
 
 {% comment %}
@@ -423,7 +423,7 @@ See
 [user namespace known limitations](#user-namespace-known-limitations)
 for some of these limitations.
 {% endcomment %}
-デーモンにおいてユーザー名前空間を有効にしている場合、起動しているコンテナーすべてにおいて、デフォルトでユーザー名前空間が有効になります。
+デーモンにおいてユーザー名前空間を有効にした場合に、コンテナーを起動すると、どのコンテナーにおいてもデフォルトでユーザー名前空間が有効になります。
 特定の権限により実行されているコンテナーのような場合には、そのコンテナーに対してユーザー名前空間を明示的に無効にすることが必要になります。
 そういった制約に関しては [ユーザー名前空間における既知の制約](#user-namespace-known-limitations) を参照してください。
 
@@ -486,7 +486,7 @@ process. One notable restriction is the inability to use the `mknod` command.
 Permission is denied for device creation within the container when run by
 the `root` user.
 {% endcomment %}
-ユーザー名前空間を利用したコンテナープロセス内において root ユーザーは、コンテナー内のスーパーユーザーとして期待される数多くの権限を持ちます。
+ユーザー名前空間を利用したコンテナーのプロセス内において root ユーザーは、コンテナー内のスーパーユーザーとして期待される数多くの権限を持ちます。
 しかし Linux カーネルは、そこがユーザー名前空間内のプロセスであることを知っていて、それに基づいた機能制約を課します。
 明らかな制約の例が、`mknod` コマンドを使えなくすることです。
 `root` ユーザーによって実行されているコンテナー内においては、デバイスの生成は拒否されます。
