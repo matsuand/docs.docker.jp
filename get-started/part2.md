@@ -273,6 +273,21 @@ At this point, you've successfully built an image, performed a simple containeri
 [3 部へ >>](part3.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 
 {% comment %}
+## Deploying to the cloud
+{% endcomment %}
+{: #deploying-to-the-cloud }
+## クラウドへのデプロイ
+
+{% comment %}
+To run your containers in the cloud with either Azure or AWS, check out our docs on getting started with cloud deployments.
+* [Deploying with Docker and AWS](https://docs.docker.com/engine/context/ecs-integration/)
+* [Deploying with Docker and Azure](https://docs.docker.com/engine/context/aci-integration/)
+{% endcomment %}
+Azure や AWS というクラウド上にてコンテナーを実行するには、クラウドでのデプロイメントに関するドキュメントを参照してください。
+* [Deploying with Docker and AWS](https://docs.docker.com/engine/context/ecs-integration/)
+* [Deploying with Docker and Azure](https://docs.docker.com/engine/context/aci-integration/)
+
+{% comment %}
 ## Sample Dockerfile
 {% endcomment %}
 {: #sample-dockerfile }
