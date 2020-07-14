@@ -90,7 +90,7 @@ guides:
     - path: /config/containers/runmetrics/
       title: コンテナーランタイムメトリックス
     - path: /config/containers/resource_constraints/
-      title: Runtime options with Memory, CPUs, and GPUs
+      title: メモリ、CPU、GPU に対する実行時オプション
     - sectiontitle: ログ出力
       section:
       - path: /config/containers/logging/
