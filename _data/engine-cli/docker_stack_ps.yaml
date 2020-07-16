@@ -100,7 +100,7 @@ examples: |-
   t72q3z038jeh        voting_redis.2        redis:alpine                                   node3  Running        Running 3 minutes ago
   ```
 
-  ### Filtering
+  ### フィルタリング
 
   The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there
   is more than one filter, then pass multiple flags (e.g. `--filter "foo=bar" --filter "bif=baz"`).

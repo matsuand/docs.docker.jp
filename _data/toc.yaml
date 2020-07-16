@@ -144,9 +144,9 @@ guides:
         - path: /engine/security/trust/trust_automation/
           title: コンテントトラストの自動化
         - path: /engine/security/trust/trust_delegation/
-          title: Delegations for content trust
+          title: コンテントトラストの委任鍵ペア
         - path: /engine/security/trust/deploying_notary/
-          title: Deploying Notary
+          title: Notary へのデプロイ
         - path: /engine/security/trust/trust_key_mng/
           title: コンテントトラストの鍵管理
         - path: /engine/security/trust/trust_sandbox/

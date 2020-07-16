@@ -1440,29 +1440,30 @@ examples: |-
 
   ### Set ulimits in container (--ulimit)
 
-  Since setting `ulimit` settings in a container requires extra privileges not
-  available in the default container, you can set these using the `--ulimit` flag.
-  `--ulimit` is specified with a soft and hard limit as such:
-  `<type>=<soft limit>[:<hard limit>]`, for example:
+  コンテナーにおいて `ulimit` 設定を行うには、デフォルトコンテナーでは利用できない追加の権限が必要となります。
+  そこでこれを行うために `--ulimit` フラグを利用します。
+  `--ulimit` では以下のように、ソフトリミット（soft limit）とハードリミット（hard limit）を `<type>=<soft limit>[:<hard limit>]` のようにして指定します。
+  たとえば以下のとおりです。
 
   ```bash
   $ docker run --ulimit nofile=1024:1024 --rm debian sh -c "ulimit -n"
   1024
   ```
 
-  > **Note**
+  > **メモ**
   >
-  > If you do not provide a `hard limit`, the `soft limit` is used
-  > for both values. If no `ulimits` are set, they are inherited from
-  > the default `ulimits` set on the daemon. The `as` option is disabled now.
-  > In other words, the following script is not supported:
+  > `hard limit` を指定しなかった場合、`soft limit` が両方の値として採用されます。
+  > `ulimits` の指定がなければ、デーモンにおいて設定されているデフォルトの `ulimits` が継承されます。
+  > `as` オプションは利用できなくなっています。
+  > つまり以下のようなスクリプトはサポートされません。
   >
   > ```bash
   > $ docker run -it --ulimit as=1024 fedora /bin/bash`
   > ```
 
-  The values are sent to the appropriate `syscall` as they are set.
-  Docker doesn't perform any byte conversion. Take this into account when setting the values.
+  値を設定すると、その値が適切な `syscall` に送信されます。
+  Docker はバイト列に関して何か変換を行うようなことはしません。
+  このことを考慮して値を設定してください。
 
   #### For `nproc` usage
 
