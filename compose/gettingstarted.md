@@ -142,8 +142,8 @@ following:
     RUN apk add --no-cache gcc musl-dev linux-headers
     COPY requirements.txt requirements.txt
     RUN pip install -r requirements.txt
-    COPY . .
     EXPOSE 5000
+    COPY . .
     CMD ["flask", "run"]
 
 {% comment %}
@@ -155,18 +155,20 @@ This tells Docker to:
 * Build an image starting with the Python 3.7 image.
 * Set the working directory to `/code`.
 * Set environment variables used by the `flask` command.
-* Install gcc so Python packages such as MarkupSafe and SQLAlchemy can compile speedups.
+* Install gcc and other dependencies
 * Copy `requirements.txt` and install the Python dependencies.
+* Add metadata to the image to describe that the container is listening on port 5000
 * Copy the current directory `.` in the project to the workdir `.` in the image.
 * Set the default command for the container to `flask run`.
 {% endcomment %}
-* Python 3.7 イメージを使って当イメージを構築する
-* 作業用ディレクトリを `/code` に指定する
-* `flask`コマンドにより用いられる環境変数を設定する
-* gcc をインストールし、MarkupSafe や SQLAlchemy Python のような Python 依存パッケージこのコンパイルをスピードアップする
-* `requirements.txt`をコピーして Python 依存パッケージをインストールする
-* このプロジェクトのカレントディレクトリ`.`を、イメージ内のワークディレクトリ`.`にコピーする
-* コンテナーに対するデフォルトのコマンドを `flask run` にする
+* Python 3.7 イメージを使って当イメージを構築する。
+* 作業用ディレクトリを `/code` に指定する。
+* `flask`コマンドにより用いられる環境変数を設定する。
+* gcc や依存パッケージをインストールする。
+* `requirements.txt`をコピーして Python 依存パッケージをインストールする。
+* イメージにメタデータを追加して、コンテナーがポート 5000 をリッスンするように記述する。
+* このプロジェクトのカレントディレクトリ`.`を、イメージ内のワークディレクトリ`.`にコピーする。
+* コンテナーに対するデフォルトのコマンドを `flask run` にする。
 
 {% comment %}
 For more information on how to write Dockerfiles, see the
