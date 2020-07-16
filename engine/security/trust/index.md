@@ -19,5 +19,5 @@ The following topics are available:
 * [Docker のコンテントトラスト](content_trust.md)
 * [コンテントトラストの鍵管理](trust_key_mng.md)
 * [コンテントトラストの自動化](trust_automation.md)
-* [Delegations for content trust](trust_delegation.md)
+* [コンテントトラストの委任鍵ペア](trust_delegation.md)
 * [コンテントトラストのサンドボックスで遊ぶ](trust_sandbox.md)
