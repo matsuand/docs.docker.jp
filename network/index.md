@@ -46,15 +46,12 @@ This topic does **not** go into OS-specific details about how Docker networks
 work, so you will not find information about how Docker manipulates `iptables`
 rules on Linux or how it manipulates routing rules on Windows servers, and you
 will not find detailed information about how Docker forms and encapsulates
-packets or handles encryption. See [Docker and iptables](iptables.md)
-and
-[Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](http://success.docker.com/article/networking)
-for a much greater depth of technical detail.
+packets or handles encryption. See [Docker and iptables](iptables.md).
 {% endcomment %}
 Docker ネットワークがどのように動作するのかに関して、OS 固有の話にまで踏み込んで説明するつもりは **ありません**。
 したがって Linux 上において Docker がどのようにして `iptables` ルールを処理するのか、Windows Server 上にてルーティング規則をどのように処理するのか、といった情報を示すことはありません。
 さらに Docker がパケットを構成しカプセル化する様子や暗号化を取り扱うところに関して、詳細情報も示しません。
-技術的にかなり踏み込んだ詳細に関しては [Docker と iptable](iptables.md) や [Docker Reference Architecture: Designing Scalable, Portable Docker Container Networks](http://success.docker.com/article/networking) を参照してください。
+技術的にかなり踏み込んだ詳細に関しては [Docker と iptable](iptables.md) を参照してください。
 
 {% comment %}
 In addition, this topic does not provide any tutorials for how to create,
