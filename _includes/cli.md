@@ -47,13 +47,12 @@ your client and daemon API versions.
 
 {% if controller_data.experimental %}
 
-> This command is experimental.
+> このコマンドは試験的なものです
 >
-> This command is experimental on the Docker daemon. It should not be used in
-> production environments.
-> To enable experimental features on the Docker daemon, edit the
-> [daemon.json](/engine/reference/commandline/dockerd/#daemon-configuration-file)
-> and set `experimental` to `true`.
+> このコマンドは Docker デーモンにおいて試験的なものです。
+> 本番環境では利用しないでください。
+>
+> Docker デーモンにおいて試験的機能を有効にする場合は、[daemon.json](/engine/reference/commandline/dockerd/#daemon-configuration-file) ファイルを編集して、`experimental` を `enabled` に設定してください。
 >
 > {% include experimental.md %}
 
@@ -61,14 +60,12 @@ your client and daemon API versions.
 
 {% if controller_data.experimentalcli %}
 
-> This command is experimental on the Docker client.
+> このコマンドは Docker クライアントにおける試験的なものです。
 >
-> **It should not be used in production environments.**
+> **本番環境では利用しないでください。**
 >
-> To enable experimental features in the Docker CLI, edit the
-> [config.json](/engine/reference/commandline/cli/#configuration-files)
-> and set `experimental` to `enabled`. You can go [here](https://docs.docker.com/engine/reference/commandline/cli/#experimental-features)
-> for more information.
+> Docker CLI において試験的機能を有効にする場合は、[config.json](/engine/reference/commandline/cli/#configuration-files) ファイルを編集して、`experimental` を `enabled` に設定してください。
+> 詳しくは [こちら](https://docs.docker.com/engine/reference/commandline/cli/#experimental-features) を参照してください。
 {: .important }
 
 {% endif %}
@@ -76,12 +73,12 @@ your client and daemon API versions.
 {% capture command-orchestrator %}
 {% if controller_data.swarm %}
 
-<span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="This command works with the Swarm orchestrator.">Swarm</span> This command works with the Swarm orchestrator.
+<span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="このコマンドは Swarm オーケストレーターにおいて動作します。">Swarm</span> このコマンドは Swarm オーケストレーターにおいて動作します。
 
 {% endif %}
 {% if controller_data.kubernetes %}
 
-<span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="This command works with the Kubernetes orchestrator.">Kubernetes</span> This command works with the Kubernetes orchestrator.
+<span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="このコマンドは Kubernetes オーケストレーターにおいて動作します。">Kubernetes</span> このコマンドは Kubernetes オーケストレーターにおいて動作します。
 
 {% endif %}
 {% endcapture %}{{ command-orchestrator }}
@@ -142,10 +139,10 @@ For example uses of this command, refer to the [examples section](#examples) bel
 <tbody>
 {% for option in alloptions %}
   {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated/" target="_blank" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
-  {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a>{% endif %}{% endcapture %}
-  {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="Read about experimental CLI options (in a new window).">experimental (CLI)</span></a>{% endif %}{% endcapture %}
-  {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the {{ controller_data.min_api_version }} API reference (in a new window)">API {{ option.min_api_version }}+</span></a>{% endif %}{%endcapture%}
-  {% capture flag-orchestrator %}{% if option.swarm %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Swarm orchestrator.">Swarm</span>{% endif %}{% if option.kubernetes %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Kubernetes orchestrator.">Kubernetes</span>{% endif %}{% endcapture %}
+  {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="デーモンの試験的オプションを確認してください（新規ウィンドウを開きます）。">試験的 (デーモン)</span></a>{% endif %}{% endcapture %}
+  {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="CLI の試験的オプションを確認してください（新規ウィンドウを開きます）。">試験的 (CLI)</span></a>{% endif %}{% endcapture %}
+  {% capture min-api %}{% if option.min_api_version %}<a href="/engine/api/v{{ option.min_api_version }}/" target="_blank" class="_"><span class="badge badge-info" data-toggle="tooltip" ttitle="Open the {{ controller_data.min_api_version }} API リファレンス (新規ウィンドウを開きます)">API {{ option.min_api_version }} 以上</span></a>{% endif %}{%endcapture%}
+  {% capture flag-orchestrator %}{% if option.swarm %}<span class="badge badge-info" data-toggle="tooltip" title="This option works for the Swarm orchestrator.">Swarm</span>{% endif %}{% if option.kubernetes %}<span class="badge badge-info" data-toggle="tooltip" title="このオプションは Kubernetes オーケストレーターにおいて動作します。">Kubernetes</span>{% endif %}{% endcapture %}
   {% capture all-badges %}{{ deprecated-badge }}{{ experimental-daemon-badge }}{{ experimental-cli-badge }}{{ min-api }}{{ flag-orchestrator }}{% endcapture %}
   {% assign defaults-to-skip = "[],map[],false,0,0s,default,'',\"\"" | split: ',' %}
   {% capture option-default %}{% if option.default_value %}{% unless defaults-to-skip contains option.default_value or defaults-to-skip == blank %}`{{ option.default_value }}`{% endunless %}{% endif %}{% endcapture %}

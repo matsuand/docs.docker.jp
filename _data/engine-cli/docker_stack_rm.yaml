@@ -1,22 +1,21 @@
 command: docker stack rm
 aliases: remove, down
-short: Remove one or more stacks
+short: Stack を削除します。
 long: |-
-  Remove the stack from the swarm.
+  Swarm から Stack を削除します。
 
-  > **Note**
+  > **メモ**
   >
-  > This is a cluster management command, and must be executed on a swarm
-  > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
-  > documentation.
+  > これはクラスター管理コマンドです。
+  > したがって Swarm 上のマネージャーノードにおいて実行する必要があります。
+  > マネージャーノードやワーカーノードについては、[Swarm モード](https://docs.docker.com/engine/swarm/) を参照してください。
 usage: docker stack rm [OPTIONS] STACK [STACK...]
 pname: docker stack
 plink: docker_stack.yaml
 options:
 - option: namespace
   value_type: string
-  description: Kubernetes namespace to use
+  description: Kubernetes 名前空間を指定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -25,7 +24,7 @@ options:
 inherited_options:
 - option: kubeconfig
   value_type: string
-  description: Kubernetes config file
+  description: Kubernetes 設定ファイルを指定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -33,16 +32,16 @@ inherited_options:
   swarm: false
 - option: orchestrator
   value_type: string
-  description: Orchestrator to use (swarm|kubernetes|all)
+  description: オーケストレーターを指定します。（swarm|kubernetes|all）
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
-  ### Remove a stack
+  ### Stack の削除
 
-  This will remove the stack with the name `myapp`. Services, networks, and secrets associated with the stack will be removed.
+  以下は `myapp` という名前の Stack を削除します。この Stack に関連づいたサービス、ネットワーク、機密情報は削除されます。
 
   ```bash
   $ docker stack rm myapp
@@ -54,9 +53,9 @@ examples: |-
   Removing network myapp_frontend
   ```
 
-  ### Remove multiple stacks
+  ### 複数 Stack の削除
 
-  This will remove all the specified stacks, `myapp` and `vossibility`. Services, networks, and secrets associated with all the specified stacks will be removed.
+  指定された `myapp` と `vossibility` という Stack をすべて削除します。指定された Stack すべてに関連づいたサービス、ネットワーク、機密情報は削除されます。
 
   ```bash
   $ docker stack rm myapp vossibility

@@ -1238,7 +1238,7 @@ manuals:
   - path: /docker-hub/webhooks/
     title: ウェブフック
   - path: /docker-hub/slack_integration/
-    title: Slack integration
+    title: Slack 連携
   - sectiontitle: 自動ビルド
     section:
       - path: /docker-hub/builds/

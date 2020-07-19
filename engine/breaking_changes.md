@@ -41,7 +41,7 @@ backwards-incompatibility for old versions of Docker tools.
 There were two breaking changes in the 1.10 release that affected
 Registry and Docker Content Trust:
 {% endcomment %}
-1.10 のリリースにおいては、互換性を維持しない変更が 2 つ存在し、Registry と Docker Content Trust に影響を与えています。
+1.10 のリリースにおいては、互換性を維持しない変更が 2 つ存在し、Registry と Docker コンテントトラストに影響を与えています。
 
 {% comment %}
 **Registry**
@@ -73,8 +73,8 @@ Docker Content Trust heavily relies on pull by digest. As a result, images
 pushed from the Engine 1.10 CLI to a 2.3 Registry cannot be pulled by older
 Engine CLIs (< 1.10) with Docker Content Trust enabled.
 {% endcomment %}
-Docker Content Trust は、ダイジェスト値によるイメージの取得機能に大きく依存しています。
-したがって Engine 1.10 CLI から Registry 2.3 にプッシュされたイメージは、Docker Content Trust を有効にしていても、古いバージョンの Engine CLI （1.10 以前）ではプルすることはできません。
+Docker コンテントトラストは、ダイジェスト値によるイメージの取得機能に大きく依存しています。
+したがって Engine 1.10 CLI から Registry 2.3 にプッシュされたイメージは、Docker コンテントトラストを有効にしていても、古いバージョンの Engine CLI （1.10 以前）ではプルすることはできません。
 
 {% comment %}
 If you are using an older Registry version (< 2.3), this problem does not occur
@@ -82,12 +82,12 @@ with any version of the Engine CLI; push, pull, with and without content trust
 work as you would expect.
 {% endcomment %}
 かつての Registry バージョン（2.3 以前）を利用している場合は、Docker Engine CLI がどのバージョンであっても問題ありません。
-プッシュやプルでも、また Docker Content Trust を利用するしないに関係なく、思いどおりに動くはずです。
+プッシュやプルでも、また Docker コンテントトラストを利用するしないに関係なく、思いどおりに動くはずです。
 
 {% comment %}
 **Docker Content Trust**
 {% endcomment %}
-**Docker Content Trust**
+**Docker コンテントトラスト**
 
 {% comment %}
 Engine older than the current 1.10 cannot pull images from repositories that

@@ -1,6 +1,6 @@
 command: docker stack
-short: Docker stack を管理します。
-long: stack を管理します。
+short: Docker Stack を管理します。
+long: Stack を管理します。
 usage: docker stack [OPTIONS]
 pname: docker
 plink: docker.yaml

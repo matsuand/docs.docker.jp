@@ -496,7 +496,7 @@ visible to the current process. This means that your host can
 can't access the host or other peer containers.
 Containers can interact with their sub-containers, though.
 {% endcomment %}
-`ip-netns exec` コマンドは、どのようなネットワーク名前空間内に対しても、現在のプロセスから状況を確認できる形で（ホスト内に存在する）プログラムを何でも実行することができます。
+`ip-netns exec` コマンドはどのようなネットワーク名前空間内においても、（ホスト内に存在する）プログラムなら何でも実行することができ、プロセスからその状況を確認することができます。
 つまりコンテナーのネットワーク名前空間内に、ホストから入ることができるということです。
 ただしコンテナーからは、ホストや別のコンテナーにはアクセスできません。
 サブコンテナーであれば、互いに通信することができます。
@@ -528,7 +528,7 @@ etc., and those namespaces are materialized under
 namespace of PID 42 is materialized by the pseudo-file
 `/proc/42/ns/net`.
 {% endcomment %}
-`ip netns` コマンドは、名前空間の擬似ファイルからコンテナー "mycontainer" を探します。
+`ip netns` コマンドは、名前空間の擬似ファイルからコンテナー「mycontainer」を探します。
 各プロセスは 1 つのネットワーク名前空間、1 つの PID 名前空間、1 つの `mnt` 名前空間、といったものに属します。
 これらの名前空間は `/proc/<pid>/ns/` の下に実現されます。
 たとえば PID が 42 であるネットワーク名前空間は、擬似ファイル `/proc/42/ns/net` として実現されます。
@@ -545,14 +545,14 @@ those pseudo-files. (Symlinks are accepted.)
 In other words, to execute a command within the network namespace of a
 container, we need to:
 {% endcomment %}
-別の点から表現すると、コンテナーのネットワーク名前空間内にてコマンドを実行するためには、以下のことが必要になるということです。
+言い換えると、コンテナーのネットワーク名前空間内にてコマンドを実行するためには、以下のことが必要になります。
 
 {% comment %}
 - Find out the PID of any process within the container that we want to investigate;
 - Create a symlink from `/var/run/netns/<somename>` to `/proc/<thepid>/ns/net`
 - Execute `ip netns exec <somename> ....`
 {% endcomment %}
-- 調査したいコンテナー内部で動作させるプロセスの PID を調べます。
+- 調査したい対象のコンテナー内部に動作している、いずれかのプロセスの PID を調べます。
 - `/var/run/netns/<somename>` から `/proc/<pid>/ns/net` へのシンボリックリンクを生成します。
 - `ip netns exec <somename> ....` を実行します。
 
@@ -563,7 +563,7 @@ From there, you can examine the pseudo-file named
 `tasks`, which contains all the PIDs in the
 cgroup (and thus, in the container). Pick any one of the PIDs.
 {% endcomment %}
-ネットワーク使用量の計測を行おうとしているコンテナー内部のプロセスに対し、その cgroup がどれであるかを探し出すには [cgroups の確認](#enumerate-cgroups) を参照してください。
+ネットワーク使用量の計測を行おうとしているコンテナー内部において、実行されているプロセスがどの cgroup に属しているかを探し出すには [cgroups の確認](#enumerate-cgroups) を参照してください。
 その方法に従って、`tasks` という名前の擬似ファイルを調べます。
 その擬似ファイル内には cgroup 内の（つまりコンテナー内の） PID がすべて示されています。
 そのうちの 1 つを取り出して扱います。
@@ -572,7 +572,8 @@ cgroup (and thus, in the container). Pick any one of the PIDs.
 Putting everything together, if the "short ID" of a container is held in
 the environment variable `$CID`, then you can do this:
 {% endcomment %}
-環境変数 `$CID` にコンテナーの「短めの ID」が設定されているとし、これまで説明してきたことをすべてまとめて、以下のコマンドとして実行します。
+環境変数 `$CID` にはコンテナーの「短めの ID」が設定されているとします。
+これまで説明してきたことをすべてまとめて、以下のコマンドとして実行します。
 
 ```bash
 $ TASKS=/sys/fs/cgroup/devices/docker/$CID*/tasks
@@ -596,7 +597,7 @@ containers on a single host), you do not want to fork a new process each
 time.
 {% endcomment %}
 新しいプロセスを起動するたびに、メトリックスを最新のものにすることは（比較的）面倒なことです。
-詳細なメトリックスが必要な場合、しかもそれが非常に多くのコンテナー（1 ホスト上に 1000 個くらいのコンテナー）を扱わなければならないとしたら、毎回の新規プロセス起動は行う気になれません。
+高解像度のメトリックスが必要な場合、しかもそれが非常に多くのコンテナー（1 ホスト上に 1000 個くらいのコンテナー）を扱わなければならないとしたら、毎回の新規プロセス起動は行う気になれません。
 
 {% comment %}
 Here is how to collect metrics from a single process. You need to
@@ -622,7 +623,7 @@ virtual interface of the container) stays around forever (or until
 you close that file descriptor).
 {% endcomment %}
 ただしこれは本当のことではありません。
-実はファイルディスクリプターをオープンにしておく必要はないのです。
+ファイルディスクリプターはオープンのままにしないでください。
 オープンにしたままであると、コントロールグループの最後の 1 つとなるプロセスがある場合に、名前空間は削除されず、そのネットワークリソース（コンテナーの仮想インターフェースなど）がずっと残り続けてしまいます。
 （あるいはそれは、ファイルディスクリプターを閉じるまで続きます。）
 
@@ -636,7 +637,7 @@ container, and re-open the namespace pseudo-file each time.
 ## Collect metrics when a container exits
 {% endcomment %}
 {: #collect-metrics-when-a-container-exits }
-## コンテナー起動時のメトリックス収集
+## コンテナー終了後のメトリックス収集
 
 {% comment %}
 Sometimes, you do not care about real time metric collection, but when a
@@ -671,10 +672,10 @@ the tasks file to check if it's the last process of the control group.
 previous section, you should also move the process to the appropriate
 network namespace.)
 {% endcomment %}
-各コンテナーにおいて、情報収集用のプロセスを実行し、コントロールグループに移動させます。
-そのコントロールグループとは監視対象としたいもので、cgroup のタスクファイル内に PID を記述しておきます。
+各コンテナーにおいて情報収集用のプロセスを実行し、コントロールグループに移動させます。
+このコントロールグループは監視対象としたいものであり、cgroup のタスクファイル内に PID を記述しておきます。
 情報収集のプロセスは、定期的にそのタスクファイルを読み込み、そのプロセス自体が、コントロールグループ内で残っている最後のプロセスであるかどうかを確認します。
-（前節に示したように、ネットワーク統計情報も収集したい場合は、そのプロセスを適切なネットワーク名前空間において実行することも必要になります。）
+（前節に示したように、ネットワーク統計情報も収集したい場合は、そのプロセスを適切なネットワーク名前空間に移動することも必要になります。）
 
 {% comment %}
 When the container exits, `lxc-start` attempts to
@@ -684,7 +685,7 @@ the only one remaining in the group. Now is the right time to collect
 all the metrics you need!
 {% endcomment %}
 コンテナーが終了するときに、`lxc-start` はコントロールグループを削除しようとします。
-削除に失敗するのは、コントロールグループがまだ利用されているということです。
+削除に失敗しますが、これはコントロールグループがまだ利用されているからです。
 でも問題ありません。
 情報収集用のプロセスはこのとき、コントロールグループ内にはただ 1 つのプロセスしか残っていないことが検出できるはずです。
 このときこそ、メトリックスをすべて収集するタイミングとなります。

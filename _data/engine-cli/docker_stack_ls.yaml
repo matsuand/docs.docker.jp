@@ -1,6 +1,6 @@
 command: docker stack ls
 aliases: list
-short: stack の一覧を表示します。
+short: Stack の一覧を表示します。
 long: |-
   stack の一覧を表示します。
 
@@ -16,7 +16,7 @@ options:
 - option: all-namespaces
   value_type: bool
   default_value: "false"
-  description: Kubernetes 名前空間のすべてから stack を一覧表示します。
+  description: Kubernetes 名前空間のすべてから Stack を一覧表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -24,7 +24,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print stacks using a Go template
+  description: Go 言語のテンプレートを使って、Stack の表示を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -57,7 +57,7 @@ inherited_options:
   kubernetes: false
   swarm: false
 examples: |-
-  以下のコマンドは、すべての stack とともに、追加情報をいくらか表示します。
+  以下のコマンドは、すべての Stack と追加情報を表示します。
 
   ```bash
   $ docker stack ls
@@ -69,23 +69,21 @@ examples: |-
 
   ### 書式変更
 
-  書式変更オプション (`--format`) は Go 言語テンプレートを利用して、stack をわかりやすく出力します。
+  書式変更オプション (`--format`) は Go 言語テンプレートを利用して、Stack をわかりやすく出力します。
 
-  Valid placeholders for the Go template are listed below:
+  Go 言語テンプレートによる記述書式は、以下のとおりです。
 
-  | Placeholder     | Description        |
-  | --------------- | ------------------ |
-  | `.Name`         | Stack name         |
-  | `.Services`     | Number of services |
-  | `.Orchestrator` | Orchestrator name  |
-  | `.Namespace`    | Namespace          |
+  | 記述書式        | 内容説明             |
+  | --------------- | -------------------- |
+  | `.Name`         | Stack 名             |
+  | `.Services`     | サービス数           |
+  | `.Orchestrator` | オーケストレーター名 |
+  | `.Namespace`    | 名前空間             |
 
-  When using the `--format` option, the `stack ls` command either outputs
-  the data exactly as the template declares or, when using the
-  `table` directive, includes column headers as well.
+  `--format` オプションを利用すると `stack ls` コマンドは、テンプレートが規定するデータを直接出力します。
+  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
-  The following example uses a template without headers and outputs the
-  `Name` and `Services` entries separated by a colon (`:`) for all stacks:
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべての Stack における `Name`、`Services` の各項目がコロン（`:`）で区切って表示されます。
 
   ```bash
   $ docker stack ls --format "{{.Name}}: {{.Services}}"

@@ -1,8 +1,8 @@
 command: docker stack deploy
 aliases: up
-short: 新規 stack のデプロイ、または既存 stack の更新を行います。
+short: 新規 Stack のデプロイ、または既存 Stack の更新を行います。
 long: |-
-  `compose` ファイルに基づいて Swarm 上の stack を生成または更新します。
+  `compose` ファイルに基づいて Swarm 上の Stack を生成または更新します。
 
   > **メモ**
   >
@@ -15,7 +15,7 @@ plink: docker_stack.yaml
 options:
 - option: bundle-file
   value_type: string
-  description: Path to a Distributed Application Bundle file
+  description: DAB（Distributed Application Bundle）ファイルへのパスを指定します。
   deprecated: false
   experimental: true
   experimentalcli: false
@@ -25,7 +25,7 @@ options:
   shorthand: c
   value_type: stringSlice
   default_value: '[]'
-  description: Path to a Compose file, or "-" to read from stdin
+  description: Compose ファイルへのパス、または「-」により標準入力を指定します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -34,7 +34,7 @@ options:
   swarm: false
 - option: namespace
   value_type: string
-  description: Kubernetes namespace to use
+  description: Kubernetes 名前空間を指定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -43,7 +43,7 @@ options:
 - option: prune
   value_type: bool
   default_value: "false"
-  description: Prune services that are no longer referenced
+  description: 参照されなくなったサービスを取り除きます。
   deprecated: false
   min_api_version: "1.27"
   experimental: false
@@ -54,7 +54,7 @@ options:
   value_type: string
   default_value: always
   description: |
-    Query the registry to resolve image digest and supported platforms ("always"|"changed"|"never")
+    レジストリを検索して、イメージのダイジェスト値と対応プラットフォームを解決します。("always"|"changed"|"never")
   deprecated: false
   min_api_version: "1.30"
   experimental: false
@@ -64,7 +64,7 @@ options:
 - option: with-registry-auth
   value_type: bool
   default_value: "false"
-  description: Send registry authentication details to Swarm agents
+  description: Swarm エージェントに対して、レジストリ認証情報を送信します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -73,7 +73,7 @@ options:
 inherited_options:
 - option: kubeconfig
   value_type: string
-  description: Kubernetes config file
+  description: Kubernetes 設定ファイルを指定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -81,16 +81,16 @@ inherited_options:
   swarm: false
 - option: orchestrator
   value_type: string
-  description: Orchestrator to use (swarm|kubernetes|all)
+  description: オーケストレーターを指定します。（swarm|kubernetes|all）
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
-  ### Compose file
+  ### Compose ファイル
 
-  The `deploy` command supports compose file version `3.0` and above.
+  `deploy` コマンドは Compose ファイルバージョン`3.0` またはそれ以降に対応しています。
 
   ```bash
   $ docker stack deploy --compose-file docker-compose.yml vossibility
@@ -107,7 +107,7 @@ examples: |-
   Creating service vossibility_lookupd
   ```
 
-  The Compose file can also be provided as standard input with `--compose-file -`:
+  Compose ファイルは `--compose-file -` とすることで、標準入力から指定することもできます。
 
   ```bash
   $ cat docker-compose.yml | docker stack deploy --compose-file - vossibility
@@ -124,9 +124,7 @@ examples: |-
   Creating service vossibility_lookupd
   ```
 
-  If your configuration is split between multiple Compose files, e.g. a base
-  configuration and environment-specific overrides, you can provide multiple
-  `--compose-file` flags.
+  複数の Compose ファイルにわたって設定を行う場合、たとえば基本となる設定と、それをオーバーライドする環境固有の設定がある場合には、`--compose-file` を複数指定することができます。
 
   ```bash
   $ docker stack deploy --compose-file docker-compose.yml -c docker-compose.prod.yml vossibility
@@ -143,7 +141,7 @@ examples: |-
   Creating service vossibility_lookupd
   ```
 
-  You can verify that the services were correctly created:
+  サービスが正しく生成できたかどうかは、以下のようにして確認します。
 
   ```bash
   $ docker service ls
@@ -157,7 +155,7 @@ examples: |-
   axqh55ipl40h  vossibility_vossibility-collector  replicated  1/1       icecrime/vossibility-collector@sha256:f03f2977203ba6253988c18d04061c5ec7aab46bca9dfd89a9a1fa4500989fba
   ```
 
-  ### DAB file
+  ### DAB ファイル
 
   ```bash
   $ docker stack deploy --bundle-file vossibility-stack.dab vossibility
@@ -171,7 +169,7 @@ examples: |-
   Creating service vossibility_vossibility-collector
   ```
 
-  You can verify that the services were correctly created:
+  サービスが正しく生成できたかどうかは、以下のようにして確認します。
 
   ```bash
   $ docker service ls

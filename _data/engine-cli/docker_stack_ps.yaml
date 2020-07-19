@@ -1,7 +1,7 @@
 command: docker stack ps
-short: stack 内のタスク一覧を表示します。
+short: Stack 内のタスク一覧を表示します。
 long: |-
-  Lists the tasks that are running as part of the specified stack.
+  指定された Stack の一部として起動しているタスクを一覧表示します。
 
   > **メモ**
   >
@@ -15,7 +15,7 @@ options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: Filter output based on conditions provided
+  description: 指定された条件に従ってフィルター出力を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -23,7 +23,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print tasks using a Go template
+  description: Go 言語のテンプレートを使って、タスク表示を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -31,7 +31,7 @@ options:
   swarm: false
 - option: namespace
   value_type: string
-  description: Kubernetes namespace to use
+  description: Kubernetes 名前空間を指定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -40,7 +40,7 @@ options:
 - option: no-resolve
   value_type: bool
   default_value: "false"
-  description: Do not map IDs to Names
+  description: ID から名前へのマッピングは行わないようにします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -49,7 +49,7 @@ options:
 - option: no-trunc
   value_type: bool
   default_value: "false"
-  description: Do not truncate output
+  description: 出力を詳細に行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -59,7 +59,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Only display task IDs
+  description: タスク ID のみを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -68,7 +68,7 @@ options:
 inherited_options:
 - option: kubeconfig
   value_type: string
-  description: Kubernetes config file
+  description: Kubernetes 設定ファイルを指定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -76,16 +76,16 @@ inherited_options:
   swarm: false
 - option: orchestrator
   value_type: string
-  description: Orchestrator to use (swarm|kubernetes|all)
+  description: オーケストレーターを指定します。（swarm|kubernetes|all）
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
-  ### List the tasks that are part of a stack
+  ### Stack の一部であるタスクの一覧表示
 
-  The following command shows all the tasks that are part of the `voting` stack:
+  以下のコマンドは `voting` Stack の一部であるタスクを一覧表示します。
 
   ```bash
   $ docker stack ps voting
@@ -102,12 +102,12 @@ examples: |-
 
   ### フィルタリング
 
-  The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there
-  is more than one filter, then pass multiple flags (e.g. `--filter "foo=bar" --filter "bif=baz"`).
-  Multiple filter flags are combined as an `OR` filter. For example,
-  `-f name=redis.1 -f name=redis.7` returns both `redis.1` and `redis.7` tasks.
+  フィルタリングフラグ（`-f` または `--filter`）の書式は、`key=value` ペアとします。
+  フィルター条件が複数必要な場合は、フィルタリングフラグを複数指定します。（たとえば `--filter "foo=bar" --filter "bif=baz"` など）
+  複数のフィルタリングフラグは、`OR` フィルターとして結合されます。
+  たとえば `-f name=redis.1 -f name=redis.7` は `redis.1` と `redis.7` の 2 つのタスクを返します。
 
-  The currently supported filters are:
+  現在サポートされているフィルターは以下のとおりです。
 
   * [id](#id)
   * [name](#name)
@@ -116,7 +116,7 @@ examples: |-
 
   #### id
 
-  The `id` filter matches on all or a prefix of a task's ID.
+  `id` フィルターは、タスク ID の全部あるいはそのプレフィックス部分に検索合致します。
 
   ```bash
   $ docker stack ps -f "id=t" voting
@@ -127,7 +127,7 @@ examples: |-
 
   #### name
 
-  The `name` filter matches on task names.
+  `name` フィルターはタスク名に検索合致します。
 
   ```bash
   $ docker stack ps -f "name=voting_redis" voting
@@ -138,7 +138,7 @@ examples: |-
 
   #### node
 
-  The `node` filter matches on a node name or a node ID.
+  `node` フィルターは、ノード名またはノード ID に検索合致します。
 
   ```bash
   $ docker stack ps -f "node=node1" voting
@@ -150,7 +150,7 @@ examples: |-
 
   #### desired-state
 
-  The `desired-state` filter can take the values `running`, `shutdown`, or `accepted`.
+  `desired-state` フィルターは、`running`、`shutdown`、`accepted` のいずれかを指定します。
 
   ```bash
   $ docker stack ps -f "desired-state=running" voting
@@ -165,29 +165,27 @@ examples: |-
   t72q3z038jeh        voting_redis.2        redis:alpine                                   node3  Running        Running 21 minutes ago
   ```
 
-  ### Formatting
+  ### 書式変更
 
-  The formatting options (`--format`) pretty-prints tasks output using a Go template.
+  書式変更を行うオプション（`--format`）は、Go 言語のテンプレートを利用してタスク出力を行います。
 
-  Valid placeholders for the Go template are listed below:
+  Go 言語テンプレートによる記述書式は、以下のとおりです。
 
-  Placeholder     | Description
+  記述書式        | 内容説明
   ----------------|------------------------------------------------------------------------------------------
-  `.ID`           | Task ID
-  `.Name`         | Task name
-  `.Image`        | Task image
-  `.Node`         | Node ID
-  `.DesiredState` | Desired state of the task (`running`, `shutdown`, or `accepted`)
-  `.CurrentState` | Current state of the task
-  `.Error`        | Error
-  `.Ports`        | Task published ports
+  `.ID`           | タスク ID
+  `.Name`         | タスク名
+  `.Image`        | タスクイメージ
+  `.Node`         | ノード ID
+  `.DesiredState` | タスク状態（`running`、`shutdown`、`accepted`）
+  `.CurrentState` | タスクの現在の状態
+  `.Error`        | エラー
+  `.Ports`        | タスクが公開するポート
 
-  When using the `--format` option, the `stack ps` command will either
-  output the data exactly as the template declares or, when using the
-  `table` directive, includes column headers as well.
+  `--format` オプションを利用すると `stack ps` コマンドは、テンプレートが規定するデータを直接出力します。
+  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
-  The following example uses a template without headers and outputs the
-  `Name` and `Image` entries separated by a colon (`:`) for all tasks:
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのタスクにおける `Name`、`Image` の各項目がコロン（`:`）で区切って表示されます。
 
   ```bash
   $ docker stack ps --format "{{.Name}}: {{.Image}}" voting
@@ -201,9 +199,9 @@ examples: |-
   voting_redis.2: redis:alpine
   ```
 
-  ### Do not map IDs to Names
+  ### ID から名前へのマッピング禁止
 
-  The `--no-resolve` option shows IDs for task name, without mapping IDs to Names.
+  `--no-resolve` オプションはタスク名に対応した ID を表示するものであり、ID から名前へのマッピングは行いません。
 
   ```bash
   $ docker stack ps --no-resolve voting
@@ -218,12 +216,13 @@ examples: |-
   t72q3z038jeh        tg61x8myx563ueo3urmn1ic6m.2   redis:alpine                                   kanqcxfajd1r16wlnqcblobmm   Running        Running 31 minutes ago
   ```
 
-  ### Do not truncate output
+  ### 出力の詳細表示
 
-  When deploying a service, docker resolves the digest for the service's
-  image, and pins the service to that digest. The digest is not shown by
-  default, but is printed if `--no-trunc` is used. The `--no-trunc` option
-  also shows the non-truncated task IDs, and error-messages, as can be seen below:
+  サービスをデプロイするときに、Docker はサービスイメージのダイジェスト値を解決し、この値にサービスをひもづけます。
+  ダイジェスト値はデフォルトでは表示されません。
+  ただし `--no-trunc` を指定すれば表示されます。
+  `--no-trunc` オプションを指定すると、さらにタスク ID が省略されず、エラーメッセージも表示されます。
+  以下のようになります。
 
   ```bash
   $ docker stack ps --no-trunc voting
@@ -238,10 +237,10 @@ examples: |-
   t72q3z038jehe1wbh9gdum076   voting_redis.2        redis:alpine@sha256:9cd405cd1ec1410eaab064a1383d0d8854d1ef74a54e1e4a92fb4ec7bdc3ee7                                   node3  Running        Runnin 32 minutes ago
   ```
 
-  ### Only display task IDs
+  ### タスク ID のみの表示
 
-  The `-q ` or `--quiet` option only shows IDs of the tasks in the stack.
-  This example outputs all task IDs of the "voting" stack;
+  `-q ` または `--quiet` オプションを指定すると、Stack 内のタスク ID のみが表示されます。
+  以下の例は「voting」Stack のタスク ID が一覧出力されます。
 
   ```bash
   $ docker stack ps -q voting
@@ -255,9 +254,9 @@ examples: |-
   t72q3z038jeh
   ```
 
-  This option can be used to perform batch operations. For example, you can use
-  the task IDs as input for other commands, such as `docker inspect`. The
-  following example inspects all tasks of the "voting" stack;
+  このオプションは、バッチ処理の実行において利用することができます。
+  たとえばタスク ID は、`docker inspect` など他のコマンドの入力とすることができます。
+  以下の例は「voting」Stack の全タスクを確認するものです。
 
   ```bash
   $ docker inspect $(docker stack ps -q voting)
