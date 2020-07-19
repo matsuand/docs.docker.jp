@@ -183,7 +183,7 @@ body#landing {
     @each $icon in $icons {
       &.#{$icon} {
         @extend %icon-card;
-        background-image: url("/images/#{$icon}.svg");
+        background-image: url("/docker/images/#{$icon}.svg");
       }
     }
 
