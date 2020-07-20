@@ -25,17 +25,54 @@ for Docker Engine.
 > instructions for the corresponding linux distro for details.
 {% endcomment %}
 > **メモ:**
-> The client and container runtime are now in separate packages from the daemon
-> in Docker Engine 18.09. Users should install and update all three packages at
-> the same time to get the latest patch releases. For example, on Ubuntu:
-> `sudo apt install docker-ce docker-ce-cli containerd.io`. See the install
-> instructions for the corresponding linux distro for details.
+> クライアントとコンテナーランタイムは、Docker Engine 18.09 からデーモンとは別パッケージになりました。
+> ユーザーがインストールおよびアップデートをする際には、同時に 3 つのパッケージを入手して行い、最新のパッチリリースを合わせるようにします。
+> たとえば Ubuntu においては `sudo apt install docker-ce docker-ce-cli containerd.io` を実行します。
+> 詳しくは、各ディストリビューションにおけるインストール手順を参照してください。
 
 {% comment %}
 # Version 19.03
 {% endcomment %}
 {: #version-1903 }
 # バージョン 19.03
+
+## 19.03.12
+2020-06-18
+
+{% comment %}
+### Client
+{% endcomment %}
+{: #client }
+### クライアント
+
+- Fix bug preventing logout from registry when using multiple config files (e.g. Windows vs WSL2 when using Docker Desktop) [docker/cli#2592](https://github.com/docker/cli/pull/2592)
+- Fix regression preventing context metadata to be read [docker/cli#2586](https://github.com/docker/cli/pull/2586)
+- Bump Golang 1.13.12 [docker/cli#2575](https://github.com/docker/cli/pull/2575)
+
+{% comment %}
+### Networking
+{% endcomment %}
+{: #networking }
+### ネットワーク
+
+{% comment %}
+- Fix regression preventing daemon start up in a systemd-nspawn environment [moby/moby#41124](https://github.com/moby/moby/pull/41124) [moby/libnetwork#2567](https://github.com/moby/libnetwork/pull/2567)
+- Fix the retry logic for creating overlay networks in swarm [moby/moby#41124](https://github.com/moby/moby/pull/41124) [moby/libnetwork#2565](https://github.com/moby/libnetwork/pull/2565)
+{% endcomment %}
+- Fix regression preventing daemon start up in a systemd-nspawn environment [moby/moby#41124](https://github.com/moby/moby/pull/41124) [moby/libnetwork#2567](https://github.com/moby/libnetwork/pull/2567)
+- Fix the retry logic for creating overlay networks in swarm [moby/moby#41124](https://github.com/moby/moby/pull/41124) [moby/libnetwork#2565](https://github.com/moby/libnetwork/pull/2565)
+
+{% comment %}
+### Runtime
+{% endcomment %}
+{: #runtime }
+### ランタイム
+
+{% comment %}
+- Bump Golang 1.13.12 [moby/moby#41082](https://github.com/moby/moby/pull/41082)
+{% endcomment %}
+- Bump Golang 1.13.12 [moby/moby#41082](https://github.com/moby/moby/pull/41082)
+
 
 ## 19.03.11
 2020-06-01
@@ -99,7 +136,7 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 {% comment %}
 ### Client
 {% endcomment %}
-{: #client }
+{: #client-1 }
 ### クライアント
 {% comment %}
 - Fix version negotiation with older engine. [docker/cli#2538](https://github.com/docker/cli/pull/2538)
