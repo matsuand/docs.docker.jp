@@ -1,14 +1,13 @@
 command: docker service create
-short: Create a new service
+short: 新たなサービスを生成します。
 long: |-
-  Creates a service as described by the specified parameters.
+  指定されたパラメーターに従ってサービスを生成します。
 
-  > **Note**
+  > **メモ**
   >
-  > This is a cluster management command, and must be executed on a swarm
-  > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
-  > documentation.
+  > これはクラスター管理コマンドです。
+  > したがって Swarm 上のマネージャーノードにおいて実行する必要があります。
+  > マネージャーノードやワーカーノードについては、[Swarm モード](https://docs.docker.com/engine/swarm/) を参照してください。
 usage: docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker service
 plink: docker_service.yaml
@@ -1536,7 +1535,7 @@ examples: |-
       HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization\Containers\CredentialSpecs
 
 
-  ### Create services using templates
+  ### テンプレートを使ったサービスの生成
 
   You can use templates for some flags of `service create`, using the syntax
   provided by the Go's [text/template](http://golang.org/pkg/text/template/) package.
@@ -1547,7 +1546,7 @@ examples: |-
   - `--mount`
   - `--env`
 
-  Valid placeholders for the Go template are listed below:
+  Go 言語テンプレートによる記述書式は、以下のとおりです。
 
 
   <table>
@@ -1590,7 +1589,7 @@ examples: |-
   </table>
 
 
-  #### Template example
+  #### テンプレート例
 
   In this example, we are going to set the template of the created containers based on the
   service's name, the node's ID and hostname where it sits.
@@ -1613,7 +1612,7 @@ examples: |-
   x3ti0erg11rjpg64m75kej2mz-hosttempl
   ```
 
-  ### Specify isolation mode (Windows)
+  ### 分離モードの設定 (Windows)
 
   By default, tasks scheduled on Windows nodes are run using the default isolation mode
   configured for this particular node. To force a specific isolation mode, you can use

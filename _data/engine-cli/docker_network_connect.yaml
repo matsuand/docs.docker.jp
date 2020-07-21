@@ -1,10 +1,10 @@
 command: docker network connect
-short: Connect a container to a network
+short: コンテナーをネットワークに接続します。
 long: |-
-  Connects a container to a network. You can connect a container by name
-  or by ID. Once connected, the container can communicate with other containers in
-  the same network.
-usage: docker network connect [OPTIONS] NETWORK CONTAINER
+  コンテナーをネットワークに接続します。
+  コンテナーの接続は、コンテナー名またはコンテナー ID を使って行います。
+  接続を行うと、同一ネットワーク内の他のコンテナーとの通信が可能になります。
+usage: docker network connect [オプション] NETWORK CONTAINER
 pname: docker network
 plink: docker_network.yaml
 options:
@@ -28,7 +28,7 @@ options:
   swarm: false
 - option: ip
   value_type: string
-  description: IPv4 address (e.g., 172.30.100.104)
+  description: IPv4 アドレスを指定します。（たとえば 172.30.100.104 など）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -36,7 +36,7 @@ options:
   swarm: false
 - option: ip6
   value_type: string
-  description: IPv6 address (e.g., 2001:db8::33)
+  description: IPv6 アドレスを指定します。（たとえば 2001:db8::33 など）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -44,7 +44,7 @@ options:
   swarm: false
 - option: link
   value_type: list
-  description: Add link to another container
+  description: 別のコンテナーへのリンクを追加します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -60,40 +60,39 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ### Connect a running container to a network
+  ### 実行中コンテナーのネットワークへの接続
 
   ```bash
   $ docker network connect multi-host-network container1
   ```
 
-  ### Connect a container to a network when it starts
+  ### コンテナー起動時のネットワークへの接続
 
-  You can also use the `docker run --network=<network-name>` option to start a container and immediately connect it to a network.
+  `docker run --network=<network-name>` のようにオプションをつけてコンテナーを起動すれば、起動直後にネットワークに接続することができます。
 
   ```bash
   $ docker run -itd --network=multi-host-network busybox
   ```
 
-  ### Specify the IP address a container will use on a given network
+  ### ネットワーク内で利用する IP アドレスの指定
 
-  You can specify the IP address you want to be assigned to the container's interface.
+  コンテナーのインターフェースに割り振りたい IP アドレスを指定することができます。
 
   ```bash
   $ docker network connect --ip 10.10.36.122 multi-host-network container2
   ```
 
-  ### Use the legacy `--link` option
+  ### かつての `--link` オプションの利用
 
-  You can use `--link` option to link another container with a preferred alias
+  `--link` オプションを使って、エイリアスを指定して別のコンテナーをリンクすることができます。
 
   ```bash
   $ docker network connect --link container1:c1 multi-host-network container2
   ```
 
-  ### Create a network alias for a container
+  ### コンテナーに対するネットワークエイリアスの生成
 
-  `--alias` option can be used to resolve the container by another name in the network
-  being connected to.
+  `--alias` オプションは、コンテナーがネットワークに接続する際に、別名による接続を可能とするものです。
 
   ```bash
   $ docker network connect --alias db --alias mysql multi-host-network container2
@@ -101,15 +100,14 @@ examples: |-
 
   ### Network implications of stopping, pausing, or restarting containers
 
-  You can pause, restart, and stop containers that are connected to a network.
-  A container connects to its configured networks when it runs.
+  ネットワークに接続しているコンテナーの一時停止、再起動、停止を行うことができます。
+  コンテナーの起動時には、設定されているネットワークへの接続を行います。
 
-  If specified, the container's IP address(es) is reapplied when a stopped
-  container is restarted. If the IP address is no longer available, the container
-  fails to start. One way to guarantee that the IP address is available is
-  to specify an `--ip-range` when creating the network, and choose the static IP
-  address(es) from outside that range. This ensures that the IP address is not
-  given to another container while this container is not on the network.
+  コンテナーに IP アドレスが指定されている場合、停止コンテナーが再起動する際には、IP アドレスが再割り当てされます。
+  その IP アドレスが利用できない場合、コンテナーは起動に失敗します。
+  IP アドレスの取得を確実にするために、ネットワーク生成時に `--ip-range` を指定する方法があります。
+  そしてコンテナーの IP アドレスには、そこで指定した IP アドレスの範囲外にある固定 IP アドレスを選ぶようにします。
+  こうすれば、コンテナーがネットワークに接続していない間に、その IP アドレスが他のコンテナーによって利用されることがなくなります。
 
   ```bash
   $ docker network create --subnet 172.20.0.0/16 --ip-range 172.20.240.0/20 multi-host-network

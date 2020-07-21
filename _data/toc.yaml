@@ -53,6 +53,12 @@ guides:
       title: イメージの管理
     - path: /develop/develop-images/baseimages/
       title: 独自イメージの構築（応用）
+- sectiontitle: クラウドへのアプリのデプロイ
+  section:
+  - path: /engine/context/aci-integration/
+    title: Docker と ACI (ベータ版)
+  - path: /engine/context/ecs-integration/
+    title: Docker と ECS (ベータ版)
 - sectiontitle: 本番環境でのアプリ運用
   section:
   - sectiontitle: オーケストレーション
@@ -1091,10 +1097,7 @@ manuals:
     title: Docker Buildx
   - path: /engine/context/working-with-contexts/
     title: Docker Context
-  - path: /engine/context/aci-integration/
-    title: Docker と ACI (ベータ版)
-  - path: /engine/context/ecs-integration/
-    title: Docker と ECS (ベータ版)
+
 - sectiontitle: Docker Compose
   section:
   - path: /compose/

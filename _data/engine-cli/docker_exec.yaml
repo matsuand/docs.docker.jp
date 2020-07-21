@@ -1,20 +1,18 @@
 command: docker exec
-short: Run a command in a running container
+short: 実行中のコンテナー内でコマンドを実行します。
 long: |-
-  The `docker exec` command runs a new command in a running container.
+  `docker exec` コマンドを、実行中のコンテナー内において新たなコマンドを実行します。
 
-  The command started using `docker exec` only runs while the container's primary
-  process (`PID 1`) is running, and it is not restarted if the container is
-  restarted.
+  `docker exec` を使って指示されるコマンドは、コンテナーの主要プロセス（`PID 1`）が実行中である場合のみ実行されます。
+  そしてコンテナーが再起動された際には、再実行されません。
 
-  COMMAND will run in the default directory of the container. If the
-  underlying image has a custom directory specified with the WORKDIR directive
-  in its Dockerfile, this will be used instead.
+  COMMAND はコンテナーのデフォルトディレクトリにおいて実行されます。
+  コンテナーの元になるイメージが、Dockerfile 内の WORKDIR ディレクティブの指定により、特定ディレクトリを指定している場合は、そのディレクトリでの実行となります。
 
   COMMAND should be an executable, a chained or a quoted command
   will not work. Example: `docker exec -ti my_container "echo a && echo b"` will
   not work, but `docker exec -ti my_container sh -c "echo a && echo b"` will.
-usage: docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+usage: docker exec [オプション] CONTAINER COMMAND [ARG...]
 pname: docker
 plink: docker.yaml
 options:

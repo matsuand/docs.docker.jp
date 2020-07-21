@@ -5,7 +5,13 @@ title: docker-compose down
 notoc: true
 ---
 
-{% comment %}
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#origin">英語表記</a></li>
+  <li><a data-toggle="tab" href="#japanese">日本語訳</a></li>
+</ul>
+<div class="tab-content">
+  <div id="origin" class="tab-pane fade in active">
+{% capture original-content %}
 ```
 Usage: down [options]
 
@@ -22,23 +28,32 @@ Options:
     -t, --timeout TIMEOUT   Specify a shutdown timeout in seconds.
                             (default: 10)
 ```
-{% endcomment %}
+{% endcapture %}
+{{ original-content | markdownify }}
+</div>
+<div id="japanese" class="tab-pane fade" markdown="1">
+{% capture japanese-content %}
 ```
 利用方法: down [オプション]
 
 オプション:
     --rmi type              イメージを削除します。type は以下のいずれか。
-                              'all': 全サービスに用いられているイメージすべてを削除。
-                              'local': `image` フィールドにカスタムタグが設定されて
-                              いないイメージのみ削除。
-    -v, --volumes           Remove named volumes declared in the `volumes`
-                            section of the Compose file and anonymous volumes
-                            attached to containers.
+                               'all': 全サービスに用いられているイメージすべてを削除。
+                               'local': `image` フィールドにカスタムタグが設定されて
+                               いないイメージのみ削除。
+    -v, --volumes           Composeファイルの`volumes`セクションにて宣言された名前
+                            つきボリュームや、コンテナーに結びついている匿名ボリューム
+                            を削除します。
     --remove-orphans        Compose ファイルにて定義されていないサービスのコンテナー
                             を削除します。
     -t, --timeout TIMEOUT   シャットダウンするまでの時間を秒単位で設定します。
                             （デフォルト: 10）
 ```
+{% endcapture %}
+{{ japanese-content | markdownify }}
+</div>
+<hr>
+</div>
 
 {% comment %}
 Stops containers and removes containers, networks, volumes, and images

@@ -1,14 +1,14 @@
 command: docker manifest push
-short: Push a manifest list to a repository
-long: Push a manifest list to a repository
-usage: docker manifest push [OPTIONS] MANIFEST_LIST
+short: マニフェスト一覧をリポジトリにプッシュします。
+long: マニフェスト一覧をリポジトリにプッシュします。
+usage: docker manifest push [オプション] MANIFEST_LIST
 pname: docker manifest
 plink: docker_manifest.yaml
 options:
 - option: insecure
   value_type: bool
   default_value: "false"
-  description: Allow push to an insecure registry
+  description: セキュアでないレジストリとの通信を可能にします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -18,7 +18,7 @@ options:
   shorthand: p
   value_type: bool
   default_value: "false"
-  description: Remove the local manifest list after push
+  description: プッシュ後にローカルマニフェスト一覧を削除します。
   deprecated: false
   experimental: false
   experimentalcli: false

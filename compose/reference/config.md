@@ -7,7 +7,13 @@ redirect_from:
 - /compose/reference/bundle/
 ---
 
-{% comment %}
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#origin">英語表記</a></li>
+  <li><a data-toggle="tab" href="#japanese">日本語訳</a></li>
+</ul>
+<div class="tab-content">
+  <div id="origin" class="tab-pane fade in active">
+{% capture original-content %}
 ```
 Usage: config [options]
 
@@ -21,7 +27,11 @@ Options:
                              Set "service1,service2" for a list of specified services
                              or use the wildcard symbol to display all services.
 ```
-{% endcomment %}
+{% endcapture %}
+{{ original-content | markdownify }}
+</div>
+<div id="japanese" class="tab-pane fade" markdown="1">
+{% capture japanese-content %}
 ```
 利用方法: config [オプション]
 
@@ -35,6 +45,11 @@ Options:
                              Set "service1,service2" for a list of specified services
                              or use the wildcard symbol to display all services.
 ```
+{% endcapture %}
+{{ japanese-content | markdownify }}
+</div>
+<hr>
+</div>
 
 {% comment %}
 Validate and view the Compose file.

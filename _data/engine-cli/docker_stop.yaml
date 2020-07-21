@@ -1,9 +1,9 @@
 command: docker stop
-short: Stop one or more running containers
+short: 実行中のコンテナーを停止します。
 long: |-
-  The main process inside the container will receive `SIGTERM`, and after a grace
-  period, `SIGKILL`.
-usage: docker stop [OPTIONS] CONTAINER [CONTAINER...]
+  コンテナー内部の主となるプロセスは、シグナル `SIGTERM` を受信します。
+  そして一定時間後に `SIGKILL` を受信します。
+usage: docker stop [オプション] CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml
 options:
@@ -11,7 +11,7 @@ options:
   shorthand: t
   value_type: int
   default_value: "10"
-  description: Seconds to wait for stop before killing it
+  description: コンテナーの削除前にいったんウェイトする秒数を指定します。
   deprecated: false
   experimental: false
   experimentalcli: false

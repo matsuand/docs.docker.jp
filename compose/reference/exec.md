@@ -5,7 +5,13 @@ title: docker-compose exec
 notoc: true
 ---
 
-{% comment %}
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#origin">英語表記</a></li>
+  <li><a data-toggle="tab" href="#japanese">日本語訳</a></li>
+</ul>
+<div class="tab-content">
+  <div id="origin" class="tab-pane fade in active">
+{% capture original-content %}
 ```
 Usage: exec [options] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]
 
@@ -21,7 +27,11 @@ Options:
                       not supported in API < 1.25)
     -w, --workdir DIR Path to workdir directory for this command.
 ```
-{% endcomment %}
+{% endcapture %}
+{{ original-content | markdownify }}
+</div>
+<div id="japanese" class="tab-pane fade" markdown="1">
+{% capture japanese-content %}
 ```
 利用方法: exec [オプション] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]
 
@@ -37,6 +47,11 @@ Options:
                       (複数の設定が可能。API 1.25 未満ではサポートされていません。)
     -w, --workdir DIR このコマンドのワークディレクトリのパスを指定します。
 ```
+{% endcapture %}
+{{ japanese-content | markdownify }}
+</div>
+<hr>
+</div>
 
 {% comment %}
 This is the equivalent of `docker exec`. With this subcommand you can run arbitrary

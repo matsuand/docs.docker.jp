@@ -1,6 +1,6 @@
 command: docker manifest create
-short: Create a local manifest list for annotating and pushing to a registry
-long: Create a local manifest list for annotating and pushing to a registry
+short: 追加情報のため、およびレジストリへのプッシュのため、ローカルマニフェストの一覧を生成します。
+long: 追加情報のため、およびレジストリへのプッシュのため、ローカルマニフェストの一覧を生成します。
 usage: docker manifest create MANIFEST_LIST MANIFEST [MANIFEST...]
 pname: docker manifest
 plink: docker_manifest.yaml
@@ -9,7 +9,7 @@ options:
   shorthand: a
   value_type: bool
   default_value: "false"
-  description: Amend an existing manifest list
+  description: 既存のマニフェスト一覧を修正します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -18,7 +18,7 @@ options:
 - option: insecure
   value_type: bool
   default_value: "false"
-  description: Allow communication with an insecure registry
+  description: セキュアでないレジストリとの通信を可能にします。
   deprecated: false
   experimental: false
   experimentalcli: false

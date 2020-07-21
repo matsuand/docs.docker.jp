@@ -1,14 +1,14 @@
 command: docker login
-short: Docker registry にログインします。
-long: Docker registry にログインします。
-usage: docker login [OPTIONS] [SERVER]
+short: Docker Registry にログインします。
+long: Docker Registry にログインします。
+usage: docker login [オプション] [SERVER]
 pname: docker
 plink: docker.yaml
 options:
 - option: password
   shorthand: p
   value_type: string
-  description: Password
+  description: パスワードを指定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -17,7 +17,7 @@ options:
 - option: password-stdin
   value_type: bool
   default_value: "false"
-  description: Take the password from stdin
+  description: 標準入力からパスワードを指定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -26,7 +26,7 @@ options:
 - option: username
   shorthand: u
   value_type: string
-  description: Username
+  description: ユーザー名を指定します。
   deprecated: false
   experimental: false
   experimentalcli: false

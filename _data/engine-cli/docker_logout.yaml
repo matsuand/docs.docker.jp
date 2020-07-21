@@ -1,6 +1,6 @@
 command: docker logout
-short: Log out from a Docker registry
-long: Log out from a Docker registry
+short: Docker Registry からログアウトします。
+long: Docker Registry からログアウトします。
 usage: docker logout [SERVER]
 pname: docker
 plink: docker.yaml

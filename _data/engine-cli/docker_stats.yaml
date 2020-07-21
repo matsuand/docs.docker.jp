@@ -1,29 +1,24 @@
 command: docker stats
-short: Display a live stream of container(s) resource usage statistics
+short: コンテナーのリソース利用統計について、動的なストリーム出力を行います。
 long: |-
-  The `docker stats` command returns a live data stream for running containers. To
-  limit data to one or more specific containers, specify a list of container names
-  or ids separated by a space. You can specify a stopped container but stopped
-  containers do not return any data.
+  `docker stats` コマンドは、実行中コンテナーに対する動的なストリームデータを返します。
+  このデータを特定のコンテナーのみに限定する場合は、コンテナー名またはコンテナー ID を空白で区切って指定します。
+  停止しているコンテナーを指定することもできますが、停止コンテナーからは何の情報も返されません。
 
-  If you need more detailed information about a container's resource usage, use
-  the `/containers/(id)/stats` API endpoint.
+  コンテナーのリソース利用状況に関する詳細については API エンドポイント `/containers/(id)/stats` を利用してください。
 
   > **メモ**
   >
-  > On Linux, the Docker CLI reports memory usage by subtracting page cache usage
-  > from the total memory usage. The API does not perform such a calculation but
-  > rather provides the total memory usage and the amount from the page cache so
-  > that clients can use the data as needed.
+  > Linux 上の Docker CLI が表示するメモリ使用量は、全メモリ使用量からページキャッシュ使用量を差し引いたものです。
+  > API ではそういった計算は行いませんが、クライアントが必要に応じてデータ利用できるように、全メモリ使用量とページキャッシュ量は示します。
 
-  > **Note**
+  > **メモ**
   >
-  > The `PIDS` column contains the number of processes and kernel threads created
-  > by that container. Threads is the term used by Linux kernel. Other equivalent
-  > terms are "lightweight process" or "kernel task", etc. A large number in the
-  > `PIDS` column combined with a small number of processes (as reported by `ps`
-  > or `top`) may indicate that something in the container is creating many threads.
-usage: docker stats [OPTIONS] [CONTAINER...]
+  > `PIDS` の欄には、そのコンテナーによって生成されたプロセスやカーネルスレッドの数が示されます。
+  > スレッドとは Linux カーネルにおける用語です。
+  > これと同じ用語として「軽量プロセス」（lightweight process）、「カーネルタスク」（kernel task）などと表現されます。
+  > `PIDS` 欄に非常に大きな数値が示されていたら、それはほんのわずかのプロセス数（`ps` や `top` によって表示されるもの）に加えて、コンテナーから生成される非常に多くのスレッドが含まれているものと考えられます。
+usage: docker stats [オプション] [CONTAINER...]
 pname: docker
 plink: docker.yaml
 options:
@@ -31,7 +26,7 @@ options:
   shorthand: a
   value_type: bool
   default_value: "false"
-  description: Show all containers (default shows just running)
+  description: コンテナーすべてを表示します。（デフォルトは実行中コンテナーのみ。）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -39,7 +34,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print images using a Go template
+  description: Go 言語のテンプレートを使って、コンテナーの表示を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -48,7 +43,7 @@ options:
 - option: no-stream
   value_type: bool
   default_value: "false"
-  description: Disable streaming stats and only pull the first result
+  description: 統計情報の自動表示を無効にし、取得された最初の値のみを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -57,14 +52,14 @@ options:
 - option: no-trunc
   value_type: bool
   default_value: "false"
-  description: Do not truncate output
+  description: 詳細出力を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
-  Running `docker stats` on all running containers against a Linux daemon.
+  以下では Linux デーモンに向けて、実行中のコンテナーすべてに対する `docker stats` を実行します。
 
   ```bash
   $ docker stats
@@ -76,17 +71,16 @@ examples: |-
   4bda148efbc0        random.1.vnc8on831idyr42slu578u3cr      0.00%               1.672MiB / 1.952GiB   0.08%               110kB / 0B          578kB / 0B          2
   ```
 
-  If you don't [specify a format string using `--format`](#formatting), the
-  following columns are shown.
+  [`--format` を利用して書式を変更する](#formatting) ということを行っていないなら、各列は以下のように表示されます。
 
   | カラム名                  | 内容説明                                                                                      |
   |---------------------------|-----------------------------------------------------------------------------------------------|
-  | `CONTAINER ID` and `Name` | the ID and name of the container                                                              |
-  | `CPU %` and `MEM %`       | the percentage of the host's CPU and memory the container is using                            |
-  | `MEM USAGE / LIMIT`       | the total memory the container is using, and the total amount of memory it is allowed to use  |
-  | `NET I/O`                 | The amount of data the container has sent and received over its network interface             |
-  | `BLOCK I/O`               | The amount of data the container has read to and written from block devices on the host       |
-  | `PIDs`                    | the number of processes or threads the container has created                                  |
+  | `CONTAINER ID` と `Name`  | コンテナー名とコンテナー ID                                                                   |
+  | `CPU %` と `MEM %`        | コンテナーが利用するホスト上の CPU およびメモリの使用割合。                                   |
+  | `MEM USAGE / LIMIT`       | コンテナーが利用しているメモリ総量と、コンテナーが利用可能なメモリ総量。                      |
+  | `NET I/O`                 | ネットワークインターフェースを通じて、コンテナーが送受信したデータ総量。                      |
+  | `BLOCK I/O`               | ホスト上のブロックデバイスから、コンテナーが読み書きしたデータ総量。                          |
+  | `PIDs`                    | コンテナーが生成したプロセス数またはスレッド数。                                              |
 
   Linux デーモンに向けて、コンテナー名とコンテナー ID を複数指定して `docker stats` を実行します。
 
@@ -112,7 +106,7 @@ examples: |-
 
   `drunk_visvesvaraya` and `big_heisenberg` are stopped containers in the above example.
 
-  Running `docker stats` on all running containers against a Windows daemon.
+  Windows デーモンに向けて、実行中のコンテナーすべてに対する `docker stats` を実行します。
 
   ```powershell
   PS E:\> docker stats
@@ -122,7 +116,7 @@ examples: |-
   3f214c61ad1d        0.00%               28.64 MiB           64 kB / 6.84 kB     4.42 MB / 6.93 MB
   ```
 
-  Running `docker stats` on multiple containers by name and id against a Windows daemon.
+  Windows デーモンに向けて、コンテナー名とコンテナー ID を複数指定して `docker stats` を実行します。
 
   ```powershell
   PS E:\> docker ps -a
@@ -137,24 +131,24 @@ examples: |-
   9db7aa4d986d        mad_wilson          9.59%               40.09 MiB           27.6 kB / 8.81 kB   17 MB / 20.1 MB
   ```
 
-  ### Formatting
+  {: #formatting }
+  ### 書式変更
 
-  The formatting option (`--format`) pretty prints container output
-  using a Go template.
+  書式変更オプション (`--format`) は Go 言語テンプレートを利用して、コンテナーをわかりやすく出力します。
 
-  Valid placeholders for the Go template are listed below:
+  Go 言語テンプレートによる記述書式は、以下のとおりです。
 
-  Placeholder  | Description
+  記述書式     | 内容説明
   ------------ | --------------------------------------------
   `.Container` | Container name or ID (user input)
-  `.Name`      | Container name
-  `.ID`        | Container ID
-  `.CPUPerc`   | CPU percentage
-  `.MemUsage`  | Memory usage
-  `.NetIO`     | Network IO
-  `.BlockIO`   | Block IO
-  `.MemPerc`   | Memory percentage (Not available on Windows)
-  `.PIDs`      | Number of PIDs (Not available on Windows)
+  `.Name`      | コンテナー名
+  `.ID`        | コンテナー ID
+  `.CPUPerc`   | CPU 使用割合
+  `.MemUsage`  | メモリ使用量
+  `.NetIO`     | ネットワーク I/O
+  `.BlockIO`   | ブロック I/O
+  `.MemPerc`   | メモリ使用割合（Windows では利用不可）
+  `.PIDs`      | PID 数（Windows では利用不可）
 
 
   When using the `--format` option, the `stats` command either

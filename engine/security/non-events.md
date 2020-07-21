@@ -4,20 +4,36 @@ keywords: Docker, Docker documentation,  security, security non-events
 title: Docker security non-events
 ---
 
+{% comment %}
+This page lists security vulnerabilities which Docker mitigated, such that
+processes run in Docker containers were never vulnerable to the bug—even before
+it was fixed. This assumes containers are run without adding extra capabilities
+or not run as `--privileged`.
+{% endcomment %}
 This page lists security vulnerabilities which Docker mitigated, such that
 processes run in Docker containers were never vulnerable to the bug—even before
 it was fixed. This assumes containers are run without adding extra capabilities
 or not run as `--privileged`.
 
+{% comment %}
 The list below is not even remotely complete. Rather, it is a sample of the few
 bugs we've actually noticed to have attracted security review and publicly
 disclosed vulnerabilities. In all likelihood, the bugs that haven't been
 reported far outnumber those that have. Luckily, since Docker's approach to
 secure by default through apparmor, seccomp, and dropping capabilities, it
 likely mitigates unknown bugs just as well as it does known ones.
+{% endcomment %}
+以下は、バグ一覧とはとても言えないものです。
+むしろこれは、ほんのわずかなバグの例にすぎず、セキュリティレビューやぜい弱性の公開を行うに至ったことから、バグとして気づいたものでしかありません。
+おそらく報告されているバグよりも、報告されていないバグの方がはるかに多いはずです。
+Docker が採用するセキュアな手法は、デフォルトにおいて AppArmor、Seccomp やケーパビリティーを限定して利用するというものであるため、既知のバグと同様に、未知のバグを軽減できる可能性があります。
 
+{% comment %}
+{% endcomment %}
 Bugs mitigated:
 
+{% comment %}
+{% endcomment %}
 * [CVE-2013-1956](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1956),
 [1957](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1957),
 [1958](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1958),
@@ -76,8 +92,12 @@ These arguments are blocked by `CAP_NET_ADMIN`, which Docker does not allow by
 default.
 
 
+{% comment %}
+{% endcomment %}
 Bugs *not* mitigated:
 
+{% comment %}
+{% endcomment %}
 * [CVE-2015-3290](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3290),
 [5157](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5157): Bugs in
 the kernel's non-maskable interrupt handling allowed privilege escalation.

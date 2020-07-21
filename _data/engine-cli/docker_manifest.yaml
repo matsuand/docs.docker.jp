@@ -1,8 +1,8 @@
 command: docker manifest
-short: Manage Docker image manifests and manifest lists
+short: Docker イメージのマニフェストとその一覧を管理します。
 long: |-
-  The `docker manifest` command by itself performs no action. In order to operate
-  on a manifest or manifest list, one of the subcommands must be used.
+  `docker manifest` コマンドだけでは、何も処理実行は行われません。
+  マニフェストやその一覧に対しての操作を行うには、サブコマンドを用いる必要があります。
 
   A single manifest is information about an image, such as layers, size, and digest.
   The docker manifest command also gives users additional information such as the os

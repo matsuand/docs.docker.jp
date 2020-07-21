@@ -5,12 +5,29 @@ title: docker-compose help
 notoc: true
 ---
 
-{% comment %}
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#origin">英語表記</a></li>
+  <li><a data-toggle="tab" href="#japanese">日本語訳</a></li>
+</ul>
+<div class="tab-content">
+  <div id="origin" class="tab-pane fade in active">
+{% capture original-content %}
+```
 Usage: help COMMAND
-{% endcomment %}
+```
+{% endcapture %}
+{{ original-content | markdownify }}
+</div>
+<div id="japanese" class="tab-pane fade" markdown="1">
+{% capture japanese-content %}
 ```
 利用方法: help コマンド
 ```
+{% endcapture %}
+{{ japanese-content | markdownify }}
+</div>
+<hr>
+</div>
 
 {% comment %}
 Displays help and usage instructions for a command.
