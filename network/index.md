@@ -28,14 +28,6 @@ capabilities.
 ここでは Docker ネットワークの基本的な考え方を紹介し、Docker の機能を最大限活用したアプリケーションの設計とデプロイができるようにしていきます。
 
 {% comment %}
-Most of this content applies to all Docker installations. However,
-[a few advanced features](#docker-ee-networking-features) are only available to
-Docker EE customers.
-{% endcomment %}
-ここに示す考え方は、ほぼすべての Docker 製品に適用できます。
-ただし [いくつかの応用機能](#docker-ee-networking-features) については Docker EE の課金ユーザーのみが利用できるものです。
-
-{% comment %}
 ## Scope of this topic
 {% endcomment %}
 {: #scope-of-this-topic }

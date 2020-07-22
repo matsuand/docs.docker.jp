@@ -277,13 +277,11 @@
 
   *Note : This label is not related to the key=value labels set for docker daemon.*
 <a class="glossary" name="task">task</a>: |
-  A [task](/engine/swarm/how-swarm-mode-works/services/#/tasks-and-scheduling) is the
-  atomic unit of scheduling within a swarm. A task carries a Docker container and
-  the commands to run inside the container. Manager nodes assign tasks to worker
-  nodes according to the number of replicas set in the service scale.
+  [タスク](/engine/swarm/how-swarm-mode-works/services/#/tasks-and-scheduling)（task）は Swarm 内でのスケジューリングの最小単位を表わします。
+  タスクは、Docker コンテナー、およびその内部での実行コマンドを運ぶものです。
+  マネージャーノードが、サービスのスケール値として設定されたレプリカ数に応じて、ワーカーノードに対してタスクを割り当てます。
 
-  The diagram below illustrates the relationship of services to tasks and
-  containers.
+  以下の図は、サービスとタスク、コンテナーの関係を示すものです。
 
   ![services diagram](/engine/swarm/images/services-diagram.png)
 <a class="glossary" name="toolbox">Toolbox</a>: |
