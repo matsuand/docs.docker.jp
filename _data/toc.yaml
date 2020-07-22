@@ -104,7 +104,7 @@ guides:
       - path: /config/containers/logging/configure/
         title: ログドライバーの設定
       - path: /config/containers/logging/dual-logging/
-        title: Use docker logs with a logging driver
+        title: ログドライバーに対する docker logs の利用
       - path: /config/containers/logging/plugins/
         title: ログドライバープラグインの利用
       - path: /config/containers/logging/log_tags/

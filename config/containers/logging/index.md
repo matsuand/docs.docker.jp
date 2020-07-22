@@ -100,5 +100,5 @@ its errors to `/proc/self/fd/2` (which is `STDERR`). See the
 - Configure [logging drivers](configure.md).
 - Write a [Dockerfile](../../../engine/reference/builder.md).
 {% endcomment %}
-- [ログドライバー](configure.md) の設定。
-- [Dockerfile](../../../engine/reference/builder.md) を記述する。
+- [ログドライバー](configure.md) を設定します。
+- [Dockerfile](../../../engine/reference/builder.md) を記述します。

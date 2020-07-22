@@ -154,7 +154,7 @@ Supported values are: `TLSv1`, `TLSv1_1`, `TLSv1_2`.
 {% endcomment %}
 `docker` デーモンとの TLS 通信に用いられる TLS バージョンを指定します。
 デフォルトは `TLSv1` です。
-また対応している値は `TLSv1`, `TLSv1_1`, `TLSv1_2` です。
+対応する値は `TLSv1`, `TLSv1_1`, `TLSv1_2` です。
 
 ## COMPOSE\_CONVERT\_WINDOWS\_PATHS
 
@@ -166,7 +166,7 @@ Supported values: `true` or `1` to enable, `false` or `0` to disable.
 ボリュームの定義において、パスの記述に関して Windows 書式と Unix 書式の変換を有効にします。
 Windows 上の Docker Machine と Docker Toolbox を利用するユーザーは、必ず本変数を設定しておきます。
 デフォルトは `0` です。
-また対応している値として `true` または `1` は有効を意味し、`false` または `0` は無効を意味します。
+対応する値は `true` または `1` が有効を意味し、`false` または `0` が無効を意味します。
 
 ## COMPOSE\_PATH\_SEPARATOR
 
@@ -184,33 +184,46 @@ are parsed assuming the host path is a Windows path, even if Compose is
 running on a UNIX-based system.
 Supported values: `true` or `1` to enable, `false` or `0` to disable.
 {% endcomment %}
-If set, volume declarations using the [short syntax](../compose-file/#short-syntax-3)
-are parsed assuming the host path is a Windows path, even if Compose is
-running on a UNIX-based system.
-Supported values: `true` or `1` to enable, `false` or `0` to disable.
+これが設定されていて、[短い文法](../compose-file/index.md#short-syntax-3) によってボリュームの宣言を行うと、ホストのパスは Windows パスとして扱われます。
+Compose が UNIX ベースのシステム上で動作していても、そのようになります。
+対応する値は `true` または `1` が有効を意味し、また `false` または `0` が無効を意味します。
 
 ## COMPOSE\_IGNORE\_ORPHANS
 
+{% comment %}
 If set, Compose doesn't try to detect orphaned containers for the project.
 Supported values: `true` or `1` to enable, `false` or `0` to disable.
+{% endcomment %}
+これが設定されている場合に、そのプロジェクト内で孤立したコンテナーを Compose が検出しないようにします。
+対応する値は `true` または `1` が有効を意味し、`false` または `0` が無効を意味します。
 
 ## COMPOSE\_PARALLEL\_LIMIT
 
+{% comment %}
 Sets a limit for the number of operations Compose can execute in parallel. The
 default value is `64`, and may not be set lower than `2`.
+{% endcomment %}
+Compose が並列で処理する操作数を設定します。
+デフォルト値は `64` です。
+`2` よりも小さな値を設定することはできません。
 
 ## COMPOSE\_INTERACTIVE\_NO\_CLI
 
+{% comment %}
 If set, Compose doesn't attempt to use the Docker CLI for interactive `run`
 and `exec` operations. This option is not available on Windows where the CLI
 is required for the aforementioned operations.
 Supported: `true` or `1` to enable, `false` or `0` to disable.
+{% endcomment %}
+これが設定されている場合に、Docker CLI の `run` や `exec` の処理において Compose は対話的処理を行わないようにします。
+前もって操作を定めておく必要がある Windows の CLI では、このオプションを利用することはできません。
+対応する値は `true` または `1` が有効を意味し、`false` または `0` が無効を意味します。
 
 {% comment %}
 ## Related information
 {% endcomment %}
-## 関連情報
 {: #related-information }
+## 関連情報
 
 {% comment %}
 - [User guide](../index.md)

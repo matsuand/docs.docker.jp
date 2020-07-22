@@ -2477,7 +2477,7 @@ Expose ports.
 {% comment %}
 #### Short syntax
 {% endcomment %}
-{: id="short-syntax" }
+{: id="short-syntax-1" }
 #### 短い文法
 
 {% comment %}
@@ -2617,8 +2617,8 @@ secrets に関する詳細は [secrets](../../engine/swarm/secrets.md) を参照
 {% comment %}
 #### Short syntax
 {% endcomment %}
-{: id="secrets-short-syntax" }
-#### Short syntax
+{: id="short-syntax-2" }
+#### 短い文法
 
 {% comment %}
 The short syntax variant only specifies the secret name. This grants the
@@ -3031,7 +3031,7 @@ volumes:
 {% comment %}
 #### Short syntax
 {% endcomment %}
-{: id="volumes-short-syntax" }
+{: id="short-syntax-3" }
 #### 短い文法
 
 {% comment %}

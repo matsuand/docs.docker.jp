@@ -14,8 +14,8 @@ This page provides the usage information for the `docker-compose` Command.
 {% comment %}
 ## Command options overview and help
 {% endcomment %}
-## コマンドオプション概要とヘルプ
 {: #command-options-overview-and-help }
+## コマンドオプション概要とヘルプ
 
 {% comment %}
 You can also see this information by running `docker-compose --help` from the
@@ -92,8 +92,8 @@ Docker Compose の実行バイナリが `docker-compose [-f <引数>...] [オプ
 {% comment %}
 ## Use `-f` to specify name and path of one or more Compose files
 {% endcomment %}
-## `-f` 利用による（複数）Compose ファイルパスの指定
 {: #use--f-to-specify-name-and-path-of-one-or-more-compose-files }
+## `-f` 利用による（複数）Compose ファイルパスの指定
 
 {% comment %}
 Use the `-f` flag to specify the location of a Compose configuration file.
@@ -103,8 +103,8 @@ Use the `-f` flag to specify the location of a Compose configuration file.
 {% comment %}
 ### Specifying multiple Compose files
 {% endcomment %}
-### 複数 Compose ファイルの指定
 {: #specifying-multiple-compose-files }
+### 複数 Compose ファイルの指定
 
 {% comment %}
 You can supply multiple `-f` configuration files. When you supply multiple
@@ -183,8 +183,8 @@ in addition to the values in the `docker-compose.yml` file.
 {% comment %}
 ### Specifying a path to a single Compose file
 {% endcomment %}
-### 1 つの Compose ファイルのパスを指定
 {: #specifying-a-path-to-a-single-compose-file }
+### 1 つの Compose ファイルのパスを指定
 
 {% comment %}
 You can use the `-f` flag to specify a path to a Compose file that is not
@@ -238,8 +238,8 @@ Status: Downloaded newer image for postgres:latest
 {% comment %}
 ## Use `-p` to specify a project name
 {% endcomment %}
-## `-p` を利用したプロジェクト名の指定
 {: #use--p-to-specify-a-project-name }
+## `-p` を利用したプロジェクト名の指定
 
 {% comment %}
 Each configuration has a project name. If you supply a `-p` flag, you can
@@ -254,8 +254,8 @@ directory name. See also the [COMPOSE_PROJECT_NAME environment variable](envvars
 {% comment %}
 ## Set up environment variables
 {% endcomment %}
-## 環境変数の設定
 {: #set-up-environment-variables }
+## 環境変数の設定
 
 {% comment %}
 You can set [environment variables](envvars.md) for various

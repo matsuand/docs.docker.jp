@@ -9,9 +9,8 @@ The following samples show the various aspects of how to work with Docker
 Compose. As a prerequisite, be sure to [install Docker Compose](install.md)
 if you have not already done so.
 {% endcomment %}
-The following samples show the various aspects of how to work with Docker
-Compose. As a prerequisite, be sure to [install Docker Compose](install.md)
-if you have not already done so.
+以下に示すサンプルは、Docker Compose の利用によりどのような動作が行われるかを、さまざまな観点から示すものです。
+前提として、まだ [Docker Compose のインストール](install.md) を行っていなければ、これを行ってください。
 
 {% comment %}
 ## Key concepts these samples cover
@@ -33,19 +32,16 @@ The samples should help you to:
 - learn how to make calls to your application services from Compose files
 - learn how to deploy applications and services to a [swarm](../engine/swarm/index.md)
 {% endcomment %}
-- define services based on Docker images using
-  [Compose files](compose-file/index.md) `docker-compose.yml` and
-  `docker-stack.yml` files
-- understand the relationship between `docker-compose.yml` and
-  [Dockerfiles](/engine/reference/builder/)
-- learn how to make calls to your application services from Compose files
-- learn how to deploy applications and services to a [swarm](../engine/swarm/index.md)
+- [Compose ファイル](compose-file/index.md) である `docker-compose.yml` と `docker-stack.yml` ファイルを利用して Docker イメージにもとづくサービスを定義します。
+- `docker-compose.yml` と [Dockerfiles](/engine/reference/builder/) の関係について理解します。
+- Compose ファイルからアプリケーションサービスに向けて、呼び出し処理を行う方法を説明します。
+- アプリケーションやサービスを [Swarm](../engine/swarm/index.md) にデプロイする方法を説明します。
 
 {% comment %}
 ## Samples tailored to demo Compose
 {% endcomment %}
 {: #samples-tailored-to-demo-compose }
-## Compose のデモを兼ねたサンプル
+## Compose のデモを含めたサンプル
 
 {% comment %}
 These samples focus specifically on Docker Compose:

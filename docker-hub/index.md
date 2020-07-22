@@ -87,8 +87,7 @@ repositories of container images.
 * [Official Images](official_images.md): Pull and use high-quality
 container images provided by Docker.
 * [Publisher Images](publish/customer_faq.md): Pull and use high-
-quality container images provided by external vendors. Certified images also
-include support and guarantee compatibility with Docker Enterprise.
+quality container images provided by external vendors.
 * [Builds](builds/index.md): Automatically build container images from
 GitHub and Bitbucket and push them to Docker Hub.
 * [Webhooks](webhooks.md): Trigger actions after a successful push
@@ -100,7 +99,6 @@ GitHub and Bitbucket and push them to Docker Hub.
 * [チームと組織](orgs.md): コンテナーイメージを配するプライベートリポジトリへのアクセスを管理します。
 * [公式イメージ](official_images.md): Docker が提供している高品質のコンテナーイメージをプルして利用します。
 * [開発提供イメージ](publish/customer_faq.md): 外部ベンダーによって提供されている高品質のコンテナーイメージをプルして利用します。
-  認定されているイメージであれば、Docker Enterprise との互換性が保証されサポートされます。
 * [ビルド](builds/index.md): GitHub や Bitbucket のコンテナーイメージを自動ビルドして Docker Hub へプッシュします。
 * [ウェブフック](webhooks.md)（webhook）: リポジトリへ正常にプッシュができた際に処理起動されるトリガーであり、Docker Hub と他サービスとの連携を図ります。
 
