@@ -261,7 +261,7 @@ In this section, you set up the database connection for Django.
 {% endcomment %}
 2. `DATABASES = ...`の部分を以下のように書き換えます。
 
-       # setting.py
+       # settings.py
 
        DATABASES = {
            'default': {
