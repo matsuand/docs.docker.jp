@@ -1139,7 +1139,7 @@ manuals:
     - path: /docker-for-mac/
       title: はじめよう
     - path: /docker-for-mac/kubernetes/
-      title: Deploy on Kubernetes
+      title: Kubernetes へのデプロイ
     - path: /docker-for-mac/docker-toolbox/
       title: Docker Desktop for Mac と Docker Toolbox
     - path: /docker-for-mac/multi-arch/
@@ -1171,7 +1171,7 @@ manuals:
     - path: /docker-for-windows/
       title: はじめよう
     - path: /docker-for-windows/kubernetes/
-      title: Deploy on Kubernetes
+      title: Kubernetes へのデプロイ
     - path: /docker-for-windows/networking/
       title: ネットワーク機能
     - path: /docker-for-windows/docker-toolbox/

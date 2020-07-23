@@ -1,14 +1,14 @@
 ---
-description: Docker Desktop on Mac のインストール方法。
+description: Docker Desktop の Mac へのインストール方法を説明します。
 keywords: mac, install, download, run, docker, local
-title: Docker Desktop on Mac のインストール
+title: Docker Desktop の Mac へのインストール
 ---
 
 {% comment %}
 Docker Desktop for Mac is the [Community](https://www.docker.com/community-edition) version of Docker for Mac.
 You can download Docker Desktop for Mac from Docker Hub.
 {% endcomment %}
-Docker Desktop for Mac is the [Community](https://www.docker.com/community-edition) version of Docker for Mac.
+Docker Desktop for Mac は Mac 向け Docker の[Community](https://www.docker.com/community-edition) バージョンです。
 Docker Desktop for Mac のダウンロードは Docker Hub からダウンロードすることができます。
 
 {% comment %}
@@ -19,7 +19,7 @@ Docker Desktop for Mac のダウンロードは Docker Hub からダウンロー
 {% comment %}
 By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
 {% endcomment %}
-By downloading Docker Desktop, you agree to the terms of the [Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} and the [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"}.
+Docker Desktop のダウンロードによって、[Docker Software End User License Agreement](https://www.docker.com/legal/docker-software-end-user-license-agreement){: target="_blank" class="_"} と [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" class="_"} に同意したことになります。
 
 {% comment %}
 ## What to know before you install
@@ -37,7 +37,7 @@ for Docker Desktop on Mac, and how the two products can coexist.
 {% endcomment %}
 > Docker Toolbox と Docker Machine のユーザーはまずはじめに読んでください。
 >
->すでにマシン上で Docker を利用している方は、まずはじめに [Docker Desktop for Mac vs. Docker Toolbox](docker-toolbox.md) をよく読んでください。
+>すでにマシン上で Docker を利用している方は、まずはじめに [Docker Desktop for Mac と Docker Toolbox](docker-toolbox.md) をよく読んでください。
 >そしてすでに Docker があるマシンに新たにインストールするとどうなるのか、Docker Desktop on Mac の環境設定をどうするのか、2 つの製品を並行して利用するにはどうするのか、こういったことを十分に理解してください。
 
 {% comment %}
@@ -46,10 +46,10 @@ you are running Docker Desktop, you do not need Docker Machine nodes running loc
 virtualization system running (HyperKit) which takes the place of the
 VirtualBox system. To learn more, see [Docker Desktop for Mac vs. Docker Toolbox](docker-toolbox.md).
 {% endcomment %}
-**Docker Machine との関係**: Docker Desktop on Mac をインストールしても、Docker Machine を使って生成していたマシンへの影響はありません。You have the option to copy containers and images from your local `default` machine (if one exists) to the Docker Desktop [HyperKit](https://github.com/docker/HyperKit/) VM. When
-you are running Docker Desktop, you do not need Docker Machine nodes running locally (or anywhere else). With Docker Desktop, you have a new, native
-virtualization system running (HyperKit) which takes the place of the
-VirtualBox system. To learn more, see [Docker Desktop for Mac vs. Docker Toolbox](docker-toolbox.md).
+**Docker Machine との関係**: Mac 上に Docker Desktop  をインストールしても、Docker Machine を使って生成していたマシンへの影響はありません。ローカルの `default` マシンがあるとして、ここから Docker Desktop [HyperKit](https://github.com/docker/HyperKit/) VM に向けて、コンテナーやイメージをコピーすることができます。
+Docker Desktop の実行中に、Docker Machine のノードをローカルで（あるいはどこであっても）起動しておく必要はありません。
+Docker Desktop を利用すると、VirtualBox システムにかわって、新たにネイティブな仮想システム（HyperKit）を起動することになります。
+詳細は [Docker Desktop for Mac と Docker Toolbox](docker-toolbox.md) を参照してください。
 
 {% comment %}
 ## System requirements
@@ -65,26 +65,38 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 {% comment %}
 - **Mac hardware must be a 2010 or a newer model**, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
 {% endcomment %}
-- **Mac hardware must be a 2010 or a newer model**, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode. You can check to see if your machine has this support by running the following command in a terminal: `sysctl kern.hv_support`
+- **Mac ハードウェアは 2010 あるいはそれより最新のモデルであること**。
+  そして Extended Page Tables (EPT) や Unrestricted モードを含んだ、MMU 仮想化に対する Intel ハードウェアサポートが必要です。
+  利用マシンがこれをサポートしているかどうかは、端末画面から `sysctl kern.hv_support` を実行してみればわかります。
 
   {% comment %}
   If your Mac supports the Hypervisor framework, the command prints `kern.hv_support: 1`.
   {% endcomment %}
-  If your Mac supports the Hypervisor framework, the command prints `kern.hv_support: 1`.
+  利用している Mac が Hypervisor フレームワークをサポートしている場合は、上のコマンドの出力に `kern.hv_support: 1` が表示されます。
 
 {% comment %}
 - **macOS must be version 10.13 or newer**. That is, Catalina, Mojave, or High Sierra. We recommend upgrading to the latest version of macOS.
 {% endcomment %}
-- **macOS must be version 10.13 or newer**. That is, Catalina, Mojave, or High Sierra. We recommend upgrading to the latest version of macOS.
+- **macOS はバージョン 10.13 またはそれ以降であること**。
+  つまり Catalina、Mojave、High Sierra であることが必要です。
+  macOS は最新バージョンにアップグレードすることをお勧めします。
 
+  {% comment %}
   If you experience any issues after upgrading your macOS to version 10.15, you must install the latest version of Docker Desktop to be compatible with this version of macOS.
+  {% endcomment %}
+  macOS をバージョン 10.15 にアップグレードしたときに問題が発生した場合は、その macOS のバージョンと互換性のある、最新の Docker Desktop をインストールすることが必要になります。
 
   {% comment %}
   **Note:** Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. Docker Desktop currently supports macOS Catalina, macOS Mojave, and macOS High Sierra.
   {% endcomment %}
-  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. Docker Desktop currently supports macOS Catalina, macOS Mojave, and macOS High Sierra.
+  **メモ:** Docker では、ほぼ最新の macOS であれば Docker Desktop をサポートしています。
+  つまり、現在最新の macOS およびそれ以前の 2 つのリリースバージョンです。
+  Docker Desktop が現時点でサポートするのは、macOS Catalina、macOS Mojave、macOS High Sierra です。
 
+   {% comment %}
     As new major versions of macOS are made generally available, Docker stops supporting the oldest version and support the newest version of macOS (in addition to the previous two releases).
+   {% endcomment %}
+    macOS の最新メジャーバージョンが公開された場合、Docker はそれまでの一番古い対応バージョンへのサポートを停止し、最新版へのサポート（およびそれ以前の 2 つのリリースバージョン）をサポート対象とします。
 
 {% comment %}
 - At least 4 GB of RAM.
@@ -95,12 +107,13 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
 - VirtualBox prior to version 4.3.30 must not be installed as it is not compatible with Docker Desktop.
 {% endcomment %}
 - VirtualBox バージョン 4.3.30 以前はインストールしないでください。
-  Docker Desktop との互換性がありません。
+  Docker Desktop との互換性がないからです。
 
 {% comment %}
 ## What's included in the installer
 {% endcomment %}
-## What's included in the installer
+{: #whats-included-in-the-installer }
+## インストーラーに含まれるもの
 
 {% comment %}
 The Docker Desktop installation includes
@@ -114,7 +127,7 @@ The Docker Desktop installation includes
 ## Install and run Docker Desktop on Mac
 {% endcomment %}
 {: #install-and-run-docker-desktop-on-Mac }
-## Docker Desktop on Mac のインストールと実行
+## Docker Desktop の Mac へのインストールと実行
 
 {% comment %}
 1. Double-click `Docker.dmg` to open the installer, then drag the Docker icon to
@@ -142,7 +155,7 @@ The Docker Desktop installation includes
     {% comment %}
     The Docker menu in the top status bar indicates that Docker Desktop is running, and accessible from a terminal.
     {% endcomment %}
-    The Docker menu in the top status bar indicates that Docker Desktop is running, and accessible from a terminal.
+    最上段のスタータスバーにある Docker メニューには Docker Desktop が起動していることが示されているので、ターミナル画面からアクセスすることができます。
 
       {% comment %}
       ![Whale in menu bar](images/whale-in-menu-bar.png)
@@ -152,12 +165,13 @@ The Docker Desktop installation includes
     {% comment %}
     If you've just installed the app, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
     {% endcomment %}
-    If you've just installed the app, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+    インストーラーによるインストールを終えたら、Docker Desktop はオンボードのチュートリアルを開始します。
+    このチュートリアルでは、単純な課題を通じてサンプルの Docker イメージを構築し、コンテナーとして実行、そのイメージを Docker Hub にプッシュして保存することを行います。
 
     {% comment %}
     ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
     {% endcomment %}
-    ![Docker Quick Start tutorial](images/docker-tutorial-mac.png)
+    ![Docker クィックスタートチュートリアル](images/docker-tutorial-mac.png)
 
 {% comment %}
 3. Click the Docker menu (![whale menu](images/whale-x.png){: .inline}) to see
@@ -180,7 +194,7 @@ Docker Desktop を正常に実行することができました。
 If you would like to rerun the tutorial, go to the Docker Desktop menu
 and select **Learn**.
 {% endcomment %}
-チュートリアルに戻りたい場合は Docker Desktop メニューから **Learn** を実行してください。
+チュートリアルを再実行したい場合は Docker Desktop メニューから **Learn** を実行してください。
 
 {% comment %}
 ## Uninstall Docker Desktop
@@ -200,51 +214,103 @@ Mac から Docker Desktop をアンインストールするには以下を実行
 1. Docker メニューから **Troubleshoot**、**Uninstall** を選択します。
 2. 選択が正しければ **Uninstall** をクリックします。
 
+{% comment %}
 > **Note:** Uninstalling Docker Desktop will destroy Docker containers and images local to the machine and remove the files generated by the application.
+{% endcomment %}
+> **メモ:** Docker Desktop をアンインストールすると、マシン上のローカルな Docker コンテナーやイメージ、あるいはアプリケーションによって生成されたファイル類はすべて削除されます。
 
 {% comment %}
 ## Switch between Stable and Edge versions
 {% endcomment %}
-## Switch between Stable and Edge versions
+{: #switch-between-stable-and-edge-versions }
+## 安定版と最新版の切り替え
 
+{% comment %}
 Docker Desktop allows you to switch between Stable and Edge releases. However, **you can only have one version of Docker Desktop installed at a time**. Switching between Stable and Edge versions can destabilize your development environment, particularly in cases where you switch from a newer (Edge) channel to an older (Stable) channel.
+{% endcomment %}
+Docker Desktop では安定版と最新版の切り替えができるようになっています。
+ただし **一度にインストールしておくことができるバージョンはただ一つです**。
+安定版と最新版を切り替えると、開発環境を不安定にする原因となることがあります。
+特に、より新しい最新版から、それに比べて古い安定版に切り替える場合には、注意してください。
 
+{% comment %}
 For example, containers created with a newer Edge version of Docker Desktop may
 not work after you switch back to Stable because they may have been created
 using Edge features that aren't in Stable yet. Keep this in mind as
 you create and work with Edge containers, perhaps in the spirit of a playground
 space where you are prepared to troubleshoot or start over.
+{% endcomment %}
+たとえば、より新しい最新版によって生成したコンテナーは、安定版に切り替えたときに動作しない場合があります。
+それは最新版の機能を利用してコンテナーを生成している場合であり、そのような機能が安定版にはないからです。
+したがって最新版においてコンテナーを生成して利用する場合には十分に注意してください。
+問題の解決ややり直しは自分で行わなければならない、そういうお試し版であることを覚えておいてください。
 
+{% comment %}
 To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section Save and Restore data below.
+{% endcomment %}
+最新版と安定版を安全に切り替えるために、イメージの保存や、必要に応じてコンテナーのエクスポートを行っておいてください。
+これを行ってから、旧バージョンをアンインストールし、新バージョンをインストールするようにしてください。
+詳しくは、以下の「データの保存と復元」の節を参照してください。
 
+{% comment %}
 ### Save and restore data
+{% endcomment %}
+{: #savevand-restore-data }
+### データの保存と復元
 
+{% comment %}
 You can use the following procedure to save and restore images and container data. For example, if you want to switch between Edge and Stable, or to reset your VM disk:
+{% endcomment %}
+イメージやコンテナーのデータを保存し復元するためには、以下に示す手順を実施します。
+たとえば最新版から安定版に切り替える場合、あるいは VM ディスクを入れ替える場合とします。
 
+{% comment %}
 1. Use `docker save -o images.tar image1 [image2 ...]` to save any images you
     want to keep. See [save](/engine/reference/commandline/save) in the Docker
     Engine command line reference.
+{% endcomment %}
+1. `docker save -o images.tar image1 [image2 ...]` を実行して、対象とするイメージを保存します。
+   Docker Engine のコマンドラインインターフェースにある [save](/engine/reference/commandline/save) コマンドを参照してください。
 
+{% comment %}
 2. Use `docker export -o myContainner1.tar container1` to export containers you
     want to keep. See [export](/engine/reference/commandline/export) in the
     Docker Engine command line reference.
+{% endcomment %}
+2. `docker export -o myContainner1.tar container1` を実行して、対象とするコンテナーをエクスポートします。
+    Docker Engine のコマンドラインインターフェースにある [export](/engine/reference/commandline/export) コマンドを参照してください。
 
+{% comment %}
 3. Uninstall the current version of Docker Desktop and install a different version (Stable or Edge), or reset your VM disk.
+{% endcomment %}
+3. Docker Desktop の現バージョンをアンインストールし、別のバージョン（安定版あるいは最新版) をインストールします。
+   あるいは VM ディスクを入れ替えます。
 
+{% comment %}
 4. Use `docker load -i images.tar` to reload previously saved images. See
     [load](/engine/reference/commandline/load) in the Docker Engine.
+{% endcomment %}
+4. `docker load -i images.tar` を実行して、上で保存したイメージをリロードします。
+    Docker Engine の [load](/engine/reference/commandline/load) コマンドを参照してください。
 
+{% comment %}
 5. Use `docker import -i myContainer1.tar` to create a filesystem image
     corresponding to the previously exported containers. See
     [import](/engine/reference/commandline/import) in the Docker Engine.
+{% endcomment %}
+5. `docker import -i myContainer1.tar` を実行して、上でエクスポートしたコンテナーに応じたファイルシステムイメージを生成します。
+    Docker Engine の [import](/engine/reference/commandline/import) コマンドを参照してください。
 
+{% comment %}
 For information on how to back up and restore data volumes, see [Backup, restore, or migrate data volumes](/storage/volumes/#backup-restore-or-migrate-data-volumes).
+{% endcomment %}
+データボリュームのバックアップと復元方法については、[データボリュームのバックアップ、復元、移行](/storage/volumes/#backup-restore-or-migrate-data-volumes) を参照してください。
 
 {% comment %}
 ## Where to go next
 {% endcomment %}
-## 次は何を読むか
 {: #where-to-go-next }
+## 次に読むものは
 
 {% comment %}
 - [Getting started](index.md) provides an overview of Docker Desktop on Mac, basic Docker command examples, how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
@@ -256,11 +322,9 @@ For information on how to back up and restore data volumes, see [Backup, restore
   [Edge release notes](edge-release-notes.md).
 - [Get started with Docker](/get-started/) provides a general Docker tutorial.
 {% endcomment %}
-* [はじめよう](index.md)では Docker Desktop on Mac の概要、基本的な Docker コマンド例、how to get help or give feedback, and links to other topics about Docker Desktop on Mac.
-* [トラブルシューティング](troubleshoot.md) describes common problems, workarounds, how
-  to run and submit diagnostics, and submit issues.
+* [はじめよう](index.md)では Mac 上での Docker Desktop の概要、基本的な Docker コマンド例、ヘルプを得たりフィードバックを行う方法、また Mac 上の Docker Desktop に関する他のトピックへのリンクを示しています。
+* [トラブルシューティング](troubleshoot.md) では一般的な質問、解決方法、診断実行や課題送信などを示しています。
 * [FAQ](faqs.md) はよくたずねられる質問とその回答を示します。
-* [リリースノート](release-notes.md) lists component updates, new features, and
-  improvements associated with Stable releases. For information about Edge releases, see [Edge release
-  notes](edge-release-notes.md).
+* [リリースノート](release-notes.md) ではコンポーネントのアップデート、新機能、また安定版に関連した改善機能を示しています。
+  最新版については [最新版リリースノート](edge-release-notes.md) を参照してください。
 * [Docker をはじめよう](/get-started/) は Docker の全般的なチュートリアルです。
