@@ -1,8 +1,8 @@
 command: docker buildx bake
 aliases: f
-short: ファイルからビルド
+short: ファイルからビルドします。
 long: ファイルからビルドします。
-usage: docker buildx bake [OPTIONS] [TARGET...]
+usage: docker buildx bake [オプション] [TARGET...]
 pname: docker buildx
 plink: docker_buildx.yaml
 options:
@@ -10,7 +10,7 @@ options:
   shorthand: f
   value_type: stringArray
   default_value: '[]'
-  description: Build definition file
+  description: 定義ファイルをビルドします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -19,7 +19,7 @@ options:
 - option: no-cache
   value_type: bool
   default_value: "false"
-  description: Do not use cache when building the image
+  description: イメージをビルドする際にキャッシュを利用しません。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -28,7 +28,7 @@ options:
 - option: print
   value_type: bool
   default_value: "false"
-  description: Print the options without building
+  description: ビルドを行わず、オプションを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -38,7 +38,7 @@ options:
   value_type: string
   default_value: auto
   description: |
-    Set type of progress output (auto, plain, tty). Use plain to show container output
+    処理経過の出力のタイプを設定します（auto、plain、tty）。コンテナー出力には plain が用いられます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -47,7 +47,7 @@ options:
 - option: pull
   value_type: bool
   default_value: "false"
-  description: Always attempt to pull a newer version of the image
+  description: イメージの最新版を常にプルするようにします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -56,7 +56,7 @@ options:
 - option: set
   value_type: stringArray
   default_value: '[]'
-  description: 'Override target value (eg: target.key=value)'
+  description: 'target のバリューをオーバーライドします（target.key=value）。'
   deprecated: false
   experimental: false
   experimentalcli: false

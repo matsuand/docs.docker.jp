@@ -1,6 +1,6 @@
 command: docker buildx imagetools
-short: Commands to work on images in registry
-long: Commands to work on images in registry
+short: レジストリ上のイメージを操作するコマンドです。
+long: レジストリ上のイメージを操作するコマンドです。
 pname: docker buildx
 plink: docker_buildx.yaml
 cname:

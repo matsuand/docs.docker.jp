@@ -1,6 +1,6 @@
 command: docker buildx inspect
-short: Inspect current builder instance
-long: Inspect current builder instance
+short: 現在のビルダーインスタンスを確認します。
+long: 現在のビルダーインスタンスを確認します。
 usage: docker buildx inspect [NAME]
 pname: docker buildx
 plink: docker_buildx.yaml
@@ -8,7 +8,7 @@ options:
 - option: bootstrap
   value_type: bool
   default_value: "false"
-  description: Ensure builder has booted before inspecting
+  description: 確認前にビルダーを起動し直します。
   deprecated: false
   experimental: false
   experimentalcli: false

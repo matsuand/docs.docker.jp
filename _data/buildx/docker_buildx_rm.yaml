@@ -1,6 +1,6 @@
 command: docker buildx rm
-short: Remove a builder instance
-long: Remove a builder instance
+short: ビルダーインスタンスを削除します。
+long: ビルダーインスタンスを削除します。
 usage: docker buildx rm [NAME]
 pname: docker buildx
 plink: docker_buildx.yaml

@@ -1,6 +1,6 @@
 command: docker buildx version
-short: 'Show buildx version information '
-long: 'Show buildx version information '
+short: 'Buildx のバージョンを表示します。'
+long: 'Buildx のバージョンを表示します。'
 usage: docker buildx version
 pname: docker buildx
 plink: docker_buildx.yaml

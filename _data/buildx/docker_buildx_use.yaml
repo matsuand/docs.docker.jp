@@ -1,14 +1,14 @@
 command: docker buildx use
-short: Set the current builder instance
-long: Set the current builder instance
-usage: docker buildx use [OPTIONS] NAME
+short: 現在のビルダーインスタンスを設定します。
+long: 現在のビルダーインスタンスを設定します。
+usage: docker buildx use [オプション] NAME
 pname: docker buildx
 plink: docker_buildx.yaml
 options:
 - option: default
   value_type: bool
   default_value: "false"
-  description: Set builder as default for current context
+  description: 現在のコンテキストに対してビルダーをデフォルトに設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -17,7 +17,7 @@ options:
 - option: global
   value_type: bool
   default_value: "false"
-  description: Builder persists context changes
+  description: ビルダーがコンテキストの変更を保持するようにします。
   deprecated: false
   experimental: false
   experimentalcli: false

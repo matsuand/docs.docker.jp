@@ -1,5 +1,5 @@
 command: docker buildx
-short: BuildKit を使ってビルド
+short: BuildKit を使ってビルドします。
 long: BuildKit を使ってビルドします。
 pname: docker
 plink: docker.yaml

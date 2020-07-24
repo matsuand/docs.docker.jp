@@ -1,14 +1,14 @@
 command: docker buildx imagetools inspect
-short: Show details of image in the registry
-long: Show details of image in the registry
-usage: docker buildx imagetools inspect [OPTIONS] NAME
+short: レジストリ内イメージの詳細を表示します。
+long: レジストリ内イメージの詳細を表示します。
+usage: docker buildx imagetools inspect [オプション] NAME
 pname: docker buildx imagetools
 plink: docker_buildx_imagetools.yaml
 options:
 - option: raw
   value_type: bool
   default_value: "false"
-  description: Show original JSON manifest
+  description: オリジナルの JSON マニフェストを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false

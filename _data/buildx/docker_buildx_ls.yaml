@@ -1,6 +1,6 @@
 command: docker buildx ls
-short: List builder instances
-long: List builder instances
+short: ビルダーインスタンスを一覧表示します。
+long: ビルダーインスタンスを一覧表示します。
 usage: docker buildx ls
 pname: docker buildx
 plink: docker_buildx.yaml

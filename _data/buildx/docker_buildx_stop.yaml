@@ -1,6 +1,6 @@
 command: docker buildx stop
-short: Stop builder instance
-long: Stop builder instance
+short: ビルダーインスタンスを停止します。
+long: ビルダーインスタンスを停止します。
 usage: docker buildx stop [NAME]
 pname: docker buildx
 plink: docker_buildx.yaml

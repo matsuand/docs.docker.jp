@@ -1,14 +1,14 @@
 command: docker buildx imagetools create
-short: Create a new image based on source images
-long: Create a new image based on source images
-usage: docker buildx imagetools create [OPTIONS] [SOURCE] [SOURCE...]
+short: ソースイメージに基づいて新たなイメージを生成します。
+long: ソースイメージに基づいて新たなイメージを生成します。
+usage: docker buildx imagetools create [オプション] [SOURCE] [SOURCE...]
 pname: docker buildx imagetools
 plink: docker_buildx_imagetools.yaml
 options:
 - option: append
   value_type: bool
   default_value: "false"
-  description: Append to existing manifest
+  description: 既存のマニフェストに追加します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -17,7 +17,7 @@ options:
 - option: dry-run
   value_type: bool
   default_value: "false"
-  description: Show final image instead of pushing
+  description: プッシュを行わずに、最終イメージを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -27,7 +27,7 @@ options:
   shorthand: f
   value_type: stringArray
   default_value: '[]'
-  description: Read source descriptor from file
+  description: ファイルからソースディスクリプターを読み込みます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -37,7 +37,7 @@ options:
   shorthand: t
   value_type: stringArray
   default_value: '[]'
-  description: Set reference for new image
+  description: 新規イメージへのリファレンスを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false

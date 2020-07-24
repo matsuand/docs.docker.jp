@@ -1,14 +1,14 @@
 command: docker buildx create
-short: Create a new builder instance
-long: Create a new builder instance
-usage: docker buildx create [OPTIONS] [CONTEXT|ENDPOINT]
+short: 新規にビルダーインスタンスを生成します。
+long: 新規にビルダーインスタンスを生成します。
+usage: docker buildx create [オプション] [CONTEXT|ENDPOINT]
 pname: docker buildx
 plink: docker_buildx.yaml
 options:
 - option: append
   value_type: bool
   default_value: "false"
-  description: Append a node to builder instead of changing it
+  description: ビルダーを変更することなく、ビルダーにノードを追加します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -16,7 +16,7 @@ options:
   swarm: false
 - option: driver
   value_type: string
-  description: 'Driver to use (available: [])'
+  description: '利用するドライバーを指定します（[] が指定可能）。'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -25,7 +25,7 @@ options:
 - option: leave
   value_type: bool
   default_value: "false"
-  description: Remove a node from builder instead of changing it
+  description: ビルダーを変更することなく、ビルダーからノードを削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -33,7 +33,7 @@ options:
   swarm: false
 - option: name
   value_type: string
-  description: Builder instance name
+  description: ビルダーインスタンスの名前を指定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -41,7 +41,7 @@ options:
   swarm: false
 - option: node
   value_type: string
-  description: Create/modify node with given name
+  description: 指定した名前でノードを生成、修正します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -50,7 +50,7 @@ options:
 - option: platform
   value_type: stringArray
   default_value: '[]'
-  description: Fixed platforms for current node
+  description: 現在のノードに対する固定プラットフォームを指定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -59,7 +59,7 @@ options:
 - option: use
   value_type: bool
   default_value: "false"
-  description: Set the current builder instance
+  description: 現在のビルダーインスタンスを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
