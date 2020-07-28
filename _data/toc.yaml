@@ -1143,15 +1143,15 @@ manuals:
     - path: /docker-for-mac/docker-toolbox/
       title: Docker Desktop for Mac と Docker Toolbox
     - path: /docker-for-mac/multi-arch/
-      title: Leveraging Multi-CPU architecture support
+      title: マルチ CPU アーキテクチャー対応の活用
     - path: /docker-for-mac/networking/
       title: ネットワーク機能
     - path: /docker-for-mac/osxfs/
-      title: File system sharing
+      title: ファイルシステム共有
     - path: /docker-for-mac/osxfs-caching/
-      title: Performance tuning for volume mounts (shared filesystems)
+      title: ボリュームマウント（共有ファイルシステム）のパフォーマンスチューニング
     - path: /docker-for-mac/space/
-      title: Disk utilization
+      title: ディスク利用
     - path: /docker-for-mac/troubleshoot/
       title: Logs and troubleshooting
     - path: /docker-for-mac/faqs/
@@ -1161,7 +1161,7 @@ manuals:
     - path: /docker-for-mac/edge-release-notes/
       title: 最新版リリースノート
     - path: /docker-for-mac/mutagen/
-      title: File synchronization
+      title: ファイル同期
   - sectiontitle: Windows
     section:
     - path: /docker-for-windows/install/

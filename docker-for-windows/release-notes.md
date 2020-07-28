@@ -20,8 +20,8 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 最新版（Edge）リリースについての情報は [最新版リリースノート](edge-release-notes.md) を参照してください。
 Docker Desktop のシステム要件については [インストール前に確認すべきこと](install.md#what-to-know-before-you-install) を参照してください。
 
-## Docker Desktop Community 2.3.0.3
-2020-05-27
+## Docker Desktop Community 2.3.0.4
+2020-07-27
 
 {% comment %}
 > [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
@@ -35,6 +35,50 @@ Docker Desktop のシステム要件については [インストール前に確
 ### アップグレード
 
 {% comment %}
+{% endcomment %}
+- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
+- [Docker Compose 1.26.2](https://github.com/docker/compose/releases/tag/1.26.2)
+- [Go 1.13.14](https://github.com/golang/go/issues?q=milestone%3AGo1.13.14+label%3ACherryPickApproved)
+
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+
+{% comment %}
+- Docker Desktop now prompts users to share directories for paths like `////c/Users/foo`, rather than only paths like `C:\Users\foo` and `C:/Users/foo`.
+- The installer now returns a non-zero exit code on error, or when the user cancels the installation.
+- Fixed the path to the installer log file default location when the username contains a space. Fixes [docker/for-win#6552](https://github.com/docker/for-win/issues/6552)
+- Dashboard: Fixed opening a CLI for Windows containers. See [docker/for-win#7079](https://github.com/docker/for-win/issues/7079)
+- Dashboard: Fixed containers logs which were sometimes truncated. Fixes [docker/for-win#5954](https://github.com/docker/for-win/issues/5954)
+- WSL 2: Fixed an issue where changing the user's default shell blocked WSL integration. Fixes [docker/for-win#7653](https://github.com/docker/for-win/issues/7653)
+- WSL 2: Fixed an issue to recover WSL distributions stuck in the "Installing" state.
+{% endcomment %}
+- Docker Desktop において共有ディレクトリを生成する際、`C:\Users\foo` や `C:/Users/foo` といったパスだけでなく、`////c/Users/foo` のようなパスに対しても、ユーザープロンプトを表示するようにする。
+- インストール時のエラー、あるいはユーザーがインストールをキャンセルした場合、インストーラーがゼロではないエラーコードを返すようにする。
+- インストール時のログファイルを出力するデフォルトディレクトリにおいて、ユーザー名が空白文字を含む場合の不備を修正。
+  [docker/for-win#6552](https://github.com/docker/for-win/issues/6552) を Fix に。
+- Dashboard: Fixed opening a CLI for Windows containers. See [docker/for-win#7079](https://github.com/docker/for-win/issues/7079)
+- Dashboard: Fixed containers logs which were sometimes truncated. Fixes [docker/for-win#5954](https://github.com/docker/for-win/issues/5954)
+- WSL 2: Fixed an issue where changing the user's default shell blocked WSL integration. Fixes [docker/for-win#7653](https://github.com/docker/for-win/issues/7653)
+- WSL 2: Fixed an issue to recover WSL distributions stuck in the "Installing" state.
+
+## Docker Desktop Community 2.3.0.3
+2020-05-27
+
+{% comment %}
+> [Download](https://desktop.docker.com/win/stable/45519/Docker%20Desktop%20Installer.exe)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/win/stable/45519/Docker%20Desktop%20Installer.exe)
+
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades-1 }
+### アップグレード
+
+{% comment %}
 - [Linux kernel 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-83885d3b4cff391813f4262099b36a529bca2df8-amd64/images/sha256-0214b82436af70054e013ea51cb1fea72bd943d0d6245b6521f1ff09a505c40f?context=repo)
 {% endcomment %}
 - [Linux カーネル 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-83885d3b4cff391813f4262099b36a529bca2df8-amd64/images/sha256-0214b82436af70054e013ea51cb1fea72bd943d0d6245b6521f1ff09a505c40f?context=repo)
@@ -42,7 +86,7 @@ Docker Desktop のシステム要件については [インストール前に確
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes }
+{: #bug-fixes-and-minor-changes-1 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -122,7 +166,11 @@ Docker Desktop のシステム要件については [インストール前に確
 - [Linux kernel 4.19.76](https://hub.docker.com/layers/docker/for-desktop-kernel/4.19.76-ce15f646db9b062dc947cfc0c1deab019fa63f96-amd64/images/sha256-6c252199aee548e4bdc8457e0a068e7d8e81c2649d4c1e26e4150daa253a85d8?context=repo)
 - LinuxKit [init](https://hub.docker.com/layers/linuxkit/init/1a80a9907b35b9a808e7868ffb7b0da29ee64a95/images/sha256-64cc8fa50d63940dbaa9979a13c362c89ecb4439bcb3ab22c40d300b9c0b597e?context=explore), [runc](https://hub.docker.com/layers/linuxkit/runc/69b4a35eaa22eba4990ee52cccc8f48f6c08ed03/images/sha256-57e3c7cbd96790990cf87d7b0f30f459ea0b6f9768b03b32a89b832b73546280?context=explore) and [containerd](https://hub.docker.com/layers/linuxkit/containerd/09553963ed9da626c25cf8acdf6d62ec37645412/images/sha256-866be7edb0598430709f88d0e1c6ed7bfd4a397b5ed220e1f793ee9067255ff1?context=explore)
 
+{% comment %}
 ### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-2 }
+### バグフィックスとマイナーチェンジ
 
 **WSL 2**
 
@@ -178,7 +226,11 @@ Docker Desktop のシステム要件については [インストール前に確
 
 > [Download](https://download.docker.com/win/stable/43884/Docker%20Desktop%20Installer.exe)
 
+{% comment %}
 ### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-3 }
+### バグフィックスとマイナーチェンジ
 
 - Docker Desktop generates `fsnotify.WRITE` events in Linux containers when files are changed on the host. Fixes [docker/for-win#5530](https://github.com/docker/for-win/issues/5530#issuecomment-585572414).
 - Fixed a race condition in `readlink` on shared volumes using "mfsymlinks". Fixes [docker/for-win#5793](https://github.com/docker/for-win/issues/5793).
@@ -195,7 +247,11 @@ Docker Desktop のシステム要件については [インストール前に確
 
 - [Docker 19.03.8](https://github.com/docker/docker-ce/releases/tag/v19.03.8)
 
+{% comment %}
 ### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-4 }
+### バグフィックスとマイナーチェンジ
 
 - Security: Diagnostics were collected with Administrator privileges, which led to a possible privilege escalation on systems where the Docker Desktop user was not an administrator.
 - Docker Desktop now displays hidden files in shared volumes. Fixes [docker/for-win#5808](https://github.com/docker/for-win/issues/5808).
@@ -227,7 +283,11 @@ Docker Desktop のシステム要件については [インストール前に確
 - [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
 - [Go 1.12.16](https://golang.org/doc/devel/release.html#go1.12)
 
+{% comment %}
 ### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-5 }
+### バグフィックスとマイナーチェンジ
 
 - Fixed an issue that prevented users from creating files with special characters in the filenames within a shared volume. Fixes [docker/for-win#5520](https://github.com/docker/for-win/issues/5520).
 - Fixed handling of shared volumes with relative paths in `docker-compose.yml`. Fixes [docker/for-win#5516](https://github.com/docker/for-win/issues/5516).
@@ -290,7 +350,11 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 - The Restart, Reset, and Uninstall options are now available on the **Troubleshoot** menu.
 - Added the ability to start and stop existing Compose-based applications and view combined logs in the Docker Desktop **Dashboard** UI.
 
+{% comment %}
 ### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-6 }
+### バグフィックスとマイナーチェンジ
 
 - Enabled Windows features such as Hyper-V and Containers during installation, thereby reducing the need for another restart after installation.
 - Added support for `Expect: 100-continue` headers in the Docker API proxy. Some HTTP clients such as `curl` send this header when the payload is large, for example, when creating containers. Fixes [moby/moby#39693](https://github.com/moby/moby/issues/39693).
@@ -408,7 +472,11 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 * Docker App: Docker App is a CLI plugin that helps configure, share, and install applications. For more information, see [Working with Docker App](/app/working-with-app/).
 * Docker Buildx: Docker Buildx is a CLI plugin for extended build capabilities with BuildKit. For more information, see [Working with Docker Buildx](/buildx/working-with-buildx/).
 
+{% comment %}
 ### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-7 }
+### バグフィックスとマイナーチェンジ
 
 * Fixed PowerShell script signing issue that caused `AuthorizationManager check failed` errors on machines with strict group policies on PowerShell script signing. [docker/for-win#4376](https://github.com/docker/for-win/issues/4376)
 * Fixed an issue where users were unable to start Docker Desktop after upgrading to version 2.1.0.0. [docker/for-win#4390](https://github.com/docker/for-win/issues/4390)
