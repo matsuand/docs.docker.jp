@@ -391,20 +391,27 @@ For more information on setting environment variables for running containers,
 see [Set environment variables](/engine/reference/commandline/run/#set-environment-variables--e---env---env-file).
 
 {% comment %}
-{% endcomment %}
 #### Network
+{% endcomment %}
+{: #network }
+#### Network タブ
 
 {% comment %}
+You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
 {% endcomment %}
 You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
 
 ### Docker Engine
 
 {% comment %}
+The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.
 {% endcomment %}
 The Docker Engine page allows you to configure the Docker daemon to determine how your containers run.
 
 {% comment %}
+Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
+[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank"
+class="_"}.
 {% endcomment %}
 Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
 [dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank"
