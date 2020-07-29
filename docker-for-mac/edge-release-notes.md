@@ -1,44 +1,136 @@
 ---
 description: Change log / release notes per Edge release
 keywords: Docker Desktop for Mac, edge, release notes
-title: Docker Desktop for Mac Edge release notes
+title: Docker Desktop for Mac 最新版リリースノート
 toc_min: 1
 toc_max: 2
 ---
 
+{% comment %}
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
+{% endcomment %}
+このページは Docker Desktop 最新版（Edge）に関する情報を示します。
+最新版では、最新の機能をいち早く試すことができます。
+その機能の中には試験的なものが含まれており、安定版のレベルには達していないものもあります。
 
+{% comment %}
 For information about Stable releases, see the [Stable release notes](release-notes.md). For Docker Desktop system requirements, see
 [What to know before you install](install.md#what-to-know-before-you-install).
+{% endcomment %}
+安定版についての情報は [安定版リリースノート](release-notes.md) を参照してください。
+Docker Desktop のシステム要件については [インストールの前に](install.md#what-to-know-before-you-install) を参照してください。
+
+## Docker Desktop Community 2.3.4.0
+2020-07-28
+
+{% comment %}
+> [Download](https://desktop.docker.com/mac/edge/46980/Docker.dmg)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/mac/edge/46980/Docker.dmg)
+
+{% comment %}
+### New
+{% endcomment %}
+{: #new }
+### 新機能
+
+{% comment %}
+- Docker Desktop introduces the new **Images** view to the Docker Dashboard. The Images view allows users to view a list of Docker images on the disk, run an image as a container, pull the latest version of an image from Docker Hub, inspect images, and remove any unwanted images from the disk.
+{% endcomment %}
+- Docker Desktop introduces the new **Images** view to the Docker Dashboard. The Images view allows users to view a list of Docker images on the disk, run an image as a container, pull the latest version of an image from Docker Hub, inspect images, and remove any unwanted images from the disk.
+
+  {% comment %}
+  To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
+  {% endcomment %}
+  To access the new Images view, from the Docker menu, select **Dashboard** > **Images**.
+
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades }
+### アップグレード
+
+- [Docker ECS integration v1.0.0-beta.4](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.4){: target="_blank" class="_”}
+- [Kubernetes 1.18.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.6){: target="_blank" class="_”}
+
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+
+{% comment %}
+- Copying the container logs from the dashboard does not copy the ANSI color codes to the clipboard anymore.
+- Mutagen two-way sync now uses `.dockersyncignore` rather than `.dockerignore` to exclude files.
+{% endcomment %}
+- ダッシュボードからコンテナーのログをコピーする際に、ANSI カラーコードはクリップボードにコピーされなくなりました。
+- Mutagen による双方向同期において、除外対象とするファイルの指定は `.dockerignore` ではなく `.dockersyncignore` になりました。
 
 ## Docker Desktop Community 2.3.3.2
 2020-07-21
 
+{% comment %}
 > [Download](https://desktop.docker.com/mac/edge/46784/Docker.dmg)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/mac/edge/46784/Docker.dmg)
 
+{% comment %}
 ### Upgrades
+{% endcomment %}
+{: #upgrades-1 }
+### アップグレード
 
 - [Docker ECS integration v1.0.0-beta.2](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.2){: target="_blank" class="_”}
 - [Docker ACI integration 0.1.10](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.10){: target="_blank" class="_”}
 
+{% comment %}
 ### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-1 }
+### バグフィックスとマイナーチェンジ
 
+{% comment %}
+- Mutagen uses the `.dockerignore` file when creating a session to filter the list of synchronized files. See [docker/for-mac#4621](https://github.com/docker/for-mac/issues/4621).
+- Docker CLI commands can now bypass any active Mutagen synchronization for volumes using `:cached`. See [docker/for-mac#1592](https://github.com/docker/for-mac/issues/1592#issuecomment-651309816).
+{% endcomment %}
 - Mutagen uses the `.dockerignore` file when creating a session to filter the list of synchronized files. See [docker/for-mac#4621](https://github.com/docker/for-mac/issues/4621).
 - Docker CLI commands can now bypass any active Mutagen synchronization for volumes using `:cached`. See [docker/for-mac#1592](https://github.com/docker/for-mac/issues/1592#issuecomment-651309816).
 
 ## Docker Desktop Community 2.3.3.0
 2020-07-09
 
+{% comment %}
 > [Download](https://desktop.docker.com/mac/edge/46574/Docker.dmg)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/mac/edge/46574/Docker.dmg)
 
+{% comment %}
 ### Upgrades
+{% endcomment %}
+{: #upgrades-2 }
+### アップグレード
 
+{% comment %}
+- Beta release of [Docker ECS integration v1.0.0-beta.1](https://docs.docker.com/engine/context/ecs-integration/)
+- [Docker ACI integration v0.1.7](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.7)
+- [Docker Compose 1.26.2](https://github.com/docker/compose/releases/tag/1.26.2)
+{% endcomment %}
 - Beta release of [Docker ECS integration v1.0.0-beta.1](https://docs.docker.com/engine/context/ecs-integration/)
 - [Docker ACI integration v0.1.7](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.7)
 - [Docker Compose 1.26.2](https://github.com/docker/compose/releases/tag/1.26.2)
 
+{% comment %}
 ### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-2 }
+### バグフィックスとマイナーチェンジ
 
+{% comment %}
+- Compose-on-Kubernetes is no longer included in the Docker Desktop installer. You can download it separately from the compose-on-kubernetes [release page](https://github.com/docker/compose-on-kubernetes/releases).
+- Fixed an incompatibility between `hyperkit` and `osquery` which resulted in excessive `hyperkit` CPU usage. See [docker/for-mac#3499](https://github.com/docker/for-mac/issues/3499#issuecomment-639140844)
+- Docker Desktop now respects consistency flags `cached`, `delegated`, `consistent` even when in a list of options (for example, `z,delegated`). See [docker/for-mac#4718](https://github.com/docker/for-mac/issues/4718).
+- Docker Desktop now implements the shared volume flag `:delegated` by automatically setting up a two-way file sync with Mutagen.
+{% endcomment %}
 - Compose-on-Kubernetes is no longer included in the Docker Desktop installer. You can download it separately from the compose-on-kubernetes [release page](https://github.com/docker/compose-on-kubernetes/releases).
 - Fixed an incompatibility between `hyperkit` and `osquery` which resulted in excessive `hyperkit` CPU usage. See [docker/for-mac#3499](https://github.com/docker/for-mac/issues/3499#issuecomment-639140844)
 - Docker Desktop now respects consistency flags `cached`, `delegated`, `consistent` even when in a list of options (for example, `z,delegated`). See [docker/for-mac#4718](https://github.com/docker/for-mac/issues/4718).
@@ -47,16 +139,33 @@ For information about Stable releases, see the [Stable release notes](release-no
 ## Docker Desktop Community 2.3.2.0
 2020-06-25
 
+{% comment %}
 > [Download](https://desktop.docker.com/mac/edge/46268/Docker.dmg)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/mac/edge/46268/Docker.dmg)
 
+{% comment %}
 ### Upgrades
+{% endcomment %}
+{: #upgrades-3 }
+### アップグレード
 
+{% comment %}
+- [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
+- [Docker Compose 1.26.0](https://github.com/docker/compose/releases/tag/1.26.0)
+- [Kubernetes 1.18.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.3)
+- Beta release of the [Docker ACI integration](https://docs.docker.com/engine/context/aci-integration/)
+{% endcomment %}
 - [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
 - [Docker Compose 1.26.0](https://github.com/docker/compose/releases/tag/1.26.0)
 - [Kubernetes 1.18.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.3)
 - Beta release of the [Docker ACI integration](https://docs.docker.com/engine/context/aci-integration/)
 
+{% comment %}
 ### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes-3 }
+### バグフィックスとマイナーチェンジ
 
 - Fixed an issue with startup when the Kubernetes certificates have expired. See [docker/for-mac#4594](https://github.com/docker/for-mac/issues/4594).
 - Fixed `hyperkit` on newer Macs / newer versions of `Hypervisor.framework`.

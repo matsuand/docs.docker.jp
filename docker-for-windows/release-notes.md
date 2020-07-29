@@ -34,8 +34,6 @@ Docker Desktop のシステム要件については [インストール前に確
 {: #upgrades }
 ### アップグレード
 
-{% comment %}
-{% endcomment %}
 - [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
 - [Docker Compose 1.26.2](https://github.com/docker/compose/releases/tag/1.26.2)
 - [Go 1.13.14](https://github.com/golang/go/issues?q=milestone%3AGo1.13.14+label%3ACherryPickApproved)

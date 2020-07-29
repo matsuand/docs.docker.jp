@@ -246,11 +246,19 @@ space where you are prepared to troubleshoot or start over.
 問題の解決ややり直しは自分で行わなければならない、そういうお試し版であることを覚えておいてください。
 
 {% comment %}
-To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section Save and Restore data below.
+Experimental features are turned on by default on Edge releases. However, when you switch from a Stable to an Edge release, you must turn on the experimental features flag to access experimental features. From the Docker Desktop menu, click **Preferences** > **Command Line** and then turn on the **Enable experimental features** toggle. Click **Apply & Restart** for the changes to take effect.
+{% endcomment %}
+試験的機能は、最新版においてはデフォルトで有効になっています。
+しかし安定版から最新版に切り替えた場合は、試験的機能のフラグを有効にしないと、その機能にアクセスすることはできません。
+Docker Desktop メニューから **Preferences** > **Command Line** をクリックして、**Enable experimental features**（試験的機能の有効化）トグルをオンにしてください。
+そして **Apply & Restart** をクリックして変更を適用します。
+
+{% comment %}
+To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section **Save and Restore data** below.
 {% endcomment %}
 最新版と安定版を安全に切り替えるために、イメージの保存や、必要に応じてコンテナーのエクスポートを行っておいてください。
 これを行ってから、旧バージョンをアンインストールし、新バージョンをインストールするようにしてください。
-詳しくは、以下の「データの保存と復元」の節を参照してください。
+詳しくは、以下の **データの保存と復元** の節を参照してください。
 
 {% comment %}
 ### Save and restore data

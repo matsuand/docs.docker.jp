@@ -138,7 +138,7 @@ guides:
       - path: /engine/security/security/
         title: Docker におけるセキュリティ
       - path: /engine/security/non-events/
-        title: Docker security non-events
+        title: Docker セキュリティ（重要性低い）
       - path: /engine/security/https/
         title: Docker デーモンソケットの保護
       - path: /engine/security/certificates/
@@ -164,7 +164,7 @@ guides:
       - path: /engine/security/seccomp/
         title: Docker 向け Seccomp セキュリティプロファイル
       - path: /engine/security/userns-remap/
-        title: Isolate containers with a user namespace
+        title: ユーザー名前空間を使ったコンテナーの分離
       - path: /engine/security/rootless/
         title: root ユーザー以外による Docker デーモン起動（rootless モード）
     - sectiontitle: アプリのスケーリング
