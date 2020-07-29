@@ -1,0 +1,12 @@
+command: docker context import
+short: コンテキストを tar ファイル、または zip ファイルからインポートします。
+long: "`docker context export` によってエクスポートされたコンテキストをインポートします。stdin からインポートするには、ファイル名にハイフン（`-`）を指定します。"
+usage: docker context import CONTEXT FILE|-
+pname: docker context
+plink: docker_context.yaml
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

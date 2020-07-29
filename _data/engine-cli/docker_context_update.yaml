@@ -1,0 +1,50 @@
+command: docker context update
+short: コンテキストを更新します。
+long: |-
+  既存の `context` を更新します。
+  [context create](context_create.md) を参照してください。
+usage: docker context update [オプション] CONTEXT
+pname: docker context
+plink: docker_context.yaml
+options:
+- option: default-stack-orchestrator
+  value_type: string
+  description: |
+    指定されたコンテキストに対して利用するデフォルトのスタックオーケストレーターを設定します。(swarm|kubernetes|all)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: description
+  value_type: string
+  description: コンテキストの内容説明を設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: docker
+  value_type: stringToString
+  default_value: '[]'
+  description: Docker のエンドポイントを設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: kubernetes
+  value_type: stringToString
+  default_value: '[]'
+  description: Kubernetes のエンドポイントを設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

@@ -1,0 +1,27 @@
+command: docker context export
+short: コンテキストを tar ファイル、または Kubeconfig ファイルにエクスポートします。
+long: |-
+  コンテキストをファイルにエクスポートします。
+  このファイルは `docker context import`（また `--kubeconfig` の指定時は `kubectl`）を使って利用することができます。
+  デフォルトの出力ファイル名は `<コンテキスト名>.dockercontext` です。
+  あるいは `--kubeconfig` を指定した場合は `<コンテキスト名>.kubeconfig` です。
+  `STDOUT` へエクスポートするには `docker context export my-context -` とします。
+usage: docker context export [オプション] CONTEXT [FILE|-]
+pname: docker context
+plink: docker_context.yaml
+options:
+- option: kubeconfig
+  value_type: bool
+  default_value: "false"
+  description: Kubeconfig ファイルとしてエクスポートします。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

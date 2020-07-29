@@ -1,0 +1,107 @@
+command: docker context create
+short: コンテキストを生成します。
+long: |-
+  新たな `context` を生成ます。
+  これによって、別のクラスターや単一ノードへの接続を行う CLI 設定を、すばやく切り替えられるようになります。
+
+  コンテキストを一から生成するには Docker オプションと、必要に応じて Kubernetes オプションを用います。
+  以下の例では、コンテキスト `my-context` を生成し、Docker のエンドポイントとして `/var/run/docker.sock`、Kubernetes の設定ファイルとして `/home/me/my-kube-config` を指定します。
+
+  ```bash
+  $ docker context create my-context \
+        --docker host=/var/run/docker.sock \
+        --kubernetes config-file=/home/me/my-kube-config
+  ```
+
+  既存のコンテキストを使って新たなコンテキストを生成するには、オプション `--from=<コンテキスト名>` を使います。
+  以下の例では、既存の `existing-context` というコンテキストから、新たに `my-context` というコンテキストを生成します。
+
+  ```bash
+  $ docker context create my-context --from existing-context
+  ```
+
+  `--from` オプションの指定がない場合、現在のコンテキストから新たなコンテキストが生成されます。
+
+  ```bash
+  $ docker context create my-context
+  ```
+
+  既存の `DOCKER_HOST` 環境変数を利用したスクリプトを使って、コンテキストを生成することもできます。
+
+  ```bash
+  $ source my-setup-script.sh
+  $ docker context create my-context
+  ```
+
+  既存のコンテキストから `docker` エンドポイントのみを参照して生成する場合は、`--docker from=<コンテキスト名>` オプションを使います。
+  以下の例では、`my-context` という新しいコンテキストを生成するにあたって、既存のコンテキスト `existing-context` から Docker エンドポイントを利用し、Kubernetes 設定は設定ファイル `/home/me/my-kube-config` から利用します。
+
+  ```bash
+  $ docker context create my-context \
+        --docker from=existing-context \
+        --kubernetes config-file=/home/me/my-kube-config
+  ```
+
+  既存のコンテキストから `kubernetes` 設定のみを参照して生成する場合は、`--kubernetes from=<コンテキスト名>` オプションを使います。
+  以下の例は、`my-context` という新しいコンテキストを生成するにあたって、既存のコンテキスト `existing-context` から Kuberentes 設定を利用し、Docker エンドポイントは `/var/run/docker.sock` を利用します。
+
+  ```bash
+  $ docker context create my-context \
+        --docker host=/var/run/docker.sock \
+        --kubernetes from=existing-context
+  ```
+
+  Docker エンドポイントや Kubernetes 設定、またデフォルトのオーケストレーターや内容説明は、`docker context update` を使って編集することができます。
+usage: docker context create [オプション] CONTEXT
+pname: docker context
+plink: docker_context.yaml
+options:
+- option: default-stack-orchestrator
+  value_type: string
+  description: |
+    指定されたコンテキストに対して利用するデフォルトのスタックオーケストレーターを設定します。(swarm|kubernetes|all)
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: description
+  value_type: string
+  description: コンテキストの内容説明を設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: docker
+  value_type: stringToString
+  default_value: '[]'
+  description: Docker のエンドポイントを設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: from
+  value_type: string
+  description: 既存のコンテキストから新たなコンテキストを生成します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: kubernetes
+  value_type: stringToString
+  default_value: '[]'
+  description: Kubernetes のエンドポイントを設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

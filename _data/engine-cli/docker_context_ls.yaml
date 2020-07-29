@@ -1,0 +1,32 @@
+command: docker context ls
+aliases: list
+short: コンテキストを一覧表示します。
+long: コンテキストを一覧表示します。
+usage: docker context ls [オプション]
+pname: docker context
+plink: docker_context.yaml
+options:
+- option: format
+  value_type: string
+  description: Go 言語テンプレートを使ってコンテキストをフォーマット出力します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: quiet
+  shorthand: q
+  value_type: bool
+  default_value: "false"
+  description: コンテキスト名のみ表示します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
