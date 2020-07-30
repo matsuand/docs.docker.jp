@@ -482,6 +482,7 @@ Docker Engine をアップグレードするには、[インストール手順](
 
     ```bash
     $ sudo rm -rf /var/lib/docker
+    $ sudo rm -rf /var/lib/containerd
     ```
 
 {% comment %}
