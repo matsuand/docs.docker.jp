@@ -1,7 +1,7 @@
 ---
 description: Review of security vulnerabilities Docker mitigated
 keywords: Docker, Docker documentation,  security, security non-events
-title: Docker security non-events
+title: Docker セキュリティ（重要性低い）
 ---
 
 {% comment %}
@@ -10,10 +10,10 @@ processes run in Docker containers were never vulnerable to the bug—even befor
 it was fixed. This assumes containers are run without adding extra capabilities
 or not run as `--privileged`.
 {% endcomment %}
-This page lists security vulnerabilities which Docker mitigated, such that
-processes run in Docker containers were never vulnerable to the bug—even before
-it was fixed. This assumes containers are run without adding extra capabilities
-or not run as `--privileged`.
+このページではセキュリティぜい弱性一覧を示します。
+Docker においては、バグに対する軽減対応がなされています。
+もっとも Docker コンテナーにおいて起動するプロセスでは、たとえバグ修正されなくても、元からぜい弱性があるとは言えません。
+ここではコンテナーの起動にあたって、ケーパビリティーは追加せず、あるいは `--privileged` としては起動していないことを前提とします。
 
 {% comment %}
 The list below is not even remotely complete. Rather, it is a sample of the few
@@ -26,14 +26,14 @@ likely mitigates unknown bugs just as well as it does known ones.
 以下は、バグ一覧とはとても言えないものです。
 むしろこれは、ほんのわずかなバグの例にすぎず、セキュリティレビューやぜい弱性の公開を行うに至ったことから、バグとして気づいたものでしかありません。
 おそらく報告されているバグよりも、報告されていないバグの方がはるかに多いはずです。
-Docker が採用するセキュアな手法は、デフォルトにおいて AppArmor、Seccomp やケーパビリティーを限定して利用するというものであるため、既知のバグと同様に、未知のバグを軽減できる可能性があります。
+ただし Docker が採用するセキュアな手法は、デフォルトにおいて AppArmor や Seccomp の利用、そして限定的なケーパビリティーの利用を行っているため、既知のバグはもちろん、未知のバグを軽減できる可能性があります。
 
 {% comment %}
-{% endcomment %}
 Bugs mitigated:
+{% endcomment %}
+バグ（軽減対応あり）
 
 {% comment %}
-{% endcomment %}
 * [CVE-2013-1956](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1956),
 [1957](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1957),
 [1958](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1958),
@@ -90,14 +90,63 @@ A bug in setsockopt with `IPT_SO_SET_REPLACE`, `ARPT_SO_SET_REPLACE`,  and
 `ARPT_SO_SET_REPLACE` causing memory corruption / local privilege escalation.
 These arguments are blocked by `CAP_NET_ADMIN`, which Docker does not allow by
 default.
+{% endcomment %}
+* [CVE-2013-1956](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1956),
+[1957](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1957),
+[1958](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1958),
+[1959](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1959),
+[1979](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1979),
+[CVE-2014-4014](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4014),
+[5206](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-5206),
+[5207](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-5207),
+[7970](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7970),
+[7975](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7975),
+[CVE-2015-2925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-2925),
+[8543](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-8543),
+[CVE-2016-3134](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3134),
+[3135](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3135), など:
+非特権ユーザーによる名前空間が導入されたことにより、非特権ユーザーでもアクセス可能な場所への攻撃が大幅に増えることになりました。
+`mount()` のように従来なら root 権限でしかアクセスできなかったシステムコールが、非特権ユーザーであっても正当にアクセスできるようになってしまったからです。
+ここにあげた CVE はすべて、ユーザー名前空間の導入にともなうセキュリティぜい弱性の例です。
+Docker ではコンテナーの設定時にユーザー名前空間を利用します。
+しかしデフォルトの seccomp プロファイルを通じて、コンテナー内のプロセスにおいては、ネスト化した名前空間の生成ができなくなっており、そのぜい弱性は悪用できなくなっています。
+* [CVE-2014-0181](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0181),
+[CVE-2015-3339](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3339):
+これは setuid バイナリを必要とするバグです。
+Docker ではコンテナー内において、`NO_NEW_PRIVS` プロセスフラグとその他の仕組みによって setuid バイナリを無効にします。
+* [CVE-2014-4699](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-4699):
+`ptrace()` にあるバグであり、権限昇格を許してしまうものです。
+Docker では、AppArmor、seccomp、そして `CAP_PTRACE` の削除により、コンテナー内での `ptrace()` を無効にしています。
+ここでは三重の防御が行われているわけです。
+* [CVE-2014-9529](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9529):
+巧妙に仕掛けられた `keyctl()` 呼び出しを繰り返すことによって、カーネル DoS 攻撃やメモリ破壊を行います。
+Docker では seccomp を利用して、コンテナー内部での `keyctl()` を無効にしています。
+* [CVE-2015-3214](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3214),
+[4036](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-4036):
+仮想ドライバーによく見られるバグであり、ゲスト OS のユーザーがホスト OS 上のコードを実行できてしまうものです。
+これを悪用するには、ゲスト内の仮想デバイスにアクセスする必要があります。
+Docker では `--privileged` の指定がない場合は、そういったデバイスへの直接アクセスを隠蔽します。
+ここがおもしろいところで、このケースが、VM よりもコンテナーの方が「より安全」と言えるかもしれない点です。
+つまりコンテナーよりも VM の方が「より安全」とされる常識に反している例です。
+* [CVE-2016-0728](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0728):
+巧妙な `keyctl()` 呼び出しによる開放メモリへの use-after-free 攻撃により、権限昇格を可能とします。
+Docker ではデフォルトの seccomp プロファイルの利用により、コンテナー内部での `keyctl()` を無効にしています。
+* [CVE-2016-2383](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2383):
+eBPF におけるバグであり、seccomp フィルターのようなものを表現するために利用される特殊なカーネル内 DSL が、カーネルメモリの任意の読み込みを可能にします。
+システムコール `bpf()` は、Docker コンテナー内部においては（皮肉なことに）seccomp を使ってブロックされます。
+* [CVE-2016-3134](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3134),
+[4997](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-4997),
+[4998](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-4998):
+setsockopt の `IPT_SO_SET_REPLACE`、`ARPT_SO_SET_REPLACE`、`ARPT_SO_SET_REPLACE` を利用することで、メモリ破壊、ローカル権限昇格を可能にしてしまうバグです。
+これらの引数は `CAP_NET_ADMIN` によってブロックでき、Docker ではデフォルトで許可していません。
 
 
 {% comment %}
-{% endcomment %}
 Bugs *not* mitigated:
+{% endcomment %}
+バグ（対応 **なし**）
 
 {% comment %}
-{% endcomment %}
 * [CVE-2015-3290](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3290),
 [5157](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5157): Bugs in
 the kernel's non-maskable interrupt handling allowed privilege escalation.
@@ -110,3 +159,15 @@ which allowed unprivileged local users to gain write access to read-only memory.
 Also known as "dirty COW."
 *Partial mitigations:* on some operating systems this vulnerability is mitigated
 by the combination of seccomp filtering of `ptrace` and the fact that `/proc/self/mem` is read-only.
+{% endcomment %}
+* [CVE-2015-3290](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3290),
+[5157](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5157):
+カーネルのノンマスカブル割り込み処理におけるバグであり、権限昇格を可能にします。
+Docker コンテナー内での悪用が可能です。
+現時点においてシステムコール `modify_ldt()` が seccomp を使ってもブロックできないためです。
+* [CVE-2016-5195](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5195):
+Linux カーネルのメモリサブシステムがコピーオンライト（copy-on-write; COW）を扱う際に、競合状態が発生し、プライベートな読み込み専用メモリのマッピングが破損してしまうことがわかりました。
+この際にローカルの非特権ユーザーが、読み込み専用メモリへの書き込み権限を有してしまうことが起こります。
+これは 「Dirty COW」とも呼ばれます。
+**部分的なバグ軽減:** オペレーティングシステムの中には、このぜい弱性を軽減できているものがあります。
+そこでは seccomp の `ptrace` に対するフィルタリングと、`/proc/self/mem` が読み込み専用であることを利用して対処しています。

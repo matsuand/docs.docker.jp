@@ -41,8 +41,7 @@ is not a requirement to deploy a service.
     * `docker service create` コマンドによりサービスを生成します。
     * `--name` フラグにより、サービス名を `helloworld` とします。
     * `--replicas` フラグは、起動インスタンス数を 1 に定義します。
-    * The arguments `alpine ping docker.com` define the service as an Alpine
-    Linux container that executes the command `ping docker.com`.
+    * `alpine ping docker.com` という引数は、Alpine Linux コンテナーがコマンド `ping docker.com` を実行するサービスを定義します。
 
 {% comment %}
 3.  Run `docker service ls` to see the list of running services:
@@ -65,4 +64,4 @@ is not a requirement to deploy a service.
 {% comment %}
 Now you've deployed a service to the swarm, you're ready to [inspect the service](inspect-service.md).
 {% endcomment %}
-Now you've deployed a service to the swarm, you're ready to [inspect the service](inspect-service.md).
+サービスを Swarm に対してデプロイできたので、[サービスの確認](inspect-service.md) を行います。
