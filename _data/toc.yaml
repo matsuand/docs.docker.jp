@@ -1271,7 +1271,7 @@ manuals:
     - path: /docker-hub/publish/byol/
       title: Bring Your Own License (BYOL)
   - path: /docker-hub/download-rate-limit/
-    title: Download rate limit
+    title: ダウンロードレート制限
   - path: /docker-hub/release-notes/
     title: リリースノート
 - sectiontitle: オープンソースプロジェクト
