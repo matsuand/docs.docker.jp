@@ -156,14 +156,43 @@ host.
 This is for development purpose and will not work in a production environment outside of Docker Desktop for Mac.
 {% endcomment %}
 ホストには可変の IP アドレスがあります（もっともネットワークを利用しなければ何もありません）。
-18.03 以降にて推奨されるのは、特別な DNS 名 `host.docker.internal` に接続することです。
-この DNS はホストが利用する内部 IP アドレスを名前解決します。
+推奨されるのは、特別な DNS 名 `host.docker.internal` に接続することです。
+この DNS は、ホストが利用する内部 IP アドレスを名前解決します。
 これは開発環境において用いられるものであり、Docker Desktop for Mac の範囲外にある本番環境では動作しません。
 
 {% comment %}
-The gateway is also reachable as `gateway.docker.internal`.
+You can also reach the gateway using `gateway.docker.internal`.
 {% endcomment %}
-ゲートウェイも `gateway.docker.internal` としてアクセス可能です。
+ゲートウェイも `gateway.docker.internal` を利用してアクセス可能です。
+
+{% comment %}
+If you have installed Python on your machine, use the following instructions as an example to connect from a container to a service on the host:
+{% endcomment %}
+マシン上に Python をインストールしている場合は、例として以下の手順に従い、コンテナーからホスト上のサービスに接続します。
+
+{% comment %}
+1. Run the following command to start a simple HTTP server on port 8000.
+{% endcomment %}
+1. 以下のコマンドを実行して、単純の HTTP サーバーをポート 8000 で起動します。
+
+    `python -m http.server 8000`
+
+    {% comment %}
+    If you have installed Python 2.x, run `python -m SimpleHTTPServer 8000`.
+    {% endcomment %}
+    Python 2.x をインストールしている場合は、`python -m SimpleHTTPServer 8000` を実行します。
+
+{% comment %}
+2. Now, run a container, install `curl`, and try to connect to the host using the following commands:
+{% endcomment %}
+2. そしてコンテナーの実行と `curl` のインストールを行って、以下のコマンドのようにホストへの接続を試してみます。
+
+    ```console
+    $ docker run --rm -it alpine sh
+    # apk add curl
+    # curl http://host.docker.internal:8000
+    # exit
+    ```
 
 {% comment %}
 #### I want to connect to a container from the Mac
