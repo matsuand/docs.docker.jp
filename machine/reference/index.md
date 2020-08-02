@@ -1,7 +1,7 @@
 ---
-description: Docker Machine Commands Overview
+description: Docker Machine コマンドの概要。
 keywords: machine, commands
-title: Docker Machine command-line reference
+title: Docker Machine コマンドラインリファレンス
 hide_from_sitemap: true
 ---
 

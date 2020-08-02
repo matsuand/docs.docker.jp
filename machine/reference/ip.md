@@ -5,7 +5,10 @@ title: docker-machine ip
 hide_from_sitemap: true
 ---
 
+{% comment %}
 Get the IP address of one or more machines.
+{% endcomment %}
+1 つまたは複数のマシンの IP アドレスを取得します。
 
 ```bash
 $ docker-machine ip dev

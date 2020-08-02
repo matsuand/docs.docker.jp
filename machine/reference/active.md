@@ -1,12 +1,16 @@
 ---
-description: Identify active machines
+description: アクティブなマシンを識別します。
 keywords: machine, active, subcommand
 title: docker-machine active
 hide_from_sitemap: true
 ---
 
+{% comment %}
 See which machine is "active" (a machine is considered active if the
 `DOCKER_HOST` environment variable points to it).
+{% endcomment %}
+どのマシンが「アクティブ」であるかを確認します。
+（環境変数 `DOCKER_HOST` が設定されている場合は、そのマシンがアクティブとみなされます。）
 
 ```bash
 $ docker-machine ls
