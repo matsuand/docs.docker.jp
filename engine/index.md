@@ -78,13 +78,13 @@ on a variety of platforms.
 A summary of the changes in each release in the current series can now be found
 on the separate [Release Notes page](release-notes/index.md)
 {% endcomment %}
-現行シリーズでの各リリースの変更点概要は、別に示している [リリースノートページ](release-notes/index.md) に示しています。
+現行シリーズでの各リリースの変更点概要は、別に示している [リリースノートページ](release-notes/index.md) を参照してください。
 
 {% comment %}
 ## Feature Deprecation Policy
 {% endcomment %}
 {: #feature-deprecation-policy }
-## 廃止予定に関するポリシー
+## 廃止決定に関するポリシー
 
 {% comment %}
 As changes are made to Docker there may be times when existing features
@@ -94,24 +94,24 @@ and remains in Docker for at least 3 stable releases unless specified
 explicitly otherwise. After that time it may be removed.
 {% endcomment %}
 Docker の変更に際しては、既存機能を削除したり新機能に置き換えたりすることがあります。
-既存機能を削除する際には、ドキュメント上に "廃止予定（deprecated）" としてラベルづけします。
-そして特に明示していない限り、安定版リリースの最低 3 回分は、その機能を残します。
-その時期を過ぎれば、その機能は削除することになります。
+既存機能を削除する際には、ドキュメント上に「廃止決定（deprecated）」としてラベルづけします。
+そして特に明示のない限り、安定版リリースの最低 3 回分は、その機能を残します。
+この時期を過ぎれば、その機能は削除することになります。
 
 {% comment %}
 Users are expected to take note of the list of deprecated features each
 release and plan their migration away from those features, and (if applicable)
 towards the replacement features as soon as possible.
 {% endcomment %}
-各リリースにおける廃止予定機能の一覧は、よく確認しておいてください。
-そしてそのような機能の廃止予定時期も確認してください。
+各リリースにおける廃止決定機能の一覧は、よく確認しておいてください。
+そしてそのような機能の廃止決定時期も確認してください。
 そして（可能なら）できるだけ早くに代替機能を利用するようにしてください。
 
 {% comment %}
 The complete list of deprecated features can be found on the
 [Deprecated Features page](deprecated.md).
 {% endcomment %}
-廃止予定機能の全一覧は、[廃止予定機能のページ](deprecated.md) に示しています。
+廃止決定機能の全一覧は、[廃止となった機能](deprecated.md) のページに示しています。
 
 {% comment %}
 ## Licensing

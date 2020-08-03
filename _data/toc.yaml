@@ -1089,7 +1089,7 @@ manuals:
     - path: /engine/release-notes/prior-releases/
       title: Engine 1.13 およびそれ以前
   - path: /engine/deprecated/
-    title: Deprecated features
+    title: 廃止となった機能
 
   - path: /app/working-with-app/
     title: Docker App
@@ -1327,14 +1327,14 @@ manuals:
       - path: /registry/insecure/
         title: Testing an insecure registry
     - path: /registry/deprecated/
-      title: 廃止予定機能
+      title: 廃止決定機能
     - path: /registry/compatibility/
       title: 互換性
     - path: /registry/help/
       title: Getting help
 - path: /release-notes/
   title: リリースノート
-- sectiontitle: Superseded products and tools
+- sectiontitle: かつての製品やツール
   section:
   - sectiontitle: Docker Machine
     section:
