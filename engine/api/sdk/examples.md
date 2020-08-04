@@ -1,5 +1,5 @@
 ---
-title: Examples using the Docker Engine SDKs and Docker API
+title: Docker Engine SDK および Docker API の利用例
 keywords: developing, api, sdk, developers, rest, curl, python, go
 redirect_from:
 - /engine/api/getting-started/
@@ -15,31 +15,35 @@ After you
 [install the Go or Python SDK](index.md#install-the-sdks) and
 also try out the Docker Engine API.
 {% endcomment %}
-[Docker のインストール](../../../get-docker.md) を行ったら、, you can
-[install the Go or Python SDK](index.md#install-the-sdks) and
-also try out the Docker Engine API.
+[Docker のインストール](../../../get-docker.md) を行ったら、[Go または Python SDK のインストール](index.md#install-the-sdks) を行うことができます。
+そして Docker Engine API にも挑戦してみましょう。
 
 {% comment %}
 Each of these examples show how to perform a given Docker operation using the Go
 and Python SDKs and the HTTP API using `curl`.
 {% endcomment %}
-Each of these examples show how to perform a given Docker operation using the Go
-and Python SDKs and the HTTP API using `curl`.
+以下に示す利用例は、提示されている Docker 操作を、Go や Python の SDK や `curl` 利用による HTTP API を使って実現する方法を示すものです。
 
 {% comment %}
-{% endcomment %}
 ## Run a container
+{% endcomment %}
+{: #run-a-container }
+## コンテナーの実行
 
 {% comment %}
-{% endcomment %}
 This first example shows how to run a container using the Docker API. On the
 command line, you would use the `docker run` command, but this is just as easy
 to do from your own apps too.
+{% endcomment %}
+1 つめの利用例は、Docker API を使ったコンテナーの実行方法です。
+コマンドラインであれば `docker run` コマンドを実行します。
+これはアプリケーションからであっても、ごく簡単に実現できます。
 
 {% comment %}
-{% endcomment %}
 This is the equivalent of typing `docker run alpine echo hello world` at the
 command prompt:
+{% endcomment %}
+以下は、コマンドプロンプトからの `docker run alpine echo hello world` の実行と、まったく同じことを行います。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-run-go" data-group="go">Go</a></li>
@@ -142,13 +146,17 @@ hello world
 </div><!-- end tab-content -->
 
 {% comment %}
-{% endcomment %}
 ## Run a container in the background
+{% endcomment %}
+{: #run-a-container-in-the-background }
+## コンテナーのバックグラウンド実行
 
 {% comment %}
-{% endcomment %}
 You can also run containers in the background, the equivalent of typing
 `docker run -d bfirsh/reticulate-splines`:
+{% endcomment %}
+コンテナーはバックグラウンド実行ができます。
+`docker run -d bfirsh/reticulate-splines` と同じことは、以下のようにして実現できます。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-rundetach-go" data-group="go">Go</a></li>
@@ -232,13 +240,16 @@ $ curl --unix-socket /var/run/docker.sock -X POST http:/v1.24/containers/1c6594f
 </div><!-- end tab-content -->
 
 {% comment %}
-{% endcomment %}
 ## List and manage containers
+{% endcomment %}
+{: #list-and-manage-containers }
+## コンテナー一覧と管理
 
 {% comment %}
-{% endcomment %}
 You can use the API to list containers that are running, just like using
 `docker ps`:
+{% endcomment %}
+実行中コンテナーの一覧を得る `docker ps` は、API を使うと以下のようになります。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-listcontainers-go" data-group="go">Go</a></li>
@@ -268,7 +279,7 @@ func main() {
 		panic(err)
 	}
 
-	containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{})
+	containers, err := cli.ContainerList(ctx, types.ContainerListOptions{})
 	if err != nil {
 		panic(err)
 	}
@@ -308,19 +319,25 @@ $ curl --unix-socket /var/run/docker.sock http:/v1.24/containers/json
 </div><!-- end tab-content -->
 
 {% comment %}
-{% endcomment %}
 ## Stop all running containers
+{% endcomment %}
+{: #stop-all-runningccontainers }
+## 実行中コンテナーの全停止
 
 {% comment %}
-{% endcomment %}
 Now that you know what containers exist, you can perform operations on them.
 This example stops all running containers.
+{% endcomment %}
+コンテナーとして何があるのかがわかったので、そのコンテナー上での操作を行います。
+以下の例は、実行中コンテナーをすべて停止させます。
 
 {% comment %}
-{% endcomment %}
 > **Note**: Don't run this on a production server. Also, if you are using swarm
 > services, the containers stop, but Docker creates new ones to keep
 > the service running in its configured state.
+{% endcomment %}
+> **メモ**: この操作は、本番サーバー上では実行しないでください。
+> また Swarm サービスを利用している場合は、コンテナーを停止させても、Docker が新たなコンテナーを生成して、サービスを設定内容どおりに動作させようとします。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-stopcontainers-go" data-group="go">Go</a></li>
@@ -397,14 +414,19 @@ $ curl --unix-socket /var/run/docker.sock \
 </div><!-- end tab-content -->
 
 {% comment %}
-{% endcomment %}
 ## Print the logs of a specific container
+{% endcomment %}
+{: #print-the-logs-of-a-specific-container }
+## 指定コンテナーのログ出力
 
 {% comment %}
-{% endcomment %}
 You can also perform actions on individual containers. This example prints the
 logs of a container given its ID. You need to modify the code before running it
 to change the hard-coded ID of the container to print the logs for.
+{% endcomment %}
+個別のコンテナーに対しても操作することができます。
+以下の例では、指定された ID を持つコンテナーのログを出力します。
+以下のコードを実行するにあたっては、コード内にハードコーディングされている ID を、ログ出力したいコンテナーの ID に置き換えてから実行してください。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-containerlogs-go" data-group="go">Go</a></li>
@@ -473,12 +495,16 @@ Reticulating spline 5...
 </div><!-- end tab-content -->
 
 {% comment %}
-{% endcomment %}
 ## List all images
+{% endcomment %}
+{: #list-all-images }
+## イメージの全一覧
 
 {% comment %}
-{% endcomment %}
 List the images on your Engine, similar to `docker image ls`:
+{% endcomment %}
+Engine 上のイメージ一覧を取得します。
+これは `docker image ls` に相当するものです。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-listimages-go" data-group="go">Go</a></li>
@@ -547,12 +573,15 @@ $ curl --unix-socket /var/run/docker.sock http:/v1.24/images/json
 </div><!-- end tab-content -->
 
 {% comment %}
-{% endcomment %}
 ## Pull an image
+{% endcomment %}
+{: #pull-an-image }
+## イメージのプル
 
 {% comment %}
-{% endcomment %}
 Pull an image, like `docker pull`:
+{% endcomment %}
+`docker pull` のようにイメージをプルします。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-pullimages-go" data-group="go">Go</a></li>
@@ -622,17 +651,23 @@ $ curl --unix-socket /var/run/docker.sock \
 
 
 {% comment %}
-{% endcomment %}
 ## Pull an image with authentication
+{% endcomment %}
+{: #pull-an-image-with-authentication }
+## 認証をともなうイメージのプル
 
 {% comment %}
-{% endcomment %}
 Pull an image, like `docker pull`, with authentication:
+{% endcomment %}
+`docker pull` と同じイメージのプルを、認証処理を含めて行います。
 
 {% comment %}
-{% endcomment %}
 > **Note**: Credentials are sent in the clear. Docker's official registries use
 > HTTPS. Private registries should also be configured to use HTTPS.
+{% endcomment %}
+> **メモ**: 資格情報は平文で送信されます。
+> Docker の公式レジストリでは HTTPS が用いられています。
+> プライベートなレジストリも HTTPS を利用するように設定されるべきものです。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-pullimages-auth-go" data-group="go">Go</a></li>
@@ -690,7 +725,6 @@ func main() {
 <div id="tab-pullimages-auth-python" class="tab-pane fade" markdown="1">
 
 {% comment %}
-{% endcomment %}
 The Python SDK retrieves authentication information from the [credentials
 store](/engine/reference/commandline/login/#credentials-store) file and
 integrates with [credential
@@ -698,6 +732,10 @@ helpers](https://github.com/docker/docker-credential-helpers){: target="_blank"
 class="_" }. It is possible to override these credentials, but that is out of
 scope for this Getting Started guide. After using `docker login`, the Python SDK
 uses these credentials automatically.
+{% endcomment %}
+Python SDK では、認証情報を [認証情報ストア](/engine/reference/commandline/login/#credentials-store) ファイルから抽出し、[認証情報ヘルパー](https://github.com/docker/docker-credential-helpers){: target="_blank" class="_" } を利用して統合します。
+認証情報をオーバーライドすることは可能ですが、そのような処理はここに示す利用ガイドの説明範囲を超えます。
+ここでは `docker login` を実行した後に、Python SDK により自動的にその認証情報を利用します。
 
 ```python
 import docker
@@ -708,13 +746,16 @@ print image.id
 
 </div>
 
-<div id="tab-pullimages-curl" class="tab-pane fade" markdown="1">
+<div id="tab-pullimages-auth-curl" class="tab-pane fade" markdown="1">
 
 {% comment %}
-{% endcomment %}
 This example leaves the credentials in your shell's history, so consider
 this a naive implementation. The credentials are passed as a Base-64-encoded
 JSON structure.
+{% endcomment %}
+この例において、資格情報はシェルの履歴に残ります。
+したがって、内部での実装としてとどめるようにしてください。
+資格情報は、Base-64-encoded の JSON 構造として送信されます。
 
 ```bash
 $ JSON=$(echo '{"username": "string", "password": "string", "serveraddress": "string"}' | base64)
@@ -734,12 +775,15 @@ $ curl --unix-socket /var/run/docker.sock \
 </div> <!-- end tab-content -->
 
 {% comment %}
-{% endcomment %}
 ## Commit a container
+{% endcomment %}
+{: #commit-a-container }
+## コンテナーのコミット
 
 {% comment %}
-{% endcomment %}
 Commit a container to create an image from its contents:
+{% endcomment %}
+コンテナーをコミットして、その内容からイメージを生成します。
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#tab-commit-go" data-group="go">Go</a></li>
