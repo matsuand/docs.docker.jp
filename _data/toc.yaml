@@ -194,7 +194,7 @@ guides:
         - path: /engine/swarm/swarm-tutorial/drain-node/
           title: ノードの解放
         - path: /engine/swarm/ingress/
-          title: Swarm モードのルーティングメッシュの利用
+          title: Swarm モードにおけるルーティングメッシュの利用
       - sectiontitle: How swarm mode works
         section:
         - path: /engine/swarm/how-swarm-mode-works/nodes/
