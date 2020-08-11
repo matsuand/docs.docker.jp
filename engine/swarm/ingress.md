@@ -382,7 +382,7 @@ the swarm even if there are no tasks scheduled on the node. For example, you
 could have the following HAProxy configuration in `/etc/haproxy/haproxy.cfg`:
 {% endcomment %}
 ロードバランサーによって Swarm ノード間にリクエストを分散する際には、タスクがスケジューリングされていないノードであってもかまいません。
-たとえば、以下のように `/etc/haproxy/haproxy.cfg` に HAProxy 設定を行うことができます。
+たとえば以下のように `/etc/haproxy/haproxy.cfg` に HAProxy 設定を行うことができます。
 
 {% comment %}
 ```bash
