@@ -39,7 +39,6 @@ versions:
 Docker Engine をインストールするには、以下に示す Ubuntu の 64 ビットバージョンのいずれかが必要です。
 
 - Ubuntu Focal 20.04 (LTS)
-- Ubuntu Eoan 19.10
 - Ubuntu Bionic 18.04 (LTS)
 - Ubuntu Xenial 16.04 (LTS)
 
