@@ -152,6 +152,21 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     {% endcomment %}
     このファイルには`db`サービスと`web`サービスという 2 つのサービスが定義されています。
 
+    {% comment %}
+    > Note:
+    >
+    > This uses the build in development server to run your application
+    > on port 8000. Do **not** use this in a production environment. For more
+    > information, see [Django documentation]
+    > (https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server).
+    {% endcomment %}
+    > メモ
+    >
+    > これは開発環境においてビルドを行い、アプリケーションをポート 8000 で動作させるものです。
+    > これを本番環境で利用 **しないで** ください。
+    > 詳しくは [Django ドキュメント]
+    > (https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server) を参照してください。
+
 {% comment %}
 10. Save and close the `docker-compose.yml` file.
 {% endcomment %}
