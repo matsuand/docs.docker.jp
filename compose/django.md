@@ -156,16 +156,14 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
     > Note:
     >
     > This uses the build in development server to run your application
-    > on port 8000. Do **not** use this in a production environment. For more
-    > information, see [Django documentation]
-    > (https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server).
+    > on port 8000. Do not use this in a production environment. For more
+    > information, see [Django documentation](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" class="_”}.
     {% endcomment %}
     > メモ
     >
     > これは開発環境においてビルドを行い、アプリケーションをポート 8000 で動作させるものです。
-    > これを本番環境で利用 **しないで** ください。
-    > 詳しくは [Django ドキュメント]
-    > (https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server) を参照してください。
+    > これを本番環境で利用しないでください。
+    > 詳しくは [Django ドキュメント](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" class="_”} を参照してください。
 
 {% comment %}
 10. Save and close the `docker-compose.yml` file.
