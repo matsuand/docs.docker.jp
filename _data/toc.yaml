@@ -263,17 +263,17 @@ guides:
         title: オーバーレイネットワークのチュートリアル
       - path: /network/network-tutorial-macvlan/
         title: Macvlan ネットワークのチュートリアル
-    - sectiontitle: Configure the daemon and containers
+    - sectiontitle: デーモンとコンテナーの設定
       section:
       - path: /config/daemon/ipv6/
-        title: Configure the daemon for IPv6
+        title: デーモンの IPv6 設定
       - path: /network/iptables/
-        title: Docker and iptables
+        title: Docker と iptables
       - path: /config/containers/container-networking/
-        title: Container networking
+        title: コンテナーのネットワーク
       - path: /network/proxy/
-        title: Configure Docker to use a proxy server
-    - sectiontitle: Legacy networking content
+        title: プロキシーサーバー利用の設定
+    - sectiontitle: これまでのネットワーク
       section:
       - path: /network/links/
         title: （古い機能）コンテナーリンク
