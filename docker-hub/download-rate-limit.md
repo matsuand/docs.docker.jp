@@ -22,7 +22,7 @@ Docker が導入しているダウンロードレート制限は、指定され�
 {% comment %}
 Docker will gradually impose download rate limits with an eventual limit of  300 downloads per six hours for anonymous users.
 {% endcomment %}
-Docker は匿名ユーザーのダウンロードに対しては、ダウンロードレート制限を段階的に増やしていき、最終的には 6 時間あたり 300 ダウンロードまでの制限とします。
+Docker は匿名ユーザーのダウンロードに対しては、ダウンロードレート制限を段階的に増やしていき、最終的には 6 時間あたり 100 回のプルまでの制限とします。
 
 {% comment %}
 Logged in users will not be affected at this time. Therefore, we recommend that you log into [Docker Hub](https://hub.docker.com/){: target="_blank" class="_"} as an authenticated user. For more information, see the following section [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests).
