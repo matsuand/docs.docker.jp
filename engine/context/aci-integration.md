@@ -240,12 +240,26 @@ ACI 上のコンテナーを停止して削除するには、以下のように�
 
 {% comment %}
 ```console
+docker stop <CONTAINER_ID>
 docker rm <CONTAINER_ID>
 ```
 {% endcomment %}
 ```console
+docker stop <コンテナーID>
 docker rm <コンテナーID>
 ```
+{% comment %}
+> **Note**
+> 
+> The stop command in ACI differs from the Moby stop command as a stopped 
+container will not retain its state when it is started again. For more 
+information, see https://github.com/docker/aci-integration-beta/issues/28.
+{% endcomment %}
+> **メモ**
+> 
+> ACI における stop コマンドは Moby の stop コマンドとは異なります。
+> 停止させたコンテナーは、再起動させても元の状態は保持されません。
+> より詳細は https://github.com/docker/aci-integration-beta/issues/28 を参照してください。
 
 {% comment %}
 ## Running Compose applications
