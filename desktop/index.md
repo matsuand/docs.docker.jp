@@ -67,22 +67,22 @@ Docker Desktop は Mac と Windows において利用できます。
 * [Docker Desktop on Windows のインストール](../docker-for-windows/install.md)
 
 {% comment %}
-## Get started
+## Configure Docker Desktop
 {% endcomment %}
-{: #get-started }
-## はじめよう
+{: #configure-docker-desktop }
+## Docker Desktop の設定
 
 {% comment %}
-For information on how to get to get started with Docker Desktop and to learn about various UI options and their usage, see:
+To learn about the various UI options and their usage, see:
 {% endcomment %}
-Docker Desktop をはじめるための情報や、そのさまざまな UI の利用方法を学ぶには、以下を参照してください。
+さまざまな UI オプションとその利用方法については、以下を参照してください。
 
 {% comment %}
-* [Get started with Docker Desktop on Mac](../docker-for-mac/index.md)
-* [Get started with Docker Desktop on Windows](../docker-for-windows/index.md)
+* [Docker Desktop for Mac user manual](../docker-for-mac/index.md)
+* [Docker Desktop for Windows user manual](../docker-for-windows/index.md)
 {% endcomment %}
-* [Docker Desktop on Mac をはじめよう](../docker-for-mac/index.md)
-* [Docker Desktop on Windows をはじめよう](../docker-for-windows/index.md)
+* [Docker Desktop for Mac ユーザーマニュアル](../docker-for-mac/index.md)
+* [Docker Desktop for Windows ユーザーマニュアル](../docker-for-windows/index.md)
 
 {% comment %}
 ## Stable and Edge versions
@@ -98,13 +98,23 @@ Docker Desktop には安定版（stable）と最新版（edge）のダウンロ�
 {% comment %}
 The Stable release provides a general availability release-ready installer for a fully baked and tested, more reliable app. The Stable version of Docker Desktop includes the latest released version of Docker Engine. The release schedule is synced every three months for major releases, with patch releases to fix minor issues, and to stay up to date with Docker Engine as required. You can choose to opt out of the usage statistics and telemetry data on the Stable channel.
 {% endcomment %}
-安定版（stable）リリースでは、正規安定版として
-The Stable release provides a general availability release-ready installer for a fully baked and tested, more reliable app. The Stable version of Docker Desktop includes the latest released version of Docker Engine. The release schedule is synced every three months for major releases, with patch releases to fix minor issues, and to stay up to date with Docker Engine as required. You can choose to opt out of the usage statistics and telemetry data on the Stable channel.
+安定版（stable）では、十分なテストを経て安定した信頼できるアプリとして、正規安定版として対応したインストーラーを提供します。
+Docker Desktop の安定版には、最新版の Docker Engine が含まれます。
+リリーススケジュールは 3 ヶ月ごとにメジャーリリースに向けて行われ、そこには軽微な問題修正を行うパッチリリースも含まれます。
+また必要に応じて Docker Engine を最新版にして含めます。
+安定版チャネルでは、利用統計やデータ収集を行わない選択が可能です。
 
 {% comment %}
 Docker Desktop Edge release is our preview version. It offers an installer with the latest features and comes with the experimental features turned on. When using the Edge release, bugs, crashes, and issues can occur as the new features may not be fully tested. However, you get a chance to preview new functionality, experiment, and provide feedback as Docker Desktop evolves. Edge releases are typically more frequent than Stable releases. Telemetry data and usage statistics are sent by default on the Edge version.
 {% endcomment %}
-Docker Desktop Edge release is our preview version. It offers an installer with the latest features and comes with the experimental features turned on. When using the Edge release, bugs, crashes, and issues can occur as the new features may not be fully tested. However, you get a chance to preview new functionality, experiment, and provide feedback as Docker Desktop evolves. Edge releases are typically more frequent than Stable releases. Telemetry data and usage statistics are sent by default on the Edge version.
+Docker Desktop の最新版（Edge）リリースは、プレビューのためのものです。
+ここから提供されるインストーラーには、最新の機能が含まれ、試験的機能が有効になっています。
+最新版リリースを利用した際には、バグや処理クラッシュなどの問題が発生することがあります。
+これは最新機能が十分にテストされていない可能性があるからです。
+ただし最新版によって最新機能や試験的機能を利用する機会が得られます。
+そして Docker が進化していくとともに、フィードバックを提供していくことができます。
+最新版はその文字のとおり、安定版よりも頻繁に提供されます。
+最新版において利用統計や収集データは、デフォルトで送信されるものになっています。
 
 {% comment %}
 ## Release notes

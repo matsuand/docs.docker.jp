@@ -5,31 +5,51 @@ title: ダウンロードレート制限
 ---
 
 {% comment %}
-Docker has enabled download rate limits for downloads and pull requests on Docker Hub.
+Docker has enabled download rate limits for pull requests on
+Docker Hub. Limits are determined based on the account type.
+For more information, see [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"}.
 {% endcomment %}
-Docker では Docker Hub におけるダウンロードやプルリクエストに対して、ダウンロードレート制限を有効にしています。
+Docker では Docker Hub 上でのプルリクエストに対して、ダウンロードレート制限を有効化してきました。
+この制限はアカウントの種類により決定されます。
+詳しくは [Docker Hub Pricing](https://hub.docker.com/pricing){: target="_blank" class="_"} を参照してください。
 
 {% comment %}
-A Docker image contains multiple layers. Each layer in a pull request represents a download object. For example, when you download the latest Python image from Docker Hub, you’ll be downloading eight layers and indexes. The download rate limit introduced by Docker caps the number of objects that users can download within a specified timeframe. Any downloads beyond this limit will result in the `429 Too Many Requests` error message.
+A user's limit will be equal to the highest entitlement of their
+personal account or any organization they belong to. To take
+advantage of this, you must log into
+[Docker Hub](https://hub.docker.com/){: target="_blank" class="_"}
+as an authenticated user. For more information, see
+[How do I authenticate pull requests](#how-do-i-authenticate-pull-requests).
+Unauthenticated (anonymous) users will have the limits enforced via IP.
 {% endcomment %}
-1 つの Docker イメージには複数のレイヤーがあります。
-プルリクエスト内の各レイヤーは、1 つのダウンロードオブジェクトとなります。
-たとえば Docker Hub から最新の Python イメージをダウンロードするとします。
-その場合、8 つのレイヤーとインデックスがダウンロードされます。
-Docker が導入しているダウンロードレート制限は、指定された時間内にユーザーがダウンロードできるオブジェクト数を制限するものです。
-この制限数を越えてダウンロードを行った場合は、`429 Too Many Requests` のエラーメッセージが返されます。
+ユーザーへの制限というのは、個人アカウントやこれが所属する組織に対しての、最大限の資格を意味します。
+これを利用するためには [Docker Hub](https://hub.docker.com/){: target="_blank" class="_"} に対して、認証されたユーザーとしてログインしなければなりません。
+[プルリクエストの認証方法](#how-do-i-authenticate-pull-requests) を参照してください。
+認証されていない（匿名）ユーザーは、IP を通じて制限が課せられます。
 
 {% comment %}
-Docker will gradually impose download rate limits with an eventual limit of  300 downloads per six hours for anonymous users.
+- A pull request is defined as up to two `GET` requests on registry
+manifest URLs (`/v2/*/manifests/*`).
+- A normal image pull makes a
+single manifest request.
+- A pull request for a multi-arch image makes two
+manifest requests.
+- `HEAD` requests are not counted.
+- Limits are applied based on the user doing the pull, and
+not based on the image being pulled or its owner.
 {% endcomment %}
-Docker は匿名ユーザーのダウンロードに対しては、ダウンロードレート制限を段階的に増やしていき、最終的には 6 時間あたり 100 回のプルまでの制限とします。
+- プルリクエストとは、Registry マニフェスト URL（`/v2/*/manifests/*`）において、最大 2 つの `GET` リクエストとして定義されています。
+- 通常のイメージプルは、単一のマニフェストリクエストを行います。
+- マルチアーキテクチャーイメージに対するプルリクエストは、2 つのマニフェストリクエストを行います。
+- `HEAD` リクエストは数に含めません。
+- 制限は、プルを行うユーザーに対して適用されます。
+  プルされたイメージやその所有者に対して適用されるものではありません。
 
 {% comment %}
-Logged in users will not be affected at this time. Therefore, we recommend that you log into [Docker Hub](https://hub.docker.com/){: target="_blank" class="_"} as an authenticated user. For more information, see the following section [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests).
+Docker will gradually introduce these rate limits, with full
+effects starting from November 1st, 2020.
 {% endcomment %}
-ログインしているユーザーには、この時間は影響しません。
-したがって利用する際には、認証されたユーザーとして [Docker Hub](https://hub.docker.com/){: target="_blank" class="_"} にログインしておくことをお勧めします。
-詳しくは以下の [プルリクエストの認証方法](#how-do-i-authenticate-pull-requests) の節を参照してください。
+Docker においてこのレート制限は徐々に導入され、完全な動作となったのは 2020 年 11 月 1 日からです。
 
 {% comment %}
 ## How do I authenticate pull requests

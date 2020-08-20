@@ -199,12 +199,11 @@ Docker Desktop は Mac や Windows 環境に簡単にインストールできる
 Docker Desktop には、コンテナー化するアプリケーションを自マシン上からビルド、実行するためのツールがすべて含まれています。
 
 {% comment %}
-Follow the instructions appropriate for your operating system to download and install Docker Desktop:
+Follow the instructions appropriate for your operating system to download and install Docker Desktop.
 {% endcomment %}
 利用しているオペレーティングシステムに対応する以下の手順に従って、Docker Desktop のダウンロードとインストールを行ってください。
 
- - [Docker Desktop for Mac]({{ site.baseurl }}/docker-for-mac/install/){: target="_blank" class="_"}
- - [Docker Desktop for Windows]({{ site.baseurl }}/docker-for-windows/install/){: target="_blank" class="_"}
+ [Docker Desktop for Mac]({{ site.baseurl }}/docker-for-mac/install/){: target="_blank" class="_"}{: .button .outline-btn} [Docker Desktop for Windows]({{ site.baseurl }}/docker-for-windows/install/){: target="_blank" class="_"}{: .button .outline-btn}
 
 {% comment %}
 ### Test Docker version

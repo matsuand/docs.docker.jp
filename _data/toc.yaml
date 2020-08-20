@@ -1137,7 +1137,7 @@ manuals:
     - path: /docker-for-mac/install/
       title: Docker Desktop for Mac のインストール
     - path: /docker-for-mac/
-      title: はじめよう
+      title: ユーザーマニュアル
     - path: /docker-for-mac/kubernetes/
       title: Kubernetes へのデプロイ
     - path: /docker-for-mac/docker-toolbox/
@@ -1169,7 +1169,7 @@ manuals:
     - path: /docker-for-windows/install-windows-home/
       title: Docker Desktop on Windows Home のインストール
     - path: /docker-for-windows/
-      title: はじめよう
+      title: ユーザーマニュアル
     - path: /docker-for-windows/kubernetes/
       title: Kubernetes へのデプロイ
     - path: /docker-for-windows/networking/
@@ -1212,7 +1212,7 @@ manuals:
             title: Recover your Docker Hub account
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
-  - sectiontitle: Administration
+  - sectiontitle: 管理
     section:
      - path: /docker-hub/convert-account/
        title: アカウントから組織への移行
@@ -1230,8 +1230,6 @@ manuals:
       title: Add seats
     - path: /docker-hub/billing/remove-seats/
       title: Remove seats
-    - path: /docker-hub/billing/faq/
-      title: Billing FAQ
   - path: /docker-hub/orgs/
     title: チームと組織
   - path: /docker-hub/repos/
