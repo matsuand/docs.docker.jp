@@ -216,15 +216,16 @@ EOF
 2. Docker イメージを構築するために、コマンド `docker build -t <your_username>/my-first-repo` を実行します。
 
 {% comment %}
-3. Test your docker image locally by running `docker run <your_username>/my-first-repo`.
+3. Run `docker run <your_username>/my-first-repo` to test your
+Docker image locally.
 {% endcomment %}
-3. ローカル環境にて Docker イメージを確認するために、コマンド`docker run <your_username>/my-first-repo`を実行します。
+3. コマンド `docker run <your_username>/my-first-repo` を実行して、ローカル環境内の Docker イメージを確認します。
 
 {% comment %}
 4. Run `docker push <your_username>/my-first-repo` to push your Docker image to
 Docker Hub.
 {% endcomment %}
-4. `docker push <your_username>/my-first-repo`を実行して Docker イメージを Docker Hub にプッシュします。
+4. `docker push <your_username>/my-first-repo` を実行して Docker イメージを Docker Hub にプッシュします。
 
     {% comment %}
     You should see output similar to:
