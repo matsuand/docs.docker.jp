@@ -63,7 +63,7 @@ Docker コンテナーを ECS にデプロイするには、以下の条件を�
     - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
 
     {% comment %}
-    Alternatively, install [Docker ECS Integration for Linux](#install-the-docker-ecs-integration-cli-on-linux).
+    Alternatively, install the [Docker ECS Integration for Linux](#install-the-docker-ecs-integration-cli-on-linux).
     {% endcomment %}
     あるいは [Docker ECS Integration for Linux](#install-the-docker-ecs-integration-cli-on-linux) をインストールしていることが必要です。
 
@@ -87,15 +87,13 @@ Docker コンテナーを ECS にデプロイするには、以下の条件を�
   > そして **Apply & Restart** をクリックして変更を適用します。
 
 {% comment %}
-Check your installation by running the command `docker ecs version`.
-{% endcomment %}
-インストール結果を確認するには、コマンド `docker ecs version` を実行します。
-
-{% comment %}
-Docker not only runs multi-container applications locally, but also enables developers to seamlessly deploy Docker containers on Amazon ECS using a Compose file with the `docker ecs compose up` command. The following sections contain instructions on how to deploy your Compose application on Amazon ECS.
+Docker not only runs multi-container applications locally, but also enables 
+developers to seamlessly deploy Docker containers on Amazon ECS using a 
+Compose file with the `docker compose up` command. The following sections 
+contain instructions on how to deploy your Compose application on Amazon ECS.
 {% endcomment %}
 Docker は、単にローカルのマルチコンテナーを実行するだけのものではなくなります。
-`docker ecs compose up` により Compose ファイルを使って Amazon ECS 上の Docker コンテナーをシームレスにデプロイできます。
+`docker compose up` により Compose ファイルを使って Amazon ECS 上の Docker コンテナーをシームレスにデプロイできます。
 以下の節では Amazon ECS 上において Docker コンテナーをデプロイする手順を説明します。
 
 {% comment %}
@@ -105,17 +103,15 @@ Docker は、単にローカルのマルチコンテナーを実行するだけ�
 ### AWS コンテキストの生成
 
 {% comment %}
-Run the `docker ecs setup` command to create an AWS docker context. If you have already installed and configured the AWS CLI, the setup command lets you select an existing AWS profile to connect to Amazon. Otherwise, you can create a new profile by passing an [AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" class="_"}.
+Run the `docker context create ecs myecscontext` command to create an Amazon ECS docker 
+context named `myecscontext`. If you have already installed and configured the AWS CLI, 
+the setup command lets you select an existing AWS profile to connect to Amazon. 
+Otherwise, you can create a new profile by passing an 
+[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" class="_"}.
 {% endcomment %}
-`docker ecs setup` コマンドを実行して AWS コンテキストを生成します。
+`docker context create ecs myecscontext` コマンドを実行して AWS コンテキストを生成します。
 すでに AWS CLI をインストールし設定を行っているのであれば、このセットアップコマンドにより、既存の AWS プロファイルを選んで Amazon への接続を行います。
 これがまだできていない場合は、[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" class="_"} を通じて、新たなプロファイルを生成します。
-
-{% comment %}
-The `docker ecs setup` command will let you select an existing AWS configuration, or create one with provided secrets and tokens.
-{% endcomment %}
-`docker ecs setup` コマンドは、既存の AWS 設定の選択を行うことができます。
-あるいは指定された機密情報やトークンを使って生成することができます。
 
 {% comment %}
 After you have created an AWS context, you can list your Docker contexts by running the `docker context ls` command:
@@ -124,7 +120,7 @@ AWS コンテキストを生成したら、`docker context ls` コマンドを�
 
 ```console
 NAME   DESCRIPTION  DOCKER ENDPOINT  KUBERNETES ENDPOINT ORCHESTRATOR
-aws *
+myecscontext *
 default  Current DOCKER_HOST based configuration   unix:///var/run/docker.sock     swarm
 ```
 
@@ -135,26 +131,32 @@ default  Current DOCKER_HOST based configuration   unix:///var/run/docker.sock  
 ## Compose アプリケーションの実行
 
 {% comment %}
-You can deploy and manage multi-container applications defined in Compose files to Amazon ECS using the `docker ecs compose` command. To do this:
+You can deploy and manage multi-container applications defined in Compose files
+to Amazon ECS using the `docker compose` command. To do this:
 {% endcomment %}
-Compose ファイルに定義したマルチコンテナーによるアプリケーションを、Amazon ECS に対してデプロイし管理するためには、`docker ecs compose` コマンドを実行します。
+Compose ファイルに定義したマルチコンテナーによるアプリケーションを、Amazon ECS に対してデプロイし管理するためには、`docker compose` コマンドを実行します。
 これを行うためには以下のことが必要です。
 
 {% comment %}
-- Ensure you are using your AWS context. You can do this either by specifying the `--context aws` flag with your command, or by setting the current context using the command `docker context use aws`.
+- Ensure you are using your ECS context. You can do this either by specifying 
+the `--context myecscontext` flag with your command, or by setting the 
+current context using the command `docker context use myecscontext`.
 {% endcomment %}
 - AWS コンテキストを利用していることが必要です。
-  これはコマンド実行時に `--context aws` フラグを指定するか、あるいはカレントなコンテキストを設定するコマンド  `docker context use aws` を実行します。
+  これはコマンド実行時に `--context myecscontext` フラグを指定するか、あるいはカレントなコンテキストを設定するコマンド  `docker context use myecscontext` を実行します。
 
 {% comment %}
-- Run `docker ecs compose up` and `docker ecs compose down` to start and then stop a full Compose application.
+- Run `docker compose up` and `docker compose down` to start and then 
+stop a full Compose application.
 {% endcomment %}
-- `docker ecs compose up` と `docker ecs compose down` を実行して、Compose アプリケーションの開始、停止ができることが必要です。
+- `docker compose up` と `docker compose down` を実行して、Compose アプリケーションの開始、停止ができることが必要です。
 
   {% comment %}
-  By default, `docker ecs compose up` uses the `docker-compose.yaml` file in the current folder. You can specify the Compose file directly using the `--file` flag.
+  By default, `docker compose up` uses the `docker-compose.yaml` file in 
+  the current folder. You can specify the Compose file directly using the 
+  `--file` flag.
   {% endcomment %}
-  デフォルトにおいて `docker ecs compose up` は、カレントフォルダーの `docker-compose.yaml` ファイルを利用します。
+  デフォルトにおいて `docker compose up` は、カレントフォルダーの `docker-compose.yaml` ファイルを利用します。
   Compose ファイルを直接 `--file` フラグを使って指定することもできます。
 
   {% comment %}
@@ -164,14 +166,16 @@ Compose ファイルに定義したマルチコンテナーによるアプリケ
   アプリケーション名の指定がなかった場合は、ワーキングディレクトリから名前が定められます。
 
 {% comment %}
-- You can view services created for the Compose application on Amazon ECS and their state using the `docker ecs compose ps` command.
+- You can view services created for the Compose application on Amazon ECS and 
+their state using the `docker compose ps` command.
 {% endcomment %}
-- Amazon ECS 上の Compose アプリケーションに対して生成されたサービスの情報およびその状態を確認するには `docker ecs compose ps` コマンドを実行します。
+- Amazon ECS 上の Compose アプリケーションに対して生成されたサービスの情報およびその状態を確認するには `docker compose ps` コマンドを実行します。
 
 {% comment %}
-- You can view logs from containers that are part of the Compose application using the `docker ecs compose logs` command.
+- You can view logs from containers that are part of the Compose application 
+using the `docker compose logs` command.
 {% endcomment %}
-- Compose アプリケーションを構成するコンテナーに対しては、コマンド `docker ecs logs` を実行してそれぞれのログを確認できます。
+- Compose アプリケーションを構成するコンテナーに対しては、コマンド `docker compose logs` を実行してそれぞれのログを確認できます。
 
 {% comment %}
 ## Private Docker images
@@ -259,6 +263,96 @@ if [ "${LOCALDOMAIN}x" != "x" ]; then echo "search ${LOCALDOMAIN}" >> /etc/resol
 exec "$@"
 ```
 
+### Secrets
+
+{% comment %}
+You can pass secrets to your ECS services using Docker model to bind sensitive 
+data as files under `/run/secrets`. If your Compose file declares a secret as 
+file, such a secret will be created as part of your application deployment on 
+ECS. If you use an existing secret as `external: true` reference in your 
+Compose file, use the ECS Secrets Manager full ARN as the secret name:
+{% endcomment %}
+Docker モデルを使って ECS サービスに Secret 情報を受け渡すことにより、`/run/secrets` 配下にあるファイルを機密データとして結びつけることができます。
+Compose ファイルに Secret 情報を宣言している場合、ECS 上へのアプリケーションのデプロイにあたって、デプロイの一部としてその情報が生成されます。
+Compose ファイル内にて既存の Secret 情報を `external: true` として参照している場合、Secret 名として ECS Secrets Manager の 完全リソース名を使うことができます。
+```yaml
+services:
+  webapp:
+    image: ...
+    secrets:
+      - foo
+
+secrets:
+  foo:
+    name: "arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"
+```
+
+{% comment %}
+Secrets will be available at runtime for your service as a plain text file `/run/secrets/foo`.
+{% endcomment %}
+Secret はサービス実行時には、`/run/secrets/foo` というプレーンなテキストファイルとしてアクセスできます。
+
+{% comment %}
+The AWS Secrets Manager allows you to store sensitive data either as a plain 
+text (like Docker secret does), or as a hierarchical JSON document. You can 
+use the latter with ECS integration by using custom field `x-asw-keys` to 
+define which entries in the JSON document to bind as a secret in your service 
+container.
+{% endcomment %}
+AWS Secrets マネージャーにおいて機密情報を保存する際には、（Docker の Secret と同じように）プレーンテキストとして保存する方法と、階層化した JSON ドキュメントとして保存する方法があります。
+ECS 統合環境内にて後者の方法を利用する場合には、カスタム項目 `x-asw-keys` を利用して、サービスコンテナー内の Secret として、JSON ドキュメント内のどの項目を結びつけるかを定義します。
+
+```yaml
+services:
+  webapp:
+    image: ...
+    secrets:
+      - foo
+
+secrets:
+  foo:
+    name: "arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"
+    keys: 
+      - "bar"
+```
+
+{% comment %}
+By doing this, the secret for `bar` key will be available at runtime for your 
+service as a plain text file `/run/secrets/foo/bar`. You can use the special 
+value `*` to get all keys bound in your container. 
+{% endcomment %}
+このようにするとキー `bar` に対する機密データは、サービスの実行時に `/run/secrets/foo/bar` というプレーンなテキストファイルとしてアクセスできます。
+特別な値として `*` を用いると、コンテナー内のキーすべてを得ることができます。
+
+{% comment %}
+### Logging
+{% endcomment %}
+{: #logging }
+### ログ処理
+
+{% comment %}
+The ECS integration configures AWS CloudWatch Logs service for your containers. 
+A log group is created for the application as `docker-compose/<application_name>`, 
+and log streams are created for each service and container in your application 
+as `<application_name>/<service_name>/<container_ID>`.
+{% endcomment %}
+ECS 統合環境では、コンテナーに対して AWS CloudWatch ログサービスを設定します。
+アプリケーションにおいて、ロググループ `docker-compose/<アプリケーション名>` が生成され、またアプリケーション内の各サービスとコンテナーにおいては、ログストリーム `<アプリケーション名>/<サービス名>/<コンテナーID>` が生成されます。
+
+{% comment %}
+You can fine tune AWS CloudWatch Logs using extension field `x-aws-logs_retention` 
+in your Compose file to set the number of retention days for log events. The 
+default behaviour is to keep logs forever.
+{% endcomment %}
+AWS CloudWatch ログに対しては Compose ファイル内の拡張項目 `x-aws-logs_retention` を使って、イベントの保存日数を調整することができます。
+デフォルトは無期限に保存します。
+
+{% comment %}
+You can also pass `awslogs` driver parameters to your container as standard 
+Compose file `logging.driver_opts` elements.
+{% endcomment %}
+標準的な Compose ファイルの項目 `logging.driver_opts` を使えば、コンテナーに対して `awslogs` ドライバーのパラメーターを指定することができます。
+
 {% comment %}
 ### Dependent service startup time and DNS resolution
 {% endcomment %}
@@ -278,6 +372,100 @@ Alternatively, you can use the [depends_on](https://github.com/compose-spec/comp
 {% endcomment %}
 あるいは Compose ファイルにおける [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" class="_"} の機能を利用することもできます。
 これを利用すると、依存サービスがまず初めに生成され、これが起動されるのを待って、アプリケーションのデプロイが行われるようになります。
+
+{% comment %}
+### Rolling update
+{% endcomment %}
+{: #rolling-update }
+### ローリングアップデート
+
+{% comment %}
+Your ECS services are created with rolling update configuration. As you run 
+`docker ecs compose up` with a modified Compose file, the stack will be 
+updated to reflect changes, and if required, some services will be replaced. 
+This replacement process will follow the rolling-update configuration set by 
+your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config) 
+configuration. 
+{% endcomment %}
+ECS サービスはローリングアップデート設定を含めて生成されます。
+Compose ファイルを修正した上で `docker ecs compose up` を実行すると、その修正に応じてアップデートが行われ、必要なサービスは置き換えられます。
+この置き換え処理は、サービスの [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)  設定によって定められるローリングアップデート設定に従います。
+
+{% comment %}
+AWS ECS uses a percent-based model to define the number of containers to be 
+run or shut down during a rolling update. The ECS integration computes 
+rolling update configuration according to the `prallelism` and `replicas` 
+fields. However, you might prefer to directly configure a rolling update 
+using the extension fields `x-aws-min_percent` and `x-aws-max_percent`. 
+The former sets the minimum percent of containers to run for service, and the 
+latter sets the maximum percent of additional containers to start before 
+previous versions are removed.
+{% endcomment %}
+AWS ECS ではパーセントベースモデル（percent-based model）を採用して、ローリングアップデート時に起動または停止するコンテナー数を定義しています。
+ECS 統合環境では項目 `prallelism` または `replicas` に従って、ローリングアップデート設定を算出しています。
+ローリングアップデートの設定を、項目 `x-aws-min_percent` や `x-aws-max_percent` を使って設定したい場合があります。
+`x-aws-min_percent` はサービスに対して、起動させるコンテナーの最小パーセントを設定します。
+`x-aws-max_percent` は、それまでのバージョンのコンテナーを削除する前に、追加で起動するコンテナーの最大パーセントを設定します。
+
+{% comment %}
+By default, the ECS rolling update is set to run twice the number of 
+containers for a service (200%), and has the ability to shut down 100% 
+containers during the update.
+{% endcomment %}
+デフォルトにおいて ECS のローリングアップデートは、コンテナー数の 2 倍（200%）の数だけ起動されるように設定されます。
+またアップデート時にコンテナー停止を行う程度は 100 % として設定されます。
+
+
+{% comment %}
+### IAM roles
+{% endcomment %}
+{: #iam-roles }
+### IAM ロール
+
+{% comment %}
+Your ECS Tasks are executed with a dedicated IAM role, granting access 
+to AWS Managed policies[`AmazonECSTaskExecutionRolePolicy`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html) 
+and [`AmazonEC2ContainerRegistryReadOnly`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecr_managed_policies.html). 
+In addition, if your service uses secrets, IAM Role gets additional 
+permissions to read and decrypt secrets from the AWS Secret Manager.
+{% endcomment %}
+ECS タスクは、AWS 管理ポリシー[`AmazonECSTaskExecutionRolePolicy`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html) と [`AmazonEC2ContainerRegistryReadOnly`](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecr_managed_policies.html) へのアクセスが可能な、専用の IAM ロールによって実行されます。
+さらにサービスが Secret を利用している場合、IAM ロールは追加の権限によって AWS Secret マネージャーから Secret の読み込みと復号化を行います。
+
+{% comment %}
+You can grant additional managed policies to your service execution 
+by using `x-aws-policies` inside a service definition:
+{% endcomment %}
+サービスの実行にあたって管理ポリシーを追加で利用するには、サービス定義の内部において `x-aws-policies` を用います。
+
+```yaml
+services:
+  foo:
+    x-aws-policies:
+      - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+```
+
+{% comment %}
+You can also write your own [IAM Policy Document](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) 
+to fine tune the IAM role to be applied to your ECS service, and use 
+`x-aws-role` inside a service definition to pass the 
+yaml-formatted policy document.
+{% endcomment %}
+また独自に [IAM ポリシードキュメント](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) を記述して、ECS サービスに適用する IAM ロールを調整することができます。
+そしてサービス定義内に `x-aws-role` を用いることで、YAML 書式のポリシードキュメントを受け渡すことができます。
+
+```yaml
+services:
+  foo:
+    x-aws-role:
+      Version: "2012-10-17"
+      Statement: 
+        - Effect: "Allow"
+          Action: 
+            - "some_aws_service"
+          Resource": 
+            - "*"
+```
 
 {% comment %}
 ## Tuning the CloudFormation template
@@ -368,91 +556,20 @@ Docker ECS 統合の CLI は、ECS 上のコンテナー実行と管理をサポ
 * [Docker 19.03 またはそれ以降](https://docs.docker.com/get-docker/)
 
 {% comment %}
-### Download the plugin
+### Install script
 {% endcomment %}
-{: #download-the-plugin }
-### プラグインのダウンロード
+{: #install-script }
+### インストールスクリプト
 
 {% comment %}
-You can download the Docker ECS plugin from the [docker/ecs-plugin](https://github.com/docker/ecs-plugin){: target="_blank" class="_"} GitHub repository using the following command:
+You can install the new CLI using the install script:
 {% endcomment %}
-GitHub リポジトリ [docker/ecs-plugin](https://github.com/docker/ecs-plugin){: target="_blank" class="_"} から Docker ECS プラグインをダウンロードすることができます。
-ダウンロードには以下のコマンドを実行します。
+インストールスクリプトを使えば、新たな CLI をインストールできます。
 
 ```console
-$ curl -LO https://github.com/docker/ecs-plugin/releases/latest/download/docker-ecs-linux-amd64
+curl -L https://raw.githubusercontent.com/docker/aci-integration-beta/main/scripts/install_linux.sh | sh
 ```
 
-{% comment %}
-You will then need to make it an executable:
-{% endcomment %}
-入手したらこれを実行可能にします。
-
-```console
-$ chmod +x docker-ecs-linux-amd64
-```
-
-{% comment %}
-### Install the plugin
-{% endcomment %}
-{: #install-the-plugin }
-### プラグインのインストール
-
-{% comment %}
-Move the plugin you’ve downloaded to the right place so the Docker CLI can use it:
-{% endcomment %}
-ダウンロードしたプラグインを Docker CLI が利用できるように、適切な場所に移動させます。
-
-```console
-$ mkdir -p /usr/local/lib/docker/cli-plugins
-
-$ mv docker-ecs-linux-amd64 /usr/local/lib/docker/cli-plugins/docker-ecs
-```
-
-{% comment %}
-You can move the CLI plugin into any of the following directories:
-{% endcomment %}
-CLI プラグインを移動するディレクトリは、以下の場所でもかまいません。
-
-- `/usr/local/lib/docker/cli-plugins`
-- `/usr/local/libexec/docker/cli-plugins`
-- `/usr/lib/docker/cli-plugins`
-- `/usr/libexec/docker/cli-plugins`
-
-{% comment %}
-Finally, you must enable the experimental features on the CLI. You can do this by setting the environment variable `DOCKER_CLI_EXPERIMENTAL=enabled`, or by setting experimental to `enabled` in your Docker config file located at `~/.docker/config.json`:
-{% endcomment %}
-最後に CLI において試験的機能を有効にする必要があります。
-これを行うには、環境変数として `DOCKER_CLI_EXPERIMENTAL=enabled` を設定するか、Docker 設定ファイル `~/.docker/config.json` 内に試験的機能を `enabled` とする設定を行います。
-
-```console
-$ export DOCKER_CLI_EXPERIMENTAL=enabled
-
-$ DOCKER_CLI_EXPERIMENTAL=enabled docker help
-
-$ cat ~/.docker/config.json
-{
-  "experimental" : "enabled",
-  "auths" : {
-    "https://index.docker.io/v1/" : {
-
-    }
-  }
-}
-```
-
-{% comment %}
-You can verify whether the CLI plugin installation is successful by checking whether it appears in the CLI help output, or by checking the plugin version. For example:
-{% endcomment %}
-CLI プラグインのインストールが適切に行われたかどうかは、CLI のヘルプを表示するか、あるいはプラグインのバージョンを表示して確認します。
-
-```console
-$ docker help | grep ecs
-  ecs*        Docker ECS (Docker Inc., 0.0.1)
-
-$ docker ecs version
-Docker ECS plugin 0.0.1
-```
 
 ## FAQ
 
@@ -465,7 +582,6 @@ Docker ECS plugin 0.0.1
 This error message means that your integration requires the new ARN resource ID format for ECS. To learn more, see [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/){: target="_blank" class="_"}.
 {% endcomment %}
 このエラーメッセージは、統合環境において ECS 向けの新たな ARN リソース ID フォーマットが必要であることを示しています。
-
 詳しくは [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/){: target="_blank" class="_"} を参照してください。
 
 {% comment %}
