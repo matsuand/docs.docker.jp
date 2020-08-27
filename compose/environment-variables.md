@@ -30,6 +30,24 @@ web:
 ```
 
 {% comment %}
+If you have multiple environment variables, you can substitute them by providing
+a path to your environment variables file. By default, the `docker-compose`
+command will look for a file named `.env` in the directory you run the command.
+By passing the file as an argument, you can store it anywhere and name it
+appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. Passing the file path is
+done using the `--env-file` option:
+{% endcomment %}
+環境変数が複数ある場合、環境変数ファイルへのパスを指定して利用することができます。
+`docker-compose` コマンドを実行すると、デフォルトでその実行ディレクトリ内の `.env` というファイルを探します。
+ファイル名を引数に与えれば、どこの何というファイルでも指定できます。
+たとえば `.env.ci`、`.env.dev`、`.env.prod` などとすることができます。
+ファイルパスの指定は `--env-file` オプションを使って行います。
+
+```shell
+docker-compose --env-file ./config/.env.dev up
+```
+
+{% comment %}
 For more information, see the
 [Variable substitution](compose-file/index.md#variable-substitution) section in the
 Compose file reference.
