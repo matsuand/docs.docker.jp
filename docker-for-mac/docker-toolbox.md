@@ -329,79 +329,48 @@ machines. One solution is to use a version manager like
 {% comment %}
 Docker Desktop does not propose Toolbox image migration as part of its
 installer since version 18.01.0.  You can migrate existing Docker
-Toolbox images with the scripts described below. (This migration
-cannot merge images from both Docker and Toolbox: any existing Docker image is
-*replaced* by the Toolbox images.)
+Toolbox images with the steps described below.
 {% endcomment %}
 Docker Desktop ではバージョン 18.01.0 以降、インストール処理において Toolbox イメージの移行操作を行わないようになりました。
 既存の Docker Toolbox イメージは、以下に示すスクリプトを使って移行できます。
-（その移行においては Docker と Toolbox の双方のイメージをマージすることはできません。
-既存の Docker イメージは、いずれも Toolbox イメージによって **置き換えられます**。）
 
 {% comment %}
-Run the following shell commands in a terminal. You need a working
-`qemu-img`; it is part of the qemu package in both MacPorts and Brew:
+In a terminal, while running Toolbox, use `docker commit` to create an image snapshot
+from a container, for each container you wish to preserve:
 {% endcomment %}
-ターミナル画面において、以下のシェルコマンドを実行します。
-ここでは実行可能な `qemu-img` を必要とします。
-これは qemu パッケージの一部として MacPorts または Brew から入手することができます。
+Toolbox の実行中、ターミナル画面において `docker commit` を実行して、コンテナーからイメージスナップショットを生成します。
+これは保存しておきたいコンテナーすべてに対して行います。
 
-```sh
-$ brew install qemu  # or sudo port install qemu
+```
+$ docker commit nginx
+sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
 ```
 
 {% comment %}
-First, find your Toolbox disk images. You probably have just one:
-`~/.docker/machine/machines/default/disk.vmdk`.
+Next, export each of these images (and any other images you wish to keep):
 {% endcomment %}
-はじめに Toolbox ディスクイメージの場所を確認します。
-おそらく `~/.docker/machine/machines/default/disk.vmdk` であるはずです。
+上のイメージを（そして他にも保存しておきたいイメージがあればそれも含めて）エクスポートします。
 
-```sh
-$ vmdk=~/.docker/machine/machines/default/disk.vmdk
-$ file "$vmdk"
-/Users/akim/.docker/machine/machines/default/disk.vmdk: VMware4 disk image
+```
+$ docker save -o nginx.tar sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
 ```
 
 {% comment %}
-Second, find out the location and format of the disk image used by your Docker
-Desktop.
+Next, when running Docker Desktop on Mac, reload all these images:
 {% endcomment %}
-次に Docker Desktop が利用しているディスクイメージの場所とフォーマットを確認します。
+Docker Desktop on Mac が実行中に、上のイメージをすべてリロードします。
 
-```sh
-$ settings=~/Library/Group\ Containers/group.com.docker/settings.json
-$ dimg=$(sed -En 's/.*diskPath.*:.*"(.*)".*/\1/p' < "$settings")
-$ echo "$dimg"
-/Users/akim/Library/Containers/com.docker.docker/Data/vms/0/Docker.raw
+```
+$ docker load -i nginx.tar
+Loaded image ID: sha256:1bc0ee792d144f0f9a1b926b862dc88b0206364b0931be700a313111025df022
 ```
 
 {% comment %}
-In this case the format is `raw` (it could have been `qcow2`), and the location
-is `~/Library/Containers/com.docker.docker/Data/vms/0/`.
+Note these steps will not migrate any `docker volume` contents: these must
+be copied across manually.
 {% endcomment %}
-この例において、フォーマットは `raw` です。
-（`qcow2` の場合もあります。）
-また保存場所は `~/Library/Containers/com.docker.docker/Data/vms/0/` です。
-
-{% comment %}
-Then:
-- if your format is qcow2, run
-{% endcomment %}
-そこで以下を実行します。
-- フォーマットが qcow2 である場合は、以下を実行します。
-```sh
-$ qemu-img convert -p -f vmdk -O qcow2 -o lazy_refcounts=on "$vmdk" "$dimg"
-```
-{% comment %}
-- if your format is raw, run the following command. If you are short on disk
-  space, it is likely to fail.
-{% endcomment %}
-- フォーマットが raw である場合は、以下を実行します。
-  ディスク容量が不足していると、おそらく処理に失敗します。
-```sh
-$ qemu-img convert -p -f vmdk -O raw "$vmdk" "$dimg"
-```
+なお上の手順では `docker volume` によるデータは移行されません。
+そういったデータは手動でコピーを行う必要があります。
 
 {% comment %}
 Finally (optional), if you are done with Docker Toolbox, you may fully
