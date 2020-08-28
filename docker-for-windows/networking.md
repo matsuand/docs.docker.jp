@@ -67,8 +67,8 @@ $ docker run -p 8000:80 -d nginx
 Now, connections to `localhost:8000` are sent to port 80 in the container. The
 syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
 {% endcomment %}
-Now, connections to `localhost:8000` are sent to port 80 in the container. The
-syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
+こうすると `localhost:8000` への接続が、コンテナー内のポート 80 へ接続されます。
+`-p` の文法は `ホストポート:クライアントポート` です。
 
 {% comment %}
 ### HTTP/HTTPS Proxy Support

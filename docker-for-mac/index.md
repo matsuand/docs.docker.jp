@@ -41,7 +41,7 @@ Docker Desktop のダウンロード、システム要件、インストール�
 ## Preferences
 {% endcomment %}
 {: #preferences }
-## Preferences メニューの実行
+## Preferences メニュー
 
 {% comment %}
 The Docker **Preferences** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
@@ -383,7 +383,7 @@ Docker Desktop includes a standalone Kubernetes server that runs on your Mac, so
 that you can test deploying your Docker workloads on Kubernetes.
 {% endcomment %}
 Docker Desktop には、Mac 上で稼動するスタンドアロンの Kubernetes サーバーが含まれます。
-したがって Kubernetes 上に構築した Docker アプリを、デプロイするテストができます。
+したがって Kubernetes 上に構築した Docker アプリをデプロイするテストができます。
 
 {% comment %}
 The Kubernetes client command, `kubectl`, is included and configured to connect
@@ -845,24 +845,24 @@ class="_"}:
 ### Two-factor authentication
 {% endcomment %}
 {: #two-factor-authentication }
-### 2 ファクター認証
+### 2 要素認証
 
 {% comment %}
 Docker Desktop enables you to sign into Docker Hub using two-factor authentication. Two-factor authentication provides an extra layer of security when accessing your Docker Hub account.
 {% endcomment %}
-Docker Desktop では Docker Hub へのサインイン時に 2 ファクター認証（two-factor authentication）を利用することができます。
-2 ファクター認証は Docker Hub アカウントへのアクセス時に、二重のセキュリティを提供するものです。
+Docker Desktop では Docker Hub へのサインイン時に 2 要素認証（two-factor authentication）を利用することができます。
+2 要素認証は Docker Hub アカウントへのアクセス時に、二重のセキュリティを提供するものです。
 
 {% comment %}
 You must enable two-factor authentication in Docker Hub before signing into your Docker Hub account through Docker Desktop. For instructions, see [Enable two-factor authentication for Docker Hub](/docker-hub/2fa/).
 {% endcomment %}
-Docker Desktop 経由で Docker Hub アカウントへのサインインを行う前には、あらかじめ 2 ファクター認証を有効にしておく必要があります。
-その手順については [Docker Hub における 2 ファクター認証の有効化](/docker-hub/2fa/) を参照してください。
+Docker Desktop 経由で Docker Hub アカウントへのサインインを行う前には、あらかじめ 2 要素認証を有効にしておく必要があります。
+その手順については [Docker Hub における 2 要素認証の有効化](/docker-hub/2fa/) を参照してください。
 
 {% comment %}
 After you have enabled two-factor authentication:
 {% endcomment %}
-2 ファクター認証の有効化が済んだら、以下を行います。
+2 要素認証の有効化が済んだら、以下を行います。
 
 {% comment %}
 1. Go to the Docker Desktop menu and then select **Sign in / Create Docker ID**.
@@ -883,7 +883,7 @@ After you have enabled two-factor authentication:
 {% comment %}
 ![Docker Desktop 2FA](images/desktop-mac-2fa.png){:width="500px"}
 {% endcomment %}
-![Docker Desktop の 2 ファクター認証](images/desktop-mac-2fa.png){:width="500px"}
+![Docker Desktop の 2 要素認証](images/desktop-mac-2fa.png){:width="500px"}
 
 {% comment %}
 After you have successfully authenticated, you can access your organizations and repositories directly from the Docker Desktop menu.

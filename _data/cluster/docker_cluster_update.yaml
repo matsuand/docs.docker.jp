@@ -1,7 +1,7 @@
 command: docker cluster update
-short: Update a running cluster's desired state
-long: Update a running cluster's desired state
-usage: docker cluster update [OPTIONS] cluster
+short: 実行中 Cluster を指定状態にアップデートします。
+long: 実行中 Cluster を指定状態にアップデートします。
+usage: docker cluster update [オプション] cluster
 pname: docker cluster
 plink: docker_cluster.yaml
 options:
@@ -9,7 +9,7 @@ options:
   shorthand: e
   value_type: stringSlice
   default_value: '[]'
-  description: Set environment variables
+  description: 環境変数を設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -18,7 +18,7 @@ options:
 - option: file
   shorthand: f
   value_type: string
-  description: Cluster definition
+  description: Cluster 定義。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -28,7 +28,7 @@ inherited_options:
 - option: dry-run
   value_type: bool
   default_value: "false"
-  description: Skip provisioning resources
+  description: リソースのプロビジョニングをスキップします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -38,7 +38,7 @@ inherited_options:
   value_type: string
   default_value: warn
   description: |
-    Set the logging level ("trace"|"debug"|"info"|"warn"|"error"|"fatal")
+    ログ出力レベルを設定します。("trace"|"debug"|"info"|"warn"|"error"|"fatal")
   deprecated: false
   experimental: false
   experimentalcli: false

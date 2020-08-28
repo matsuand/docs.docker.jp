@@ -1,7 +1,7 @@
 command: docker cluster create
-short: Create a new Docker Cluster
-long: Create a new Docker Cluster
-usage: docker cluster create [OPTIONS]
+short: Docker Cluster を新規生成します。
+long: Docker Cluster を新規生成します。
+usage: docker cluster create [オプション]
 pname: docker cluster
 plink: docker_cluster.yaml
 options:
@@ -9,7 +9,7 @@ options:
   shorthand: e
   value_type: stringSlice
   default_value: '[]'
-  description: Set environment variables
+  description: 環境変数を設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -18,7 +18,7 @@ options:
 - option: example
   value_type: string
   default_value: aws
-  description: Display an example cluster declaration
+  description: Cluster 宣言例を表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -28,7 +28,7 @@ options:
   shorthand: f
   value_type: string
   default_value: cluster.yml
-  description: Cluster declaration
+  description: Cluster の内容説明。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -37,7 +37,7 @@ options:
 - option: name
   shorthand: "n"
   value_type: string
-  description: Name for the cluster
+  description: Cluster 名。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -47,7 +47,7 @@ options:
   shorthand: s
   value_type: bool
   default_value: "false"
-  description: Switch context after cluster create.
+  description: Cluster 生成後にコンテキストを切り替えます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -57,7 +57,7 @@ inherited_options:
 - option: dry-run
   value_type: bool
   default_value: "false"
-  description: Skip provisioning resources
+  description: リソースのプロビジョニングをスキップします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -67,7 +67,7 @@ inherited_options:
   value_type: string
   default_value: warn
   description: |
-    Set the logging level ("trace"|"debug"|"info"|"warn"|"error"|"fatal")
+    ログ出力レベルを設定します。("trace"|"debug"|"info"|"warn"|"error"|"fatal")
   deprecated: false
   experimental: false
   experimentalcli: false

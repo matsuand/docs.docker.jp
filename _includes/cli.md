@@ -38,9 +38,15 @@ your client and daemon API versions.
 
 {% if page.enterprise_only == true %}
 
+{% comment %}
 > This command is only available on Docker Enterprise Edition.
 >
 > Learn more about [Docker Enterprise products](/ee/supported-platforms/){: target="_blank" class="_"}.
+{: .important }
+{% endcomment %}
+> このコマンドは Docker Enterprise Edition においてのみ利用可能です。
+>
+> 詳しくは [Docker Enterprise 製品](/ee/supported-platforms/){: target="_blank" class="_"} を参照してください。
 {: .important }
 
 {% endif %}

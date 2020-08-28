@@ -137,7 +137,7 @@ there is no need for writes to build artifacts within the container to
 be immediately reflected on the host file system. Distinguishing between
 these two cases makes it possible to significantly improve performance.
 {% endcomment %}
-**性能劣化が重大であっても、コンテナーホスト間の一貫性を完璧にしなければならないケースは、幸いながらほぼありません。**
+**性能劣化が犠牲にしてまで、コンテナーホスト間の一貫性を完璧にしなければならないケースは、幸いながらほぼありません。**
 特に、コンテナー内での書き込みを即座にホストに反映する必要があるかと言えば、そんな必要はないことがほとんどです。
 たとえばインタラクティブな開発では、ホスト上にバインドマウントされたディレクトリへの書き込みは、コンテナー内部でのファイルシステムイベントを即座に発生させる必要があります。
 ただしコンテナー内部でビルドされた成果物を、ホスト上のファイルシステムに即反映する必要はまったくありません。

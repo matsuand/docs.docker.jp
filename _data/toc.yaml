@@ -1490,7 +1490,7 @@ manuals:
     - path: /desktop/enterprise/user/windows-user/
       title: Use DDE on Windows
   - path: /desktop/enterprise/app-designer/
-    title: Application designer
+    title: アプリケーションデザイナー
   - sectiontitle: Troubleshoot
     section:
     - path: /desktop/enterprise/troubleshoot/mac-issues/

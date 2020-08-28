@@ -111,7 +111,7 @@ exec $SHELL -l
 {% comment %}
 Depending on what you typed on the command line so far, it completes:
 {% endcomment %}
-コマンドラインにどこまで入力したかによって、以下のように補完入力が行われます。
+コマンドラインにどこまで入力したかによって、以下のような補完入力が可能です。
 
 {% comment %}
 - commands and their options

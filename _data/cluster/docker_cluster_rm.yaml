@@ -1,7 +1,7 @@
 command: docker cluster rm
-short: Remove a cluster
-long: Remove a cluster
-usage: docker cluster rm [OPTIONS] cluster
+short: Cluster を削除します。
+long: Cluster を削除します。
+usage: docker cluster rm [オプション] cluster
 pname: docker cluster
 plink: docker_cluster.yaml
 options:
@@ -9,7 +9,7 @@ options:
   shorthand: e
   value_type: stringSlice
   default_value: '[]'
-  description: Set environment variables
+  description: 環境変数を設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -19,7 +19,7 @@ options:
   shorthand: f
   value_type: bool
   default_value: "false"
-  description: Force removal of the cluster files
+  description: Cluster ファイルを強制的に削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -29,7 +29,7 @@ inherited_options:
 - option: dry-run
   value_type: bool
   default_value: "false"
-  description: Skip provisioning resources
+  description: リソースのプロビジョニングをスキップします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -39,7 +39,7 @@ inherited_options:
   value_type: string
   default_value: warn
   description: |
-    Set the logging level ("trace"|"debug"|"info"|"warn"|"error"|"fatal")
+    ログ出力レベルを設定します。("trace"|"debug"|"info"|"warn"|"error"|"fatal")
   deprecated: false
   experimental: false
   experimentalcli: false
