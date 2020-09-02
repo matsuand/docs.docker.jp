@@ -191,13 +191,13 @@ Docker ECS 統合では自動的に認証が設定されます。
 一方 Docker Hub も含め、別のレジストリからプライベートイメージをプルするには、[Amazon SSM サービス](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html){: target="_blank" class="_"} 上にユーザー名とパスワード（あるいはユーザー名とトークン）を生成する必要があります。
 
 {% comment %}
-For your convenience, Docker ECS integration offers the `docker ecs secret` command, so you can manage secrets created on AWS SMS without having to install the AWS CLI.
+For your convenience, Docker ECS integration offers the `docker secret` command, so you can manage secrets created on AWS SMS without having to install the AWS CLI.
 {% endcomment %}
-Docker ECS 統合では、便利なコマンドとして `docker ecs secret` が提供されています。
+Docker ECS 統合では、便利なコマンドとして `docker secret` が提供されています。
 したがって AWS CLI をインストールしていなくても、AWS SMS において生成した機密情報を管理することができます。
 
 ```console
-docker ecs secret create dockerhubAccessToken --username <dockerhubuser>  --password <dockerhubtoken>
+docker secret create dockerhubAccessToken --username <dockerhubuser>  --password <dockerhubtoken>
 arn:aws:secretsmanager:eu-west-3:12345:secret:DockerHubAccessToken
 ```
 
@@ -381,14 +381,14 @@ Alternatively, you can use the [depends_on](https://github.com/compose-spec/comp
 
 {% comment %}
 Your ECS services are created with rolling update configuration. As you run 
-`docker ecs compose up` with a modified Compose file, the stack will be 
+`docker compose up` with a modified Compose file, the stack will be 
 updated to reflect changes, and if required, some services will be replaced. 
 This replacement process will follow the rolling-update configuration set by 
 your services [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config) 
 configuration. 
 {% endcomment %}
 ECS サービスはローリングアップデート設定を含めて生成されます。
-Compose ファイルを修正した上で `docker ecs compose up` を実行すると、その修正に応じてアップデートが行われ、必要なサービスは置き換えられます。
+Compose ファイルを修正した上で `docker compose up` を実行すると、その修正に応じてアップデートが行われ、必要なサービスは置き換えられます。
 この置き換え処理は、サービスの [`deploy.update_config`](https://docs.docker.com/compose/compose-file/#update_config)  設定によって定められるローリングアップデート設定に従います。
 
 {% comment %}
@@ -474,10 +474,10 @@ services:
 ## CloudFormation テンプレートの調整
 
 {% comment %}
-The Docker ECS integration relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker ecs compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
+The Docker ECS integration relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
 {% endcomment %}
 Docker ECS 統合では [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" class="_"} を活用して、アプリケーションのデプロイ管理を行っています。
-生成済みのリソースをより的確に制御するには、`docker ecs compose convert` を使い、Compose ファイルから CloudFormation スタックファイルを生成します。
+生成済みのリソースをより的確に制御するには、`docker compose convert` を使い、Compose ファイルから CloudFormation スタックファイルを生成します。
 スタックファイルを生成すると、そこに定義されたリソースの確認や、必要に応じたテンプレートのカスタマイズ、AWS CLI や AWS ウェブコンソールからのテンプレートの適用を行うことができます。
 
 {% comment %}
