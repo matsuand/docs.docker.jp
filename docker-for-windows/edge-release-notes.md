@@ -20,6 +20,57 @@ For information about Stable releases, see the [Stable release notes](release-no
 安定版については [安定版リリースノート](release-notes.md) を参照してください。
 また Docker Desktop のシステム要件については [インストール前に確認すべきこと](install.md#what-to-know-before-you-install) を参照してください。
 
+## Docker Desktop Community 2.3.6.0
+2020-09-01
+
+{% comment %}
+> [Download](https://desktop.docker.com/win/edge/47622/Docker%20Desktop%20Installer.exe)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/win/edge/47622/Docker%20Desktop%20Installer.exe)
+
+{% comment %}
+### New
+{% endcomment %}
+{: #new }
+### 新機能
+
+{% comment %}
+- In partnership with Snyk, Docker Desktop launches [vulnerability scanning](https://docs.docker.com/engine/scan/) for Docker local images.
+- Docker ECS plugin has been replaced by [ECS cloud integration](https://docs.docker.com/engine/context/ecs-integration/)
+- Docker UI:
+  - The Images view now has search and filter options.
+  - You can now push an image to Docker Hub using the Remote repositories drop-down menu.
+{% endcomment %}
+- Snyk 社との共同により Docker Desktop から Docker ローカルイメージに対して [ぜい弱性スキャン](https://docs.docker.com/engine/scan/) を実行できるようになりました。
+- Docker ECS プラグインは [ECS クラウド統合](https://docs.docker.com/engine/context/ecs-integration/) に置き換えられました。
+- Docker UI:
+  - Images ビューにおいて検索とフィルターのオプションが追加されました。
+  - ドロップダウンメニュー Remote repositories を使って、Docker Hub へのイメージプッシュを行えるようになりました。
+
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades }
+### アップグレード
+
+- [Alpine 3.12](https://alpinelinux.org/posts/Alpine-3.12.0-released.html)
+- [Kubernetes 1.18.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.8)
+
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+
+{% comment %}
+- Fixed an issue with Docker Desktop integration with other WSL 2 distros. See [docker/for-win#6894](https://github.com/docker/for-win/issues/6894)
+- Fixed DNS resolution of short names. See [docker/for-win#4425](https://github.com/docker/for-win/issues/4425)
+{% endcomment %}
+- WSL 2 との Desktop 統合における問題を修正しました。
+  [docker/for-win#6894](https://github.com/docker/for-win/issues/6894) を参照してください。
+- 短い名前の DNS 解決を修正しました。
+  [docker/for-win#4425](https://github.com/docker/for-win/issues/4425) を参照してください。
+
 ## Docker Desktop Community 2.3.5.1
 2020-08-25
 
@@ -31,7 +82,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes }
+{: #bug-fixes-and-minor-changes-1 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -50,7 +101,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### New
 {% endcomment %}
-{: #new }
+{: #new-1 }
 ### 新機能
 
 {% comment %}
@@ -76,7 +127,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades }
+{: #upgrades-1 }
 ### アップグレード
 
 - [Go 1.14.7](https://github.com/golang/go/issues?q=milestone:Go1.14.7+label:CherryPickApproved)
@@ -87,7 +138,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-1 }
+{: #bug-fixes-and-minor-changes-2 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -113,7 +164,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-1 }
+{: #new-2 }
 ### 新機能
 
 {% comment %}
@@ -129,7 +180,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-1 }
+{: #upgrades-2 }
 ### アップグレード
 
 - [Docker ECS integration v1.0.0-beta.4](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.4){: target="_blank" class="_”}
@@ -138,7 +189,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-2 }
+{: #bug-fixes-and-minor-changes-3 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -159,7 +210,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-2 }
+{: #upgrades-3 }
 ### アップグレード
 
 - [Docker ECS integration v1.0.0-beta.2](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.2){: target="_blank" class="_”}
@@ -176,7 +227,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-3 }
+{: #bug-fixes-and-minor-changes-4 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -195,7 +246,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-3 }
+{: #upgrades-4 }
 ### アップグレード
 
 {% comment %}
@@ -207,7 +258,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-4 }
+{: #bug-fixes-and-minor-changes-5 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -234,7 +285,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-4 }
+{: #upgrades-5 }
 ### アップグレード
 
 {% comment %}
@@ -247,7 +298,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-5 }
+{: #bug-fixes-and-minor-changes-6 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -277,7 +328,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-5 }
+{: #upgrades-6 }
 ### アップグレード
 
 {% comment %}
@@ -288,7 +339,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-6 }
+{: #bug-fixes-and-minor-changes-7 }
 ### バグフィックスとマイナーチェンジ
 
 **Hyper-V**
@@ -346,7 +397,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-7 }
+{: #bug-fixes-and-minor-changes-8 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -369,7 +420,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-6 }
+{: #upgrades-7 }
 ### アップグレード
 
 - [Docker Compose 1.25.5](https://github.com/docker/compose/releases/tag/1.25.5)
@@ -380,7 +431,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-8 }
+{: #bug-fixes-and-minor-changes-9 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -436,7 +487,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-7 }
+{: #upgrades-8 }
 ### アップグレード
 
 - [Docker 19.03.8](https://github.com/docker/docker-ce/releases/tag/v19.03.8)
@@ -446,7 +497,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-2 }
+{: #new-3 }
 ### 新機能
 
 {% comment %}
@@ -456,7 +507,7 @@ For information about Stable releases, see the [Stable release notes](release-no
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-9 }
+{: #bug-fixes-and-minor-changes-10 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -531,7 +582,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-8 }
+{: #upgrades-9 }
 ### アップグレード
 
 - [Kubernetes 1.16.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.5)
@@ -540,7 +591,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-3 }
+{: #new-4 }
 ### 新機能
 
 {% comment %}
@@ -551,7 +602,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-10 }
+{: #bug-fixes-and-minor-changes-11 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -572,7 +623,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-9 }
+{: #upgrades-10 }
 ### アップグレード
 
 - [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
@@ -581,7 +632,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-11 }
+{: #bug-fixes-and-minor-changes-12 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -630,7 +681,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-10 }
+{: #upgrades-11 }
 ### アップグレード
 
 - [Docker Compose 1.25.1-rc1](https://github.com/docker/compose/releases/tag/1.25.1-rc1)
@@ -638,7 +689,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-4 }
+{: #new-5 }
 ### 新機能
 
 - Added the **WSL Integration** option in **Settings** > **Resources** to select WSL 2 distributions. This option will be visible only after enabling WSL 2 on your machine.
@@ -647,7 +698,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-12 }
+{: #bug-fixes-and-minor-changes-13 }
 ### バグフィックスとマイナーチェンジ
 
 - The Docker Desktop Dashboard now displays port information inline with the container status.
@@ -675,7 +726,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-13 }
+{: #bug-fixes-and-minor-changes-14 }
 ### バグフィックスとマイナーチェンジ
 
 - Fixed an issue that prevented Kubernetes to start with WSL 2 on machines with multiple CPU cores.
@@ -696,7 +747,7 @@ Windows Insider Preview Slow Ring users running OS builds older than 19025 canno
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-11 }
+{: #upgrades-12 }
 ### アップグレード
 
 - [Docker 19.03.5](https://github.com/docker/docker-ce/releases/tag/v19.03.5)
@@ -705,7 +756,7 @@ Windows Insider Preview Slow Ring users running OS builds older than 19025 canno
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-5 }
+{: #new-6 }
 ### 新機能
 
 Added the ability to start and stop Compose-based applications and view combined logs in the Docker Desktop **Dashboard** UI.
@@ -713,7 +764,7 @@ Added the ability to start and stop Compose-based applications and view combined
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-14 }
+{: #bug-fixes-and-minor-changes-15 }
 ### バグフィックスとマイナーチェンジ
 
 - Docker Desktop now automatically restarts after an update.
@@ -745,7 +796,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-12 }
+{: #upgrades-13 }
 ### アップグレード
 
 - [Kubernetes 1.15.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.5)
@@ -755,7 +806,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-6 }
+{: #new-7 }
 ### 新機能
 
 - **Docker Desktop Dashboard:** The new Docker Desktop **Dashboard** provides a user-friendly interface which enables you to interact with containers and applications, and manage the lifecycle of your applications directly from the UI. In addition, it allows you to access the logs, view container details, and monitor resource utilization to explore the container behavior.
@@ -790,7 +841,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-13 }
+{: #upgrades-14 }
 ### アップグレード
 
 - [Docker 19.03.3](https://github.com/docker/docker-ce/releases/tag/v19.03.3)
@@ -801,7 +852,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-15 }
+{: #bug-fixes-and-minor-changes-16 }
 ### バグフィックスとマイナーチェンジ
 
 - Improved the navigation in **Settings** and **Troubleshoot** UI.
@@ -819,7 +870,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-16 }
+{: #bug-fixes-and-minor-changes-17 }
 ### バグフィックスとマイナーチェンジ
 
 - Added a loading overlay to the **Settings** and **Troubleshoot** windows to prevent editing conflicts.
@@ -836,7 +887,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-14 }
+{: #upgrades-15 }
 ### アップグレード
 
 - [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
@@ -849,7 +900,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-17 }
+{: #bug-fixes-and-minor-changes-18 }
 ### バグフィックスとマイナーチェンジ
 
 - Reduced the Virtual Machine (VM) startup time.
@@ -866,7 +917,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-15 }
+{: #upgrades-16 }
 ### アップグレード
 
 - Linux Kernel 4.14.131
@@ -874,7 +925,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-7 }
+{: #new-8 }
 ### 新機能
 
 - [Docker Desktop WSL 2 Tech Preview](https://docs.docker.com/docker-for-windows/wsl/)
@@ -882,7 +933,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-18 }
+{: #bug-fixes-and-minor-changes-19 }
 ### バグフィックスとマイナーチェンジ
 
 - Fixed a PowerShell script signing issue that caused `AuthorizationManager check failed` errors on machines with strict group policies on PowerShell script signing. [docker/for-win#4376](https://github.com/docker/for-win/issues/4376)
@@ -905,7 +956,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-16 }
+{: #upgrades-17 }
 ### アップグレード
 
  - [Docker 19.03.1](https://github.com/docker/docker-ce/releases/tag/v19.03.1)
@@ -917,7 +968,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 {% comment %}
 ### New
 {% endcomment %}
-{: #new-8 }
+{: #new-9 }
 ### 新機能
 
  - Introduced a new user interface for the Docker Desktop **Settings** menu.
@@ -926,7 +977,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-19 }
+{: #bug-fixes-and-minor-changes-20 }
 ### バグフィックスとマイナーチェンジ
 
  - Changed the host's kubernetes context to ensure `docker run -v .kube:kube ... kubectl` works.
