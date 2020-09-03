@@ -116,6 +116,34 @@ This opens your web browser and prompts you to enter your Azure login credential
 コマンドを実行するとウェブブラウザーが開き、Azure のログイン情報の入力が求められます。
 
 {% comment %}
+Alternatively, you can log in without interaction (typically in 
+scripts or continuous integration scenarios), using an Azure Service
+Principal, with `docker login azure --client-id xx --client-secret yy --tenant-id zz`
+{% endcomment %}
+これとは別に、対話形式でない方法（スクリプトや継続的インテグレーションの利用時）でのログインも可能です。
+その場合には Azure サービスプリンシパルを利用し `docker login azure --client-id xx --client-secret yy --tenant-id zz` のようにコマンド実行します。
+
+{% comment %}
+>**Note**
+>
+> Logging in through the Azure Service Provider obtains an access token valid 
+for a short period (typically 1h), but it does not allow you to automatically 
+and transparently refresh this token. You must manually re-login 
+when the access token has expired when logging in with a Service Provider. 
+{% endcomment %}
+>**メモ**
+>
+> Azure サービスプロバイダーを通じたログインでは、アクセストークンの有効期間は短いもの（通常は 1 時間）になっています。
+だからといって、このトークンを自動的、透過的に更新することはできません。
+サービスプロバイダーを利用したログイン中にそのアクセストークンの有効期間が過ぎた場合は、手動で再ログインしなければなりません。
+
+{% comment %}
+You can also use the `--tenant-id` option alone to specify a tenant, if 
+you have several ones available in Azure.
+{% endcomment %}
+Azure 上に複数のテナントを有している場合、`--tenant-id` オプションを単独で用いることもできます。
+
+{% comment %}
 ### Create an ACI context
 {% endcomment %}
 {: #create-an-aci-context }
@@ -312,6 +340,67 @@ ACI に対しては、Compose ファイルにて定義されたマルチコン�
 > **メモ**
 >
 > 現時点の Docker Azure 統合では、Compose アプリケーションを構成するコンテナーからのログを、すべて集めて取得するようなことはできません。
+
+{% comment %}
+## Using Azure file share as volumes in ACI containers
+{% endcomment %}
+{: #using-azure-file-share-as-volumes-in-aci-containers }
+## ACI コンテナー内での Azure ファイル共有のボリュームとしての利用
+
+{% comment %}
+You can deploy containers or Compose applications that use persistent data 
+stored in volumes. Azure File Share can be used to support volumes for ACI 
+containers. 
+{% endcomment %}
+コンテナーや Compose アプリケーションにおいてボリュームを使ったデータ保存を行っている場合でも、デプロイすることが可能です。
+Azure ファイル共有を使えば、ACI コンテナーに対してのボリュームをサポートしています。
+
+{% comment %}
+With an existing Azure File Share, with storage account name `mystorageaccount` 
+and file share name `myfileshare`, you can specify a volume in your deployment `run`
+command as follows:
+{% endcomment %}
+既存の Azure ファイル共有を利用して、ストレージアカウント名 が `mystorageaccount`、ファイル共有名が `myfileshare` であるとしたときに、デプロイにおける `run` コマンド実行を以下のように指定できます。
+
+{% comment %}
+`docker run -v storageaccount@fileshare:/target/path myimage` and the runtime 
+container will see the file share content in `/target/path`.
+{% endcomment %}
+`docker run -v storageaccount@fileshare:/target/path myimage` 
+これにより実行中のコンテナーからは、ファイル共有内容は `/target/path` に見えるようになります。
+
+{% comment %}
+In a Compose application, the volume specification must use the following syntax
+in the Compose file:
+{% endcomment %}
+Compose アプリケーションにおいて、ボリュームの指定は Compose ファイル内において以下のような文法に従う必要があります。
+
+```yaml
+myservice:
+  image: nginx
+  volumes:
+    - mydata:/mount/testvolumes
+
+volumes:
+  mydata:
+    driver: azure_file
+    driver_opts:
+      share_name: myfileshare
+      storage_account_name: mystorageaccount
+```
+
+{% comment %}
+Now, you need to create an Azure storage account and File Share using the Azure
+portal, or the `az` [command line](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-cli).
+{% endcomment %}
+そこで Azure ストレージアカウントの生成が必要です。
+さらに Azure ポータル、つまり `az` [コマンドライン](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-cli) を用いてファイル共有を生成することが必要です。
+
+{% comment %}
+When you deploy a single container or a Compose application, your 
+Azure login will automatically fetch the key to the Azure storage account.
+{% endcomment %}
+単一のコンテナーあるいは Compose アプリケーションをデプロイしたら、Azure のログイン内において、Auzre ストレージアカウントに対するアクセスキーが自動的に取得されます。
 
 {% comment %}
 ## Using ACI resource groups as namespaces
