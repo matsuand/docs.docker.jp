@@ -45,7 +45,7 @@ quick access to a test container. Make the following substitutions:
 - `RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config` は、Ubuntu 14.04 においては `prohibit-password` ではなく `without-password` を指定してください。
 
 ```dockerfile
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 RUN apt-get update && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd

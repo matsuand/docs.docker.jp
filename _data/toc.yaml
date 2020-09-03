@@ -1162,8 +1162,6 @@ manuals:
       title: 安定版リリースノート
     - path: /docker-for-mac/edge-release-notes/
       title: 最新版リリースノート
-    - path: /docker-for-mac/mutagen/
-      title: ファイル同期
   - sectiontitle: Windows
     section:
     - path: /docker-for-windows/install/

@@ -630,7 +630,7 @@ Exposes that specific GPU.
 これにより指定した GPU が有効になります。
 
 ```bash
-$ docker run -it --rm --gpus device=0,2 nvidia-smi
+$ docker run -it --rm --gpus device=0,2 ubuntu nvidia-smi
 ```
 
 {% comment %}
