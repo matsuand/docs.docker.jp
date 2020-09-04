@@ -18,10 +18,55 @@ All of these examples use the `docker inspect` command, but many other CLI
 commands have a `--format` flag, and many of the CLI command references
 include examples of customizing the output format.
 {% endcomment %}
-Docker では、template 項目を操作する基本機能を提供します。
+Docker では、テンプレート項目を操作する基本機能を提供します。
 以下では、すべて `docker inspect` コマンドを使った例を示します。
 ただしこれ以外の CLI コマンドにも `--format` フラグは用意されています。
 また多くの CLI コマンドリファレンスにて、出力フォーマットをカスタマイズする例を示しています。
+
+{% comment %}
+>**Note**
+>
+> Whe using the `--format` flag, you need observe your shell environment.
+> In a Posix shell, you can run the following with a single quote:
+>
+> {% raw %}
+> ```bash
+> docker inspect --format '{{join .Args " , "}}'
+> ```
+> {% endraw %}
+>
+> Otherwise, in a Windows shell (for example, PowerShell), you need to use single quotes, but
+> escape the double quotes inside the params as follows:
+>
+> {% raw %}
+> ```bash
+> docker inspect --format '{{join .Args \" , \"}}'
+> ```
+> {% endraw %}
+>
+{:.important}
+{% endcomment %}
+>**メモ**
+>
+> `--format` フラグを用いる際には、利用しているシェル環境を考慮する必要があります。
+> Posix シェルの場合、以下のようなコマンド実行では、シングルクォートで囲むことが必要です。
+>
+> {% raw %}
+> ```bash
+> docker inspect --format '{{join .Args " , "}}'
+> ```
+> {% endraw %}
+>
+> 逆に Windows シェル（たとえば PowerShell）の場合、シングルクォートの利用は必要ですが、パラメーター内部ではダブルクォートをエスケープする必要があります。
+> たとえば以下のとおりです。
+>
+> {% raw %}
+> ```bash
+> docker inspect --format '{{join .Args \" , \"}}'
+> ```
+> {% endraw %}
+>
+{:.important}
 
 ## join
 
@@ -140,7 +185,7 @@ docker inspect --format='{{range .NetworkSettings.Networks}}{{println .IPAddress
 {% comment %}
 To find out what data can be printed, show all content as json:
 {% endcomment %}
-どの項目を出力できるかを知るには、以下を実行すれば全項目を json 形式で表示できます。
+どの項目を出力できるかを知るには、以下を実行すれば全項目を JSON 形式で表示できます。
 
 {% raw %}
 ```
