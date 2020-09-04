@@ -110,7 +110,11 @@ as an environment variable and warns you:
 このことを忘れてドル記号 1 つ（`$`）を用いてしまうと、Compose は環境変数として値を解釈し、以下の警告を出します。
 
 {% comment %}
-`The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.`
+```
+The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.
+```
 {% endcomment %}
-`The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.`
-（VAR_NOT_INTERPOLATED_BY_COMPOSE は設定されていません。空文字として置換します。）
+```
+The VAR_NOT_INTERPOLATED_BY_COMPOSE is not set. Substituting an empty string.
+(VAR_NOT_INTERPOLATED_BY_COMPOSE は設定されていません。空文字として置換します。)
+```

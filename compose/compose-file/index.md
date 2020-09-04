@@ -864,11 +864,14 @@ format `file://<filename>` or `registry://<value-name>`.
 When using `file:`, the referenced file must be present in the `CredentialSpecs`
 subdirectory in the Docker data directory, which defaults to `C:\ProgramData\Docker\`
 on Windows. The following example loads the credential spec from a file named
-`C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json`:
 {% endcomment %}
 `file:` を用いるとき、参照するファイルは実際に存在するファイルでなければならず、Docker データディレクトリ配下のサブディレクトリ `CredentialSpecs` になければなりません。
 Windows における Docker データディレクトリのデフォルトは `C:\ProgramData\Docker\` です。
-以下の例は `C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json` というファイルから資格情報スペックを読み込みます。
+以下の例はファイルから資格情報スペックを読み込みます。
+
+```
+C:\ProgramData\Docker\CredentialSpecs\my-credential-spec.json
+```
 
 ```yaml
 credential_spec:
