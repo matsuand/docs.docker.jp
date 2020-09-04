@@ -1,9 +1,9 @@
 command: docker volume create
-short: Create a volume
+short: ボリュームを生成します。
 long: |-
-  Creates a new volume that containers can consume and store data in. If a name is
-  not specified, Docker generates a random name.
-usage: docker volume create [OPTIONS] [VOLUME]
+  コンテナーが利用しデータ保存を行うボリュームを新規に生成します。
+  名前が指定されなかった場合、Docker がランダムな名前を生成します。
+usage: docker volume create [オプション] [VOLUME]
 pname: docker volume
 plink: docker_volume.yaml
 options:
@@ -11,7 +11,7 @@ options:
   shorthand: d
   value_type: string
   default_value: local
-  description: Specify volume driver name
+  description: ボリュームドライバー名を指定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -19,7 +19,7 @@ options:
   swarm: false
 - option: label
   value_type: list
-  description: Set metadata for a volume
+  description: ボリュームに対してメタデータを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -27,7 +27,7 @@ options:
   swarm: false
 - option: name
   value_type: string
-  description: Specify volume name
+  description: ボリューム名を指定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -37,14 +37,14 @@ options:
   shorthand: o
   value_type: map
   default_value: map[]
-  description: Set driver specific options
+  description: ドライバー固有のオプションを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
-  Create a volume and then configure the container to use it:
+  ボリュームを生成して、コンテナーがこれを利用できるように設定します。
 
   ```bash
   $ docker volume create hello
@@ -54,28 +54,29 @@ examples: |-
   $ docker run -d -v hello:/world busybox ls /world
   ```
 
-  The mount is created inside the container's `/world` directory. Docker does not
-  support relative paths for mount points inside the container.
+  コンテナーの `/world` ディレクトリ配下にマウントが生成されます。
+  コンテナーのマウントポイントに対して、相対パスの指定はサポートされていません。
 
-  Multiple containers can use the same volume in the same time period. This is
-  useful if two containers need access to shared data. For example, if one
-  container writes and the other reads the data.
+  1 つのボリュームを複数のコンテナーから同時に利用することができます。
+  2 つのコンテナーが共有データにアクセスする必要がある場合に便利です。
+  たとえば一方のコンテナーからデータを書き出し、他方がそのデータを読み取ることができます。
 
-  Volume names must be unique among drivers. This means you cannot use the same
-  volume name with two different drivers. If you attempt this `docker` returns an
-  error:
+  すべてのドライバーにわたって、ボリューム名はユニークであることが必要です。
+  つまり 2 つの異なるドライバーにおいて、同一のボリューム名を利用することはできません。
+  これを行った場合、`docker` は以下のようなエラーを返します。
 
   ```none
   A volume named  "hello"  already exists with the "some-other" driver. Choose a different volume name.
+  ("hello" というボリュームは "some-other" ドライバーにおいてすでに存在しています。別のボリューム名を用いてください。)
   ```
 
-  If you specify a volume name already in use on the current driver, Docker
-  assumes you want to re-use the existing volume and does not return an error.
+  現在利用しているドライバーにおいて、すでに用いられているボリューム名を指定した場合、Docker はすでに存在しているものを再利用するものと解釈されるため、エラーとはなりません。
 
-  ### Driver-specific options
+  {: #driver-specific-options }
+  ### ドライバー固有のオプション
 
-  Some volume drivers may take options to customize the volume creation. Use the
-  `-o` or `--opt` flags to pass driver options:
+  ボリュームドライバーによっては、ボリューム生成に関してカスタマイズ可能なオプションを持つものがあります。
+  ドライバーへオプションを受け渡すには `-o` あるいは `--opt` フラグを利用します。
 
   ```bash
   $ docker volume create --driver fake \
@@ -84,19 +85,17 @@ examples: |-
       foo
   ```
 
-  These options are passed directly to the volume driver. Options for
-  different volume drivers may do different things (or nothing at all).
+  このようなオプション指定は、ボリュームドライバーに直接受け渡されます。
+  ボリュームドライバーが異なると、このオプションは全く違った（あるいは何の意味もなさない）ものになる場合があります。
 
-  The built-in `local` driver on Windows does not support any options.
+  Windows におけるビルトインドライバー `local` は、オプションを一切受けつけません。
 
-  The built-in `local` driver on Linux accepts options similar to the linux
-  `mount` command. You can provide multiple options by passing the `--opt` flag
-  multiple times. Some `mount` options (such as the `o` option) can take a
-  comma-separated list of options. Complete list of available mount options can be
-  found [here](http://man7.org/linux/man-pages/man8/mount.8.html).
+  Linux でのビルトイン `local` ドライバーは、Linux の `mount` コマンドに似たオプションをとります。
+  複数のオプションを指定するには、`--opt` フラグを複数用いて指定します。
+  `mount` オプションの中には（`o` オプションなどのように）、カンマ区切りリストを指定するものがあります。
+  mount オプションの全一覧については、[こちら](http://man7.org/linux/man-pages/man8/mount.8.html) を参照してください。
 
-  For example, the following creates a `tmpfs` volume called `foo` with a size of
-  100 megabyte and `uid` of 1000.
+  たとえば以下のコマンドは `foo` という名前の `tmpfs` ボリュームを生成し、そのサイズを 100 MB、`uid` を 1000 とするものです。
 
   ```bash
   $ docker volume create --driver local \
@@ -106,7 +105,7 @@ examples: |-
       foo
   ```
 
-  Another example that uses `btrfs`:
+  以下は `btrfs` を利用する別の例です。
 
   ```bash
   $ docker volume create --driver local \
@@ -115,8 +114,7 @@ examples: |-
       foo
   ```
 
-  Another example that uses `nfs` to mount the `/path/to/dir` in `rw` mode from
-  `192.168.1.1`:
+  さらに別の例として `nfs` を利用し、`192.168.1.1` から `rw` モードにより `/path/to/dir` をマウントします。
 
   ```bash
   $ docker volume create --driver local \

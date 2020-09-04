@@ -1,14 +1,14 @@
 command: docker volume prune
-short: Remove all unused local volumes
-long: Remove all unused local volumes. Unused local volumes are those which are not
-  referenced by any containers
-usage: docker volume prune [OPTIONS]
+short: 未使用のローカルボリュームを削除します。
+long: 未使用のローカルボリュームを削除します。
+  未使用のローカルボリュームとは、どのコンテナーからも参照されていないボリュームのことです。
+usage: docker volume prune [オプション]
 pname: docker volume
 plink: docker_volume.yaml
 options:
 - option: filter
   value_type: filter
-  description: Provide filter values (e.g. 'label=<label>')
+  description: フィルター値を定めます。（たとえば 'label=\<label\>'）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -18,7 +18,7 @@ options:
   shorthand: f
   value_type: bool
   default_value: "false"
-  description: Do not prompt for confirmation
+  description: 確認のためのプロンプトを表示しません。
   deprecated: false
   experimental: false
   experimentalcli: false

@@ -1,11 +1,11 @@
 command: docker volume ls
 aliases: list
-short: List volumes
+short: ボリュームを一覧表示します。
 long: |-
-  List all the volumes known to Docker. You can filter using the `-f` or
-  `--filter` flag. Refer to the [filtering](#filtering) section for more
-  information about available filter options.
-usage: docker volume ls [OPTIONS]
+  Docker が管理するボリュームをすべて一覧表示します。
+  `-f` または `--filter` フラグを使ってフィルター出力を行うことができます。
+  フィルター出力時のオプションについての詳細は [フィルター出力](#filtering) の節を参照してください。
+usage: docker volume ls [オプション]
 pname: docker volume
 plink: docker_volume.yaml
 options:
@@ -20,7 +20,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print volumes using a Go template
+  description: Go 言語のテンプレートを用いてボリュームの内容をフォーマット出力します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -30,14 +30,15 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Only display volume names
+  description: ボリューム名のみを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
-  ### Create a volume
+  {: #create-a-volume }
+  ### ボリュームの生成
   ```bash
   $ docker volume create rosemary
 
@@ -54,21 +55,24 @@ examples: |-
   local               tyler
   ```
 
-  ### Filtering
+  {: #filtering }
+  ### フィルター出力
 
-  The filtering flag (`-f` or `--filter`) format is of "key=value". If there is more
-  than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
+  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
 
-  The currently supported filters are:
+  現在サポートされているフィルターは以下のとおりです。
 
-  - dangling (boolean - true or false, 0 or 1)
-  - driver (a volume driver's name)
-  - label (`label=<key>` or `label=<key>=<value>`)
-  - name (a volume's name)
+  - dangling (ブール値 - true または false、0 または 1)
+  - driver (ボリュームドライバー名)
+  - label (`label=<キー>` または `label=<キー>=<値>`)
+  - name (ボリューム名)
 
-  #### dangling
+  {: #dangling }
+  #### dangling フィルター
 
-  The `dangling` filter matches on all volumes not referenced by any containers
+  `dangling` フィルターは、どのコンテナーからも参照されていないボリュームを検索します。
 
   ```bash
   $ docker run -d  -v tyler:/tmpwork  busybox
@@ -79,11 +83,12 @@ examples: |-
   local               rosemary
   ```
 
-  #### driver
+  {: #driver }
+  #### driver フィルター
 
-  The `driver` filter matches volumes based on their driver.
+  `driver` フィルターは、そのドライバーに基づいたボリュームを抽出します。
 
-  The following example matches volumes that are created with the `local` driver:
+  以下の例では、`local` ドライバーを使って生成されたボリュームが抽出されます。
 
   ```bash
   $ docker volume ls -f driver=local
@@ -93,12 +98,12 @@ examples: |-
   local               tyler
   ```
 
-  #### label
+  {: #label }
+  #### label フィルター
 
-  The `label` filter matches volumes based on the presence of a `label` alone or
-  a `label` and a value.
+  `label` フィルターは、`label` だけが存在する、あるいは `label` とその値が存在するボリュームを検索します。
 
-  First, let's create some volumes to illustrate this;
+  このことを示すために、まずボリュームを生成します。
 
   ```bash
   $ docker volume create the-doctor --label is-timelord=yes
@@ -109,8 +114,8 @@ examples: |-
   daleks
   ```
 
-  The following example filter matches volumes with the `is-timelord` label
-  regardless of its value.
+  以下の例では `is-timelord` ラベルを持ったボリュームをフィルター抽出します。
+  この場合、その値の内容は問いません。
 
   ```bash
   $ docker volume ls --filter label=is-timelord
@@ -120,10 +125,9 @@ examples: |-
   local               the-doctor
   ```
 
-  As the above example demonstrates, both volumes with `is-timelord=yes`, and
-  `is-timelord=no` are returned.
+  上の結果からわかるように、`is-timelord=yes` と `is-timelord=no` というラベルを持ったボリュームが表示されます。
 
-  Filtering on both `key` *and* `value` of the label, produces the expected result:
+  ラベルの `key` と `value` の **双方を** フィルターに指定すれば、そのとおりの結果が返ります。
 
   ```bash
   $ docker volume ls --filter label=is-timelord=yes
@@ -132,8 +136,8 @@ examples: |-
   local               the-doctor
   ```
 
-  Specifying multiple label filter produces an "and" search; all conditions
-  should be met;
+  ラベルのフィルターフラグを複数指定すると「AND」検索になります。
+  つまりすべての条件が満たされた検索になります。
 
   ```bash
   $ docker volume ls --filter label=is-timelord=yes --filter label=is-timelord=no
@@ -141,11 +145,12 @@ examples: |-
   DRIVER              VOLUME NAME
   ```
 
-  #### name
+  {: #name }
+  #### name フィルター
 
-  The `name` filter matches on all or part of a volume's name.
+  `name` フィルターは、ボリューム名の全部または一部に一致する検索を行います。
 
-  The following filter matches all volumes with a name containing the `rose` string.
+  以下のフィルター指定では、`rose` という文字列をボリューム名に含むものが検索されます。
 
   ```bash
   $ docker volume ls -f name=rose
@@ -154,28 +159,26 @@ examples: |-
   local               rosemary
   ```
 
-  ### Formatting
+  {: #formatting }
+  ### フォーマット出力
 
-  The formatting options (`--format`) pretty-prints volumes output
-  using a Go template.
+  フォーマットオプション（`--format`）は、Go 言語のテンプレートを使ってフォーマット出力を行います。
 
-  Valid placeholders for the Go template are listed below:
+  Go 言語テンプレートによるプレースホルダー（placeholder）は、以下のとおりです。
 
-  Placeholder   | Description
+  プレースホルダー | 内容説明
   --------------|------------------------------------------------------------------------------------------
-  `.Name`       | Volume name
-  `.Driver`     | Volume driver
-  `.Scope`      | Volume scope (local, global)
-  `.Mountpoint` | The mount point of the volume on the host
-  `.Labels`     | All labels assigned to the volume
-  `.Label`      | Value of a specific label for this volume. For example `{{.Label "project.version"}}`
+  `.Name`       | ボリューム名。
+  `.Driver`     | ボリュームドライバー。
+  `.Scope`      | ボリュームの範囲（local, global）
+  `.Mountpoint` | ホスト上のボリュームのマウントポイント
+  `.Labels`     | ボリュームに割り当てられている全ラベル。
+  `.Label`      | そのボリュームに設定されている特定ラベルの値。たとえば `{{.Label "project.version"}}`
 
-  When using the `--format` option, the `volume ls` command will either
-  output the data exactly as the template declares or, when using the
-  `table` directive, includes column headers as well.
+  `--format` オプションを利用すると `volume ls` コマンドは、テンプレートが定めるデータを直接出力します。
+  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
-  The following example uses a template without headers and outputs the
-  `Name` and `Driver` entries separated by a colon (`:`) for all volumes:
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのタスクにおける `Name`、`Driver` の各項目がコロン（`:`）で区切って表示されます。
 
   ```bash
   $ docker volume ls --format "{{.Name}}: {{.Driver}}"
