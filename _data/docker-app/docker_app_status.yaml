@@ -1,8 +1,8 @@
 command: docker app status
-short: Get the installation status of an application
-long: Get the installation status of an application. If the installation is a Docker
-  Application, the status shows the stack services.
-usage: docker app status INSTALLATION_NAME [--target-context TARGET_CONTEXT] [OPTIONS]
+short: アプリケーションのインストール状態を取得します。
+long: アプリケーションのインストール状態を取得します。
+  インストールされているものが Docker アプリケーションである場合、ステータスには Stack サービスが表示されます。
+usage: docker app status INSTALLATION_NAME [--target-context TARGET_CONTEXT] [オプション]
 pname: docker app
 plink: docker_app.yaml
 options:
@@ -10,7 +10,7 @@ options:
   value_type: stringArray
   default_value: '[]'
   description: |
-    Use a YAML file containing a credential set or a credential set present in the credential store
+    資格情報セット（credential set）を含む YAML ファイルを用いるか、資格情報ストアにある資格情報セットを用います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -19,7 +19,7 @@ options:
 - option: target-context
   value_type: string
   description: |
-    Context on which the application is installed (default: <current-context>)
+    アプリケーションをインストールするコンテキスト。（デフォルト： \<current-context\>）)
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -28,7 +28,7 @@ options:
 - option: with-registry-auth
   value_type: bool
   default_value: "false"
-  description: Sends registry auth
+  description: レジストリの認証情報を送信します。
   deprecated: false
   experimental: false
   experimentalcli: false

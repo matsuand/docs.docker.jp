@@ -1,12 +1,12 @@
 command: docker app install
 aliases: deploy
-short: Install an application
+short: アプリケーションをインストールします。
 long: |-
-  Install an application.
-  By default, the application definition in the current directory will be
-  installed. The APP_NAME can also be:
-  - a path to a Docker Application definition (.dockerapp) or a CNAB bundle.json
-  - a registry Application Package reference
+  アプリケーションをインストールします。
+  デフォルトで、カレントディレクトリにあるアプリケーション定義がインストールされます。
+  APP_NAME は以下のようにすることができます。
+  - Docker アプリケーション定義 (.dockerapp) または CNAB bundle.json。
+  - Registry の Application パッケージ参照。
 usage: docker app install [APP_NAME] [--name INSTALLATION_NAME] [--target-context
   TARGET_CONTEXT] [OPTIONS]
 pname: docker app
@@ -16,7 +16,7 @@ options:
   value_type: stringArray
   default_value: '[]'
   description: |
-    Use a YAML file containing a credential set or a credential set present in the credential store
+    資格情報セット（credential set）を含む YAML ファイルを用いるか、資格情報ストアにある資格情報セットを用います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -26,7 +26,7 @@ options:
   value_type: stringSlice
   default_value: '[]'
   description: |
-    Use HTTP instead of HTTPS when pulling from/pushing to those registries
+    レジストリに対してプル、プッシュを行う際に HTTPS でなく HTTP を利用します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -35,7 +35,7 @@ options:
 - option: kubernetes-namespace
   value_type: string
   default_value: default
-  description: Kubernetes namespace to install into
+  description: インストール対象とする Kubernetes 名前空間。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -43,7 +43,7 @@ options:
   swarm: false
 - option: name
   value_type: string
-  description: Installation name (defaults to application name)
+  description: インストール名。（デフォルトはアプリケーション名）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -51,7 +51,7 @@ options:
   swarm: false
 - option: orchestrator
   value_type: string
-  description: Orchestrator to install on (swarm, kubernetes)
+  description: インストールに用いるオーケストレーター（swarm、kubernetes）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -60,7 +60,7 @@ options:
 - option: parameters-file
   value_type: stringArray
   default_value: '[]'
-  description: Override parameters file
+  description: パラメーターファイルをオーバーライドします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -69,7 +69,7 @@ options:
 - option: pull
   value_type: bool
   default_value: "false"
-  description: Pull the bundle
+  description: バンドルをプルします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -79,7 +79,7 @@ options:
   shorthand: s
   value_type: stringArray
   default_value: '[]'
-  description: Override parameter value
+  description: パラメーター値をオーバーライドします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -88,7 +88,7 @@ options:
 - option: target-context
   value_type: string
   description: |
-    Context on which the application is installed (default: <current-context>)
+    アプリケーションをインストールするコンテキスト。（デフォルト： \<current-context\>）)
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -97,7 +97,7 @@ options:
 - option: with-registry-auth
   value_type: bool
   default_value: "false"
-  description: Sends registry auth
+  description: レジストリの認証情報を送信します。
   deprecated: false
   experimental: false
   experimentalcli: false

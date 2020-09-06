@@ -1,14 +1,14 @@
 command: docker config create
-short: Create a config from a file or STDIN
-long: Create a config from a file or STDIN
-usage: docker config create [OPTIONS] CONFIG file|-
+short: ファイルまたは標準入力から config を生成します。
+long: ファイルまたは標準入力から config を生成します。
+usage: docker config create [オプション] CONFIG file|-
 pname: docker config
 plink: docker_config.yaml
 options:
 - option: label
   shorthand: l
   value_type: list
-  description: Config labels
+  description: Config ラベル。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -16,7 +16,7 @@ options:
   swarm: false
 - option: template-driver
   value_type: string
-  description: Template driver
+  description: テンプレートドライバー。
   deprecated: false
   min_api_version: "1.37"
   experimental: false

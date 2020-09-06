@@ -1,6 +1,6 @@
 command: docker app merge
-short: Merge a directory format Docker Application definition into a single file
-long: Merge a directory format Docker Application definition into a single file
+short: Docker アプリケーション定義のディレクトリ形式を単一のファイルにマージします。
+long: Docker アプリケーション定義のディレクトリ形式を単一のファイルにマージします。
 usage: docker app merge [APP_NAME] [--output OUTPUT_FILE]
 pname: docker app
 plink: docker_app.yaml
@@ -8,7 +8,7 @@ options:
 - option: output
   shorthand: o
   value_type: string
-  description: 'Output file (default: in-place)'
+  description: '出力ファイル。（デフォルト: 所定ファイル）'
   deprecated: false
   experimental: false
   experimentalcli: false

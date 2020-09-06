@@ -1,6 +1,6 @@
 command: docker app validate
-short: Checks the rendered application is syntactically correct
-long: Checks the rendered application is syntactically correct
+short: 指定されたアプリケーションが文法的に正しいかどうかをチェックします。
+long: 指定されたアプリケーションが文法的に正しいかどうかをチェックします。
 usage: docker app validate [APP_NAME] [--set KEY=VALUE ...] [--parameters-file PARAMETERS_FILE]
 pname: docker app
 plink: docker_app.yaml
@@ -8,7 +8,7 @@ options:
 - option: parameters-file
   value_type: stringArray
   default_value: '[]'
-  description: Override parameters file
+  description: パラメーターファイルをオーバーライドします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -18,7 +18,7 @@ options:
   shorthand: s
   value_type: stringArray
   default_value: '[]'
-  description: Override parameter value
+  description: パラメーター値をオーバーライドします。
   deprecated: false
   experimental: false
   experimentalcli: false

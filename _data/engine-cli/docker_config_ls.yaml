@@ -1,15 +1,15 @@
 command: docker config ls
 aliases: list
-short: List configs
-long: List configs
-usage: docker config ls [OPTIONS]
+short: Config の一覧を表示します。
+long: Config の一覧を表示します。
+usage: docker config ls [オプション]
 pname: docker config
 plink: docker_config.yaml
 options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: Filter output based on conditions provided
+  description: 指定された条件に従ってフィルター出力します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -17,7 +17,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print configs using a Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -27,7 +27,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Only display IDs
+  description: ID のみを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false

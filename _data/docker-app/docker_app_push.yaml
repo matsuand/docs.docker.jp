@@ -1,7 +1,7 @@
 command: docker app push
-short: Push an application package to a registry
-long: Push an application package to a registry
-usage: docker app push [APP_NAME] --tag TARGET_REFERENCE [OPTIONS]
+short: アプリケーションパッケージをレジストリにプッシュします。
+long: アプリケーションパッケージをレジストリにプッシュします。
+usage: docker app push [APP_NAME] --tag TARGET_REFERENCE [オプション]
 pname: docker app
 plink: docker_app.yaml
 options:
@@ -9,7 +9,7 @@ options:
   value_type: stringSlice
   default_value: '[]'
   description: |
-    Use HTTP instead of HTTPS when pulling from/pushing to those registries
+    レジストリに対してプル、プッシュを行う際に HTTPS でなく HTTP を利用します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -19,7 +19,7 @@ options:
   value_type: stringSlice
   default_value: '[]'
   description: |
-    For multi-arch service images, only push the specified platforms
+    マルチプラットフォーム対応のサービスイメージにおいて、指定するプラットフォームのみプッシュします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -29,7 +29,7 @@ options:
   shorthand: t
   value_type: string
   description: |
-    Target registry reference (default: <name>:<version> from metadata)
+    対象とするレジストリ参照。（デフォルト: メタデータより <name>:<version>)
   deprecated: false
   experimental: false
   experimentalcli: false

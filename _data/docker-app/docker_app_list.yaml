@@ -1,14 +1,14 @@
 command: docker app list
 aliases: ls
-short: List the installations and their last known installation result
-long: List the installations and their last known installation result
-usage: docker app list [OPTIONS]
+short: インストールの一覧および最終インストール結果を表示します。
+long: インストールの一覧および最終インストール結果を表示します。
+usage: docker app list [オプション]
 pname: docker app
 plink: docker_app.yaml
 options:
 - option: target-context
   value_type: string
-  description: List installations on this context
+  description: そのコンテキスト内のインストールを一覧表示します。
   deprecated: false
   experimental: false
   experimentalcli: false

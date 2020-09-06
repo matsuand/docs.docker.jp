@@ -1,17 +1,20 @@
 command: docker app completion
-short: Generates completion scripts for the specified shell (bash or zsh)
+short: 指定されたシェル（bash あたは zsh）に対するコマンド補完スクリプトを生成します。
 long: |
-  # Load the "docker app" completion code for bash into the current shell
-  . <(docker app completion bash)
-  # Set the "docker app" completion code for bash to autoload on startup in your ~/.bashrc,
-  # ~/.profile or ~/.bash_profile
-  . <(docker app completion bash)
-  # Note: bash-completion is needed.
+  ```bash
+  # bash向けに"docker app"の補完コードを現シェルにロードします。
+  . <(docker app の bash 補完)
+  # bash向けに"docker app"の補完コードを自動ロードするため ~/.bashrc, ~/.profile, ~/.bash_profile に。
+  . <(docker app の bash 補完)
+  # メモ: bash-completion が必要です。
+  ```
 
-  # Load the "docker app" completion code for zsh into the current shell
-  source <(docker app completion zsh)
-  # Set the "docker app" completion code for zsh to autoload on startup in your ~/.zshrc,
-  source <(docker app completion zsh)
+  ```zsh
+  # zsh向けに"docker app"の補完コードを現シェルにロードします。
+  source <(docker app の zsh 補完)
+  # zsh向けに"docker app"の補完コードを自動ロードするため ~/.zshrc に。
+  source <(docker app の zsh 補完)
+  ```
 usage: docker app completion SHELL
 pname: docker app
 plink: docker_app.yaml

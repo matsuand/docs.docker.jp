@@ -1,6 +1,6 @@
 command: docker app
-short: Docker Application
-long: A tool to build and manage Docker Applications.
+short: Docker アプリケーション。
+long: Docker アプリケーションを生成し管理するツールです。
 pname: docker
 plink: docker.yaml
 cname:

@@ -1,7 +1,7 @@
 command: docker app init
-short: Initialize Docker Application definition
-long: Start building a Docker Application package. If there is a docker-compose.yml
-  file in the current directory it will be copied and used.
+short: Docker アプリケーション定義の初期化を行います。
+long: Docker アプリケーションのビルドを開始します。
+  カレントディレクトリに docker-compose.yml ファイルがある場合は、これをコピーして利用します。
 usage: docker app init APP_NAME [--compose-file COMPOSE_FILE] [--description DESCRIPTION]
   [--maintainer NAME:EMAIL ...] [OPTIONS]
 pname: docker app
@@ -9,7 +9,7 @@ plink: docker_app.yaml
 options:
 - option: compose-file
   value_type: string
-  description: Compose file to use as application base (optional)
+  description: アプリケーションのベースとして利用する Compose ファイル（任意指定）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -17,7 +17,7 @@ options:
   swarm: false
 - option: description
   value_type: string
-  description: Human readable description of your application (optional)
+  description: アプリケーションに対してのわかりやすい説明。（任意指定）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -27,7 +27,7 @@ options:
   value_type: stringArray
   default_value: '[]'
   description: |
-    Name and email address of person responsible for the application (name:email) (optional)
+    アプリケーション責任者名と E メールアドレス。（name:email） （任意指定）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -36,7 +36,7 @@ options:
 - option: single-file
   value_type: bool
   default_value: "false"
-  description: Create a single-file Docker Application definition
+  description: 単一ファイルからなる Docker アプリケーション定義を生成します。
   deprecated: false
   experimental: false
   experimentalcli: false

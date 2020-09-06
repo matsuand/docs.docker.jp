@@ -1,14 +1,14 @@
 command: docker config inspect
-short: Display detailed information on one or more configs
-long: Display detailed information on one or more configs
-usage: docker config inspect [OPTIONS] CONFIG [CONFIG...]
+short: 1 つまたは複数の Config についての詳細情報を表示します。
+long: 1 つまたは複数の Config についての詳細情報を表示します。
+usage: docker config inspect [オプション] CONFIG [CONFIG...]
 pname: docker config
 plink: docker_config.yaml
 options:
 - option: format
   shorthand: f
   value_type: string
-  description: Format the output using the given Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -17,7 +17,7 @@ options:
 - option: pretty
   value_type: bool
   default_value: "false"
-  description: Print the information in a human friendly format
+  description: 読みやすい書式で内容を出力します。
   deprecated: false
   experimental: false
   experimentalcli: false

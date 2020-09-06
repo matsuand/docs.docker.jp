@@ -1,6 +1,6 @@
 command: docker app version
-short: Print version information
-long: Print version information
+short: バージョン情報を表示します。
+long: バージョン情報を表示します。
 usage: docker app version
 pname: docker app
 plink: docker_app.yaml

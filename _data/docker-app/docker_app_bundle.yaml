@@ -1,6 +1,6 @@
 command: docker app bundle
-short: Create a CNAB invocation image and `bundle.json` for the application
-long: Create a CNAB invocation image and `bundle.json` for the application
+short: アプリケーションに対する CNAB 呼び出しイメージと `bundle.json` を生成します。
+long: アプリケーションに対する CNAB 呼び出しイメージ（CNAB invocation image）と `bundle.json` を生成します。
 usage: docker app bundle [APP_NAME] [--output OUTPUT_FILE]
 pname: docker app
 plink: docker_app.yaml
@@ -9,7 +9,7 @@ options:
   shorthand: o
   value_type: string
   default_value: bundle.json
-  description: Output file (- for stdout)
+  description: 出力ファイル。（- は標準出力）
   deprecated: false
   experimental: false
   experimentalcli: false
