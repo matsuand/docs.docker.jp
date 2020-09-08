@@ -1,9 +1,9 @@
 command: docker network disconnect
-short: Disconnect a container from a network
+short: ネットワークからコンテナーを切断します。
 long: |-
-  Disconnects a container from a network. The container must be running to
-  disconnect it from the network.
-usage: docker network disconnect [OPTIONS] NETWORK CONTAINER
+  ネットワークからコンテナーを切断します。
+  コンテナーをネットワークから切断するには、そのコンテナーが実行中でなければなりません。
+usage: docker network disconnect [オプション] NETWORK CONTAINER
 pname: docker network
 plink: docker_network.yaml
 options:
@@ -11,7 +11,7 @@ options:
   shorthand: f
   value_type: bool
   default_value: "false"
-  description: Force the container to disconnect from a network
+  description: コンテナーからネットワークを強制的に切断します。
   deprecated: false
   experimental: false
   experimentalcli: false

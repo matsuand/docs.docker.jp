@@ -1,35 +1,35 @@
 command: docker network rm
 aliases: remove
-short: Remove one or more networks
+short: 1 つまたは複数のネットワークを削除します。
 long: |-
-  Removes one or more networks by name or identifier. To remove a network,
-  you must first disconnect any containers connected to it.
+  ネットワーク名または ID を指定して、1 つまたは複数のネットワークを削除します。
+  ネットワークを削除するには、そこに接続しているコンテナーをすべて切断しておかなければなりません。
 usage: docker network rm NETWORK [NETWORK...]
 pname: docker network
 plink: docker_network.yaml
 examples: |-
-  ### Remove a network
+  {: #remove-a-network }
+  ### ネットワークの削除
 
-  To remove the network named 'my-network':
+  'my-network' というネットワークを削除するには、以下のようにします。
 
   ```bash
     $ docker network rm my-network
   ```
 
-  ### Remove multiple networks
+  {: #remove-multiple-networks }
+  ### ネットワークの複数削除
 
-  To delete multiple networks in a single `docker network rm` command, provide
-  multiple network names or ids. The following example deletes a network with id
-  `3695c422697f` and a network named `my-network`:
+  1 つの `docker network rm` コマンドを使って複数のネットワークを削除するには、ネットワーク名または id を複数指定します。
+  以下のコマンドは、id `3695c422697f` を持つネットワーク 1 つと、`my-network` という名のネットワーク 1 つを削除します。
 
   ```bash
     $ docker network rm 3695c422697f my-network
   ```
 
-  When you specify multiple networks, the command attempts to delete each in turn.
-  If the deletion of one network fails, the command continues to the next on the
-  list and tries to delete that. The command reports success or failure for each
-  deletion.
+  複数のネットワークを指定した場合、このコマンドは順番に削除を行っていきます。
+  どれかのネットワーク削除に失敗した場合でも、コマンドは指定された次のネットワークの削除処理を続行します。
+  このコマンドは各ネットワークの削除に成功したか失敗したかを報告します。
 deprecated: false
 min_api_version: "1.21"
 experimental: false

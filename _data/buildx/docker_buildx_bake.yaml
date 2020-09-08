@@ -10,7 +10,7 @@ options:
   shorthand: f
   value_type: stringArray
   default_value: '[]'
-  description: 定義ファイルをビルドします。
+  description: ビルド定義ファイル。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -19,7 +19,7 @@ options:
 - option: no-cache
   value_type: bool
   default_value: "false"
-  description: イメージをビルドする際にキャッシュを利用しません。
+  description: イメージビルド時にキャッシュを利用しません。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -38,7 +38,7 @@ options:
   value_type: string
   default_value: auto
   description: |
-    処理経過の出力のタイプを設定します（auto、plain、tty）。コンテナー出力には plain が用いられます。
+    処理経過の出力タイプを設定します（auto、plain、tty）。コンテナー出力には plain が用いられます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -47,7 +47,7 @@ options:
 - option: pull
   value_type: bool
   default_value: "false"
-  description: イメージの最新版を常にプルするようにします。
+  description: 常に最新イメージのプルを試みます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -56,7 +56,7 @@ options:
 - option: set
   value_type: stringArray
   default_value: '[]'
-  description: 'target のバリューをオーバーライドします（target.key=value）。'
+  description: 'target の値をオーバーライドします（target.key=value）。'
   deprecated: false
   experimental: false
   experimentalcli: false
