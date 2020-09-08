@@ -6,14 +6,14 @@ notoc: true
 ---
 
 {% comment %}
-```
+```none
 Usage: events [options] [SERVICE...]
 
 Options:
     --json      Output events as a stream of json objects
 ```
 {% endcomment %}
-```
+```none
 利用方法: events [オプション] [SERVICE...]
 
 オプション:

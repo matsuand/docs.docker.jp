@@ -6,14 +6,14 @@ notoc: true
 ---
 
 {% comment %}
-```
+```none
 Usage: push [options] [SERVICE...]
 
 Options:
     --ignore-push-failures  Push what it can and ignores images with push failures.
 ```
 {% endcomment %}
-```
+```none
 利用方法: push [オプション] [SERVICE...]
 
 オプション:

@@ -6,6 +6,7 @@ notoc: true
 ---
 
 {% comment %}
+```none
 Usage: up [options] [--scale SERVICE=NUM...] [SERVICE...]
 
 Options:
@@ -26,6 +27,7 @@ Options:
     --build                    Build images before starting containers.
     --abort-on-container-exit  Stops all containers if any container was
                                stopped. Incompatible with -d.
+    --attach-dependencies      Attach to dependent containers.
     -t, --timeout TIMEOUT      Use this timeout in seconds for container
                                shutdown when attached or when containers are
                                already running. (default: 10)
@@ -37,8 +39,9 @@ Options:
                                container. Implies --abort-on-container-exit.
     --scale SERVICE=NUM        Scale SERVICE to NUM instances. Overrides the
                                `scale` setting in the Compose file if present.
-{% endcomment %}
 ```
+{% endcomment %}
+```none
 利用方法: up [オプション] [--scale SERVICE=NUM...] [SERVICE...]
 
 オプション:
@@ -59,6 +62,7 @@ Options:
     --build                    コンテナー起動前にイメージをビルドします。
     --abort-on-container-exit  コンテナーのいずれかが停止したときにコンテナーすべて
                                を停止します。-d と同時に使えません。
+    --attach-dependencies      依存するコンテナーにアタッチします。
     -t, --timeout TIMEOUT      アタッチあるいは起動されているコンテナーのシャット
                                ダウンに要するタイムアウト時間を秒数で指定します。
                                （デフォルト: 10）

@@ -6,9 +6,11 @@ notoc: true
 ---
 
 {% comment %}
+```none
 Usage: unpause [SERVICE...]
-{% endcomment %}
 ```
+{% endcomment %}
+```none
 利用方法: unpause [SERVICE...]
 ```
 

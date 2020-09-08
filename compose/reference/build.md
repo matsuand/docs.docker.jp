@@ -7,28 +7,40 @@ notoc: true
 ---
 
 {% comment %}
+```none
 Usage: build [options] [--build-arg key=val...] [SERVICE...]
 
 Options:
+    --build-arg key=val     Set build-time variables for services.
     --compress              Compress the build context using gzip.
     --force-rm              Always remove intermediate containers.
+    -m, --memory MEM        Set memory limit for the build container.
     --no-cache              Do not use cache when building the image.
-    --pull                  Always attempt to pull a newer version of the image.
-    -m, --memory MEM        Sets memory limit for the build container.
-    --build-arg key=val     Set build-time variables for services.
+    --no-rm                 Do not remove intermediate containers after a successful build.
     --parallel              Build images in parallel.
-{% endcomment %}
+    --progress string       Set type of progress output (`auto`, `plain`, `tty`).
+                            `EXPERIMENTAL` flag for native builder.
+                            To enable, run with `COMPOSE_DOCKER_CLI_BUILD=1`)
+    --pull                  Always attempt to pull a newer version of the image.
+    -q, --quiet             Don't print anything to `STDOUT`.
 ```
+{% endcomment %}
+```none
 利用方法: build [オプション] [--build-arg key=val...] [SERVICE...]
 
 オプション:
+    --build-arg key=val     サービスに対してビルド時の変数を設定します。
     --compress              gzip を使ってビルドコンテキストを圧縮します。
     --force-rm              常に中間コンテナーは削除します。
+    -m, --memory MEM        ビルドするコンテナーのメモリ上限を設定します。
     --no-cache              イメージビルド時にキャッシュを使用しません。
-    --pull                  プルを行う際に常に最新版のイメージの取得を試みます。
-    -m, --memory MEM        ビルドコンテナーにおけるメモリ上限を設定します。
-    --build-arg key=val     サービスに対してビルド時の変数を設定します。
+    --no-rm                 ビルド生成後に中間コンテナーを削除しません。
     --parallel              並行的にイメージをビルドします。
+    --progress string       処理経過の出力タイプ。（`auto`、`plain`、`tty`）
+                            ネイティブビルダー用に `EXPERIMENTAL` フラグがあり、これを有効
+                            にするには `COMPOSE_DOCKER_CLI_BUILD=1` を指定して実行。
+    --pull                  プルを行う際に常に最新版のイメージの取得を試みます。
+    -q, --quiet             `STDOUT` に何も出力しません。
 ```
 
 {% comment %}

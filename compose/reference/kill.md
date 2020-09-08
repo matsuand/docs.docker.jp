@@ -6,7 +6,7 @@ notoc: true
 ---
 
 {% comment %}
-```
+```none
 Usage: kill [options] [SERVICE...]
 
 Options:
@@ -14,7 +14,7 @@ Options:
                       Default signal is SIGKILL.
 ```
 {% endcomment %}
-```
+```none
 利用方法: kill [オプション] [SERVICE...]
 
 オプション:

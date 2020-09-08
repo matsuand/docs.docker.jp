@@ -6,14 +6,14 @@ notoc: true
 ---
 
 {% comment %}
-```
+```none
 Usage: images [options] [SERVICE...]
 
 Options:
     -q, --quiet  Only display IDs
 ```
 {% endcomment %}
-```
+```none
 利用方法: images [オプション] [SERVICE...]
 
 オプション:

@@ -6,9 +6,11 @@ notoc: true
 ---
 
 {% comment %}
+```none
 Usage: start [SERVICE...]
-{% endcomment %}
 ```
+{% endcomment %}
+```none
 利用方法: start [SERVICE...]
 ```
 

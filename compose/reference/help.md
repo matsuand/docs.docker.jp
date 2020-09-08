@@ -12,16 +12,16 @@ notoc: true
 <div class="tab-content">
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
-```
-Usage: help COMMAND
+```none
+Usage: help [COMMAND]
 ```
 {% endcapture %}
 {{ original-content | markdownify }}
 </div>
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
-```
-利用方法: help コマンド
+```none
+利用方法: help [コマンド]
 ```
 {% endcapture %}
 {{ japanese-content | markdownify }}

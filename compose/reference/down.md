@@ -12,7 +12,7 @@ notoc: true
 <div class="tab-content">
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
-```
+```none
 Usage: down [options]
 
 Options:
@@ -33,7 +33,7 @@ Options:
 </div>
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
-```
+```none
 利用方法: down [オプション]
 
 オプション:

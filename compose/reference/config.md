@@ -14,13 +14,14 @@ redirect_from:
 <div class="tab-content">
   <div id="origin" class="tab-pane fade in active">
 {% capture original-content %}
-```
+```none
 Usage: config [options]
 
 Options:
     --resolve-image-digests  Pin image tags to digests.
     --no-interpolate         Don't interpolate environment variables.
-    -q, --quiet              Only validate the configuration, don't print anything.
+    -q, --quiet              Only validate the configuration, don't print
+                             anything.
     --services               Print the service names, one per line.
     --volumes                Print the volume names, one per line.
     --hash="*"               Print the service config hash, one per line.
@@ -32,13 +33,14 @@ Options:
 </div>
 <div id="japanese" class="tab-pane fade" markdown="1">
 {% capture japanese-content %}
-```
+```none
 利用方法: config [オプション]
 
 オプション:
     --resolve-image-digests  Pin image tags to digests.
     --no-interpolate         Don't interpolate environment variables.
-    -q, --quiet              Only validate the configuration, don't print anything.
+    -q, --quiet              Only validate the configuration, don't print
+                             anything.
     --services               Print the service names, one per line.
     --volumes                Print the volume names, one per line.
     --hash="*"               Print the service config hash, one per line.

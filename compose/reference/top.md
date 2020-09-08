@@ -8,12 +8,10 @@ notoc: true
 {% comment %}
 ```none
 Usage: top [SERVICE...]
-
 ```
 {% endcomment %}
 ```none
 利用方法: top [SERVICE...]
-
 ```
 
 {% comment %}

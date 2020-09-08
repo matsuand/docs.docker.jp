@@ -6,6 +6,111 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+## 1.27.0
+(2020-09-07)
+
+{% comment %}
+### Features
+{% endcomment %}
+{: #features }
+### 機能
+
+{% comment %}
+- Merged 2.x and 3.x Compose formats and aligned with `COMPOSE_SPEC` schema.
+{% endcomment %}
+- Compose フォーマット 2.x と 3.x をマージし、`COMPOSE_SPEC` スキーマに合わせました。
+
+{% comment %}
+- Implemented service mode for `ipc`.
+{% endcomment %}
+- `ipc` に対応するサービスモードを導入しました。
+
+{% comment %}
+- Passed `COMPOSE_PROJECT_NAME` environment variable in container mode.
+{% endcomment %}
+- コンテナーモードにおいて環境変数 `COMPOSE_PROJECT_NAME` を設定しました。
+
+{% comment %}
+- Made `run` behave in the same way as `up`.
+{% endcomment %}
+- `run` の動作を `up` と同様にしました。
+
+{% comment %}
+- Used `docker build` on `docker-compose run` when `COMPOSE_DOCKER_CLI_BUILD` environment variable is set.
+{% endcomment %}
+- 環境変数 `COMPOSE_DOCKER_CLI_BUILD` の設定時には `docker-compose run` において `docker build` を利用するようにしました。
+
+{% comment %}
+- Used the docker-py default API version for engine queries (`auto`).
+{% endcomment %}
+- Engine のクエリー（`auto`）に対して docker-py のデフォルト API バージョンを利用するようにしました。
+
+{% comment %}
+- Parsed `network_mode` on build.
+{% endcomment %}
+- ビルド時に `network_mode` を取得するようにしました。
+
+{% comment %}
+### Bugs
+{% endcomment %}
+{: #bugs }
+### バグ
+
+{% comment %}
+- Ignored build context path validation when building is not required.
+{% endcomment %}
+- ビルドが必要ではない場合には、ビルドコンテキストのパス確認を無視するようにしました。
+
+{% comment %}
+- Fixed float to bytes conversion via docker-py bump to 4.3.1.
+{% endcomment %}
+- docker-py 4.3.1 へのアップグレードにともなって、float から byte への変換を修正しました。
+
+{% comment %}
+- Fixed the scale bug when the deploy section is set.
+{% endcomment %}
+- デプロイの項が設定されているときのスケールに関するバグを修正しました。
+
+{% comment %}
+- Fixed `docker-py` bump in `setup.py`.
+{% endcomment %}
+- `setup.py` において `docker-py` のバージョンアップに対応しました。
+
+{% comment %}
+- Fixed experimental build failure detection.
+{% endcomment %}
+- 試験的ビルドに失敗検出を修正しました。
+
+{% comment %}
+- Fixed context propagation to the Docker CLI.
+{% endcomment %}
+- Docker CLI へのコンテキスト送信を修正しました。
+
+{% comment %}
+### Miscellaneous
+{% endcomment %}
+{: #miscellaneous }
+### その他
+
+{% comment %}
+- Bumped `docker-py` to 4.3.1.
+{% endcomment %}
+- `docker-py` 4.3.1 へのアップデート。
+
+{% comment %}
+- Bumped `tox` to 3.19.0.
+{% endcomment %}
+- `tox` 3.19.0 へのアップデート。
+
+{% comment %}
+- Bumped `virtualenv` to 20.0.30.
+{% endcomment %}
+- `virtualenv` 20.0.30 へのアップデート。
+
+{% comment %}
+- Added script for Docs synchronization.
+{% endcomment %}
+- Docs 同期に対するスクリプトを追加しました。
 
 ## 1.26.2
 (2020-07-02)
@@ -27,7 +132,7 @@ redirect_from:
 {% comment %}
 ### Features
 {% endcomment %}
-{: #features }
+{: #features-1 }
 ### 機能
 
 {% comment %}
@@ -57,8 +162,8 @@ redirect_from:
 {% comment %}
 ### Features
 {% endcomment %}
-{: #features }
-### Features
+{: #features-2 }
+### 機能
 
 {% comment %}
 - Added `docker context` support.
@@ -125,7 +230,11 @@ redirect_from:
 ## 1.25.5
 (2020-04-10)
 
+{% comment %}
 ### Features
+{% endcomment %}
+{: #features-3 }
+### 機能
 
 - Bumped OpenSSL from 1.1.1d to 1.1.1f.
 
@@ -272,7 +381,11 @@ This release contains minor improvements and bug fixes.
 ## 1.24.0
 (2019-03-28)
 
+{% comment %}
 ### Features
+{% endcomment %}
+{: #features-4 }
+### 機能
 
 - Added support for connecting to the Docker Engine using the `ssh` protocol.
 
@@ -367,7 +480,11 @@ has changed from `<project>_<service>_<index>` to
 hexadecimal string. Please make sure to update scripts relying on the old
 naming scheme accordingly before upgrading.
 
+{% comment %}
 ### Features
+{% endcomment %}
+{: #features-5 }
+### 機能
 
 - Logs for containers restarting after a crash will now appear in the output
   of the `up` and `logs` commands.
