@@ -154,10 +154,16 @@ Compose と Swarm の統合に関しては、[統合に関する説明](swarm.md
 {: #compose-documentation }
 
 {% comment %}
+- [User guide](index.md)
 - [Installing Compose](install.md)
+- [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
+- [Sample apps with Compose](samples-for-compose.md)
 {% endcomment %}
+- [ユーザーガイド](index.md)
 - [Compose のインストール](install.md)
+- [はじめよう](gettingstarted.md)
 - [コマンドラインリファレンス](reference/index.md)
 - [Compose ファイルリファレンス](compose-file/index.md)
+- [Compose を使ったサンプルアプリ](samples-for-compose.md)

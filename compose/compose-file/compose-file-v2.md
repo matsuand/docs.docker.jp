@@ -3055,11 +3055,11 @@ networks:
 - [User guide](../index.md)
 - [Installing Compose](../install.md)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Samples](../../samples/index.md)
+- [Sample apps with Compose](../samples-for-compose.md)
 - [Command line reference](../reference/index.md)
 {% endcomment %}
 - [ユーザーガイド](../index.md)
 - [Compose のインストール](../install.md)
 - [Compose ファイルのバージョンとアップグレード](compose-versioning.md)
-- [サンプル](../../samples/index.md)
+- [Compose を使ったサンプルアプリ](../samples-for-compose.md)
 - [コマンドラインリファレンス](../reference/index.md)

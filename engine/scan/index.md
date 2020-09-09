@@ -81,10 +81,23 @@ Check your installation by running `docker scan --version`, it should print the 
 
 ```shell
 $ docker scan --version
-Version:    v0.3.0
-Git commit: b8ee514
-Provider:   Snyk (1.383.1)
+Version:    v0.3.3
+Git commit: 1bab774
+Provider:   Snyk (1.385.0)
 ```
+
+{% comment %}
+> **Note:**
+>
+> Docker Scan uses the Snyk binary installed in your environment by default. If 
+this is not available, it uses the Snyk binary embedded in Docker Desktop.
+> The minimum version required for Snyk is `1.385.0`.
+{% endcomment %}
+> **メモ**
+>
+> Docker Scan はデフォルトで、インストールされている Snyk バイナリを利用します。
+> これが利用できなかった場合は、Docker Desktop に埋め込まれている Snyk バイナリが利用されます。
+> 必要となる Snyk の最低バージョンは `1.385.0` です。
 
 {% comment %}
 ## Supported options

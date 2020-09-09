@@ -322,7 +322,7 @@ from [https://download.docker.com/linux/static/stable/x86\_64/](https://download
 {% comment %}
 {% endcomment %}
 If you already have the Docker daemon running as the root, you only need to
-extract `docker-rootless-extras-<version>.tar.gz`. The archive can be extracted
+extract `docker-rootless-extras-<version>.tgz`. The archive can be extracted
 under an arbitrary directory listed in the `$PATH`. For example, `/usr/local/bin`,
 or `$HOME/bin`.
 

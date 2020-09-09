@@ -217,16 +217,12 @@ Compose での作業を、入力は速くミスは少なく！
 {% comment %}
 - [User guide](index.md)
 - [Installing Compose](install.md)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
+- [Sample apps with Compose](samples-for-compose.md)
 {% endcomment %}
 - [ユーザーガイド](index.md)
 - [Compose のインストール](install.md)
-- [Django を使ってはじめよう](django.md)
-- [Rails を使ってはじめよう](rails.md)
-- [WordPress を使ってはじめよう](wordpress.md)
 - [コマンドラインリファレンス](reference/index.md)
 - [Compose ファイルリファレンス](compose-file/index.md)
+- [Compose を使ったサンプルアプリ](samples-for-compose.md)

@@ -89,10 +89,14 @@ Fully qualified container name, such as `DB_1_NAME=/myapp_web_1/myapp_db_1`
 {% comment %}
 - [User guide](index.md)
 - [Installing Compose](install.md)
+- [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
+- [Sample apps with Compose](samples-for-compose.md)
 {% endcomment %}
 - [ユーザーガイド](index.md)
 - [Compose のインストール](install.md)
+- [はじめよう](gettingstarted.md)
 - [コマンドラインリファレンス](reference/index.md)
 - [Compose ファイルリファレンス](compose-file/index.md)
+- [Compose を使ったサンプルアプリ](samples-for-compose.md)

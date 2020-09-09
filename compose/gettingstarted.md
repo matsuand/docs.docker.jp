@@ -569,13 +569,12 @@ At this point, you have seen the basics of how Compose works.
 ## 次に読むものは
 
 {% comment %}
-- Next, try the quick start guide for [Django](django.md),
-  [Rails](rails.md), or [WordPress](wordpress.md)
+- Next, try the [Sample apps with Compose](samples-for-compose.md)
 - [Explore the full list of Compose commands](reference/index.md)
 - [Compose configuration file reference](compose-file/index.md)
 - To learn more about volumes and bind mounts, see [Manage data in Docker](../storage/index.md)
 {% endcomment %}
-- 次は [Django](django.md)、[Rails](rails.md)、[WordPress](wordpress.md) のクイックスタートを試してみましょう。
+- 次は [Compose を使ったサンプルアプリ](samples-for-compose.md) を試してみましょう。
 - [Compose コマンドの全一覧](reference/index.md)
 - [Compose ファイルリファレンス](compose-file/index.md)
 - ボリュームやバインドマウントについての詳細は、[Docker でのデータ管理](../storage/index.md) を参照してください。
