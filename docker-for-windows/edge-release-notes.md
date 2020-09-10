@@ -24,11 +24,6 @@ For information about Stable releases, see the [Stable release notes](release-no
 2020-09-08
 
 {% comment %}
-> [Download](https://desktop.docker.com/win/edge/47792/Docker%20Desktop%20Installer.exe)
-{% endcomment %}
-> [ダウンロード](https://desktop.docker.com/win/edge/47792/Docker%20Desktop%20Installer.exe)
-
-{% comment %}
 ### Upgrades
 {% endcomment %}
 {: #upgrades }
