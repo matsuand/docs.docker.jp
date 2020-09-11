@@ -1,13 +1,13 @@
 command: docker container create
 short: 新たなコンテナーを生成します。
 long: 新たなコンテナーを生成します。
-usage: docker container create [OPTIONS] IMAGE [COMMAND] [ARG...]
+usage: docker container create [オプション] IMAGE [COMMAND] [ARG...]
 pname: docker container
 plink: docker_container.yaml
 options:
 - option: add-host
   value_type: list
-  description: Add a custom host-to-IP mapping (host:ip)
+  description: ホスト－IP マッピングのカスタム設定を追加します。(ホスト名:ip)
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -16,7 +16,7 @@ options:
 - option: attach
   shorthand: a
   value_type: list
-  description: Attach to STDIN, STDOUT or STDERR
+  description: STDIN、STDOUT、STDERR にアタッチします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -26,7 +26,7 @@ options:
   value_type: uint16
   default_value: "0"
   description: |
-    Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)
+    ブロック I/O。（相対的な重みづけ）、10 から 1000、0 は無効化。（デフォルトは 0）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -35,7 +35,7 @@ options:
 - option: blkio-weight-device
   value_type: list
   default_value: '[]'
-  description: Block IO weight (relative device weight)
+  description: ブロック I/O 重みづけ。（相対的なデバイス重みづけ）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -43,7 +43,7 @@ options:
   swarm: false
 - option: cap-add
   value_type: list
-  description: Add Linux capabilities
+  description: Linux ケーパビリティーを追加します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -51,7 +51,7 @@ options:
   swarm: false
 - option: cap-drop
   value_type: list
-  description: Drop Linux capabilities
+  description: Linux ケーパビリティーを削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -59,7 +59,7 @@ options:
   swarm: false
 - option: cgroup-parent
   value_type: string
-  description: Optional parent cgroup for the container
+  description: 任意に指定するコンテナーの親 cgroup。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -67,7 +67,7 @@ options:
   swarm: false
 - option: cidfile
   value_type: string
-  description: Write the container ID to the file
+  description: コンテナー ID をファイルに書き出します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -76,7 +76,7 @@ options:
 - option: cpu-count
   value_type: int64
   default_value: "0"
-  description: CPU count (Windows only)
+  description: CPU カウント。(Windows のみ)
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -86,7 +86,7 @@ options:
 - option: cpu-percent
   value_type: int64
   default_value: "0"
-  description: CPU percent (Windows only)
+  description: CPU パーセント。(Windows のみ)
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -96,7 +96,7 @@ options:
 - option: cpu-period
   value_type: int64
   default_value: "0"
-  description: Limit CPU CFS (Completely Fair Scheduler) period
+  description: CPU の CFS（Completely Fair Scheduler）間隔を制限します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -105,7 +105,7 @@ options:
 - option: cpu-quota
   value_type: int64
   default_value: "0"
-  description: Limit CPU CFS (Completely Fair Scheduler) quota
+  description: CPU の CFS（Completely Fair Scheduler）クォータを制限します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -114,7 +114,7 @@ options:
 - option: cpu-rt-period
   value_type: int64
   default_value: "0"
-  description: Limit CPU real-time period in microseconds
+  description: CPU へのリアルタイムアクセス時間をマイクロ秒で制限します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -124,7 +124,7 @@ options:
 - option: cpu-rt-runtime
   value_type: int64
   default_value: "0"
-  description: Limit CPU real-time runtime in microseconds
+  description: CPU へのリアルタイムアクセスランタイムをマイクロ秒で制限します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -135,7 +135,7 @@ options:
   shorthand: c
   value_type: int64
   default_value: "0"
-  description: CPU shares (relative weight)
+  description: CPU 配分。（相対的な重みづけ）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -143,7 +143,7 @@ options:
   swarm: false
 - option: cpus
   value_type: decimal
-  description: Number of CPUs
+  description: CPU 数。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -152,7 +152,7 @@ options:
   swarm: false
 - option: cpuset-cpus
   value_type: string
-  description: CPUs in which to allow execution (0-3, 0,1)
+  description: 利用を許容する CPU 数。（0-3、0,1）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -160,7 +160,7 @@ options:
   swarm: false
 - option: cpuset-mems
   value_type: string
-  description: MEMs in which to allow execution (0-3, 0,1)
+  description: 利用を許容するメモリ数。（0-3、0,1）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -168,7 +168,7 @@ options:
   swarm: false
 - option: device
   value_type: list
-  description: Add a host device to the container
+  description: ホストのデバイスをコンテナーに追加します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -176,7 +176,7 @@ options:
   swarm: false
 - option: device-cgroup-rule
   value_type: list
-  description: Add a rule to the cgroup allowed devices list
+  description: cgroup がアクセス可能なデバイスリストにルールを追加します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -185,7 +185,7 @@ options:
 - option: device-read-bps
   value_type: list
   default_value: '[]'
-  description: Limit read rate (bytes per second) from a device
+  description: デバイスからの読み込み割合（秒あたりのバイト数）を制限します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -194,7 +194,7 @@ options:
 - option: device-read-iops
   value_type: list
   default_value: '[]'
-  description: Limit read rate (IO per second) from a device
+  description: デバイスからの読み込み割合（秒あたりの I/O）を制限します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -203,7 +203,7 @@ options:
 - option: device-write-bps
   value_type: list
   default_value: '[]'
-  description: Limit write rate (bytes per second) to a device
+  description: デバイスへの書き込み割合（秒あたりのバイト数）を制限します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -212,7 +212,7 @@ options:
 - option: device-write-iops
   value_type: list
   default_value: '[]'
-  description: Limit write rate (IO per second) to a device
+  description: デバイスへの書き込み割合（秒あたりの I/O）を制限します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -221,7 +221,7 @@ options:
 - option: disable-content-trust
   value_type: bool
   default_value: "true"
-  description: Skip image verification
+  description: イメージの検証を省略します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -229,7 +229,7 @@ options:
   swarm: false
 - option: dns
   value_type: list
-  description: Set custom DNS servers
+  description: カスタム DNS サーバーを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -237,7 +237,7 @@ options:
   swarm: false
 - option: dns-opt
   value_type: list
-  description: Set DNS options
+  description: DNS オプションを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -245,7 +245,7 @@ options:
   swarm: false
 - option: dns-option
   value_type: list
-  description: Set DNS options
+  description: DNS オプションを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -253,7 +253,7 @@ options:
   swarm: false
 - option: dns-search
   value_type: list
-  description: Set custom DNS search domains
+  description: カスタム DNS 検索ドメインを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -261,7 +261,7 @@ options:
   swarm: false
 - option: domainname
   value_type: string
-  description: Container NIS domain name
+  description: コンテナーの NIS ドメイン名。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -269,7 +269,7 @@ options:
   swarm: false
 - option: entrypoint
   value_type: string
-  description: Overwrite the default ENTRYPOINT of the image
+  description: イメージのデフォルト ENTRYPOINT をオーバーライドします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -278,7 +278,7 @@ options:
 - option: env
   shorthand: e
   value_type: list
-  description: Set environment variables
+  description: 環境変数を設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -286,7 +286,7 @@ options:
   swarm: false
 - option: env-file
   value_type: list
-  description: Read in a file of environment variables
+  description: 環境変数ファイルを読み込みます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -294,7 +294,7 @@ options:
   swarm: false
 - option: expose
   value_type: list
-  description: Expose a port or a range of ports
+  description: ポートまたはポート範囲を公開します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -302,7 +302,7 @@ options:
   swarm: false
 - option: gpus
   value_type: gpu-request
-  description: GPU devices to add to the container ('all' to pass all GPUs)
+  description: コンテナーに追加する GPU デバイスを指定します。('all' により全 GPU)
   deprecated: false
   min_api_version: "1.40"
   experimental: false
@@ -311,7 +311,7 @@ options:
   swarm: false
 - option: group-add
   value_type: list
-  description: Add additional groups to join
+  description: 新たに参加するグループを追加します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -319,7 +319,7 @@ options:
   swarm: false
 - option: health-cmd
   value_type: string
-  description: Command to run to check health
+  description: ヘルスチェックを実行するコマンド。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -328,7 +328,7 @@ options:
 - option: health-interval
   value_type: duration
   default_value: 0s
-  description: Time between running the check (ms|s|m|h) (default 0s)
+  description: ヘルスチェックの実行間隔。(ms|s|m|h) （デフォルトは 0s）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -337,7 +337,7 @@ options:
 - option: health-retries
   value_type: int
   default_value: "0"
-  description: Consecutive failures needed to report unhealthy
+  description: 不健康（unhealthy）であると報告するのに必要な連続失敗回数。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -347,7 +347,7 @@ options:
   value_type: duration
   default_value: 0s
   description: |
-    Start period for the container to initialize before starting health-retries countdown (ms|s|m|h) (default 0s)
+    ヘルスチェックのリトライを数え始める前の、コンテナー初期化を行う開始時間。(ms|s|m|h) （デフォルトは 0s）
   deprecated: false
   min_api_version: "1.29"
   experimental: false
@@ -358,7 +358,7 @@ options:
   value_type: duration
   default_value: 0s
   description: |
-    Maximum time to allow one check to run (ms|s|m|h) (default 0s)
+    1 つのチェック処理実行に許容する最大時間。(ms|s|m|h) （デフォルトは 0s）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -367,7 +367,7 @@ options:
 - option: help
   value_type: bool
   default_value: "false"
-  description: Print usage
+  description: 利用方法を表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -376,7 +376,7 @@ options:
 - option: hostname
   shorthand: h
   value_type: string
-  description: Container host name
+  description: コンテナーホスト名。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -386,7 +386,7 @@ options:
   value_type: bool
   default_value: "false"
   description: |
-    Run an init inside the container that forwards signals and reaps processes
+    コンテナー内部にて、シグナル送信と子プロセス管理を行う初期化処理を実行します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -397,7 +397,7 @@ options:
   shorthand: i
   value_type: bool
   default_value: "false"
-  description: Keep STDIN open even if not attached
+  description: アタッチされていなくても STDIN は開放し続けます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -407,7 +407,7 @@ options:
   value_type: bytes
   default_value: "0"
   description: |
-    Maximum IO bandwidth limit for the system drive (Windows only)
+    システムデバイスの I/O 帯域幅の上限。（Windows のみ）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -417,7 +417,7 @@ options:
 - option: io-maxiops
   value_type: uint64
   default_value: "0"
-  description: Maximum IOps limit for the system drive (Windows only)
+  description: システムデバイスの IOps の上限。（Windows のみ）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -426,7 +426,7 @@ options:
   os_type: windows
 - option: ip
   value_type: string
-  description: IPv4 address (e.g., 172.30.100.104)
+  description: IPv4 アドレス。（たとえば 172.30.100.104）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -434,7 +434,7 @@ options:
   swarm: false
 - option: ip6
   value_type: string
-  description: IPv6 address (e.g., 2001:db8::33)
+  description: IPv6 アドレス。（たとえば 2001:db8::33）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -442,7 +442,7 @@ options:
   swarm: false
 - option: ipc
   value_type: string
-  description: IPC mode to use
+  description: 利用する IPC mode モード。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -450,7 +450,7 @@ options:
   swarm: false
 - option: isolation
   value_type: string
-  description: Container isolation technology
+  description: コンテナーの分離技術（isolation technology）方式。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -459,7 +459,7 @@ options:
 - option: kernel-memory
   value_type: bytes
   default_value: "0"
-  description: Kernel memory limit
+  description: カーネルメモリ上限。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -468,7 +468,7 @@ options:
 - option: label
   shorthand: l
   value_type: list
-  description: Set meta data on a container
+  description: コンテナーに対してメタデータを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -476,7 +476,7 @@ options:
   swarm: false
 - option: label-file
   value_type: list
-  description: Read in a line delimited file of labels
+  description: 行ごとにラベルが記述されたファイルを読み込みます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -484,7 +484,7 @@ options:
   swarm: false
 - option: link
   value_type: list
-  description: Add link to another container
+  description: 別コンテナーへのリンクを追加します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -492,7 +492,7 @@ options:
   swarm: false
 - option: link-local-ip
   value_type: list
-  description: Container IPv4/IPv6 link-local addresses
+  description: コンテナーの IPv4/IPv6 によるリンクローカルアドレス。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -500,7 +500,7 @@ options:
   swarm: false
 - option: log-driver
   value_type: string
-  description: Logging driver for the container
+  description: コンテナーにおけるログドライバー。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -508,7 +508,7 @@ options:
   swarm: false
 - option: log-opt
   value_type: list
-  description: Log driver options
+  description: ログドライバーオプション。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -516,7 +516,7 @@ options:
   swarm: false
 - option: mac-address
   value_type: string
-  description: Container MAC address (e.g., 92:d0:c6:0a:29:33)
+  description: コンテナーの MAC アドレス。（たとえば 92:d0:c6:0a:29:33）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -526,7 +526,7 @@ options:
   shorthand: m
   value_type: bytes
   default_value: "0"
-  description: Memory limit
+  description: メモリ上限。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -535,7 +535,7 @@ options:
 - option: memory-reservation
   value_type: bytes
   default_value: "0"
-  description: Memory soft limit
+  description: メモリのソフトリミット。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -545,7 +545,7 @@ options:
   value_type: bytes
   default_value: "0"
   description: |
-    Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+    メモリとスワップの総量を制限します。'-1' 設定時はスワップ無制限。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -554,7 +554,7 @@ options:
 - option: memory-swappiness
   value_type: int64
   default_value: "-1"
-  description: Tune container memory swappiness (0 to 100)
+  description: コンテナーのスワップ割合を調整します。（0 から 100）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -562,7 +562,7 @@ options:
   swarm: false
 - option: mount
   value_type: mount
-  description: Attach a filesystem mount to the container
+  description: ファイルシステムマウントをコンテナーにアタッチします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -570,7 +570,7 @@ options:
   swarm: false
 - option: name
   value_type: string
-  description: Assign a name to the container
+  description: コンテナーに名前を割り当てます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -578,7 +578,7 @@ options:
   swarm: false
 - option: net
   value_type: network
-  description: Connect a container to a network
+  description: コンテナーをネットワークに接続します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -586,7 +586,7 @@ options:
   swarm: false
 - option: net-alias
   value_type: list
-  description: Add network-scoped alias for the container
+  description: ネットワーク範囲内のエイリアスをコンテナーに追加します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -594,7 +594,7 @@ options:
   swarm: false
 - option: network
   value_type: network
-  description: Connect a container to a network
+  description: コンテナーをネットワークに接続します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -602,7 +602,7 @@ options:
   swarm: false
 - option: network-alias
   value_type: list
-  description: Add network-scoped alias for the container
+  description: ネットワーク範囲内のエイリアスをコンテナーに追加します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -611,7 +611,7 @@ options:
 - option: no-healthcheck
   value_type: bool
   default_value: "false"
-  description: Disable any container-specified HEALTHCHECK
+  description: コンテナー固有の HEALTHCHECK を無効にします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -620,7 +620,7 @@ options:
 - option: oom-kill-disable
   value_type: bool
   default_value: "false"
-  description: Disable OOM Killer
+  description: OOM キラーを無効にします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -629,7 +629,7 @@ options:
 - option: oom-score-adj
   value_type: int
   default_value: "0"
-  description: Tune host's OOM preferences (-1000 to 1000)
+  description: ホストの OOM に対する優先順位を設定します。（-1000 から 1000）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -637,7 +637,7 @@ options:
   swarm: false
 - option: pid
   value_type: string
-  description: PID namespace to use
+  description: 利用する PID 名前空間。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -646,7 +646,7 @@ options:
 - option: pids-limit
   value_type: int64
   default_value: "0"
-  description: Tune container pids limit (set -1 for unlimited)
+  description: コンテナーの PID 制限を調整します。（-1 により無制限）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -654,7 +654,7 @@ options:
   swarm: false
 - option: platform
   value_type: string
-  description: Set platform if server is multi-platform capable
+  description: サーバーがマルチプラットフォームに対応している場合に、プラットフォームを指定します。
   deprecated: false
   min_api_version: "1.32"
   experimental: true
@@ -664,7 +664,7 @@ options:
 - option: privileged
   value_type: bool
   default_value: "false"
-  description: Give extended privileges to this container
+  description: コンテナーに拡張権限を付与します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -673,7 +673,7 @@ options:
 - option: publish
   shorthand: p
   value_type: list
-  description: Publish a container's port(s) to the host
+  description: ホストに対してコンテナーのポートを公開します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -683,7 +683,7 @@ options:
   shorthand: P
   value_type: bool
   default_value: "false"
-  description: Publish all exposed ports to random ports
+  description: 公開されたポートをランダムポートとして公開します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -692,7 +692,7 @@ options:
 - option: read-only
   value_type: bool
   default_value: "false"
-  description: Mount the container's root filesystem as read only
+  description: コンテナーのルートファイルシステムを読み込み専用としてマウントします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -701,7 +701,7 @@ options:
 - option: restart
   value_type: string
   default_value: "no"
-  description: Restart policy to apply when a container exits
+  description: コンテナー終了時に適用する再起動ポリシー。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -710,7 +710,7 @@ options:
 - option: rm
   value_type: bool
   default_value: "false"
-  description: Automatically remove the container when it exits
+  description: 終了時に中間コンテナーを自動的に削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -718,7 +718,7 @@ options:
   swarm: false
 - option: runtime
   value_type: string
-  description: Runtime to use for this container
+  description: このコンテナー向けに利用するランタイム。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -726,7 +726,7 @@ options:
   swarm: false
 - option: security-opt
   value_type: list
-  description: Security Options
+  description: セキュリティオプション。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -735,7 +735,7 @@ options:
 - option: shm-size
   value_type: bytes
   default_value: "0"
-  description: Size of /dev/shm
+  description: /dev/shm のサイズ。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -744,7 +744,7 @@ options:
 - option: stop-signal
   value_type: string
   default_value: SIGTERM
-  description: Signal to stop a container
+  description: コンテナーを停止するシグナル。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -753,7 +753,7 @@ options:
 - option: stop-timeout
   value_type: int
   default_value: "0"
-  description: Timeout (in seconds) to stop a container
+  description: コンテナー停止時の中断時間（秒単位）。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -762,7 +762,7 @@ options:
   swarm: false
 - option: storage-opt
   value_type: list
-  description: Storage driver options for the container
+  description: コンテナーにおけるストレージドライバーのオプション。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -771,7 +771,7 @@ options:
 - option: sysctl
   value_type: map
   default_value: map[]
-  description: Sysctl options
+  description: sysctl オプション。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -779,7 +779,7 @@ options:
   swarm: false
 - option: tmpfs
   value_type: list
-  description: Mount a tmpfs directory
+  description: tmpfs ディレクトリのマウント。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -789,7 +789,7 @@ options:
   shorthand: t
   value_type: bool
   default_value: "false"
-  description: Allocate a pseudo-TTY
+  description: 擬似 TTY を割り当てます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -798,7 +798,7 @@ options:
 - option: ulimit
   value_type: ulimit
   default_value: '[]'
-  description: Ulimit options
+  description: ulimit オプション。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -807,7 +807,7 @@ options:
 - option: user
   shorthand: u
   value_type: string
-  description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+  description: 'ユーザー名または UID。（記述書式t: \<name|uid\>[:\<group|gid\>]）'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -815,7 +815,7 @@ options:
   swarm: false
 - option: userns
   value_type: string
-  description: User namespace to use
+  description: 利用するユーザー名前空間。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -823,7 +823,7 @@ options:
   swarm: false
 - option: uts
   value_type: string
-  description: UTS namespace to use
+  description: 利用する UTS 名前空間。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -832,7 +832,7 @@ options:
 - option: volume
   shorthand: v
   value_type: list
-  description: Bind mount a volume
+  description: ボリュームをバインドマウントします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -840,7 +840,7 @@ options:
   swarm: false
 - option: volume-driver
   value_type: string
-  description: Optional volume driver for the container
+  description: 任意に指定するボリュームドライバー。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -848,7 +848,7 @@ options:
   swarm: false
 - option: volumes-from
   value_type: list
-  description: Mount volumes from the specified container(s)
+  description: 指定されたコンテナーからボリュームをマウントいます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -857,7 +857,7 @@ options:
 - option: workdir
   shorthand: w
   value_type: string
-  description: Working directory inside the container
+  description: コンテナー内部のワーキングディレクトリ。
   deprecated: false
   experimental: false
   experimentalcli: false

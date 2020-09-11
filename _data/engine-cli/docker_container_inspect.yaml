@@ -1,14 +1,14 @@
 command: docker container inspect
-short: Display detailed information on one or more containers
-long: Display detailed information on one or more containers
-usage: docker container inspect [OPTIONS] CONTAINER [CONTAINER...]
+short: 1 つまたは複数のコンテナーについて詳細情報を表示します。
+long: 1 つまたは複数のコンテナーについて詳細情報を表示します。
+usage: docker container inspect [オプション] CONTAINER [CONTAINER...]
 pname: docker container
 plink: docker_container.yaml
 options:
 - option: format
   shorthand: f
   value_type: string
-  description: Format the output using the given Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -18,7 +18,7 @@ options:
   shorthand: s
   value_type: bool
   default_value: "false"
-  description: Display total file sizes
+  description: 合計ファイルサイズを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false

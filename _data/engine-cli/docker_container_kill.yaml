@@ -1,7 +1,7 @@
 command: docker container kill
-short: Kill one or more running containers
-long: Kill one or more running containers
-usage: docker container kill [OPTIONS] CONTAINER [CONTAINER...]
+short: 1 つまたは複数の実行コンテナーを Kill します。
+long: 1 つまたは複数の実行コンテナーを Kill します。
+usage: docker container kill [オプション] CONTAINER [CONTAINER...]
 pname: docker container
 plink: docker_container.yaml
 options:
@@ -9,7 +9,7 @@ options:
   shorthand: s
   value_type: string
   default_value: KILL
-  description: Signal to send to the container
+  description: コンテナーに送信するシグナル。
   deprecated: false
   experimental: false
   experimentalcli: false

@@ -1,7 +1,7 @@
 command: docker container start
-short: Start one or more stopped containers
-long: Start one or more stopped containers
-usage: docker container start [OPTIONS] CONTAINER [CONTAINER...]
+short: 1 つまたは複数の停止中コンテナーを起動します。
+long: 1 つまたは複数の停止中コンテナーを起動します。
+usage: docker container start [オプション] CONTAINER [CONTAINER...]
 pname: docker container
 plink: docker_container.yaml
 options:
@@ -9,7 +9,7 @@ options:
   shorthand: a
   value_type: bool
   default_value: "false"
-  description: Attach STDOUT/STDERR and forward signals
+  description: STDOUT/STDERR をアタッチして、シグナルをフォワードします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -17,7 +17,7 @@ options:
   swarm: false
 - option: checkpoint
   value_type: string
-  description: Restore from this checkpoint
+  description: このチェックポイントから復元します。
   deprecated: false
   experimental: true
   experimentalcli: false
@@ -26,7 +26,7 @@ options:
   os_type: linux
 - option: checkpoint-dir
   value_type: string
-  description: Use a custom checkpoint storage directory
+  description: カスタムのチェックポイントストレージディレクトリを利用します。
   deprecated: false
   experimental: true
   experimentalcli: false
@@ -35,7 +35,7 @@ options:
   os_type: linux
 - option: detach-keys
   value_type: string
-  description: Override the key sequence for detaching a container
+  description: コンテナーデタッチ時のキーシーケンスをオーバーライドします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -45,7 +45,7 @@ options:
   shorthand: i
   value_type: bool
   default_value: "false"
-  description: Attach container's STDIN
+  description: コンテナーの STDIN をアタッチします。
   deprecated: false
   experimental: false
   experimentalcli: false

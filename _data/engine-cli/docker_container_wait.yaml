@@ -1,6 +1,6 @@
 command: docker container wait
-short: Block until one or more containers stop, then print their exit codes
-long: Block until one or more containers stop, then print their exit codes
+short: 1 つまたは複数コンテナーが停止するまで待ち、各終了コードを表示します。
+long: 1 つまたは複数コンテナーが停止するまで待ち、各終了コードを表示します。
 usage: docker container wait CONTAINER [CONTAINER...]
 pname: docker container
 plink: docker_container.yaml

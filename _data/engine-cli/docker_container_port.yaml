@@ -1,6 +1,6 @@
 command: docker container port
-short: List port mappings or a specific mapping for the container
-long: List port mappings or a specific mapping for the container
+short: コンテナーにおけるポート割り当て、あるいは特定の割り当てを一覧表示します。
+long: コンテナーにおけるポート割り当て、あるいは特定の割り当てを一覧表示します。
 usage: docker container port CONTAINER [PRIVATE_PORT[/PROTO]]
 pname: docker container
 plink: docker_container.yaml

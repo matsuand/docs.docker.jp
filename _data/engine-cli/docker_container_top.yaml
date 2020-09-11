@@ -1,6 +1,6 @@
 command: docker container top
-short: Display the running processes of a container
-long: Display the running processes of a container
+short: コンテナーにおける実行プロセスを表示します。
+long: コンテナーにおける実行プロセスを表示します。
 usage: docker container top CONTAINER [ps OPTIONS]
 pname: docker container
 plink: docker_container.yaml

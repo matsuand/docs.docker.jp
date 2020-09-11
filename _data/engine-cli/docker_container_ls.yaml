@@ -1,8 +1,8 @@
 command: docker container ls
 aliases: ps, list
-short: List containers
-long: List containers
-usage: docker container ls [OPTIONS]
+short: コンテナーを一覧表示します。
+long: コンテナーを一覧表示します。
+usage: docker container ls [オプション]
 pname: docker container
 plink: docker_container.yaml
 options:
@@ -10,7 +10,7 @@ options:
   shorthand: a
   value_type: bool
   default_value: "false"
-  description: Show all containers (default shows just running)
+  description: 全コンテナーを表示します。（デフォルトは実行中コンテナーのみ。）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -19,7 +19,7 @@ options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: Filter output based on conditions provided
+  description: 指定された条件に基づいてフィルター出力を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -27,7 +27,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print containers using a Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -37,7 +37,7 @@ options:
   shorthand: "n"
   value_type: int
   default_value: "-1"
-  description: Show n last created containers (includes all states)
+  description: 最近生成された n 個分のコンテナーを表示します。（状態はすべてが対象）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -47,7 +47,7 @@ options:
   shorthand: l
   value_type: bool
   default_value: "false"
-  description: Show the latest created container (includes all states)
+  description: 最新のコンテナーを表示します。（状態はすべてが対象）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -56,7 +56,7 @@ options:
 - option: no-trunc
   value_type: bool
   default_value: "false"
-  description: Don't truncate output
+  description: 詳細出力を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -66,7 +66,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Only display numeric IDs
+  description: 数値 ID のみを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -76,7 +76,7 @@ options:
   shorthand: s
   value_type: bool
   default_value: "false"
-  description: Display total file sizes
+  description: 合計ファイルサイズを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false

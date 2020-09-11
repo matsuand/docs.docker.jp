@@ -1,6 +1,6 @@
 command: docker container unpause
-short: Unpause all processes within one or more containers
-long: Unpause all processes within one or more containers
+short: 1 つまたは複数コンテナー内において停止中のプロセスを再開します。
+long: 1 つまたは複数コンテナー内において停止中のプロセスを再開します。
 usage: docker container unpause CONTAINER [CONTAINER...]
 pname: docker container
 plink: docker_container.yaml

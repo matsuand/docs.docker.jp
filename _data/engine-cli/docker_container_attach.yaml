@@ -1,13 +1,13 @@
 command: docker container attach
-short: Attach local standard input, output, and error streams to a running container
-long: Attach local standard input, output, and error streams to a running container
-usage: docker container attach [OPTIONS] CONTAINER
+short: ローカルの標準入出力やエラー出力を実行中コンテナーにアタッチします。
+long: ローカルの標準入出力やエラー出力を実行中コンテナーにアタッチします。
+usage: docker container attach [オプション] CONTAINER
 pname: docker container
 plink: docker_container.yaml
 options:
 - option: detach-keys
   value_type: string
-  description: Override the key sequence for detaching a container
+  description: コンテナーデタッチ時のキーシーケンスをオーバーライドします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -16,7 +16,7 @@ options:
 - option: no-stdin
   value_type: bool
   default_value: "false"
-  description: Do not attach STDIN
+  description: STDIN をアタッチしません。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -25,7 +25,7 @@ options:
 - option: sig-proxy
   value_type: bool
   default_value: "true"
-  description: Proxy all received signals to the process
+  description: 受信シグナルをすべてプロセスにプロキシーします。
   deprecated: false
   experimental: false
   experimentalcli: false

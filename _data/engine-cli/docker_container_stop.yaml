@@ -1,7 +1,7 @@
 command: docker container stop
-short: Stop one or more running containers
-long: Stop one or more running containers
-usage: docker container stop [OPTIONS] CONTAINER [CONTAINER...]
+short: 1 つまたは複数の実行中コンテナーを停止します。
+long: 1 つまたは複数の実行中コンテナーを停止します。
+usage: docker container stop [オプション] CONTAINER [CONTAINER...]
 pname: docker container
 plink: docker_container.yaml
 options:
@@ -9,7 +9,7 @@ options:
   shorthand: t
   value_type: int
   default_value: "10"
-  description: Seconds to wait for stop before killing it
+  description: コンテナーを Kill する前の待ち時間（秒数）。
   deprecated: false
   experimental: false
   experimentalcli: false

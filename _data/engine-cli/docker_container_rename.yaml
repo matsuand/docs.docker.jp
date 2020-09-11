@@ -1,6 +1,6 @@
 command: docker container rename
-short: Rename a container
-long: Rename a container
+short: コンテナーの名前を変更します。
+long: コンテナーの名前を変更します。
 usage: docker container rename CONTAINER NEW_NAME
 pname: docker container
 plink: docker_container.yaml

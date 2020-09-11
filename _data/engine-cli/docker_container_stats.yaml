@@ -1,7 +1,7 @@
 command: docker container stats
-short: Display a live stream of container(s) resource usage statistics
-long: Display a live stream of container(s) resource usage statistics
-usage: docker container stats [OPTIONS] [CONTAINER...]
+short: コンテナーのリソース利用統計を動的に表示します。
+long: コンテナーのリソース利用統計を動的に表示します。
+usage: docker container stats [オプション] [CONTAINER...]
 pname: docker container
 plink: docker_container.yaml
 options:
@@ -9,7 +9,7 @@ options:
   shorthand: a
   value_type: bool
   default_value: "false"
-  description: Show all containers (default shows just running)
+  description: 全コンテナーを表示します。（デフォルトは実行中コンテナーのみ。）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -17,7 +17,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print images using a Go template
+  description: Go 言語テンプレートを使って、わかりやすく出力します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -26,7 +26,7 @@ options:
 - option: no-stream
   value_type: bool
   default_value: "false"
-  description: Disable streaming stats and only pull the first result
+  description: 統計情報のストリーミングは無効にし、最初の結果のみを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -35,7 +35,7 @@ options:
 - option: no-trunc
   value_type: bool
   default_value: "false"
-  description: Do not truncate output
+  description: 詳細出力を行います。
   deprecated: false
   experimental: false
   experimentalcli: false

@@ -1,6 +1,6 @@
 command: docker container pause
-short: Pause all processes within one or more containers
-long: Pause all processes within one or more containers
+short: 1 つまたは複数コンテナー内部における全プロセスを一時停止します。
+long: 1 つまたは複数コンテナー内部における全プロセスを一時停止します。
 usage: docker container pause CONTAINER [CONTAINER...]
 pname: docker container
 plink: docker_container.yaml
