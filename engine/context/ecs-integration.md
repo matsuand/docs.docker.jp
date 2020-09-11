@@ -521,6 +521,51 @@ between services.
 - Compose ファイルのネットワーク定義内において `x-aws-securitygroup` を利用します。
   これは、サービス間のネットワーク接続のために用意されている既存の SecurityGroup の ARN を設定します。
 
+
+{% comment %}
+## Local simulation
+{% endcomment %}
+{: #local-simulation }
+## ローカルシミュレーション
+
+{% comment %}
+When you deploy your application on ECS, you may also rely on the additional AWS services.
+In such cases, your code must embed the AWS SDK and retrieve API credentials at runtime.
+AWS offers a credentials discovery mechanism which is fully implemented by the SDK, and relies
+on accessing a metadata service on a fixed IP address.
+{% endcomment %}
+ECS 上にアプリケーションをデプロイする際に、追加の AWS サービスを用いたい場合があります。
+そのような場合には、コード内に AWS SDK を埋め込んで、実行時に API 資格情報を取り出すことが必要になります。
+AWS では資格情報を取得するメカニズムが用意されていて、SDK を使って完全実装されています。
+そして固定 IP アドレス上のメタデータサービスにアクセスすることで、これを実現しています。
+
+{% comment %}
+Once you adopt this approach, running your application locally for testing or debug purposes
+can be difficult. Therefore, we have introduced an option on context creation to set the
+`ecs-local` context to maintain application portability between local workstation and the 
+AWS cloud provider.
+{% endcomment %}
+ただこの手法を採用してしまうと、ローカル環境においてテストやデバッグ目的でアプリケーションを実行することが困難になります。
+そこでコンテキストを生成する際のオプションを導入しています。
+そのオプションでは `ecs-local` コンテキストを設定して、ローカルマシンと AWS クラウドプロバイダー間でのアプリケーションの可搬性を確保しています。
+
+```console
+$ docker context create ecs --local-simulation ecsLocal
+Successfully created ecs-local context "ecsLocal"
+```
+
+{% comment %}
+When you select a local simulation context, running the `docker compose up` command doesn't
+deploy your application on ECS. Therefore, you must run it locally, automatically adjusting your Compose
+application so it includes the [ECS local endpoints](https://github.com/awslabs/amazon-ecs-local-container-endpoints/). 
+This allows the AWS SDK used by application code to
+access a local mock container as "AWS metadata API" and retrieve credentials from your own
+local `.aws/credentials` config file.
+{% endcomment %}
+ローカルシミュレーションコンテキストを選んだ場合、`docker compose up` コマンドを実行しても、アプリケーションは ECS 上にデプロイされません。
+したがってアプリケーションはローカルでの実行となり、Compose アプリケーションは [ECS local endpoints](https://github.com/awslabs/amazon-ecs-local-container-endpoints/) を用いるように、自動的に調整されます。
+このことから、アプリケーションコード内にて利用する AWS SDK は、「AWS メタデータ API」としてローカルの一時的なコンテナーにアクセスし、ローカルの設定ファイル `.aws/credentials` から資格情報を取得することになります。
+
 {% comment %}
 ## Install the Docker ECS Integration CLI on Linux
 {% endcomment %}

@@ -20,8 +20,10 @@ For information about Stable releases, see the [Stable release notes](release-no
 安定版については [安定版リリースノート](release-notes.md) を参照してください。
 また Docker Desktop のシステム要件については [インストール前に確認すべきこと](install.md#what-to-know-before-you-install) を参照してください。
 
-## Docker Desktop Community 2.3.6.1
-2020-09-08
+## Docker Desktop Community 2.3.6.2
+2020-09-09
+
+> [ダウンロード](https://desktop.docker.com/win/edge/47842/Docker%20Desktop%20Installer.exe)
 
 {% comment %}
 ### Upgrades

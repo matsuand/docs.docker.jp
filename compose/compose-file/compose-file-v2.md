@@ -673,7 +673,7 @@ cpu_rt_period: 11000
 {% comment %}
 Add rules to the cgroup allowed devices list.
 {% endcomment %}
-cgroup としてアクセス許可されているデバイスリストにルールを追加します。
+cgroup がアクセス可能なデバイスリストにルールを追加します。
 
 ```yaml
 device_cgroup_rules:

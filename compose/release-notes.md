@@ -6,6 +6,33 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+
+{% comment %}
+### Bugs
+{% endcomment %}
+{: #bugs }
+### バグ
+
+{% comment %}
+- Fixed the `compose run` command when `service.scale` is specified.
+{% endcomment %}
+- `service.scale` 指定時の `compose run` コマンドを修正しました。
+
+{% comment %}
+- Allowed the `driver` property for external networks as a temporary workaround for the Swarm network propagation issue.
+{% endcomment %}
+- Swarm ネットワーク通信における障害への一時対応として、`driver` プロパティを外部ネットワークに対して機能させるようにしました。
+
+{% comment %}
+- Pinned the new internal schema version to `3.9` as the default.
+{% endcomment %}
+- 内部スキーマバージョン `3.9` をデフォルトにしました。
+
+{% comment %}
+- Preserved the version number configured in the Compose file.
+{% endcomment %}
+- Compose ファイル内に設定されたバージョン番号を保持するようにしました。
+
 ## 1.27.0
 (2020-09-07)
 
@@ -53,7 +80,7 @@ redirect_from:
 {% comment %}
 ### Bugs
 {% endcomment %}
-{: #bugs }
+{: #bugs-1 }
 ### バグ
 
 {% comment %}
