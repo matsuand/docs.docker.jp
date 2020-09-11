@@ -1,14 +1,14 @@
 command: docker image load
-short: Load an image from a tar archive or STDIN
-long: Load an image from a tar archive or STDIN
-usage: docker image load [OPTIONS]
+short: tar アーカイブまたは標準入力からイメージをロードします。
+long: tar アーカイブまたは標準入力からイメージをロードします。
+usage: docker image load [オプション]
 pname: docker image
 plink: docker_image.yaml
 options:
 - option: input
   shorthand: i
   value_type: string
-  description: Read from tar archive file, instead of STDIN
+  description: 標準入力からではなく tar アーカイブファイルから読み込みます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -18,7 +18,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Suppress the load output
+  description: ロード処理出力を省略します。
   deprecated: false
   experimental: false
   experimentalcli: false

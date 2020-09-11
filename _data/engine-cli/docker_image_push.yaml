@@ -1,14 +1,14 @@
 command: docker image push
-short: Push an image or a repository to a registry
-long: Push an image or a repository to a registry
-usage: docker image push [OPTIONS] NAME[:TAG]
+short: イメージやリポジトリをレジストリにプッシュします。
+long: イメージやリポジトリをレジストリにプッシュします。
+usage: docker image push [オプション] NAME[:TAG]
 pname: docker image
 plink: docker_image.yaml
 options:
 - option: disable-content-trust
   value_type: bool
   default_value: "true"
-  description: Skip image signing
+  description: イメージの検証を省略します。
   deprecated: false
   experimental: false
   experimentalcli: false

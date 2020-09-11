@@ -1,7 +1,7 @@
 command: docker image pull
-short: Pull an image or a repository from a registry
-long: Pull an image or a repository from a registry
-usage: docker image pull [OPTIONS] NAME[:TAG|@DIGEST]
+short: イメージまたはレポジトリをレジストリからプルします。
+long: イメージまたはレポジトリをレジストリからプルします。
+usage: docker image pull [オプション] NAME[:TAG|@DIGEST]
 pname: docker image
 plink: docker_image.yaml
 options:
@@ -9,7 +9,7 @@ options:
   shorthand: a
   value_type: bool
   default_value: "false"
-  description: Download all tagged images in the repository
+  description: リポジトリ内においてタグづけされているイメージをすべてダウンロードします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -18,7 +18,7 @@ options:
 - option: disable-content-trust
   value_type: bool
   default_value: "true"
-  description: Skip image verification
+  description: イメージの検証を省略します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -26,7 +26,7 @@ options:
   swarm: false
 - option: platform
   value_type: string
-  description: Set platform if server is multi-platform capable
+  description: サーバーがマルチプラットフォームに対応している場合に、プラットフォームを指定します。
   deprecated: false
   min_api_version: "1.32"
   experimental: true
@@ -37,7 +37,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Suppress verbose output
+  description: 冗長な出力を省略します。
   deprecated: false
   experimental: false
   experimentalcli: false
