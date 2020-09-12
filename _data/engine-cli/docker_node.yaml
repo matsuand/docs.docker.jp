@@ -1,6 +1,6 @@
 command: docker node
-short: Manage Swarm nodes
-long: Manage nodes.
+short: Swarm ノードを管理します。
+long: Swarm ノードを管理します。
 usage: docker node
 pname: docker
 plink: docker.yaml

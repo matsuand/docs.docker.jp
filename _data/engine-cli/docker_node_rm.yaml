@@ -1,16 +1,14 @@
 command: docker node rm
 aliases: remove
-short: Remove one or more nodes from the swarm
+short: 1 つまたは複数ノードを Swarm から削除します。
 long: |-
-  Removes the specified nodes from a swarm.
+  指定したノードを Swarm から削除します。
 
-  > **Note**
+  > **メモ**
   >
-  > This is a cluster management command, and must be executed on a swarm
-  > manager node. To learn about managers and workers, refer to the
-  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
-  > documentation.
-usage: docker node rm [OPTIONS] NODE [NODE...]
+  > これはクラスター管理コマンドであるため、Swarm のマネージャーノード上で実行する必要があります。
+  > マネージャーノードとワーカーノードについては、本ドキュメントの [Swarm モード](http://lfstranslation/docker/engine/swarm/) を参照してください。
+usage: docker node rm [オプション] NODE [NODE...]
 pname: docker node
 plink: docker_node.yaml
 options:
@@ -18,24 +16,26 @@ options:
   shorthand: f
   value_type: bool
   default_value: "false"
-  description: Force remove a node from the swarm
+  description: Swarm からノードを強制的に削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
-  ### Remove a stopped node from the swarm
+  {: #remove-a-stopped-node-from-the-swarm }
+  ### 停止中ノードの Swarm からの削除
 
   ```bash
   $ docker node rm swarm-node-02
 
   Node swarm-node-02 removed from swarm
   ```
-  ### Attempt to remove a running node from a swarm
+  {: #attempt-to-remove-a-running-node-from-a-swarm }
+  ### 実行中ノードの Swarm からの削除
 
-  Removes the specified nodes from the swarm, but only if the nodes are in the
-  down state. If you attempt to remove an active node you will receive an error:
+  指定されたノードを Swarm から削除するのは、ノードが停止している場合に限ります。
+  アクティブなノードを削除しようとした場合は、エラーになります。
 
   ```non
   $ docker node rm swarm-node-03
@@ -44,12 +44,11 @@ examples: |-
   down and can't be removed
   ```
 
-  ### Forcibly remove an inaccessible node from a swarm
+  {: #forcibly-remove-an-inaccessible-node-from-a-swarm }
+  ### アクセス不能ノードの Swarm からの強制削除
 
-  If you lose access to a worker node or need to shut it down because it has been
-  compromised or is not behaving as expected, you can use the `--force` option.
-  This may cause transient errors or interruptions, depending on the type of task
-  being run on the node.
+  ワーカーノードへのアクセスができない、セキュリティ侵害されているとか思ったように動作しないので停止したい、といった場合には、`--force` オプションを利用します。
+  このときにはノード上に実行されていたタスクの種類に応じて、一時的なエラーや中断が発生することがあります。
 
   ```bash
   $ docker node rm --force swarm-node-03
@@ -57,8 +56,7 @@ examples: |-
   Node swarm-node-03 removed from swarm
   ```
 
-  A manager node must be demoted to a worker node (using `docker node demote`)
-  before you can remove it from the swarm.
+  マネージャーノードは（`docker node demote` を使って）ワーカーノードに降格しておかないと、Swarm から削除することはできません。
 deprecated: false
 min_api_version: "1.24"
 experimental: false
