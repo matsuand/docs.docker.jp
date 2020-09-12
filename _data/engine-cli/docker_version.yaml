@@ -13,7 +13,7 @@ options:
 - option: format
   shorthand: f
   value_type: string
-  description: Format the output using the given Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false

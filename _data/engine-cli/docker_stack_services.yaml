@@ -15,7 +15,7 @@ options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: 指定された条件に従ってフィルター出力を行います。
+  description: 指定された条件に基づいてフィルター検索を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -23,7 +23,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Go 言語のテンプレートを使って、サービス表示を行います。
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -75,11 +75,13 @@ examples: |-
   dn7m7nhhfb9y  myapp_db        1/1       mysql@sha256:a9a5b559f8821fe73d58c3606c812d1c044868d42c63817fa5125fd9d8b7b539
   ```
 
-  ### フィルタリング
+  {: #filtering }
+  ### フィルター検索
 
-  フィルタリングフラグ（`-f` または `--filter`）の書式は、`key=value` ペアとします。
-  フィルター条件が複数必要な場合は、フィルタリングフラグを複数指定します。（たとえば `--filter "foo=bar" --filter "bif=baz"` など）
-  複数のフィルタリングフラグは、`OR` フィルターとして結合されます。
+  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など）
+  複数のフィルターフラグは `OR` フィルターとして結合されます。
 
   以下のコマンドは `web` と `db` という 2 つのサービスを表示します。
 
@@ -112,13 +114,14 @@ examples: |-
     * Swarm: 未対応。
     * Kubernetes: 対応済み。
 
-  ### 書式変更
+  {: #formatting }
+  ### フォーマット設定
 
-  書式変更を行うオプション（`--format`）は、Go 言語のテンプレートを利用してサービス出力を行います。
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、サービスをわかりやすく出力することができます。
 
-  Go 言語テンプレートによる記述書式は、以下のとおりです。
+  Go 言語テンプレートによるプレースホルダー（placeholder）は以下のとおりです。
 
-  記述書式    | 内容説明
+  プレースホルダー | 内容説明
   ------------|-------------------------------------------------------------------
   `.ID`       | サービス ID
   `.Name`     | サービス名
@@ -126,7 +129,7 @@ examples: |-
   `.Replicas` | サービスレプリカ
   `.Image`    | サービスイメージ
 
-  `--format` オプションを利用すると `stack services` コマンドは、テンプレートが規定するデータを直接出力します。
+  `--format` オプションを利用すると `stack services` コマンドは、テンプレートが定めるデータを直接出力します。
   また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
   以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのサービスにおける `ID`、`Mode`、`Replicas` の各項目がコロン（`:`）で区切って表示されます。

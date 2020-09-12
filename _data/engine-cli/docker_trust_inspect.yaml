@@ -11,7 +11,7 @@ options:
 - option: pretty
   value_type: bool
   default_value: "false"
-  description: Print the information in a human friendly format
+  description: 読みやすい書式で内容を出力します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -353,7 +353,8 @@ examples: |-
   ]
   ```
 
-  ### Formatting
+  {: #formatting }
+  ### フォーマット設定
 
   You can print the inspect output in a human-readable format instead of the default
   JSON output, by using the `--pretty` option:

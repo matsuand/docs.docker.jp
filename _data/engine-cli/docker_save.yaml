@@ -11,7 +11,7 @@ options:
 - option: output
   shorthand: o
   value_type: string
-  description: Write to a file, instead of STDOUT
+  description: 出力先を STDOUT でなくファイルとします。
   deprecated: false
   experimental: false
   experimentalcli: false

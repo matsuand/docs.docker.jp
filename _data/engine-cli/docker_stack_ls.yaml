@@ -24,7 +24,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Go 言語のテンプレートを使って、Stack の表示を行います。
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -67,20 +67,21 @@ examples: |-
   vossibility-stack  6                   Swarm
   ```
 
-  ### 書式変更
+  {: #formatting }
+  ### フォーマット設定
 
-  書式変更オプション (`--format`) は Go 言語テンプレートを利用して、Stack をわかりやすく出力します。
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、Stack をわかりやすく出力することができます。
 
-  Go 言語テンプレートによる記述書式は、以下のとおりです。
+  Go 言語テンプレートによるプレースホルダー（placeholder）は以下のとおりです。
 
-  | 記述書式        | 内容説明             |
+  | プレースホルダー | 内容説明            |
   | --------------- | -------------------- |
   | `.Name`         | Stack 名             |
   | `.Services`     | サービス数           |
   | `.Orchestrator` | オーケストレーター名 |
   | `.Namespace`    | 名前空間             |
 
-  `--format` オプションを利用すると `stack ls` コマンドは、テンプレートが規定するデータを直接出力します。
+  `--format` オプションを利用すると `stack ls` コマンドは、テンプレートが定めるデータを直接出力します。
   また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
   以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべての Stack における `Name`、`Services` の各項目がコロン（`:`）で区切って表示されます。

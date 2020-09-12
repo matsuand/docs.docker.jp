@@ -1,7 +1,7 @@
 command: docker ps
 short: List containers
 long: List containers
-usage: docker ps [OPTIONS]
+usage: docker ps [オプション]
 pname: docker
 plink: docker.yaml
 options:
@@ -9,7 +9,7 @@ options:
   shorthand: a
   value_type: bool
   default_value: "false"
-  description: Show all containers (default shows just running)
+  description: コンテナーすべてを表示します。（デフォルトは実行中コンテナーのみ。）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -18,7 +18,7 @@ options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: Filter output based on conditions provided
+  description: 指定された条件に基づいてフィルター検索を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -26,7 +26,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print containers using a Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -55,7 +55,7 @@ options:
 - option: no-trunc
   value_type: bool
   default_value: "false"
-  description: Don't truncate output
+  description: 詳細出力を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -65,7 +65,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Only display numeric IDs
+  description: 数値 ID のみ表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -75,13 +75,14 @@ options:
   shorthand: s
   value_type: bool
   default_value: "false"
-  description: Display total file sizes
+  description: 合計ファイルサイズを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
+  {: #prevent-truncating-output }
   ### Prevent truncating output
 
   Running `docker ps --no-trunc` showing 2 linked containers.
@@ -94,10 +95,11 @@ examples: |-
   d7886598dbe2        crosbymichael/redis:latest   /redis-server --dir    33 minutes ago       Up 33 minutes       6379/tcp            redis,webapp/db
   ```
 
+  {: #show-both-running-and-stopped-containers }
   ### Show both running and stopped containers
 
-  The `docker ps` command only shows running containers by default. To see all
-  containers, use the `-a` (or `--all`) flag:
+  `docker ps` コマンドは、デフォルトでは実行中のコンテナーのみを表示します。
+  コンテナーすべてを表示するには `-a`（または `--all`）フラグを指定します。
 
   ```bash
   $ docker ps -a
@@ -107,7 +109,8 @@ examples: |-
   container that exposes TCP ports `100, 101, 102` displays `100-102/tcp` in
   the `PORTS` column.
 
-  ### Show disk usage by container
+  {: #show-disk-usage-by-container }
+  ### コンテナーのディスク使用量の表示
 
   The `docker ps -s` command displays two different on-disk-sizes for each container:
 
@@ -124,17 +127,19 @@ examples: |-
   For more information, refer to the [container size on disk](https://docs.docker.com/storage/storagedriver/#container-size-on-disk) section.
 
 
-  ### Filtering
+  {: #filtering }
+  ### フィルター検索
 
-  The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there is more
-  than one filter, then pass multiple flags (e.g. `--filter "foo=bar" --filter "bif=baz"`)
+  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
 
-  The currently supported filters are:
+  現在サポートされているフィルターは以下のとおりです。
 
-  | Filter                | Description                                                                                                                          |
+  | フィルター            | 内容説明                                                                                                                             |
   |:----------------------|:-------------------------------------------------------------------------------------------------------------------------------------|
-  | `id`                  | Container's ID                                                                                                                       |
-  | `name`                | Container's name                                                                                                                     |
+  | `id`                  | コンテナー ID                                                                                                                        |
+  | `name`                | コンテナー名                                                                                                                         |
   | `label`               | An arbitrary string representing either a key or a key-value pair. Expressed as `<key>` or `<key>=<value>`                           |
   | `exited`              | An integer representing the container's exit code. Only useful with `--all`.                                                         |
   | `status`              | One of `created`, `restarting`, `running`, `removing`, `paused`, `exited`, or `dead`                                                 |
@@ -148,12 +153,13 @@ examples: |-
   | `is-task`             | Filters containers that are a "task" for a service. Boolean option (`true` or `false`)                                               |
 
 
-  #### label
+  {: #label }
+  #### label フィルター
 
-  The `label` filter matches containers based on the presence of a `label` alone or a `label` and a
-  value.
+  `label` フィルターは、`label` だけが存在する、あるいは `label` とその値が存在するコンテナーを検索します。
 
-  The following filter matches containers with the `color` label regardless of its value.
+  以下の例では `color` ラベルを持ったコンテナーが検索されます。
+  この場合、その値の内容は問いません。
 
   ```bash
   $ docker ps --filter "label=color"
@@ -163,7 +169,7 @@ examples: |-
   d85756f57265        busybox             "top"               52 seconds ago      Up 51 seconds                           high_albattani
   ```
 
-  The following filter matches containers with the `color` label with the `blue` value.
+  以下の例では `color` ラベルに `blue` という値を持つコンテナーが抽出されます。
 
   ```bash
   $ docker ps --filter "label=color=blue"
@@ -172,11 +178,12 @@ examples: |-
   d85756f57265        busybox             "top"               About a minute ago   Up About a minute                       high_albattani
   ```
 
-  #### name
+  {: #name }
+  #### name フィルター
 
-  The `name` filter matches on all or part of a container's name.
+  `name` フィルターは、コンテナー名の全部または一部を検索します。
 
-  The following filter matches all containers with a name containing the `nostalgic_stallman` string.
+  以下のフィルター指定では、`nostalgic_stallman` という文字列を名前に含んだコンテナーすべてが検索されます。
 
   ```bash
   $ docker ps --filter "name=nostalgic_stallman"
@@ -185,7 +192,8 @@ examples: |-
   9b6247364a03        busybox             "top"               2 minutes ago       Up 2 minutes                            nostalgic_stallman
   ```
 
-  You can also filter for a substring in a name as this shows:
+  名前の部分文字列を指定することも可能です。
+  以下がその例です。
 
   ```bash
   $ docker ps --filter "name=nostalgic"
@@ -198,8 +206,8 @@ examples: |-
 
   #### exited
 
-  The `exited` filter matches containers by exist status code. For example, to
-  filter for containers that have exited successfully:
+  `exited` フィルターは、ステータスコードが exist であるコンテナーに一致します。
+  たとえば正常に終了しているコンテナーに一致させるには、以下のようにします。
 
   ```bash
   $ docker ps -a --filter 'exited=0'
@@ -210,7 +218,8 @@ examples: |-
   48ee228c9464        fedora:20         bash                   2 weeks ago         Exited (0) 2 weeks ago                              tender_torvalds
   ```
 
-  #### Filter by exit signal
+  {: #filter-by-exit-signal }
+  #### exit シグナルによるフィルター
 
   You can use a filter to locate containers that exited with status of `137`
   meaning a `SIGKILL(9)` killed them.
@@ -433,14 +442,14 @@ examples: |-
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
   ```
 
-  ### Formatting
+  {: #formatting }
+  ### フォーマット設定
 
-  The formatting option (`--format`) pretty-prints container output using a Go
-  template.
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、コンテナーをわかりやすく出力することができます。
 
-  Valid placeholders for the Go template are listed below:
+  Go 言語テンプレートによるプレースホルダー（placeholder）は以下のとおりです。
 
-  | Placeholder   | Description                                                                                     |
+  | プレースホルダー | 内容説明                                                                                     |
   |:--------------|:------------------------------------------------------------------------------------------------|
   | `.ID`         | Container ID                                                                                    |
   | `.Image`      | Image ID                                                                                        |
@@ -456,12 +465,10 @@ examples: |-
   | `.Mounts`     | Names of the volumes mounted in this container.                                                 |
   | `.Networks`   | Names of the networks attached to this container.                                               |
 
-  When using the `--format` option, the `ps` command will either output the data
-  exactly as the template declares or, when using the `table` directive, includes
-  column headers as well.
+  `--format` オプションを利用すると `ps` コマンドは、テンプレートが定めるデータを直接出力します。
+  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
-  The following example uses a template without headers and outputs the `ID` and
-  `Command` entries separated by a colon (`:`) for all running containers:
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのコンテナーにおける `ID`、`Command` の各項目がコロン（`:`）で区切って表示されます。
 
   ```bash
   $ docker ps --format "{{.ID}}: {{.Command}}"
@@ -472,7 +479,7 @@ examples: |-
   41d50ecd2f57: /bin/sh -c #(nop) MA
   ```
 
-  To list all running containers with their labels in a table format you can use:
+  実行中コンテナーの一覧を、ラベルとともに表形式で出力するには、以下のようにします。
 
   ```bash
   $ docker ps --format "table {{.ID}}\t{{.Labels}}"

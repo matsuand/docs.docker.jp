@@ -9,7 +9,7 @@ options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: 指定された条件に従ってフィルター出力します。
+  description: 指定された条件に基づいてフィルター検索を行います。
   deprecated: false
   experimental: false
   experimentalcli: false

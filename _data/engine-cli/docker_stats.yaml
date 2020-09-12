@@ -34,7 +34,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Go 言語のテンプレートを使って、コンテナーの表示を行います。
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -132,13 +132,13 @@ examples: |-
   ```
 
   {: #formatting }
-  ### 書式変更
+  ### フォーマット設定
 
-  書式変更オプション (`--format`) は Go 言語テンプレートを利用して、コンテナーをわかりやすく出力します。
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、コンテナーをわかりやすく出力することができます。
 
-  Go 言語テンプレートによる記述書式は、以下のとおりです。
+  Go 言語テンプレートによるプレースホルダー（placeholder）は以下のとおりです。
 
-  記述書式     | 内容説明
+  プレースホルダー | 内容説明
   ------------ | --------------------------------------------
   `.Container` | Container name or ID (user input)
   `.Name`      | コンテナー名
@@ -151,12 +151,10 @@ examples: |-
   `.PIDs`      | PID 数（Windows では利用不可）
 
 
-  When using the `--format` option, the `stats` command either
-  outputs the data exactly as the template declares or, when using the
-  `table` directive, includes column headers as well.
+  `--format` オプションを利用すると `stats` コマンドは、テンプレートが定めるデータを直接出力します。
+  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
-  The following example uses a template without headers and outputs the
-  `Container` and `CPUPerc` entries separated by a colon (`:`) for all images:
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのイメージにおける `Container`、`CPUPerc` の各項目がコロン（`:`）で区切って表示されます。
 
   ```bash
   $ docker stats --format "{{.Container}}: {{.CPUPerc}}"
@@ -166,8 +164,7 @@ examples: |-
   3f214c61ad1d: 0.00%
   ```
 
-  To list all containers statistics with their name, CPU percentage and memory
-  usage in a table format you can use:
+  コンテナーの統計情報一覧を、その名前、CPU 使用率、メモリ使用量とともに表形式で出力するには、以下のようにします。
 
   ```bash
   $ docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}"

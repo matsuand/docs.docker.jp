@@ -8,7 +8,7 @@ options:
 - option: password
   shorthand: p
   value_type: string
-  description: パスワードを指定します。
+  description: パスワード。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -26,13 +26,14 @@ options:
 - option: username
   shorthand: u
   value_type: string
-  description: ユーザー名を指定します。
+  description: ユーザー名。
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
+  {: #login-to-a-self-hosted-registry }
   ### Login to a self-hosted registry
 
   If you want to login to a self-hosted registry you can specify this by
@@ -42,7 +43,8 @@ examples: |-
   $ docker login localhost:8080
   ```
 
-  ### Provide a password using STDIN
+  {: #provide-a-password-using-stdin }
+  ### STDIN からのパスワード入力
 
   To run the `docker login` command non-interactively, you can set the
   `--password-stdin` flag to provide a password through `STDIN`. Using

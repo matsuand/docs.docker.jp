@@ -44,7 +44,7 @@ options:
   swarm: false
 - option: link
   value_type: list
-  description: 別のコンテナーへのリンクを追加します。
+  description: 別コンテナーへのリンクを追加します。
   deprecated: false
   experimental: false
   experimentalcli: false

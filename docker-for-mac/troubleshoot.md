@@ -3,7 +3,7 @@ description: Troubleshooting, logs, and known issues
 keywords: mac, troubleshooting, logs, issues
 redirect_from:
 - /mackit/troubleshoot/
-title: Logs and troubleshooting
+title: ログ機能とトラブルシューティング
 ---
 
 This page contains information on how to diagnose and troubleshoot Docker Desktop issues, send logs and communicate with the Docker Desktop team, use our forums and Success Center, browse and log issues on GitHub, and find workarounds for known problems.

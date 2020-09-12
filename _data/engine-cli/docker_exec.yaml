@@ -28,7 +28,7 @@ options:
   swarm: false
 - option: detach-keys
   value_type: string
-  description: Override the key sequence for detaching a container
+  description: コンテナーデタッチ時のキーシーケンスをオーバーライドします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -48,7 +48,7 @@ options:
   shorthand: i
   value_type: bool
   default_value: "false"
-  description: Keep STDIN open even if not attached
+  description: アタッチされていなくても STDIN は開放し続けます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -57,7 +57,7 @@ options:
 - option: privileged
   value_type: bool
   default_value: "false"
-  description: Give extended privileges to the command
+  description: コマンドに拡張権限を付与します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -67,7 +67,7 @@ options:
   shorthand: t
   value_type: bool
   default_value: "false"
-  description: Allocate a pseudo-TTY
+  description: 擬似 TTY を割り当てます。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -76,7 +76,7 @@ options:
 - option: user
   shorthand: u
   value_type: string
-  description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+  description: 'ユーザー名または UID。（記述書式t: \<name|uid\>[:\<group|gid\>]）'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -85,7 +85,7 @@ options:
 - option: workdir
   shorthand: w
   value_type: string
-  description: Working directory inside the container
+  description: コンテナー内部のワーキングディレクトリ。
   deprecated: false
   min_api_version: "1.35"
   experimental: false

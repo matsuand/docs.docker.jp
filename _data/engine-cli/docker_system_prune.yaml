@@ -19,7 +19,7 @@ options:
   swarm: false
 - option: filter
   value_type: filter
-  description: Provide filter values (e.g. 'label=<key>=<value>')
+  description: フィルター値を定めます。（たとえば 'label=\<key\>=\<value\>'）
   deprecated: false
   min_api_version: "1.28"
   experimental: false
@@ -30,7 +30,7 @@ options:
   shorthand: f
   value_type: bool
   default_value: "false"
-  description: Do not prompt for confirmation
+  description: 確認のためのプロンプトを表示しません。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -126,12 +126,14 @@ examples: |-
   > volumes.
 
 
-  ### Filtering
+  {: #filtering }
+  ### フィルター検索
 
-  The filtering flag (`--filter`) format is of "key=value". If there is more
-  than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
+  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
 
-  The currently supported filters are:
+  現在サポートされているフィルターは以下のとおりです。
 
   * until (`<timestamp>`) - only remove containers, images, and networks created before given timestamp
   * label (`label=<key>`, `label=<key>=<value>`, `label!=<key>`, or `label!=<key>=<value>`) - only remove containers, images, networks, and volumes with (or without, in case `label!=...` is used) the specified labels.

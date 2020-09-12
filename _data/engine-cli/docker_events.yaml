@@ -139,21 +139,20 @@ long: |-
   Only the last 1000 log events are returned. You can use filters to further limit
   the number of events returned.
 
-  #### Filtering
+  {: #filtering }
+  ### フィルター検索
 
-  The filtering flag (`-f` or `--filter`) format is of "key=value". If you would
-  like to use multiple filters, pass multiple flags (e.g.,
-  `--filter "foo=bar" --filter "bif=baz"`)
+  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
 
-  Using the same filter multiple times will be handled as a *OR*; for example
-  `--filter container=588a23dac085 --filter container=a8f7720b8c22` will display
-  events for container 588a23dac085 *OR* container a8f7720b8c22
+  同一のフィルターフラグを複数回指定した場合は、**OR** フィルターとして結合されます。
+  たとえば `--filter container=588a23dac085 --filter container=a8f7720b8c22` は、コンテナー 588a23dac085 **または** a8f7720b8c22 に対するイベントを表示します。
 
-  Using multiple filters will be handled as a *AND*; for example
-  `--filter container=588a23dac085 --filter event=start` will display events for
-  container container 588a23dac085 *AND* the event type is *start*
+  異なるフィルターフラグを複数指定した場合は、**AND** フィルターとして結合されます。
+  たとえば `--filter container=588a23dac085 --filter event=start` は コンテナー 588a23dac085 であり、**かつ** イベントタイプが **start** であるものが表示されます。
 
-  The currently supported filters are:
+  現在サポートされているフィルターは以下のとおりです。
 
   * config (`config=<name or id>`)
   * container (`container=<name or id>`)
@@ -170,6 +169,7 @@ long: |-
   * type (`type=<container or image or volume or network or daemon or plugin or service or node or secret or config>`)
   * volume (`volume=<name>`)
 
+  {: #format }
   #### Format
 
   If a format (`--format`) is specified, the given template will be executed
@@ -179,14 +179,14 @@ long: |-
 
   If a format is set to `{{json .}}`, the events are streamed as valid JSON
   Lines. For information about JSON Lines, please refer to http://jsonlines.org/.
-usage: docker events [OPTIONS]
+usage: docker events [オプション]
 pname: docker
 plink: docker.yaml
 options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: Filter output based on conditions provided
+  description: 指定された条件に基づいてフィルター検索を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -194,7 +194,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Format the output using the given Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -401,7 +401,8 @@ examples: |-
   2017-07-10T07:47:31.093797134Z secret create 6g5pufzsv438p9tbvl9j94od4 (name=new_secret)
   ```
 
-  ### Format the output
+  {: #format-the-output }
+  ### フォーマット設定
 
   ```bash
   $ docker events --filter 'type=container' --format 'Type={{.Type}}  Status={{.Status}}  ID={{.ID}}'

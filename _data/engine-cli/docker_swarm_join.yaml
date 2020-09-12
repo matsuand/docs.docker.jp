@@ -19,7 +19,7 @@ options:
 - option: availability
   value_type: string
   default_value: active
-  description: Availability of the node ("active"|"pause"|"drain")
+  description: ノードの利用状態（availability）。("active"|"pause"|"drain")
   deprecated: false
   experimental: false
   experimentalcli: false

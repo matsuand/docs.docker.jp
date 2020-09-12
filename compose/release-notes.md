@@ -6,6 +6,8 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+## 1.27.1
+(2020-09-10)
 
 {% comment %}
 ### Bugs

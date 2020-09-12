@@ -8,14 +8,14 @@ long: |-
   > これはクラスター管理コマンドです。
   > したがって Swarm 上のマネージャーノードにおいて実行する必要があります。
   > マネージャーノードやワーカーノードについては、[Swarm モード](https://docs.docker.com/engine/swarm/) を参照してください。
-usage: docker stack ps [OPTIONS] STACK
+usage: docker stack ps [オプション] STACK
 pname: docker stack
 plink: docker_stack.yaml
 options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: 指定された条件に従ってフィルター出力を行います。
+  description: 指定された条件に基づいてフィルター検索を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -23,7 +23,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Go 言語のテンプレートを使って、タスク表示を行います。
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -49,7 +49,7 @@ options:
 - option: no-trunc
   value_type: bool
   default_value: "false"
-  description: 出力を詳細に行います。
+  description: 詳細出力を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -100,11 +100,13 @@ examples: |-
   t72q3z038jeh        voting_redis.2        redis:alpine                                   node3  Running        Running 3 minutes ago
   ```
 
-  ### フィルタリング
+  {: #filtering }
+  ### フィルター検索
 
-  フィルタリングフラグ（`-f` または `--filter`）の書式は、`key=value` ペアとします。
-  フィルター条件が複数必要な場合は、フィルタリングフラグを複数指定します。（たとえば `--filter "foo=bar" --filter "bif=baz"` など）
-  複数のフィルタリングフラグは、`OR` フィルターとして結合されます。
+  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
+  複数のフィルターフラグは、`OR` フィルターとして結合されます。
   たとえば `-f name=redis.1 -f name=redis.7` は `redis.1` と `redis.7` の 2 つのタスクを返します。
 
   現在サポートされているフィルターは以下のとおりです。
@@ -114,9 +116,10 @@ examples: |-
   * [node](#node)
   * [desired-state](#desired-state)
 
-  #### id
+  {: #id }
+  #### id フィルター
 
-  `id` フィルターは、タスク ID の全部あるいはそのプレフィックス部分に検索合致します。
+  `id` フィルターは、タスク ID の全部またはそのプリフィックス部分を検索します。
 
   ```bash
   $ docker stack ps -f "id=t" voting
@@ -125,9 +128,10 @@ examples: |-
   t72q3z038jeh        voting_redis.2      redis:alpine        node3        Running             Running 14 minutes ago
   ```
 
-  #### name
+  {: #name }
+  #### name フィルター
 
-  `name` フィルターはタスク名に検索合致します。
+  `name` フィルターは、タスク名を検索します。
 
   ```bash
   $ docker stack ps -f "name=voting_redis" voting
@@ -165,13 +169,14 @@ examples: |-
   t72q3z038jeh        voting_redis.2        redis:alpine                                   node3  Running        Running 21 minutes ago
   ```
 
-  ### 書式変更
+  {: #formatting }
+  ### フォーマット設定
 
-  書式変更を行うオプション（`--format`）は、Go 言語のテンプレートを利用してタスク出力を行います。
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、タスクをわかりやすく出力することができます。
 
-  Go 言語テンプレートによる記述書式は、以下のとおりです。
+  Go 言語テンプレートによるプレースホルダー（placeholder）は以下のとおりです。
 
-  記述書式        | 内容説明
+  プレースホルダー | 内容説明
   ----------------|------------------------------------------------------------------------------------------
   `.ID`           | タスク ID
   `.Name`         | タスク名
@@ -182,7 +187,7 @@ examples: |-
   `.Error`        | エラー
   `.Ports`        | タスクが公開するポート
 
-  `--format` オプションを利用すると `stack ps` コマンドは、テンプレートが規定するデータを直接出力します。
+  `--format` オプションを利用すると `stack ps` コマンドは、テンプレートが定めるデータを直接出力します。
   また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
   以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのタスクにおける `Name`、`Image` の各項目がコロン（`:`）で区切って表示されます。
@@ -199,6 +204,7 @@ examples: |-
   voting_redis.2: redis:alpine
   ```
 
+  {: #do-not-map-ids-to-names }
   ### ID から名前へのマッピング禁止
 
   `--no-resolve` オプションはタスク名に対応した ID を表示するものであり、ID から名前へのマッピングは行いません。
@@ -216,6 +222,7 @@ examples: |-
   t72q3z038jeh        tg61x8myx563ueo3urmn1ic6m.2   redis:alpine                                   kanqcxfajd1r16wlnqcblobmm   Running        Running 31 minutes ago
   ```
 
+  {: #do-not-truncate-output }
   ### 出力の詳細表示
 
   サービスをデプロイするときに、Docker はサービスイメージのダイジェスト値を解決し、この値にサービスをひもづけます。
@@ -237,6 +244,7 @@ examples: |-
   t72q3z038jehe1wbh9gdum076   voting_redis.2        redis:alpine@sha256:9cd405cd1ec1410eaab064a1383d0d8854d1ef74a54e1e4a92fb4ec7bdc3ee7                                   node3  Running        Runnin 32 minutes ago
   ```
 
+  {: #only-display-task-ids }
   ### タスク ID のみの表示
 
   `-q ` または `--quiet` オプションを指定すると、Stack 内のタスク ID のみが表示されます。

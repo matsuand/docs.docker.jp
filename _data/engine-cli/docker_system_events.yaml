@@ -97,21 +97,20 @@ long: |-
   seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
   fraction of a second no more than nine digits long.
 
-  #### Filtering
+  {: #filtering }
+  ### フィルター検索
 
-  The filtering flag (`-f` or `--filter`) format is of "key=value". If you would
-  like to use multiple filters, pass multiple flags (e.g.,
-  `--filter "foo=bar" --filter "bif=baz"`)
+  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
 
-  Using the same filter multiple times will be handled as a *OR*; for example
-  `--filter container=588a23dac085 --filter container=a8f7720b8c22` will display
-  events for container 588a23dac085 *OR* container a8f7720b8c22
+  同一のフィルターフラグを複数回指定した場合は、**OR** フィルターとして結合されます。
+  たとえば `--filter container=588a23dac085 --filter container=a8f7720b8c22` は、コンテナー 588a23dac085 **または** a8f7720b8c22 に対するイベントを表示します。
 
-  Using multiple filters will be handled as a *AND*; for example
-  `--filter container=588a23dac085 --filter event=start` will display events for
-  container container 588a23dac085 *AND* the event type is *start*
+  異なるフィルターフラグを複数指定した場合は、**AND** フィルターとして結合されます。
+  たとえば `--filter container=588a23dac085 --filter event=start` は コンテナー 588a23dac085 であり、**かつ** イベントタイプが **start** であるものが表示されます。
 
-  The currently supported filters are:
+  現在サポートされているフィルターは以下のとおりです。
 
   * container (`container=<name or id>`)
   * daemon (`daemon=<name or id>`)
@@ -123,7 +122,8 @@ long: |-
   * type (`type=<container or image or volume or network or daemon or plugin>`)
   * volume (`volume=<name or id>`)
 
-  #### Format
+  {: #format }
+  #### フォーマット設定
 
   If a format (`--format`) is specified, the given template will be executed
   instead of the default
@@ -132,14 +132,14 @@ long: |-
 
   If a format is set to `{{json .}}`, the events are streamed as valid JSON
   Lines. For information about JSON Lines, please refer to http://jsonlines.org/ .
-usage: docker system events [OPTIONS]
+usage: docker system events [オプション]
 pname: docker system
 plink: docker_system.yaml
 options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: Filter output based on conditions provided
+  description: 指定された条件に基づいてフィルター検索を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -147,7 +147,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Format the output using the given Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -329,6 +329,7 @@ examples: |-
   2016-07-25T17:30:14.888127370Z plugin enable ec7b87f2ce84330fe076e666f17dfc049d2d7ae0b8190763de94e1f2d105993f (name=tiborvass/sample-volume-plugin:latest)
   ```
 
+  {: #format-the-output }
   ### Format the output
 
   ```bash
@@ -342,6 +343,7 @@ examples: |-
   Type=container  Status=destroy  ID=2ee349dac409e97974ce8d01b70d250b85e0ba8189299c126a87812311951e26
   ```
 
+  {: #format-as-json }
   #### Format as JSON
 
   ```bash

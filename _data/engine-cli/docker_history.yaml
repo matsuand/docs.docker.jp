@@ -7,7 +7,7 @@ plink: docker.yaml
 options:
 - option: format
   value_type: string
-  description: Pretty-print images using a Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -17,7 +17,7 @@ options:
   shorthand: H
   value_type: bool
   default_value: "true"
-  description: Print sizes and dates in human readable format
+  description: サイズと日時を読みやすい書式で表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -26,7 +26,7 @@ options:
 - option: no-trunc
   value_type: bool
   default_value: "false"
-  description: Don't truncate output
+  description: 詳細出力を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -36,7 +36,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Only show numeric IDs
+  description: 数値 ID のみを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -68,14 +68,14 @@ examples: |-
   511136ea3c5a        19 months ago                                                       0 B                 Imported from -
   ```
 
-  ### Format the output
+  {: #format-the-output }
+  ### フォーマット設定
 
-  The formatting option (`--format`) will pretty-prints history output
-  using a Go template.
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、履歴をわかりやすく出力することができます。
 
-  Valid placeholders for the Go template are listed below:
+  Go 言語テンプレートによるプレースホルダー（placeholder）は以下のとおりです。
 
-  | Placeholder     | Description |
+  | プレースホルダー | 内容説明   |
   | --------------- | ----------- |
   | `.ID`           | Image ID    |
   | `.CreatedSince` | Elapsed time since the image was created if `--human=true`, otherwise timestamp of when image was created |
@@ -84,13 +84,10 @@ examples: |-
   | `.Size`         | Image disk size |
   | `.Comment`      | Comment for image |
 
-  When using the `--format` option, the `history` command will either
-  output the data exactly as the template declares or, when using the
-  `table` directive, will include column headers as well.
+  `--format` オプションを利用すると `history` コマンドは、テンプレートが定めるデータを直接出力します。
+  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
-  The following example uses a template without headers and outputs the
-  `ID` and `CreatedSince` entries separated by a colon (`:`) for the `busybox`
-  image:
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、`busybox` イメージにおける `ID`、`CreatedSince` の各項目がコロン（`:`）で区切って表示されます。
 
   ```bash
   $ docker history --format "{{.ID}}: {{.CreatedSince}}" busybox

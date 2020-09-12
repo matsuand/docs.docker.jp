@@ -46,7 +46,7 @@ options:
   swarm: false
 - option: cgroup-parent
   value_type: string
-  description: オプションとしてコンテナーに指定する親の cgroup。
+  description: 任意に指定するコンテナーの親 cgroup。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -83,7 +83,7 @@ options:
   shorthand: c
   value_type: int64
   default_value: "0"
-  description: CPU 配分。（相対的なウェイト）
+  description: CPU 配分。（相対的な重みづけ）
   deprecated: false
   experimental: false
   experimentalcli: false

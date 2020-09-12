@@ -11,7 +11,7 @@ options:
 - option: compress
   value_type: bool
   default_value: "false"
-  description: Compress the context using gzip
+  description: コンテキストを gzip を使って圧縮します。
   deprecated: false
   experimental: false
   experimentalcli: false

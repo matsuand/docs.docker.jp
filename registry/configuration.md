@@ -1,20 +1,28 @@
 ---
-title: "Configuring a registry"
+title: "Registry の設定"
 description: "Explains how to configure a registry"
 keywords: registry, on-prem, images, tags, repository, distribution, configuration
 ---
 
+{% comment %}
+{% endcomment %}
 The Registry configuration is based on a YAML file, detailed below. While it
 comes with sane default values out of the box, you should review it exhaustively
 before moving your systems to production.
 
+{% comment %}
+{% endcomment %}
 ## Override specific configuration options
 
+{% comment %}
+{% endcomment %}
 In a typical setup where you run your Registry from the official image, you can
 specify a configuration variable from the environment by passing `-e` arguments
 to your `docker run` stanza or from within a Dockerfile using the `ENV`
 instruction.
 
+{% comment %}
+{% endcomment %}
 To override a configuration option, create an environment variable named
 `REGISTRY_variable` where `variable` is the name of the configuration option
 and the `_` (underscore) represents indention levels. For example, you can
@@ -26,25 +34,37 @@ storage:
     rootdirectory: /var/lib/registry
 ```
 
+{% comment %}
+{% endcomment %}
 To override this value, set an environment variable like this:
 
 ```none
 REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/somewhere
 ```
 
+{% comment %}
+{% endcomment %}
 This variable overrides the `/var/lib/registry` value to the `/somewhere`
 directory.
 
+{% comment %}
+{% endcomment %}
 > **Note**: Create a base configuration file with environment variables that can
 > be configured to tweak individual values. Overriding configuration sections
 > with environment variables is not recommended.
 
+{% comment %}
+{% endcomment %}
 ## Overriding the entire configuration file
 
+{% comment %}
+{% endcomment %}
 If the default configuration is not a sound basis for your usage, or if you are
 having issues overriding keys from the environment, you can specify an alternate
 YAML configuration file by mounting it as a volume in the container.
 
+{% comment %}
+{% endcomment %}
 Typically, create a new configuration file from scratch,named `config.yml`, then
 specify it in the `docker run` command:
 
@@ -54,12 +74,18 @@ $ docker run -d -p 5000:5000 --restart=always --name registry \
              registry:2
 ```
 
+{% comment %}
+{% endcomment %}
 Use this
 [example YAML file](https://github.com/docker/distribution/blob/master/cmd/registry/config-example.yml)
 as a starting point.
 
+{% comment %}
+{% endcomment %}
 ## List of configuration options
 
+{% comment %}
+{% endcomment %}
 These are all configuration options for the registry. Some options in the list
 are mutually exclusive. Read the detailed reference information about each
 option before finalizing your configuration.
@@ -305,23 +331,33 @@ validation:
         - ^https?://www\.example\.com/
 ```
 
+{% comment %}
+{% endcomment %}
 In some instances a configuration option is **optional** but it contains child
 options marked as **required**. In these cases, you can omit the parent with
 all its children. However, if the parent is included, you must also include all
 the children marked **required**.
 
+{% comment %}
+{% endcomment %}
 ## `version`
 
 ```none
 version: 0.1
 ```
 
+{% comment %}
+{% endcomment %}
 The `version` option is **required**. It specifies the configuration's version.
 It is expected to remain a top-level field, to allow for a consistent version
 check before parsing the remainder of the configuration file.
 
+{% comment %}
+{% endcomment %}
 ## `log`
 
+{% comment %}
+{% endcomment %}
 The `log` subsection configures the behavior of the logging system. The logging
 system outputs everything to stdout. You can adjust the granularity and format
 with this configuration section.
@@ -337,12 +373,16 @@ log:
     environment: staging
 ```
 
+{% comment %}
+{% endcomment %}
 | Parameter   | Required | Description |
 |-------------|----------|-------------|
 | `level`     | no       | Sets the sensitivity of logging output. Permitted values are `error`, `warn`, `info`, and `debug`. The default is `info`. |
 | `formatter` | no       | This selects the format of logging output. The format primarily affects how keyed attributes for a log line are encoded. Options are `text`, `json`, and `logstash`. The default is `text`. |
 | `fields`    | no       | A map of field names to values. These are added to every log line for the context. This is useful for identifying log messages source after being mixed in other systems. |
 
+{% comment %}
+{% endcomment %}
 ### `accesslog`
 
 ```none
@@ -350,11 +390,15 @@ accesslog:
   disabled: true
 ```
 
+{% comment %}
+{% endcomment %}
 Within `log`, `accesslog` configures the behavior of the access logging
 system. By default, the access logging system outputs to stdout in
 [Combined Log Format](https://httpd.apache.org/docs/2.4/logs.html#combined).
 Access logging can be disabled by setting the boolean flag `disabled` to `true`.
 
+{% comment %}
+{% endcomment %}
 ## `hooks`
 
 ```none
@@ -373,21 +417,31 @@ hooks:
         - name@receivehost.com
 ```
 
+{% comment %}
+{% endcomment %}
 The `hooks` subsection configures the logging hooks' behavior. This subsection
 includes a sequence handler which you can use for sending mail, for example.
 Refer to `loglevel` to configure the level of messages printed.
 
+{% comment %}
+{% endcomment %}
 ## `loglevel`
 
+{% comment %}
+{% endcomment %}
 > **DEPRECATED:** Please use [log](#log) instead.
 
 ```none
 loglevel: debug
 ```
 
+{% comment %}
+{% endcomment %}
 Permitted values are `error`, `warn`, `info` and `debug`. The default is
 `info`.
 
+{% comment %}
+{% endcomment %}
 ## `storage`
 
 ```none
@@ -468,10 +522,14 @@ storage:
     disable: false
 ```
 
+{% comment %}
+{% endcomment %}
 The `storage` option is **required** and defines which storage backend is in
 use. You must configure exactly one backend. If you configure more, the registry
 returns an error. You can choose any of these backend storage drivers:
 
+{% comment %}
+{% endcomment %}
 | Storage driver      | Description                                                                                                                                                                                                                                                                              |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `filesystem`        | Uses the local disk to store registry files. It is ideal for development and may be appropriate for some small-scale production applications. See the [driver's reference documentation](https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/filesystem.md). |
@@ -481,12 +539,16 @@ returns an error. You can choose any of these backend storage drivers:
 | `swift`             | Uses Openstack Swift object storage. See the [driver's reference documentation](https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/swift.md).                                                                                                               |
 | `oss`               | Uses Aliyun OSS for object storage. See the [driver's reference documentation](https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/oss.md).                                                                                                                  |
 
+{% comment %}
+{% endcomment %}
 For testing only, you can use the [`inmemory` storage
 driver](https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/inmemory.md).
 If you would like to run a registry from volatile memory, use the
 [`filesystem` driver](https://github.com/docker/docker.github.io/tree/master/registry/storage-drivers/filesystem.md)
 on a ramdisk.
 
+{% comment %}
+{% endcomment %}
 If you are deploying a registry on Windows, a Windows volume mounted from the
 host is not recommended. Instead, you can use a S3 or Azure backing
 data-store. If you do use a Windows volume, the length of the `PATH` to
@@ -497,19 +559,29 @@ or this error will occur:
 mkdir /XXX protocol error and your registry will not function properly.
 ```
 
+{% comment %}
+{% endcomment %}
 ### `maintenance`
 
+{% comment %}
+{% endcomment %}
 Currently, upload purging and read-only mode are the only `maintenance`
 functions available.
 
+{% comment %}
+{% endcomment %}
 ### `uploadpurging`
 
+{% comment %}
+{% endcomment %}
 Upload purging is a background process that periodically removes orphaned files
 from the upload directories of the registry. Upload purging is enabled by
 default. To configure upload directory purging, the following parameters must
 be set.
 
 
+{% comment %}
+{% endcomment %}
 | Parameter  | Required | Description                                                                                        |
 |------------|----------|----------------------------------------------------------------------------------------------------|
 | `enabled`  | yes      | Set to `true` to enable upload purging. Defaults to `true`.                                        |
@@ -517,11 +589,17 @@ be set.
 | `interval` | yes      | The interval between upload directory purging. Defaults to `24h`.                                  |
 | `dryrun`   | yes      | Set `dryrun` to `true` to obtain a summary of what directories will be deleted. Defaults to `false`.|
 
+{% comment %}
+{% endcomment %}
 > **Note**: `age` and `interval` are strings containing a number with optional
 fraction and a unit suffix. Some examples: `45m`, `2h10m`, `168h`.
 
+{% comment %}
+{% endcomment %}
 ### `readonly`
 
+{% comment %}
+{% endcomment %}
 If the `readonly` section under `maintenance` has `enabled` set to `true`,
 clients will not be allowed to write to the registry. This mode is useful to
 temporarily prevent writes to the backend storage so a garbage collection pass
@@ -530,8 +608,12 @@ restarted with readonly's `enabled` set to true. After the garbage collection
 pass finishes, the registry may be restarted again, this time with `readonly`
 removed from the configuration (or set to false).
 
+{% comment %}
+{% endcomment %}
 ### `delete`
 
+{% comment %}
+{% endcomment %}
 Use the `delete` structure to enable the deletion of image blobs and manifests
 by digest. It defaults to false, but it can be enabled by writing the following
 on the configuration file:
@@ -541,21 +623,33 @@ delete:
   enabled: true
 ```
 
+{% comment %}
+{% endcomment %}
 ### `cache`
 
+{% comment %}
+{% endcomment %}
 Use the `cache` structure to enable caching of data accessed in the storage
 backend. Currently, the only available cache provides fast access to layer
 metadata, which uses the `blobdescriptor` field if configured.
 
+{% comment %}
+{% endcomment %}
 You can set `blobdescriptor` field to `redis` or `inmemory`. If set to `redis`,a
 Redis pool caches layer metadata. If set to `inmemory`, an in-memory map caches
 layer metadata.
 
+{% comment %}
+{% endcomment %}
 > **NOTE**: Formerly, `blobdescriptor` was known as `layerinfo`. While these
 > are equivalent, `layerinfo` has been deprecated.
 
+{% comment %}
+{% endcomment %}
 ### `redirect`
 
+{% comment %}
+{% endcomment %}
 The `redirect` subsection provides configuration for managing redirects from
 content backends. For backends that support it, redirecting is enabled by
 default. In certain deployment scenarios, you may decide to route all data
@@ -563,6 +657,8 @@ through the Registry, rather than redirecting to the backend. This may be more
 efficient when using a backend that is not co-located or when a registry
 instance is aggressively caching.
 
+{% comment %}
+{% endcomment %}
 To disable redirects, add a single flag `disable`, set to `true`
 under the `redirect` section:
 
@@ -571,6 +667,8 @@ redirect:
   disable: true
 ```
 
+{% comment %}
+{% endcomment %}
 ## `auth`
 
 ```none
@@ -588,6 +686,8 @@ auth:
     path: /path/to/htpasswd
 ```
 
+{% comment %}
+{% endcomment %}
 The `auth` option is **optional**. Possible auth providers include:
 
 - [`silly`](#silly)
@@ -595,29 +695,45 @@ The `auth` option is **optional**. Possible auth providers include:
 - [`htpasswd`](#htpasswd)
 - [`none`]
 
+{% comment %}
+{% endcomment %}
 You can configure only one authentication provider.
 
+{% comment %}
+{% endcomment %}
 ### `silly`
 
+{% comment %}
+{% endcomment %}
 The `silly` authentication provider is only appropriate for development. It simply checks
 for the existence of the `Authorization` header in the HTTP request. It does not
 check the header's value. If the header does not exist, the `silly` auth
 responds with a challenge response, echoing back the realm, service, and scope
 for which access was denied.
 
+{% comment %}
+{% endcomment %}
 The following values are used to configure the response:
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `realm`   | yes      | The realm in which the registry server authenticates. |
 | `service` | yes      | The service being authenticated.                      |
 
+{% comment %}
+{% endcomment %}
 ### `token`
 
+{% comment %}
+{% endcomment %}
 Token-based authentication allows you to decouple the authentication system from
 the registry. It is an established authentication paradigm with a high degree of
 security.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `realm`   | yes      | The realm in which the registry server authenticates. |
@@ -627,11 +743,17 @@ security.
 | `autoredirect`   | no      | When set to `true`, `realm` will automatically be set using the Host header of the request as the domain and a path of `/auth/token/`|
 
 
+{% comment %}
+{% endcomment %}
 For more information about Token based authentication configuration, see the
 [specification](spec/auth/token.md).
 
+{% comment %}
+{% endcomment %}
 ### `htpasswd`
 
+{% comment %}
+{% endcomment %}
 The _htpasswd_ authentication backed allows you to configure basic
 authentication using an
 [Apache htpasswd file](https://httpd.apache.org/docs/2.4/programs/htpasswd.html).
@@ -640,20 +762,30 @@ The only supported password format is
 are ignored. The `htpasswd` file is loaded once, at startup. If the file is
 invalid, the registry will display an error and will not start.
 
+{% comment %}
+{% endcomment %}
 > **Warning**: If the `htpasswd` file is missing, the file will be created and provisioned with a default user and automatically generated password.
 > The password will be printed to stdout.
 
+{% comment %}
+{% endcomment %}
 > **Warning**: Only use the `htpasswd` authentication scheme with TLS
 > configured, since basic authentication sends passwords as part of the HTTP
 > header.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `realm`   | yes      | The realm in which the registry server authenticates. |
 | `path`    | yes      | The path to the `htpasswd` file to load at startup.   |
 
+{% comment %}
+{% endcomment %}
 ## `middleware`
 
+{% comment %}
+{% endcomment %}
 The `middleware` structure is **optional**. Use this option to inject middleware at
 named hook points. Each middleware must implement the same interface as the
 object it is wrapping. For instance, a registry middleware must implement the
@@ -661,6 +793,8 @@ object it is wrapping. For instance, a registry middleware must implement the
 `distribution.Repository`, and a storage middleware must implement
 `driver.StorageDriver`.
 
+{% comment %}
+{% endcomment %}
 This is an example configuration of the `cloudfront`  middleware, a storage
 middleware:
 
@@ -687,6 +821,8 @@ middleware:
         iprangesurl: https://ip-ranges.amazonaws.com/ip-ranges.json
 ```
 
+{% comment %}
+{% endcomment %}
 Each middleware entry has `name` and `options` entries. The `name` must
 correspond to the name under which the middleware registers itself. The
 `options` field is a map that details custom configuration required to
@@ -695,9 +831,13 @@ it supports any interesting structures desired, leaving it up to the middleware
 initialization function to best determine how to handle the specific
 interpretation of the options.
 
+{% comment %}
+{% endcomment %}
 ### `cloudfront`
 
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `baseurl` | yes      | The `SCHEME://HOST[/PATH]` at which Cloudfront is served. |
@@ -710,23 +850,35 @@ interpretation of the options.
 | `iprangesurl` | no      | The URL contains the AWS IP ranges information, default: `https://ip-ranges.amazonaws.com/ip-ranges.json` |
 
 
+{% comment %}
+{% endcomment %}
 Value of `ipfilteredby` can be:
 
+{% comment %}
+{% endcomment %}
 | Value       | Description                        |
 |-------------|------------------------------------|
 | `none`      | default, do not filter by IP       |
 | `aws`       | IP from AWS goes to S3 directly    |
 | `awsregion` | IP from certain AWS regions goes to S3 directly, use together with `awsregion`. |
 
+{% comment %}
+{% endcomment %}
 ### `redirect`
 
+{% comment %}
+{% endcomment %}
 You can use the `redirect` storage middleware to specify a custom URL to a
 location of a proxy for the layer stored by the S3 storage driver.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                                                                                 |
 |-----------|----------|-------------------------------------------------------------------------------------------------------------|
 | `baseurl` | yes      | `SCHEME://HOST` at which layers are served. Can also contain port. For example, `https://example.com:5443`. |
 
+{% comment %}
+{% endcomment %}
 ## `reporting`
 
 ```
@@ -741,30 +893,44 @@ reporting:
     verbose: true
 ```
 
+{% comment %}
+{% endcomment %}
 The `reporting` option is **optional** and configures error and metrics
 reporting tools. At the moment only two services are supported:
 
 - [Bugsnag](#bugsnag)
 - [New Relic](#new-relic)
 
+{% comment %}
+{% endcomment %}
 A valid configuration may contain both.
 
+{% comment %}
+{% endcomment %}
 ### `bugsnag`
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `apikey`  | yes      | The API Key provided by Bugsnag.                      |
 | `releasestage` | no  | Tracks where the registry is deployed, using a string like `production`, `staging`, or `development`.|
 | `endpoint`| no       | The enterprise Bugsnag endpoint.                      |
 
+{% comment %}
+{% endcomment %}
 ### `newrelic`
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `licensekey` | yes   | License key provided by New Relic.                    |
 | `name`    | no       | New Relic application name.                           |
 |  `verbose`| no       | Set to `true` to enable New Relic debugging output on `stdout`. |
 
+{% comment %}
+{% endcomment %}
 ## `http`
 
 ```none
@@ -794,9 +960,13 @@ http:
     disabled: false
 ```
 
+{% comment %}
+{% endcomment %}
 The `http` option details the configuration for the HTTP server that hosts the
 registry.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `addr`    | yes      | The address for which the server should accept connections. The form depends on a network type (see the `net` option). Use `HOST:PORT` for TCP and `FILE` for a UNIX socket. |
@@ -808,25 +978,37 @@ registry.
 | `draintimeout`| no    | Amount of time to wait for HTTP connections to drain before shutting down after registry receives SIGTERM signal|
 
 
+{% comment %}
+{% endcomment %}
 ### `tls`
 
+{% comment %}
+{% endcomment %}
 The `tls` structure within `http` is **optional**. Use this to configure TLS
 for the server. If you already have a web server running on
 the same host as the registry, you may prefer to configure TLS on that web server
 and proxy connections to the registry server.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `certificate` | yes  | Absolute path to the x509 certificate file.           |
 | `key`     | yes      | Absolute path to the x509 private key file.           |
 | `clientcas` | no     | An array of absolute paths to x509 CA files.          |
 
+{% comment %}
+{% endcomment %}
 ### `letsencrypt`
 
+{% comment %}
+{% endcomment %}
 The `letsencrypt` structure within `tls` is **optional**. Use this to configure
 TLS certificates provided by
 [Let's Encrypt](https://letsencrypt.org/how-it-works/).
 
+{% comment %}
+{% endcomment %}
 >**NOTE**: When using Let's Encrypt, ensure that the outward-facing address is
 > accessible on port `443`. The registry defaults to listening on port `5000`.
 > If you run the registry as a container, consider adding the flag `-p 443:5000`
@@ -835,59 +1017,91 @@ TLS certificates provided by
 > that are valid for this registry to avoid trying to get certificates for random
 > hostnames due to malicious clients connecting with bogus SNI hostnames.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `cachefile` | yes    | Absolute path to a file where the Let's Encrypt agent can cache data. |
 | `email`   | yes      | The email address used to register with Let's Encrypt. |
 | `hosts`   | no       | The hostnames allowed for Let's Encrypt certificates. |
 
+{% comment %}
+{% endcomment %}
 ### `debug`
 
+{% comment %}
+{% endcomment %}
 The `debug` option is **optional** . Use it to configure a debug server that
 can be helpful in diagnosing problems. The debug endpoint can be used for
 monitoring registry metrics and health, as well as profiling. Sensitive
 information may be available via the debug endpoint. Please be certain that
 access to the debug endpoint is locked down in a production environment.
 
+{% comment %}
+{% endcomment %}
 The `debug` section takes a single required `addr` parameter, which specifies
 the `HOST:PORT` on which the debug server should accept connections.
 
+{% comment %}
+{% endcomment %}
 ## `prometheus`
 
+{% comment %}
+{% endcomment %}
 The `prometheus` option defines whether the prometheus metrics is enable, as well
 as the path to access the metrics.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `enabled` | no       | Set `true` to enable the prometheus server            |
 | `path`    | no       | The path to access the metrics, `/metrics` by default |
 
+{% comment %}
+{% endcomment %}
 The url to access the metrics is `HOST:PORT/path`, where `HOST:PORT` is defined
 in `addr` under `debug`.
 
+{% comment %}
+{% endcomment %}
 ### `headers`
 
+{% comment %}
+{% endcomment %}
 The `headers` option is **optional** . Use it to specify headers that the HTTP
 server should include in responses. This can be used for security headers such
 as `Strict-Transport-Security`.
 
+{% comment %}
+{% endcomment %}
 The `headers` option should contain an option for each header to include, where
 the parameter name is the header's name, and the parameter value a list of the
 header's payload values.
 
+{% comment %}
+{% endcomment %}
 Including `X-Content-Type-Options: [nosniff]` is recommended, so that browsers
 will not interpret content as HTML if they are directed to load a page from the
 registry. This header is included in the example configuration file.
 
+{% comment %}
+{% endcomment %}
 ### `http2`
 
+{% comment %}
+{% endcomment %}
 The `http2` structure within `http` is **optional**. Use this to control http2
 settings for the registry.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `disabled` | no      | If `true`, then `http2` support is disabled.          |
 
+{% comment %}
+{% endcomment %}
 ## `notifications`
 
 ```none
@@ -911,14 +1125,22 @@ notifications:
            - pull
 ```
 
+{% comment %}
+{% endcomment %}
 The notifications option is **optional** and currently may contain a single
 option, `endpoints`.
 
+{% comment %}
+{% endcomment %}
 ### `endpoints`
 
+{% comment %}
+{% endcomment %}
 The `endpoints` structure contains a list of named services (URLs) that can
 accept event notifications.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `name`    | yes      | A human-readable name for the service.                |
@@ -931,20 +1153,32 @@ accept event notifications.
 | `ignoredmediatypes`|no| A list of target media types to ignore. Events with these target media types are not published to the endpoint. |
 | `ignore`  |no| Events with these mediatypes or actions are not published to the endpoint. |
 
+{% comment %}
+{% endcomment %}
 #### `ignore`
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `mediatypes`|no| A list of target media types to ignore. Events with these target media types are not published to the endpoint. |
 | `actions`   |no| A list of actions to ignore. Events with these actions are not published to the endpoint. |
 
+{% comment %}
+{% endcomment %}
 ### `events`
 
+{% comment %}
+{% endcomment %}
 The `events` structure configures the information provided in event notifications.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `includereferences` | no | If `true`, include reference information in manifest events. |
 
+{% comment %}
+{% endcomment %}
 ## `redis`
 
 ```none
@@ -961,15 +1195,21 @@ redis:
     idletimeout: 300s
 ```
 
+{% comment %}
+{% endcomment %}
 Declare parameters for constructing the `redis` connections. Registry instances
 may use the Redis instance for several applications. Currently, it caches
 information about immutable blobs. Most of the `redis` options control
 how the registry connects to the `redis` instance. You can control the pool's
 behavior with the [pool](#pool) subsection.
 
+{% comment %}
+{% endcomment %}
 You should configure Redis with the **allkeys-lru** eviction policy, because the
 registry does not set an expiration value on keys.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `addr`    | yes      | The address (host and port) of the Redis instance.    |
@@ -979,6 +1219,8 @@ registry does not set an expiration value on keys.
 | `readtimeout` | no   | The timeout for reading from the Redis instance.      |
 | `writetimeout` | no  | The timeout for writing to the Redis instance.        |
 
+{% comment %}
+{% endcomment %}
 ### `pool`
 
 ```none
@@ -988,14 +1230,20 @@ pool:
   idletimeout: 300s
 ```
 
+{% comment %}
+{% endcomment %}
 Use these settings to configure the behavior of the Redis connection pool.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `maxidle` | no       | The maximum number of idle connections in the pool.   |
 | `maxactive`| no      | The maximum number of connections which can be open before blocking a connection request. |
 | `idletimeout`| no    | How long to wait before closing inactive connections. |
 
+{% comment %}
+{% endcomment %}
 ## `health`
 
 ```none
@@ -1022,42 +1270,62 @@ health:
       threshold: 3
 ```
 
+{% comment %}
+{% endcomment %}
 The health option is **optional**, and contains preferences for a periodic
 health check on the storage driver's backend storage, as well as optional
 periodic checks on local files, HTTP URIs, and/or TCP servers. The results of
 the health checks are available at the `/debug/health` endpoint on the debug
 HTTP server if the debug HTTP server is enabled (see http section).
 
+{% comment %}
+{% endcomment %}
 ### `storagedriver`
 
+{% comment %}
+{% endcomment %}
 The `storagedriver` structure contains options for a health check on the
 configured storage driver's backend storage. The health check is only active
 when `enabled` is set to `true`.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `enabled` | yes      | Set to `true` to enable storage driver health checks or `false` to disable them. |
 | `interval`| no       | How long to wait between repetitions of the storage driver health check. A positive integer and an optional suffix indicating the unit of time. The suffix is one of `ns`, `us`, `ms`, `s`, `m`, or `h`. Defaults to `10s` if the value is omitted. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds. |
 | `threshold`| no      | A positive integer which represents the number of times the check must fail before the state is marked as unhealthy. If not specified, a single failure marks the state as unhealthy. |
 
+{% comment %}
+{% endcomment %}
 ### `file`
 
+{% comment %}
+{% endcomment %}
 The `file` structure includes a list of paths to be periodically checked for the\
 existence of a file. If a file exists at the given path, the health check will
 fail. You can use this mechanism to bring a registry out of rotation by creating
 a file.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `file`    | yes      | The path to check for existence of a file.            |
 | `interval`| no       | How long to wait before repeating the check. A positive integer and an optional suffix indicating the unit of time. The suffix is one of `ns`, `us`, `ms`, `s`, `m`, or `h`. Defaults to `10s` if the value is omitted. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds. |
 
+{% comment %}
+{% endcomment %}
 ### `http`
 
+{% comment %}
+{% endcomment %}
 The `http` structure includes a list of HTTP URIs to periodically check with
 `HEAD` requests. If a `HEAD` request does not complete or returns an unexpected
 status code, the health check will fail.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `uri`     | yes      | The URI to check.                                     |
@@ -1067,12 +1335,18 @@ status code, the health check will fail.
 | `interval`| no       | How long to wait before repeating the check. A positive integer and an optional suffix indicating the unit of time. The suffix is one of `ns`, `us`, `ms`, `s`, `m`, or `h`. Defaults to `10s` if the value is omitted. If you specify a value but omit the suffix, the value is interpreted as a number of nanoseconds. |
 | `threshold`| no      | The number of times the check must fail before the state is marked as unhealthy. If this field is not specified, a single failure marks the state as unhealthy. |
 
+{% comment %}
+{% endcomment %}
 ### `tcp`
 
+{% comment %}
+{% endcomment %}
 The `tcp` structure includes a list of TCP addresses to periodically check using
 TCP connection attempts. Addresses must include port numbers. If a connection
 attempt fails, the health check will fail.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `addr`    | yes      | The TCP address and port to connect to.               |
@@ -1081,6 +1355,8 @@ attempt fails, the health check will fail.
 | `threshold`| no      | The number of times the check must fail before the state is marked as unhealthy. If this field is not specified, a single failure marks the state as unhealthy. |
 
 
+{% comment %}
+{% endcomment %}
 ## `proxy`
 
 ```
@@ -1090,12 +1366,16 @@ proxy:
   password: [password]
 ```
 
+{% comment %}
+{% endcomment %}
 The `proxy` structure allows a registry to be configured as a pull-through cache
 to Docker Hub.  See
 [mirror](https://github.com/docker/docker.github.io/tree/master/registry/recipes/mirror.md)
 for more information. Pushing to a registry configured as a pull-through cache
 is unsupported.
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `remoteurl`| yes     | The URL for the repository on Docker Hub.             |
@@ -1103,12 +1383,18 @@ is unsupported.
 | `password` | no      | The password used to authenticate to Docker Hub using the username specified in `username`. |
 
 
+{% comment %}
+{% endcomment %}
 To enable pulling private repositories (e.g. `batman/robin`) specify the
 username (such as `batman`) and the password for that username.
 
+{% comment %}
+{% endcomment %}
 > **Note**: These private repositories are stored in the proxy cache's storage.
 > Take appropriate measures to protect access to the proxy cache.
 
+{% comment %}
+{% endcomment %}
 ## `compatibility`
 
 ```none
@@ -1118,16 +1404,24 @@ compatibility:
     enabled: true
 ```
 
+{% comment %}
+{% endcomment %}
 Use the `compatibility` structure to configure handling of older and deprecated
 features. Each subsection defines such a feature with configurable behavior.
 
+{% comment %}
+{% endcomment %}
 ### `schema1`
 
+{% comment %}
+{% endcomment %}
 | Parameter | Required | Description                                           |
 |-----------|----------|-------------------------------------------------------|
 | `signingkeyfile` | no | The signing private key used to add signatures to `schema1` manifests. If no signing key is provided, a new ECDSA key is generated when the registry starts. |
 | `enabled` | no | If this is not set to true, `schema1` manifests cannot be pushed. |
 
+{% comment %}
+{% endcomment %}
 ## `validation`
 
 ```none
@@ -1140,33 +1434,55 @@ validation:
         - ^https?://www\.example\.com/
 ```
 
+{% comment %}
+{% endcomment %}
 ### `disabled`
 
+{% comment %}
+{% endcomment %}
 The `disabled` flag disables the other options in the `validation`
 section. They are enabled by default. This option deprecates the `enabled` flag.
 
+{% comment %}
+{% endcomment %}
 ### `manifests`
 
+{% comment %}
+{% endcomment %}
 Use the `manifests` subsection to configure validation of manifests. If
 `disabled` is `false`, the validation allows nothing.
 
+{% comment %}
+{% endcomment %}
 #### `urls`
 
+{% comment %}
+{% endcomment %}
 The `allow` and `deny` options are each a list of
 [regular expressions](https://godoc.org/regexp/syntax) that restrict the URLs in
 pushed manifests.
 
+{% comment %}
+{% endcomment %}
 If `allow` is unset, pushing a manifest containing URLs fails.
 
+{% comment %}
+{% endcomment %}
 If `allow` is set, pushing a manifest succeeds only if all URLs match
 one of the `allow` regular expressions **and** one of the following holds:
 
+{% comment %}
+{% endcomment %}
 1.  `deny` is unset.
 2.  `deny` is set but no URLs within the manifest match any of the `deny` regular
     expressions.
 
+{% comment %}
+{% endcomment %}
 ## Example: Development configuration
 
+{% comment %}
+{% endcomment %}
 You can use this simple example for local development:
 
 ```none
@@ -1183,26 +1499,38 @@ http:
         addr: localhost:5001
 ```
 
+{% comment %}
+{% endcomment %}
 This example configures the registry instance to run on port `5000`, binding to
 `localhost`, with the `debug` server enabled. Registry data is stored in the
 `/var/lib/registry` directory. Logging is set to `debug` mode, which is the most
 verbose.
 
+{% comment %}
+{% endcomment %}
 See
 [config-example.yml](https://github.com/docker/distribution/blob/master/cmd/registry/config-example.yml)
 for another simple configuration. Both examples are generally useful for local
 development.
 
 
+{% comment %}
+{% endcomment %}
 ## Example: Middleware configuration
 
+{% comment %}
+{% endcomment %}
 This example configures [Amazon Cloudfront](http://aws.amazon.com/cloudfront/)
 as the storage middleware in a registry. Middleware allows the registry to serve
 layers via a content delivery network (CDN). This reduces requests to the
 storage layer.
 
+{% comment %}
+{% endcomment %}
 Cloudfront requires the S3 storage driver.
 
+{% comment %}
+{% endcomment %}
 This is the configuration expressed in YAML:
 
 ```none
@@ -1217,9 +1545,13 @@ middleware:
       duration: 60s
 ```
 
+{% comment %}
+{% endcomment %}
 See the configuration reference for [Cloudfront](#cloudfront) for more
 information about configuration options.
 
+{% comment %}
+{% endcomment %}
 > **Note**: Cloudfront keys exist separately from other AWS keys.  See
 > [the documentation on AWS credentials](http://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html)
 > for more information.

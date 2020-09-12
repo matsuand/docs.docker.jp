@@ -11,7 +11,7 @@ options:
   shorthand: t
   value_type: int
   default_value: "10"
-  description: コンテナーの削除前にいったんウェイトする秒数を指定します。
+  description: コンテナーを Kill する前の待ち時間（秒数）。
   deprecated: false
   experimental: false
   experimentalcli: false

@@ -1,5 +1,5 @@
 command: docker builder prune
-short: ビルドキャッシュの削除
+short: ビルドキャッシュを削除します。
 long: ビルドキャッシュを削除します。
 usage: docker builder prune
 pname: docker builder

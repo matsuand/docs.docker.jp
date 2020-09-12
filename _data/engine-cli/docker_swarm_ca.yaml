@@ -63,7 +63,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Suppress progress output
+  description: 経過出力を省略します。
   deprecated: false
   experimental: false
   experimentalcli: false

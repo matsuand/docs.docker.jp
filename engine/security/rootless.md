@@ -539,21 +539,29 @@ Or add `net.ipv4.ip_unprivileged_port_start=0` to `/etc/sysctl.conf` (or
 `/etc/sysctl.d`) and run `sudo sysctl --system`.
 
 {% comment %}
+### Limiting resources
 {% endcomment %}
+{: #limiting-resources }
 ### Limiting resources
 
 {% comment %}
+In Docker 19.03, rootless mode ignores cgroup-related `docker run` flags such as
+`--cpus`, `--memory`, --pids-limit`.
 {% endcomment %}
 In Docker 19.03, rootless mode ignores cgroup-related `docker run` flags such as
 `--cpus`, `--memory`, --pids-limit`.
 
 {% comment %}
+However, you can still use the traditional `ulimit` and [`cpulimit`](https://github.com/opsengine/cpulimit),
+though they work in process-granularity rather than in container-granularity,
+and can be arbitrarily disabled by the container process.
 {% endcomment %}
 However, you can still use the traditional `ulimit` and [`cpulimit`](https://github.com/opsengine/cpulimit),
 though they work in process-granularity rather than in container-granularity,
 and can be arbitrarily disabled by the container process.
 
 {% comment %}
+For example:
 {% endcomment %}
 For example:
 

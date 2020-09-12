@@ -8,7 +8,7 @@ plink: docker_context.yaml
 options:
 - option: format
   value_type: string
-  description: Go 言語テンプレートを使ってコンテキストをフォーマット出力します。
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false

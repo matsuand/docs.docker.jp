@@ -71,7 +71,7 @@ Options:
       --max-concurrent-downloads int          Set the max concurrent downloads for each pull (default 3)
       --max-concurrent-uploads int            Set the max concurrent uploads for each push (default 5)
       --metrics-addr string                   Set default address and port to serve the metrics api on
-      --mtu int                               Set the containers network MTU
+      --mtu int                               コンテナーにネットワーク MTU を設定します。
       --node-generic-resources list           Advertise user-defined resource
       --no-new-privileges                     Set no-new-privileges by default for new containers
       --oom-score-adjust int                  Set the oom_score_adj for the daemon (default -500)

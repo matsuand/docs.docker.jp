@@ -35,7 +35,7 @@ options:
   os_type: linux
 - option: detach-keys
   value_type: string
-  description: コンテナーをデタッチするためのキーシーケンスをオーバーライドします。
+  description: コンテナーデタッチ時のキーシーケンスをオーバーライドします。
   deprecated: false
   experimental: false
   experimentalcli: false

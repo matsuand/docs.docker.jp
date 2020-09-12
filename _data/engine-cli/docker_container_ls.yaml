@@ -19,7 +19,7 @@ options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: 指定された条件に基づいてフィルター出力を行います。
+  description: 指定された条件に基づいてフィルター検索を行います。
   deprecated: false
   experimental: false
   experimentalcli: false

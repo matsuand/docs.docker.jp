@@ -25,7 +25,7 @@ options:
 - option: format
   shorthand: f
   value_type: string
-  description: Format the output using the given Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -182,7 +182,8 @@ examples: |-
 
   The global `-D` option causes all `docker` commands to output debug information.
 
-  ### Format the output
+  {: #format-the-output }
+  ### フォーマット設定
 
   You can also specify the output format:
 

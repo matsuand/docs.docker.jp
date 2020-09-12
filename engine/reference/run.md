@@ -48,7 +48,7 @@ The basic `docker run` command takes this form:
 {% endcomment %}
 基本的な `docker run` コマンドは以下の書式で表わされます。
 
-    $ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
+    $ docker run [オプション] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
 
 {% comment %}
 The `docker run` command must specify an [*IMAGE*](glossary.md#image)
@@ -57,8 +57,7 @@ defaults related to:
 {% endcomment %}
 `docker run` コマンドには [**イメージ**](glossary.md#image) を指定することが必要です。
 コンテナーはこのイメージから作り出されます。
-An image developer can define image
-defaults related to:
+イメージの開発者は、以下に関するデフォルトをイメージに定義することができます。
 
  {% comment %}
  * detached or foreground running
@@ -67,7 +66,7 @@ defaults related to:
  * runtime constraints on CPU and memory
  {% endcomment %}
  * デタッチ実行かフォアグラウンド実行か
- * container identification
+ * コンテナーの指定
  * ネットワーク設定
  * CPU やメモリに対する実行時の制約
 
@@ -79,19 +78,15 @@ operator's ability to override image and Docker runtime defaults is why
 [*run*](commandline/run.md) has more options than any
 other `docker` command.
 {% endcomment %}
-With the `docker run [OPTIONS]` an operator can add to or override the
-image defaults set by a developer. And, additionally, operators can
-override nearly all the defaults set by the Docker runtime itself. The
-operator's ability to override image and Docker runtime defaults is why
-[*run*](commandline/run.md) has more options than any
-other `docker` command.
+`docker run [オプション]` を使うと、開発者が設定したイメージデフォルトを追加またはオーバーライドすることができます。
+またオペレーターは、Docker ランタイムに設定されているデフォルト値を、ほぼすべてオーバーライドすることができます。
+このようにオペレーターに対して、イメージや Docker ランタイムに対するデフォルト値のオーバーライドを可能としているため、`docker` コマンドの中でも [*run*](commandline/run.md) コマンドには、多くのオプションが存在しています。
 
 {% comment %}
 To learn how to interpret the types of `[OPTIONS]`, see [*Option
 types*](commandline/cli.md#option-types).
 {% endcomment %}
-To learn how to interpret the types of `[OPTIONS]`, see [*Option
-types*](commandline/cli.md#option-types).
+`[オプション]` の種類を理解するには [**オプションの種類**](commandline/cli.md#option-types) を参照してください。
 
 {% comment %}
 > **Note**: Depending on your Docker system configuration, you may be
@@ -101,26 +96,22 @@ types*](commandline/cli.md#option-types).
 > it. For more information about this configuration, refer to the Docker
 > installation documentation for your operating system.
 {% endcomment %}
-> **Note**: Depending on your Docker system configuration, you may be
-> required to preface the `docker run` command with `sudo`. To avoid
-> having to use `sudo` with the `docker` command, your system
-> administrator can create a Unix group called `docker` and add users to
-> it. For more information about this configuration, refer to the Docker
-> installation documentation for your operating system.
+> **メモ**: Docker に対するシステム設定の仕方によっては、`docker run` コマンドの実行時に `sudo` をつけることが必要かもしれません。
+> `sudo` をつけずに `docker` コマンドを実行できるようにするには、システム管理者が `docker` という名のグループを生成して、そこにユーザーを追加するようにします。
+> この設定に関する詳細は、各オペレーティングシステムにおける Docker インストールのドキュメントを参照してください。
 
 
 {% comment %}
 ## Operator exclusive options
 {% endcomment %}
 {: #operator-exclusive-options }
-## Operator exclusive options
+## オペレーター専用のオプション
 
 {% comment %}
 Only the operator (the person executing `docker run`) can set the
 following options.
 {% endcomment %}
-Only the operator (the person executing `docker run`) can set the
-following options.
+オペレーター（`docker run` を実行するユーザー）だけが利用できるのが、以下のオプションです。
 
 {% comment %}
  - [Detached vs foreground](#detached-vs-foreground)
@@ -177,41 +168,48 @@ run the container exits, unless you also specify the `--rm` option. If you use
 `-d` with `--rm`, the container is removed when it exits **or** when the daemon
 exits, whichever happens first.
 {% endcomment %}
-To start a container in detached mode, you use `-d=true` or just `-d` option. By
-design, containers started in detached mode exit when the root process used to
-run the container exits, unless you also specify the `--rm` option. If you use
-`-d` with `--rm`, the container is removed when it exits **or** when the daemon
-exits, whichever happens first.
+デタッチモードでコンテナーを起動するには、`-d=true` または単に `-d` オプションを利用します。
+設計方針として、デタッチモードで起動したコンテナーが終了するのは、コンテナーの起動に用いられたルートプロセスが終了したときとなっています。
+ただし `--rm` オプションも合わせて指定した場合は異なります。
+`-d` と同時に `--rm` を指定した場合は、コンテナーが終了するか、**あるいは** デーモンが終了するか、どちらかが先に起きたときに、コンテナーは削除されます。
 
 {% comment %}
 Do not pass a `service x start` command to a detached container. For example, this
 command attempts to start the `nginx` service.
 {% endcomment %}
-Do not pass a `service x start` command to a detached container. For example, this
-command attempts to start the `nginx` service.
+`service` かつ `start` コマンドをデタッチコンテナーに対して用いてはなりません。
+例として、以下のコマンドは `nginx` サービスを起動するものです。
 
     $ docker run -d -p 80:80 my_image service nginx start
 
 {% comment %}
-{% endcomment %}
 This succeeds in starting the `nginx` service inside the container. However, it
 fails the detached container paradigm in that, the root process (`service nginx
 start`) returns and the detached container stops as designed. As a result, the
 `nginx` service is started but could not be used. Instead, to start a process
 such as the `nginx` web server do the following:
+{% endcomment %}
+このコマンドは、コンテナー内に `nginx` サービスを起動させることには成功します。
+しかしデタッチ実行という処理には失敗します。
+そしてルートプロセス（`service nginx start`）が終了してデタッチコンテナーが停止しますが、これは設計どおりの動きです。
+結果として `nginx` サービスは起動するものの、利用はできません。
+`nginx` ウェブサーバーのようなプロセスを起動するなら、代わりに以下のようなコマンド実行とします。
 
     $ docker run -d -p 80:80 my_image nginx -g 'daemon off;'
 
 {% comment %}
-{% endcomment %}
 To do input/output with a detached container use network connections or shared
 volumes. These are required because the container is no longer listening to the
 command line where `docker run` was run.
+{% endcomment %}
+デタッチコンテナーを使って入出力を行うには、ネットワーク接続や共有ボリュームを利用します。
+これが必要になる理由は、`docker run` を実行したコマンドラインから、コンテナーはもはやコマンドを受け付ける状態にはないからです。
 
 {% comment %}
-{% endcomment %}
 To reattach to a detached container, use `docker`
 [*attach*](commandline/attach.md) command.
+{% endcomment %}
+デタッチモードのコンテナーに再度アタッチするには `docker` [*attach*](commandline/attach.md) コマンドを利用します。
 
 {% comment %}
 ### Foreground
@@ -226,110 +224,161 @@ the process's standard input, output, and standard error. It can even
 pretend to be a TTY (this is what most command line executables expect)
 and pass along signals. All of that is configurable:
 {% endcomment %}
-In foreground mode (the default when `-d` is not specified), `docker
-run` can start the process in the container and attach the console to
-the process's standard input, output, and standard error. It can even
-pretend to be a TTY (this is what most command line executables expect)
-and pass along signals. All of that is configurable:
+フォアグラウンドモード（`-d` を指定しなかった場合のデフォルト）の場合、`docker run` はコンテナー内にプロセスを起動させます。
+そしてコンソールをプロセスの標準入出力および標準エラー出力にアタッチします。
+こうすれば TTY であるかのように扱うことができ（そしてたいていのコマンドラインモジュールが期待していることであり）、シグナルの送受信も行うことができます。
+いずれも設定により変更可能です。
 
+    {% comment %}
     -a=[]           : Attach to `STDIN`, `STDOUT` and/or `STDERR`
     -t              : Allocate a pseudo-tty
     --sig-proxy=true: Proxy all received signals to the process (non-TTY mode only)
     -i              : Keep STDIN open even if not attached
+    {% endcomment %}
+    -a=[]           : `STDIN`, `STDOUT`, `STDERR` にアタッチします。
+    -t              : 擬似TTYに割り当てます。
+    --sig-proxy=true: 受信シグナルをすべてプロセスにプロキシーします。(非TTYモードのみ)
+    -i              : アタッチされていなくても STDIN だけは受け付けます。
 
 {% comment %}
-{% endcomment %}
 If you do not specify `-a` then Docker will [attach to both stdout and stderr
 ]( https://github.com/docker/docker/blob/4118e0c9eebda2412a09ae66e90c34b85fae3275/runconfig/opts/parse.go#L267).
 You can specify to which of the three standard streams (`STDIN`, `STDOUT`,
 `STDERR`) you'd like to connect instead, as in:
+{% endcomment %}
+`-a` を指定しなかった場合、Docker は [標準出力と標準エラー出力の双方にアタッチ]( https://github.com/docker/docker/blob/4118e0c9eebda2412a09ae66e90c34b85fae3275/runconfig/opts/parse.go#L267) します。
+上とは別に、標準ストリーム 3 つ（`STDIN`, `STDOUT`, `STDERR`）のうちから、接続したいものを選んで指定することもできます。
+たとえば以下のようにします。
 
     $ docker run -a stdin -a stdout -i -t ubuntu /bin/bash
 
 {% comment %}
-{% endcomment %}
 For interactive processes (like a shell), you must use `-i -t` together in
 order to allocate a tty for the container process. `-i -t` is often written `-it`
 as you'll see in later examples.  Specifying `-t` is forbidden when the client
 is receiving its standard input from a pipe, as in:
+{% endcomment %}
+シェルのような対話的処理を行うには、`-i -t` をともに指定し、コンテナープロセスに対して TTY を割り当てることが必要です。
+`-i -t` は後の利用例からもわかるように、`-it` と記述する場合もあります。
+クライアントが標準入力をパイプから受け付けている場合は、`-t` の指定は禁止されています。
+たとえば以下です。
 
     $ echo test | docker run -i busybox cat
 
 {% comment %}
-{% endcomment %}
 >**Note**: A process running as PID 1 inside a container is treated
 >specially by Linux: it ignores any signal with the default action.
 >So, the process will not terminate on `SIGINT` or `SIGTERM` unless it is
 >coded to do so.
+{% endcomment %}
+>**メモ**: コンテナー内にて PID 1 として実行しているプロセスは、Linux において特別に取り扱われるものです。
+> このプロセスのデフォルト動作は、あらゆるシグナルを無視します。
+> したがってこのプロセスが特別にコーディングされていない限り、`SIGINT` や `SIGTERM` では停止しません。
 
 {% comment %}
-{% endcomment %}
 ## Container identification
+{% endcomment %}
+{: #container-identification }
+## コンテナーの指定
 
 {% comment %}
-{% endcomment %}
 ### Name (--name)
+{% endcomment %}
+{: #name---name }
+### コンテナー名 (--name)
 
 {% comment %}
-{% endcomment %}
 The operator can identify a container in three ways:
+{% endcomment %}
+オペレーターがコンテナーを指定するには、以下の 3 とおりの方法があります。
 
 {% comment %}
-{% endcomment %}
 | Identifier type       | Example value                                                      |
 |:----------------------|:-------------------------------------------------------------------|
 | UUID long identifier  | "f78375b1c487e03c9438c729345e54db9d20cfa2ac1fc3494b6eb60872e74778" |
 | UUID short identifier | "f78375b1c487"                                                     |
 | Name                  | "evil_ptolemy"                                                     |
+{% endcomment %}
+| 識別タイプ            | 利用例                                                             |
+|:----------------------|:-------------------------------------------------------------------|
+| UUID 識別子(長い)     | "f78375b1c487e03c9438c729345e54db9d20cfa2ac1fc3494b6eb60872e74778" |
+| UUID 識別子(短い)     | "f78375b1c487"                                                     |
+| 名前                  | "evil_ptolemy"                                                     |
 
 {% comment %}
-{% endcomment %}
 The UUID identifiers come from the Docker daemon. If you do not assign a
 container name with the `--name` option, then the daemon generates a random
 string name for you. Defining a `name` can be a handy way to add meaning to a
 container. If you specify a `name`, you can use it  when referencing the
 container within a Docker network. This works for both background and foreground
 Docker containers.
+{% endcomment %}
+UUID 識別子は Docker デーモンから割り当てられるものです。
+`--name` オプションによりコンテナー名を指定しなかった場合、デーモンはランダムな文字列を生成して割り当てます。
+`name` を定義すれば、コンテナーに意味のある名称を与えることができます。
+`name` を指定しておくと、Docker ネットワーク内のコンテナーを参照する際に、その名前を使うことができます。
+この方法は Docker コンテナーの実行が、バックグラウンドかフォアグラウンドかに関係なく利用できます。
 
 {% comment %}
-{% endcomment %}
 > **Note**: Containers on the default bridge network must be linked to
 > communicate by name.
+{% endcomment %}
+> **メモ**: デフォルトのブリッジネットワーク上のコンテナーが、その名前を使って通信するためには互いにリンクしておくことが必要です。
 
 {% comment %}
-{% endcomment %}
 ### PID equivalent
+{% endcomment %}
+{: #pid-equivalent }
+### PID に相当するもの
 
 {% comment %}
-{% endcomment %}
 Finally, to help with automation, you can have Docker write the
 container ID out to a file of your choosing. This is similar to how some
 programs might write out their process ID to a file (you've seen them as
 PID files):
+{% endcomment %}
+処理の自動化に活用するような目的で、コンテナー ID を指定ファイルに書き出すことができます。
+これはある種のプログラムにおいて、プロセス ID をファイルに書き出している手法と同様です。
+（PID ファイルとして見たことがあるものです。）
 
+    {% comment %}
     --cidfile="": Write the container ID to the file
+    {% endcomment %}
+    --cidfile="": コンテナーIDをファイルに書き出します。
 
 {% comment %}
-{% endcomment %}
 ### Image[:tag]
+{% endcomment %}
+{: #imagetag }
+### イメージ[:タグ]
 
 {% comment %}
-{% endcomment %}
 While not strictly a means of identifying a container, you can specify a version of an
 image you'd like to run the container with by adding `image[:tag]` to the command. For
 example, `docker run ubuntu:14.04`.
-
-{% comment %}
 {% endcomment %}
-### Image[@digest]
+コンテナーを厳密に指定する方法ではありませんが、実行したいコンテナーのイメージバージョンを指定することが可能です。
+これを行うには、コマンド実行時に `イメージ[:タグ]` を加えます。
+たとえば `docker run ubuntu:14.04` のようにします。
 
 {% comment %}
+### Image[@digest]
+{% endcomment %}
+{: #imagedigest }
+### イメージ[@ダイジェスト値]
+
+{% comment %}
+Images using the v2 or later image format have a content-addressable identifier
+called a digest. As long as the input used to generate the image is unchanged,
+the digest value is predictable and referenceable.
 {% endcomment %}
 Images using the v2 or later image format have a content-addressable identifier
 called a digest. As long as the input used to generate the image is unchanged,
 the digest value is predictable and referenceable.
 
 {% comment %}
+The following example runs a container from the `alpine` image with the
+`sha256:9cacb71397b640eca97488cf08582ae4e4068513101088e9f96c9814bfda95e0` digest:
 {% endcomment %}
 The following example runs a container from the `alpine` image with the
 `sha256:9cacb71397b640eca97488cf08582ae4e4068513101088e9f96c9814bfda95e0` digest:
@@ -337,38 +386,54 @@ The following example runs a container from the `alpine` image with the
     $ docker run alpine@sha256:9cacb71397b640eca97488cf08582ae4e4068513101088e9f96c9814bfda95e0 date
 
 {% comment %}
-{% endcomment %}
 ## PID settings (--pid)
+{% endcomment %}
+{: #pid-settings---pid }
+## PID 設定 (--pid)
 
+    {% comment %}
+    --pid=""  : Set the PID (Process) Namespace mode for the container,
+                 'container:<name|id>': joins another container's PID namespace
+                 'host': use the host's PID namespace inside the container
+    {% endcomment %}
     --pid=""  : Set the PID (Process) Namespace mode for the container,
                  'container:<name|id>': joins another container's PID namespace
                  'host': use the host's PID namespace inside the container
 
 {% comment %}
-{% endcomment %}
 By default, all containers have the PID namespace enabled.
+{% endcomment %}
+コンテナーの PID 名前空間は、デフォルトで有効になっています。
 
 {% comment %}
-{% endcomment %}
 PID namespace provides separation of processes. The PID Namespace removes the
 view of the system processes, and allows process ids to be reused including
 pid 1.
+{% endcomment %}
+PID 名前空間は、プロセスの分離を実現します。
+PID 名前空間があることによって、システムプロセスの参照はできなくなり、プロセス ID の再利用が（PID 1 を含めて）可能となります。
 
 {% comment %}
-{% endcomment %}
 In certain cases you want your container to share the host's process namespace,
 basically allowing processes within the container to see all of the processes
 on the system.  For example, you could build a container with debugging tools
 like `strace` or `gdb`, but want to use these tools when debugging processes
 within the container.
+{% endcomment %}
+コンテナーがホストプロセスの名前空間を共有したい場合を考えます。
+この場合、基本的にはコンテナー内部のプロセスが、システム上の全プロセスを参照できるようにします。
+たとえば `strace` や `gdb` といったデバッグツールを用いてコンテナーをビルドしたとして、このツールをコンテナー内部のプロセスをデバッグする際にも利用したい場合です。
 
 {% comment %}
-{% endcomment %}
 ### Example: run htop inside a container
+{% endcomment %}
+{: #example-run-htop-inside-a-container }
+### 利用例: コンテナー内での htop の実行
 
 {% comment %}
-{% endcomment %}
 Create this Dockerfile:
+{% endcomment %}
+以下の Dockerfile を生成します。
 
 ```
 FROM alpine:latest
@@ -377,30 +442,36 @@ CMD ["htop"]
 ```
 
 {% comment %}
-{% endcomment %}
 Build the Dockerfile and tag the image as `myhtop`:
+{% endcomment %}
+Dockerfile をビルドして、イメージに対して `myhtop` というタグをつけます。
 
 ```bash
 $ docker build -t myhtop .
 ```
 
 {% comment %}
-{% endcomment %}
 Use the following command to run `htop` inside a container:
+{% endcomment %}
+以下のコマンドを実行して、コンテナー内にて `htop` を実行します。
 
 ```
 $ docker run -it --rm --pid=host myhtop
 ```
 
 {% comment %}
-{% endcomment %}
 Joining another container's pid namespace can be used for debugging that container.
-
-{% comment %}
 {% endcomment %}
-### Example
+別コンテナーが PID 名前空間に参加すれば、コンテナーをデバッグする目的で利用することができます。
 
 {% comment %}
+### Example
+{% endcomment %}
+{: #example }
+### 利用例
+
+{% comment %}
+Start a container running a redis server:
 {% endcomment %}
 Start a container running a redis server:
 
@@ -409,6 +480,7 @@ $ docker run --name my-redis -d redis
 ```
 
 {% comment %}
+Debug the redis container by running another container that has strace in it:
 {% endcomment %}
 Debug the redis container by running another container that has strace in it:
 
@@ -418,13 +490,20 @@ $ strace -p 1
 ```
 
 {% comment %}
-{% endcomment %}
 ## UTS settings (--uts)
+{% endcomment %}
+{: #uts-settings---uts }
+## UTS 設定 (--uts)
 
     --uts=""  : Set the UTS namespace mode for the container,
            'host': use the host's UTS namespace inside the container
 
 {% comment %}
+The UTS namespace is for setting the hostname and the domain that is visible
+to running processes in that namespace.  By default, all containers, including
+those with `--network=host`, have their own UTS namespace.  The `host` setting will
+result in the container using the same UTS namespace as the host.  Note that
+`--hostname` and `--domainname` are invalid in `host` UTS mode.
 {% endcomment %}
 The UTS namespace is for setting the hostname and the domain that is visible
 to running processes in that namespace.  By default, all containers, including
@@ -433,22 +512,35 @@ result in the container using the same UTS namespace as the host.  Note that
 `--hostname` and `--domainname` are invalid in `host` UTS mode.
 
 {% comment %}
+You may wish to share the UTS namespace with the host if you would like the
+hostname of the container to change as the hostname of the host changes.  A
+more advanced use case would be changing the host's hostname from a container.
 {% endcomment %}
 You may wish to share the UTS namespace with the host if you would like the
 hostname of the container to change as the hostname of the host changes.  A
 more advanced use case would be changing the host's hostname from a container.
 
 {% comment %}
+## IPC settings (--ipc)
 {% endcomment %}
 ## IPC settings (--ipc)
 
     --ipc="MODE"  : Set the IPC mode for the container
 
 {% comment %}
+The following values are accepted:
 {% endcomment %}
 The following values are accepted:
 
 {% comment %}
+| Value                      | Description                                                                       |
+|:---------------------------|:----------------------------------------------------------------------------------|
+| ""                         | Use daemon's default.                                                             |
+| "none"                     | Own private IPC namespace, with /dev/shm not mounted.                             |
+| "private"                  | Own private IPC namespace.                                                        |
+| "shareable"                | Own private IPC namespace, with a possibility to share it with other containers.  |
+| "container:<_name-or-ID_>" | Join another ("shareable") container's IPC namespace.                             |
+| "host"                     | Use the host system's IPC namespace.                                              |
 {% endcomment %}
 | Value                      | Description                                                                       |
 |:---------------------------|:----------------------------------------------------------------------------------|
@@ -460,16 +552,28 @@ The following values are accepted:
 | "host"                     | Use the host system's IPC namespace.                                              |
 
 {% comment %}
+If not specified, daemon default is used, which can either be `"private"`
+or `"shareable"`, depending on the daemon version and configuration.
 {% endcomment %}
 If not specified, daemon default is used, which can either be `"private"`
 or `"shareable"`, depending on the daemon version and configuration.
 
 {% comment %}
+IPC (POSIX/SysV IPC) namespace provides separation of named shared memory
+segments, semaphores and message queues.
 {% endcomment %}
 IPC (POSIX/SysV IPC) namespace provides separation of named shared memory
 segments, semaphores and message queues.
 
 {% comment %}
+Shared memory segments are used to accelerate inter-process communication at
+memory speed, rather than through pipes or through the network stack. Shared
+memory is commonly used by databases and custom-built (typically C/OpenMPI,
+C++/using boost libraries) high performance applications for scientific
+computing and financial services industries. If these types of applications
+are broken into multiple containers, you might need to share the IPC mechanisms
+of the containers, using `"shareable"` mode for the main (i.e. "donor")
+container, and `"container:<donor-name-or-ID>"` for other containers.
 {% endcomment %}
 Shared memory segments are used to accelerate inter-process communication at
 memory speed, rather than through pipes or through the network stack. Shared
@@ -481,9 +585,12 @@ of the containers, using `"shareable"` mode for the main (i.e. "donor")
 container, and `"container:<donor-name-or-ID>"` for other containers.
 
 {% comment %}
-{% endcomment %}
 ## Network settings
+{% endcomment %}
+{: #network-settings }
+## ネットワーク設定
 
+    {% comment %}
     --dns=[]           : Set custom dns servers for the container
     --network="bridge" : Connect a container to a network
                           'bridge': create a network stack on the default Docker bridge
@@ -497,8 +604,27 @@ container, and `"container:<donor-name-or-ID>"` for other containers.
     --ip=""            : Sets the container's Ethernet device's IPv4 address
     --ip6=""           : Sets the container's Ethernet device's IPv6 address
     --link-local-ip=[] : Sets one or more container's Ethernet device's link local IPv4/IPv6 addresses
+    {% endcomment %}
+    --dns=[]           : Set custom dns servers for the container
+    --network="bridge" : Connect a container to a network
+                          'bridge': create a network stack on the default Docker bridge
+                          'none': no networking
+                          'container:<name|id>': reuse another container's network stack
+                          'host': use the Docker host network stack
+                          '<network-name>|<network-id>': connect to a user-defined network
+    --network-alias=[] : Add network-scoped alias for the container
+    --add-host=""      : Add a line to /etc/hosts (host:IP)
+    --mac-address=""   : Sets the container's Ethernet device's MAC address
+    --ip=""            : Sets the container's Ethernet device's IPv4 address
+    --ip6=""           : Sets the container's Ethernet device's IPv6 address
+    --link-local-ip=[] : コンテナーのイーサネットデバイスに 1つまたは複数のIPv4/IPv6によるリンクローカルアドレスを設定します。
 
 {% comment %}
+By default, all containers have networking enabled and they can make any
+outgoing connections. The operator can completely disable networking
+with `docker run --network none` which disables all incoming and outgoing
+networking. In cases like this, you would perform I/O through files or
+`STDIN` and `STDOUT` only.
 {% endcomment %}
 By default, all containers have networking enabled and they can make any
 outgoing connections. The operator can completely disable networking
@@ -507,15 +633,22 @@ networking. In cases like this, you would perform I/O through files or
 `STDIN` and `STDOUT` only.
 
 {% comment %}
+Publishing ports and linking to other containers only works with the default (bridge). The linking feature is a legacy feature. You should always prefer using Docker network drivers over linking.
 {% endcomment %}
 Publishing ports and linking to other containers only works with the default (bridge). The linking feature is a legacy feature. You should always prefer using Docker network drivers over linking.
 
 {% comment %}
+Your container will use the same DNS servers as the host by default, but
+you can override this with `--dns`.
 {% endcomment %}
 Your container will use the same DNS servers as the host by default, but
 you can override this with `--dns`.
 
 {% comment %}
+By default, the MAC address is generated using the IP address allocated to the
+container. You can set the container's MAC address explicitly by providing a
+MAC address via the `--mac-address` parameter (format:`12:34:56:78:9a:bc`).Be
+aware that Docker does not check if manually specified MAC addresses are unique.
 {% endcomment %}
 By default, the MAC address is generated using the IP address allocated to the
 container. You can set the container's MAC address explicitly by providing a
@@ -523,14 +656,15 @@ MAC address via the `--mac-address` parameter (format:`12:34:56:78:9a:bc`).Be
 aware that Docker does not check if manually specified MAC addresses are unique.
 
 {% comment %}
+Supported networks :
 {% endcomment %}
 Supported networks :
 
 <table>
   <thead>
     <tr>
-      <th class="no-wrap">Network</th>
-      <th>Description</th>
+      <th class="no-wrap">ネットワーク</th>
+      <th>内容説明</th>
     </tr>
   </thead>
   <tbody>
@@ -569,10 +703,16 @@ Supported networks :
 </table>
 
 {% comment %}
-{% endcomment %}
 #### Network: none
+{% endcomment %}
+{: #network-none }
+#### ネットワーク設定: none
 
 {% comment %}
+With the network is `none` a container will not have
+access to any external routes.  The container will still have a
+`loopback` interface enabled in the container but it does not have any
+routes to external traffic.
 {% endcomment %}
 With the network is `none` a container will not have
 access to any external routes.  The container will still have a
@@ -580,11 +720,12 @@ access to any external routes.  The container will still have a
 routes to external traffic.
 
 {% comment %}
-{% endcomment %}
 #### Network: bridge
+{% endcomment %}
+{: #network-bridge }
+#### ネットワーク設定: bridge
 
 {% comment %}
-{% endcomment %}
 With the network set to `bridge` a container will use docker's
 default networking setup.  A bridge is setup on the host, commonly named
 `docker0`, and a pair of `veth` interfaces will be created for the
@@ -593,14 +734,29 @@ to the bridge while the other side of the pair will be placed inside the
 container's namespaces in addition to the `loopback` interface.  An IP
 address will be allocated for containers on the bridge's network and
 traffic will be routed though this bridge to the container.
+{% endcomment %}
+コンテナーに対して `bridge` を設定した場合、そのネットワークは Docker のデフォルトネットワーク設定を利用します。
+ブリッジはホスト上において、通常は `docker0` という名前で設定されます。
+そしてコンテナーに対しては `veth` というインターフェースがペアで生成されます。
+この `veth` ペアの一方は、ブリッジにアタッチされたホスト上にあり、もう一方はコンテナーの名前空間内に置かれます。
+その名前空間内には `loopback` インターフェースもあります。
+ブリッジネットワーク上のコンテナーに対して IP アドレスが割り振られるので、トラフィックはこのブリッジを介してコンテナーに届けられます。
+
+{% comment %}
+Containers can communicate via their IP addresses by default. To communicate by
+name, they must be linked.
+{% endcomment %}
+コンテナー同士は、デフォルトではその IP アドレスを使って互いに通信を行います。
+名前を使って通信を行うには、互いにリンクしていなければなりません。
+
+{% comment %}
+#### Network: host
+{% endcomment %}
+{: #network-host }
+#### ネットワーク設定: host
 
 {% comment %}
 {% endcomment %}
-Containers can communicate via their IP addresses by default. To communicate by
-name, they must be linked.
-
-#### Network: host
-
 With the network set to `host` a container will share the host's
 network stack and all interfaces from the host will be available to the
 container.  The container's hostname will match the hostname on the host
@@ -613,6 +769,8 @@ Similar to `--hostname`, the `--add-host`, `--dns`, `--dns-search`, and
 `/etc/hosts` or `/etc/resolv.conf` inside the container. No change are made to
 `/etc/hosts` and `/etc/resolv.conf` on the host.
 
+{% comment %}
+{% endcomment %}
 Compared to the default `bridge` mode, the `host` mode gives *significantly*
 better networking performance since it uses the host's native networking stack
 whereas the bridge has to go through one level of virtualization through the
@@ -620,11 +778,17 @@ docker daemon. It is recommended to run containers in this mode when their
 networking performance is critical, for example, a production Load Balancer
 or a High Performance Web Server.
 
+{% comment %}
+{% endcomment %}
 > **Note**: `--network="host"` gives the container full access to local system
 > services such as D-bus and is therefore considered insecure.
 
+{% comment %}
+{% endcomment %}
 #### Network: container
 
+{% comment %}
+{% endcomment %}
 With the network set to `container` a container will share the
 network stack of another container.  The other container's name must be
 provided in the format of `--network container:<name|id>`. Note that `--add-host`
@@ -632,6 +796,8 @@ provided in the format of `--network container:<name|id>`. Note that `--add-host
 invalid in `container` netmode, and `--publish` `--publish-all` `--expose` are
 also invalid in `container` netmode.
 
+{% comment %}
+{% endcomment %}
 Example running a Redis container with Redis binding to `localhost` then
 running the `redis-cli` command and connecting to the Redis server over the
 `localhost` interface.
@@ -640,17 +806,25 @@ running the `redis-cli` command and connecting to the Redis server over the
     $ # use the redis container's network stack to access localhost
     $ docker run --rm -it --network container:redis example/redis-cli -h 127.0.0.1
 
+{% comment %}
+{% endcomment %}
 #### User-defined network
 
+{% comment %}
+{% endcomment %}
 You can create a network using a Docker network driver or an external network
 driver plugin. You can connect multiple containers to the same network. Once
 connected to a user-defined network, the containers can communicate easily using
 only another container's IP address or name.
 
+{% comment %}
+{% endcomment %}
 For `overlay` networks or custom plugins that support multi-host connectivity,
 containers connected to the same multi-host network but launched from different
 Engines can also communicate in this way.
 
+{% comment %}
+{% endcomment %}
 The following example creates a network using the built-in `bridge` network
 driver and running a container in the created network
 
@@ -659,8 +833,12 @@ $ docker network create -d bridge my-net
 $ docker run --network=my-net -itd --name=container3 busybox
 ```
 
+{% comment %}
+{% endcomment %}
 ### Managing /etc/hosts
 
+{% comment %}
+{% endcomment %}
 Your container will have lines in `/etc/hosts` which define the hostname of the
 container itself as well as `localhost` and a few other common things. The
 `--add-host` flag can be used to add additional lines to `/etc/hosts`.
@@ -675,10 +853,14 @@ container itself as well as `localhost` and a few other common things. The
     ::1	            localhost ip6-localhost ip6-loopback
     86.75.30.9      db-static
 
+{% comment %}
+{% endcomment %}
 If a container is connected to the default bridge network and `linked`
 with other containers, then the container's `/etc/hosts` file is updated
 with the linked container's name.
 
+{% comment %}
+{% endcomment %}
 > **Note** Since Docker may live update the container’s `/etc/hosts` file, there
 may be situations when processes inside the container can end up reading an
 empty or incomplete `/etc/hosts` file. In most cases, retrying the read again
@@ -708,7 +890,7 @@ Docker supports the following restart policies:
 <table>
   <thead>
     <tr>
-      <th>Policy</th>
+      <th>ポリシー</th>
       <th>Result</th>
     </tr>
   </thead>
@@ -795,30 +977,42 @@ in an error. On container restart, attached clients are disconnected. See the
 examples on using the [`--rm` (clean up)](#clean-up-rm) flag later in this page.
 
 {% comment %}
-{% endcomment %}
 ### Examples
+{% endcomment %}
+{: #examples }
+### 利用例
 
     $ docker run --restart=always redis
 
 {% comment %}
+This will run the `redis` container with a restart policy of **always**
+so that if the container exits, Docker will restart it.
 {% endcomment %}
 This will run the `redis` container with a restart policy of **always**
 so that if the container exits, Docker will restart it.
 
     $ docker run --restart=on-failure:10 redis
 
+{% comment %}
+{% endcomment %}
 This will run the `redis` container with a restart policy of **on-failure**
 and a maximum restart count of 10.  If the `redis` container exits with a
 non-zero exit status more than 10 times in a row Docker will abort trying to
 restart the container. Providing a maximum restart limit is only valid for the
 **on-failure** policy.
 
+{% comment %}
+{% endcomment %}
 ## Exit Status
 
+{% comment %}
+{% endcomment %}
 The exit code from `docker run` gives information about why the container
 failed to run or why it exited.  When `docker run` exits with a non-zero code,
 the exit codes follow the `chroot` standard, see below:
 
+{% comment %}
+{% endcomment %}
 **_125_** if the error is with Docker daemon **_itself_**
 
     $ docker run --foo busybox; echo $?
@@ -826,25 +1020,35 @@ the exit codes follow the `chroot` standard, see below:
       See 'docker run --help'.
       125
 
+{% comment %}
+{% endcomment %}
 **_126_** if the **_contained command_** cannot be invoked
 
     $ docker run busybox /etc; echo $?
     # docker: Error response from daemon: Container command '/etc' could not be invoked.
       126
 
+{% comment %}
+{% endcomment %}
 **_127_** if the **_contained command_** cannot be found
 
     $ docker run busybox foo; echo $?
     # docker: Error response from daemon: Container command 'foo' not found or does not exist.
       127
 
+{% comment %}
+{% endcomment %}
 **_Exit code_** of **_contained command_** otherwise
 
     $ docker run busybox /bin/sh -c 'exit 3'; echo $?
     # 3
 
+{% comment %}
+{% endcomment %}
 ## Clean up (--rm)
 
+{% comment %}
+{% endcomment %}
 By default a container's file system persists even after the container
 exits. This makes debugging a lot easier (since you can inspect the
 final state) and you retain all your data by default. But if you are
@@ -855,6 +1059,8 @@ the container exits**, you can add the `--rm` flag:
 
     --rm=false: Automatically remove the container when it exits
 
+{% comment %}
+{% endcomment %}
 > **Note**: When you set the `--rm` flag, Docker also removes the anonymous volumes
 associated with the container when the container is removed. This is similar
 to running `docker rm -v my-container`. Only volumes that are specified without a
@@ -875,19 +1081,27 @@ with the same logic -- if the original volume was specified with a name it will 
     --security-opt="seccomp=profile.json": White listed syscalls seccomp Json file to be used as a seccomp filter
 
 
+{% comment %}
+{% endcomment %}
 You can override the default labeling scheme for each container by specifying
 the `--security-opt` flag. Specifying the level in the following command
 allows you to share the same content between containers.
 
     $ docker run --security-opt label=level:s0:c100,c200 -it fedora bash
 
+{% comment %}
+{% endcomment %}
 > **Note**: Automatic translation of MLS labels is not currently supported.
 
+{% comment %}
+{% endcomment %}
 To disable the security labeling for this container versus running with the
 `--privileged` flag, use the following command:
 
     $ docker run --security-opt label=disable -it fedora bash
 
+{% comment %}
+{% endcomment %}
 If you want a tighter security policy on the processes within a container,
 you can specify an alternate type for the container. You could run a container
 that is only allowed to listen on Apache ports by executing the following
@@ -895,41 +1109,62 @@ command:
 
     $ docker run --security-opt label=type:svirt_apache_t -it centos bash
 
+{% comment %}
+{% endcomment %}
 > **Note**: You would have to write policy defining a `svirt_apache_t` type.
 
+{% comment %}
+{% endcomment %}
 If you want to prevent your container processes from gaining additional
 privileges, you can execute the following command:
 
     $ docker run --security-opt no-new-privileges -it centos bash
 
+{% comment %}
+{% endcomment %}
 This means that commands that raise privileges such as `su` or `sudo` will no longer work.
 It also causes any seccomp filters to be applied later, after privileges have been dropped
 which may mean you can have a more restrictive set of filters.
 For more details, see the [kernel documentation](https://www.kernel.org/doc/Documentation/prctl/no_new_privs.txt).
 
+{% comment %}
+{% endcomment %}
 ## Specify an init process
 
+{% comment %}
+{% endcomment %}
 You can use the `--init` flag to indicate that an init process should be used as
 the PID 1 in the container. Specifying an init process ensures the usual
 responsibilities of an init system, such as reaping zombie processes, are
 performed inside the created container.
 
+{% comment %}
+{% endcomment %}
 The default init process used is the first `docker-init` executable found in the
 system path of the Docker daemon process. This `docker-init` binary, included in
 the default installation, is backed by [tini](https://github.com/krallin/tini).
 
+{% comment %}
+{% endcomment %}
 ## Specify custom cgroups
 
+{% comment %}
+{% endcomment %}
 Using the `--cgroup-parent` flag, you can pass a specific cgroup to run a
 container in. This allows you to create and manage cgroups on their own. You can
 define custom resources for those cgroups and put containers under a common
 parent group.
 
+{% comment %}
+{% endcomment %}
 ## Runtime constraints on resources
 
+{% comment %}
+{% endcomment %}
 The operator can also adjust the performance parameters of the
 container:
 
+{% comment %}
 | Option                     | Description                                                                                                                                                                                                                                                                              |
 |:---------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `-m`, `--memory=""`        | Memory limit (format: `<number>[<unit>]`). Number is a positive integer. Unit can be one of `b`, `k`, `m`, or `g`. Minimum is 4M.                                                                                                                                                        |
@@ -954,9 +1189,38 @@ container:
 | `--oom-score-adj=0`        | Tune container's OOM preferences (-1000 to 1000)                                                                                                                                                                                                                                         |
 | `--memory-swappiness=""`   | Tune a container's memory swappiness behavior. Accepts an integer between 0 and 100.                                                                                                                                                                                                     |
 | `--shm-size=""`            | Size of `/dev/shm`. The format is `<number><unit>`. `number` must be greater than `0`. Unit is optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes), or `g` (gigabytes). If you omit the unit, the system uses bytes. If you omit the size entirely, the system uses `64m`. |
+{% endcomment %}
+| オプション                 | 内容説明                                                                                                                                                                                                                                                                                 |
+|:---------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `-m`, `--memory=""`        | Memory limit (format: `<number>[<unit>]`). Number is a positive integer. Unit can be one of `b`, `k`, `m`, or `g`. Minimum is 4M.                                                                                                                                                        |
+| `--memory-swap=""`         | Total memory limit (memory + swap, format: `<number>[<unit>]`). Number is a positive integer. Unit can be one of `b`, `k`, `m`, or `g`.                                                                                                                                                  |
+| `--memory-reservation=""`  | Memory soft limit (format: `<number>[<unit>]`). Number is a positive integer. Unit can be one of `b`, `k`, `m`, or `g`.                                                                                                                                                                  |
+| `--kernel-memory=""`       | Kernel memory limit (format: `<number>[<unit>]`). Number is a positive integer. Unit can be one of `b`, `k`, `m`, or `g`. Minimum is 4M.                                                                                                                                                 |
+| `-c`, `--cpu-shares=0`     | CPU shares (relative weight)                                                                                                                                                                                                                                                             |
+| `--cpus=0.000`             | Number of CPUs. Number is a fractional number. 0.000 means no limit.                                                                                                                                                                                                                     |
+| `--cpu-period=0`           | Limit the CPU CFS (Completely Fair Scheduler) period                                                                                                                                                                                                                                     |
+| `--cpuset-cpus=""`         | CPUs in which to allow execution (0-3, 0,1)                                                                                                                                                                                                                                              |
+| `--cpuset-mems=""`         | Memory nodes (MEMs) in which to allow execution (0-3, 0,1). Only effective on NUMA systems.                                                                                                                                                                                              |
+| `--cpu-quota=0`            | Limit the CPU CFS (Completely Fair Scheduler) quota                                                                                                                                                                                                                                      |
+| `--cpu-rt-period=0`        | Limit the CPU real-time period. In microseconds. Requires parent cgroups be set and cannot be higher than parent. Also check rtprio ulimits.                                                                                                                                             |
+| `--cpu-rt-runtime=0`       | Limit the CPU real-time runtime. In microseconds. Requires parent cgroups be set and cannot be higher than parent. Also check rtprio ulimits.                                                                                                                                            |
+| `--blkio-weight=0`         | Block IO weight (relative weight) accepts a weight value between 10 and 1000.                                                                                                                                                                                                            |
+| `--blkio-weight-device=""` | Block IO weight (relative device weight, format: `DEVICE_NAME:WEIGHT`)                                                                                                                                                                                                                   |
+| `--device-read-bps=""`     | Limit read rate from a device (format: `<device-path>:<number>[<unit>]`). Number is a positive integer. Unit can be one of `kb`, `mb`, or `gb`.                                                                                                                                          |
+| `--device-write-bps=""`    | Limit write rate to a device (format: `<device-path>:<number>[<unit>]`). Number is a positive integer. Unit can be one of `kb`, `mb`, or `gb`.                                                                                                                                           |
+| `--device-read-iops="" `   | Limit read rate (IO per second) from a device (format: `<device-path>:<number>`). Number is a positive integer.                                                                                                                                                                          |
+| `--device-write-iops="" `  | Limit write rate (IO per second) to a device (format: `<device-path>:<number>`). Number is a positive integer.                                                                                                                                                                           |
+| `--oom-kill-disable=false` | Whether to disable OOM Killer for the container or not.                                                                                                                                                                                                                                  |
+| `--oom-score-adj=0`        | Tune container's OOM preferences (-1000 to 1000)                                                                                                                                                                                                                                         |
+| `--memory-swappiness=""`   | Tune a container's memory swappiness behavior. Accepts an integer between 0 and 100.                                                                                                                                                                                                     |
+| `--shm-size=""`            | Size of `/dev/shm`. The format is `<number><unit>`. `number` must be greater than `0`. Unit is optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes), or `g` (gigabytes). If you omit the unit, the system uses bytes. If you omit the size entirely, the system uses `64m`. |
 
+{% comment %}
+{% endcomment %}
 ### User memory constraints
 
+{% comment %}
+{% endcomment %}
 We have four ways to set user memory usage:
 
 <table>
@@ -1005,21 +1269,29 @@ We have four ways to set user memory usage:
   </tbody>
 </table>
 
+{% comment %}
+{% endcomment %}
 Examples:
 
     $ docker run -it ubuntu:14.04 /bin/bash
 
+{% comment %}
+{% endcomment %}
 We set nothing about memory, this means the processes in the container can use
 as much memory and swap memory as they need.
 
     $ docker run -it -m 300M --memory-swap -1 ubuntu:14.04 /bin/bash
 
+{% comment %}
+{% endcomment %}
 We set memory limit and disabled swap memory limit, this means the processes in
 the container can use 300M memory and as much swap memory as they need (if the
 host supports swap memory).
 
     $ docker run -it -m 300M ubuntu:14.04 /bin/bash
 
+{% comment %}
+{% endcomment %}
 We set memory limit only, this means the processes in the container can use
 300M memory and 300M swap memory, by default, the total virtual memory size
 (--memory-swap) will be set as double of memory, in this case, memory + swap
@@ -1027,9 +1299,13 @@ would be 2*300M, so processes can use 300M swap memory as well.
 
     $ docker run -it -m 300M --memory-swap 1G ubuntu:14.04 /bin/bash
 
+{% comment %}
+{% endcomment %}
 We set both memory and swap memory, so the processes in the container can use
 300M memory and 700M swap memory.
 
+{% comment %}
+{% endcomment %}
 Memory reservation is a kind of memory soft limit that allows for greater
 sharing of memory. Under normal circumstances, containers can use as much of
 the memory as needed and are constrained only by the hard limits set with the
@@ -1037,15 +1313,21 @@ the memory as needed and are constrained only by the hard limits set with the
 contention or low memory and forces containers to restrict their consumption to
 a reservation limit.
 
+{% comment %}
+{% endcomment %}
 Always set the memory reservation value below the hard limit, otherwise the hard
 limit takes precedence. A reservation of 0 is the same as setting no
 reservation. By default (without reservation set), memory reservation is the
 same as the hard memory limit.
 
+{% comment %}
+{% endcomment %}
 Memory reservation is a soft-limit feature and does not guarantee the limit
 won't be exceeded. Instead, the feature attempts to ensure that, when memory is
 heavily contended for, memory is allocated based on the reservation hints/setup.
 
+{% comment %}
+{% endcomment %}
 The following example limits the memory (`-m`) to 500M and sets the memory
 reservation to 200M.
 
@@ -1053,20 +1335,28 @@ reservation to 200M.
 $ docker run -it -m 500M --memory-reservation 200M ubuntu:14.04 /bin/bash
 ```
 
+{% comment %}
+{% endcomment %}
 Under this configuration, when the container consumes memory more than 200M and
 less than 500M, the next system memory reclaim attempts to shrink container
 memory below 200M.
 
+{% comment %}
+{% endcomment %}
 The following example set memory reservation to 1G without a hard memory limit.
 
 ```bash
 $ docker run -it --memory-reservation 1G ubuntu:14.04 /bin/bash
 ```
 
+{% comment %}
+{% endcomment %}
 The container can use as much memory as it needs. The memory reservation setting
 ensures the container doesn't consume too much memory for long time, because
 every memory reclaim shrinks the container's consumption to the reservation.
 
+{% comment %}
+{% endcomment %}
 By default, kernel kills processes in a container if an out-of-memory (OOM)
 error occurs. To change this behaviour, use the `--oom-kill-disable` option.
 Only disable the OOM killer on containers where you have also set the
@@ -1074,40 +1364,80 @@ Only disable the OOM killer on containers where you have also set the
 running out of memory and require killing the host's system processes to free
 memory.
 
+{% comment %}
+The following example limits the memory to 100M and disables the OOM killer for
+this container:
+{% endcomment %}
 The following example limits the memory to 100M and disables the OOM killer for
 this container:
 
     $ docker run -it -m 100M --oom-kill-disable ubuntu:14.04 /bin/bash
 
+{% comment %}
+The following example, illustrates a dangerous way to use the flag:
+{% endcomment %}
 The following example, illustrates a dangerous way to use the flag:
 
     $ docker run -it --oom-kill-disable ubuntu:14.04 /bin/bash
 
+{% comment %}
 The container has unlimited memory which can cause the host to run out memory
 and require killing system processes to free memory. The `--oom-score-adj`
 parameter can be changed to select the priority of which containers will
 be killed when the system is out of memory, with negative scores making them
 less likely to be killed, and positive scores more likely.
+{% endcomment %}
+コンテナーのメモリは無制限です。
+したがってホスト上のメモリ不足が発生してしまうので、システムプロセスを kill してメモリ開放を行う必要が出てきます。
+`--oom-score-adj` パラメーターを変更することにより、システム上のメモリ不足時に、どのコンテナーを kill するかの優先度を設定することができます。
+設定値を負にすればそれだけ kill されにくくなり、正にすればそれだけ kill されやすくなります。
 
+{% comment %}
 ### Kernel memory constraints
+{% endcomment %}
+{: #kernel-memory-constraints }
+### カーネルメモリの制約
 
+{% comment %}
+Kernel memory is fundamentally different than user memory as kernel memory can't
+be swapped out. The inability to swap makes it possible for the container to
+block system services by consuming too much kernel memory. Kernel memory includes：
+{% endcomment %}
 Kernel memory is fundamentally different than user memory as kernel memory can't
 be swapped out. The inability to swap makes it possible for the container to
 block system services by consuming too much kernel memory. Kernel memory includes：
 
+ {% comment %}
+ - stack pages
+ - slab pages
+ - sockets memory pressure
+ - tcp memory pressure
+ {% endcomment %}
  - stack pages
  - slab pages
  - sockets memory pressure
  - tcp memory pressure
 
+{% comment %}
+You can setup kernel memory limit to constrain these kinds of memory. For example,
+every process consumes some stack pages. By limiting kernel memory, you can
+prevent new processes from being created when the kernel memory usage is too high.
+{% endcomment %}
 You can setup kernel memory limit to constrain these kinds of memory. For example,
 every process consumes some stack pages. By limiting kernel memory, you can
 prevent new processes from being created when the kernel memory usage is too high.
 
+{% comment %}
+Kernel memory is never completely independent of user memory. Instead, you limit
+kernel memory in the context of the user memory limit. Assume "U" is the user memory
+limit and "K" the kernel limit. There are three possible ways to set limits:
+{% endcomment %}
 Kernel memory is never completely independent of user memory. Instead, you limit
 kernel memory in the context of the user memory limit. Assume "U" is the user memory
 limit and "K" the kernel limit. There are three possible ways to set limits:
 
+{% comment %}
+{% endcomment %}
 <table>
   <thead>
     <tr>
@@ -1147,48 +1477,94 @@ limit and "K" the kernel limit. There are three possible ways to set limits:
   </tbody>
 </table>
 
+{% comment %}
+Examples:
+{% endcomment %}
 Examples:
 
     $ docker run -it -m 500M --kernel-memory 50M ubuntu:14.04 /bin/bash
 
+{% comment %}
+We set memory and kernel memory, so the processes in the container can use
+500M memory in total, in this 500M memory, it can be 50M kernel memory tops.
+{% endcomment %}
 We set memory and kernel memory, so the processes in the container can use
 500M memory in total, in this 500M memory, it can be 50M kernel memory tops.
 
     $ docker run -it --kernel-memory 50M ubuntu:14.04 /bin/bash
 
+{% comment %}
+We set kernel memory without **-m**, so the processes in the container can
+use as much memory as they want, but they can only use 50M kernel memory.
+{% endcomment %}
 We set kernel memory without **-m**, so the processes in the container can
 use as much memory as they want, but they can only use 50M kernel memory.
 
+{% comment %}
+### Swappiness constraint
+{% endcomment %}
+{: #swappiness-constraint }
 ### Swappiness constraint
 
+{% comment %}
+By default, a container's kernel can swap out a percentage of anonymous pages.
+To set this percentage for a container, specify a `--memory-swappiness` value
+between 0 and 100. A value of 0 turns off anonymous page swapping. A value of
+100 sets all anonymous pages as swappable. By default, if you are not using
+`--memory-swappiness`, memory swappiness value will be inherited from the parent.
+{% endcomment %}
 By default, a container's kernel can swap out a percentage of anonymous pages.
 To set this percentage for a container, specify a `--memory-swappiness` value
 between 0 and 100. A value of 0 turns off anonymous page swapping. A value of
 100 sets all anonymous pages as swappable. By default, if you are not using
 `--memory-swappiness`, memory swappiness value will be inherited from the parent.
 
+{% comment %}
+For example, you can set:
+{% endcomment %}
 For example, you can set:
 
     $ docker run -it --memory-swappiness=0 ubuntu:14.04 /bin/bash
 
+{% comment %}
+Setting the `--memory-swappiness` option is helpful when you want to retain the
+container's working set and to avoid swapping performance penalties.
+{% endcomment %}
 Setting the `--memory-swappiness` option is helpful when you want to retain the
 container's working set and to avoid swapping performance penalties.
 
+{% comment %}
+### CPU share constraint
+{% endcomment %}
 ### CPU share constraint
 
+{% comment %}
+By default, all containers get the same proportion of CPU cycles. This proportion
+can be modified by changing the container's CPU share weighting relative
+to the weighting of all other running containers.
+{% endcomment %}
 By default, all containers get the same proportion of CPU cycles. This proportion
 can be modified by changing the container's CPU share weighting relative
 to the weighting of all other running containers.
 
+{% comment %}
+To modify the proportion from the default of 1024, use the `-c` or `--cpu-shares`
+flag to set the weighting to 2 or higher. If 0 is set, the system will ignore the
+value and use the default of 1024.
+{% endcomment %}
 To modify the proportion from the default of 1024, use the `-c` or `--cpu-shares`
 flag to set the weighting to 2 or higher. If 0 is set, the system will ignore the
 value and use the default of 1024.
 
+{% comment %}
+{% endcomment %}
 The proportion will only apply when CPU-intensive processes are running.
 When tasks in one container are idle, other containers can use the
 left-over CPU time. The actual amount of CPU time will vary depending on
 the number of containers running on the system.
 
+{% comment %}
+{% endcomment %}
 For example, consider three containers, one has a cpu-share of 1024 and
 two others have a cpu-share setting of 512. When processes in all three
 containers attempt to use 100% of CPU, the first container would receive
@@ -1196,10 +1572,14 @@ containers attempt to use 100% of CPU, the first container would receive
 of 1024, the first container only gets 33% of the CPU. The remaining containers
 receive 16.5%, 16.5% and 33% of the CPU.
 
+{% comment %}
+{% endcomment %}
 On a multi-core system, the shares of CPU time are distributed over all CPU
 cores. Even if a container is limited to less than 100% of CPU time, it can
 use 100% of each individual CPU core.
 
+{% comment %}
+{% endcomment %}
 For example, consider a system with more than three cores. If you start one
 container `{C0}` with `-c=512` running one process, and another container
 `{C1}` with `-c=1024` running two processes, this can result in the following
@@ -1210,48 +1590,78 @@ division of CPU shares:
     101    {C1}		1	100% of CPU1
     102    {C1}		2	100% of CPU2
 
+{% comment %}
+{% endcomment %}
 ### CPU period constraint
 
+{% comment %}
+{% endcomment %}
 The default CPU CFS (Completely Fair Scheduler) period is 100ms. We can use
 `--cpu-period` to set the period of CPUs to limit the container's CPU usage.
 And usually `--cpu-period` should work with `--cpu-quota`.
 
+{% comment %}
+{% endcomment %}
 Examples:
 
     $ docker run -it --cpu-period=50000 --cpu-quota=25000 ubuntu:14.04 /bin/bash
 
+{% comment %}
+{% endcomment %}
 If there is 1 CPU, this means the container can get 50% CPU worth of run-time every 50ms.
 
+{% comment %}
+{% endcomment %}
 In addition to use `--cpu-period` and `--cpu-quota` for setting CPU period constraints,
 it is possible to specify `--cpus` with a float number to achieve the same purpose.
 For example, if there is 1 CPU, then `--cpus=0.5` will achieve the same result as
 setting `--cpu-period=50000` and `--cpu-quota=25000` (50% CPU).
 
+{% comment %}
+{% endcomment %}
 The default value for `--cpus` is `0.000`, which means there is no limit.
 
+{% comment %}
+{% endcomment %}
 For more information, see the [CFS documentation on bandwidth limiting](https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt).
 
+{% comment %}
+{% endcomment %}
 ### Cpuset constraint
 
+{% comment %}
+{% endcomment %}
 We can set cpus in which to allow execution for containers.
 
+{% comment %}
+{% endcomment %}
 Examples:
 
     $ docker run -it --cpuset-cpus="1,3" ubuntu:14.04 /bin/bash
 
+{% comment %}
+{% endcomment %}
 This means processes in container can be executed on cpu 1 and cpu 3.
 
     $ docker run -it --cpuset-cpus="0-2" ubuntu:14.04 /bin/bash
 
+{% comment %}
+{% endcomment %}
 This means processes in container can be executed on cpu 0, cpu 1 and cpu 2.
 
+{% comment %}
+{% endcomment %}
 We can set mems in which to allow execution for containers. Only effective
 on NUMA systems.
 
+{% comment %}
+{% endcomment %}
 Examples:
 
     $ docker run -it --cpuset-mems="1,3" ubuntu:14.04 /bin/bash
 
+{% comment %}
+{% endcomment %}
 This example restricts the processes in the container to only use memory from
 memory nodes 1 and 3.
 
@@ -1705,6 +2115,7 @@ Similarly the operator can set the **HOSTNAME** (Linux) or **COMPUTERNAME** (Win
 
 ### HEALTHCHECK
 
+{% comment %}
 ```
   --health-cmd            Command to run to check health
   --health-interval       Time between running the check
@@ -1712,6 +2123,15 @@ Similarly the operator can set the **HOSTNAME** (Linux) or **COMPUTERNAME** (Win
   --health-timeout        Maximum time to allow one check to run
   --health-start-period   Start period for the container to initialize before starting health-retries countdown
   --no-healthcheck        Disable any container-specified HEALTHCHECK
+```
+{% endcomment %}
+```
+  --health-cmd            ヘルスチェックを実行するコマンド。
+  --health-interval       ヘルスチェックの実行間隔。
+  --health-retries        不健康（unhealthy）であると報告するのに必要な連続失敗回数。
+  --health-timeout        1 つのチェック処理実行に許容する最大時間。
+  --health-start-period   ヘルスチェックのリトライを数え始める前の、コンテナー初期化を行う開始時間。
+  --no-healthcheck        コンテナー固有の HEALTHCHECK を無効にします。
 ```
 
 Example:

@@ -19,7 +19,7 @@ options:
   shorthand: s
   value_type: string
   default_value: KILL
-  description: Signal to send to the container
+  description: コンテナーに送信するシグナル。
   deprecated: false
   experimental: false
   experimentalcli: false

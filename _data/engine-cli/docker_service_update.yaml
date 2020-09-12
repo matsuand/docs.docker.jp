@@ -17,7 +17,7 @@ long: |-
   > manager node. To learn about managers and workers, refer to the
   > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
   > documentation.
-usage: docker service update [OPTIONS] SERVICE
+usage: docker service update [オプション] SERVICE
 pname: docker service
 plink: docker_service.yaml
 options:
@@ -65,7 +65,7 @@ options:
   swarm: false
 - option: container-label-add
   value_type: list
-  description: Add or update a container label
+  description: コンテナーのラベルを追加または更新します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -73,7 +73,7 @@ options:
   swarm: false
 - option: container-label-rm
   value_type: list
-  description: Remove a container label by its key
+  description: コンテナーのラベルをキーを使って削除します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -164,7 +164,7 @@ options:
   swarm: false
 - option: entrypoint
   value_type: command
-  description: Overwrite the default ENTRYPOINT of the image
+  description: イメージのデフォルト ENTRYPOINT をオーバーライドします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -172,7 +172,7 @@ options:
   swarm: false
 - option: env-add
   value_type: list
-  description: Add or update an environment variable
+  description: 環境変数を追加または更新します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -214,7 +214,7 @@ options:
   swarm: false
 - option: group-add
   value_type: list
-  description: Add an additional supplementary user group to the container
+  description: 新たに参加する補助ユーザーグループをコンテナーに追加します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -233,7 +233,7 @@ options:
   swarm: false
 - option: health-cmd
   value_type: string
-  description: Command to run to check health
+  description: ヘルスチェックを実行するコマンド。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -242,7 +242,7 @@ options:
   swarm: false
 - option: health-interval
   value_type: duration
-  description: Time between running the check (ms|s|m|h)
+  description: ヘルスチェックの実行間隔。(ms|s|m|h)
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -252,7 +252,7 @@ options:
 - option: health-retries
   value_type: int
   default_value: "0"
-  description: Consecutive failures needed to report unhealthy
+  description: 不健康（unhealthy）であると報告するのに必要な連続失敗回数。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -262,6 +262,7 @@ options:
 - option: health-start-period
   value_type: duration
   description: |
+    ヘルスチェックのリトライを数え始める前の、コンテナー初期化を行う開始時間。(ms|s|m|h)
     Start period for the container to initialize before counting retries towards unstable (ms|s|m|h)
   deprecated: false
   min_api_version: "1.29"
@@ -271,7 +272,7 @@ options:
   swarm: false
 - option: health-timeout
   value_type: duration
-  description: Maximum time to allow one check to run (ms|s|m|h)
+  description: 1 つのチェック処理実行に許容する最大時間。(ms|s|m|h)
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -317,7 +318,7 @@ options:
   value_type: bool
   default_value: "false"
   description: |
-    Use an init inside each service container to forward signals and reap processes
+    各サービスコンテナー内部にて、シグナル送信と子プロセス管理を行う初期化処理を実行します。
   deprecated: false
   min_api_version: "1.37"
   experimental: false
@@ -326,7 +327,7 @@ options:
   swarm: false
 - option: isolation
   value_type: string
-  description: Service container isolation mode
+  description: サービスの分離技術（isolation technology）モード。
   deprecated: false
   min_api_version: "1.35"
   experimental: false
@@ -368,7 +369,7 @@ options:
   swarm: false
 - option: log-driver
   value_type: string
-  description: Logging driver for service
+  description: サービスにおけるログドライバー。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -376,7 +377,7 @@ options:
   swarm: false
 - option: log-opt
   value_type: list
-  description: Logging driver options
+  description: ログドライバーオプション。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -419,7 +420,7 @@ options:
 - option: no-healthcheck
   value_type: bool
   default_value: "false"
-  description: Disable any container-specified HEALTHCHECK
+  description: コンテナー固有の HEALTHCHECK を無効にします。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -475,7 +476,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Suppress progress output
+  description: 経過出力を省略します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -484,7 +485,7 @@ options:
 - option: read-only
   value_type: bool
   default_value: "false"
-  description: Mount the container's root filesystem as read only
+  description: コンテナーのルートファイルシステムを読み込み専用としてマウントします。
   deprecated: false
   min_api_version: "1.28"
   experimental: false
@@ -528,7 +529,7 @@ options:
   swarm: false
 - option: restart-condition
   value_type: string
-  description: Restart when condition is met ("none"|"on-failure"|"any")
+  description: 条件を満たした際に再起動します。("none"|"on-failure"|"any")
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -666,7 +667,7 @@ options:
   swarm: false
 - option: sysctl-add
   value_type: list
-  description: Add or update a Sysctl option
+  description: sysctl オプションを追加または更新します。
   deprecated: false
   min_api_version: "1.40"
   experimental: false
@@ -675,7 +676,7 @@ options:
   swarm: false
 - option: sysctl-rm
   value_type: list
-  description: Remove a Sysctl option
+  description: sysctl オプションを削除します。。
   deprecated: false
   min_api_version: "1.40"
   experimental: false
@@ -686,7 +687,7 @@ options:
   shorthand: t
   value_type: bool
   default_value: "false"
-  description: Allocate a pseudo-TTY
+  description: 擬似 TTY を割り当てます。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -753,7 +754,7 @@ options:
 - option: user
   shorthand: u
   value_type: string
-  description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+  description: 'ユーザー名または UID。（記述書式t: \<name|uid\>[:\<group|gid\>]）'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -771,7 +772,7 @@ options:
 - option: workdir
   shorthand: w
   value_type: string
-  description: Working directory inside the container
+  description: コンテナー内部のワーキングディレクトリ。
   deprecated: false
   experimental: false
   experimentalcli: false

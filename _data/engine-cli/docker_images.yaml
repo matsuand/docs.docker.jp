@@ -1,5 +1,5 @@
 command: docker images
-short: List images
+short: イメージを一覧表示します。
 long: |-
   The default `docker images` will show all top level
   images, their repository and tags, and their size.
@@ -16,7 +16,7 @@ long: |-
   An image will be listed more than once if it has multiple repository names
   or tags. This single image (identifiable by its matching `IMAGE ID`)
   uses up the `SIZE` listed only once.
-usage: docker images [OPTIONS] [REPOSITORY[:TAG]]
+usage: docker images [オプション] [REPOSITORY[:TAG]]
 pname: docker
 plink: docker.yaml
 options:
@@ -42,7 +42,7 @@ options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: Filter output based on conditions provided
+  description: 指定された条件に基づいてフィルター検索を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -50,7 +50,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print images using a Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -59,7 +59,7 @@ options:
 - option: no-trunc
   value_type: bool
   default_value: "false"
-  description: Don't truncate output
+  description: 詳細出力を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -69,7 +69,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Only show numeric IDs
+  description: 数値 ID のみを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -168,12 +168,14 @@ examples: |-
   also reference by digest in `create`, `run`, and `rmi` commands, as well as the
   `FROM` image reference in a Dockerfile.
 
-  ### Filtering
+  {: #filtering }
+  ### フィルター検索
 
-  The filtering flag (`-f` or `--filter`) format is of "key=value". If there is more
-  than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
+  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
 
-  The currently supported filters are:
+  現在サポートされているフィルターは以下のとおりです。
 
   * dangling (boolean - true or false)
   * label (`label=<key>` or `label=<key>=<value>`)
@@ -316,14 +318,14 @@ examples: |-
   busybox             glibc               21c16b6787c6        5 weeks ago         4.19 MB
   ```
 
-  ### Format the output
+  {: #format-the-output }
+  ### フォーマット設定
 
-  The formatting option (`--format`) will pretty print container output
-  using a Go template.
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、コンテナーをわかりやすく出力することができます。
 
-  Valid placeholders for the Go template are listed below:
+  Go 言語テンプレートによるプレースホルダー（placeholder）は以下のとおりです。
 
-  | Placeholder | Description|
+  | プレースホルダー | 内容説明 |
   | ---- | ---- |
   | `.ID` | Image ID |
   | `.Repository` | Image repository |
@@ -333,12 +335,10 @@ examples: |-
   | `.CreatedAt` | Time when the image was created |
   | `.Size` | Image disk size |
 
-  When using the `--format` option, the `image` command will either
-  output the data exactly as the template declares or, when using the
-  `table` directive, will include column headers as well.
+  `--format` オプションを利用すると `image` コマンドは、テンプレートが定めるデータを直接出力します。
+  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
-  The following example uses a template without headers and outputs the
-  `ID` and `Repository` entries separated by a colon (`:`) for all images:
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのイメージにおける `ID`、`Repository` の各項目がコロン（`:`）で区切って表示されます。
 
   ```bash
   $ docker images --format "{{.ID}}: {{.Repository}}"
@@ -354,8 +354,7 @@ examples: |-
   746b819f315e: postgres
   ```
 
-  To list all images with their repository and tag in a table format you
-  can use:
+  イメージの一覧をリポジトリ、タグとともに表形式で出力するには、以下のようにします。
 
   ```bash
   $ docker images --format "table {{.ID}}\t{{.Repository}}\t{{.Tag}}"

@@ -2,9 +2,9 @@ command: docker volume ls
 aliases: list
 short: ボリュームを一覧表示します。
 long: |-
-  Docker が管理するボリュームをすべて一覧表示します。
-  `-f` または `--filter` フラグを使ってフィルター出力を行うことができます。
-  フィルター出力時のオプションについての詳細は [フィルター出力](#filtering) の節を参照してください。
+  Docker が管理するボリュームを一覧表示します。
+  `-f` または `--filter` フラグを使ってフィルター検索を行うことができます。
+  フィルター検索時のオプションの詳細は [フィルター検索](#filtering) の節を参照してください。
 usage: docker volume ls [オプション]
 pname: docker volume
 plink: docker_volume.yaml
@@ -20,7 +20,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Go 言語のテンプレートを用いてボリュームの内容をフォーマット出力します。
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -56,7 +56,7 @@ examples: |-
   ```
 
   {: #filtering }
-  ### フィルター出力
+  ### フィルター検索
 
   フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
   複数のフィルターが必要な場合は、フラグを複数指定します。
@@ -114,7 +114,7 @@ examples: |-
   daleks
   ```
 
-  以下の例では `is-timelord` ラベルを持ったボリュームをフィルター抽出します。
+  以下の例では `is-timelord` ラベルを持ったボリュームを抽出します。
   この場合、その値の内容は問いません。
 
   ```bash
@@ -148,9 +148,9 @@ examples: |-
   {: #name }
   #### name フィルター
 
-  `name` フィルターは、ボリューム名の全部または一部に一致する検索を行います。
+  `name` フィルターは、ボリューム名の全部または一部を検索します。
 
-  以下のフィルター指定では、`rose` という文字列をボリューム名に含むものが検索されます。
+  以下のフィルター指定では、`rose` という文字列を名前に含んだボリュームすべてが検索されます。
 
   ```bash
   $ docker volume ls -f name=rose
@@ -160,9 +160,9 @@ examples: |-
   ```
 
   {: #formatting }
-  ### フォーマット出力
+  ### フォーマット設定
 
-  フォーマットオプション（`--format`）は、Go 言語のテンプレートを使ってフォーマット出力を行います。
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、ボリュームをわかりやすく出力することができます。
 
   Go 言語テンプレートによるプレースホルダー（placeholder）は、以下のとおりです。
 

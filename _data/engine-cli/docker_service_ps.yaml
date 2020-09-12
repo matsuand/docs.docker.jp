@@ -9,14 +9,14 @@ long: |-
   > manager node. To learn about managers and workers, refer to the
   > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
   > documentation.
-usage: docker service ps [OPTIONS] SERVICE [SERVICE...]
+usage: docker service ps [オプション] SERVICE [SERVICE...]
 pname: docker service
 plink: docker_service.yaml
 options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: Filter output based on conditions provided
+  description: 指定された条件に基づいてフィルター検索を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -24,7 +24,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print tasks using a Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -42,7 +42,7 @@ options:
 - option: no-trunc
   value_type: bool
   default_value: "false"
-  description: Do not truncate output
+  description: 詳細出力を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -52,7 +52,7 @@ options:
   shorthand: q
   value_type: bool
   default_value: "false"
-  description: Only display task IDs
+  description: タスク ID のみを表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -118,14 +118,16 @@ examples: |-
   nvjljf7rmor4htv7l8rwcx7i7   \_ redis.2   redis:3.0.6@sha256:6a692a76c2081888b589e26e6ec835743119fe453d67ecf03df7de5b73d69842  worker2   Shutdown       Rejected 5 minutes ago   "No such image: redis@sha256:6a692a76c2081888b589e26e6ec835743119fe453d67ecf03df7de5b73d69842"
   ```
 
-  ### Filtering
+  {: #filtering }
+  ### フィルター検索
 
-  The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there
-  is more than one filter, then pass multiple flags (e.g. `--filter "foo=bar" --filter "bif=baz"`).
-  Multiple filter flags are combined as an `OR` filter. For example,
-  `-f name=redis.1 -f name=redis.7` returns both `redis.1` and `redis.7` tasks.
+  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
+  複数のフィルターフラグは `OR` フィルターとして結合されます。
+  たとえば `-f name=redis.1 -f name=redis.7` は `redis.1` と `redis.7` の 2 つのタスクを返します。
 
-  The currently supported filters are:
+  現在サポートされているフィルターは以下のとおりです。
 
   * [id](#id)
   * [name](#name)
@@ -133,9 +135,10 @@ examples: |-
   * [desired-state](#desired-state)
 
 
-  #### id
+  {: #id }
+  #### id フィルター
 
-  The `id` filter matches on all or a prefix of a task's ID.
+  `id` フィルターは、タスク ID の全部またはそのプリフィックス部分を検索します。
 
   ```bash
   $ docker service ps -f "id=8" redis
@@ -145,9 +148,10 @@ examples: |-
   8eaxrb2fqpbn   redis.10  redis:3.0.6  manager1  Running        Running 8 seconds
   ```
 
-  #### name
+  {: #name }
+  #### name フィルター
 
-  The `name` filter matches on task names.
+  `name` フィルターは、タスク名を検索します。
 
   ```bash
   $ docker service ps -f "name=redis.1" redis
@@ -173,14 +177,14 @@ examples: |-
 
   The `desired-state` filter can take the values `running`, `shutdown`, or `accepted`.
 
-  ### Formatting
+  {: #formatting }
+  ### フォーマット設定
 
-  The formatting options (`--format`) pretty-prints tasks output
-  using a Go template.
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、タスクをわかりやすく出力することができます。
 
-  Valid placeholders for the Go template are listed below:
+  Go 言語テンプレートによるプレースホルダー（placeholder）は以下のとおりです。
 
-  Placeholder     | Description
+  プレースホルダー | 内容説明
   ----------------|------------------------------------------------------------------------------------------
   `.ID`           | Task ID
   `.Name`         | Task name
@@ -191,12 +195,10 @@ examples: |-
   `.Error`        | Error
   `.Ports`        | Task published ports
 
-  When using the `--format` option, the `service ps` command will either
-  output the data exactly as the template declares or, when using the
-  `table` directive, includes column headers as well.
+  `--format` オプションを利用すると `service ps` コマンドは、テンプレートが定めるデータを直接出力します。
+  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
-  The following example uses a template without headers and outputs the
-  `Name` and `Image` entries separated by a colon (`:`) for all tasks:
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのタスクにおける `Name`、`Image` の各項目がコロン（`:`）で区切って表示されます。
 
   ```bash
   $ docker service ps --format "{{.Name}}: {{.Image}}" top

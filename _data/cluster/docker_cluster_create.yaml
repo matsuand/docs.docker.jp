@@ -28,7 +28,7 @@ options:
   shorthand: f
   value_type: string
   default_value: cluster.yml
-  description: Cluster の内容説明。
+  description: Cluster 定義。
   deprecated: false
   experimental: false
   experimentalcli: false

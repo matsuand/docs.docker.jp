@@ -17,7 +17,7 @@ options:
 - option: filter
   shorthand: f
   value_type: filter
-  description: Filter output based on conditions provided
+  description: 指定された条件に基づいてフィルター検索を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -25,7 +25,7 @@ options:
   swarm: false
 - option: format
   value_type: string
-  description: Pretty-print search using a Go template
+  description: Go 言語テンプレートを使って出力をフォーマットします。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -43,7 +43,7 @@ options:
 - option: no-trunc
   value_type: bool
   default_value: "false"
-  description: Don't truncate output
+  description: 詳細出力を行います。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -113,12 +113,14 @@ examples: |-
   The flag `--limit` is the maximum number of results returned by a search. This value could
   be in the range between 1 and 100. The default value of `--limit` is 25.
 
-  ### Filtering
+  {: #filtering }
+  ### フィルター検索
 
-  The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there is more
-  than one filter, then pass multiple flags (e.g. `--filter is-automated=true --filter stars=3`)
+  フィルターフラグ（`-f` または `--filter`）の指定書式は「キー=値」というものです。
+  複数のフィルターが必要な場合は、フラグを複数指定します。
+  （たとえば `--filter "foo=bar" --filter "bif=baz"` など。）
 
-  The currently supported filters are:
+  現在サポートされているフィルターは以下のとおりです。
 
   - stars (int - number of stars the image has)
   - is-automated (boolean - true or false) - is the image automated or not
@@ -164,14 +166,14 @@ examples: |-
   radial/busyboxplus   Full-chain, Internet enabled, busybox made...   8                    [OK]
   ```
 
-  ### Format the output
+  {: #format-the-output }
+  ### フォーマット設定
 
-  The formatting option (`--format`) pretty-prints search output
-  using a Go template.
+  フォーマット設定オプション（`--format`）により Go 言語のテンプレートを利用して、検索結果をわかりやすく出力することができます。
 
-  Valid placeholders for the Go template are:
+  Go 言語テンプレートによるプレースホルダー（placeholder）は以下のとおりです。
 
-  | Placeholder    | Description                       |
+  | プレースホルダー | 内容説明                        |
   | -------------- | --------------------------------- |
   | `.Name`        | Image Name                        |
   | `.Description` | Image description                 |
@@ -179,12 +181,10 @@ examples: |-
   | `.IsOfficial`  | "OK" if image is official         |
   | `.IsAutomated` | "OK" if image build was automated |
 
-  When you use the `--format` option, the `search` command will
-  output the data exactly as the template declares. If you use the
-  `table` directive, column headers are included as well.
+  `--format` オプションを利用すると `search` コマンドは、テンプレートが定めるデータを直接出力します。
+  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
-  The following example uses a template without headers and outputs the
-  `Name` and `StarCount` entries separated by a colon (`:`) for all images:
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのイメージにおける `Name`、`StarCount` の各項目がコロン（`:`）で区切って表示されます。
 
   ```bash
   $ docker search --format "{{.Name}}: {{.StarCount}}" nginx
@@ -201,7 +201,7 @@ examples: |-
   maxexcloo/nginx: 7
   ```
 
-  This example outputs a table format:
+  以下は表形式で出力する例です。
 
   ```bash
   $ docker search --format "table {{.Name}}\t{{.IsAutomated}}\t{{.IsOfficial}}" nginx

@@ -37,7 +37,7 @@ options:
   swarm: false
 - option: platform
   value_type: string
-  description: Set platform if server is multi-platform capable
+  description: サーバーがマルチプラットフォームに対応している場合に、プラットフォームを指定します。
   deprecated: false
   min_api_version: "1.32"
   experimental: true
