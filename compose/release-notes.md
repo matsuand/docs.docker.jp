@@ -6,7 +6,8 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
-## 1.27.1
+
+## 1.27.2
 (2020-09-10)
 
 {% comment %}
@@ -16,9 +17,23 @@ redirect_from:
 ### バグ
 
 {% comment %}
-- Fixed the `compose run` command when `service.scale` is specified.
+- Fixed bug on `docker-compose run` container attach.
 {% endcomment %}
-- `service.scale` 指定時の `compose run` コマンドを修正しました。
+- `docker-compose run` によるコンテナーアタッチのバグを修正しました。
+
+## 1.27.1
+(2020-09-10)
+
+{% comment %}
+### Bugs
+{% endcomment %}
+{: #bugs-1 }
+### バグ
+
+{% comment %}
+- Fixed `docker-compose run` when `service.scale` is specified.
+{% endcomment %}
+- `service.scale` 指定時の `docker-compose run` コマンドを修正しました。
 
 {% comment %}
 - Allowed the `driver` property for external networks as a temporary workaround for the Swarm network propagation issue.
@@ -82,7 +97,7 @@ redirect_from:
 {% comment %}
 ### Bugs
 {% endcomment %}
-{: #bugs-1 }
+{: #bugs-2 }
 ### バグ
 
 {% comment %}
