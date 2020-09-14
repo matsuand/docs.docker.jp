@@ -84,7 +84,7 @@ mounts is to think about where the data lives on the Docker host.
 - **ボリューム** はホストのファイルシステムの一部としてデータが保存されます。
   そしてこれは **Docker によって管理されます**。
   （Linux であれば `/var/lib/docker/volumes/` に保存されます。）
-  Docker 以外のプロセスは、このファイルシステム上の保存場所への変更操作を行うことはできません。
+  Docker 以外のプロセスは、このファイルシステム上の保存場所に変更を行ってはなりません。
   ボリュームは Docker においてデータを維持するための最良の方法です。
 
 {% comment %}
