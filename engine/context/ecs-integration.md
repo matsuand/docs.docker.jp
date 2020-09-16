@@ -295,12 +295,12 @@ Secret はサービス実行時には、`/run/secrets/foo` というプレーン
 {% comment %}
 The AWS Secrets Manager allows you to store sensitive data either as a plain 
 text (like Docker secret does), or as a hierarchical JSON document. You can 
-use the latter with ECS integration by using custom field `x-asw-keys` to 
+use the latter with ECS integration by using custom field `x-aws-keys` to 
 define which entries in the JSON document to bind as a secret in your service 
 container.
 {% endcomment %}
 AWS Secrets マネージャーにおいて機密情報を保存する際には、（Docker の Secret と同じように）プレーンテキストとして保存する方法と、階層化した JSON ドキュメントとして保存する方法があります。
-ECS 統合環境内にて後者の方法を利用する場合には、カスタム項目 `x-asw-keys` を利用して、サービスコンテナー内の Secret として、JSON ドキュメント内のどの項目を結びつけるかを定義します。
+ECS 統合環境内にて後者の方法を利用する場合には、カスタム項目 `x-aws-keys` を利用して、サービスコンテナー内の Secret として、JSON ドキュメント内のどの項目を結びつけるかを定義します。
 
 ```yaml
 services:

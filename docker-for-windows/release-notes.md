@@ -20,8 +20,8 @@ For information about Edge releases, see the [Edge release notes](edge-release-n
 最新版（Edge）リリースについての情報は [最新版リリースノート](edge-release-notes.md) を参照してください。
 Docker Desktop のシステム要件については [インストール前に確認すべきこと](install.md#what-to-know-before-you-install) を参照してください。
 
-## Docker Desktop Community 2.3.0.4
-2020-07-27
+## Docker Desktop Community 2.3.0.5
+2020-09-15
 
 {% comment %}
 > [Download](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
@@ -29,9 +29,47 @@ Docker Desktop のシステム要件については [インストール前に確
 > [ダウンロード](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
 
 {% comment %}
+### New
+{% endcomment %}
+{: #new }
+### 新機能
+  {% comment %}
+  - The new Cloud integration in Docker CLI makes it easy to run containers in the cloud using either Amazon ECS or Microsoft ACI. For more information, see [Deploying Docker containers on ECS](https://docs.docker.com/engine/context/ecs-integration/) and [Deploying Docker containers on Azure](https://docs.docker.com/engine/context/aci-integration/).
+  {% endcomment %}
+  - Docker CLI の新しいクラウド統合環境によって、Amazon ECS や Microsoft ACI を用いたコンテナー実行が簡単になりました。
+    詳しくは [ECS での Docker コンテナーのデプロイ](../../engine/context/ecs-integration/) や [Azure での Docker コンテナーのデプロイ](../../engine/context/aci-integration/) を参照してください。
+
+{% comment %}
 ### Upgrades
 {% endcomment %}
 {: #upgrades }
+### アップグレード
+  - [Docker Compose 1.27.2](https://github.com/docker/compose/releases/tag/1.27.2)
+  - [Cloud integration v0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
+
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+  {% comment %}
+  - WSL2: Fixed a crash when using an incompatible glibc. See [docker/for-win#8183](https://github.com/docker/for-win/issues/8183).
+  {% endcomment %}
+  - WSL2: 非互換の glibc を利用している際のクラッシュを修正しました。
+    [docker/for-win#8183](https://github.com/docker/for-win/issues/8183) を参照してください。
+
+## Docker Desktop Community 2.3.0.4
+2020-07-27
+
+{% comment %}
+> [Download](https://desktop.docker.com/win/stable/46911/Docker%20Desktop%20Installer.exe)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/win/stable/46911/Docker%20Desktop%20Installer.exe)
+
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades-1 }
 ### アップグレード
 
 - [Docker 19.03.12](https://github.com/docker/docker-ce/releases/tag/v19.03.12)
@@ -41,7 +79,7 @@ Docker Desktop のシステム要件については [インストール前に確
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes }
+{: #bug-fixes-and-minor-changes-1 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -73,7 +111,7 @@ Docker Desktop のシステム要件については [インストール前に確
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-1 }
+{: #upgrades-2 }
 ### アップグレード
 
 {% comment %}
@@ -84,7 +122,7 @@ Docker Desktop のシステム要件については [インストール前に確
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-1 }
+{: #bug-fixes-and-minor-changes-2 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -151,13 +189,21 @@ Docker Desktop のシステム要件については [インストール前に確
 {% endcomment %}
 > [ダウンロード](https://download.docker.com/win/stable/45183/Docker%20Desktop%20Installer.exe)
 
+{% comment %}
 ### New
+{% endcomment %}
+{: #new-1 }
+### 新機能
 
 - Windows 10 Home users can now use Docker Desktop through WSL 2. This requires Windows 10, version 2004 or higher. For more information, see [Install Docker Desktop on Windows Home](install-windows-home.md).
 - Docker Desktop introduces a new onboarding tutorial upon first startup. The Quick Start tutorial guides users to get started with Docker in a few easy steps. It includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 - Docker Desktop now allows sharing individual folders, rather than whole drives, giving more control to users over what is being shared.
 
+{% comment %}
 ### Upgrades
+{% endcomment %}
+{: #upgrades-3 }
+### アップグレード
 
 - [Docker Compose 1.25.5](https://github.com/docker/compose/releases/tag/1.25.5)
 - [Go 1.13.10](https://github.com/golang/go/issues?q=milestone%3AGo1.13.10+label%3ACherryPickApproved)
@@ -167,7 +213,7 @@ Docker Desktop のシステム要件については [インストール前に確
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-2 }
+{: #bug-fixes-and-minor-changes-3 }
 ### バグフィックスとマイナーチェンジ
 
 **WSL 2**
@@ -227,7 +273,7 @@ Docker Desktop のシステム要件については [インストール前に確
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-3 }
+{: #bug-fixes-and-minor-changes-4 }
 ### バグフィックスとマイナーチェンジ
 
 - Docker Desktop generates `fsnotify.WRITE` events in Linux containers when files are changed on the host. Fixes [docker/for-win#5530](https://github.com/docker/for-win/issues/5530#issuecomment-585572414).
@@ -241,14 +287,18 @@ Docker Desktop のシステム要件については [インストール前に確
 
 > [Download](https://download.docker.com/win/stable/43472/Docker%20Desktop%20Installer.exe)
 
+{% comment %}
 ### Upgrades
+{% endcomment %}
+{: #upgrades-4 }
+### アップグレード
 
 - [Docker 19.03.8](https://github.com/docker/docker-ce/releases/tag/v19.03.8)
 
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-4 }
+{: #bug-fixes-and-minor-changes-5 }
 ### バグフィックスとマイナーチェンジ
 
 - Security: Diagnostics were collected with Administrator privileges, which led to a possible privilege escalation on systems where the Docker Desktop user was not an administrator.
@@ -276,7 +326,11 @@ Docker Desktop のシステム要件については [インストール前に確
 
 > [Download](https://download.docker.com/win/stable/42716/Docker%20Desktop%20Installer.exe)
 
+{% comment %}
 ### Upgrades
+{% endcomment %}
+{: #upgrades-5 }
+### アップグレード
 
 - [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
 - [Go 1.12.16](https://golang.org/doc/devel/release.html#go1.12)
@@ -284,7 +338,7 @@ Docker Desktop のシステム要件については [インストール前に確
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-5 }
+{: #bug-fixes-and-minor-changes-6 }
 ### バグフィックスとマイナーチェンジ
 
 - Fixed an issue that prevented users from creating files with special characters in the filenames within a shared volume. Fixes [docker/for-win#5520](https://github.com/docker/for-win/issues/5520).
@@ -322,14 +376,22 @@ Docker Desktop のシステム要件については [インストール前に確
 
 Docker Desktop 2.2.0.0 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 
+{% comment %}
 ### Upgrades
+{% endcomment %}
+{: #upgrades-6 }
+### アップグレード
 
 - [Docker Compose 1.25.2](https://github.com/docker/compose/releases/tag/1.25.2)
 - [Kubernetes 1.15.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.5)
 - Linux kernel 4.19.76
 - [QEMU 4.0.1](https://github.com/docker/binfmt)
 
+{% comment %}
 ### New
+{% endcomment %}
+{: #new-2 }
+### 新機能
 
 - **Docker Desktop Dashboard:** The new Docker Desktop **Dashboard** provides a user-friendly interface which enables you to interact with containers and applications, and manage the lifecycle of your applications directly from the UI. In addition, it allows you to access the logs, view container details, and monitor resource utilization to explore the container behavior.
 For detailed information about the new Dashboard UI, see [Docker Desktop Dashboard](dashboard.md).
@@ -351,7 +413,7 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-6 }
+{: #bug-fixes-and-minor-changes-7 }
 ### バグフィックスとマイナーチェンジ
 
 - Enabled Windows features such as Hyper-V and Containers during installation, thereby reducing the need for another restart after installation.
@@ -388,7 +450,11 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 
 Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
 
+{% comment %}
 ### Upgrades
+{% endcomment %}
+{: #upgrades-7 }
+### アップグレード
 
 - [Docker 19.03.5](https://github.com/docker/docker-ce/releases/tag/v19.03.5)
 - [Kubernetes 1.14.8](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.8)
@@ -401,14 +467,22 @@ Docker Desktop 2.1.0.5 contains a Kubernetes upgrade. Note that your local Kuber
 
 Docker Desktop 2.1.0.4 contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing this version.
 
+{% comment %}
 ### Upgrades
+{% endcomment %}
+{: #upgrades-8 }
+### アップグレード
 
 - [Docker 19.03.4](https://github.com/docker/docker-ce/releases/tag/v19.03.4)
 - [Kubernetes 1.14.7](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.7)
 - [Go 1.12.10](https://github.com/golang/go/issues?q=milestone%3AGo1.12.10+label%3ACherryPickApproved)
 - [Kitematic 0.17.9](https://github.com/docker/kitematic/releases/tag/v0.17.9)
 
+{% comment %}
 ### New
+{% endcomment %}
+{: #new-3 }
+### 新機能
 
 Docker Desktop now enables you to sign into Docker Hub using two-factor authentication. For more information, see [Two-factor authentication](index/#docker-hub).
 
@@ -417,7 +491,11 @@ Docker Desktop now enables you to sign into Docker Hub using two-factor authenti
 
 [Download](https://download.docker.com/win/stable/38240/Docker%20Desktop%20Installer.exe)
 
+{% comment %}
 ### Upgrades
+{% endcomment %}
+{: #upgrades-9 }
+### アップグレード
 
 - [Kitematic 0.17.8](https://github.com/docker/kitematic/releases/tag/v0.17.8)
 
@@ -428,7 +506,11 @@ Docker Desktop now enables you to sign into Docker Hub using two-factor authenti
 
 Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes cluster will be reset after installing this version.
 
+{% comment %}
 ### Upgrades
+{% endcomment %}
+{: #upgrades-10 }
+### アップグレード
 
 - [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
 - [Kubernetes 1.14.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6)
@@ -442,7 +524,11 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 
   Note that you must sign in and create a Docker ID in order to download Docker Desktop.
 
+{% comment %}
 ### Upgrades
+{% endcomment %}
+{: #upgrades-11 }
+### アップグレード
 
 * [Docker 19.03.1](https://github.com/docker/docker-ce/releases/tag/v19.03.1)
 * [Docker Compose 1.24.1](https://github.com/docker/compose/releases/tag/1.24.1)
@@ -456,7 +542,11 @@ Docker Desktop 2.1.0.2 contains a Kubernetes upgrade. Your local Kubernetes clus
 * [Alpine 3.10](https://alpinelinux.org/posts/Alpine-3.10.0-released.html)
 * [Docker Credential Helpers 0.6.3](https://github.com/docker/docker-credential-helpers/releases/tag/v0.6.3)
 
+{% comment %}
 ### New
+{% endcomment %}
+{: #new-4 }
+### 新機能
 
 * Selecting the ‘Experimental features’ checkbox in the Daemon, **Settings** menu turns on experimental features for Docker daemon and Docker CLI.
 * Docker Desktop now checks for stored credentials at startup before attempting to mount any shared drives. This prompts users to reenter the credentials if they are invalid.
@@ -473,7 +563,7 @@ Docker Desktop Community 2.1.0.0 contains the following experimental features:
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-7 }
+{: #bug-fixes-and-minor-changes-8 }
 ### バグフィックスとマイナーチェンジ
 
 * Fixed PowerShell script signing issue that caused `AuthorizationManager check failed` errors on machines with strict group policies on PowerShell script signing. [docker/for-win#4376](https://github.com/docker/for-win/issues/4376)

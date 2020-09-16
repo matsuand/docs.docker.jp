@@ -71,7 +71,6 @@ later in the repository settings.
 
 ![Setting page for creating a repo](images/repo-create-details.png)
 
-
 {% comment %}
 After you hit the **Create** button, you can start using `docker push` to push
 images to this repository.
@@ -288,7 +287,6 @@ Status: Downloaded newer image for centos:latest
 {% endcomment %}
 You now have an image from which you can run containers.
 
-
 {% comment %}
 ## Starring Repositories
 {% endcomment %}
@@ -303,3 +301,19 @@ bookmarking your favorites.
 リポジトリは他の方から星マークをつけてもらうことがあり、逆に他のリポジトリへ星マークをつけることができます。
 星マークをつけるのは、好きなリポジトリが何かを公開する方法として使えます。
 またお気に入りのリポジトリをブックマークしておくということもできます。
+
+## Service accounts
+
+ A service account is a Docker ID used by a bot for automating the build pipeline for containerized applications. Service accounts are typically used in an automated workflow and do not share Docker IDs with the members in the Team plan.
+
+ To create a new service account:
+
+ 1. Create a new Docker ID.
+ 2. Create a [team](orgs.md#create-a-team) in your organization and grant it read-only access to your private repositories.
+ 3. Add the new Docker ID to your [organization](orgs.md#working-with-organizations).
+ 4. Add the new Docker ID  to the [team](orgs.md#add-a-member-to-a-team) you created earlier.
+ 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
+
+ > **Note**
+ >
+ > If you want a read-only PAT just for your open source repos, or to access official images and other public images, you do not have to grant any access permissions to the new Docker ID.

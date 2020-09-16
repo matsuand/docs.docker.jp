@@ -8,17 +8,10 @@ redirect_from:
 ---
 
 {% comment %}
-Your free Docker ID grants you access to Docker Hub repositories, and some beta programs. All you need is an email address.
+Your free Docker ID grants you access to Docker Hub repositories and some beta programs. All you need is an email address.
 {% endcomment %}
 フリーの Docker ID を取得すると Docker Hub リポジトリへアクセスでき、ベータプログラムのいくつかを利用できます。
 Docker ID の取得には電子メールアドレスのみが必要です。
-
-{% comment %}
-This account also allows you to log in to services such as the Docker Support
-Center, the Docker Forums, and the Docker Success portal.
-{% endcomment %}
-このアカウントがあると、たとえば Docker Support Center、Docker フォーラム、Docker Success ポータルのようなサービスにもログインできるようになります。
-
 
 {% comment %}
 ## Register for a Docker ID
@@ -27,9 +20,10 @@ Center, the Docker Forums, and the Docker Success portal.
 {: #register-for-a-docker-id }
 
 {% comment %}
-Your Docker ID becomes your user namespace for hosted Docker services, and becomes your username on the Docker Forums.
+Your Docker ID becomes your user namespace for hosted Docker services, and becomes your username on the Docker Forums. To create a new Docker ID:
 {% endcomment %}
 Docker ID は、提供されている Docker サービスにおける各ユーザー向けの名前となり、Docker フォーラムでのユーザー名にもなります。
+新たな Docker ID は以下のようにして生成します。
 
 {% comment %}
 1. Go to the [Docker Hub signup page](https://hub.docker.com/signup/).
@@ -52,14 +46,15 @@ Docker ID は、提供されている Docker サービスにおける各ユー�
 3. ユニークで適正なメールアドレスを入力します。
 
 {% comment %}
-4. Enter a password between 6 and 128 characters long.
+4. Enter a password. Note that the password must be at least 9 characters.
 {% endcomment %}
-4. パスワードを 6 文字以上 128 文字以下の範囲で入力します。
+4. パスワードを入力します。
+   なおパスワードは最低 9 文字以上なければなりません。
 
 {% comment %}
-3. Click **Sign up**.
+5. Complete the Captcha verification and then then click **Sign up**.
 {% endcomment %}
-3. **Sign up** をクリックします。
+5. Captcha 確認を行って **Sign up** をクリックします。
 
    {% comment %}
    Docker sends a verification email to the address you provided.
@@ -67,15 +62,14 @@ Docker ID は、提供されている Docker サービスにおける各ユー�
    Docker からの確認メールが、入力されたメールアドレスに送信されます。
 
 {% comment %}
-4. Click the link in the email to verify your address.
+6. Verify your email address to complete the registration process.
 {% endcomment %}
-4. 受信したメール内のリンクをクリックしてメールアドレスを承認します。
+4. メールアドレスを確認して登録操作を完了します。
 
 {% comment %}
 > **Note**: You cannot log in with your Docker ID until you verify your email address.
 {% endcomment %}
 > **メモ**: メールアドレスの承認処理を終えてからでないと Docker ID を使ったログインはできません。
-
 
 {% comment %}
 ## Log in
@@ -85,20 +79,15 @@ Docker ID は、提供されている Docker サービスにおける各ユー�
 
 {% comment %}
 Once you register and verify your Docker ID email address, you can log in
-to [Docker Hub](https://hub.docker.com) and [Docker Support](https://support.docker.com).
+to [Docker Hub](https://hub.docker.com).
 {% endcomment %}
-Docker ID の登録を行ってメールアドレスの承認を終えたら [Docker Hub](https://hub.docker.com) や [Docker Support](https://support.docker.com) にログインできるようになります。
+Docker ID の登録を行ってメールアドレスの承認を終えたら [Docker Hub](https://hub.docker.com) にログインできるようになります。
 
 {% comment %}
-![Login](images/login2019.png)
+You can also log in through the CLI using the `docker login` command. For more information, see [`docker login`](../engine/reference/commandline/login.md).
 {% endcomment %}
-![ログイン](images/login2019.png)
-
-{% comment %}
-You can also log in using the `docker login` command. (You can read more about `docker login` [here](../engine/reference/commandline/login.md).)
-{% endcomment %}
-`docker login` コマンドを使ってログインすることもできます。
-（`docker login`の詳細は[こちら](/engine/reference/commandline/login.md)を参照してください。）
+`docker login` コマンドを使って CLI を通じたログインもできます。
+詳しくは [こちら](../engine/reference/commandline/login.md) を参照してください。）
 
 {% comment %}
 > **Warning**:

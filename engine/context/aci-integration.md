@@ -350,23 +350,25 @@ ACI に対しては、Compose ファイルにて定義されたマルチコン�
 {% comment %}
 You can deploy containers or Compose applications that use persistent data 
 stored in volumes. Azure File Share can be used to support volumes for ACI 
-containers. 
+containers.
 {% endcomment %}
 コンテナーや Compose アプリケーションにおいてボリュームを使ったデータ保存を行っている場合でも、デプロイすることが可能です。
 Azure ファイル共有を使えば、ACI コンテナーに対してのボリュームをサポートしています。
 
 {% comment %}
-With an existing Azure File Share, with storage account name `mystorageaccount` 
+Using an existing Azure File Share with storage account name `mystorageaccount` 
 and file share name `myfileshare`, you can specify a volume in your deployment `run`
 command as follows:
 {% endcomment %}
 既存の Azure ファイル共有を利用して、ストレージアカウント名 が `mystorageaccount`、ファイル共有名が `myfileshare` であるとしたときに、デプロイにおける `run` コマンド実行を以下のように指定できます。
 
+```
+docker run -v storageaccount/fileshare:/target/path myimage
+```
+
 {% comment %}
-`docker run -v storageaccount@fileshare:/target/path myimage` and the runtime 
-container will see the file share content in `/target/path`.
+The runtime container will see the file share content in `/target/path`.
 {% endcomment %}
-`docker run -v storageaccount@fileshare:/target/path myimage` 
 これにより実行中のコンテナーからは、ファイル共有内容は `/target/path` に見えるようになります。
 
 {% comment %}
@@ -390,17 +392,102 @@ volumes:
 ```
 
 {% comment %}
-Now, you need to create an Azure storage account and File Share using the Azure
-portal, or the `az` [command line](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-cli).
-{% endcomment %}
-そこで Azure ストレージアカウントの生成が必要です。
-さらに Azure ポータル、つまり `az` [コマンドライン](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-cli) を用いてファイル共有を生成することが必要です。
-
-{% comment %}
 When you deploy a single container or a Compose application, your 
 Azure login will automatically fetch the key to the Azure storage account.
 {% endcomment %}
 単一のコンテナーあるいは Compose アプリケーションをデプロイしたら、Azure のログイン内において、Auzre ストレージアカウントに対するアクセスキーが自動的に取得されます。
+
+{% comment %}
+### Managing Azure volumes
+{% endcomment %}
+{: #managing-azure-volumes }
+### Azure ボリュームの管理
+
+{% comment %}
+To create a volume that you can use in containers or Compose applications when 
+using your ACI Docker context, you can use the `docker volume create` command, 
+and specify an Azure storage account name and the file share name:
+{% endcomment %}
+ACI Docker コンテキストを利用して、コンテナーや Compose アプリケーション内で用いるボリュームを生成するには、`docker volume create` コマンドを実行します。
+そこで Azure ストレージアカウント名とファイル共有名を指定します。
+
+```
+$ docker --context aci volume create --storage-account mystorageaccount --fileshare test-volume
+[+] Running 2/2
+ ⠿ mystorageaccount  Created                         26.2s
+ ⠿ test-volume       Created                          0.9s
+mystorageaccount/test-volume
+```
+
+{% comment %}
+By default, if the storage account does not already exist, this command 
+creates a new storage account using the Standard LRS as a default SKU, and the 
+resource group and location associated with you Docker ACI context.
+{% endcomment %}
+ストレージアカウントが存在しない場合、このコマンドがデフォルト SKU として 標準 LRS を利用してストレージアカウントを新規生成します。
+そしてリソースグループや Docker ACI コンテキストに関連するディレクトリを生成します。
+
+{% comment %}
+If you specify an existing storage account, the command creates a new 
+file share in the exsting account:
+{% endcomment %}
+既存のストレージアカウントを指定した場合、このコマンドはそのアカウント内にファイル共有を新規生成します。
+
+```
+$ docker --context aci volume create --storage-account mystorageaccount --fileshare test-volume2
+[+] Running 2/2
+ ⠿ mystorageaccount   Use existing                    0.7s
+ ⠿ test-volume2       Created                         0.7s
+mystorageaccount/test-volume2
+```
+
+{% comment %}
+Alternatively, you can create an Azure storage account or a file share using the Azure
+portal, or the `az` [command line](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-cli).
+{% endcomment %}
+別の方法として Azure ストレージアカウントを生成するか、
+Azure ポータル、つまり `az` [コマンドライン](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-cli) を用いてファイル共有を生成することができます。
+
+{% comment %}
+You can also list volumes that are available for use in containers or Compose applications:
+{% endcomment %}
+コンテナーや Compose アプリケーションにおいて利用可能なボリュームの一覧を確認することができます。
+
+```
+$ docker --context aci volume ls
+ID                                 DESCRIPTION
+mystorageaccount/test-volume       Fileshare test-volume in mystorageaccount storage account
+mystorageaccount/test-volume2      Fileshare test-volume2 in mystorageaccount storage account
+```
+
+{% comment %}
+To delete a volume and the corresponding Azure file share, use the `volume rm` command:
+{% endcomment %}
+ボリュームと対応する Azure ファイル共有を削除するには `volume rm` コマンドを実行します。
+
+```
+$ docker --context aci volume rm mystorageaccount/test-volume
+mystorageaccount/test-volume
+```
+
+{% comment %}
+This permanently deletes the Azure file share and all its data.
+{% endcomment %}
+これによって Azure ファイル共有とこれに関連するデータは、完全に削除されます。
+
+{% comment %}
+When deleting a volume in Azure, the command checks whether the specified file share
+is the only file share available in the storage account. If the storage account is 
+created with the `docker volume create` command, `docker volume rm` also 
+deletes the storage account when it does not have any file shares.
+If you are using a storage account created without the `docker volume create` command 
+(through Azure portal or with the `az` command line for example), `docker volume rm` 
+does not delete the storage account, even when it has zero remaining file shares.
+{% endcomment %}
+Azure においてボリュームを削除するとこのコマンドは、指定されたファイル共有が、そのストレージアカウントにおいてのみ利用されているファイル共有であるかどうかをチェックします。
+そのストレージアカウントが `docker volume create` コマンドによって作り出されたものである場合、`docker volume rm` コマンドは、ストレージアカウントがファイル共有を持っていなければ、ストレージアカウントも削除します。
+逆にストレージアカウントが（たとえば Azure ポータルや `az` コマンドを使った場合のように）`docker volume create` 以外において生成されたものである場合は、`docker volume rm` はストレージアカウントを削除しません。
+そのアカウントが一つのファイル共有も残っていなかったとしてもです。
 
 {% comment %}
 ## Using ACI resource groups as namespaces
