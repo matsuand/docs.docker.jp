@@ -7,13 +7,47 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.27.3
+(2020-09-16)
+
+{% comment %}
+### Bugs
+{% endcomment %}
+{: #bugs }
+### バグ
+
+{% comment %}
+- Merged `max_replicas_per_node` on `docker-compose config`.
+{% endcomment %}
+- `docker-compose config` に `max_replicas_per_node` をマージしました。
+
+{% comment %}
+- Fixed `depends_on` serialization on `docker-compose config`.
+{% endcomment %}
+- `docker-compose config` における `depends_on` のシリアライズ処理を修正しました。
+
+{% comment %}
+- Fixed scaling when some containers are not running on `docker-compose up`.
+{% endcomment %}
+- `docker-compose up` において動作していないコンテナーがある際のスケール処理を修正しました。
+
+{% comment %}
+- Enabled relative paths for `driver_opts.device` for `local` driver.
+{% endcomment %}
+- `local` ドライバー利用時の `driver_opts.device` において相対パスを可能にしました。
+
+{% comment %}
+- Allowed strings for `cpus` fields.
+{% endcomment %}
+- `cpus` に対して文字列指定を可能にしました。
+
 ## 1.27.2
 (2020-09-10)
 
 {% comment %}
 ### Bugs
 {% endcomment %}
-{: #bugs }
+{: #bugs-1 }
 ### バグ
 
 {% comment %}
@@ -27,7 +61,7 @@ redirect_from:
 {% comment %}
 ### Bugs
 {% endcomment %}
-{: #bugs-1 }
+{: #bugs-2 }
 ### バグ
 
 {% comment %}
@@ -97,7 +131,7 @@ redirect_from:
 {% comment %}
 ### Bugs
 {% endcomment %}
-{: #bugs-2 }
+{: #bugs-3 }
 ### バグ
 
 {% comment %}

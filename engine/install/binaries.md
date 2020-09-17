@@ -7,6 +7,7 @@ redirect_from:
 - /engine/installation/binaries/
 - /engine/installation/linux/docker-ce/binaries/
 - /install/linux/docker-ce/binaries/
+- /installation/binaries/
 ---
 
 {% comment %}

@@ -481,7 +481,13 @@ Docker ECS 統合では [Amazon CloudFormation](https://docs.aws.amazon.com/clou
 スタックファイルを生成すると、そこに定義されたリソースの確認や、必要に応じたテンプレートのカスタマイズ、AWS CLI や AWS ウェブコンソールからのテンプレートの適用を行うことができます。
 
 {% comment %}
-By default, the Docker ECS integration creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" class="_"} to create such resources, or you want to manage these yourself, you can use the following custom Compose extensions:
+## Using existing AWS network resources
+{% endcomment %}
+{: #using-existing-aws-network-resources }
+## 既存の AWS ネットワークリソースの利用
+
+{% comment %}
+By default, the Docker ECS integration creates an ECS cluster for your Compose application, a Security Group per network in your Compose file on your AWS account’s default VPC, and a LoadBalancer to route traffic to your services. If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
 {% endcomment %}
 Docker ECS 統合では、Compose アプリケーションに対して、デフォルトで以下のものを生成します。
 1 つは Compose アプリケーション用の ECS クラスターです。
@@ -518,9 +524,16 @@ the ARN of an existing LoadBalancer.
 set the ARN of an existing SecurityGroup used to implement network connectivity
 between services.
 {% endcomment %}
-- Compose ファイルのネットワーク定義内において `x-aws-securitygroup` を利用します。
-  これは、サービス間のネットワーク接続のために用意されている既存の SecurityGroup の ARN を設定します。
+- Docker ECS 統合向けの Compose ファイルにおいて、ネットワーク定義内に `external: true` を記述します。
+  これによってセキュリティグループを生成 **しない** ようにします。
+  そしてサービス間のネットワーク接続を実現するために、利用したい既存の SecurityGroup における名前と ID を設定します。
 
+```yaml
+networks:
+  back_tier:
+    external: true
+    name: "sg-1234acbd"
+```  
 
 {% comment %}
 ## Local simulation

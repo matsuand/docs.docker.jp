@@ -206,7 +206,7 @@ guides:
         - path: /engine/swarm/how-swarm-mode-works/swarm-task-states/
           title: Swarm タスクの状態
       - path: /engine/swarm/swarm-mode/
-        title: Run Docker in swarm mode
+        title: Docker の Swarm モード実行
       - path: /engine/swarm/join-nodes/
         title: Join nodes to a swarm
       - path: /engine/swarm/manage-nodes/
@@ -1188,7 +1188,7 @@ manuals:
       title: 安定版リリースノート
     - path: /docker-for-windows/edge-release-notes/
       title: 最新版リリースノート
-    - path: /docker-for-windows/wsl-tech-preview/
+    - path: /docker-for-windows/wsl/
       title: Docker Desktop WSL 2 バックエンド
   - path: /desktop/dashboard/
     title: ダッシュボード
