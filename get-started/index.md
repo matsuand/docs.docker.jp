@@ -219,7 +219,7 @@ Docker Desktop のインストールを正常に終えたら、端末画面を�
 
 ```shell
 $ docker --version
-Docker version 19.03.12, build 48a66213fe
+Docker version 19.03.13, build 4484c46d9d
 ```
 
 {% comment %}

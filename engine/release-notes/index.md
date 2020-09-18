@@ -36,13 +36,106 @@ for Docker Engine.
 {: #version-1903 }
 # バージョン 19.03
 
+## 19.03.13
+2020-09-16
+
+### Builder
+
+{% comment %}
+- buildkit: Fix nil dereference in cache logic [moby/moby#41279](https://github.com/moby/moby/pull/41279)
+- buildkit: Treat Unix sockets as regular files during COPY/ADD [moby/moby#41269](https://github.com/moby/moby/pull/41269)
+- buildkit: Ignore system and security xattrs in calculation to ensure consistent COPY caching regardless of SELinux environment [moby/moby#41222](https://github.com/moby/moby/pull/41222)
+- buildkit: Make `--cache-from` behavior more reliable [moby/moby#41222](https://github.com/moby/moby/pull/41222)
+- buildkit: Fix infinite loop burning CPU when exporting cache [moby/moby#41185](https://github.com/moby/moby/pull/41185)
+{% endcomment %}
+- buildkit: キャッシュロジックにおける nil 参照を修正しました。
+  [moby/moby#41279](https://github.com/moby/moby/pull/41279)
+- buildkit: COPY/ADD の処理中は Unix ソケットを通常ファイルとして取り扱います。
+  [moby/moby#41269](https://github.com/moby/moby/pull/41269)
+- buildkit: SELinux 環境であっても、計算処理中はシステムおよびセキュリティ xattrs を無視することで、COPY 時に安定したキャッシングとなるようにしました。
+  [moby/moby#41222](https://github.com/moby/moby/pull/41222)
+- buildkit: `--cache-from` による処理をより安定化させました。
+  [moby/moby#41222](https://github.com/moby/moby/pull/41222)
+- buildkit: キャッシュエクスポート時の CPU 無限ループ書き込みを修正しました。
+  [moby/moby#41185](https://github.com/moby/moby/pull/41185)
+
+{% comment %}
+### Client
+{% endcomment %}
+{: #client }
+### クライアント
+
+{% comment %}
+- Bump Golang 1.13.15 [docker/cli#2674](https://github.com/docker/cli/pull/2674)
+- Fix config file permission issues (~/.docker/config.json) [docker/cli#2631](https://github.com/docker/cli/pull/2631)
+- build: Fix panic on terminals with zero height [docker/cli#2719](https://github.com/docker/cli/pull/2719)
+- windows: Fix potential issue with newline character in console [docker/cli#2623](https://github.com/docker/cli/pull/2623)
+{% endcomment %}
+- Golang 1.13.15 へのアップデート。
+  [docker/cli#2674](https://github.com/docker/cli/pull/2674)
+- 設定ファイル（~/.docker/config.json）のパーミッション問題を修正しました。
+  [docker/cli#2631](https://github.com/docker/cli/pull/2631)
+- build: 高さゼロのターミナルにおける panic を修正しました。
+  [docker/cli#2719](https://github.com/docker/cli/pull/2719)
+- windows: コンソール画面での改行文字に関する潜在的な問題を修正しました。
+  [docker/cli#2623](https://github.com/docker/cli/pull/2623)
+
+{% comment %}
+### Networking
+{% endcomment %}
+{: #networking }
+### ネットワーク
+
+{% comment %}
+- Clean up network sandbox on failure [moby/moby#41081](https://github.com/moby/moby/pull/41081)
+- Fix shallow error messages by forwarding deadline-related errors to user [moby/moby#41312](https://github.com/moby/moby/pull/41312)
+- Fix leaking of netns file descriptors [moby/moby#41287](https://github.com/moby/moby/41287)
+{% endcomment %}
+- 処理失敗時にネットワークサンドボックスを削除しました。
+  [moby/moby#41081](https://github.com/moby/moby/pull/41081)
+- deadline に関するエラーをユーザーにフォワードすることによって、情報量の少ないエラーメッセージを修正しました。
+  [moby/moby#41312](https://github.com/moby/moby/pull/41312)
+- ファイルディスクリプター netns の漏れを修正しました。
+  [moby/moby#41287](https://github.com/moby/moby/pull/41287)
+
+### Rootless
+
+{% comment %}
+- Fix port forwarder resource leak [moby/moby#41277](https://github.com/moby/moby/pull/41277)
+{% endcomment %}
+- port forwarder のリソースリークを修正しました。
+  [moby/moby#41277](https://github.com/moby/moby/pull/41277)
+
+{% comment %}
+### Runtime
+{% endcomment %}
+{: #runtime }
+### ランタイム
+
+{% comment %}
+- Bump Golang 1.13.15 [moby/moby#41334](https://github.com/moby/moby/pull/41334)
+- Update to containerd 1.3.7 [moby/moby#40408](https://github.com/moby/moby/pull/40408)
+{% endcomment %}
+- Golang 1.13.15 へのアップデート。
+  [moby/moby#41334](https://github.com/moby/moby/pull/41334)
+- containerd 1.3.7 へのアップデート。
+  [moby/moby#40408](https://github.com/moby/moby/pull/40408)
+
+### Windows
+
+{% comment %}
+- Fix slow Windows container start time when using servercore image [moby/moby#41192](https://github.com/moby/moby/pull/41192)
+{% endcomment %}
+- servercore イメージ利用時に、Windows コンテナーの起動が遅くなることを修正しました。
+  [moby/moby#41192](https://github.com/moby/moby/pull/41192)
+
 ## 19.03.12
 2020-06-18
 
 {% comment %}
 ### Client
 {% endcomment %}
-{: #client }
+{: #client-1 }
 ### クライアント
 
 - Fix bug preventing logout from registry when using multiple config files (e.g. Windows vs WSL2 when using Docker Desktop) [docker/cli#2592](https://github.com/docker/cli/pull/2592)
@@ -52,7 +145,7 @@ for Docker Engine.
 {% comment %}
 ### Networking
 {% endcomment %}
-{: #networking }
+{: #networking-1 }
 ### ネットワーク
 
 {% comment %}
@@ -65,7 +158,7 @@ for Docker Engine.
 {% comment %}
 ### Runtime
 {% endcomment %}
-{: #runtime }
+{: #runtime-1 }
 ### ランタイム
 
 {% comment %}
@@ -136,7 +229,7 @@ See [kubernetes/kubernetes#91507](https://github.com/kubernetes/kubernetes/issue
 {% comment %}
 ### Client
 {% endcomment %}
-{: #client-1 }
+{: #client-2 }
 ### クライアント
 {% comment %}
 - Fix version negotiation with older engine. [docker/cli#2538](https://github.com/docker/cli/pull/2538)
