@@ -41,11 +41,12 @@ Before you install the Docker Desktop WSL 2 backend, you must complete the follo
 Docker Desktop WSL 2 バックエンドをインストールするにあたっては、事前に以下の手順を行っておく必要があります。
 
 {% comment %}
-1. Install Windows 10, version 1903 or higher.
+1. Install Windows 10, version 2004 or higher. The Docker Desktop Edge release also supports Windows 10, version 1903 or higher.
 2. Enable WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 3. Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
 {% endcomment %}
-1. Windows 10、バージョン 1903 またはそれ以上をインストールします。
+1. Windows 10、バージョン 2004 またはそれ以上をインストールします。
+   Docker Desktop 最新版では Windows 10、バージョン 1903 以降に対応しています。
 2. Windows 上において WSL 2 機能を有効にします。
    詳しい手順については [Microsoft のドキュメント](https://docs.microsoft.com/en-us/windows/wsl/install-win10) を参照してください。
 3. [Linux カーネル更新プログラムパッケージ](https://docs.microsoft.com/windows/wsl/wsl2-kernel) をダウンロードしてインストールします。

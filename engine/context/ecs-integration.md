@@ -24,12 +24,12 @@ The integration between Docker and Amazon ECS allow developers to use the Docker
 Docker と Amazon ECS の統合により、開発者が Docker CLI を用いる際には、以下のことが可能になります。
 
 {% comment %}
-Set up an AWS context in one Docker command, allowing you to switch from a local context to a cloud context and run applications quickly and easily
-Simplify multi-container application development on Amazon ECS using the Compose specification
+* Set up an AWS context in one Docker command, allowing you to switch from a local context to a cloud context and run applications quickly and easily
+* Simplify multi-container application development on Amazon ECS using the Compose specification
 {% endcomment %}
-1 つの Docker コマンドに対して AWS コンテキストを設定することができます。
-これによってローカルコンテキストとクラウドコンテキストを切り替えられるようになり、アプリケーションの実行をすばやく簡単に行うことができます。
-Compose を使って、Amazon ECS 上の複数コンテナーアプリケーションの開発を単純化できます。
+* 1 つの Docker コマンドに対して AWS コンテキストを設定することができます。
+  これによってローカルコンテキストとクラウドコンテキストを切り替えられるようになり、アプリケーションの実行をすばやく簡単に行うことができます。
+* Compose を使って、Amazon ECS 上の複数コンテナーアプリケーションの開発を単純化できます。
 
 {% comment %}
 >**Note**

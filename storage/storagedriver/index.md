@@ -83,14 +83,14 @@ writable layer on top of the underlying layers. This layer is often called the
 "container layer". All changes made to the running container, such as writing
 new files, modifying existing files, and deleting files, are written to this thin
 writable container layer. The diagram below shows a container based on the Ubuntu
-18.04 image.
+15.04 image.
 {% endcomment %}
 各レイヤーは、その直前のレイヤーからの差異だけを保持します。
 そしてレイヤーは順に積み上げられていきます。
 新しいコンテナーを生成したときには、それまで存在していたレイヤー群の最上部に、新たな書き込み可能なレイヤーが加えられます。
 このレイヤーは「コンテナーレイヤー」と呼ばれることがあります。
 実行中のコンテナーに対して実行される変更処理すべて、たとえば新規ファイル生成、既存ファイル修正、ファイル削除といったことは、その薄い皮のような書き込み可能なコンテナーレイヤーに対して書き込まれます。
-以下の図は Ubuntu 18.04 イメージに基づいて生成されたコンテナーを表わしています。
+以下の図は Ubuntu 15.04 イメージに基づいて生成されたコンテナーを表わしています。
 
 {% comment %}
 ![Layers of a container based on the Ubuntu image](images/container-layers.jpg)
@@ -126,11 +126,11 @@ deleted. The underlying image remains unchanged.
 Because each container has its own writable container layer, and all changes are
 stored in this container layer, multiple containers can share access to the same
 underlying image and yet have their own data state. The diagram below shows
-multiple containers sharing the same Ubuntu 18.04 image.
+multiple containers sharing the same Ubuntu 15.04 image.
 {% endcomment %}
 複数のコンテナーを見た場合、そのコンテナーごとに個々の書き込み可能なコンテナーレイヤーがあって、データ更新結果はそのコンテナーレイヤーに保存されます。
 したがって複数コンテナーでは、同一のイメージを共有しながらアクセスすることができ、しかも個々に見れば独自の状態を持つことができることになります。
-以下の図は、Ubuntu 18.04 という同一のイメージを共有する複数コンテナーを示しています。
+以下の図は、Ubuntu 15.04 という同一のイメージを共有する複数コンテナーを示しています。
 
 {% comment %}
 ![Containers sharing same image](images/sharing-layers.jpg)
