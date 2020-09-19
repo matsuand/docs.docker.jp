@@ -115,7 +115,7 @@ more information, see [Running Docker Desktop in nested virtualization scenarios
 {% comment %}
 Looking for information on using Windows containers?
 {% endcomment %}
-Looking for information on using Windows containers?
+Windows コンテナーの利用方法についてお探しの方は以下です。
 
 {% comment %}
 * [Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers)
@@ -126,13 +126,11 @@ Looking for information on using Windows containers?
 * Docker Container Platform for Windows [articles and blog
   posts](https://www.docker.com/microsoft/) on the Docker website.
 {% endcomment %}
-* [Switch between Windows and Linux containers](index.md#switch-between-windows-and-linux-containers)
-  describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned above.
-* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
-  provides a tutorial on how to set up and run Windows containers on Windows 10, Windows Server 2016 and Windows Server 2019. It shows you how to use a MusicStore application
-  with Windows containers.
-* Docker Container Platform for Windows [articles and blog
-  posts](https://www.docker.com/microsoft/) on the Docker website.
+* [Windows と Linux の各コンテナー間の切り替え](index.md#switch-between-windows-and-linux-containers) では、Docker Desktop 上において Linux と Windows のコンテナー間を切り替える方法を説明しています。
+  そして上で説明したチュートリアルをお勧めしています。
+* [Windows コンテナーをはじめよう（ラボ）](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md) では、Windows 10、Windows Server 2016、Windows Server 2019 の各 OS 上において Windows コンテナーを設定して実行するチュートリアルを提供しています。
+  そこでは、Windows コンテナーを使った MusicStore アプリケーションの利用方法を示しています。
+* Docker ウェブサイト上に Docker Container Platform for Windows に関する [記事とブログ投稿](https://www.docker.com/microsoft/) があります。
 
 {% comment %}
 ## Install Docker Desktop on Windows
@@ -201,7 +199,7 @@ Docker Desktop を起動するには、Docker を検索して、その結果か�
 {% comment %}
 When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
 {% endcomment %}
-When the whale icon in the status bar stays steady, Docker Desktop is up-and-running, and is accessible from any terminal window.
+クジラアイコンがステータスバーに常時表示されていれば、Docker Desktop は実行しており、どのターミナル画面からでもアクセス可能です。
 
 {% comment %}
 ![whale on taskbar](images/whale-icon-systray.png)
@@ -218,7 +216,8 @@ taskbar to show it. To learn more, see [Docker Settings](index.md#docker-setting
 {% comment %}
 When the initialization is complete, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 {% endcomment %}
-When the initialization is complete, Docker Desktop launches the onboarding tutorial. The tutorial includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+初期設定が完了すると Docker Desktop はシステム内のチュートリアルを起動します。
+このチュートリアルには、Docker イメージを試しにビルドし、コンテナーとしての実行、Docker Hub へのイメージのプッシュと保存、といった簡単な練習問題があります。
 
 {% comment %}
 ![Docker Quick Start tutorial](images/docker-tutorial-win.png){:width="450px"}
@@ -271,7 +270,10 @@ Windows から Docker Desktop をアンインストールするには、以下�
 {% comment %}
 Docker Desktop allows you to switch between Stable and Edge releases. However, **you can only have one version of Docker Desktop installed at a time**. Switching between Stable and Edge versions can destabilize your development environment, particularly in cases where you switch from a newer (Edge) channel to an older (Stable) channel.
 {% endcomment %}
-Docker Desktop allows you to switch between Stable and Edge releases. However, **you can only have one version of Docker Desktop installed at a time**. Switching between Stable and Edge versions can destabilize your development environment, particularly in cases where you switch from a newer (Edge) channel to an older (Stable) channel.
+Docker Desktop では安定版（stable）と最新版（edge）の切り替えができるようになっています。
+ただし **一度にインストールできるのは、どちらか一つの Docker Desktop バージョンです**。
+安定版と最新版の切り替えを行うと、手元の開発環境が不安定になることがあります。
+特により最新に近いバージョンから、古い安定版に切り替えた場合に、起こることがあります。
 
 {% comment %}
 For example, containers created with a newer Edge version of Docker Desktop may
@@ -280,21 +282,24 @@ using Edge features that aren't in Stable yet. Keep this in mind as
 you create and work with Edge containers, perhaps in the spirit of a playground
 space where you are prepared to troubleshoot or start over.
 {% endcomment %}
-For example, containers created with a newer Edge version of Docker Desktop may
-not work after you switch back to Stable because they may have been created
-using Edge features that aren't in Stable yet. Keep this in mind as
-you create and work with Edge containers, perhaps in the spirit of a playground
-space where you are prepared to troubleshoot or start over.
+たとえば Docker Desktop 最新版を使って生成したコンテナーは、古い安定版に切り替えたら、動作しなくなるかもしれません。
+そのコンテナーが最新版の機能を使って生成されていたとすると、それが古い安定版には存在しないことになるからです。
+最新版を使ってコンテナーを生成して実行するときには、このことを十分に理解しておいてください。
+いってみれば遊び感覚で操作するつもりで、なにかあっても自分で解決するか、初めからやり直す覚悟を持っておいてください。
 
 {% comment %}
 Experimental features are turned on by default on Edge releases. However, when you switch from a Stable to an Edge release, you must turn on the experimental features flag to access experimental features. From the Docker Desktop menu, click **Settings** > **Command Line** and then turn on the **Enable experimental features** toggle. Click **Apply & Restart** for the changes to take effect.
 {% endcomment %}
-Experimental features are turned on by default on Edge releases. However, when you switch from a Stable to an Edge release, you must turn on the experimental features flag to access experimental features. From the Docker Desktop menu, click **Settings** > **Command Line** and then turn on the **Enable experimental features** toggle. Click **Apply & Restart** for the changes to take effect.
+最新版では試験的（experimental）機能がデフォルトで有効になっています。
+ただし安定版から最新版への切り替えを行った場合、試験的機能を利用するには設定フラグを有効にしなければなりません。
+Docker Desktop メニューから **Settings** > **Command Line** をクリックして、トグルスイッチ **Enable experimental features** をオンにしてください。**Apply & Restart** をクリックすれば変更が反映されます。
 
 {% comment %}
 To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section _Save and Restore data_ below.
 {% endcomment %}
-To safely switch between Edge and Stable versions, ensure you save images and export the containers you need, then uninstall the current version before installing another. For more information, see the section _Save and Restore data_ below.
+最新版と安定版の間で安全に切り替えを行うためには、必要なイメージの保存、コンテナーのエクスポートを行っておいてください。
+そして切り替えるバージョンをインストールする前に、それまでのバージョンはアンインストールしてください。
+詳しくは、以下の「データの保存と復元」を参照してください。
 
 {% comment %}
 ### Save and restore data
@@ -314,7 +319,7 @@ You can use the following procedure to save and restore images and container dat
     Engine command line reference.
 {% endcomment %}
 1. `docker save -o images.tar image1 [image2 ...]` を実行して、保存しておきたいイメージを保存します。
-    Docker Engine のコマンドラインリファレンスにある [save](/engine/reference/commandline/save) を参照してください。
+    Docker Engine のコマンドラインリファレンスにある [save](../../engine/reference/commandline/save) を参照してください。
 
 {% comment %}
 2. Use `docker export -o myContainner1.tar container1` to export containers you
@@ -322,7 +327,7 @@ You can use the following procedure to save and restore images and container dat
     Docker Engine command line reference.
 {% endcomment %}
 2. `docker export -o myContainner1.tar container1` を実行して、保存しておきたいコンテナーをエクスポートします。
-    Docker Engine のコマンドラインリファレンスにある [export](/engine/reference/commandline/export) を参照してください。
+    Docker Engine のコマンドラインリファレンスにある [export](../../engine/reference/commandline/export) を参照してください。
 
 {% comment %}
 3. Uninstall the current version of Docker Desktop and install a different version (Stable or Edge), or reset your VM disk.
@@ -335,7 +340,7 @@ You can use the following procedure to save and restore images and container dat
     [load](/engine/reference/commandline/load) in the Docker Engine.
 {% endcomment %}
 4. `docker load -i images.tar` を実行して、上で保存したイメージをリロードします。
-   Docker Engine の [load](/engine/reference/commandline/load) を参照してください。
+   Docker Engine の [load](../../engine/reference/commandline/load) を参照してください。
 
 {% comment %}
 5. Use `docker import -i myContainer1.tar` to create a file system image
@@ -343,12 +348,12 @@ You can use the following procedure to save and restore images and container dat
     [import](/engine/reference/commandline/import) in the Docker Engine.
 {% endcomment %}
 5. `docker import -i myContainer1.tar` を実行して、上でエクスポートしたコンテナーに対応するファイルシステムイメージを生成します。
-    Docker Engine の [import](/engine/reference/commandline/import) を参照してください。
+    Docker Engine の [import](../../engine/reference/commandline/import) を参照してください。
 
 {% comment %}
 For information on how to back up and restore data volumes, see [Backup, restore, or migrate data volumes](/storage/volumes/#backup-restore-or-migrate-data-volumes).
 {% endcomment %}
-データボリュームの保存と復元に関しては [データボリュームのバックアップ、復元、移行](/storage/volumes/#backup-restore-or-migrate-data-volumes) を参照してください。
+データボリュームの保存と復元に関しては [データボリュームのバックアップ、復元、移行](../../storage/volumes/#backup-restore-or-migrate-data-volumes) を参照してください。
 
 {% comment %}
 ## Where to go next
@@ -357,7 +362,6 @@ For information on how to back up and restore data volumes, see [Backup, restore
 ## 次に読むものは
 
 {% comment %}
-{% endcomment %}
 * [Getting started](index.md) introduces Docker Desktop for Windows.
 * [Get started with Docker](/get-started/) is a tutorial that teaches you how to
   deploy a multi-service stack.
@@ -365,3 +369,9 @@ For information on how to back up and restore data volumes, see [Backup, restore
   how to get support.
 * [FAQs](faqs.md) provides answers to frequently asked questions.
 * [Stable Release Notes](release-notes.md) or [Edge Release Notes](edge-release-notes.md).
+{% endcomment %}
+* [はじめよう](index.md) では Docker Desktop for Windows を紹介しています。
+* [Docker をはじめよう](../../get-started/) はマルチサービススタックのデプロイ方法を説明するチュートリアルです。
+* [トラブルシューティング](troubleshoot.md) では、一般的な問題、回避策、サポートの受け方などについて説明しています。
+* [FAQ](faqs.md) ではよく尋ねられる質問を示しています。
+* [安定版リリースノード](release-notes.md) または [最新版リリースノート](edge-release-notes.md)。

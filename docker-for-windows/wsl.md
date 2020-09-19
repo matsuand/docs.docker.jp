@@ -169,14 +169,19 @@ Docker Desktop 安定版 2.3.0.2 をインストールする **前に**、上の
 {% comment %}
 The following section describes how to start developing your applications using Docker and WSL 2. We recommend that you have your code in your default Linux distribution for the best development experience using Docker and WSL 2. After you have enabled WSL 2 on Docker Desktop, you can start working with your code inside the Linux distro and ideally with your IDE still in Windows. This workflow can be pretty straightforward if you are using [VSCode](https://code.visualstudio.com/download).
 {% endcomment %}
-The following section describes how to start developing your applications using Docker and WSL 2. We recommend that you have your code in your default Linux distribution for the best development experience using Docker and WSL 2. After you have enabled WSL 2 on Docker Desktop, you can start working with your code inside the Linux distro and ideally with your IDE still in Windows. This workflow can be pretty straightforward if you are using [VSCode](https://code.visualstudio.com/download).
+以下の節では、Docker と WSL 2 を利用したアプリケーション開発方法について説明します。
+Docker と WSL 2 を利用して開発作業を進めていく際には、開発コードをデフォルトの Linux ディストリビューション内に配置して進めていくことが最適です。
+Docker Desktop において WSL 2 を有効にしていれば、その Linux ディストリビューション内のソースコードでありながら、理想的に Windows 上の IDE の中で作業し続けることができます。
+このような作業を進めるには [VSCode](https://code.visualstudio.com/download) を用いるのが最も自然な方法です。
 
 {% comment %}
 1. Open VSCode and install the [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) extension. This extension allows you to work with a remote server in the Linux distro and your IDE client still on Windows.
 2. Now, you can start working in VSCode remotely. To do this, open your terminal and type:
 {% endcomment %}
-1. Open VSCode and install the [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) extension. This extension allows you to work with a remote server in the Linux distro and your IDE client still on Windows.
-2. Now, you can start working in VSCode remotely. To do this, open your terminal and type:
+1. VSCode を開いて [リモート WSL 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) をインストールします。
+   この拡張機能は、Linux ディストリビューション内のリモートサーバーで作業をしつつ IDE クライアントは Windows のままとするものです。
+2. そこで VSCode 内においてリモートに対する作業を開始します。
+   これを行うにはターミナル画面を開いて以下を入力します。
 
     `wsl`
 
@@ -185,16 +190,18 @@ The following section describes how to start developing your applications using 
     {% comment %}
     This opens a new VSCode connected remotely to your default Linux distro which you can check in the bottom corner of the screen.
     {% endcomment %}
-    This opens a new VSCode connected remotely to your default Linux distro which you can check in the bottom corner of the screen.
+    この操作によって、デフォルト Linux ディストリビューションに対してリモート接続された新たな VSCode が開きます。
+    画面下段からこのことが確認できます。
 
     {% comment %}
     Alternatively, you can type the name of your default Linux distro in your Start menu, open it, and then run `code` .
     {% endcomment %}
-    Alternatively, you can type the name of your default Linux distro in your Start menu, open it, and then run `code` .
+    別の方法として、スタートメニューからデフォルト Linux ディストリビューション名を入力してこれを開き、その後に`code`を実行する方法もあります。
 {% comment %}
 3. When you are in VSCode, you can use the terminal in VSCode to pull your code and start working natively from your Windows machine.
 {% endcomment %}
-3. When you are in VSCode, you can use the terminal in VSCode to pull your code and start working natively from your Windows machine.
+3. VSCode 内では VSCode のターミナル画面を使うことができます。
+   これによってソースコードをプルし、Windows マシン内からネイティブ環境のように作業を進めていくことができます。
 
 {% comment %}
 ## Best practices
@@ -218,20 +225,18 @@ The following section describes how to start developing your applications using 
 - If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945).
 - To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must [uninstall any previous versions of Docker Engine](https://docs.docker.com/install/linux/docker-ce/ubuntu/#uninstall-docker-engine---community) and CLI installed directly through Linux distributions before installing Docker Desktop.
 {% endcomment %}
-- To get the best out of the file system performance when bind-mounting files:
-    - Store source code and other data that is bind-mounted into Linux containers
+- バインドマウント利用時のファイルシステム性能を最大化するには、以下を行います。
+    - ソースコードやデータが Linux コンテナーにバインドマウントされている場合（たとえば`docker run -v <host-path>:<container-path>`を実行している場合）は、Linux ファイルシステムに保存し、Windows ファイルシステムには保存しないようにします。
       (i.e., with `docker run -v <host-path>:<container-path>`) in the Linux
       filesystem, rather than the Windows filesystem.
-    - Linux containers only receive file change events ("inotify events") if the
-      original files are stored in the Linux filesystem.
-    - Performance is much higher when files are bind-mounted from the Linux
-      filesystem, rather than remoted from the Windows host. Therefore avoid
-      `docker run -v /mnt/c/users:/users` (where `/mnt/c` is mounted from Windows).
-    - Instead, from a Linux shell use a command like `docker run -v ~/my-project:/sources <my-image>`
-      where `~` is expanded by the Linux shell to `$HOME`.
-- If you have concerns about the size of the docker-desktop-data VHDX, or need to change it, take a look at the [WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size).
-- If you have concerns about CPU or memory usage, you can configure limits on the memory, CPU, Swap size allocated to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945).
-- To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must [uninstall any previous versions of Docker Engine](https://docs.docker.com/install/linux/docker-ce/ubuntu/#uninstall-docker-engine---community) and CLI installed directly through Linux distributions before installing Docker Desktop.
+    - 元のファイルを Linux ファイルシステムに保存しているのであれば、Linux コンテナーはファイル変更のイベント（「inotify」イベント）のみを受けつけるようにしてください。
+    - Windows ホストからリモート接続する場合に比べて、Linux ファイルシステムからバインドマウントされたファイルにアクセスする方が、性能ははるかに向上します。
+      したがって`docker run -v /mnt/c/users:/users`（ここで`/mnt/c`は Windows からのマウント）とすることは避けてください。
+    - 上のかわりに Linux シェルから`docker run -v ~/my-project:/sources <my-image>`のようなコマンドを実行してください。
+      ここで`~`は Linux シェルが`$HOME`に展開することを表わします。
+- Docker Desktop のデータ VHDX の容量が気になったり、変更を必要とする場合は、[WSL tooling built into Windows](https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes#understanding-wsl-2-uses-a-vhd-and-what-to-do-if-you-reach-its-max-size) を確認してください。
+- CPU や メモリの使用量について気にかける必要がある場合は [WSL 2 ユーティリティー VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945) に割り当てられているメモリ、CPU、スワップサイズの制限を設定することができます。
+- Docker Desktop 上での WSL 2 利用において、衝突のリスクを避けるには、[Docker Engine の古いバージョンのアンインストール](../../engine/install/ubuntu/#uninstall-docker-engine) を行い、Docker Desktop のインストール前に Linux ディストリビューションに対して CLI を直接インストールするようにしてください。
 
 {% comment %}
 ## Feedback
@@ -242,4 +247,5 @@ The following section describes how to start developing your applications using 
 {% comment %}
 Your feedback is very important to us. Please let us know your feedback by creating an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues) repository and adding the **WSL 2** label.
 {% endcomment %}
-Your feedback is very important to us. Please let us know your feedback by creating an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues) repository and adding the **WSL 2** label.
+みなさんからのフィードバックは大変重要です。
+フィードバックをいただくには、Github レポジトリ [Docker Desktop for Windows](https://github.com/docker/for-win/issues) に issue をあげて、**WSL 2** というラベルをつけてください。

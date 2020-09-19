@@ -34,7 +34,7 @@ Docker Desktop のダウンロード、システム要件、インストール�
 >**メモ**
 >
 > 本ページでは Docker Desktop 安定版（Stable）についての情報を示します。
-最新版（Edge）において利用可能な機能については [Edge リリースノート](edge-release-notes.md) を参照してください。
+最新版（Edge）において利用可能な機能については [最新版リリースノート](edge-release-notes.md) を参照してください。
 
 {% comment %}
 ## Settings
@@ -46,18 +46,17 @@ Docker Desktop のダウンロード、システム要件、インストール�
 The **Docker Desktop** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
 and more.
 {% endcomment %}
-The **Docker Desktop** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
-and more.
+**Docker Desktop** メニューでは Docker に対する設定として、インストール設定、アップデート、バージョンチャネル設定、Docker Hub ログインなどを行うことができます。
 
 {% comment %}
 This section explains the configuration options accessible from the **Settings** dialog.
 {% endcomment %}
-This section explains the configuration options accessible from the **Settings** dialog.
+本節では、**Settings** ダイアログからアクセスできる設定について説明します。
 
 {% comment %}
 1. Open the Docker Desktop menu by clicking the Docker icon in the Notifications area (or System tray):
 {% endcomment %}
-1. Open the Docker Desktop menu by clicking the Docker icon in the Notifications area (or System tray):
+1. 通知領域（またはシステムトレイ）にある Docker アイコンをクリックし、Docker Desktop メニューを開きます。
 
     {% comment %}
     ![Showing hidden apps in the taskbar](images/whale-icon-systray-hidden.png){:width="250px"}
@@ -67,7 +66,7 @@ This section explains the configuration options accessible from the **Settings**
 {% comment %}
 2. Select **Settings** to open the Settings dialog:
 {% endcomment %}
-2. Select **Settings** to open the Settings dialog:
+2. **Settings** を実行して Settings ダイアログを開きます。
 
     {% comment %}
     ![Docker Desktop popup menu](images/docker-menu-settings.png){:width="300px"}
@@ -85,7 +84,10 @@ On the **General** tab of the Settings dialog, you can configure when to start a
 {% endcomment %}
 Settings ダイアログの **General** タブにおいて、Docker の起動や更新をいつ行うのかを設定します。
 
+{% comment %}
 ![Settings](images/settings-general.png){:width="750px"}
+{% endcomment %}
+![Settings ダイアログ](images/settings-general.png){:width="750px"}
 
 {% comment %}
 * **Start Docker when you log in** - Automatically start Docker Desktop upon Windows system login.
@@ -106,21 +108,24 @@ main Docker menu.
 {% comment %}
 * **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
 {% endcomment %}
-* **Expose daemon on tcp://localhost:2375 without TLS** - Click this option to enable legacy clients to connect to the Docker daemon. You must use this option with caution as exposing the daemon without TLS can result in remote code execution attacks.
+* **Expose daemon on tcp://localhost:2375 without TLS**（TLS なしにデーモンを tcp://localhost:2375 で公開） - このオプションをクリックすることで、古いクライアントが Docker デーモンに接続できるようにします。
+   このオプションに利用には十分注意しなければなりません。
+   TLS を用いずにデーモンを公開するということは、リモートコードの実行攻撃を受ける可能性があります。
 
 {% comment %}
 * **Send usage statistics** - By default, Docker Desktop sends diagnostics,
 crash reports, and usage data. This information helps Docker improve and
 troubleshoot the application. Clear the check box to opt out. Docker may periodically prompt you for more information.
 {% endcomment %}
-* **Send usage statistics** - By default, Docker Desktop sends diagnostics,
-crash reports, and usage data. This information helps Docker improve and
-troubleshoot the application. Clear the check box to opt out. Docker may periodically prompt you for more information.
+* **Send usage statistics**（利用統計の送信） - Docker Desktop では診断情報、クラッシュレポート、利用データを、デフォルトで送信するようになっています。
+こういった情報は Docker の改善や、アプリケーションにおける問題解決に役立てることができます。
+チェックボックスをオフにすれば、情報を送信しないようにすることができます。
+Docker では定期的に情報確認を行うことがあります。
 
   {% comment %}
   Click **Switch to the Edge version** to learn more about Docker Desktop Edge releases.
   {% endcomment %}
-  Click **Switch to the Edge version** to learn more about Docker Desktop Edge releases.
+  **Switch to the Edge version**（最新版への切り替え）をクリックすれば、Docker Desktop 最新版（Edge）について確認することができます。
 
 {% comment %}
 ### Resources
@@ -158,10 +163,9 @@ mode, Linux containers in Hyper-V mode, or Windows containers.
 {% endcomment %}
 > **メモ**
 >
-> The Advanced tab is only available in Hyper-V mode, because in WSL 2 mode and
-> Windows container mode these resources are managed by Windows. In WSL 2
-> mode, you can configure limits on the memory, CPU, and swap size allocated
-> to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945).
+> Advanced タブは Hyper-V モードにおいてのみ利用可能です。
+> WSL 2 モードや Windows コンテナーモードでは、ここで扱うリソースは Windows において管理されます。
+> WSL 2 モードでは、[WSL 2 ユーティリティー VM](https://docs.microsoft.com/en-us/windows/wsl/release-notes#build-18945) に割り当てられているメモリ、CPU、スワップサイズの制限を設定することができます。
 
 {% comment %}
 Use the **Advanced** tab to limit resources available to Docker.
@@ -181,7 +185,7 @@ higher number; to decrease, lower the number.
 **Memory**: By default, Docker Desktop is set to use `2` GB runtime memory,
 allocated from the total available memory on your machine. To increase the RAM, set this to a higher number. To decrease it, lower the number.
 {% endcomment %}
-**メモリ**  デフォルトにおいて Docker Desktop は、実行時メモリとして `2` GB を利用するものとして設定されています。
+**メモリ**  デフォルトにおいて Docker Desktop は、実行時メモリとして`2`GB を利用するものとして設定されています。
 この値はマシン上において利用可能な全メモリ容量の中から割り当てられます。
 RAM 容量を増やすには、この設定値を大きくします。
 逆に減らすには、この設定値を小さくします。
@@ -222,8 +226,8 @@ You can also move the disk image to a different location. If you attempt to move
 {% endcomment %}
 > **メモ**
 >
-> The File sharing tab is only available in Hyper-V mode, because in WSL 2 mode
-> and Windows container mode all files are automatically shared by Windows.
+> Advanced タブは Hyper-V モードにおいてのみ利用可能です。
+> WSL 2 モードや Windows コンテナーモードでは、ファイルはすべて Windows において自動的に共有されます。
 
 {% comment %}
 Use File sharing to allow local directories on Windows to be shared with Linux containers.
@@ -234,13 +238,14 @@ Note that configuring file sharing is not necessary for Windows containers, only
 {% endcomment %}
 File sharing（ファイル共有）を利用すると、Windows 内のローカルディレクトリを Linux コンテナー間で共有できるようになります。
 たとえばホストにある IDE 環境上でソースコードを編集し、コードの実行やテストはコンテナー内で行うような場合に、大変便利なものです。
-Note that configuring file sharing is not necessary for Windows containers, only [Linux containers](#switch-between-windows-and-linux-containers).
- If a directory is not shared with a Linux container you may get `file not found` or `cannot start service` errors at runtime. See [Volume mounting requires shared folders for Linux containers](troubleshoot.md#volume-mounting-requires-shared-folders-for-linux-containers).
+ちなみにファイル共有の設定は Windows コンテナーでは不要であり、[Linux コンテナー](#switch-between-windows-and-linux-containers) だけに必要となるものです。
+あるディレクトリが Linux コンテナーに共有されるものでないならば、実行時に `file not found` か `cannot start service` というエラーが発生するかもしれません。
+[ボリュームマウントには Linux コンテナーの共有フォルダーが必要](troubleshoot.md#volume-mounting-requires-shared-folders-for-linux-containers) を参照してください。
 
 {% comment %}
 File share settings are:
 {% endcomment %}
-File share の設定には以下のものがあります。
+ファイル共有の設定には以下のものがあります。
 
 {% comment %}
 - **Add a Directory**: Click `+` and navigate to the directory you want to add.
@@ -266,48 +271,55 @@ File share の設定には以下のものがあります。
 >
  * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive. On Linux it is possible to create 2 separate files: `test` and `Test`, while on Windows these filenames would actually refer to the same underlying file. This can lead to problems where an app works correctly on a developer Windows machine (where the file contents are shared) but fails when run in Linux in production (where the file contents are distinct). To avoid this, Docker Desktop insists that all shared files are accessed as their original case. Therefore if a file is created called `test`, it must be opened as `test`. Attempts to open `Test` will fail with "No such file or directory". Similarly once a file called `test` is created, attempts to create a second file called `Test` will fail.
 {% endcomment %}
-> Tips on shared folders, permissions, and volume mounts
+> 共有フォルダー、パーミッション、ボリュームマウントに関するヒント
 >
- * Shared folders are designed to allow application code to be edited on the host while being executed in containers. For non-code items
- such as cache directories or databases, the performance will be much better if they are stored in
- the Linux VM, using a [data volume](../storage/volumes.md)
- (named volume) or [data container](../storage/volumes.md).
+ * 共有フォルダーは、ホスト上においてアプリケーションコードを編集できるようにしつつ、その実行はコンテナー上で行うという目的で用いられます。
+   コード以外のものとしてキャッシュディレクトリ、データベースなどにおいては、[データボリューム](../storage/volumes.md)（名前つきボリューム）や [データコンテナー](../storage/volumes.md) を利用して Linux VM 上に保存しておけば、性能は格段によくなります。
 >
- * Docker Desktop sets permissions to read/write/execute for users, groups and others [0777 or a+rwx](http://permissions-calculator.org/decode/0777/).
-   This is not configurable. See [Permissions errors on data directories for shared volumes](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes).
+ * Docker Desktop では所有ユーザー、グループ、その他ユーザーに対して、読み書き実行のパーミッションを [0777 つまり a+rwx](http://permissions-calculator.org/decode/0777/) に設定します。
+   これを設定変更することはできません。
+   [共有ボリュームにおけるデータディレクトリでパーミッションエラー](troubleshoot.md#permissions-errors-on-data-directories-for-shared-volumes) を参照してください。
 >
- * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive. On Linux it is possible to create 2 separate files: `test` and `Test`, while on Windows these filenames would actually refer to the same underlying file. This can lead to problems where an app works correctly on a developer Windows machine (where the file contents are shared) but fails when run in Linux in production (where the file contents are distinct). To avoid this, Docker Desktop insists that all shared files are accessed as their original case. Therefore if a file is created called `test`, it must be opened as `test`. Attempts to open `Test` will fail with "No such file or directory". Similarly once a file called `test` is created, attempts to create a second file called `Test` will fail.
+ * Windows では、アプリケーションが参照するファイルシステムは英字の大文字小文字を区別しません。
+   一方で Linux は大文字小文字を区別します。
+   Linux 上においては `test` と `Test` というファイルは別々のものとして生成可能ですが、Windows ではこの 2 つは同一のファイルを参照します。
+   このことが問題になる場合があります。
+   Windows の開発マシン上では（2 つのファイル内容が共有されているとして）、アプリケーションが正しく動作するにも関わらず、Linux の本番環境（2 つのファイルを別々に取り扱う）が実行に失敗してしまうケースです。
+   こういったことを避けるためには、Docker Desktop が共有ファイルにアクセスする際に、大文字小文字をそのまま扱うようにします。
+   たとえば`test`というファイルが生成されたなら、`test`という名前で開かなければならないものとします。
+   そして`Test`という名前で開こうとしたら「No such file or directory」とエラーにします。
+   同様に`test`が生成されている状態で、2 つめのファイル`Test`を作ろうとしてもエラーにします。
 
 {% comment %}
 #### Shared folders on demand
 {% endcomment %}
-#### Shared folders on demand
+{: #shared-folders-on-demand }
+#### オンデマンドによるフォルダー共有
 
 {% comment %}
 You can share a folder "on demand" the first time a particular folder is used by a container.
 {% endcomment %}
-You can share a folder "on demand" the first time a particular folder is used by a container.
+コンテナーが特定のフォルダーを利用するときになって初めて、そのフォルダーを「オンデマンド」で共有するようにできます。
 
 {% comment %}
 If you run a Docker command from a shell with a volume mount (as shown in the
 example below) or kick off a Compose file that includes volume mounts, you get a
 popup asking if you want to share the specified folder.
 {% endcomment %}
-If you run a Docker command from a shell with a volume mount (as shown in the
-example below) or kick off a Compose file that includes volume mounts, you get a
-popup asking if you want to share the specified folder.
+ボリュームマウントがある状態（以下に示す例）でシェルから Docker コマンドを実行するか、ボリュームマウントを持った Compose ファイルを実行したとします。
+その場合、指定されたフォルダーを共有するかどうかを尋ねるポップアップ画面が開きます。
 
 {% comment %}
 You can select to **Share it**, in which case it is added your Docker Desktop Shared Folders list and available to
 containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 {% endcomment %}
-You can select to **Share it**, in which case it is added your Docker Desktop Shared Folders list and available to
-containers. Alternatively, you can opt not to share it by selecting **Cancel**.
+**Share it**（共有する）を選択すると、Docker Desktop の共有フォルダーリストに追加されて、コンテナーから利用可能になります。
+逆に **Cancel** を選択すれば、共有しないようにもできます。
 
 {% comment %}
 ![Shared folder on demand](images/shared-folder-on-demand.png){:width="600px"}
 {% endcomment %}
-![Shared folder on demand](images/shared-folder-on-demand.png){:width="600px"}
+![オンデマンドによるフォルダー共有](images/shared-folder-on-demand.png){:width="600px"}
 
 {% comment %}
 #### Proxies
@@ -320,16 +332,15 @@ Docker Desktop lets you configure HTTP/HTTPS Proxy Settings and
 automatically propagates these to Docker. For example, if you set your proxy
 settings to `http://proxy.example.com`, Docker uses this proxy when pulling containers.
 {% endcomment %}
-Docker Desktop lets you configure HTTP/HTTPS Proxy Settings and
-automatically propagates these to Docker. For example, if you set your proxy
-settings to `http://proxy.example.com`, Docker uses this proxy when pulling containers.
+Docker Desktop では HTTP/HTTPS プロキシーの設定が可能であり、これを自動的に Docker に対して伝えます。
+たとえばプロキシー設定として`http://proxy.example.com`を行った場合、Docker はコンテナーのプル処理においてこのプロキシーを利用します。
 
 {% comment %}
 Your proxy settings, however, will not be propagated into the containers you start.
 If you wish to set the proxy settings for your containers, you need to define
 environment variables for them, just like you would do on Linux, for example:
 {% endcomment %}
-しかしそのプロキシー設定は、起動したコンテナーには伝えられません。
+しかしそのプロキシー設定は、これから起動するコンテナーには伝えられません。
 コンテナーに対してプロキシー設定を行いたい場合は、Linux 上において行うのと同じように、環境変数を使って定義することが必要です。
 たとえば以下のとおりです。
 
@@ -375,7 +386,7 @@ Docker Desktop のネットワーク設定により、仮想プライベート�
 {% comment %}
 **DNS Server**: You can configure the DNS server to use dynamic or static IP addressing.
 {% endcomment %}
-**DNS Server**: You can configure the DNS server to use dynamic or static IP addressing.
+**DNS Server**: DNS サーバーに対して、動的および静的な IP アドレスの設定が可能です。
 
 {% comment %}
 > **Note**
@@ -387,55 +398,51 @@ encounter this, reset the DNS server to use the Google DNS fixed address:
 `8.8.8.8`. For more information, see
 [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
 {% endcomment %}
-> **Note**
+> **メモ**
 >
-> Some users reported problems connecting to Docker Hub on Docker Desktop Stable version. This would manifest as an error when trying to run
-`docker` commands that pull images from Docker Hub that are not already
-downloaded, such as a first time run of `docker run hello-world`. If you
-encounter this, reset the DNS server to use the Google DNS fixed address:
-`8.8.8.8`. For more information, see
-[Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+> Docker Desktop 安定版を使って Docker Hub に接続する際に、問題が発生するとの報告があります。
+> これは `docker` コマンドの実行時に発生するものです。
+> Docker Hub からイメージをプルする際に、それまでダウンロードしていないイメージであったとき、たとえば `docker run hello-world` を初めて実行したような場合に発生します。
+> この症状が発生した場合は、DNS サーバーをリセットして Google DNS 固定アドレス `8.8.8.8` を設定してみてください。
+> 詳しくはトラブルシューティングの [ネットワークの問題](troubleshoot.md#networking-issues) を参照してください。
 
 {% comment %}
 Updating these settings requires a reconfiguration and reboot of the Linux VM.
 {% endcomment %}
-Updating these settings requires a reconfiguration and reboot of the Linux VM.
+ここでの設定を変更したら、Linux VM の再設定と再起動が必要になります。
 
 {% comment %}
 #### WSL Integration
 {% endcomment %}
 {: #wsl-integration }
-#### WSL との統合
+#### WSL 統合環境
 
 {% comment %}
 In WSL 2 mode, you can configure which WSL 2 distributions will have the Docker
 WSL integration.
 {% endcomment %}
-In WSL 2 mode, you can configure which WSL 2 distributions will have the Docker
-WSL integration.
+WSL 2 モードにおいては、WSL 2 ディストリビューションが Docker WSL 統合環境を持つように設定することができます。
 
 {% comment %}
 By default, the integration will be enabled on your default WSL distribution.
 To change your default WSL distro, run `wsl --set-default <distro name>`. (For example,
 to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
 {% endcomment %}
-By default, the integration will be enabled on your default WSL distribution.
-To change your default WSL distro, run `wsl --set-default <distro name>`. (For example,
-to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
+デフォルトの WSL ディストリビューション上では、WSL 統合環境がデフォルトで有効になります。
+デフォルトの WSL ディストリビューションを変更するには`wsl --set-default <ディストリビューション名>`を実行します。
+（たとえばデフォルトとして Ubuntu を設定する場合は`wsl --set-default ubuntu`を実行します。）
 
 {% comment %}
 You can also select any additional distributions you would like to enable the WSL 2
 integration on.
 {% endcomment %}
-You can also select any additional distributions you would like to enable the WSL 2
-integration on.
+他に WSL 2 統合環境を有効にしたいディストリビューションがあれば、追加で設定することもできます。
 
 {% comment %}
 For more details on configuring Docker Desktop to use WSL 2, see
 [Docker Desktop WSL 2 backend](wsl.md).
 {% endcomment %}
-For more details on configuring Docker Desktop to use WSL 2, see
-[Docker Desktop WSL 2 backend](wsl.md).
+Docker Desktop において WSL 2 を利用するための設定については [Docker Desktop WSL 2 バックエンド](wsl.md) を参照してください。
 
 {% comment %}
 ### Docker Engine
@@ -478,21 +485,29 @@ Docker Desktop の最新版（Edge）と安定版（Stable）の両方におい�
 試験的機能を無効にした場合、Docker Desktop は、Docker Engine の安定版を利用することになります。
 
 {% comment %}
+#### Experimental features
 {% endcomment %}
+{: #experimental-features }
 #### Experimental features
 
 {% comment %}
-{% endcomment %}
 Docker Desktop Edge releases have the experimental version
 of Docker Engine enabled by default, described in the [Docker Experimental Features README](https://github.com/docker/cli/blob/master/experimental/README.md) on GitHub.
+{% endcomment %}
+Docker Desktop 最新版（Edge）には、デフォルトで Docker Engine の試験的（experimental）バージョンが含まれています。
+詳しくは GitHub 上の [Docker 試験的機能 README](https://github.com/docker/cli/blob/master/experimental/README.md) に示しています。
 
 {% include experimental.md %}
 
 {% comment %}
-{% endcomment %}
 Run `docker version` to verify whether you have enabled experimental features. Experimental mode
 is listed under `Server` data. If `Experimental` is `true`, then Docker is
 running in experimental mode, as shown here:
+{% endcomment %}
+`docker version`を実行すると、試験的機能が有効であるかどうかを確認することができます。
+試験的モードは`Server`項目の中に示されています。
+`Experimental`が`true`であれば、Docker は試験的モードで起動しています。
+たとえば以下のように表示されます。
 
 ```shell
 > docker version
@@ -557,8 +572,8 @@ to the local Kubernetes server. If you have `kubectl` already installed and
 pointing to some other environment, such as `minikube` or a GKE cluster, be sure
 to change context so that `kubectl` is pointing to `docker-desktop`:
 {% endcomment %}
-Kubernetes のクライアントコマンドである `kubectl` が提供されていて、ローカルの Kubernetes サーバーへの接続するように設定されています。
-`kubectl` をすでにインストールしていて、`minikube` や GKE クラスターといった別の環境に向いている場合は、その内容を変更して、`kubectl` が `docker-desktop` を向くようにしてください。
+Kubernetes のクライアントコマンドである`kubectl`が提供されていて、ローカルの Kubernetes サーバーへの接続するように設定されています。
+`kubectl`をすでにインストールしていて、`minikube`や GKE クラスターといった別の環境に向いている場合は、その内容を変更して、`kubectl`が`docker-desktop`を向くようにしてください。
 
 ```bash
 > kubectl config get-contexts
@@ -575,8 +590,7 @@ Kubernetes のクライアントコマンドである `kubectl` が提供され�
 To set Kubernetes as the
   [default orchestrator](/docker-for-windows/kubernetes/#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
 {% endcomment %}
-To set Kubernetes as the
-  [default orchestrator](/docker-for-windows/kubernetes/#override-the-default-orchestrator), select **Deploy Docker Stacks to Kubernetes by default**.
+Kubernetes を [デフォルトオーケストレーター](kubernetes/#override-the-default-orchestrator) に設定するには、**Deploy Docker Stacks to Kubernetes by default**（Docker スタックをデフォルトで Kubernetes にデプロイ） を実行します。
 
 {% comment %}
 By default, Kubernetes containers are hidden from commands like `docker
@@ -585,13 +599,14 @@ visible, select **Show system containers (advanced)**. Most users do not need th
 {% endcomment %}
 デフォルトで Kubernetes コンテナーは `docker service ls` などのコマンドには現れません。
 手動で管理することがサポートされていないためです。
-コマンド上に表示させるためには、**Show system containers (advanced)** を選択します。
+コマンド上に表示させるためには、**Show system containers (advanced)** を実行します。
 ただしたいていのユーザーにとって、このオプションは不要です。
 
 {% comment %}
 Click **Apply & Restart** to save the settings. This instantiates images required to run the Kubernetes server as containers, and installs the `kubectl.exe` command in the path.
 {% endcomment %}
-Click **Apply & Restart** to save the settings. This instantiates images required to run the Kubernetes server as containers, and installs the `kubectl.exe` command in the path.
+**Apply & Restart** をクリックして設定を保存します。
+これによって Kubernetes サーバーをコンテナーとして実行するために必要となるイメージが初期化され、コマンド`kubectl.exe`が実行パスにインストールされます。
 
 {% comment %}
 - When Kubernetes is enabled and running, an additional status bar item displays
@@ -613,14 +628,13 @@ at the bottom right of the Docker Desktop Settings dialog. The status of Kuberne
 {% comment %}
 - To delete all stacks and Kubernetes resources, select **Reset Kubernetes Cluster**.
 {% endcomment %}
-- To delete all stacks and Kubernetes resources, select **Reset Kubernetes Cluster**.
+- インストールされたスタックや Kubernetes リソースを削除するには、**Reset Kubernetes Cluster**（Kubernetes クラスターのリセット） を実行します。
 
 {% comment %}
 - If you installed `kubectl` by another method, and
 experience conflicts, remove it.
 {% endcomment %}
-- If you installed `kubectl` by another method, and
-experience conflicts, remove it.
+- `kubectl` を別の方法でインストールしていて何か支障が発生したら、これを削除してください。
 
   {% comment %}
   For more information on using the Kubernetes integration with Docker Desktop, see [Deploy on Kubernetes](kubernetes.md).
@@ -636,7 +650,7 @@ experience conflicts, remove it.
 The **Restart Docker Desktop** and **Reset to factory defaults** options are now available on the **Troubleshoot** menu. For information, see [Logs and Troubleshooting](troubleshoot.md).
 {% endcomment %}
 **Restart Docker Desktop**、**Reset to factory defaults**、その他のリセットオプションは、**Troubleshoot** メニューにあります。
-詳細は [ログ機能とトラブルシューティング](troubleshoot.md) を参照してください。
+詳細は [ログとトラブルシューティング](troubleshoot.md) を参照してください。
 
 {% comment %}
 ### Troubleshoot
@@ -647,27 +661,28 @@ The **Restart Docker Desktop** and **Reset to factory defaults** options are now
 {% comment %}
 Visit our [Logs and Troubleshooting](troubleshoot.md) guide for more details.
 {% endcomment %}
-Visit our [Logs and Troubleshooting](troubleshoot.md) guide for more details.
+詳しくは [ログとトラブルシューティング](troubleshoot.md) を参照してください。
 
 {% comment %}
 Log on to our [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
 {% endcomment %}
-Log on to our [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows) to get help from the community, review current user topics, or join a discussion.
+[Docker Desktop for Windows フォーラム](https://forums.docker.com/c/docker-for-windows) にログインすれば、コミュニティからのヘルプ、現状ユーザーのトピック参照、議論への参加を行うことができます。
 
 {% comment %}
 Log on to [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues) to report bugs or problems and review community reported issues.
 {% endcomment %}
-Log on to [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues) to report bugs or problems and review community reported issues.
+[GitHub 上の Docker Desktop for Windows の issue](https://github.com/docker/for-win/issues) へログインして、バグや問題の報告を行ったり、コミュニティによる報告を確認したりしてください。
 
 {% comment %}
 For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
 {% endcomment %}
-For information about providing feedback on the documentation or update it yourself, see [Contribute to documentation](/opensource/).
+ドキュメントへのフィードバックや更新方法については [ドキュメントへの貢献](/opensource/) を参照してください。
 
 {% comment %}
 ## Switch between Windows and Linux containers
 {% endcomment %}
-## Switch between Windows and Linux containers
+{: #switch-between-windows-and-linux-containers }
+## Windows と Linux の各コンテナー間の切り替え
 
 {% comment %}
 From the Docker Desktop menu, you can toggle which daemon (Linux or Windows)
@@ -675,27 +690,25 @@ the Docker CLI talks to. Select **Switch to Windows containers** to use Windows
 containers, or select **Switch to Linux containers** to use Linux containers
 (the default).
 {% endcomment %}
-From the Docker Desktop menu, you can toggle which daemon (Linux or Windows)
-the Docker CLI talks to. Select **Switch to Windows containers** to use Windows
-containers, or select **Switch to Linux containers** to use Linux containers
-(the default).
+Docker Desktop メニューにおいて、Docker CLI が通信するデーモンをどれにするか（Linux か Windows か）を切り替えるメニューがあります。
+**Switch to Windows containers**（Windows コンテナーへの切り替え）を実行すれば Windows コンテナーを利用します。
+あるいは **Switch to Linux containers**（Linux コンテナーへの切り替え）を実行すれば Linux コンテナーを利用します（デフォルト）。
 
 {% comment %}
 For more information on Windows containers, refer to the following documentation:
 {% endcomment %}
-For more information on Windows containers, refer to the following documentation:
+Windows コンテナーについての詳細は、以下のドキュメントを参照してください。
 
 {% comment %}
 - Microsoft documentation on [Windows containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index).
 {% endcomment %}
-- Microsoft documentation on [Windows containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index).
+- Microsoft の [Windows コンテナー](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index) に関するドキュメント。
 
 {% comment %}
 - [Build and Run Your First Windows Server Container (Blog Post)](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/)
   gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
 {% endcomment %}
-- [Build and Run Your First Windows Server Container (Blog Post)](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/)
-  gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
+- [はじめての Windows Server コンテナーのビルドと実行（ブログ投稿）](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/) は、Windows 10 および Windows Server 2016 評価版を使って、ネイティブな Docker Windows コンテナーのビルドと実行方法についてのクイックツアーを提供しています。
 
 {% comment %}
 - [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
@@ -703,17 +716,15 @@ For more information on Windows containers, refer to the following documentation
   application with Windows containers. The MusicStore is a standard .NET application and,
   [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 {% endcomment %}
-- [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
-  shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md)
-  application with Windows containers. The MusicStore is a standard .NET application and,
-  [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
+- [Windows コンテナーをはじめよう（ラボ）](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md) では、Windows コンテナー上での [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md) アプリケーションの利用方法を示しています。
+  MusicStore は標準 .NET アプリケーションであり、[コンテナー利用のためにこちらでフォークされています](https://github.com/friism/MusicStore)。
+  これはマルチコンテナーアプリケーションの例として最適です。
 
 {% comment %}
 - To understand how to connect to Windows containers from the local host, see
   [Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)
 {% endcomment %}
-- To understand how to connect to Windows containers from the local host, see
-  [Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)
+- ローカルホストから Windows コンテナーへの接続方法を理解するには、[`localhost` や公開ポートに対する Windows コンテナーの制約](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports) を参照してください。
 
 {% comment %}
 > Settings dialog changes with Windows containers
@@ -721,9 +732,9 @@ For more information on Windows containers, refer to the following documentation
 > When you switch to Windows containers, the Settings dialog only shows those tabs that are active and apply to your Windows containers:
 >
 {% endcomment %}
-> Settings dialog changes with Windows containers
+> Windows コンテナーへの切り替えによる Settings ダイアログの変更
 >
-> When you switch to Windows containers, the Settings dialog only shows those tabs that are active and apply to your Windows containers:
+> Windows コンテナーに切り替えると、Settings ダイアログでは以下のタブだけが操作可能であり、Windows コンテナーへの設定を行うことができます。
 >
 
   {% comment %}
@@ -744,38 +755,43 @@ proxies and daemon configurations return to what you had set for Linux
 containers. Your Windows container settings are retained and become available
 again when you switch back.
 {% endcomment %}
-If you set proxies or daemon configuration in Windows containers mode, these
-apply only on Windows containers. If you switch back to Linux containers,
-proxies and daemon configurations return to what you had set for Linux
-containers. Your Windows container settings are retained and become available
-again when you switch back.
+Windows コンテナーモードにおいてプロキシーやデーモン設定を行った場合、その設定は Windows コンテナーに対してのみ適用されます。
+Linux コンテナーに戻した場合、プロキシーやデーモンの設定は、元々 Linux コンテナーに対して行っていた設定に戻ります。
+この際の Windows コンテナー設定は保持されるので、元に戻すと再度利用できるようになります。
 
 {% comment %}
 ## Dashboard
 {% endcomment %}
 {: #dashboard }
-## Dashboard
+## ダッシュボード
 
 {% comment %}
-{% endcomment %}
 The Docker Desktop Dashboard enables you to interact with containers and applications and manage the lifecycle of your applications directly from your machine. The Dashboard UI shows all running, stopped, and started containers with their state. It provides an intuitive interface to perform common actions to inspect and manage containers and Docker Compose applications. For more information, see [Docker Desktop Dashboard](../desktop/dashboard.md).
-
-{% comment %}
 {% endcomment %}
+Docker Desktop ダッシュボードは、コンテナーやアプリケーションを対話的に操作できるようにするものであり、アプリケーションのライフサイクルを手元のマシンから直接管理できます。
+ダッシュボードの UI 画面からは、すべてのコンテナーが実行中、停止中、起動中といったステータスとともに表示されます。
+直感的なインターフェースを通じて、コンテナーや Docker Compose ベースのアプリケーションといった Docker オブジェクトを、確認し管理することができます。
+[Docker Desktop ダッシュボード](../desktop/dashboard.md) を参照してください。
+
 ## Docker Hub
 
 {% comment %}
-{% endcomment %}
 Select **Sign in /Create Docker ID** from the Docker Desktop menu to access your [Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } account. Once logged in, you can access your Docker Hub repositories directly from the Docker Desktop menu.
+{% endcomment %}
+Docker Desktop メニューから **Sign in /Create Docker ID** を実行すると、[Docker Hub](https://hub.docker.com/){: target="_blank" class="_" } アカウントにアクセスすることができます。
+ログインを行っておけば、Docker Desktop メニューから Docker Hub リポジトリに直接アクセスできます。
 
 {% comment %}
-{% endcomment %}
 For more information, refer to the following [Docker Hub topics](../docker-hub/index.md){: target="_blank" class="_" }:
+{% endcomment %}
+詳しくは、以下に示す [Docker Hub トピック](../docker-hub/index.md){: target="_blank" class="_" } を参照してください。
 
 {% comment %}
-{% endcomment %}
 * [Organizations and Teams in Docker Hub](../docker-hub/orgs.md){: target="_blank" class="_" }
 * [Builds and Images](../docker-hub/builds/index.md){: target="_blank" class="_" }
+{% endcomment %}
+* [Docker Hub における組織とチーム](../docker-hub/orgs.md){: target="_blank" class="_" }
+* [ビルドとイメージ](../docker-hub/builds/index.md){: target="_blank" class="_" }
 
 {% comment %}
 ### Two-factor authentication
@@ -838,70 +854,65 @@ certificates, and **client certificates**, to authenticate to registries. For mo
 and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates)
 in the FAQs.
 {% endcomment %}
-You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server
-certificates, and **client certificates**, to authenticate to registries. For more information, see [How do I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates)
-and [How do I add client certificates?](faqs.md#how-do-i-add-client-certificates)
-in the FAQs.
+Docker デーモンに対して、信頼された **認証局（Certificate Authorities; CA）** を追加することができます。
+これを用いてレジストリーサーバーの証明書と **クライアント証明書** を検証し、レジストリに対して認証します。
+詳しくは FAQ にある [どうやって独自の CA 証明書を追加するか](faqs.md#how-do-i-add-custom-ca-certificates) や [どうやってクライアント証明書を追加するか](faqs.md#how-do-i-add-client-certificates) を参照してください。
 
 {% comment %}
 ### How do I add custom CA certificates?
 {% endcomment %}
-### How do I add custom CA certificates?
+{: #how-do-i-add-custom-ca-certificates }
+### どうやって独自の CA 証明書を追加するか
 
 {% comment %}
 Docker Desktop supports all trusted Certificate Authorities (CAs) (root or
 intermediate). Docker recognizes certs stored under Trust Root
 Certification Authorities or Intermediate Certification Authorities.
 {% endcomment %}
-Docker Desktop supports all trusted Certificate Authorities (CAs) (root or
-intermediate). Docker recognizes certs stored under Trust Root
-Certification Authorities or Intermediate Certification Authorities.
+Docker Desktop では、信頼された認証局（Certificate Authorities; CA）をすべてサポートしています（ルート認証局および中間認証局）。
+Docker は、信頼されたルート証明機関や中間証明機関のもとに保存された証明書を識別します。
 
 {% comment %}
 Docker Desktop creates a certificate bundle of all user-trusted CAs based on
 the Windows certificate store, and appends it to Moby trusted certificates. Therefore, if an enterprise SSL certificate is trusted by the user on the host, it is trusted by Docker Desktop.
 {% endcomment %}
-Docker Desktop creates a certificate bundle of all user-trusted CAs based on
-the Windows certificate store, and appends it to Moby trusted certificates. Therefore, if an enterprise SSL certificate is trusted by the user on the host, it is trusted by Docker Desktop.
+Docker Desktop は Windows の証明書ストアに基づいて、ユーザーが信頼できる CA すべてを含めた CA バンドルを生成します。
+そしてこれを Moby による信頼された証明書に加えます。
+したがってホスト上において企業認証 SSL 証明書（enterprise SSL certificate）がユーザーによって信頼されていれば、Docker Desktop から信頼されているということです。
 
 {% comment %}
 To learn more about how to install a CA root certificate for the registry, see
 [Verify repository client with certificates](../engine/security/certificates.md)
 in the Docker Engine topics.
 {% endcomment %}
-To learn more about how to install a CA root certificate for the registry, see
-[Verify repository client with certificates](../engine/security/certificates.md)
-in the Docker Engine topics.
+レジストリに対して CA ルート証明書をインストールする方法については、Docker Engine のトピックにある [証明書を使ったリポジトリクライアントの確認](../engine/security/certificates.md) を参照してください。
 
 {% comment %}
 ### How do I add client certificates?
 {% endcomment %}
-### How do I add client certificates?
+{: #how-do-i-add-client-certificates }
+### どうやってクライアント証明書を追加するか
 
 {% comment %}
 You can add your client certificates
 in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
 `~/.docker/certs.d/<MyRegistry>:<Port>/client.key`. You do not need to push your certificates with `git` commands.
 {% endcomment %}
-You can add your client certificates
-in `~/.docker/certs.d/<MyRegistry>:<Port>/client.cert` and
-`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`. You do not need to push your certificates with `git` commands.
+クライアント証明書は`~/.docker/certs.d/<MyRegistry>:<Port>/client.cert`と`~/.docker/certs.d/<MyRegistry>:<Port>/client.key`に追加することができます。
+証明書を`git`コマンドを使ってプッシュする必要はありません。
 
 {% comment %}
 When the Docker Desktop application starts, it copies the
 `~/.docker/certs.d` folder on your Windows system to the `/etc/docker/certs.d`
 directory on Moby (the Docker Desktop virtual machine running on Hyper-V).
 {% endcomment %}
-When the Docker Desktop application starts, it copies the
-`~/.docker/certs.d` folder on your Windows system to the `/etc/docker/certs.d`
-directory on Moby (the Docker Desktop virtual machine running on Hyper-V).
+Docker Desktop アプリケーションが起動する際には、Windows システム内の`~/.docker/certs.d`フォルダーを、Moby （Hyper-V において稼動する Docker Desktop 仮想マシン）上の`/etc/docker/certs.d`ディレクトリにコピーします。
 
 {% comment %}
 You need to restart Docker Desktop after making any changes to the keychain
 or to the `~/.docker/certs.d` directory in order for the changes to take effect.
 {% endcomment %}
-You need to restart Docker Desktop after making any changes to the keychain
-or to the `~/.docker/certs.d` directory in order for the changes to take effect.
+キーチェーンや`~/.docker/certs.d`ディレクトリ内に変更を加えた場合には、これを適用させるために Docker Desktop の再起動が必要になります。
 
 {% comment %}
 The registry cannot be listed as an _insecure registry_ (see
@@ -910,20 +921,16 @@ certificates listed under insecure registries, and does not send client
 certificates. Commands like `docker run` that attempt to pull from the registry
 produce error messages on the command line, as well as on the registry.
 {% endcomment %}
-The registry cannot be listed as an _insecure registry_ (see
-[Docker Daemon](#docker-engine)). Docker Desktop ignores
-certificates listed under insecure registries, and does not send client
-certificates. Commands like `docker run` that attempt to pull from the registry
-produce error messages on the command line, as well as on the registry.
+**セキュアでないレジストリ** はレジストリ一覧に表示させることはできません（[Docker デーモン](#docker-engine) 参照）。
+Docker Desktop ではセキュアではないレジストリのもとにある証明書は無視し、クライアント証明書を送信しません。
+そのような場合にレジストリからプルを行う`docker run`のようなコマンドを実行すると、コマンドライン上とレジストリ上にエラーメッセージが出力されます。
 
 {% comment %}
 To learn more about how to set the client TLS certificate for verification, see
 [Verify repository client with certificates](../engine/security/certificates.md)
 in the Docker Engine topics.
 {% endcomment %}
-To learn more about how to set the client TLS certificate for verification, see
-[Verify repository client with certificates](../engine/security/certificates.md)
-in the Docker Engine topics.
+クライアント TLS 証明書による検証を実現する方法については、Docker Engine のトピックにある [証明書を使ったリポジトリクライアントの確認](../engine/security/certificates.md) を参照してください。
 
 {% comment %}
 ## Where to go next
