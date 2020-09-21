@@ -1204,23 +1204,23 @@ manuals:
     section:
       - path: /docker-hub/access-tokens/
         title: アクセストークンの管理
-      - sectiontitle: Two-factor authentication
+      - sectiontitle: ２要素認証
         section:
           - path: /docker-hub/2fa/
-            title: Enable two-factor authentication
+            title: ２要素認証の有効化
           - path: /docker-hub/2fa/disable-2fa/
-            title: Disable two-factor authentication
+            title: ２要素認証の無効化
           - path: /docker-hub/2fa/recover-hub-account/
-            title: Recover your Docker Hub account
+            title: Docker Hub アカウントの復旧
           - path: /docker-hub/2fa/new-recovery-code/
-            title: Generate a new recovery code
+            title: 新たなリカバリーコードの生成
   - sectiontitle: 管理
     section:
      - path: /docker-hub/convert-account/
        title: アカウントから組織への移行
      - path: /docker-hub/deactivate-account/
        title: アカウントや組織の無効化
-  - sectiontitle: Billing
+  - sectiontitle: 有料プラン
     section:
     - path: /docker-hub/billing/
       title: 概要
@@ -1229,9 +1229,9 @@ manuals:
     - path: /docker-hub/billing/downgrade/
       title: プランのダウングレード
     - path: /docker-hub/billing/add-seats/
-      title: Add seats
+      title: シートの追加
     - path: /docker-hub/billing/remove-seats/
-      title: Remove seats
+      title: シートの削除
   - path: /docker-hub/orgs/
     title: チームと組織
   - path: /docker-hub/repos/
