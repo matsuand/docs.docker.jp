@@ -88,17 +88,28 @@ Docker Desktop supports 2 kinds of symlink:
 1. Windows native symlinks: these are visible inside containers as symlinks.
 2. Symlinks created inside a container: these are represented as [mfsymlinks](https://wiki.samba.org/index.php/UNIX_Extensions#Minshall.2BFrench_symlinks) i.e. regular Windows files with special metadata. These appear as symlinks inside containers but not as symlinks on the host.
 
+{% comment %}
 ## Certificates
+{% endcomment %}
+{: #certificates }
+## 証明書
 
+{% comment %}
 ### How do I add custom CA certificates?
+{% endcomment %}
+{: #how-do-i-add-custom-ca-certificates }
+### どうやって独自の CA 証明書を追加するか
 
-Docker Desktop supports all trusted Certificate Authorities (CAs) (root or
-intermediate). Docker recognizes certs stored under Trust Root
-Certification Authorities or Intermediate Certification Authorities.
+Docker Desktop では、信頼された認証局（Certificate Authorities; CA）をすべてサポートしています（ルート認証局および中間認証局）。
+Docker は、信頼されたルート証明機関や中間証明機関のもとに保存された証明書を識別します。
 
  For more information on adding server and client side certs, see [Adding TLS certificates](index.md#adding-tls-certificates) in the Getting Started topic.
 
+{% comment %}
 ### How do I add client certificates?
+{% endcomment %}
+{: #how-do-i-add-client-certificates }
+### どうやってクライアント証明書を追加するか
 
 For information on adding client certificates, see [Adding TLS certificates](index.md#adding-tls-certificates) in the Getting Started topic.
 

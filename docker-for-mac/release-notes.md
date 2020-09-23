@@ -58,6 +58,21 @@ Docker Desktop のシステム要件については [インストール前に確
   - ログイン時の自動起動を修正しました。
     [docker/for-mac#4877](https://github.com/docker/for-mac/issues/4877) と [docker/for-mac#4890](https://github.com/docker/for-mac/issues/4890) を参照してください。
 
+{% comment %}
+### Known issues
+{% endcomment %}
+{: #known-issues }
+### 既知の問題
+
+{% comment %}
+- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS`
+in i386 images. To work around this issue, disable `seccomp` by using
+the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
+{% endcomment %}
+- システムコール`clock_gettime64`は、i386 イメージにおいて`ENOSYS`ではなく`EPERM`を返します。
+  この問題を回避するには、`--privileged`フラグを指定して`seccomp`を無効にしてください。
+  [docker/for-win#8326](https://github.com/docker/for-win/issues/8326) を参照してください。
+
 ## Docker Desktop Community 2.3.0.4
 2020-07-27
 
@@ -304,8 +319,10 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 - Fixed an issue where attempts to log into Docker through Docker Desktop could sometimes fail with the `Incorrect authentication credentials` error. Fixes [docker/for-mac#4010](https://github.com/docker/for-mac/issues/4010).
 
 {% comment %}
-{% endcomment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues-1 }
+### 既知の問題
 
 {% comment %}
 {% endcomment %}

@@ -85,6 +85,21 @@ For information about Stable releases, see the [Stable release notes](release-no
 - コンテナーログの高負荷時における停滞を修正しました。
   [docker/for-win#8216](https://github.com/docker/for-win/issues/8216) を参照してください。
 
+{% comment %}
+### Known issues
+{% endcomment %}
+{: #known-issues }
+### 既知の問題
+
+{% comment %}
+- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS`
+in i386 images. To work around this issue, disable `seccomp` by using
+the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
+{% endcomment %}
+- システムコール`clock_gettime64`は、i386 イメージにおいて`ENOSYS`ではなく`EPERM`を返します。
+  この問題を回避するには、`--privileged`フラグを指定して`seccomp`を無効にしてください。
+  [docker/for-win#8326](https://github.com/docker/for-win/issues/8326) を参照してください。
+
 ## Docker Desktop Community 2.3.6.2
 2020-09-09
 
@@ -471,8 +486,10 @@ For information about Stable releases, see the [Stable release notes](release-no
 - Fixed a delay when opening the systray menu. Fixes [docker/for-win#1011](https://github.com/docker/for-win/issues/1011).
 
 {% comment %}
-{% endcomment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues-1 }
+### 既知の問題
 
 **WSL 2**
 
@@ -653,8 +670,10 @@ For information about Stable releases, see the [Stable release notes](release-no
 - Removed port probing from dashboard, just unconditionally showing links to ports that should be available. Fixes [docker/for-win#5903](https://github.com/docker/for-win/issues/5903).
 
 {% comment %}
-{% endcomment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues-2 }
+### 既知の問題
 
 {% comment %}
 {% endcomment %}
@@ -749,8 +768,10 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - Fixed a bug where running the command `DockerCli.exe -SharedDrives` failed to display a list of drives that are shared. Fixes [docker/for-win#5625](https://github.com/docker/for-win/issues/5625).
 
 {% comment %}
-{% endcomment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues-3 }
+### 既知の問題
 
 - DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](/docker-for-win/networking/#use-cases-and-workarounds).
 
@@ -803,7 +824,11 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 - Fixed an issue that caused Docker Desktop to fail on startup when there is an incomplete Kubernetes config file.
 - Fixed various stability issues.
 
+{% comment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues-4 }
+### 既知の問題
 
 - The Dashboard stops updating when you switch the container mode between Linux and Windows. To work around this issue, close and reopen the Dashboard.
 - The new gRPC FUSE file sharing implementation does not support connecting to new drives after Docker Desktop starts (for example, a USB drive). If you would like to share the new drive in Docker Desktop, you must quit Docker Desktop and then start the application to refresh the list of drives in Settings.
@@ -917,7 +942,11 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   >
   > From the Docker menu, select **Settings** > **Command line**, and then clear the **Enable experimental features** check box. Alternatively, install a Docker Desktop Stable release.
 
+{% comment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues-5 }
+### 既知の問題
 
 - When you start a Docker Compose application and then start a Docker App which has the same name as the Compose application, Docker Desktop displays only one application on the Dashboard. However, when you expand the application, containers that belong to both applications are displayed on the Dashboard.
 

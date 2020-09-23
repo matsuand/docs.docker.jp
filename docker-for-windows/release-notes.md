@@ -58,6 +58,21 @@ Docker Desktop のシステム要件については [インストール前に確
   - WSL2: 非互換の glibc を利用している際のクラッシュを修正しました。
     [docker/for-win#8183](https://github.com/docker/for-win/issues/8183) を参照してください。
 
+{% comment %}
+### Known issues
+{% endcomment %}
+{: #known-issues }
+### 既知の問題
+
+{% comment %}
+- The `clock_gettime64` system call returns `EPERM` rather than `ENOSYS`
+in i386 images. To work around this issue, disable `seccomp` by using
+the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for-win/issues/8326).
+{% endcomment %}
+- システムコール`clock_gettime64`は、i386 イメージにおいて`ENOSYS`ではなく`EPERM`を返します。
+  この問題を回避するには、`--privileged`フラグを指定して`seccomp`を無効にしてください。
+  [docker/for-win#8326](https://github.com/docker/for-win/issues/8326) を参照してください。
+
 ## Docker Desktop Community 2.3.0.4
 2020-07-27
 
@@ -256,7 +271,11 @@ Docker Desktop のシステム要件については [インストール前に確
 - Fixed an issue that caused the Windows log file archive to grow indefinitely. Fixes [docker/for-win#5113](https://github.com/docker/for-win/issues/5113).
 - Added a prerequisite check in the installer for the LanmanServer service. Fixes [docker/for-win#5150](https://github.com/docker/for-win/issues/5150)
 
+{% comment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues-1 }
+### 既知の問題
 
 - Some CLI commands fail if you are running Docker Desktop in the experimental Linux Containers on Windows (LCOW) mode. As alternatives, we recommend running either traditional Linux containers, or the [WSL 2 backend](wsl.md).
 
@@ -312,7 +331,11 @@ Docker Desktop のシステム要件については [インストール前に確
 - Fixed an issue which caused Docker Desktop to hang when users tried to reset to factory defaults.
 - Fixed a file sharing issue that caused Docker Desktop to lock random files. Fixes [docker/for-win#5624](https://github.com/docker/for-win/issues/5624) and [docker/for-win#5575](https://github.com/docker/for-win/issues/5575).
 
+{% comment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues-2 }
+### 既知の問題
 
 - Some CLI commands fail if you are running Docker Desktop in the experimental Linux Containers on Windows (LCOW) mode. As alternatives, we recommend running either traditional Linux containers, or the experimental [WSL backend](wsl.md).
 - It is not possible to resize the disk image using the Docker Desktop **Settings** UI. If you would like to update the size of the disk image (for example, to 128 GB), run the following command in PowerShell:
@@ -360,7 +383,11 @@ Docker Desktop のシステム要件については [インストール前に確
 - Fixed a bug where running the command `DockerCli.exe -SharedDrives` failed to display a list of drives that are shared. Fixes [docker/for-win#5625](https://github.com/docker/for-win/issues/5625).
 - Starting with Docker Desktop 2.2.0.3, you must access all shared files using their original case. For example, if you have created a file called `test`, you must open it as `test`. Attempts to open the file as `Test` will fail with the error `No such file or directory`. For more information, see _Tips on shared drives, permissions, and volume mounts_ in [File sharing](index.md#file-sharing).
 
+{% comment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues-3 }
+### 既知の問題
 
 - DockerNAT has been removed from Docker Desktop 2.2.0.0 as using an IP address to communicate from the host to a container is not a supported feature. To communicate from a container to the host, you must use the special DNS name `host.docker.internal`. We also recommend using ports to communicate from the host to a container. For more information, see [Networking](/docker-for-win/networking/#use-cases-and-workarounds).
 
@@ -434,7 +461,11 @@ For detailed information about the new Dashboard UI, see [Docker Desktop Dashboa
 - Fixed an issue that caused Docker Desktop to fail on startup when there is an incomplete Kubernetes config file.
 - Fixed various stability issues.
 
+{% comment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues-4 }
+### 既知の問題
 
 - When you start a Docker Compose application and then start a Docker App which has the same name as the Compose application, Docker Desktop displays only one application on the Dashboard. However, when you expand the application, containers that belong to both applications are displayed on the Dashboard.
 - When you deploy a Docker App with multiple containers on Kubernetes, Docker Desktop displays each Pod as an application on the Dashboard.

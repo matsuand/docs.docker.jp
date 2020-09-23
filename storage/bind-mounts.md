@@ -10,7 +10,7 @@ redirect_from:
 Bind mounts have been around since the early days of Docker. Bind mounts have
 limited functionality compared to [volumes](volumes.md). When you use a bind
 mount, a file or directory on the _host machine_ is mounted into a container.
-The file or directory is referenced by its full or relative path on the host
+The file or directory is referenced by its absolute path on the host
 machine. By contrast, when you use a volume, a new directory is created within
 Docker's storage directory on the host machine, and Docker manages that
 directory's contents.
@@ -18,7 +18,7 @@ directory's contents.
 バインドマウントは Docker の初期のころから存在しています。
 ただし [ボリューム](volumes.md) に比べると、バインドマウントの機能は限定されます。
 バインドマウントを利用すると「ホストマシン」上のファイルやディレクトリがコンテナー内にマウントされます。
-そのファイルやディレクトリは、ホストマシン上の絶対パスや相対パスにより参照できます。
+そのファイルやディレクトリは、ホストマシン上の絶対パスにより参照できます。
 これとは違ってボリュームを利用すると、ホストマシン上に新たなディレクトリが生成され、そこが Docker の保存ディレクトリとなります。
 そして Docker はそのディレクトリ内の内容を管理していきます。
 

@@ -285,6 +285,7 @@ services:
 secrets:
   foo:
     name: "arn:aws:secretsmanager:eu-west-3:1234:secret:foo-ABC123"
+    external: true
 ```
 
 {% comment %}

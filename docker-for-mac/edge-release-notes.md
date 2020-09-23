@@ -78,6 +78,17 @@ Docker Desktop のシステム要件については [インストールの前に
 - コンテナーログの高負荷時における停滞を修正しました。
   [docker/for-win#8216](https://github.com/docker/for-win/issues/8216) を参照してください。
 
+{% comment %}
+### Known issues
+{% endcomment %}
+{: #known-issues }
+### 既知の問題
+
+- システムコール`clock_gettime64`は、i386 イメージにおいて`ENOSYS`ではなく`EPERM`を返します。
+  この問題を回避するには、`--privileged`フラグを指定して`seccomp`を無効にしてください。
+  [docker/for-win#8326](https://github.com/docker/for-win/issues/8326) を参照してください。
+
+
 ## Docker Desktop Community 2.3.6.1
 2020-09-08
 
@@ -518,7 +529,11 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 - Kubernetes: Persistent volumes created by claims are now stored in the virtual machine. Fixes [docker/for-win#5665](https://github.com/docker/for-win/issues/5665).
 - Removed port probing from dashboard, just unconditionally showing links to ports that should be available. Fixes [docker/for-mac#4264](https://github.com/docker/for-mac/issues/4264).
 
+{% comment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues-1 }
+### 既知の問題
 
 - Loopback and unspecified IPv6 addresses (`::` and `::1`) within a container do not currently work. Some web servers and other programs may be using these addresses in their configuration files.
 
@@ -657,7 +672,11 @@ To access the new Dashboard UI, select the Docker menu from the Mac menu bar and
 
 Fixed an issue that caused VMs running on older hardware with macOS Catalina to fail on startup with the error `processor does not support desired secondary processor-based controls`.
 
+{% comment %}
 ### Known issues
+{% endcomment %}
+{: #known-issues-2 }
+### 既知の問題
 
 - When you start a Docker Compose application and then start a Docker App which has the same name as the Compose application, Docker Desktop displays only one application on the Dashboard. However, when you expand the application, containers that belong to both applications are displayed on the Dashboard.
 

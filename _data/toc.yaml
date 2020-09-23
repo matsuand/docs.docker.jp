@@ -1345,7 +1345,7 @@ manuals:
     - path: /machine/release-notes/
       title: リリースノート
     - path: /machine/get-started/
-      title: Get started with a local VM
+      title: ローカルVMを使ってはじめよう
     - path: /machine/get-started-cloud/
       title: Provision hosts in the cloud
     - sectiontitle: 例から学ぶ

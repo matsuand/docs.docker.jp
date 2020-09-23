@@ -48,7 +48,7 @@ Docker Desktop のダウンロード、システム要件、インストール�
 The Docker **Preferences** menu allows you to configure your Docker settings such as installation, updates, version channels, Docker Hub login,
 and more.
 {% endcomment %}
-Docker の **Preferences** メニューでは Docker に対する設定として、インストール設定、アップデート、バージョンチャネル、Docker Hub ログインなどを行うことができます。
+Docker の **Preferences** メニューでは Docker に対する設定として、インストール設定、アップデート、バージョンチャネル設定、Docker Hub ログインなどを行うことができます。
 
 {% comment %}
 Choose the Docker menu ![whale menu](images/whale-x.png){: .inline} > **Preferences** from the
@@ -126,6 +126,7 @@ The **Resources** tab allows you to configure CPU, memory, disk, proxies, networ
 #### Advanced タブ
 
 {% comment %}
+On the Advanced tab, you can limit resources available to Docker.
 {% endcomment %}
 Advanced タブでは、Docker におけるリソースの利用制限を設定します。
 

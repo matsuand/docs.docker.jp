@@ -62,21 +62,23 @@ A `docker-compose.yml` looks like this:
 {% endcomment %}
 `docker-compose.yml` は次のように記述します。
 
-    version: '2.0'
-    services:
-      web:
-        build: .
-        ports:
-        - "5000:5000"
-        volumes:
-        - .:/code
-        - logvolume01:/var/log
-        links:
-        - redis
-      redis:
-        image: redis
+```yaml
+version: "{{ site.compose_file_v3 }}"
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
     volumes:
-      logvolume01: {}
+      - .:/code
+      - logvolume01:/var/log
+    links:
+      - redis
+  redis:
+    image: redis
+volumes:
+  logvolume01: {}
+```
 
 {% comment %}
 For more information about the Compose file, see the
@@ -306,9 +308,11 @@ and destroy isolated testing environments for your test suite. By defining the f
 Compose ではテストスイートに対応して、分離されたテスト環境の生成とデプロイを便利に行う機能を提供しています。
 [Compose ファイル](compose-file/index.md) 内に必要な環境定義を行っておけば、テスト環境の生成と削除は、ごく簡単なコマンドだけで実現できます。
 
-    $ docker-compose up -d
-    $ ./run_tests
-    $ docker-compose down
+```bash
+$ docker-compose up -d
+$ ./run_tests
+$ docker-compose down
+```
 
 {% comment %}
 ### Single host deployments
