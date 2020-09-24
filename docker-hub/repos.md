@@ -378,9 +378,9 @@ bookmarking your favorites.
  通常は自動化処理において用いられるものであって、チームプランにおけるメンバーの Docker ID として利用するものではありません。
 
  {% comment %}
- To create a new service account:
+ To create a new service account for your Team account:
  {% endcomment %}
- 新たなサービスアカウントを生成するには、以下のようにします。
+ チームアカウントにおいて新たなサービスアカウントを生成するには、以下のようにします。
 
  {% comment %}
  1. Create a new Docker ID.
@@ -393,6 +393,24 @@ bookmarking your favorites.
  2. 組織内に [チーム](orgs.md#create-a-team) を生成し、プライベートリポジトリに対して読み取り専用の権限を与えます。
  3. その Docker ID を [組織](orgs.md#working-with-organizations) に加えます。
  4. その Docker ID を、先ほど生成した [チーム](orgs.md#add-a-member-to-a-team) に加えます。
+ 5. ユーザーアカウントから新たに [個人用アクセストークン（personal access token; PAT）](/access-tokens.md) を生成して、CI において利用します。
+
+{% comment %}
+To create a new service account for your Pro account:
+{% endcomment %}
+プロアカウントにおいて新たなサービスアカウントを生成するには、以下のようにします。
+
+ {% comment %}
+ 1. Create a new Docker ID.
+ 2. Click **Repositories** from the main menu.
+ 3. Select a repository from the list and go to the **Collaborators** tab.
+ 4. Add the new Docker ID as a collaborator.
+ 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
+ {% endcomment %}
+ 1. 新たな Docker ID を生成します。
+ 2. メインメニューから **Repositories** をクリックします。
+ 3. 一覧から目的のリポジトリを選択して、**Collaborators** タブにアクセスします。
+ 4. 協力者として新たな Docker ID を加えます。
  5. ユーザーアカウントから新たに [個人用アクセストークン（personal access token; PAT）](/access-tokens.md) を生成して、CI において利用します。
 
  {% comment %}

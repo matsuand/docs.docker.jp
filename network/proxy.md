@@ -107,15 +107,15 @@ instead.
 {% comment %}
 | Variable      | Dockerfile example                                | `docker run` Example                                |
 |:--------------|:--------------------------------------------------|:----------------------------------------------------|
-| `HTTP_PROXY`  | `ENV HTTP_PROXY "http://127.0.0.1:3001"`          | `--env HTTP_PROXY="http://127.0.0.1:3001"`          |
-| `HTTPS_PROXY` | `ENV HTTPS_PROXY "https://127.0.0.1:3001"`        | `--env HTTPS_PROXY="https://127.0.0.1:3001"`        |
-| `FTP_PROXY`   | `ENV FTP_PROXY "ftp://127.0.0.1:3001"`            | `--env FTP_PROXY="ftp://127.0.0.1:3001"`            |
-| `NO_PROXY`    | `ENV NO_PROXY "*.test.example.com,.example2.com"` | `--env NO_PROXY="*.test.example.com,.example2.com"` |
+| `HTTP_PROXY`  | `ENV HTTP_PROXY="http://127.0.0.1:3001"`          | `--env HTTP_PROXY="http://127.0.0.1:3001"`          |
+| `HTTPS_PROXY` | `ENV HTTPS_PROXY="https://127.0.0.1:3001"`        | `--env HTTPS_PROXY="https://127.0.0.1:3001"`        |
+| `FTP_PROXY`   | `ENV FTP_PROXY="ftp://127.0.0.1:3001"`            | `--env FTP_PROXY="ftp://127.0.0.1:3001"`            |
+| `NO_PROXY`    | `ENV NO_PROXY="*.test.example.com,.example2.com"` | `--env NO_PROXY="*.test.example.com,.example2.com"` |
 {% endcomment %}
 | 変数          | Dockerfile 例                                     | `docker run` 実行例                                 |
 |:--------------|:--------------------------------------------------|:----------------------------------------------------|
-| `HTTP_PROXY`  | `ENV HTTP_PROXY "http://127.0.0.1:3001"`          | `--env HTTP_PROXY="http://127.0.0.1:3001"`          |
-| `HTTPS_PROXY` | `ENV HTTPS_PROXY "https://127.0.0.1:3001"`        | `--env HTTPS_PROXY="https://127.0.0.1:3001"`        |
-| `FTP_PROXY`   | `ENV FTP_PROXY "ftp://127.0.0.1:3001"`            | `--env FTP_PROXY="ftp://127.0.0.1:3001"`            |
-| `NO_PROXY`    | `ENV NO_PROXY "*.test.example.com,.example2.com"` | `--env NO_PROXY="*.test.example.com,.example2.com"` |
+| `HTTP_PROXY`  | `ENV HTTP_PROXY="http://127.0.0.1:3001"`          | `--env HTTP_PROXY="http://127.0.0.1:3001"`          |
+| `HTTPS_PROXY` | `ENV HTTPS_PROXY="https://127.0.0.1:3001"`        | `--env HTTPS_PROXY="https://127.0.0.1:3001"`        |
+| `FTP_PROXY`   | `ENV FTP_PROXY="ftp://127.0.0.1:3001"`            | `--env FTP_PROXY="ftp://127.0.0.1:3001"`            |
+| `NO_PROXY`    | `ENV NO_PROXY="*.test.example.com,.example2.com"` | `--env NO_PROXY="*.test.example.com,.example2.com"` |
 

@@ -55,7 +55,7 @@ RUN sed -i 's/#*PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ss
 # SSH ログインの設定修正。これを行わないとログインした後に処理実行できない。
 RUN sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
 
-ENV NOTVISIBLE "in users profile"
+ENV NOTVISIBLE="in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 22

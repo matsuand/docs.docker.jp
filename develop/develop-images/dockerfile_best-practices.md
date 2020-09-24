@@ -1199,12 +1199,12 @@ Docker のリンク機能においては環境変数が利用できます。
 {% comment %}
 To make new software easier to run, you can use `ENV` to update the
 `PATH` environment variable for the software your container installs. For
-example, `ENV PATH /usr/local/nginx/bin:$PATH` ensures that `CMD ["nginx"]`
+example, `ENV PATH=/usr/local/nginx/bin:$PATH` ensures that `CMD ["nginx"]`
 just works.
 {% endcomment %}
 新しいソフトウェアに対しては `ENV` を用いれば簡単にそのソフトウェアを実行できます。
 コンテナーがインストールするソフトウェアに必要な環境変数 `PATH` を、この `ENV` を使って更新します。
-たとえば `ENV PATH /usr/local/nginx/bin:$PATH` を実行すれば、 `CMD ["nginx"]` が確実に動作するようになります。
+たとえば `ENV PATH=/usr/local/nginx/bin:$PATH` を実行すれば、 `CMD ["nginx"]` が確実に動作するようになります。
 
 {% comment %}
 The `ENV` instruction is also useful for providing required environment
@@ -1223,10 +1223,10 @@ version bumps are easier to maintain, as seen in the following example:
 たとえば以下がその例です。
 
 ```dockerfile
-ENV PG_MAJOR 9.3
-ENV PG_VERSION 9.3.4
+ENV PG_MAJOR=9.3
+ENV PG_VERSION=9.3.4
 RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress && …
-ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
+ENV PATH=/usr/local/postgres-$PG_MAJOR/bin:$PATH
 ```
 
 {% comment %}

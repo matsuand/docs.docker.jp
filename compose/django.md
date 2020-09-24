@@ -55,22 +55,24 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 {% endcomment %}
 3. `Dockerfile` に以下の内容を記述します。
 
-       FROM python:3
-       ENV PYTHONUNBUFFERED 1
-       RUN mkdir /code
-       WORKDIR /code
-       COPY requirements.txt /code/
-       RUN pip install -r requirements.txt
-       COPY . /code/
+   ```dockerfile
+   FROM python:3
+   ENV PYTHONUNBUFFERED=1
+   RUN mkdir /code
+   WORKDIR /code
+   COPY requirements.txt /code/
+   RUN pip install -r requirements.txt
+   COPY . /code/
+   ```
 
-    {% comment %}
-    This `Dockerfile` starts with a [Python 3 parent image](https://hub.docker.com/r/library/python/tags/3/).
-    The parent image is modified by adding a new `code` directory. The parent image is further modified
-    by installing the Python requirements defined in the `requirements.txt` file.
-    {% endcomment %}
-    この`Dockerfile`はまず [Python 3 の親イメージ](https://hub.docker.com/r/library/python/tags/3/)から始まっています。
-    この親イメージには新規のディレクトリ`code`が加えられます。
-    さらに`requirements.txt`ファイルに定義された Python 依存パッケージをインストールする変更が加えられています。
+   {% comment %}
+   This `Dockerfile` starts with a [Python 3 parent image](https://hub.docker.com/r/library/python/tags/3/).
+   The parent image is modified by adding a new `code` directory. The parent image is further modified
+   by installing the Python requirements defined in the `requirements.txt` file.
+   {% endcomment %}
+   この`Dockerfile`はまず [Python 3 の親イメージ](https://hub.docker.com/r/library/python/tags/3/)から始まっています。
+   この親イメージには新規のディレクトリ`code`が加えられます。
+   さらに`requirements.txt`ファイルに定義された Python 依存パッケージをインストールする変更が加えられています。
 
 {% comment %}
 4. Save and close the `Dockerfile`.
@@ -126,44 +128,44 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 {% endcomment %}
 9. 以下の設定内容をファイルに記述します。
 
-    ```none
-     version: '3'
+   ```yaml
+   version: "{{ site.compose_file_v3 }}"
 
-     services:
-       db:
-         image: postgres
-         environment:
-           - POSTGRES_DB=postgres
-           - POSTGRES_USER=postgres
-           - POSTGRES_PASSWORD=postgres
-       web:
-         build: .
-         command: python manage.py runserver 0.0.0.0:8000
-         volumes:
-           - .:/code
-         ports:
-           - "8000:8000"
-         depends_on:
-           - db
-    ```
+   services:
+     db:
+       image: postgres
+       environment:
+         - POSTGRES_DB=postgres
+         - POSTGRES_USER=postgres
+         - POSTGRES_PASSWORD=postgres
+     web:
+       build: .
+       command: python manage.py runserver 0.0.0.0:8000
+       volumes:
+         - .:/code
+       ports:
+         - "8000:8000"
+       depends_on:
+         - db
+   ```
 
-    {% comment %}
-    This file defines two services: The `db` service and the `web` service.
-    {% endcomment %}
-    このファイルには`db`サービスと`web`サービスという 2 つのサービスが定義されています。
+   {% comment %}
+   This file defines two services: The `db` service and the `web` service.
+   {% endcomment %}
+   このファイルには`db`サービスと`web`サービスという 2 つのサービスが定義されています。
 
-    {% comment %}
-    > Note:
-    >
-    > This uses the build in development server to run your application
-    > on port 8000. Do not use this in a production environment. For more
-    > information, see [Django documentation](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" class="_”}.
-    {% endcomment %}
-    > メモ
-    >
-    > これは開発環境においてビルドを行い、アプリケーションをポート 8000 で動作させるものです。
-    > これを本番環境で利用しないでください。
-    > 詳しくは [Django ドキュメント](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" class="_”} を参照してください。
+   {% comment %}
+   > Note:
+   >
+   > This uses the build in development server to run your application
+   > on port 8000. Do not use this in a production environment. For more
+   > information, see [Django documentation](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" class="_”}.
+   {% endcomment %}
+   > メモ
+   >
+   > これは開発環境においてビルドを行い、アプリケーションをポート 8000 で動作させるものです。
+   > これを本番環境で利用しないでください。
+   > 詳しくは [Django ドキュメント](https://docs.djangoproject.com/en/3.1/intro/tutorial01/#the-development-server){: target="_blank" class="_”} を参照してください。
 
 {% comment %}
 10. Save and close the `docker-compose.yml` file.
@@ -192,7 +194,9 @@ the [docker-compose run](reference/run.md) command as follows.
 {% endcomment %}
 2. Django プロジェクトを生成するために [docker-compose run](reference/run.md) コマンドを以下のように実行します。
 
-       sudo docker-compose run web django-admin startproject composeexample .
+   ```console
+   $ sudo docker-compose run web django-admin startproject composeexample .
+   ```
 
     {% comment %}
     This instructs Compose to run `django-admin startproject composeexample`
@@ -218,39 +222,47 @@ the [docker-compose run](reference/run.md) command as follows.
 {% endcomment %}
 3. `docker-compose`コマンドの処理が完了したら、プロジェクト内の一覧を表示してみます。
 
-       $ ls -l
-       drwxr-xr-x 2 root   root   composeexample
-       -rw-rw-r-- 1 user   user   docker-compose.yml
-       -rw-rw-r-- 1 user   user   Dockerfile
-       -rwxr-xr-x 1 root   root   manage.py
-       -rw-rw-r-- 1 user   user   requirements.txt
+   ```console
+   $ ls -l
 
-    {% comment %}
-    If you are running Docker on Linux, the files `django-admin` created are
-    owned by root. This happens because the container runs as the root user.
-    Change the ownership of the new files.
-    {% endcomment %}
-    Linux 上で Docker を利用している場合、`django-admin`が生成したファイルの所有者が root になっています。
-    これはコンテナーが root ユーザーで実行されるからです。
-    生成されたファイルの所有者を以下のようにして変更します。
+   drwxr-xr-x 2 root   root   composeexample
+   -rw-rw-r-- 1 user   user   docker-compose.yml
+   -rw-rw-r-- 1 user   user   Dockerfile
+   -rwxr-xr-x 1 root   root   manage.py
+   -rw-rw-r-- 1 user   user   requirements.txt
+   ```
 
-       sudo chown -R $USER:$USER .
+   {% comment %}
+   If you are running Docker on Linux, the files `django-admin` created are
+   owned by root. This happens because the container runs as the root user.
+   Change the ownership of the new files.
+   {% endcomment %}
+   Linux 上で Docker を利用している場合、`django-admin`が生成したファイルの所有者が root になっています。
+   これはコンテナーが root ユーザーで実行されるからです。
+   生成されたファイルの所有者を以下のようにして変更します。
 
-    {% comment %}
-    If you are running Docker on Mac or Windows, you should already
-    have ownership of all files, including those generated by
-    `django-admin`. List the files just to verify this.
-    {% endcomment %}
-    Docker on Mac あるいは Docker on Windows を利用している場合は、生成されたファイルの所有権は、`django-admin`が作り出したファイルも含めて、すべて持っています。
-    確認のため一覧を表示してみます。
+   ```console
+   $ sudo chown -R $USER:$USER .
+   ```
 
-        $ ls -l
-        total 32
-        -rw-r--r--  1 user  staff  145 Feb 13 23:00 Dockerfile
-        drwxr-xr-x  6 user  staff  204 Feb 13 23:07 composeexample
-        -rw-r--r--  1 user  staff  159 Feb 13 23:02 docker-compose.yml
-        -rwxr-xr-x  1 user  staff  257 Feb 13 23:07 manage.py
-        -rw-r--r--  1 user  staff   16 Feb 13 23:01 requirements.txt
+   {% comment %}
+   If you are running Docker on Mac or Windows, you should already
+   have ownership of all files, including those generated by
+   `django-admin`. List the files just to verify this.
+   {% endcomment %}
+   Docker on Mac あるいは Docker on Windows を利用している場合は、生成されたファイルの所有権は、`django-admin`が作り出したファイルも含めて、すべて持っています。
+   確認のため一覧を表示してみます。
+
+   ```console
+   $ ls -l
+
+   total 32
+   -rw-r--r--  1 user  staff  145 Feb 13 23:00 Dockerfile
+   drwxr-xr-x  6 user  staff  204 Feb 13 23:07 composeexample
+   -rw-r--r--  1 user  staff  159 Feb 13 23:02 docker-compose.yml
+   -rwxr-xr-x  1 user  staff  257 Feb 13 23:07 manage.py
+   -rw-r--r--  1 user  staff   16 Feb 13 23:01 requirements.txt
+   ```
 
 
 {% comment %}
@@ -265,27 +277,29 @@ In this section, you set up the database connection for Django.
 ここでは Django におけるデータベース接続の設定を行います。
 
 {% comment %}
-1.  In your project directory, edit the `composeexample/settings.py` file.
+1. In your project directory, edit the `composeexample/settings.py` file.
 {% endcomment %}
-1.  プロジェクトディレクトリにおいて`composeexample/settings.py`ファイルを編集します。
+1. プロジェクトディレクトリにおいて`composeexample/settings.py`ファイルを編集します。
 
 {% comment %}
 2. Replace the `DATABASES = ...` with the following:
 {% endcomment %}
 2. `DATABASES = ...`の部分を以下のように書き換えます。
 
-       # settings.py
+   ```python
+   # settings.py
 
-       DATABASES = {
-           'default': {
-               'ENGINE': 'django.db.backends.postgresql',
-               'NAME': 'postgres',
-               'USER': 'postgres',
-               'PASSWORD': 'postgres',
-               'HOST': 'db',
-               'PORT': 5432,
-           }
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.postgresql',
+           'NAME': 'postgres',
+           'USER': 'postgres',
+           'PASSWORD': 'postgres',
+           'HOST': 'db',
+           'PORT': 5432,
        }
+   }
+   ```
 
    {% comment %}
    These settings are determined by the
@@ -295,95 +309,98 @@ In this section, you set up the database connection for Django.
    上の設定は`docker-compose.yml`に指定した Docker イメージ [postgres](https://hub.docker.com/_/postgres) が定めている内容です。
 
 {% comment %}
-3.  Save and close the file.
+3. Save and close the file.
 {% endcomment %}
-3.  ファイルを保存して閉じます。
+3. ファイルを保存して閉じます。
 
 {% comment %}
-4.  Run the [docker-compose up](reference/up.md) command from the top level directory for your project.
+4. Run the [docker-compose up](reference/up.md) command from the top level directory for your project.
 {% endcomment %}
-4.  プロジェクトのトップディレクトリにおいてコマンド [docker-compose up](reference/up.md) を実行します。
+4. プロジェクトのトップディレクトリにおいてコマンド [docker-compose up](reference/up.md) を実行します。
 
-    ```none
-    $ docker-compose up
-    djangosample_db_1 is up-to-date
-    Creating djangosample_web_1 ...
-    Creating djangosample_web_1 ... done
-    Attaching to djangosample_db_1, djangosample_web_1
-    db_1   | The files belonging to this database system will be owned by user "postgres".
-    db_1   | This user must also own the server process.
-    db_1   |
-    db_1   | The database cluster will be initialized with locale "en_US.utf8".
-    db_1   | The default database encoding has accordingly been set to "UTF8".
-    db_1   | The default text search configuration will be set to "english".
+   ```console
+   $ docker-compose up
 
-    . . .
+   djangosample_db_1 is up-to-date
+   Creating djangosample_web_1 ...
+   Creating djangosample_web_1 ... done
+   Attaching to djangosample_db_1, djangosample_web_1
+   db_1   | The files belonging to this database system will be owned by user "postgres".
+   db_1   | This user must also own the server process.
+   db_1   |
+   db_1   | The database cluster will be initialized with locale "en_US.utf8".
+   db_1   | The default database encoding has accordingly been set to "UTF8".
+   db_1   | The default text search configuration will be set to "english".
 
-    web_1  | July 30, 2020 - 18:35:38
-    web_1  | Django version 3.0.8, using settings 'composeexample.settings'
-    web_1  | Starting development server at http://0.0.0.0:8000/
-    web_1  | Quit the server with CONTROL-C.
-    ```
+   . . .
 
-    {% comment %}
-    At this point, your Django app should be running at port `8000` on
-    your Docker host. On Docker Desktop for Mac and Docker Desktop for Windows, go
-    to `http://localhost:8000` on a web browser to see the Django
-    welcome page. If you are using [Docker Machine](../machine/overview.md),
-    then `docker-machine ip MACHINE_VM` returns the Docker host IP
-    address, to which you can append the port (`<Docker-Host-IP>:8000`).
-    {% endcomment %}
-    この段階で Django アプリは Docker ホスト上のポート`8000`で稼動しています。
-    Docker Desktop for Mac または Docker Desktop for Windows の場合は、ブラウザーから `http://localhost:8000` にアクセスすることで、Django の Welcome ページを確認できます。
-    [Docker Machine](../machine/overview.md) を利用している場合は、`docker-machine ip MACHINE_VM` を実行すると Docker ホストの IP アドレスが得られるので、ポート番号をつけてアクセスします（`<DockerホストID>:8000`）。
+   web_1  | July 30, 2020 - 18:35:38
+   web_1  | Django version 3.0.8, using settings 'composeexample.settings'
+   web_1  | Starting development server at http://0.0.0.0:8000/
+   web_1  | Quit the server with CONTROL-C.
+   ```
 
-    {% comment %}
-    ![Django example](images/django-it-worked.png)
-    {% endcomment %}
-    ![Django の例](images/django-it-worked.png)
+   {% comment %}
+   At this point, your Django app should be running at port `8000` on
+   your Docker host. On Docker Desktop for Mac and Docker Desktop for Windows, go
+   to `http://localhost:8000` on a web browser to see the Django
+   welcome page. If you are using [Docker Machine](../machine/overview.md),
+   then `docker-machine ip MACHINE_VM` returns the Docker host IP
+   address, to which you can append the port (`<Docker-Host-IP>:8000`).
+   {% endcomment %}
+   この段階で Django アプリは Docker ホスト上のポート`8000`で稼動しています。
+   Docker Desktop for Mac または Docker Desktop for Windows の場合は、ブラウザーから`http://localhost:8000`にアクセスすることで、Django の Welcome ページを確認できます。
+   [Docker Machine](../machine/overview.md) を利用している場合は、`docker-machine ip MACHINE_VM`を実行すると Docker ホストの IP アドレスが得られるので、ポート番号をつけてアクセスします（`<DockerホストID>:8000`）。
 
-    {% comment %}
-    > Note:
-    >
-    > On certain platforms (Windows 10), you might need to
-      edit `ALLOWED_HOSTS` inside `settings.py` and add your Docker host name
-      or IP address to the list.  For demo purposes, you can set the value to:
-    >
-    >       ALLOWED_HOSTS = ['*']
-    >
-    > This value is **not** safe for production usage.  Refer to the
-     [Django documentation](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts)  for more information.
-    {% endcomment %}
-    > メモ:
-    >
-    > 特定プラットフォーム（Windows 10）では、`settings.py`ファイル内の`ALLOWED_HOSTS`に、ホスト名あるいはホストの IP アドレスを追加することが必要かもしれません。ここはデモが目的なので、以下のように設定することにします。
-    >
-    >       ALLOWED_HOSTS = ['*']
-    >
-    > この設定は本番環境では**安全ではありません**。詳しくは [Django ドキュメント](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts)を参照してください。
+   {% comment %}
+   ![Django example](images/django-it-worked.png)
+   {% endcomment %}
+   ![Django の例](images/django-it-worked.png)
+
+   {% comment %}
+   > Note:
+   >
+   > On certain platforms (Windows 10), you might need to edit `ALLOWED_HOSTS`
+   > inside `settings.py` and add your Docker host name or IP address to the list.
+   > For demo purposes, you can set the value to:
+   >
+   >       ALLOWED_HOSTS = ['*']
+   >
+   > This value is **not** safe for production usage.  Refer to the
+   > [Django documentation](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts)  for more information.
+   {% endcomment %}
+   > メモ:
+   >
+   > 特定プラットフォーム（Windows 10）では、`settings.py`ファイル内の`ALLOWED_HOSTS`に、ホスト名あるいはホストの IP アドレスを追加することが必要かもしれません。
+   > ここはデモが目的なので、以下のように設定することにします。
+   >
+   >       ALLOWED_HOSTS = ['*']
+   >
+   > この設定は本番環境では**安全ではありません**。
+   > 詳しくは [Django ドキュメント](https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts) を参照してください。
 
 {% comment %}
-5.  List running containers.
+5. List running containers.
 {% endcomment %}
-5.  起動しているコンテナーの一覧を確認します。
+5. 起動しているコンテナーの一覧を確認します。
 
-    {% comment %}
-    In another terminal window, list the running Docker processes with the `docker container ls` command.
-    {% endcomment %}
-    別の端末画面を開いて `docker container ls`コマンドを実行し、起動している Docker プロセスの一覧を表示します。
+   {% comment %}
+   In another terminal window, list the running Docker processes with the `docker container ls` command.
+   {% endcomment %}
+   別の端末画面を開いて`docker container ls`コマンドを実行し、起動している Docker プロセスの一覧を表示します。
 
-    ```none
-    $ docker ps
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago      Up 9 minutes        0.0.0.0:8000->8000/tcp   django_web_1
-678ce61c79cc        postgres            "docker-entrypoint..."   20 minutes ago      Up 9 minutes        5432/tcp                 django_db_1
+   ```console
+   $ docker ps
 
-    ```
+   CONTAINER ID  IMAGE       COMMAND                  CREATED         STATUS        PORTS                    NAMES
+   def85eff5f51  django_web  "python3 manage.py..."   10 minutes ago  Up 9 minutes  0.0.0.0:8000->8000/tcp   django_web_1
+   678ce61c79cc  postgres    "docker-entrypoint..."   20 minutes ago  Up 9 minutes  5432/tcp                 django_db_1
+   ```
 
 {% comment %}
-6.  Shut down services and clean up by using either of these methods:
+6. Shut down services and clean up by using either of these methods:
 {% endcomment %}
-6.  サービスを停止しクリアするために、以下のいずれかの方法をとります。
+6. サービスを停止しクリアするために、以下のいずれかの方法をとります。
 
     {% comment %}
     * Stop the application by typing `Ctrl-C`
@@ -391,7 +408,7 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
     {% endcomment %}
     * アプリケーションを実行したシェル上で `Ctrl-C` を入力してアプリケーションを止めます。
 
-      ```none
+      ```console
       Gracefully stopping... (press Ctrl+C again to force)
       Killing test_web_1 ... done
       Killing test_db_1 ... done
@@ -402,9 +419,10 @@ def85eff5f51        django_web          "python3 manage.py..."   10 minutes ago 
     {% endcomment %}
     * もう少しきれいなやり方として別のシェル画面に切り替えて、Django サンプルプロジェクトのトップディレクトリにおいて [docker-compose down](reference/down.md) を実行します。
 
-      ```none
+      ```console
       vmb at mymachine in ~/sandbox/django
       $ docker-compose down
+
       Stopping django_web_1 ... done
       Stopping django_db_1 ... done
       Removing django_web_1 ... done
