@@ -7,13 +7,28 @@ redirect_from:
   - /release-notes/docker-compose/
 ---
 
+## 1.27.4
+(2020-09-24)
+
+{% comment %}
+### Bugs
+{% endcomment %}
+{: #bugs }
+### バグ
+
+- バインドマウントにおけるパス確認を削除しました。
+
+- v1 でない場合のポート出力を長い書式に修正しました。
+
+- Docker ソケットアドレスにプロトコルを追加しました。
+
 ## 1.27.3
 (2020-09-16)
 
 {% comment %}
 ### Bugs
 {% endcomment %}
-{: #bugs }
+{: #bugs-1}
 ### バグ
 
 {% comment %}
@@ -47,7 +62,7 @@ redirect_from:
 {% comment %}
 ### Bugs
 {% endcomment %}
-{: #bugs-1 }
+{: #bugs-2 }
 ### バグ
 
 {% comment %}
@@ -61,7 +76,7 @@ redirect_from:
 {% comment %}
 ### Bugs
 {% endcomment %}
-{: #bugs-2 }
+{: #bugs-3 }
 ### バグ
 
 {% comment %}
@@ -131,7 +146,7 @@ redirect_from:
 {% comment %}
 ### Bugs
 {% endcomment %}
-{: #bugs-3 }
+{: #bugs-4 }
 ### バグ
 
 {% comment %}
