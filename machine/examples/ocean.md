@@ -1,44 +1,101 @@
 ---
 description: Using Docker Machine to provision hosts on DigitalOcean
 keywords: docker, machine, cloud, digitalocean
-title: DigitalOcean example
+title: DigitalOcean 利用例
 hide_from_sitemap: true
 ---
 
+{% comment %}
 Follow along with this example to create a Dockerized [DigitalOcean](https://digitalocean.com) Droplet (cloud host).
+{% endcomment %}
+以下に示す例に従って、Docker 化された [DigitalOcean](https://digitalocean.com) ドロップレット（クラウドホスト）を生成します。
 
+{% comment %}
 ### Step 1. Create a DigitalOcean account
+{% endcomment %}
+{: #step-1-create-a-digitalocean-account }
+### ステップ 1. DigitalOcean アカウントの生成
 
+{% comment %}
 If you have not done so already, go to [DigitalOcean](https://digitalocean.com), create an account, and log in.
+{% endcomment %}
+[DigitalOcean](https://digitalocean.com) のアカウントをまだ生成していない場合は、サイトにアクセスしてアカウントを生成し、ログインします。
 
+{% comment %}
 ### Step 2. Generate a personal access token
+{% endcomment %}
+{: #step-2-generate-a-personal-access-token }
+### ステップ 2. 個人用アクセストークンの生成
 
+{% comment %}
 To generate your access token:
+{% endcomment %}
+個人用のアクセストークンを以下のようにして生成します。
 
+{% comment %}
 1.  Go to the DigitalOcean administrator console and click **API** in the header.
+{% endcomment %}
+1.  DigitalOcean の管理コンソールにアクセスし、ヘッダーにある **API** をクリックします。
 
+    {% comment %}
     ![Click API in DigitalOcean console](../img/ocean_click_api.png)
+    {% endcomment %}
+    ![DigitalOcean コンソールでの API クリック](../img/ocean_click_api.png)
 
+{% comment %}
 2.  Click **Generate new token** to get to the token generator.
+{% endcomment %}
+2.  **Generate new token**（新たなトークンの生成）をクリックしてトークン生成画面に進みます。
 
+    {% comment %}
     ![Generate token](../img/ocean_gen_token.png)
+    {% endcomment %}
+    ![トークンの生成](../img/ocean_gen_token.png)
 
+{% comment %}
 3.  Give the token a descriptive name, make sure the **Write (Optional)** checkbox is checked, and click **Generate Token**.
+{% endcomment %}
+3.  トークンに対するわかりやすい名前を入力して、チェックボックス **Write (Optional)** をチェックします。
+    そして **Generate Token**（トークンの生成）をクリックします。
 
+    {% comment %}
     ![Name and generate token](../img/ocean_token_create.png)
+    {% endcomment %}
+    ![トークンの命名と生成](../img/ocean_token_create.png)
 
+{% comment %}
 4.  Grab (copy to clipboard) the generated big long hex string and store it somewhere safe.
+{% endcomment %}
+4.  画面上に生成された長い 16 進数文字列を取得して（クリップボードにコピーして）どこか安全な場所に保存します。
 
+    {% comment %}
     ![Copy and save personal access token](../img/ocean_save_token.png)
+    {% endcomment %}
+    ![個人用アクセストークンのコピーと保存](../img/ocean_save_token.png)
 
+    {% comment %}
     This is the personal access token used in the next step to create your cloud server.
+    {% endcomment %}
+    これが個人用のアクセストークンであり、クラウドサーバー生成のために次のステップで利用します。
 
+{% comment %}
 ### Step 3. Use Machine to create the Droplet
+{% endcomment %}
+{: #step-3-use-machine-to-create-the-droplet }
+### ステップ 3. Machine を使ったドロップレットの生成
 
 
+{% comment %}
 1.  Run `docker-machine create` with the `digitalocean` driver and pass your key to the `--digitalocean-access-token` flag, along with a name for the new cloud server.
+{% endcomment %}
+1.  ドライバーに`digitalocean`を指定して`docker-machine create`コマンドを実行します。
+    トークンは`--digitalocean-access-token`フラグに指定します。
+    また新たなクラウドサーバーに対する名前を指定します。
 
+    {% comment %}
     For this example, the new Droplet is called `docker-sandbox`:
+    {% endcomment %}
+    以下の例では、新たなドロップレットを`docker-sandbox`とします。
 
     ```none
     $ docker-machine create --driver digitalocean --digitalocean-access-token xxxxx docker-sandbox
@@ -58,28 +115,58 @@ To generate your access token:
     To see how to connect Docker to this machine, run: docker-machine env docker-sandbox
     ```
 
+      {% comment %}
       When the Droplet is created, Docker generates a unique SSH key and stores it on your local system in `~/.docker/machines`. Initially, this is used to provision the host. Later, it's used under the hood to access the Droplet directly with the `docker-machine ssh` command. Docker Engine is installed on the cloud server and the daemon is configured to accept remote connections over TCP using TLS for authentication.
+      {% endcomment %}
+      ドロップレットが生成されると、Docker はユニークな SSH 鍵を生成して、ローカルシステムの`~/.docker/machines`に保存します。
+      はじめにこの鍵は、ホストのプロビジョニングに用いられます。
+      そして後には、`docker-machine ssh`コマンドを通じて、ドロップレットに直接アクセスするために用いられます。
+      Docker Engine はクラウドサーバー上にインストールされ、Docker デーモンの TCP リモート接続を可能とするために TLS 認証を用いるように設定されます。
 
+{% comment %}
 2. Go to the DigitalOcean console to view the new Droplet.
+{% endcomment %}
+2. DigitalOcean コンソールにアクセスして、新たなドロップレットを確認してみます。
 
+    {% comment %}
     ![Droplet in DigitalOcean created with Machine](../img/ocean_droplet.png)
+    {% endcomment %}
+    ![Machine により生成された DigitalOcean のドロップレット](../img/ocean_droplet.png)
 
+{% comment %}
 3. At the command terminal, run `docker-machine ls`.
+{% endcomment %}
+3. コマンドターミナル画面から`docker-machine ls`を実行します。
 
         $ docker-machine ls
         NAME             ACTIVE   DRIVER         STATE     URL                         SWARM
         default          -        virtualbox     Running   tcp://192.168.99.100:2376
         docker-sandbox   *        digitalocean   Running   tcp://45.55.139.48:2376
 
+    {% comment %}
     The new `docker-sandbox` machine is running, and it is the active host as
     indicated by the asterisk (\*). When you create a new machine, your command
     shell automatically connects to it. If for some reason your new machine is
     not the active host, run `docker-machine env docker-sandbox`, followed by
     `eval $(docker-machine env docker-sandbox)` to connect to it.
+    {% endcomment %}
+    新たな`docker-sandbox`マシンが実行されています。
+    それがアクティブホストとなっていることが、アスタリスク（\*）の表示からわかります。
+    さらに新たなマシンを生成すると、コマンドシェルは自動的にそのマシンに接続されます。
+    何らかの理由によりマシンがアクティブホストでない場合は、`docker-machine env docker-sandbox`を実行した上で、`eval $(docker-machine env docker-sandbox)`を実行し、マシンへの接続を行います。
 
+{% comment %}
 ### Step 4. Run Docker commands on the Droplet
+{% endcomment %}
+{: #step-4-run-docker-commands-on-the-droplet }
+### ステップ 4. ドロップレット上での Docker コマンド実行
 
+{% comment %}
 1. Run some `docker-machine` commands to inspect the remote host. For example, `docker-machine ip <machine>` gets the host IP address and `docker-machine inspect <machine>` lists all the details.
+{% endcomment %}
+1. リモートホストが確認できる`docker-machine`コマンドを実行します。
+   たとえば`docker-machine ip <マシン名>`は、ホストの IP アドレスを取得します。
+   また`docker-machine inspect <マシン名>`はマシンの詳細を一覧表示します。
 
         $ docker-machine ip docker-sandbox
         104.131.43.236
@@ -99,11 +186,21 @@ To generate your access token:
             "SwarmDiscovery": "",
             ...
 
+{% comment %}
 2. Verify Docker Engine is installed correctly by running `docker` commands.
+{% endcomment %}
+2. Docker Engine が正しくインストールできていることを確認するために`docker`コマンドを実行します。
 
+    {% comment %}
     Start with something basic like `docker run hello-world`, or for a more interesting test, run a Dockerized webserver on your new remote machine.
+    {% endcomment %}
+    たとえば`docker run hello-world`のような簡単なコマンドから実行してみてください。
+    あるいはもっとおもしろい確認として、Docker 化されたウェブサーバーをリモートマシン上に起動してみます。
 
+    {% comment %}
     In this example, the `-p` option is used to expose port 80 from the `nginx` container and make it accessible on port `8000` of the `docker-sandbox` host.
+    {% endcomment %}
+    以下の例において`-p`オプションは、`nginx`コンテナーのポート 80 を公開する指定であり、`docker-sandbox`ホストのポート`8000`からアクセスできるようにします。
 
         $ docker run -d -p 8000:80 --name webserver kitematic/hello-world-nginx
         Unable to find image 'kitematic/hello-world-nginx:latest' locally
@@ -115,13 +212,28 @@ To generate your access token:
         Status: Downloaded newer image for kitematic/hello-world-nginx:latest
         942dfb4a0eaae75bf26c9785ade4ff47ceb2ec2a152be82b9d7960e8b5777e65
 
+    {% comment %}
     In a web browser, go to `http://<host_ip>:8000` to bring up the webserver home page. You got the `<host_ip>` from the output of the `docker-machine ip <machine>` command you ran in a previous step. Use the port you exposed in the `docker run` command.
+    {% endcomment %}
+    ウェブブラウザーから`http://<ホストIP>:8000`にアクセスして、ウェブサーバーのホームページを開きます。
+    `<host_ip>`は、前のステップにおいて実行したコマンド`docker-machine ip <マシン名>`の出力結果から、すでに取得できているものです。
+    また指定するポートは、`docker run`コマンドにおいて指定したものです。
 
+    {% comment %}
     ![nginx webserver](../img/nginx-webserver.png)
+    {% endcomment %}
+    ![Nginx ウェブサーバー](../img/nginx-webserver.png)
 
+{% comment %}
 ### Step 5. Use Machine to remove the Droplet
+{% endcomment %}
+{: #step-5-use-machine-to-remove-the-droplet }
+### ステップ 5. Machine を使ったドロップレットの削除
 
+{% comment %}
 To remove a host and all of its containers and images, first stop the machine, then use `docker-machine rm`:
+{% endcomment %}
+ホストとそのコンテナーやイメージを削除するには、その前にマシンを停止させ、それから`docker-machine rm`コマンドを実行します。
 
     $ docker-machine stop docker-sandbox
     $ docker-machine rm docker-sandbox
@@ -132,17 +244,35 @@ To remove a host and all of its containers and images, first stop the machine, t
     NAME      ACTIVE   DRIVER       STATE     URL                         SWARM
     default   *        virtualbox   Running   tcp:////xxx.xxx.xx.xxx:xxxx
 
+{% comment %}
 If you monitor the DigitalOcean console while you run these commands, notice
 that it updates first to reflect that the Droplet was stopped, and then removed.
+{% endcomment %}
+上のコマンド実行の際に DigitalOcean コンソールを確認していたら、まずドロップレットが停止され、次にドロップレットが削除される様子がわかります。
 
+{% comment %}
 If you create a host with Docker Machine, but remove it through the cloud
 provider console, Machine loses track of the server status. Use the
 `docker-machine rm` command for hosts you create with `docker-machine create`.
+{% endcomment %}
+Docker Machine を使ってホストを生成しておいて、その削除をクラウドプロバイダーコンソールから行ったとしたら、Docker Machine はサーバーの状態を追跡できないことになります。
+`docker-machine create`を使って生成したホストは、`docker-machine rm`コマンドを使うようにしてください。
 
+{% comment %}
 ## Where to go next
+{% endcomment %}
+{: #where-to-go-next }
+## 次に読むものは
 
+{% comment %}
 -   [Understand Machine concepts](../concepts.md)
 -   [Docker Machine driver reference](../drivers/index.md)
 -   [Docker Machine subcommand reference](../reference/index.md)
 -   [Create containers for your Docker Machine](../../get-started/part2.md)
 -   [Provision a Docker Swarm cluster with Docker Machine](../../swarm/provision-with-machine.md)
+{% endcomment %}
+-   [Machine の考え方](../concepts.md)
+-   [Docker Machine ドライバーライセンス](../drivers/index.md)
+-   [Docker Machine サブコマンドリファレンス](../reference/index.md)
+-   [Docker Machine におけるコンテナー生成](../../get-started/part2.md)
+-   [Docker Machine を使った Docker Swarm クラスターのプロビジョニング](../../swarm/provision-with-machine.md)

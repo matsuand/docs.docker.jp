@@ -1347,15 +1347,15 @@ manuals:
     - path: /machine/get-started/
       title: ローカルVMを使ってはじめよう
     - path: /machine/get-started-cloud/
-      title: Provision hosts in the cloud
-    - sectiontitle: 例から学ぶ
+      title: クラウドへのホストのプロビジョニング
+    - sectiontitle: 利用例から学ぶ
       section:
       - path: /machine/examples/ocean/
-        title: Provision Digital Ocean Droplets
+        title: Digital Ocean Droplets のプロビジョン
       - path: /machine/examples/aws/
-        title: Provision AWS EC2 instances
+        title: AWS EC2 インスタンスのプロビジョン
       - path: /machine/concepts/
-        title: Machine concepts and help
+        title: Machine の考え方とヘルプ
       - sectiontitle: Machine (docker-machine) CLI
         section:
         - path: /machine/reference/
@@ -1439,13 +1439,13 @@ manuals:
         - path: /machine/drivers/vsphere/
           title: VMware vSphere
       - path: /machine/migrate-to-machine/
-        title: Migrate from Boot2Docker to Machine
+        title: Boot2Docker から Machine への移行
   - sectiontitle: Docker Toolbox (legacy)
     section:
     - path: /toolbox/overview/
       title: Toolbox 概要
     - path: /toolbox/toolbox_install_mac/
-      title: Install Toolbox on Mac
+      title: Toolbox on Mac のインストール
     - path: /toolbox/toolbox_install_windows/
       title: Toolbox on Windows のインストール
   - sectiontitle: Kitematic
@@ -1459,7 +1459,7 @@ manuals:
     - path: /kitematic/rethinkdb-dev-database/
       title: Creating a local RethinkDB database for development
     - path: /kitematic/faq/
-      title: よく尋ねられる質問
+      title: よくたずねられる質問
     - path: /kitematic/known-issues/
       title: 既知の問題
     - path: /toolbox/faqs/troubleshoot/

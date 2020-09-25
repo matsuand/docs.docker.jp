@@ -1,8 +1,8 @@
 ---
 description: Examples of cloud installs
 keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
-title: Learn by example
+title: 利用例から学ぶ
 hide_from_sitemap: true
 ---
--   [DigitalOcean Example](ocean.md)
--   [AWS Example](aws.md)
+-   [DigitalOcean 利用例](ocean.md)
+-   [AWS 利用例](aws.md)

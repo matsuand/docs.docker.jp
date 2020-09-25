@@ -17,8 +17,8 @@ GitHub 上の [docker/machine リリースページ](https://github.com/docker/m
 {% comment %}
 ## Install Docker Machine
 {% endcomment %}
-## Docker Machine のインストール
 {: #install-docker-machine }
+## Docker Machine のインストール
 
 {% comment %}
 1.  Install [Docker](../engine/install/index.md){: target="_blank" class="_" }.
@@ -90,8 +90,8 @@ GitHub 上の [docker/machine リリースページ](https://github.com/docker/m
 {% comment %}
 ## Install bash completion scripts
 {% endcomment %}
-## bash 補完スクリプトのインストール
 {: #install-bash-completion-scripts }
+## bash 補完スクリプトのインストール
 
 {% comment %}
 The Machine repository supplies several `bash` scripts that add features such
@@ -155,8 +155,8 @@ target="_blank" class="_"}にコメントとして記述されています。
 {% comment %}
 ## How to uninstall Docker Machine
 {% endcomment %}
-## Docker Machine のアンインストール
 {: #how-to-uninstall-docker-machine }
+## Docker Machine のアンインストール
 
 {% comment %}
 To uninstall Docker Machine:
@@ -213,8 +213,8 @@ VM に対しては、それがローカルでもリモートでも影響しま�
 {% comment %}
 ## Where to go next
 {% endcomment %}
-## 次はどこへ
 {: #where-to-go-next }
+## 次に読むものは
 
 {% comment %}
 -  [Docker Machine overview](overview.md)
@@ -224,7 +224,7 @@ VM に対しては、それがローカルでもリモートでも影響しま�
 -  [Docker Machine subcommand reference](reference/index.md)
 {% endcomment %}
 -  [Docker Machine 概要](overview.md)
--  [仮想環境を用いてローカルシステム上](get-started.md)に Docker ホストを生成して実行
--  [クラウドプロバイダー](get-started-cloud.md)上に複数の Docker ホストを実現
+-  [仮想環境を用いてローカルシステム上](get-started.md) に Docker ホストを生成して実行
+-  [クラウドプロバイダー](get-started-cloud.md) 上に複数の Docker ホストを実現
 -  [Docker Machine ドライバーリファレンス](drivers/index.md)
 -  [Docker Machine サブコマンドリファレンス](reference/index.md)
