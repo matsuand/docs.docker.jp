@@ -284,6 +284,11 @@ At this point, you've installed Docker Desktop on your development machine, and 
 [2 部へ >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}
 
 {% comment %}
+For information on how to build and run your first containerized application using Node.js, go to [Build your Node.js image](/nodejs/build-images.md).
+{% endcomment %}
+Node.js を使ったはじめてのコンテナー化アプリケーションをビルドして実行する方法は、[Node.js イメージのビルド](/nodejs/build-images.md) を参照してください。
+
+{% comment %}
 ## CLI references
 {% endcomment %}
 {: #cli-references }

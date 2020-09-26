@@ -4,7 +4,7 @@ horizontalnav:
   path: /
   node: home
 - title: ガイド
-  path: /develop/
+  path: /get-started/
   node: guides
 - title: 製品マニュアル
   path: /engine/
@@ -19,12 +19,12 @@ horizontalnav:
 home: {}
 
 guides:
+- title: Docker 概要
+  path: /get-started/overview/
 - title: Docker の入手
   path: /get-docker/
 - sectiontitle: はじめよう
   section:
-  - path: /get-started/overview/
-    title: Docker 概要
   - sectiontitle: クイックスタート
     section:
     - title: "1部: 概要と準備"
@@ -33,6 +33,14 @@ guides:
       path: /get-started/part2/
     - title: "3部: Docker Hub におけるイメージ共有"
       path: /get-started/part3/
+  - sectiontitle: Node.js
+    section:
+    - title: "イメージのビルド"
+      path: /get-started/nodejs/build-images/
+    - title: "コンテナー実行"
+      path: /get-started/nodejs/run-containers/
+    - title: "開発"
+      path: /get-started/nodejs/develop/
   - path: /get-started/resources/
     title: "学習のための各種情報"
 - sectiontitle: Docker を用いた開発

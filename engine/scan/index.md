@@ -136,6 +136,7 @@ The high-level `docker scan` command scans local images using the image name or 
 | `--token string`  | 認証トークンを使ってサードパーティー製スキャンプロバイダーにログインします。|
 | `--version` | Docker Scan プラグインのバージョンを表示します。|
 
+
 {% comment %}
 ## How to Scan images
 {% endcomment %}
@@ -386,6 +387,8 @@ Tested 200 dependencies for known issues, found 157 issues.
 
 For more free scans that keep your images secure, sign up to Snyk at https://dockr.ly/3ePqVcp.
 ```
+
+For more information about the vulnerability data, see [Docker Vulnerability Scanning CLI Cheat Sheet](https://goto.docker.com/rs/929-FJL-178/images/cheat-sheet-docker-desktop-vulnerability-scanning-CLI.pdf){: target="_blank" class="_"}.
 
 {% comment %}
 ## Provider authentication
