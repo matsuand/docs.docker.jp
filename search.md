@@ -4,7 +4,7 @@ keywords: Search, Docker, documentation, manual, guide, reference, api
 noratings: true
 notoc: true
 notags: true
-title: "Docs search"
+title: "Docs 検索"
 skip_read_time: true
 ---
 
@@ -29,7 +29,7 @@ skip_read_time: true
 <div id="my-cse1">
 <script>
   (function() {
-    var cx = '005610573923180467403:iwlnuvjqpv4';
+    var cx = 'dcbb7d4804f37ddab';
     var gcse = document.createElement('script');
     gcse.type = 'text/javascript';
     gcse.async = true;
@@ -51,7 +51,7 @@ setTimeout(function(){
       $("#st-search-input").focus();
       // Update heading with term user searched for
       let currHeading = $("h1").text();
-      $("h1").text(currHeading + " results for: " + searchTerm);
+      $("h1").text(currHeading + " 検索結果: " + searchTerm);
     }
   });
 }, 1);

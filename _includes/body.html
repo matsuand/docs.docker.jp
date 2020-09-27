@@ -8,7 +8,7 @@
                 <div class="col-body">
                     <main class="col-content content">
                         <section class="section">
-                            {% if page.url != '/' %}
+                            {% if page.url != '{{ site.baseurl }}' %}
                             {% if page.title %}
                             <h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
                             <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
@@ -25,7 +25,7 @@
                                 {%- for keyword in keywords -%}
                                 {%- assign strippedKeyword = keyword | strip -%}
                                 <a
-                                    href="https://docs.docker.com/search/?q={{ strippedKeyword }}">{{ strippedKeyword }}</a>
+                                    href="{{ site.url }}{{ site.baseurl }}?q={{ strippedKeyword }}">{{ strippedKeyword }}</a>
                                 {%- unless forloop.last %}, {% endunless -%}
                                 {% endfor -%}
                             </span>
@@ -136,5 +136,5 @@
     <script src="{{ site.baseurl }}/js/glossary.js"></script>
     <script defer src="{{ site.baseurl }}/js/docs.js"></script>
     <script defer src="{{ site.baseurl }}/js/toc.js"></script>
-    <script defer src="/js/search.js"></script>
+    <script defer src="{{ site.baseurl }}/js/search.js"></script>
 </body>

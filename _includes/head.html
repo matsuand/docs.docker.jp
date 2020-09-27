@@ -53,10 +53,10 @@
   <meta property="og:locale" content="ja_JP" />
   <meta name="description" content="{{ page.description }}" />
   <meta property="og:description" content="{{ page.description }}" />
-  <link rel="canonical" href="{{ page.url }}" />
-  <meta property="og:url" content="https://docs.docker.com{{ page.url }}" />
+  <link rel="canonical" href="{{ site.baseurl }}{{ page.url }}" />
+  <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}{{ page.url }}" />
   <meta property="og:site_name" content="Docker ドキュメント" />
-  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title }}","description":"{{ page.description }}","url":"https://docs.docker.com{{ page.url }}"}</script>
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"WebPage","headline":"{{ page.title }}","description":"{{ page.description }}","url":"{{ site.url }}{{ site.baseurl }}{{ page.url }}"}</script>
   <!-- END SEO STUFF -->
   {% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
 </head>
