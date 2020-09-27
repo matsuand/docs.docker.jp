@@ -25,7 +25,7 @@
                                 {%- for keyword in keywords -%}
                                 {%- assign strippedKeyword = keyword | strip -%}
                                 <a
-                                    href="{{ site.url }}{{ site.baseurl }}?q={{ strippedKeyword }}">{{ strippedKeyword }}</a>
+                                    href="{{ site.baseurl }}/search/?q={{ strippedKeyword }}">{{ strippedKeyword }}</a>
                                 {%- unless forloop.last %}, {% endunless -%}
                                 {% endfor -%}
                             </span>
