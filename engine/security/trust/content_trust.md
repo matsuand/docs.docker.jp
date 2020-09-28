@@ -277,12 +277,12 @@ Unique Name (GUN). If this is the first time you are adding a delegation to that
 repository, this command will also initiate the repository, using a local Notary
 canonical root key. To understand more about initiating a repository, and the
 role of delegations, head to
-[delegations for content trust](trust_delegation/#managing-delegations-in-a-notary-server).
+[delegations for content trust](trust_delegation.md).
 {% endcomment %}
 次に委任鍵ペアの公開鍵を Notary サーバーへ追加します。
 これは Notary の Global Unique Name (GUN) と呼ばれるイメージリポジトリとして特化したものです。
 委任鍵ペアをリポジトリに追加する初回は、このコマンド実行において、ローカル Notary サーバーの正規のルート鍵を使って、リポジトリが初期化されます。
-リポジトリの初期化と委任鍵の役割に関しては、[コンテントトラストの委任鍵](trust_delegation/#managing-delegations-in-a-notary-server) を参照してください。
+リポジトリの初期化と委任鍵の役割に関しては、[コンテントトラストの委任鍵](trust_delegation.md) を参照してください。
 
 ```
 $ docker trust signer add --key cert.pem jeff registry.example.com/admin/demo

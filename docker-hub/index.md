@@ -272,10 +272,10 @@ Congratulations! You've successfully:
 - Create an [organization](orgs.md) to use Docker Hub with your team.
 - Automatically build container images from code through [builds](builds/index.md).
 - [Explore](https://hub.docker.com/explore) official & publisher Images
-- [Upgrade your plan](upgrade.md) to push additional private Docker images to
+- [Upgrade your plan](billing/upgrade.md) to push additional private Docker images to
 Docker Hub
 {% endcomment %}
 - [組織](orgs.md)（organization）を生成して開発チームにより Docker Hub を利用します。
-- [ビルド](builds/index.md)からのコードを用いてコンテナーイメージを自動ビルドします。
-- 公式イメージや開発提供イメージを[検索](https://hub.docker.com/explore)します。
-- [開発作業を更新](upgrade.md)してプライベートな Docker イメージを Docker Hub に追加します。
+- [ビルド](builds/index.md) からのコードを用いてコンテナーイメージを自動ビルドします。
+- 公式イメージや開発提供イメージを [検索](https://hub.docker.com/explore) します。
+- [開発作業を更新](billing/upgrade.md) してプライベートな Docker イメージを Docker Hub に追加します。
