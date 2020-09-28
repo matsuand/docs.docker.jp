@@ -460,17 +460,17 @@ examples: |-
   Removing intermediate container 02071fceb21b
   ```
 
-  上の例では `PATH` に `.` を指定しています。
-  そこでローカルディレクトリ内のファイルが `tar` によってまとめられて Docker デーモンに送られます。
-  `PAHT` は、Docker デーモン上でビルドが行われる際の「コンテキスト」として、対象とするファイルを探し出す場所を意味します。
+  上の例では`PATH`に`.`を指定しています。
+  そこでローカルディレクトリ内のファイルが`tar`によってまとめられて Docker デーモンに送られます。
+  `PAHT`は、Docker デーモン上でビルドが行われる際の「コンテキスト」として、対象とするファイルを探し出す場所を意味します。
   デーモンというものは、リモートマシン上でも起動可能であることを思い出してください。
-  クライアント側（`docker build` を実行するマシン）において Dockerfile に何かが起こったとしても、それを検知することはできません。
-  つまり `PATH` 上のファイルは **すべて** 送信されます。
+  クライアント側（`docker build`を実行するマシン）において Dockerfile に何かが起こったとしても、それを検知することはできません。
+  つまり`PATH`上のファイルは **すべて** 送信されます。
   ただし Dockerfile 内の [**ADD**](../builder.md#add) が扱うファイルは別です。
 
-  コンテキストがローカルマシンから Docker デーモンに送信される様子は、`docker` クライアントにおいて「Sending build context」（ビルドコンテキストを送信中）というメッセージからわかります。
+  コンテキストがローカルマシンから Docker デーモンに送信される様子は、`docker`クライアントにおいて「Sending build context」（ビルドコンテキストを送信中）というメッセージからわかります。
 
-  ビルド処理を終えたときに中間コンテナーを残しておきたい場合は `--rm=false` を用います。
+  ビルド処理を終えたときに中間コンテナーを残しておきたい場合は`--rm=false`を用います。
   これを用いてもビルドキャッシュには影響しません。
 
   {: #build-with-url }
@@ -482,7 +482,7 @@ examples: |-
 
   上では GitHub リポジトリをクローンして、クラウドリポジトリをコンテキストとします。
   リポジトリのルートにある Dockerfile が、処理における Dockerfile として用いられます。
-  スキーム指定 `git://` や `git@` を使って、どのような Git リポジトリでも指定することができます。
+  スキーム指定`git://`や`git@`を使って、どのような Git リポジトリでも指定することができます。
 
   ```bash
   $ docker build -f ctx/Dockerfile http://server/ctx.tar.gz
@@ -500,12 +500,12 @@ examples: |-
   Successfully built 377c409b35e4
   ```
 
-  上では URL `http://server/ctx.tar.gz` を Docker デーモンに送っています。
+  上では URL`http://server/ctx.tar.gz`を Docker デーモンに送っています。
   こうすると、指定された tarball をダウンロードし、伸張（解凍）が行われます。
-  パラメーター `-f ctx/Dockerfile` は、イメージをビルドする際に利用する `Dockerfile` を `ctx.tar.gz` 内部のパスとして指定しています。
-  その `Dockerfile` 内に `ADD` コマンドがあって、それがローカルパスを参照しているものであれば、それはすべて `ctx.tar.gz` 内ファイルのルートからの相対パスでなければなりません。
-  上の例において tarball は `ctx/` というディレクトリを含むものとしています。
-  したがって `ADD ctx/container.cfg /` という命令であれば、期待どおりに動作します。
+  パラメーター`-f ctx/Dockerfile`は、イメージをビルドする際に利用する`Dockerfile`を`ctx.tar.gz`内部のパスとして指定しています。
+  その`Dockerfile`内に`ADD`コマンドがあって、それがローカルパスを参照しているものであれば、それはすべて`ctx.tar.gz`内ファイルのルートからの相対パスでなければなりません。
+  上の例において tarball は`ctx/`というディレクトリを含むものとしています。
+  したがって`ADD ctx/container.cfg /`という命令であれば、期待どおりに動作します。
 
   {: #build-with-- }
   ### - を使ったビルド
@@ -514,15 +514,15 @@ examples: |-
   $ docker build - < Dockerfile
   ```
 
-  上の例ではコンテキストを利用せず、Dockerfile を `STDIN` から読み込みます。
+  上の例ではコンテキストを利用せず、Dockerfile を`STDIN`から読み込みます。
   コンテキストがないわけですから、ローカルディレクトリ内から Docker デーモンに送信されるものは何もないということです。
-  コンテキストがないため、Dockerfile 内の `ADD` は、リモート URL を参照しているものだけが正しく動作します。
+  コンテキストがないため、Dockerfile 内の`ADD`は、リモート URL を参照しているものだけが正しく動作します。
 
   ```bash
   $ docker build - < context.tar.gz
   ```
 
-  上の例は、圧縮されたコンテキストを `STDIN` から読み込んでイメージをビルドします。
+  上の例は、圧縮されたコンテキストを`STDIN`から読み込んでイメージをビルドします。
   サポートされるフォーマットは bzip2、gzip、xz です。
 
   {: #use-a-dockerignore-file }
@@ -551,64 +551,59 @@ examples: |-
   Successfully built 99cc1ad10469
   ```
 
-  This example shows the use of the `.dockerignore` file to exclude the `.git`
-  directory from the context. Its effect can be seen in the changed size of the
-  uploaded context. The builder reference contains detailed information on
-  [creating a .dockerignore file](../builder.md#dockerignore-file).
+  上の例では`.dockerignore`ファイルを利用して、コンテキストから`.git`ディレクトリを除外しています。
+  その効果は、アップロードされたコンテキストの変更後のサイズからわかります。
+  Dockerfile リファレンスにおいて、[.dockerignore ファイルの生成](../builder.md#dockerignore-file) を詳しく説明しています。
 
-  When using the [BuildKit backend](../builder.md#buildkit), `docker build` searches
-  for a `.dockerignore` file relative to the Dockerfile name. For example, running
-  `docker build -f myapp.Dockerfile .` will first look for an ignore file named
-  `myapp.Dockerfile.dockerignore`. If such a file is not found, the `.dockerignore`
-  file is used if present. Using a Dockerfile based `.dockerignore` is useful if a
-  project contains multiple Dockerfiles that expect to ignore different sets of
-  files.
+  [BuildKit バックエンド](../builder.md#buildkit) を利用すると、`docker build`コマンドは Dockerfile 名に関連づいた`.dockerignore`ファイルを検索するようになります。
+  たとえば`docker build -f myapp.Dockerfile .`を実行した場合、最初に検索される ignore ファイルは`myapp.Dockerfile.dockerignore`というファイルです。
+  そういったファイルがみつからなかったら、次に`.dockerignore`ファイルがあればこれが利用されます。
+  `.dockerignore`と関連づいて Dockerfile が利用できるのは便利なことです。
+  たとえばプロジェクト内に複数の Dockerfile があって、それぞれに異なる ignore ファイルの設定が必要な場合です。
 
 
-  ### Tag an image (-t)
+  {: #tag-an-image--t }
+  ### イメージへのタグづけ (-t)
 
   ```bash
   $ docker build -t vieux/apache:2.0 .
   ```
 
-  This will build like the previous example, but it will then tag the resulting
-  image. The repository name will be `vieux/apache` and the tag will be `2.0`.
-  [Read more about valid tags](tag.md).
+  上のコマンドは前の例と同じようなビルドを行います。
+  ただし結果となるイメージにタグをつけます。
+  リポジトリ名が`vieux/apache`であり、タグ名が`2.0`です。
+  詳しくは [適正なタグ](tag.md) を参照してください。
 
-  You can apply multiple tags to an image. For example, you can apply the `latest`
-  tag to a newly built image and add another tag that references a specific
-  version.
-  For example, to tag an image both as `whenry/fedora-jboss:latest` and
-  `whenry/fedora-jboss:v2.1`, use the following:
+  1 つのイメージに対しては複数のタグをつけることができます。
+  たとえば最新のビルドイメージに対して`latest`というタグをつけ、特定のバージョンを指し示すために別のタグをつけるといった具合です。
+  例として 2 つのイメージを対象にして`whenry/fedora-jboss:latest`と`whenry/fedora-jboss:v2.1`のように設定するには、以下を実行します。
 
   ```bash
   $ docker build -t whenry/fedora-jboss:latest -t whenry/fedora-jboss:v2.1 .
   ```
 
-  ### Specify a Dockerfile (-f)
+  {: #specify-a-dockerfile--f }
+  ### Dockerfile の指定 (-f)
 
   ```bash
   $ docker build -f Dockerfile.debug .
   ```
 
-  This will use a file called `Dockerfile.debug` for the build instructions
-  instead of `Dockerfile`.
+  上では、ビルドの命令を行うファイルとして`Dockerfile`ではなく`Dockerfile.debug`を指定しています。
 
   ```bash
   $ curl example.com/remote/Dockerfile | docker build -f - .
   ```
 
-  The above command will use the current directory as the build context and read
-  a Dockerfile from stdin.
+  上のコマンドはカレントディレクトリをビルドコンテキストとし、Dockerfile を標準入力から読み込みます。
 
   ```bash
   $ docker build -f dockerfiles/Dockerfile.debug -t myapp_debug .
   $ docker build -f dockerfiles/Dockerfile.prod  -t myapp_prod .
   ```
 
-  The above commands will build the current build context (as specified by the
-  `.`) twice, once using a debug version of a `Dockerfile` and once using a
-  production version.
+  上の 2 つのコマンドは（ピリオド`.`が指定されているので）カレントディレクトリをビルドコンテキストとして 2 回のビルドを行います。
+  1 度めはデバッグバージョンの`Dockerfile`を使い、2 度めは本番環境バージョンを使います。
 
   ```bash
   $ cd /home/me/myapp/some/dir/really/deep
@@ -616,109 +611,102 @@ examples: |-
   $ docker build -f ../../../../dockerfiles/debug /home/me/myapp
   ```
 
-  These two `docker build` commands do the exact same thing. They both use the
-  contents of the `debug` file instead of looking for a `Dockerfile` and will use
-  `/home/me/myapp` as the root of the build context. Note that `debug` is in the
-  directory structure of the build context, regardless of how you refer to it on
-  the command line.
+  この 2 つの`docker build`コマンドは、まったく同じことを行います。
+  いずれも`Dockerfile`を用いるのではなく、`debug`というファイルの内容を利用しています。
+  そしてビルドコンテキストのルートを`/home/me/myapp`としています。
+  ですから`debug`というファイルは、コマンドライン上でどのように参照していようが、結局はビルドコンテキストのディレクトリ構造内のものとなります。
 
-  > **Note:**
-  > `docker build` will return a `no such file or directory` error if the
-  > file or directory does not exist in the uploaded context. This may
-  > happen if there is no context, or if you specify a file that is
-  > elsewhere on the Host system. The context is limited to the current
-  > directory (and its children) for security reasons, and to ensure
-  > repeatable builds on remote Docker hosts. This is also the reason why
-  > `ADD ../file` will not work.
+  > **メモ**
+  > ビルドコンテキストがアップロードされたときに、ファイルやディレクトリが存在していないと、`docker build`コマンドは`no such file or directory`のエラーを出力します。
+  > よくあるのがコンテキストが存在していない場合や、ホストシステムのまったく別の場所に置かれているファイルを指定したような場合です。
+  > セキュリティ上の理由から、コンテキストはカレントディレクトリ（およびそのサブディレクトリ）に限定されます。
+  > またリモートの Docker ホスト上において何度でも確実にビルドできるものでなければなりません。
+  > `ADD ../file`が動作しないのも、この理由によります。
 
-  ### Use a custom parent cgroup (--cgroup-parent)
+  {: #use-a-custom-parent-cgroup---cgroup-parent }
+  ### 独自の親 cgroup の利用 (--cgroup-parent)
 
-  When `docker build` is run with the `--cgroup-parent` option the containers
-  used in the build will be run with the [corresponding `docker run`
-  flag](../run.md#specify-custom-cgroups).
+  `docker build`において`--cgroup-parent`オプションをつけて実行すると、ビルドに用いられたコンテナーが、[対応する`docker run`フラグ](../run/#specify-custom-cgroups) を用いて実行されることになります。
 
   {: #set-ulimits-in-container---ulimit }
   ### コンテナーの ulimit 設定 (--ulimit)
 
-  Using the `--ulimit` option with `docker build` will cause each build step's
-  container to be started using those [`--ulimit`
-  flag values](run.md#set-ulimits-in-container---ulimit).
+  `docker build`に`--ulimit`オプションを指定すると、各ビルドステップのコンテナーが、この[`--ulimit`フラグ値](run.md#set-ulimits-in-container---ulimit) を用いて開始されます。
 
   {: #set-build-time-variables---build-arg }
-  ### Set build-time variables (--build-arg)
+  ### ビルド時変数の設定 (--build-arg)
 
-  You can use `ENV` instructions in a Dockerfile to define variable
-  values. These values persist in the built image. However, often
-  persistence is not what you want. Users want to specify variables differently
-  depending on which host they build an image on.
+  Dockerfile ファイル内に`ENV`命令を用いれば、変数を定義することができます。
+  その値はビルドされるイメージに保持されます。
+  しかし場合によっては、イメージ内に保持したくないこともあります。
+  イメージをビルドするホストがさまざまであって、変数はそれに応じて設定したくなることがあるからです。
 
-  A good example is `http_proxy` or source versions for pulling intermediate
-  files. The `ARG` instruction lets Dockerfile authors define values that users
-  can set at build-time using the  `--build-arg` flag:
+  これをうまく利用した例として`http_proxy`と、中間ファイルをプルするそのソースバージョンがあります。
+  `ARG`命令には Dockerfile 作者が定義する値が設定されますが、それをビルド時に`--build-arg`フラグを用いて再設定することができます。
 
   ```bash
   $ docker build --build-arg HTTP_PROXY=http://10.20.30.2:1234 --build-arg FTP_PROXY=http://40.50.60.5:4567 .
   ```
 
-  This flag allows you to pass the build-time variables that are
-  accessed like regular environment variables in the `RUN` instruction of the
-  Dockerfile. Also, these values don't persist in the intermediate or final images
-  like `ENV` values do.   You must add `--build-arg` for each build argument.
+  このフラグにはビルド時の変数を設定できます。
+  ちょうど Dockerfile の`RUN`命令において、通常の環境変数にアクセスできることと同じです。
+  また`ENV`における値とは違って、これらの値は中間イメージや最終イメージには残りません。
+  ビルド時の値は、実行のたびに`--build-arg`に与えなければなりません。
 
-  Using this flag will not alter the output you see when the `ARG` lines from the
-  Dockerfile are echoed during the build process.
+  Dockerfile によるビルド処理時に Dockerfile 内の`ARG`命令が出力する表示は、このフラグを使っていても変わることはありません。
 
-  For detailed information on using `ARG` and `ENV` instructions, see the
-  [Dockerfile reference](../builder.md).
+  `ARG`命令と`ENV`命令に関する詳細は [Dockerfile リファレンス](../builder.md) を参照してください。
 
-  You may also use the `--build-arg` flag without a value, in which case the value
-  from the local environment will be propagated into the Docker container being
-  built:
+  `--build-arg`フラグには値を設定しないこともあります。
+  その場合は、ビルドされるコンテナーに対して、ローカルの環境変数の値が与えられます。
 
   ```bash
   $ export HTTP_PROXY=http://10.20.30.2:1234
   $ docker build --build-arg HTTP_PROXY .
   ```
 
-  This is similar to how `docker run -e` works. Refer to the [`docker run` documentation](https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file)
-  for more information.
+  これは`docker run -e`の動作に似ています。
+  詳しくは[`docker run` ドキュメント](http://lfstranslation/docker/engine/reference/commandline/run/#set-environment-variables--e---env---env-file) を参照してください。
 
   {: #optional-security-options---security-opt }
-  ### Optional security options (--security-opt)
+  ### 任意指定のセキュリティオプション (--security-opt)
 
-  This flag is only supported on a daemon running on Windows, and only supports
-  the `credentialspec` option. The `credentialspec` must be in the format
-  `file://spec.txt` or `registry://keyname`.
+  このフラグは Windows 上に起動するデーモンに対してのみサポートされています。
+  そしてサポートされるのは`credentialspec`オプションのみです。
+  `credentialspec`の記述書式は`file://spec.txt`または`registry://keyname`というものでなければなりません。
 
-  ### Specify isolation technology for container (--isolation)
+  {: #specify-isolation-technology-for-container---isolation }
+  ### コンテナーに対する分離技術方式の指定 (--isolation)
 
-  This option is useful in situations where you are running Docker containers on
-  Windows. The `--isolation=<value>` option sets a container's isolation
-  technology. On Linux, the only supported is the `default` option which uses
-  Linux namespaces. On Microsoft Windows, you can specify these values:
+  このオプションは Docker コンテナーを Windows 上で実行する場合に有用なものです。
+  `--isolation=<設定値>`は、コンテナーの分離技術（isolation technology）方式を指定します。
+  Linux 上においては、Linux 名前空間を利用する`default`指定のみがサポートされます。
+  Microsoft Windows の場合、以下の値を設定することができます。
 
 
-  | Value     | Description                                                                                                                                                   |
-  |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | `default` | Use the value specified by the Docker daemon's `--exec-opt` . If the `daemon` does not specify an isolation technology, Microsoft Windows uses `process` as its default value.  |
-  | `process` | Namespace isolation only.                                                                                                                                     |
-  | `hyperv`  | Hyper-V hypervisor partition-based isolation.                                                                                                                 |
+  | 設定値    | 内容説明                                                                                                                                                      |
+  |-----------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | `default` | Docker デーモンの`--exec-opt`の指定に従います。`daemon`に分離技術が指定されていない場合、Microsoft Windows はデフォルトとして`process`を採用します。 |
+  | `process` | 名前空間による分離のみを行います。                                                                                                                   |
+  | `hyperv`  | ハイパーバイザー Hyper-V によるパーティションベースの分離を行います。                                                                                |
 
-  Specifying the `--isolation` flag without a value is the same as setting `--isolation="default"`.
+  `--isolation`フラグに値を設定しなかった場合、`--isolation="default"`と指定したことになります。
 
-  ### Add entries to container hosts file (--add-host)
+  {: #add-entries-to-container-hosts-file---add-host }
+  ### コンテナーの hosts ファイルへの項目追加 (--add-host)
 
-  You can add other hosts into a container's `/etc/hosts` file by using one or
-  more `--add-host` flags. This example adds a static address for a host named
-  `docker`:
+  コンテナーの`/etc/hosts`ファイルに、別のホストの情報を追加することができます。
+  これには`--add-host`フラグを使います。
+  その指定は必要な分だけ行うことができます。
+  以下の例では、`docker`という名前のホストに対するスタティックアドレスを加えるものです。
 
       $ docker build --add-host=docker:10.180.0.1 .
 
-  ### Specifying target build stage (--target)
+  {: #specifying-target-build-stage---target }
+  ### ターゲットとするビルドステージの指定 (--target)
 
-  When building a Dockerfile with multiple build stages, `--target` can be used to
-  specify an intermediate build stage by name as a final stage for the resulting
-  image. Commands after the target stage will be skipped.
+  Dockerfile のビルドにおいてマルチステージビルドを採用している場合、中間にあるビルドステージ名を指定して、これを結果イメージに対する最終ステージとすることができます。
+  指定されたステージ以降にある命令は処理されません。
 
   ```dockerfile
   FROM debian AS build-env
@@ -732,61 +720,57 @@ examples: |-
   $ docker build -t mybuildimage --target build-env .
   ```
 
-  ### Custom build outputs
+  {: #custom-build-outputs }
+  ### 独自のビルド出力
 
-  By default, a local container image is created from the build result. The
-  `--output` (or `-o`) flag allows you to override this behavior, and a specify a
-  custom exporter. For example, custom exporters allow you to export the build
-  artifacts as files on the local filesystem instead of a Docker image, which can
-  be useful for generating local binaries, code generation etc.
+  ローカルのコンテナーイメージというものは、デフォルトではビルド結果として生成されるものです。
+  `--output`（`-o`）フラグを用いると、この動作をオーバーライドすることができます。
+  これには独自のエクスポーターを指定します。
+  たとえば独自のエクスポーターによって、ビルド生成結果を Docker イメージとするのではなく、ローカルファイルシステム上のファイルとして出力できるようになります。
+  こういうものがあれば、ローカルの実行モジュール生成やコードジェネレーターに活用できます。
 
-  The value for `--output` is a CSV-formatted string defining the exporter type
-  and options. Currently, `local` and `tar` exporters are supported. The `local`
-  exporter writes the resulting build files to a directory on the client side. The
-  `tar` exporter is similar but writes the files as a single tarball (`.tar`).
+  `--output`に指定するのはカンマ区切りの文字列であり、これによってエクスポーターのタイプとオプションを指定します。
+  今のところサポートされるエクスポーターは`local`と`tar`だけです。
+  `local`エクスポーターは、生成されるビルドファイルを、クライアント側のディレクトリに書き込みます。
+  `tar`エクスポーターはそれと同様ですが、ファイルの書き込みは 1 つの tarball（`.tar`）とします。
 
-  If no type is specified, the value defaults to the output directory of the local
-  exporter. Use a hyphen (`-`) to write the output tarball to standard output
-  (`STDOUT`).
+  タイプが指定されていない場合、デフォルトは local エクスポーターの出力ディレクトリになります。
+  ハイフン（`-`）を指定すると、出力する tarball を標準出力（`STDOUT`）に出力します。
 
-  The following example builds an image using the current directory (`.`) as build
-  context, and exports the files to a directory named `out` in the current directory.
-  If the directory does not exist, Docker creates the directory automatically:
+  以下の例では、ビルドコンテキストをカレントディレクトリ（`.`）としてイメージをビルドします。
+  そして出力ファイルを、カレントディレクトリにある`out`というディレクトリにエクスポートします。
+  そのディレクトリが存在しない場合、Docker はそのディレクトリを自動生成します。
 
   ```bash
   $ docker build -o out .
   ```
 
-  The example above uses the short-hand syntax, omitting the `type` options, and
-  thus uses the default (`local`) exporter. The example below shows the equivalent
-  using the long-hand CSV syntax, specifying both `type` and `dest` (destination
-  path):
+  上の例では短いオプション指定を用いており`type`オプションは省略していました。
+  したがってデフォルトの（`local`）エクスポーターが用いられます。
+  以下の例では同等の指定を長いオプション指定で行い、CSV によって`type`と`dest`（出力パス）を指定しています。
 
   ```bash
   $ docker build --output type=local,dest=out .
   ```
 
-  Use the `tar` type to export the files as a `.tar` archive:
+  タイプとして`tar`を指定すると、ファイルを`.tar`アーカイブとしてエクスポートします。
 
   ```bash
   $ docker build --output type=tar,dest=out.tar .
   ```
 
-  The example below shows the equivalent when using the short-hand syntax. In this
-  case, `-` is specified as destination, which automatically selects the `tar` type,
-  and writes the output tarball to standard output, which is then redirected to
-  the `out.tar` file:
+  以下の例では同時ことを短いオプション指定により行います。
+  この場合、出力先として`-`を指定しているので、タイプとして`tar`が自動的に選択され、tarball を標準出力します。
+  そしてこれを`out.tar`ファイルにリダイレクトします。
 
   ```bash
   docker build -o - . > out.tar
   ```
 
-  The `--output` option exports all files from the target stage. A common pattern
-  for exporting only specific files is to do multi-stage builds and to copy the
-  desired files to a new scratch stage with [`COPY --from`](../builder.md#copy).
+  `--output`オプションでは、ターゲット指定されたステージから全ファイルをエクスポートします。
+  特定ステージのファイルのみをエクスポートするこの方法は、マルチステージビルドによって生成されたファイルを、次の新たなステージのベースとして[`COPY --from`](../builder.md#copy) を使ってコピーする形でよく利用されます。
 
-  The example `Dockerfile` below uses a separate stage to collect the
-  build-artifacts for exporting:
+  以下の`Dockerfile`例ではビルドステージを分けて、エクスポートしたビルド結果を集約しています。
 
   ```dockerfile
   FROM golang AS build-stage
@@ -796,8 +780,8 @@ examples: |-
   COPY --from=build-stage /go/bin/vndr /
   ```
 
-  When building the Dockerfile with the `-o` option, only the files from the final
-  stage are exported to the `out` directory, in this case, the `vndr` binary:
+  Dockerfile によるビルドにおいて`-o`オプションを利用すると、最終ステージにおけるファイルのみが`out`ディレクトリにエクスポートされます。
+  それはこの例では`vndr`バイナリモジュールとなります。
 
   ```bash
   $ docker build -o out .
@@ -819,108 +803,106 @@ examples: |-
   vndr
   ```
 
-  > **Note**
+  > **メモ**
   >
-  > This feature requires the BuildKit backend. You can either
-  > [enable BuildKit](../builder.md#buildkit) or use the [buildx](https://github.com/docker/buildx)
-  > plugin which provides more output type options.
+  > この機能を利用するためには BuildKit バックエンドが必要です。
+  > [BuildKit の有効化](../builder.md#buildkit) を行ってください。
+  > あるいは [buildx](https://github.com/docker/buildx) プラグインを利用すれば、別の出力タイプオプションも提供されます。
 
-  ### Specifying external cache sources
+  {: #specifying-external-cache-sources }
+  ### 外部キャッシュソースの指定
 
-  In addition to local build cache, the builder can reuse the cache generated from
-  previous builds with the `--cache-from` flag pointing to an image in the registry.
+  ローカルのビルドキャッシュだけでなく、ビルド処理では以前のビルドにおいて生成されたキャッシュを再利用できます。
+  これを行うには`--cache-from`フラグを用います。
+  そしてこれがレジストリ内のイメージを指し示すようにします。
 
-  To use an image as a cache source, cache metadata needs to be written into the
-  image on creation. This can be done by setting `--build-arg BUILDKIT_INLINE_CACHE=1`
-  when building the image. After that, the built image can be used as a cache source
-  for subsequent builds.
+  キャッシュソースとしてイメージを指定するためには、そのイメージの生成時にキャッシュメタデータをイメージ内に書き込んでおく必要があります。
+  これはイメージのビルド時に`--build-arg BUILDKIT_INLINE_CACHE=1`を指定します。
+  こうしておくと後々のビルドに対して、キャッシュソースとしてこのイメージが利用できます。
 
-  Upon importing the cache, the builder will only pull the JSON metadata from the
-  registry and determine possible cache hits based on that information. If there
-  is a cache hit, the matched layers are pulled into the local environment.
+  キャッシュをインポートする際に、ビルド処理ではレジストリから JSON メタデータのみをプルします。
+  そしてその情報に基づいて、キャッシュがヒットするかどうかを判断します。
+  キャッシュがヒットすれば、該当するレイヤーがローカル環境にプルされます。
 
-  In addition to images, the cache can also be pulled from special cache manifests
-  generated by [`buildx`](https://github.com/docker/buildx) or the BuildKit CLI
-  (`buildctl`). These manifests (when built with the `type=registry` and `mode=max`
-  options) allow pulling layer data for intermediate stages in multi-stage builds.
+  キャッシュがプルするのはイメージだけではありません。
+  [`buildx`](https://github.com/docker/buildx) や BuildKit CLI（`buildctl`）によって生成される特殊なキャッシュマニフェストもプルすることができます。
+  このようなマニフェストは（ビルド時に`type=registry`と`mode=max`を指定するものであり）、マルチステージビルドにおける中間ステージから、レイヤーデータがプルできるようになります。
 
-  The following example builds an image with inline-cache metadata and pushes it
-  to a registry, then uses the image as a cache source on another machine:
+  以下の例では、インラインキャッシュメタデータを使ってイメージのビルドを行い、レジストリへプッシュします。
+  これにより別マシンにおいて、このイメージをキャッシュソースとして利用できるようにします。
 
   ```bash
   $ docker build -t myname/myapp --build-arg BUILDKIT_INLINE_CACHE=1 .
   $ docker push myname/myapp
   ```
 
-  After pushing the image, the image is used as cache source on another machine.
-  BuildKit automatically pulls the image from the registry if needed.
+  イメージをプッシュした後、別マシンからキャッシュソースとしてこのイメージを利用します。
+  BuildKit が必要に応じてレジストリからイメージを自動的にプルします。
 
   ```bash
-  # on another machine
+  # 別マシン上
   $ docker build --cache-from myname/myapp .
   ```
 
-  > **Note**
+  > **メモ**
   >
-  > This feature requires the BuildKit backend. You can either
-  > [enable BuildKit](../builder.md#buildkit) or use the [buildx](https://github.com/docker/buildx)
-  > plugin. The previous builder has limited support for reusing cache from
-  > pre-pulled images.
+  > この機能を利用するためには BuildKit バックエンドが必要です。
+  > [BuildKit の有効化](../builder.md#buildkit) を行ってください。
+  > あるいは [buildx](https://github.com/docker/buildx) プラグインを利用することもできます。
+  > BuildKit には、プルしたイメージをキャッシュとして再利用する機能には制限があります。
 
   {: #squash-an-images-layers---squash-experimental }
-  ### Squash an image's layers (--squash) （試験的機能）
+  ### イメージへのレイヤーの押し込み (--squash) （試験的機能）
 
   {: #overview }
   #### 概要
 
-  Once the image is built, squash the new layers into a new image with a single
-  new layer. Squashing does not destroy any existing image, rather it creates a new
-  image with the content of the squashed layers. This effectively makes it look
-  like all `Dockerfile` commands were created with a single layer. The build
-  cache is preserved with this method.
+  このオプションは 1 度ビルドしたイメージに対して、その新しいレイヤー群を 1 つのイメージ内に単一のレイヤーとして押し込みます（squash します）。
+  この押し込み処理を行っても、既存のイメージは壊されることはありません。
+  そうはならずに、新たなイメージが 1 つ生成され、そこに押し込められたレイヤー内容が入ります。
+  まるで`Dockerfile`のコマンドがすべて、単一のレイヤーとして生成されるようなものです。
+  この場合もビルドキャッシュは保持されます。
 
-  `--squash` オプションは試験的機能であるため、安定したものとしては捉えないでください。
+  `--squash`オプションは試験的機能であるため、安定したものとしては捉えないでください。
 
 
-  Squashing layers can be beneficial if your Dockerfile produces multiple layers
-  modifying the same files, for example, files that are created in one step, and
-  removed in another step. For other use-cases, squashing images may actually have
-  a negative impact on performance; when pulling an image consisting of multiple
-  layers, layers can be pulled in parallel, and allows sharing layers between
-  images (saving space).
+  レイヤーを押し込めらるこの機能は、同一対象のファイルを修正したレイヤーが複数生成されている場合に、便利なものとなります。
+  たとえば 1 つの処理ステップにおいてファイルが生成され、別ステップにおいて削除された場合です。
+  ただ利用の仕方によっては、イメージの押し込みが、性能面の低下が起きることがあります。
+  たとえば複数レイヤーからなるイメージをプルする際には、各レイヤーが同時並行的にプルされますが、複数イメージ間でレイヤーを共有している場合です（保存が節約されます）。
 
-  For most use cases, multi-stage builds are a better alternative, as they give more
-  fine-grained control over your build, and can take advantage of future
-  optimizations in the builder. Refer to the [use multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/)
-  section in the userguide for more information.
+  たいていの場合、マルチステージビルドを選んで間違いはありません。
+  これによって、ビルド処理をきめ細かく制御でき、ビルド処理において将来最適化が行われた際にも活用することができます。
+  詳しくは、ユーザーガイドにある [マルチステージビルドの利用](http://lfstranslation/docker/develop/develop-images/multistage-build/) の節を参照してください。
 
 
   {: #known-limitations }
   #### 既知の制約
 
-  `--squash` オプションでは多くの制約があります。
+  `--squash` オプションには多くの制約があることがわかっています。
 
-  - When squashing layers, the resulting image cannot take advantage of layer
-    sharing with other images, and may use significantly more space. Sharing the
-    base image is still supported.
-  - When using this option you may see significantly more space used due to
-    storing two copies of the image, one for the build cache with all the cache
-    layers in tact, and one for the squashed version.
-  - While squashing layers may produce smaller images, it may have a negative
-    impact on performance, as a single layer takes longer to extract, and
-    downloading a single layer cannot be parallelized.
-  - When attempting to squash an image that does not make changes to the
-    filesystem (for example, the Dockerfile only contains `ENV` instructions),
-    the squash step will fail (see [issue #33823](https://github.com/moby/moby/issues/33823)).
+  - レイヤーの押し込みを行う際には、結果として生成されるイメージは、他のイメージとの間でレイヤーを共有することができません。
+    そして容量が極端に増えることがあります。
+    なおベースイメージの共有には対応しています。
+  - このオプションを利用すると、確実に保存容量が増えます。
+    これはイメージの 2 つ分のコピーを保存するためです。
+    1 つは、キャッシュレイヤーすべてを損なうことなく完全な形で保持するビルドキャッシュ用、そしてもう 1 つは押し込みを行うバージョン用です。
+  - レイヤーを押し込むことで、より小さなイメージが生成されますが、性能劣化を引き起こすことがあります。
+    単一のレイヤーであるために伸張（解凍）には処理時間が余計にかかります。
+    また単一のレイヤーは、同時並行によるダウンロード処理ができません。
+  - イメージの押し込み処理を行うにあたって、そのイメージがファイルシステムへの変更を行っていない場合（たとえば Dockerfile に`ENV`命令しかない場合）、押し込み処理は失敗します。
+    （[issue #33823](https://github.com/moby/moby/issues/33823) を参照してください。）
 
   {: #prerequisites }
   #### 前提条件
 
-  The example on this page is using experimental mode in Docker 1.13.
+  本ページに示す利用例においては、Docker 1.13 の試験的（experimental）モードを利用しています。
 
-  Experimental mode can be enabled by using the `--experimental` flag when starting the Docker daemon or setting `experimental: true` in the `daemon.json` configuration file.
+  試験的モードは、Docker デーモンの起動時に`--experimental`フラグをつけることで有効になります。
+  あるいは設定ファイル`daemon.json`において`experimental: true`を設定します。
 
-  By default, experimental mode is disabled. To see the current configuration, use the `docker version` command.
+  デフォルトで試験的モードは無効になっています。
+  現在の設定を確認するには`docker version`コマンドを実行します。
 
   ```none
   Server:
@@ -935,11 +917,14 @@ examples: |-
    [...]
   ```
 
-  To enable experimental mode, users need to restart the docker daemon with the experimental flag enabled.
+  試験的モードを有効にするには、experimental フラグを有効にした上で Docker デーモンを再起動する必要があります。
 
-  #### Enable Docker experimental
+  {: #enable-docker-experimental }
+  #### 試験的モードの有効化
 
-  Experimental features are now included in the standard Docker binaries as of version 1.13.0. For enabling experimental features, you need to start the Docker daemon with `--experimental` flag. You can also enable the daemon flag via /etc/docker/daemon.json. e.g.
+  試験的機能は、標準的な Docker バイナリのバージョン 1.13.0 以降に含まれるようになりました。
+  試験的機能を有効にするには、Docker デーモンに`--experimental`フラグをつけて実行することが必要です。
+  あるいは /etc/docker/daemon.json において、以下のようにしてデーモンフラグを有効にすることもできます。
 
   ```json
   {
@@ -947,16 +932,17 @@ examples: |-
   }
   ```
 
-  Then make sure the experimental flag is enabled:
+  試験的フラグが有効になっていることを確認します。
 
   ```bash
   $ docker version -f '{{.Server.Experimental}}'
   true
   ```
 
-  #### Build an image with `--squash` argument
+  {: #build-an-image-with---squash-argument }
+  #### `--squash`引数をつけたイメージのビルド
 
-  The following is an example of docker build with `--squash` argument
+  以下では、`--squash`引数をつけて docker build を実行する例を示します。
 
   ```dockerfile
   FROM busybox
@@ -967,7 +953,7 @@ examples: |-
   RUN rm /remove_me
   ```
 
-  An image named `test` is built with `--squash` argument.
+  `test`という名前のイメージが`--squash`引数をつけてビルドされます。
 
   ```bash
   $ docker build --squash -t test .
@@ -975,7 +961,7 @@ examples: |-
   [...]
   ```
 
-  If everything is right, the history will look like this:
+  正常に処理されれば、履歴が以下のように表示されます。
 
   ```bash
   $ docker history test
@@ -991,9 +977,11 @@ examples: |-
   <missing>           7 weeks ago         /bin/sh -c #(nop) ADD file:47ca6e777c36a4cfff   1.113 MB
   ```
 
-  We could find that all layer's name is `<missing>`, and there is a new layer with COMMENT `merge`.
+  確認すればわかるように、レイヤーの名前はすべて`<missing>`となっています。
+  そして新しいレイヤーがあって、そのコメントに`merge`と書かれています。
 
-  Test the image, check for `/remove_me` being gone, make sure `hello\nworld` is in `/hello`, make sure the `HELLO` envvar's value is `world`.
+  イメージを確認してください。
+  `/remove_me`は削除されていて、`/hello`の中身は`hello\nworld`、変数`HELLO`の値は`world`となっていることをそれぞれ確認してください。
 deprecated: false
 experimental: false
 experimentalcli: false

@@ -1,6 +1,6 @@
 command: docker builder
-short: Manage builds
-long: Manage builds
+short: ビルドを管理します。
+long: ビルドを管理します。
 usage: docker builder
 pname: docker
 plink: docker.yaml

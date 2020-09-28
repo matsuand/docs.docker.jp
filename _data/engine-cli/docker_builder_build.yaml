@@ -1,7 +1,7 @@
 command: docker builder build
-short: Build an image from a Dockerfile
-long: Build an image from a Dockerfile
-usage: docker builder build [OPTIONS] PATH | URL | -
+short: Dockerfile からイメージをビルドします。
+long: Dockerfile からイメージをビルドします。
+usage: docker builder build [オプション] PATH | URL | -
 pname: docker builder
 plink: docker_builder.yaml
 options:
@@ -15,7 +15,7 @@ options:
   swarm: false
 - option: build-arg
   value_type: list
-  description: Set build-time variables
+  description: ビルド時の変数を設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -176,7 +176,7 @@ options:
 - option: no-cache
   value_type: bool
   default_value: "false"
-  description: Do not use cache when building the image
+  description: イメージビルド時にキャッシュを利用しません。
   deprecated: false
   experimental: false
   experimentalcli: false

@@ -1,6 +1,6 @@
 command: docker checkpoint
-short: Manage checkpoints
-long: Manage checkpoints
+short: チェックポイントを管理します。
+long: チェックポイントを管理します。
 usage: docker checkpoint
 pname: docker
 plink: docker.yaml
