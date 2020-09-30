@@ -42,13 +42,13 @@ Docker デーモンが起動したときに生成される Unix ソケットは�
 >
 > The `docker` group grants privileges equivalent to the `root`
 > user. For details on how this impacts security in your system, see
-> [*Docker Daemon Attack Surface*](../security/security.md#docker-daemon-attack-surface).
+> [*Docker Daemon Attack Surface*](../security/index.md#docker-daemon-attack-surface).
 {: .warning}
 {% endcomment %}
 > 注意
 >
 > `docker` グループは `root` ユーザーと同等の権限を持ちます。
-> このことがシステムセキュリティ上でどのような意味を持つのか、[*Docker Daemon Attack Surface*](../security/security.md#docker-daemon-attack-surface) を参照してください。
+> このことがシステムセキュリティ上でどのような意味を持つのか、[*Docker Daemon Attack Surface*](../security/index.md#docker-daemon-attack-surface) を参照してください。
 {: .warning}
 
 {% comment %}

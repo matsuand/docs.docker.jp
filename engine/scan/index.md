@@ -437,8 +437,8 @@ If you use the `--login` flag without any token, you will be redirected to the S
 ## フィードバック
 
 {% comment %}
-Thank you for trying out the beta release of vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/scan-cli-plugin/issues/new){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the beta release of vulnerability scanning for Docker local images. Your feedback is very important to us. Let us know your feedback by creating an issue in the [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" class="_"} GitHub repository.
 {% endcomment %}
 Docker ローカルイメージに対するぜい弱性スキャン機能のベータ版をご利用いただき、ありがとうございます。
 みなさんからのフィードバックを頂くことが重要です。
-フィードバックは GitHub リポジトリ内の [scan-cli-plugin](https://github.com/docker/scan-cli-plugin/issues/new){: target="_blank" class="_"} において issue を生成してお知らせください。
+フィードバックは GitHub リポジトリ内の [scan-cli-plugin](https://github.com/docker/cli-scan-feedback/issues/new){: target="_blank" class="_"} において issue を生成してお知らせください。

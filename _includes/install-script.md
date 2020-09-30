@@ -102,7 +102,7 @@ Remember to log out and back in for this to take effect!
 >
 > Adding a user to the "docker" group grants them the ability to run containers
 > which can be used to obtain root privileges on the Docker host. Refer to
-> [Docker Daemon Attack Surface](https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface)
+> [Docker Daemon Attack Surface](/engine/security/#docker-daemon-attack-surface)
 > for more information.
 {:.warning}
 {% endcomment %}
@@ -111,7 +111,7 @@ Remember to log out and back in for this to take effect!
 > "docker" グループにユーザーを追加すれば、そのユーザーはコンテナーを実行できるようになります。
 > このユーザーは Docker ホスト上では root 権限を得るために利用されます。
 > 詳細については
-> [Docker Daemon Attack Surface](https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface)
+> [Docker Daemon Attack Surface](/engine/security/#docker-daemon-attack-surface)
 > を参照してください。
 {:.warning}
 

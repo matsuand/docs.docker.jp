@@ -2,16 +2,16 @@
 description: はじめよう。
 keywords: mac, tutorial, run, docker, local, machine
 redirect_from:
-- /mackit/
-- /mackit/getting-started/
+- /docker-for-mac/index/
+- /docker-for-mac/mutagen/
+- /docker-for-mac/osx/
+- /docker-for-mac/started/
+- /engine/installation/mac/
+- /installation/mac/
 - /mac/
 - /mac/started/
-- /docker-for-mac/started/
-- /installation/mac/
-- /engine/installation/mac/
-- /docker-for-mac/index/
-- /docker-for-mac/osx/
-- /docker-for-mac/mutagen/
+- /mackit/
+- /mackit/getting-started/
 title: Docker Desktop for Mac ユーザーマニュアル
 toc_min: 1
 toc_max: 2

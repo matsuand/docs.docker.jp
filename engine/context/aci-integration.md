@@ -59,15 +59,15 @@ To deploy Docker containers on Azure, you must meet the following requirements:
 Docker コンテナーを Azure にデプロイするには、以下の条件を満たしていることが必要です。
 
 {% comment %}
-1. Download and install Docker Desktop Edge version 2.3.2.0 or later.
+1. Download and install Docker Desktop Stable version 2.3.0.5 or later, or Edge version 2.3.2.0 or later.
 {% endcomment %}
-1. Docker Desktop 最新版（Edge）2.3.2.0 またはそれ以降をダウンロードしインストールしていることが必要です。
+1. Docker Desktop 安定版（Stable）2.3.0.5 またはそれ以降、最新版（Edge）2.3.2.0 またはそれ以降をダウンロードしインストールしていることが必要です。
 
     - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
     - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
 
     {% comment %}
-    Alternatively, install the [Docker ACI Integration for Linux](#install-the-docker-aci-integration-cli-on-linux).
+    Alternatively, install the [Docker Compose CLI for Linux](#install-the-docker-compose-cli-on-linux).
     {% endcomment %}
     あるいは [Docker ACI Integration for Linux](#install-the-docker-aci-integration-cli-on-linux) をインストールしていることが必要です。
 
@@ -280,14 +280,12 @@ docker rm <コンテナーID>
 > **Note**
 > 
 > The stop command in ACI differs from the Moby stop command as a stopped 
-container will not retain its state when it is started again. For more 
-information, see https://github.com/docker/aci-integration-beta/issues/28.
+container will not retain its state when it is started again on ACI.
 {% endcomment %}
 > **メモ**
 > 
 > ACI における stop コマンドは Moby の stop コマンドとは異なります。
-> 停止させたコンテナーは、再起動させても元の状態は保持されません。
-> より詳細は https://github.com/docker/aci-integration-beta/issues/28 を参照してください。
+> 停止させたコンテナーは、ACI 上において再起動させても元の状態は保持されません。
 
 {% comment %}
 ## Running Compose applications
@@ -510,15 +508,15 @@ When you run the `docker ps` command, it only lists containers in your current D
 Docker コンテキストが異なれば、コンテナー名や Compose アプリケーション名が同一であっても、競合することにはなりません。
 
 {% comment %}
-## Install the Docker ACI Integration CLI on Linux
+## Install the Docker Compose CLI on Linux
 {% endcomment %}
-{: #install-the-docker-aci-integration-cli-on-linux }
-## Linux における Docker ACI 統合 CLI のインストール
+{: #install-the-docker-compose-cli-on-linux }
+## Linux における Docker Compose CLI のインストール
 
 {% comment %}
-The Docker ACI Integration CLI adds support for running and managing containers on Azure Container Instances (ACI).
+The Docker Compose CLI adds support for running and managing containers on Azure Container Instances (ACI).
 {% endcomment %}
-Docker ACI 統合の CLI は、Azure コンテナーインスタンス（ACI）上でのコンテナー実行と管理をサポートします。
+Docker Compose CLI は、Azure コンテナーインスタンス（ACI）上でのコンテナー実行と管理をサポートします。
 
 {% comment %}
 >**Note**
@@ -555,7 +553,7 @@ You can install the new CLI using the install script:
 新たな CLI は、インストールスクリプトを利用してインストールします。
 
 ```console
-curl -L https://raw.githubusercontent.com/docker/aci-integration-beta/main/scripts/install_linux.sh | sh
+curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
 ```
 
 {% comment %}
@@ -566,9 +564,9 @@ curl -L https://raw.githubusercontent.com/docker/aci-integration-beta/main/scrip
 
 {% comment %}
 You can download the Docker ACI Integration CLI from the 
-[latest release](https://github.com/docker/aci-integration-beta/releases/latest){: target="_blank" class="_"} page.
+[latest release](https://github.com/docker/compose-cli/releases/latest){: target="_blank" class="_"} page.
 {% endcomment %}
-Docker ACI 統合の CLI は、[最新版](https://github.com/docker/aci-integration-beta/releases/latest){: target="_blank" class="_"} ページからダウンロードすることができます。
+Docker ACI 統合の CLI は、[最新版](https://github.com/docker/compose-cli/releases/latest){: target="_blank" class="_"} ページからダウンロードすることができます。
 
 {% comment %}
 You will then need to make it executable:
@@ -704,8 +702,8 @@ sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
 ## フィードバック
 
 {% comment %}
-Thank you for trying out the Docker Azure Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [aci-integration-beta](https://github.com/docker/aci-integration-beta){: target="_blank" class="_"} GitHub repository.
+Thank you for trying out the Docker Azure Integration beta release. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" class="_"} GitHub repository.
 {% endcomment %}
 Docker Azure 統合ベータ版を利用していただき、ありがとうございます。
 みなさんからのフィードバックが大変重要です。
-フィードバックをいただくには、Github レポジトリ [aci-integration-beta](https://github.com/docker/aci-integration-beta){: target="_blank" class="_"} に issue をあげてください。
+フィードバックをいただくには、Github レポジトリ [compose-cli](https://github.com/docker/compose-cli){: target="_blank" class="_"} に issue をあげてください。

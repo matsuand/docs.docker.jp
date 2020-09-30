@@ -55,9 +55,9 @@ To deploy Docker containers on ECS, you must meet the following requirements:
 Docker コンテナーを ECS にデプロイするには、以下の条件を満たしていることが必要です。
 
 {% comment %}
-1. Download and install Docker Desktop Stable or Edge version 2.3.3.0 or later.
+1. Download and install Docker Desktop Stable version 2.3.0.5 or later, or Edge version 2.3.2.0 or later.
 {% endcomment %}
-1. Docker Desktop 安定版（Stable）または最新版（Edge）2.3.2.0 またはそれ以降をダウンロードしインストールしていることが必要です。
+1. Docker Desktop 安定版（Stable）2.3.0.5 またはそれ以降、あるいは最新版（Edge）2.3.2.0 またはそれ以降をダウンロードしインストールしていることが必要です。
 
     - [Download for Mac](https://desktop.docker.com/mac/edge/Docker.dmg){: target="_blank" class="_"}
     - [Download for Windows](https://desktop.docker.com/win/edge/Docker%20Desktop%20Installer.exe){: target="_blank" class="_"}
