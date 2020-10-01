@@ -25,6 +25,11 @@ examples: |-
 
   ```bash
   $ docker trust inspect alpine:latest
+  ```
+
+  出力は JSON 形式であり、たとえば以下のとおりです。
+
+  ```json
   [
     {
       "Name": "alpine:latest",
@@ -70,6 +75,11 @@ examples: |-
 
   ```bash
   $ docker trust inspect my-image:purple
+  ```
+
+  出力は JSON 形式であり、たとえば以下のとおりです。
+
+  ```json
   [
     {
       "Name": "my-image:purple",
@@ -152,7 +162,11 @@ examples: |-
 
   ```bash
   $ docker trust inspect alpine:unsigned
+  ```
 
+  出力は JSON 形式であり、たとえば以下のとおりです。
+
+  ```json
   [
     {
       "Name": "alpine:unsigned",
@@ -186,7 +200,11 @@ examples: |-
 
   ```bash
   $ docker trust inspect alpine
+  ```
 
+  出力は JSON 形式であり、たとえば以下のとおりです。
+
+  ```json
   [
     {
       "Name": "alpine",
@@ -251,7 +269,11 @@ examples: |-
 
   ```bash
   $ docker trust inspect alpine notary
+  ```
 
+  出力は JSON 形式であり、たとえば以下のとおりです。
+
+  ```json
   [
     {
       "Name": "alpine",

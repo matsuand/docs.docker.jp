@@ -1,26 +1,24 @@
 command: docker import
-short: Import the contents from a tarball to create a filesystem image
+short: tarball の内容をインポートしてファイルシステムイメージを生成します。
 long: |-
-  You can specify a `URL` or `-` (dash) to take data directly from `STDIN`. The
-  `URL` can point to an archive (.tar, .tar.gz, .tgz, .bzip, .tar.xz, or .txz)
-  containing a filesystem or to an individual file on the Docker host.  If you
-  specify an archive, Docker untars it in the container relative to the `/`
-  (root). If you specify an individual file, you must specify the full path within
-  the host. To import from a remote location, specify a `URI` that begins with the
-  `http://` or `https://` protocol.
+  引数には`URL`が指定できます。
+  また`-`（ダッシュ）を指定すると`STDIN`からデータを直接入力できます。
+  `URL`には、ファイルシステムを含んだアーカイブ（.tar, .tar.gz, .tgz, .bzip, .tar.xz, .txz）を指定するか、Docker ホスト上の個別ファイルを指定します。
+  アーカイブを指定した場合、Docker はそれをコンテナー内において、`/`（ルート）からの相対位置に伸張（展開）します。
+  個別のファイルを指定する場合には、ホスト内のフルパスの指定でなければなりません。
+  リモートからインポートを行う場合、`http://`または`https://`プロトコルによる`URI`を指定します。
 
-  The `--change` option will apply `Dockerfile` instructions to the image
-  that is created.
-  Supported `Dockerfile` instructions:
+  `--change`オプションは、生成されたイメージに対して`Dockerfile`命令を適用します。
+  サポートされている`Dockerfile`命令は以下のとおりです。
   `CMD`|`ENTRYPOINT`|`ENV`|`EXPOSE`|`ONBUILD`|`USER`|`VOLUME`|`WORKDIR`
-usage: docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]
+usage: docker import [オプション] file|URL|- [REPOSITORY[:TAG]]
 pname: docker
 plink: docker.yaml
 options:
 - option: change
   shorthand: c
   value_type: list
-  description: Apply Dockerfile instruction to the created image
+  description: 生成したイメージに対して Dockerfile 命令を適用します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -29,7 +27,7 @@ options:
 - option: message
   shorthand: m
   value_type: string
-  description: Set commit message for imported image
+  description: インポートしたイメージに対するコミットメッセージを設定します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -45,50 +43,53 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ### Import from a remote location
+  {: #import-from-a-remote-location }
+  ### リモートからのインポート
 
-  This will create a new untagged image.
+  以下は、新たなタグなしのイメージを生成します。
 
   ```bash
   $ docker import http://example.com/exampleimage.tgz
   ```
 
-  ### Import from a local file
+  {: #import-from-a-local-file }
+  ### ローカルファイルからのインポート
 
-  - Import to docker via pipe and `STDIN`.
+  - パイプと`STDIN`を通じてインポートします。
 
     ```bash
     $ cat exampleimage.tgz | docker import - exampleimagelocal:new
     ```
 
-  - Import with a commit message.
+  - コミットメッセージをつけてインポートします。
 
     ```bash
     $ cat exampleimage.tgz | docker import --message "New image imported from tarball" - exampleimagelocal:new
     ```
 
-  - Import to docker from a local archive.
+  - ローカルのアーカイブからインポートします。
 
     ```bash
     $ docker import /path/to/exampleimage.tgz
     ```
 
-  ### Import from a local directory
+  {: #import-from-a-local-directory }
+  ### ローカルディレクトリからのインポート
 
   ```bash
   $ sudo tar -c . | docker import - exampleimagedir
   ```
 
-  ### Import from a local directory with new configurations
+  {: #import-from-a-local-directory-with-new-configurations }
+  ### 新たな設定を加えて、ローカルディレクトリからのインポート
 
   ```bash
-  $ sudo tar -c . | docker import --change "ENV DEBUG true" - exampleimagedir
+  $ sudo tar -c . | docker import --change "ENV DEBUG=true" - exampleimagedir
   ```
 
-  Note the `sudo` in this example – you must preserve
-  the ownership of the files (especially root ownership) during the
-  archiving with tar. If you are not root (or the sudo command) when you
-  tar, then the ownerships might not get preserved.
+  上の例においては`sudo`を用いています。
+  tar によりアーカイブを生成する際には、ファイルの所有権（特に root 所有権）は保持しておかなければなりません。
+  tar 処理の際に root（sudo コマンド）ではない場合、所有権が保持されないことになります。
 deprecated: false
 experimental: false
 experimentalcli: false

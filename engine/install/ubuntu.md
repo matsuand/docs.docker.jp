@@ -67,14 +67,16 @@ $ sudo apt-get remove docker docker-engine docker.io containerd runc
 {% comment %}
 It's OK if `apt-get` reports that none of these packages are installed.
 {% endcomment %}
-`apt-get` を実行したときに、上のパッケージがインストールされていないと表示されれば OK です。
+`apt-get`を実行したときに、上のパッケージがインストールされていないと表示されれば OK です。
 
 {% comment %}
 The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker Engine package is now called `docker-ce`.
+networks, are preserved. If you do not need to save your existing data, and want to
+start with a clean installation, refer to the [uninstall Docker Engine](#uninstall-docker-engine)
+section at the bottom of this page.
 {% endcomment %}
-`/var/lib/docker/` にはイメージ、コンテナー、ボリューム、ネットワークが含まれていて、それは保持されたまま残ります。
-なお Docker Engine パッケージは、今は `docker-ce` と呼ばれます。
+`/var/lib/docker/`にはイメージ、コンテナー、ボリューム、ネットワークが含まれていて、それは保持されたまま残ります。
+既存データを保存する必要がなく、クリーンインストールから始めたい場合は、本ページの後段にある [Docker Engine のアンインストール](#uninstall-docker-engine) を参照してください。
 
 {% comment %}
 ### Supported storage drivers

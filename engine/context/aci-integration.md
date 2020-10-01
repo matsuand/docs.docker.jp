@@ -361,7 +361,7 @@ command as follows:
 既存の Azure ファイル共有を利用して、ストレージアカウント名 が `mystorageaccount`、ファイル共有名が `myfileshare` であるとしたときに、デプロイにおける `run` コマンド実行を以下のように指定できます。
 
 ```
-docker run -v storageaccount/fileshare:/target/path myimage
+docker run -v mystorageaccount/myfileshare:/target/path myimage
 ```
 
 {% comment %}
@@ -410,7 +410,7 @@ ACI Docker コンテキストを利用して、コンテナーや Compose アプ
 そこで Azure ストレージアカウント名とファイル共有名を指定します。
 
 ```
-$ docker --context aci volume create --storage-account mystorageaccount --fileshare test-volume
+$ docker --context aci volume create test-volume --storage-account mystorageaccount
 [+] Running 2/2
  ⠿ mystorageaccount  Created                         26.2s
  ⠿ test-volume       Created                          0.9s
@@ -432,7 +432,7 @@ file share in the exsting account:
 既存のストレージアカウントを指定した場合、このコマンドはそのアカウント内にファイル共有を新規生成します。
 
 ```
-$ docker --context aci volume create --storage-account mystorageaccount --fileshare test-volume2
+$ docker --context aci volume create test-volume2 --storage-account mystorageaccount
 [+] Running 2/2
  ⠿ mystorageaccount   Use existing                    0.7s
  ⠿ test-volume2       Created                         0.7s

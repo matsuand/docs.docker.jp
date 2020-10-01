@@ -75,10 +75,10 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
   利用している Mac が Hypervisor フレームワークをサポートしている場合は、上のコマンドの出力に `kern.hv_support: 1` が表示されます。
 
 {% comment %}
-- **macOS must be version 10.13 or newer**. That is, Catalina, Mojave, or High Sierra. We recommend upgrading to the latest version of macOS.
+- **macOS must be version 10.14 or newer**. That is, Mojave or Catalina. We recommend upgrading to the latest version of macOS.
 {% endcomment %}
-- **macOS はバージョン 10.13 またはそれ以降であること**。
-  つまり Catalina、Mojave、High Sierra であることが必要です。
+- **macOS はバージョン 10.14 またはそれ以降であること**。
+  つまり Catalina または Mojave であることが必要です。
   macOS は最新バージョンにアップグレードすることをお勧めします。
 
   {% comment %}
@@ -87,16 +87,15 @@ Docker Desktop を Mac に正常にインストールするには、以下のシ
   macOS をバージョン 10.15 にアップグレードしたときに問題が発生した場合は、その macOS のバージョンと互換性のある、最新の Docker Desktop をインストールすることが必要になります。
 
   {% comment %}
-  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. Docker Desktop currently supports macOS Catalina, macOS Mojave, and macOS High Sierra.
+  **Note:** Docker supports Docker Desktop on the most recent versions of macOS. Docker Desktop currently supports macOS Mojave and macOS Catalina.
   {% endcomment %}
   **メモ:** Docker では、ほぼ最新の macOS であれば Docker Desktop をサポートしています。
-  つまり、現在最新の macOS およびそれ以前の 2 つのリリースバージョンです。
-  Docker Desktop が現時点でサポートするのは、macOS Catalina、macOS Mojave、macOS High Sierra です。
+  Docker Desktop が現時点でサポートするのは、macOS Catalina、macOS Mojave です。
 
    {% comment %}
-    As new major versions of macOS are made generally available, Docker stops supporting the oldest version and support the newest version of macOS (in addition to the previous two releases).
+    As new major versions of macOS are made generally available, Docker stops supporting the oldest version and support the newest version of macOS.
    {% endcomment %}
-    macOS の最新メジャーバージョンが公開された場合、Docker はそれまでの一番古い対応バージョンへのサポートを停止し、最新版へのサポート（およびそれ以前の 2 つのリリースバージョン）をサポート対象とします。
+    macOS の最新メジャーバージョンが公開された場合、Docker はそれまでの一番古い対応バージョンへのサポートを停止し、最新版をサポート対象とします。
 
 {% comment %}
 - At least 4 GB of RAM.

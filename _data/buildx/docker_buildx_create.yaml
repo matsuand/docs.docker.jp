@@ -14,9 +14,34 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: buildkitd-flags
+  value_type: string
+  description: buildkitd デーモンへのフラグ
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: config
+  value_type: string
+  description: BuildKit 設定ファイル
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: driver
   value_type: string
   description: '利用するドライバーを指定します（[] が指定可能）。'
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: driver-opt
+  value_type: stringArray
+  default_value: '[]'
+  description: ドライバー用のオプション。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -60,6 +85,15 @@ options:
   value_type: bool
   default_value: "false"
   description: 現在のビルダーインスタンスを設定します。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+inherited_options:
+- option: builder
+  value_type: string
+  description: 設定された builder インスタンスをオーバーライドします。
   deprecated: false
   experimental: false
   experimentalcli: false

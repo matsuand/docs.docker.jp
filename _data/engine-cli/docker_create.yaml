@@ -263,7 +263,7 @@ options:
   swarm: false
 - option: dns-search
   value_type: list
-  description: カスタム DNS 検索ドメインを設定します。
+  description: カスタム DNS 検索ドメイン。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -271,7 +271,7 @@ options:
   swarm: false
 - option: domainname
   value_type: string
-  description: Container NIS domain name
+  description: コンテナー NIS ドメイン名。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -377,7 +377,7 @@ options:
 - option: help
   value_type: bool
   default_value: "false"
-  description: Print usage
+  description: 利用方法を表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -386,7 +386,7 @@ options:
 - option: hostname
   shorthand: h
   value_type: string
-  description: Container host name
+  description: コンテナーホスト名。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -436,7 +436,7 @@ options:
   os_type: windows
 - option: ip
   value_type: string
-  description: IPv4 address (e.g., 172.30.100.104)
+  description: IPv4 アドレス。（たとえば 172.30.100.104）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -444,7 +444,7 @@ options:
   swarm: false
 - option: ip6
   value_type: string
-  description: IPv6 address (e.g., 2001:db8::33)
+  description: IPv6 アドレス。（たとえば 2001:db8::33）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -452,7 +452,7 @@ options:
   swarm: false
 - option: ipc
   value_type: string
-  description: IPC mode to use
+  description: 利用する IPC モード。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -890,9 +890,9 @@ examples: |-
   {: #initialize-volumes }
   ### ボリュームの初期化
 
-  v1.4.0 現在、コンテナーボリュームは `docker create` 処理フェーズにおいて初期化されます。
-  （`docker run` も同じです。）
-  つまり `create` によって `data` ボリュームコンテナーが生成されるので、これを別のコンテナーが利用できることを意味します。
+  v1.4.0 現在、コンテナーボリュームは`docker create`処理フェーズにおいて初期化されます。
+  （`docker run`も同じです。）
+  つまり`create`によって`data`ボリュームコンテナーが生成されるので、これを別のコンテナーが利用できることを意味します。
 
   ```bash
   $ docker create -v /data --name data ubuntu
@@ -906,8 +906,8 @@ examples: |-
   drwxr-xr-x 48 root root 4096 Dec  5 04:11 ..
   ```
 
-  Similarly, `create` a host directory bind mounted volume container, which can
-  then be used from the subsequent container:
+  同様にして`create`は、ホストディレクトリをバインドマウントするコンテナーを生成します。
+  そしてこれに続くコンテナーがこれを利用できるようにします。
 
   ```bash
   $ docker create -v /home/docker:/docker --name docker ubuntu
@@ -935,54 +935,47 @@ examples: |-
   $ docker create -it --storage-opt size=120G fedora /bin/bash
   ```
 
-  This (size) will allow to set the container rootfs size to 120G at creation time.
-  This option is only available for the `devicemapper`, `btrfs`, `overlay2`,
-  `windowsfilter` and `zfs` graph drivers.
-  For the `devicemapper`, `btrfs`, `windowsfilter` and `zfs` graph drivers,
-  user cannot pass a size less than the Default BaseFS Size.
-  For the `overlay2` storage driver, the size option is only available if the
-  backing fs is `xfs` and mounted with the `pquota` mount option.
-  Under these conditions, user can pass any size less than the backing fs size.
+  上の例において（そのサイズ設定）は、コンテナー生成時に rootfs のサイズを 120 G に設定しています。
+  そのオプションは`devicemapper`、`btrfs`、`overlay2`、`windowsfilter`、`zfs`の各グラフドライバーにおいてのみ利用可能です。
+  そして `devicemapper`、`btrfs`、`windowsfilter`、`zfs`の各ドライバーにおいて、設定可能なサイズはデフォルトの BaseFS サイズ以下でなければなりません。
+  ストレージドライバー`overlay2`では、バックエンドのファイルシステムが`xfs`であって、マウントオプション`pquota`を使ってマウントされている場合に限って、サイズオプションの指定が可能です。
+  こういった条件のもと、バックエンドのファイルシステムサイズ以内であれば、どのようなサイズ設定でも可能です。
 
   {: #specify-isolation-technology-for-container---isolation }
-  ### Specify isolation technology for container (--isolation)
+  ### コンテナーに対する分離技術方式の指定 (--isolation)
 
-  This option is useful in situations where you are running Docker containers on
-  Windows. The `--isolation=<value>` option sets a container's isolation
-  technology. On Linux, the only supported is the `default` option which uses
-  Linux namespaces. On Microsoft Windows, you can specify these values:
+  このオプションは Docker コンテナーを Windows 上で実行する場合に有用なものです。
+  `--isolation=<設定値>`は、コンテナーの分離技術（isolation technology）方式を指定します。
+  Linux 上においては、Linux 名前空間を利用する`default`指定のみがサポートされます。
+  Microsoft Windows の場合、以下の値を設定することができます。
 
 
-  | Value     | Description                                                                                                                                                   |
+  | 設定値    | 内容説明                                                                                                                                                      |
   |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | `default` | Use the value specified by the Docker daemon's `--exec-opt` . If the `daemon` does not specify an isolation technology, Microsoft Windows uses `process` as its default value if the daemon is running on Windows server, or `hyperv` if running on Windows client.  |
-  | `process` | Namespace isolation only.                                                                                                                                     |
-  | `hyperv`   | Hyper-V hypervisor partition-based isolation.                                                                                                                  |
+  | `default` | Docker デーモンの`--exec-opt`の指定に従います。`daemon`に分離技術が指定されていない場合、Microsoft Windows において、デーモンが Windows サーバー上の稼動であれば`process`を、あるいは Windows クライアント上であれば`hyperv`をそれぞれデフォルトで採用します。  |
+  | `process` | 名前空間による分離のみを行います。                                                                                                                            |
+  | `hyperv`  | ハイパーバイザー Hyper-V によるパーティションベースの分離を行います。                                                                                         |
 
-  Specifying the `--isolation` flag without a value is the same as setting `--isolation="default"`.
+  `--isolation`フラグに値を設定しなかった場合、`--isolation="default"`と指定したことになります。
 
-  ### Dealing with dynamically created devices (--device-cgroup-rule)
+  {: #dealing-with-dynamically-created-devices---device-cgroup-rule }
+  ### 動的生成デバイスの扱い (--device-cgroup-rule)
 
-  Devices available to a container are assigned at creation time. The
-  assigned devices will both be added to the cgroup.allow file and
-  created into the container once it is run. This poses a problem when
-  a new device needs to be added to running container.
+  コンテナーが利用可能なデバイスは、コンテナーの生成時に割り当てられます。
+  割り当てられたデバイスは cgroup.allow ファイルに加えられ、またコンテナーが起動したときにコンテナー内に生成されます。
+  ここで問題になるのが、実行中コンテナーに対して新たなデバイスを追加したい場合にはどうするかということです。
 
-  One of the solution is to add a more permissive rule to a container
-  allowing it access to a wider range of devices. For example, supposing
-  our container needs access to a character device with major `42` and
-  any number of minor number (added as new devices appear), the
-  following rule would be added:
+  解決方法の 1 つとして、コンテナーにもっとゆるいルールを設定して、幅広くデバイスにアクセスできるようにする方法があります。
+  たとえば、キャラクターデバイスとしてメジャー番号`42`、マイナー番号は何でも取るような（新たなデバイスとして出てきたら加えられる）デバイスにアクセスする必要があるとします。
+  この場合には、以下のようなルールを適用することになるはずです。
 
   ```
   docker create --device-cgroup-rule='c 42:* rmw' -name my-container my-image
   ```
 
-  Then, a user could ask `udev` to execute a script that would `docker exec my-container mknod newDevX c 42 <minor>`
-  the required device when it is added.
+  そして必要なデバイスが追加された際に`docker exec my-container mknod newDevX c 42 <minor>`を実行するようなスクリプトを、`udev`から実行するように設定します。
 
-  NOTE: initially present devices still need to be explicitly added to
-  the create/run command
+  メモ: はじめから存在しているデバイスも、create/run コマンドにおいて明示的に追加することが必要です。
 deprecated: false
 experimental: false
 experimentalcli: false

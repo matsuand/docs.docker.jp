@@ -1,17 +1,16 @@
 command: docker exec
 short: 実行中のコンテナー内でコマンドを実行します。
 long: |-
-  `docker exec` コマンドを、実行中のコンテナー内において新たなコマンドを実行します。
+  `docker exec`コマンドを、実行中のコンテナー内において新たなコマンドを実行します。
 
-  `docker exec` を使って指示されるコマンドは、コンテナーの主要プロセス（`PID 1`）が実行中である場合のみ実行されます。
+  `docker exec`を使って指示されるコマンドは、コンテナーの主要プロセス（`PID 1`）が実行中である場合のみ実行されます。
   そしてコンテナーが再起動された際には、再実行されません。
 
   COMMAND はコンテナーのデフォルトディレクトリにおいて実行されます。
-  コンテナーの元になるイメージが、Dockerfile 内の WORKDIR ディレクティブの指定により、特定ディレクトリを指定している場合は、そのディレクトリでの実行となります。
+  コンテナーの元になるイメージが、Dockerfile 内の WORKDIR ディレクティブの指定により、特定ディレクトリを指定している場合は、そのディレクトリにおいて実行されます。
 
-  COMMAND should be an executable, a chained or a quoted command
-  will not work. Example: `docker exec -ti my_container "echo a && echo b"` will
-  not work, but `docker exec -ti my_container sh -c "echo a && echo b"` will.
+  COMMAND は実行可能である必要があり、連結されていたりクォートで囲まれていたりすると動作しません。
+  例として`docker exec -ti my_container "echo a && echo b"`は動作しませんが、`docker exec -ti my_container sh -c "echo a && echo b"`であれば動作します。
 usage: docker exec [オプション] CONTAINER COMMAND [ARG...]
 pname: docker
 plink: docker.yaml
@@ -20,7 +19,7 @@ options:
   shorthand: d
   value_type: bool
   default_value: "false"
-  description: 'Detached mode: run command in the background'
+  description: 'デタッチモード。つまりコマンドをバックグラウンドで実行します。'
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -37,7 +36,7 @@ options:
 - option: env
   shorthand: e
   value_type: list
-  description: Set environment variables
+  description: 環境変数を設定します。
   deprecated: false
   min_api_version: "1.25"
   experimental: false
@@ -93,51 +92,50 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ### Run `docker exec` on a running container
+  {: #run-docker-exec-on-a-running-container }
+  ### 実行中コンテナーでの`docker exec`実行
 
-  First, start a container.
+  はじめにコンテナーを起動させます。
 
   ```bash
   $ docker run --name ubuntu_bash --rm -i -t ubuntu bash
   ```
 
-  This will create a container named `ubuntu_bash` and start a Bash session.
+  上では`ubuntu_bash`という名のコンテナーが生成されて、Bash セッションが起動します。
 
-  Next, execute a command on the container.
+  次にそのコンテナー上においてコマンドを実行します。
 
   ```bash
   $ docker exec -d ubuntu_bash touch /tmp/execWorks
   ```
 
-  This will create a new file `/tmp/execWorks` inside the running container
-  `ubuntu_bash`, in the background.
+  これはバックグラウンドで実行中のコンテナー`ubuntu_bash`内において、新規ファイル`/tmp/execWorks`を生成します。
 
-  Next, execute an interactive `bash` shell on the container.
+  次にそのコンテナー上において、対話形式の`bash`シェルを起動します。
 
   ```bash
   $ docker exec -it ubuntu_bash bash
   ```
 
-  This will create a new Bash session in the container `ubuntu_bash`.
+  コンテナー`ubuntu_bash`内において新たな Bash セッションを生成します。
 
-  Next, set an environment variable in the current bash session.
+  次にカレントな Bash セッションにおいて環境変数を設定します。
 
   ```bash
   $ docker exec -it -e VAR=1 ubuntu_bash bash
   ```
 
-  This will create a new Bash session in the container `ubuntu_bash` with environment
-  variable `$VAR` set to "1". Note that this environment variable will only be valid
-  on the current Bash session.
+  これはコンテナー`ubuntu_bash`内に新たな Bash セッションを生成して、環境変数`$VAR`に "1" を設定します。
+  なおこの環境変数は、カレントな Bash セッション内においてのみ有効です。
 
-  By default `docker exec` command runs in the same working directory set when container was created.
+  デフォルトにおいて`docker exec`コマンドは、コンテナーの生成時に設定されたワーキングディレクトリにおいて動作します。
 
   ```bash
   $ docker exec -it ubuntu_bash pwd
   /
   ```
 
-  You can select working directory for the command to execute into
+  コマンドを実行するワーキングディレクトリは変更することができます。
 
   ```bash
   $ docker exec -it -w /root ubuntu_bash pwd
@@ -145,9 +143,10 @@ examples: |-
   ```
 
 
-  ### Try to run `docker exec` on a paused container
+  {: #try-to-run-docker-exec-on-a-paused-container }
+  ### 停止中コンテナーでの`docker exec`実行
 
-  If the container is paused, then the `docker exec` command will fail with an error:
+  コンテナーが停止中である場合に`docker exec`コマンドを実行すると、エラーが発生します。
 
   ```bash
   $ docker pause test

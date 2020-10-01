@@ -42,6 +42,16 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+examples: |-
+  {: #update-an-existing-context }
+  ### 既存コンテキストの更新
+
+  ```bash
+  $ docker context update \
+      --description "some description" \
+      --docker "host=tcp://myserver:2376,ca=~/ca-file,cert=~/cert-file,key=~/key-file" \
+      my-context
+  ```
 deprecated: false
 experimental: false
 experimentalcli: false

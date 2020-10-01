@@ -687,7 +687,8 @@ RUN apt-get update && apt-get install -y \
   cvs \
   git \
   mercurial \
-  subversion
+  subversion \
+  && rm -rf /var/lib/apt/lists/*
 ```
 
 {% comment %}
@@ -946,7 +947,8 @@ statement. For example:
 RUN apt-get update && apt-get install -y \
     package-bar \
     package-baz \
-    package-foo
+    package-foo  \
+    && rm -rf /var/lib/apt/lists/*
 ```
 
 {% comment %}

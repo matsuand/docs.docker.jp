@@ -39,9 +39,9 @@ configure it in different ways:
     necessary, and substituting the address and port of the proxy server. You
     can configure multiple proxy servers at the same time.
 {% endcomment %}
-1.  Docker クライアント上において、コンテナーを起動するユーザーのホームディレクトリ内に `~/.docker/config.json` 新規生成するか、これを編集します。
+1.  Docker クライアント上において、コンテナーを起動するユーザーのホームディレクトリ内に`~/.docker/config.json`を新規生成するか、これを編集します。
     そして以下のような JSON 記述を追加します。
-    この記述において、プロキシータイプとして、必要であれば `httpsProxy` または `ftpProxy` を指定します。
+    この記述において、プロキシータイプとして必要であれば`httpsProxy`または`ftpProxy`を指定します。
     またプロキシーサーバーのアドレスとポートを指定します。
     プロキシーサーバーは、同時に複数設定することができます。
 
@@ -51,8 +51,8 @@ configure it in different ways:
     addresses or hosts. Using the `*` character as a wildcard is supported, as
     shown in this example.
     {% endcomment %}
-    プロキシーサーバーを介したくないホストや IP 範囲の指定が必要な場合は、`noProxy` キーにおいて IP アドレスまたはホスト名をカンマ区切りにより設定します。
-    アスタリスク `*` を用いたワイルドカード指定がサポートされています。
+    プロキシーサーバーを介したくないホストや IP 範囲の指定が必要な場合は、`noProxy`キーにおいて IP アドレスまたはホスト名をカンマ区切りにより設定します。
+    アスタリスク`*`を用いたワイルドカード指定がサポートされています。
     たとえば以下に例を示します。
 
     ```json
@@ -100,7 +100,7 @@ value. This method makes the image less portable, so if you have Docker 17.07
 or higher, you should [configure the Docker client](#configure-the-docker-client)
 instead.
 {% endcomment %}
-イメージをビルドした場合、あるいはコンテナーの生成、実行時に `--env` フラグを利用した場合、以下に示すような環境変数を使って、値を設定して利用することができます。
+イメージをビルドした場合、あるいはコンテナーの生成、実行時に`--env`フラグを利用した場合、以下に示すような環境変数を使って、値を設定して利用することができます。
 この方法ではイメージの可搬性が損なわれます。
 したがって Docker 17.07 またはそれ以降を利用している場合は、代わりに [Docker クライアントの設定](#configure-the-docker-client) を行ってください。
 

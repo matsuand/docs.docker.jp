@@ -16,6 +16,15 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: load
+  value_type: bool
+  default_value: "false"
+  description: --set=*.output=type=docker の短縮形。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: no-cache
   value_type: bool
   default_value: "false"
@@ -53,10 +62,28 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: push
+  value_type: bool
+  default_value: "false"
+  description: --set=*.output=type=registry の短縮形。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: set
   value_type: stringArray
   default_value: '[]'
-  description: 'target の値をオーバーライドします（target.key=value）。'
+  description: 'target の値をオーバーライドします（targetpattern.key=value）。'
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+inherited_options:
+- option: builder
+  value_type: string
+  description: 設定された builder インスタンスをオーバーライドします。
   deprecated: false
   experimental: false
   experimentalcli: false

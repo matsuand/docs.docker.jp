@@ -3,7 +3,7 @@ short: Remove unused data
 long: |-
   Remove all unused containers, networks, images (both dangling and unreferenced),
   and optionally, volumes.
-usage: docker system prune [OPTIONS]
+usage: docker system prune [オプション]
 pname: docker system
 plink: docker_system.yaml
 options:
@@ -11,7 +11,7 @@ options:
   shorthand: a
   value_type: bool
   default_value: "false"
-  description: Remove all unused images not just dangling ones
+  description: タグづけなし、参照なしを問わず、未使用のイメージをすべて削除します。
   deprecated: false
   experimental: false
   experimentalcli: false

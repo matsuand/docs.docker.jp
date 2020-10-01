@@ -155,7 +155,7 @@ options:
   swarm: false
 - option: since
   value_type: string
-  description: Show all events created since timestamp
+  description: タイムスタンプ以降に生成されたイベントをすべて表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -163,24 +163,25 @@ options:
   swarm: false
 - option: until
   value_type: string
-  description: Stream events until this timestamp
+  description: そのタイムスタンプ以前のイベントを出力します。
   deprecated: false
   experimental: false
   experimentalcli: false
   kubernetes: false
   swarm: false
 examples: |-
-  ### Basic example
+  {: #basic-example }
+  ### 基本的な利用例
 
-  You'll need two shells for this example.
+  以下の利用例においてはシェルを 2 つ利用します。
 
-  **Shell 1: Listening for events:**
+  **シェル 1: イベントの取得**
 
   ```bash
   $ docker system events
   ```
 
-  **Shell 2: Start and Stop containers:**
+  **シェル 2: コンテナーの起動と停止**
 
   ```bash
   $ docker create --name test alpine:latest top
@@ -188,7 +189,7 @@ examples: |-
   $ docker stop test
   ```
 
-  **Shell 1: (Again .. now showing events):**
+  **シェル 1: (再度確認。イベントが表示される。)**
 
   ```console
   2017-01-05T00:35:58.859401177+08:00 container create 0fdb48addc82871eb34eb23a847cfd033dedd1a0a37bef2e6d9eb3870fc7ff37 (image=alpine:latest, name=test)
@@ -200,12 +201,14 @@ examples: |-
   2017-01-05T00:36:09.890214053+08:00 container stop 0fdb...ff37 (image=alpine:latest, name=test)
   ```
 
-  To exit the `docker system events` command, use `CTRL+C`.
+  `docker system events`コマンドから抜け出るには`CTRL+C`を入力します。
 
-  ### Filter events by time
+  {: #filter-events-by-time }
+  ### 時刻によるイベントのフィルター検索
 
-  You can filter the output by an absolute timestamp or relative time on the host
-  machine, using the following different time syntaxes:
+  時刻を用いてフィルター検索を行うことができます。
+  時刻はホストマシン上の絶対時間か相対時間を指定できます。
+  以下のようなさまざまな指定が可能です。
 
   ```bash
   $ docker system events --since 1483283804

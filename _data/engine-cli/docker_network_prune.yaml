@@ -62,7 +62,7 @@ examples: |-
   以下の例では生成から 5 分以上経過したネットワークを削除します。
   ただしシステムネットワークである `bridge`、`host`、`none` は取り除かれる（prune される）ことはありません。
 
-  ```none
+  ```bash
   $ docker network ls
 
   NETWORK ID          NAME                DRIVER              SCOPE

@@ -1,21 +1,17 @@
 command: docker images
 short: イメージを一覧表示します。
 long: |-
-  The default `docker images` will show all top level
-  images, their repository and tags, and their size.
+  `docker images`はデフォルトで、すべてのトップレベルイメージ、そのリポジトリとタグ、そのサイズを表示します。
 
-  Docker images have intermediate layers that increase reusability,
-  decrease disk usage, and speed up `docker build` by
-  allowing each step to be cached. These intermediate layers are not shown
-  by default.
+  Docker イメージには中間レイヤーが含まれるため、ディスク容量を必要としますが再利用性は増えます。
+  したがって`docker build`の各処理ステップにおけるキャッシュの利用によって、処理速度が向上します。
+  そのような中間レイヤーはデフォルトでは表示されません。
 
-  The `SIZE` is the cumulative space taken up by the image and all
-  its parent images. This is also the disk space used by the contents of the
-  Tar file created when you `docker save` an image.
+  `SIZE`はイメージと親イメージによって占有される合計サイズです。
+  これはまた、`docker save`によりイメージを生成した際の tar ファイルのディスク容量でもあります。
 
-  An image will be listed more than once if it has multiple repository names
-  or tags. This single image (identifiable by its matching `IMAGE ID`)
-  uses up the `SIZE` listed only once.
+  イメージが複数のリポジトリ名やタグを持っている場合は、一覧に複数回表示されます。
+  その 1 つのイメージ（`IMAGE ID`が一致するもの）の`SIZE`欄に同一サイズが示されます。
 usage: docker images [オプション] [REPOSITORY[:TAG]]
 pname: docker
 plink: docker.yaml
@@ -24,7 +20,7 @@ options:
   shorthand: a
   value_type: bool
   default_value: "false"
-  description: Show all images (default hides intermediate images)
+  description: イメージをすべて表示します。（デフォルトでは中間イメージが表示されません。）
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -33,7 +29,7 @@ options:
 - option: digests
   value_type: bool
   default_value: "false"
-  description: Show digests
+  description: ダイジェスト値を表示します。
   deprecated: false
   experimental: false
   experimentalcli: false
@@ -76,7 +72,8 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ### List the most recently created images
+  {: #list-the-most-recently-created-images }
+  ### 最近生成したイメージの一覧
 
   ```bash
   $ docker images
@@ -93,14 +90,14 @@ examples: |-
   postgres                  latest              746b819f315e        4 days ago          213.4 MB
   ```
 
-  ### List images by name and tag
+  {: #list-images-by-name-and-tag }
+  ### 名前とタグ指定によるイメージ一覧
 
-  The `docker images` command takes an optional `[REPOSITORY[:TAG]]` argument
-  that restricts the list to images that match the argument. If you specify
-  `REPOSITORY`but no `TAG`, the `docker images` command lists all images in the
-  given repository.
+  `docker images`コマンドには任意に指定できる`[REPOSITORY[:TAG]]`引数があります。
+  この引数に合致するものだけが一覧出力されます。
+  `REPOSITORY`だけ指定し`TAG`を指定しなかった場合、`docker images`コマンドは指定されたリポジトリ内にあるイメージをすべて一覧表示します。
 
-  For example, to list all images in the "java" repository, run this command :
+  たとえば「java」リポジトリのイメージすべてを表示するには、以下のコマンドを実行します。
 
   ```bash
   $ docker images java
@@ -111,12 +108,11 @@ examples: |-
   java                latest              2711b1d6f3aa        5 months ago        603.9 MB
   ```
 
-  The `[REPOSITORY[:TAG]]` value must be an "exact match". This means that, for example,
-  `docker images jav` does not match the image `java`.
+  `[REPOSITORY[:TAG]]`の値は完全に一致するものを指定しなければなりません。
+  たとえば`docker images jav`を実行しても、イメージ名`java`には一致しません。
 
-  If both `REPOSITORY` and `TAG` are provided, only images matching that
-  repository and tag are listed.  To find all local images in the "java"
-  repository with tag "8" you can use:
+  `REPOSITORY`と`TAG`の両方を指定した場合、リポジトリとタグが一致したイメージのみが一覧表示されます。
+  「java」リポジトリにあるローカルイメージで「8」というタグを持つものを検索するには、以下のようにします。
 
   ```bash
   $ docker images java:8
@@ -125,7 +121,7 @@ examples: |-
   java                8                   308e519aac60        6 days ago          824.5 MB
   ```
 
-  If nothing matches `REPOSITORY[:TAG]`, the list is empty.
+  `REPOSITORY[:TAG]`に一致するものがなければ、一覧には何も表示されません。
 
   ```bash
   $ docker images java:0
@@ -133,7 +129,8 @@ examples: |-
   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
   ```
 
-  ### List the full length image IDs
+  {: #list-the-full-length-image-ids }
+  ### 完全なイメージ ID による一覧表示
 
   ```bash
   $ docker images --no-trunc
@@ -150,12 +147,12 @@ examples: |-
   <none>                        <none>              sha256:5ed6274db6ceb2397844896966ea239290555e74ef307030ebb01ff91b1914df   24 hours ago        1.089 GB
   ```
 
-  ### List image digests
+  {: #list-image-digests }
+  ### イメージダイジェストの一覧表示
 
-  Images that use the v2 or later format have a content-addressable identifier
-  called a `digest`. As long as the input used to generate the image is
-  unchanged, the digest value is predictable. To list image digest values, use
-  the `--digests` flag:
+  イメージ仕様の v2 またはそれ以降を利用するイメージには、`digest`（ダイジェスト）と呼ぶ連想識別子（content-addressable identifier）があります。
+  イメージ生成に用いられた入力内容が変更されていない限り、ダイジェスト値は予測できます。
+  イメージダイジェストの一覧を表示するには`--digests`フラグを利用します。
 
   ```bash
   $ docker images --digests
@@ -163,10 +160,9 @@ examples: |-
   localhost:5000/test/busybox        <none>              sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf   4986bf8c1536        9 weeks ago         2.43 MB
   ```
 
-  When pushing or pulling to a 2.0 registry, the `push` or `pull` command
-  output includes the image digest. You can `pull` using a digest value. You can
-  also reference by digest in `create`, `run`, and `rmi` commands, as well as the
-  `FROM` image reference in a Dockerfile.
+  レジストリバージョン 2.0 に対してプッシュやプルを行う際には、`push`や`pull`コマンドの出力にイメージダイジェストが表示されます。
+  `pull`の際にダイジェスト値を用いることが可能であり、`create`、`run`、`rmi`といったコマンドにおいてはダイジェスト値を使ってイメージを参照することもできます。
+  また Dockerfile 内での`FROM`において、イメージを参照するために用いることもできます。
 
   {: #filtering }
   ### フィルター検索
@@ -177,13 +173,14 @@ examples: |-
 
   現在サポートされているフィルターは以下のとおりです。
 
-  * dangling (boolean - true or false)
-  * label (`label=<key>` or `label=<key>=<value>`)
-  * before (`<image-name>[:<tag>]`,  `<image id>` or `<image@digest>`) - filter images created before given id or references
-  * since (`<image-name>[:<tag>]`,  `<image id>` or `<image@digest>`) - filter images created since given id or references
-  * reference (pattern of an image reference) - filter images whose reference matches the specified pattern
+  * dangling (ブール値 - true または false)
+  * label (`label=<key>` または `label=<key>=<value>`)
+  * before (`<image-name>[:<tag>]`,`<image id>`または`<image@digest>`) - 指定された ID または参照名より以前に生成されたイメージを検索。
+  * since (`<image-name>[:<tag>]`,`<image id>`または`<image@digest>`) - 指定された ID または参照名より以降に生成されたイメージを検索。
+  * 参照名（イメージ参照のパターン） - 参照名が指定パターンに一致するイメージを検索。
 
-  #### Show untagged images (dangling)
+  {: #show-untagged-images-dangling }
+  #### タグづけなしイメージの表示 (dangling)
 
   ```bash
   $ docker images --filter "dangling=true"
@@ -197,13 +194,12 @@ examples: |-
   <none>              <none>              511136ea3c5a        8 months ago        0 B
   ```
 
-  This will display untagged images that are the leaves of the images tree (not
-  intermediary layers). These images occur when a new build of an image takes the
-  `repo:tag` away from the image ID, leaving it as `<none>:<none>` or untagged.
-  A warning will be issued if trying to remove an image when a container is presently
-  using it. By having this flag it allows for batch cleanup.
+  これは、イメージツリーの葉にあたる（中間レイヤーではない）、タグづけされていないイメージを表示します。
+  そのようなイメージは新規ビルドの際に、イメージ ID から`repo:tag`が取り除かれることで発生し、`<none>:<none>`やタグなしの状態になります。
+  コンテナーがイメージをまだ利用している状態で、そのイメージを削除しようとすると、警告メッセージが表示されます。
+  このフラグを指定して、バッチ処理による削除が可能になります。
 
-  You can use this in conjunction with `docker rmi ...`:
+  つまり`docker rmi ...`と合わせて以下のようにします。
 
   ```bash
   $ docker rmi $(docker images -f "dangling=true" -q)
@@ -216,15 +212,15 @@ examples: |-
   511136ea3c5a
   ```
 
-  Docker warns you if any containers exist that are using these untagged images.
+  タグづけされていないイメージをまだ利用するコンテナーが存在していたときは、警告が表示されます。
 
 
-  #### Show images with a given label
+  {: #show-images-with-a-given-label }
+  #### ラベル指定によるイメージの表示
 
-  The `label` filter matches images based on the presence of a `label` alone or a `label` and a
-  value.
+  `label`フィルターは、イメージが`label`単体を持つか、あるいは`label`とその値を持つものを検索します。
 
-  The following filter matches images with the `com.example.version` label regardless of its value.
+  以下のフィルター指定は、ラベルとして`com.example.version`を持つものを検索し、その値は問いません。
 
   ```bash
   $ docker images --filter "label=com.example.version"
@@ -234,7 +230,7 @@ examples: |-
   match-me-2          latest              dea752e4e117        About a minute ago   188.3 MB
   ```
 
-  The following filter matches images with the `com.example.version` label with the `1.0` value.
+  以下のフィルター指定は、ラベルとして`com.example.version`を持ち、その値が`1.0`であるものを検索します。
 
   ```bash
   $ docker images --filter "label=com.example.version=1.0"
@@ -243,17 +239,18 @@ examples: |-
   match-me            latest              511136ea3c5a        About a minute ago   188.3 MB
   ```
 
-  In this example, with the `0.1` value, it returns an empty set because no matches were found.
+  以下の例では、ラベルの値として`0.1`を持つものを検索しますが、一致するものがなかったとして結果が空となったことを表わします。
 
   ```bash
   $ docker images --filter "label=com.example.version=0.1"
   REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
   ```
 
-  #### Filter images by time
+  {: #filter-images-by-time }
+  #### 時刻指定によるイメージ検索
 
-  The `before` filter shows only images created before the image with
-  given id or reference. For example, having these images:
+  `before`フィルターは、指定された ID または参照名を持つイメージより以前に生成されたイメージのみを表示します。
+  たとえばはじめに以下のイメージがあったとします。
 
   ```bash
   $ docker images
@@ -264,7 +261,7 @@ examples: |-
   image3              latest              511136ea3c5a        25 minutes ago       188.3 MB
   ```
 
-  Filtering with `before` would give:
+  `before`のフィルタリング結果として以下が得られます。
 
   ```bash
   $ docker images --filter "before=image1"
@@ -274,7 +271,7 @@ examples: |-
   image3              latest              511136ea3c5a        25 minutes ago       188.3 MB
   ```
 
-  Filtering with `since` would give:
+  `since`のフィルタリング結果は以下です。
 
   ```bash
   $ docker images --filter "since=image3"
@@ -283,10 +280,10 @@ examples: |-
   image2              latest              dea752e4e117        9 minutes ago        188.3 MB
   ```
 
-  #### Filter images by reference
+  {: #filter-images-by-reference }
+  #### 参照名によりイメージ検索
 
-  The `reference` filter shows only images whose reference matches
-  the specified pattern.
+  `reference`フィルターは、参照名が指定されたパターンに一致するイメージのみを表示します。
 
   ```bash
   $ docker images
@@ -298,7 +295,7 @@ examples: |-
   busybox             glibc               21c16b6787c6        5 weeks ago         4.19 MB
   ```
 
-  Filtering with `reference` would give:
+  `reference`のフィルタリング結果は以下です。
 
   ```bash
   $ docker images --filter=reference='busy*:*libc'
@@ -308,7 +305,7 @@ examples: |-
   busybox             glibc               21c16b6787c6        5 weeks ago         4.19 MB
   ```
 
-  Filtering with multiple `reference` would give, either match A or B:
+  複数の`reference`によるフィルタリングを行うと、A または B に一致するものを検索します。
 
   ```bash
   $ docker images --filter=reference='busy*:uclibc' --filter=reference='busy*:glibc'
@@ -327,18 +324,18 @@ examples: |-
 
   | プレースホルダー | 内容説明 |
   | ---- | ---- |
-  | `.ID` | Image ID |
-  | `.Repository` | Image repository |
-  | `.Tag` | Image tag |
-  | `.Digest` | Image digest |
-  | `.CreatedSince` | Elapsed time since the image was created |
-  | `.CreatedAt` | Time when the image was created |
-  | `.Size` | Image disk size |
+  | `.ID` | イメージ ID |
+  | `.Repository` | イメージリポジトリ |
+  | `.Tag` | イメージタグ |
+  | `.Digest` | イメージダイジェスト |
+  | `.CreatedSince` | イメージが生成されてからの経過時刻 |
+  | `.CreatedAt` | イメージが生成された時刻 |
+  | `.Size` | イメージディスクサイズ |
 
-  `--format` オプションを利用すると `image` コマンドは、テンプレートが定めるデータを直接出力します。
-  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
+  `--format`オプションを利用すると`image`コマンドは、テンプレートが定めるデータを直接出力します。
+  また`table`ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
-  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのイメージにおける `ID`、`Repository` の各項目がコロン（`:`）で区切って表示されます。
+  以下は、ヘッダーを含めずにテンプレートを利用する例であり、すべてのイメージにおける`ID`、`Repository`の各項目がコロン（`:`）で区切って表示されます。
 
   ```bash
   $ docker images --format "{{.ID}}: {{.Repository}}"

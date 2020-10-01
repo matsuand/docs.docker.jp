@@ -91,7 +91,7 @@ Docker Machine を利用すると、さまざまな種類の Linux に対して�
 Additionally, Machine allows you to run Docker on older Mac or Windows systems,
 as described in the previous topic.
 {% endcomment %}
-さらに Docker Machine は、上で述べているように、Mac や Windows の古いシステムにおいて、Docker を起動させることができます。
+さらに Docker Machine は上で述べているように、Mac や Windows の古いシステムにおいて Docker を起動させることができます。
 
 {% comment %}
 Docker Machine has these two broad use cases.
@@ -123,7 +123,7 @@ Docker Machine は、以下の 2 つの利用がよく行われています。
   {% comment %}
   ![Docker Machine for provisioning multiple systems](img/provision-use-case.png){: .white-bg}
   {% endcomment %}
-  ![Docker Machine for provisioning multiple systems](img/provision-use-case.png){: .white-bg}
+  ![複数システムをプロビジョニングする Docker Machine](img/provision-use-case.png){: .white-bg}
 
   {% comment %}
   Docker Engine runs natively on Linux systems. If you have a Linux box as your
@@ -134,7 +134,7 @@ Docker Machine は、以下の 2 つの利用がよく行われています。
   {% endcomment %}
   Docker Engine は Linux システム上でネイティブに動作します。
   主に利用するシステムが Linux であって `docker`コマンドを利用したいのであれば、やるべきことは、単に Docker Engine をダウンロードしてインストールするだけです。
-  ただしネットワーク上に複数の Docker ホストを効率よくプロビジョニングしたい場合、それがクラウド上とローカル上を問わず、Docker Machine が必要になります。
+  ただしネットワーク上に複数の Docker ホストを効率よくプロビジョニングしたい場合は、クラウド上とローカル上は問わず Docker Machine が必要になります。
 
   {% comment %}
   Whether your primary system is Mac, Windows, or Linux, you can install Docker
@@ -143,10 +143,10 @@ Docker Machine は、以下の 2 つの利用がよく行われています。
   Engine on them, then configures the `docker` clients. Each managed host
   ("**_machine_**") is the combination of a Docker host and a configured client.
   {% endcomment %}
-  ふだん利用するシステムが Mac、Windows、Linux のどれであっても、Docker Machine をインストールして`docker-machine`コマンドを使えば、相当数の Docker ホストのプロビジョニングや管理が可能となります。
-  Docker Machine からはホストが生成され、そのホスト内に Docker Engine がインストールされます。
+  ふだん利用するシステムが Mac、Windows、Linux のどれであっても、Docker Machine をインストールして`docker-machine`コマンドを使えば、いくらでも Docker ホストのプロビジョニングと管理が可能になります。
+  Docker Machine からはホストが自動生成され、そのホスト内に Docker Engine がインストールされます。
   そして`docker`クライアントが設定されます。
-  こうして生成され管理されるホスト（「**Machine**」）は、Docker ホストと設定済みクライアントを組み合わせたものです。
+  こうして管理される各ホスト（「**マシン**」）が、Docker ホストと設定済みクライアントを結びつけます。
 
 {% comment %}
 ## What's the difference between Docker Engine and Docker Machine?
@@ -164,9 +164,9 @@ Docker Engine accepts `docker` commands from the CLI, such as
 to list images, and so on.
 {% endcomment %}
 「Docker」と言えば、普通は **Docker Engine** のことを意味します。
-これは Docker デーモンが作り出すクライアントサーバーアプリケーションであり、デーモンとのやりとりを行うためのインターフェースを規定する REST API であり、デーモンとの対話を（REST API ラッパーを通じて）行うコマンドラインインターフェース（CLI）をすべて意味しています。
-Docker Engine は CLI から`docker`コマンド、たとえば`docker run <image>`を受け付けます。
-あるいは`docker ps`によって、実行中コンテナーの一覧を表示し、`docker image ls`によってイメージ一覧を表示する、といった具合です。
+これは Docker デーモンによって構成されるクライアントサーバーアプリケーションであり、デーモンとのやりとりを行うためのインターフェースを規定する REST API であり、デーモンとの対話を（REST API ラッパーを通じて）行うコマンドラインインターフェース（CLI）をすべて意味しています。
+Docker Engine は CLI から`docker`コマンド、たとえば`docker run <イメージ名>`を受けつけます。
+あるいは`docker ps`によって実行中コンテナーの一覧を表示し、`docker image ls`によってイメージ一覧を表示するといった具合です。
 
 ![Docker Engine](img/engine.png)
 
@@ -183,7 +183,7 @@ and are sometimes referred to as, managed "**_machines_**".
 {% endcomment %}
 **Docker Machine** とは、Docker 化されたホスト（Docker Engine がインストールされたホスト）をプロビジョニングして管理するツールのことです。
 通常はローカルシステムに Docker Machine をインストールして利用します。
-Docker Machine には独自のコマンドラインクライアント`docker-machine`と Docker Engine クライアントがあります。
+Docker Machine には独自のコマンドラインクライアント`docker-machine`と Docker Engine クライアント`docker`があります。
 Docker Machine を利用して、必要な分だけ仮想システムに Docker Engine をインストールできます。
 この仮想システムはローカル上に実現（Mac や Windows 上の VirtualBox において Docker Engine をインストールし実行）することもでき、リモート上に（Machine を使ってクラウドプロバイダー上に Docker 化したホストをプロビジョニングしたり）することができます。
 Docker 化されたこのホストが、管理された「**Machine**」と認識され、そう呼ばれます。

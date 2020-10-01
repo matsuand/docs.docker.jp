@@ -2,8 +2,8 @@ command: docker context use
 short: カレントな Docker コンテキストを設定します。
 long: |-
   利用するデフォルトのコンテキストを設定します。
-  ただしこれを設定するには 環境変数 `DOCKER_HOST`、`DOCKER_CONTEXT` が設定されていないこと、あるいはグローバルオプション `--host`、`--context` が設定されていないこと。
-  コンテキストの利用を無効にしたい場合は、特別なコンテキスト `default` を指定します。
+  ただしこれを設定するには 環境変数`DOCKER_HOST`、`DOCKER_CONTEXT`が設定されていないこと、あるいはグローバルオプション`--host`、`--context`が設定されていないこと。
+  コンテキストの利用を無効にしたい場合は、特別なコンテキスト`default`を指定します。
 usage: docker context use CONTEXT
 pname: docker context
 plink: docker_context.yaml

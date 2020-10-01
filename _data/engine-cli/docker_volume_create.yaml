@@ -65,7 +65,7 @@ examples: |-
   つまり 2 つの異なるドライバーにおいて、同一のボリューム名を利用することはできません。
   これを行った場合、`docker` は以下のようなエラーを返します。
 
-  ```none
+  ```console
   A volume named  "hello"  already exists with the "some-other" driver. Choose a different volume name.
   ("hello" というボリュームは "some-other" ドライバーにおいてすでに存在しています。別のボリューム名を用いてください。)
   ```

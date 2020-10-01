@@ -73,15 +73,15 @@ Docker を使って人気のあるソフトウェアを実行します。
 {% endcomment %}
 | サンプル                                                                  | 内容説明                                                          |
 | ------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| [apt-cacher-ng](/engine/examples/apt-cacher-ng/)                          | Docker 化された apt-cacher-ng インスタンスを実行します。          |
-| [.Net Core application](/engine/examples/dotnetcore/)                     | Docker 化された ASP.NET Core アプリケーションを実行します。       |
-| [ASP.NET Core + SQL Server on Linux](/compose/aspnet-mssql-compose/)      | Docker 化された ASP.NET Core および SQL サーバー環境を実行します。|
-| [CouchDB](/engine/examples/couchdb_data_volumes/)                         | Docker 化された CouchDB インスタンスを実行します。                |
-| [Django + PostgreSQL](/compose/django/)                                   | Docker 化された Django および PostgreSQL 環境を実行します。       |
-| [PostgreSQL](/engine/examples/postgresql_service/)                        | Docker 化された PostgreSQL インスタンスを実行します。             |
-| [Rails + PostgreSQL](/compose/rails/)                                     | Docker 化された Rails および PostgreSQL 環境を実行します。        |
-| [Riak](/engine/examples/running_riak_service/)                            | Docker 化された Riak インスタンスを実行します。                   |
-| [SSHd](/engine/examples/running_ssh_service/)                             | Docker 化された SSHd インスタンスを実行します。                   |
+| [apt-cacher-ng](../engine/examples/apt-cacher-ng.md)                      | Docker 化された apt-cacher-ng インスタンスを実行します。          |
+| [.Net Core application](../engine/examples/dotnetcore.md)                 | Docker 化された ASP.NET Core アプリケーションを実行します。       |
+| [ASP.NET Core + SQL Server on Linux](../compose/aspnet-mssql-compose.md)  | Docker 化された ASP.NET Core および SQL サーバー環境を実行します。|
+| [CouchDB](../engine/examples/couchdb_data_volumes.md)                     | Docker 化された CouchDB インスタンスを実行します。                |
+| [Django + PostgreSQL](../compose/django.md)                               | Docker 化された Django および PostgreSQL 環境を実行します。       |
+| [PostgreSQL](../engine/examples/postgresql_service.md)                    | Docker 化された PostgreSQL インスタンスを実行します。             |
+| [Rails + PostgreSQL](../compose/rails.md)                                 | Docker 化された Rails および PostgreSQL 環境を実行します。        |
+| [Riak](../engine/examples/running_riak_service.md)                        | Docker 化された Riak インスタンスを実行します。                   |
+| [SSHd](../engine/examples/running_ssh_service.md)                         | Docker 化された SSHd インスタンスを実行します。                   |
 | [WordPress](../compose/wordpress.md)                                      | クイックスタート: Compose と WordPress。                          |
 
 {% comment %}

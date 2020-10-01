@@ -1,7 +1,7 @@
 command: docker history
-short: Show the history of an image
-long: Show the history of an image
-usage: docker history [OPTIONS] IMAGE
+short: イメージの履歴を表示します。
+long: イメージの履歴を表示します。
+usage: docker history [オプション] IMAGE
 pname: docker
 plink: docker.yaml
 options:
@@ -43,7 +43,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  To see how the `docker:latest` image was built:
+  `docker:latest`イメージがどのようにしてビルドされているかを確認します。
 
   ```bash
   $ docker history docker
@@ -57,7 +57,7 @@ examples: |-
   511136ea3c5a        9 months ago                                                        0 B                 Imported from -
   ```
 
-  To see how the `docker:apache` image was added to a container's base image:
+  `docker:apache`イメージが、コンテナーのベースイメージとしてどのように追加されたかを確認します。
 
   ```bash
   $ docker history docker:scm
@@ -77,17 +77,17 @@ examples: |-
 
   | プレースホルダー | 内容説明   |
   | --------------- | ----------- |
-  | `.ID`           | Image ID    |
-  | `.CreatedSince` | Elapsed time since the image was created if `--human=true`, otherwise timestamp of when image was created |
-  | `.CreatedAt`    | Timestamp of when image was created |
-  | `.CreatedBy`    | Command that was used to create the image |
-  | `.Size`         | Image disk size |
-  | `.Comment`      | Comment for image |
+  | `.ID`           | イメージ ID    |
+  | `.CreatedSince` | `--human=true`設定時はイメージ生成からの経過時間。そうでない場合はイメージ生成時刻。 |
+  | `.CreatedAt`    | イメージ生成時のタイムスタンプ。 |
+  | `.CreatedBy`    | イメージ生成時に用いられたコマンド。|
+  | `.Size`         | イメージディスクサイズ。|
+  | `.Comment`      | イメージのコメント。 |
 
-  `--format` オプションを利用すると `history` コマンドは、テンプレートが定めるデータを直接出力します。
-  また `table` ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
+  `--format`オプションを利用すると `history`コマンドは、テンプレートが定めるデータを直接出力します。
+  また`table`ディレクティブを利用すると、カラムヘッダーも同時に出力されます。
 
-  以下は、ヘッダーを含めずにテンプレートを利用する例であり、`busybox` イメージにおける `ID`、`CreatedSince` の各項目がコロン（`:`）で区切って表示されます。
+  以下はヘッダーを含めずにテンプレートを利用する例であり、`busybox`イメージにおける `ID`、`CreatedSince`の各項目がコロン（`:`）で区切って表示されます。
 
   ```bash
   $ docker history --format "{{.ID}}: {{.CreatedSince}}" busybox

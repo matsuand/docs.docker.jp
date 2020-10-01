@@ -1354,7 +1354,7 @@ Configures if and how to restart containers when they exit. Replaces
 {% comment %}
 - `condition`: One of `none`, `on-failure` or `any` (default: `any`).
 - `delay`: How long to wait between restart attempts, specified as a
-  [duration](#specifying-durations) (default: 0).
+  [duration](#specifying-durations) (default: 5s).
 - `max_attempts`: How many times to attempt to restart a container before giving
   up (default: never give up). If the restart does not succeed within the configured
   `window`, this attempt doesn't count toward the configured `max_attempts` value.
@@ -1366,7 +1366,7 @@ Configures if and how to restart containers when they exit. Replaces
 {% endcomment %}
 - `condition`: `none`, `on-failure`, `any` のいずれかを指定します。（デフォルト: `any`）
 - `delay`: 再起動までどれだけの間隔をあけるかを [時間](#specifying-durations) として指定します。
-  （デフォルト: 0）
+  （デフォルト: 5s）
 - `max_attempts`: 再起動に失敗しても何回までリトライするかを指定します。
   （デフォルト: 無制限）
   設定した `window` 時間内に再起動が成功しなかったとしても、そのときの再起動リトライは、`max_attempts` の値としてカウントされません。
@@ -1405,7 +1405,7 @@ update.
 - `parallelism`: The number of containers to rollback at a time. If set to 0, all containers rollback simultaneously.
 - `delay`: The time to wait between each container group's rollback (default 0s).
 - `failure_action`: What to do if a rollback fails. One of `continue` or `pause` (default `pause`)
-- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
+- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 5s) **Note**: Setting to 0 will use the default 5s.
 - `max_failure_ratio`: Failure rate to tolerate during a rollback (default 0).
 - `order`: Order of operations during rollbacks. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks briefly overlap) (default `stop-first`).
 {% endcomment %}
@@ -1415,7 +1415,7 @@ update.
 - `failure_action`: ロールバックが失敗したときにどうするかを指定します。
   `continue`、 `pause` のいずれかです。（デフォルト `pause`）
 - `monitor`: 各タスク更新後に失敗を監視する時間 `(ns|us|ms|s|m|h)` を設定します。
-  （デフォルト： 0s）
+  （デフォルト： 5s）**メモ** 0 に設定するとデフォルト値 5s が用いられます。
 - `max_failure_ratio`: ロールバック時の失敗許容率を設定します。（デフォルト 0）
 - `order`: ロールバック時の処理順を設定します。
   `stop-first` （古いタスクを停止してから新しいタスクを実行する）、あるいは `start-first` （新しいタスクをまず起動させ、タスク起動を一時的に重複させる）のいずれかを設定します。
@@ -1435,7 +1435,7 @@ Rolling update を設定する際に有効です。
 - `delay`: The time to wait between updating a group of containers.
 - `failure_action`: What to do if an update fails. One of `continue`, `rollback`, or `pause`
   (default: `pause`).
-- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
+- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 5s) **Note**: Setting to 0 will use the default 5s.
 - `max_failure_ratio`: Failure rate to tolerate during an update.
 - `order`: Order of operations during updates. One of `stop-first` (old task is stopped before starting new one), or `start-first` (new task is started first, and the running tasks briefly overlap) (default `stop-first`) **Note**: Only supported for v3.4 and higher.
 {% endcomment %}
@@ -1445,7 +1445,7 @@ Rolling update を設定する際に有効です。
   `continue`, `rollback`, `pause` のいずれかです。
   （デフォルト： `pause`）
 - `monitor`: 各タスク更新後に失敗を監視する時間 `(ns|us|ms|s|m|h)` を設定します。
-  （デフォルト： 0s）
+  （デフォルト： 5s）**メモ** 0 に設定するとデフォルト値 5s が用いられます。
 - `max_failure_ratio`: 更新時の失敗許容率を設定します。
 - `order`: 更新時の処理順を設定します。
   `stop-first` （古いタスクを停止してから新しいタスクを実行する）、あるいは `start-first` （新しいタスクをまず起動させ、タスク起動を一時的に重複させる）のいずれかを設定します。

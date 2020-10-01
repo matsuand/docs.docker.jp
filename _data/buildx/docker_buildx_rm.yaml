@@ -4,6 +4,15 @@ long: ビルダーインスタンスを削除します。
 usage: docker buildx rm [NAME]
 pname: docker buildx
 plink: docker_buildx.yaml
+inherited_options:
+- option: builder
+  value_type: string
+  description: 設定された builder インスタンスをオーバーライドします。
+  deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 deprecated: false
 experimental: false
 experimentalcli: true

@@ -154,7 +154,7 @@ examples: |-
 
   #### desired-state
 
-  `desired-state` フィルターは、`running`、`shutdown`、`accepted` のいずれかを指定します。
+  `desired-state`フィルターは、`running`、`shutdown`、`ready`、`accepted`のいずれかを指定します。
 
   ```bash
   $ docker stack ps -f "desired-state=running" voting

@@ -1,14 +1,13 @@
 command: docker info
-short: Display system-wide information
+short: システム全体の情報を表示します。
 long: |-
-  This command displays system wide information regarding the Docker installation.
-  Information displayed includes the kernel version, number of containers and images.
-  The number of images shown is the number of unique images. The same image tagged
-  under different names is counted only once.
+  このコマンドは Docker のインストールに関連したシステム全体の情報を表示します。
+  表示される情報には、カーネルバージョン、コンテナー数やイメージ数があります。
+  イメージ数は、ユニークなイメージの数です。
+  タグ名が異なるだけのイメージは 1 つと数えます。
 
-  If a format is specified, the given template will be executed instead of the
-  default format. Go's [text/template](http://golang.org/pkg/text/template/) package
-  describes all the details of the format.
+  フォーマットが指定された場合、デフォルトフォーマットに代わって指定されたテンプレートが実行されます。
+  Go 言語の [text/template](http://golang.org/pkg/text/template/) パッケージには、フォーマットの詳細が説明されています。
 
   Depending on the storage driver in use, additional information can be shown, such
   as pool name, data file, metadata file, data space used, total data space, metadata
@@ -18,7 +17,7 @@ long: |-
   meta data regarding those images are stored. When run for the first time Docker
   allocates a certain amount of data space and meta data space from the space
   available on the volume where `/var/lib/docker` is mounted.
-usage: docker info [OPTIONS]
+usage: docker info [オプション]
 pname: docker
 plink: docker.yaml
 options:
@@ -32,6 +31,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
+  {: #show-output }
   ### Show output
 
   The example below shows the output for a daemon running on Red Hat Enterprise Linux,
@@ -92,6 +92,7 @@ examples: |-
     127.0.0.0/8
   ```
 
+  {: #show-debugging-output }
   ### Show debugging output
 
   Here is a sample output for a daemon running on Ubuntu, using the overlay2
@@ -193,11 +194,12 @@ examples: |-
   {"ID":"I54V:OLXT:HVMM:TPKO:JPHQ:CQCD:JNLC:O3BZ:4ZVJ:43XJ:PFHZ:6N2S","Containers":14, ...}
   ```
 
+  {: #run-docker-info-on-windows }
   ### Run `docker info` on Windows
 
   Here is a sample output for a daemon running on Windows Server 2016:
 
-  ```none
+  ```console
   E:\docker>docker info
   Client:
    Debug Mode: false
