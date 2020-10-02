@@ -20,6 +20,41 @@ For information about Stable releases, see the [Stable release notes](release-no
 安定版についての情報は [安定版リリースノート](release-notes.md) を参照してください。
 Docker Desktop のシステム要件については [インストールの前に](install.md#what-to-know-before-you-install) を参照してください。
 
+## Docker Desktop Community 2.4.1.0
+2020-10-01
+
+{% comment %}
+> [Download](https://desktop.docker.com/mac/edge/48572/Docker.dmg)
+{% endcomment %}
+> [ダウンロード](https://desktop.docker.com/mac/edge/48572/Docker.dmg)
+
+{% comment %}
+### Upgrades
+{% endcomment %}
+{: #upgrades }
+### アップグレード
+
+- [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli)
+- [Docker Compose 1.27.4](https://github.com/docker/compose/releases/tag/1.27.4)
+- [Snyk v1.399.1](https://github.com/snyk/snyk/releases/tag/v1.399.1)
+- [Docker Engine 19.03.13](https://github.com/docker/docker-ce/releases/tag/v19.03.13)
+
+{% comment %}
+### Bug fixes and minor changes
+{% endcomment %}
+{: #bug-fixes-and-minor-changes }
+### バグフィックスとマイナーチェンジ
+
+{% comment %}
+- Docker Desktop always flushes filesystem caches synchronously on container start. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+- Docker Desktop now supports `S_ISUID`, `S_ISGID` and `S_ISVTX` in calls to `chmod(2)` on shared filesystems. See [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943).
+- Fixed a possible premature file handle close when using `gRPC-FUSE`.
+{% endcomment %}
+- Docker Desktop では、コンテナー起動時に常にファイルシステムキャッシュを同期して書き出すようにしました。
+  [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943) を参照してください。
+- Docker Desktop では、共有ファイルシステム上において`chmod(2)`呼び出しにおける`S_ISUID`、`S_ISGID`、`S_ISVTX`をサポートするようにしました。
+  [docker/for-mac#4943](https://github.com/docker/for-mac/issues/4943) を参照してください。
+- `gRPC-FUSE`を使用した際にファイルハンドルが閉じる可能性があったため修正。
 
 ## Docker Desktop Community 2.3.7.0
 2020-09-17
@@ -43,7 +78,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades }
+{: #upgrades-1 }
 ### アップグレード
 
 - [Docker ACI integration 0.1.15](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.15)
@@ -52,7 +87,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes }
+{: #bug-fixes-and-minor-changes-1 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -88,7 +123,6 @@ Docker Desktop のシステム要件については [インストールの前に
   この問題を回避するには、`--privileged`フラグを指定して`seccomp`を無効にしてください。
   [docker/for-win#8326](https://github.com/docker/for-win/issues/8326) を参照してください。
 
-
 ## Docker Desktop Community 2.3.6.1
 2020-09-08
 
@@ -100,7 +134,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-1 }
+{: #upgrades-2 }
 ### アップグレード
 
 - [Docker Compose 1.27.0](https://github.com/docker/compose/releases/tag/1.27.0)
@@ -108,7 +142,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-1 }
+{: #bug-fixes-and-minor-changes-2 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -161,7 +195,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-2 }
+{: #upgrades-3 }
 ### アップグレード
 
 {% comment %}
@@ -174,7 +208,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-2 }
+{: #bug-fixes-and-minor-changes-3 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -223,7 +257,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-3 }
+{: #upgrades-4 }
 ### アップグレード
 
 - [Go 1.14.7](https://github.com/golang/go/issues?q=milestone:Go1.14.7+label:CherryPickApproved)
@@ -244,7 +278,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-3 }
+{: #bug-fixes-and-minor-changes-4 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -283,7 +317,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-4 }
+{: #upgrades-5 }
 ### アップグレード
 
 - [Docker ECS integration v1.0.0-beta.4](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.4){: target="_blank" class="_”}
@@ -292,7 +326,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-4 }
+{: #bug-fixes-and-minor-changes-5 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -313,7 +347,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-5 }
+{: #upgrades-6 }
 ### アップグレード
 
 - [Docker ECS integration v1.0.0-beta.2](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.2){: target="_blank" class="_”}
@@ -322,7 +356,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-5 }
+{: #bug-fixes-and-minor-changes-6 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -343,7 +377,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-6 }
+{: #upgrades-7 }
 ### アップグレード
 
 {% comment %}
@@ -358,7 +392,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-6 }
+{: #bug-fixes-and-minor-changes-7 }
 ### バグフィックスとマイナーチェンジ
 
 {% comment %}
@@ -383,7 +417,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-7 }
+{: #upgrades-8 }
 ### アップグレード
 
 {% comment %}
@@ -400,7 +434,7 @@ Docker Desktop のシステム要件については [インストールの前に
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-7 }
+{: #bug-fixes-and-minor-changes-8 }
 ### バグフィックスとマイナーチェンジ
 
 - Fixed an issue with startup when the Kubernetes certificates have expired. See [docker/for-mac#4594](https://github.com/docker/for-mac/issues/4594).
@@ -430,7 +464,7 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-8 }
+{: #upgrades-9 }
 ### アップグレード
 
 - [Docker Compose 1.26.0-rc4](https://github.com/docker/compose/releases/tag/1.26.0-rc4)
@@ -439,7 +473,7 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-8 }
+{: #bug-fixes-and-minor-changes-9 }
 ### バグフィックスとマイナーチェンジ
 
 - Fixed a performance regression when using shared volumes in 2.2.0.5. Fixes [docker/for-mac#4423](https://github.com/docker/for-mac/issues/4423).
@@ -453,7 +487,7 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-9 }
+{: #bug-fixes-and-minor-changes-10 }
 ### バグフィックスとマイナーチェンジ
 
 - Fixed a bug that caused starting and stopping of a Compose application from the UI to fail when the path contains whitespace.
@@ -466,7 +500,7 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-9 }
+{: #upgrades-10 }
 ### アップグレード
 
 - [Docker Compose 1.25.5](https://github.com/docker/compose/releases/tag/1.25.5)
@@ -477,7 +511,7 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-10 }
+{: #bug-fixes-and-minor-changes-11 }
 ### バグフィックスとマイナーチェンジ
 
 > Docker Desktop Edge 2.3.0.0 fixes one issue reported on the [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
@@ -497,7 +531,7 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-10 }
+{: #upgrades-11 }
 ### アップグレード
 
 - [Docker 19.03.8](https://github.com/docker/docker-ce/releases/tag/v19.03.8)
@@ -515,7 +549,7 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-11 }
+{: #bug-fixes-and-minor-changes-12 }
 ### バグフィックスとマイナーチェンジ
 
 > Docker Desktop Edge 2.2.3.0 fixes 7 issues reported on the [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
@@ -547,7 +581,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-11 }
+{: #upgrades-12 }
 ### アップグレード
 
 - [Kubernetes 1.16.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.5)
@@ -556,7 +590,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-12 }
+{: #bug-fixes-and-minor-changes-13 }
 ### バグフィックスとマイナーチェンジ
 
 - Docker Desktop now shares `/var/folders` by default as it stores per-user temporary files and caches.
@@ -570,7 +604,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-12 }
+{: #upgrades-13 }
 ### アップグレード
 
 - [Docker Compose 1.25.4](https://github.com/docker/compose/releases/tag/1.25.4)
@@ -586,7 +620,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-13 }
+{: #upgrades-14 }
 ### アップグレード
 
 - [Docker Compose 1.25.1-rc1](https://github.com/docker/compose/releases/tag/1.25.1-rc1)
@@ -594,7 +628,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-13 }
+{: #bug-fixes-and-minor-changes-14 }
 ### バグフィックスとマイナーチェンジ
 
 - The Docker Desktop Dashboard now displays port information inline with the container status.
@@ -614,7 +648,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-14 }
+{: #upgrades-15 }
 ### アップグレード
 
 - [Docker 19.03.5](https://github.com/docker/docker-ce/releases/tag/v19.03.5)
@@ -631,7 +665,7 @@ Added the ability to start and stop Compose-based applications and view combined
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-14 }
+{: #bug-fixes-and-minor-changes-15 }
 ### バグフィックスとマイナーチェンジ
 
 - Fixed port forwarding when containers are using `overlay` networks.
@@ -647,7 +681,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-15 }
+{: #upgrades-16 }
 ### アップグレード
 
 - [Kubernetes 1.15.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.5)
@@ -667,7 +701,7 @@ To access the new Dashboard UI, select the Docker menu from the Mac menu bar and
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-15 }
+{: #bug-fixes-and-minor-changes-16 }
 ### バグフィックスとマイナーチェンジ
 
 Fixed an issue that caused VMs running on older hardware with macOS Catalina to fail on startup with the error `processor does not support desired secondary processor-based controls`.
@@ -690,7 +724,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-16 }
+{: #upgrades-17 }
 ### アップグレード
 
 - [Docker 19.03.3](https://github.com/docker/docker-ce/releases/tag/v19.03.3)
@@ -701,7 +735,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-16 }
+{: #bug-fixes-and-minor-changes-17 }
 ### バグフィックスとマイナーチェンジ
 
 - Improved the navigation in **Settings** and **Troubleshoot** UI.
@@ -717,7 +751,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-17 }
+{: #bug-fixes-and-minor-changes-18 }
 ### バグフィックスとマイナーチェンジ
 
 - All binaries included in Docker Desktop are now notarized so that they can run on macOS Catalina. For more information, see [Notarization Requirement for Mac Software](https://developer.apple.com/news/?id=06032019i).
@@ -733,7 +767,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-17 }
+{: #upgrades-18 }
 ### アップグレード
 
 - [Docker 19.03.2](https://github.com/docker/docker-ce/releases/tag/v19.03.2)
@@ -746,7 +780,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-18 }
+{: #bug-fixes-and-minor-changes-19 }
 ### バグフィックスとマイナーチェンジ
 
 - Reduced the Virtual Machine (VM) startup time.
@@ -760,7 +794,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-18 }
+{: #upgrades-19 }
 ### アップグレード
 
 - Linux Kernel 4.14.131
@@ -769,7 +803,7 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-19 }
+{: #bug-fixes-and-minor-changes-20 }
 ### バグフィックスとマイナーチェンジ
 
 - Docker Desktop now allows users to expose privileged UDP ports. [docker/for-mac#3775](https://github.com/docker/for-mac/issues/3775)
@@ -787,7 +821,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 {% comment %}
 ### Upgrades
 {% endcomment %}
-{: #upgrades-19 }
+{: #upgrades-20 }
 ### アップグレード
 
  - [Docker 19.03.1](https://github.com/docker/docker-ce/releases/tag/v19.03.1)
@@ -808,7 +842,7 @@ This release contains Kubernetes security improvements. Note that your local Kub
 {% comment %}
 ### Bug fixes and minor changes
 {% endcomment %}
-{: #bug-fixes-and-minor-changes-20 }
+{: #bug-fixes-and-minor-changes-21 }
 ### バグフィックスとマイナーチェンジ
 
 - Changed the host's Kubernetes context to ensure `docker run -v .kube:kube ... kubectl` works.
