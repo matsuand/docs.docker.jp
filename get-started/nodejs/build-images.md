@@ -157,10 +157,10 @@ Switch back to the terminal where our server is running. You should now see the 
 ## Node.js 用の Dockerfile 生成
 
 {% comment %}
-A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker run` command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.
+A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. When we tell Docker to build our image by executing the `docker build` command, Docker reads these instructions and executes them one by one and creates a Docker image as a result.
 {% endcomment %}
 Dockerfile はテキストファイルであり、この中にはコマンドライン上で実行するようなコマンドがさまざまに記述され、それがイメージ生成に結びつきます。
-Docker に対してイメージ生成の指示を行うために`docker run`コマンドを実行すると、Docker は Dockerfile 内の命令を読み取って、1 つずつ実行していき、結果として Docker イメージを作り出します。
+Docker に対してイメージ生成の指示を行うために`docker build`コマンドを実行すると、Docker は Dockerfile 内の命令を読み取って、1 つずつ実行していき、結果として Docker イメージを作り出します。
 
 {% comment %}
 Let’s walk through the process of creating a Dockerfile for our application. In the root of your working directory, create a file named `Dockerfile` and open this file in your text editor.

@@ -371,14 +371,14 @@ to the host.
 This doesn't affect regular web apps, but reduces the vectors of attack by
 malicious users considerably. By default Docker
 drops all capabilities except [those
-needed](https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30),
+needed](https://github.com/moby/moby/blob/master/oci/caps/defaults.go#L6-L19),
 an allowlist instead of a denylist approach. You can see a full list of
 available capabilities in [Linux
 manpages](http://man7.org/linux/man-pages/man7/capabilities.7.html).
 {% endcomment %}
 普通のウェブアプリに対しての影響はありません。
 しかも悪意あるユーザーからの攻撃はかなり抑えられることになります。
-デフォルトで Dockerは全ケーパビリティーを拒否した上で、[必要となるケーパビリティー](https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30) を用います。
+デフォルトで Dockerは全ケーパビリティーを拒否した上で、[必要となるケーパビリティー](https://github.com/moby/moby/blob/master/oci/caps/defaults.go#L6-L19) を用います。
 つまり拒否リスト方式ではなく許可リスト方式をとるものです。
 利用可能なケーパビリティーの一覧は [Linux man ページ](http://man7.org/linux/man-pages/man7/capabilities.7.html) を参照してください。
 
