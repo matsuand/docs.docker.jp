@@ -216,9 +216,9 @@ guides:
       - path: /engine/swarm/swarm-mode/
         title: Docker の Swarm モード実行
       - path: /engine/swarm/join-nodes/
-        title: Join nodes to a swarm
+        title: Swarm へのノード参加
       - path: /engine/swarm/manage-nodes/
-        title: Manage nodes in a swarm
+        title: Swarm でのノード管理
       - path: /engine/swarm/services/
         title: Deploy services to a swarm
       - path: /engine/swarm/configs/
@@ -226,9 +226,9 @@ guides:
       - path: /engine/swarm/secrets/
         title: Manage sensitive data with Docker secrets
       - path: /engine/swarm/swarm_manager_locking/
-        title: Lock your swarm
+        title: Swarm のロック
       - path: /engine/swarm/admin_guide/
-        title: Swarm administration guide
+        title: Swarm 管理ガイド
       - path: /engine/swarm/raft/
         title: Raft consensus in swarm mode
     - sectiontitle: Docker の拡張
