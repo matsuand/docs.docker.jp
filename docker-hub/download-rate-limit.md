@@ -98,9 +98,9 @@ Docker Compose ファイルを使ってアプリケーションをデプロイ�
 ### GitHub Action
 
 {% comment %}
-If you are using GitHub Actions to build and push Docker images to Docker Hub, see [username](https://github.com/docker/build-push-action#username){: target="_blank" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
+If you are using GitHub Actions to build and push Docker images to Docker Hub, see [login action](https://github.com/docker/login-action#dockerhub){: target="_blank" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
 {% endcomment %}
-GitHub の Action を利用して、Docker Hub における Docker イメージのビルドとプッシュを行っている場合は、[username](https://github.com/docker/build-push-action#username){: target="_blank" class="_"} を参照してください。
+GitHub の Action を利用して、Docker Hub における Docker イメージのビルドとプッシュを行っている場合は、[login action](https://github.com/docker/login-action#dockerhub){: target="_blank" class="_"} を参照してください。
 これとは別の Action を利用している場合、認証と同じようにユーザー名とアクセストークンを追加する必要があります。
 
 ### Kubernetes
